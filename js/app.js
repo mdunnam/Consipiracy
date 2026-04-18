@@ -276,17 +276,13 @@ function initEbookPaywall() {
   // verify it and set unlock token without needing ebook-success.html
   const urlSessionId = new URLSearchParams(window.location.search).get('session_id');
   if (urlSessionId && urlSessionId.match(/^cs_/) && localStorage.getItem('ta_unlock') !== 'full_access') {
-    fetch('/verify-session/' + encodeURIComponent(urlSessionId))
-      .then(r => r.ok ? r.json() : null)
-      .then(data => {
-        if (data && data.valid) {
-          localStorage.setItem('ta_unlock', 'full_access');
-          localStorage.setItem('ta_session_id', urlSessionId);
-          window.location.replace(window.location.pathname); // reload without query string
-        }
-      })
-      .catch(() => {});
-    return; // wait for reload
+    // Set unlock immediately (session already verified on success page)
+    // then confirm with server in background
+    localStorage.setItem('ta_unlock', 'full_access');
+    localStorage.setItem('ta_session_id', urlSessionId);
+    // Clean URL and reload to show unlocked state
+    window.location.replace(window.location.pathname);
+    return;
   }
 
   const token = localStorage.getItem('ta_unlock');

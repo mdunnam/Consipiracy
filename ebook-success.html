@@ -81,9 +81,7 @@
     <div class="error-box" id="error-box"></div>
 
     <div id="actions" style="display:none; flex-direction:column; align-items:center; gap:1rem; margin-top:2rem;">
-      <a href="ebook.html" class="btn btn-gold" style="font-size:1rem; padding:1rem 2.5rem;">
-        📖 Open the Full eBook
-      </a>
+      <a id="open-ebook-btn" href="ebook.html" class="btn btn-gold" style="font-size:1rem; padding:1rem 2.5rem;">📖 Open the Full eBook</a>
       <a href="index.html" class="btn btn-outline">← Return to Archive</a>
     </div>
     <div id="manual-unlock" style="display:none;margin-top:2rem;text-align:center;">
@@ -136,8 +134,10 @@
           verifying.textContent = 'ACCESS GRANTED — LEVEL OMEGA CLEARANCE';
           verifying.style.color = 'var(--gold)';
           actions.style.display = 'flex';
+          const openBtn = document.getElementById('open-ebook-btn');
+          if (openBtn) openBtn.href = 'ebook.html?session_id=' + encodeURIComponent(sessionId);
           // Auto-redirect so unlock token is already set when ebook.html loads
-          setTimeout(() => { window.location.href = 'ebook.html'; }, 1800);
+          setTimeout(() => { window.location.href = 'ebook.html?session_id=' + encodeURIComponent(sessionId); }, 1800);
 
         } else {
           showError('Payment could not be verified. If you were charged, please contact support with your session ID: ' + sessionId);
@@ -177,7 +177,7 @@
       if (sessionId && sessionId.match(/^cs_/)) {
         localStorage.setItem('ta_unlock', 'full_access');
         localStorage.setItem('ta_session_id', sessionId);
-        window.location.href = 'ebook.html';
+        window.location.href = 'ebook.html?session_id=' + encodeURIComponent(sessionId);
       }
     }
   </script>
