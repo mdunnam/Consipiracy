@@ -10,6 +10,16 @@
    1. LOADING SCREEN — "Establishing secure connection…"
    ============================================================ */
 
+function dismissLoadingScreen(screen) {
+  if (!screen || screen._dismissed) return;
+  screen._dismissed = true;
+  screen.classList.add('fade-out');
+  setTimeout(() => {
+    screen.remove();
+    sessionStorage.setItem('ta_loaded', '1');
+  }, 600);
+}
+
 function initLoadingScreen() {
   // Only show on first visit per session
   if (sessionStorage.getItem('ta_loaded')) {
@@ -19,6 +29,9 @@ function initLoadingScreen() {
 
   const screen = document.getElementById('ta-loading-screen');
   if (!screen) return;
+
+  // Hard safety timeout — always dismiss after 6s no matter what
+  const safetyTimer = setTimeout(() => dismissLoadingScreen(screen), 6000);
 
   const lines = [
     'ESTABLISHING SECURE CONNECTION…',
@@ -34,25 +47,28 @@ function initLoadingScreen() {
   let lineIndex = 0;
 
   const appendLine = () => {
-    if (!log) return;
-    const span = document.createElement('div');
-    span.className = 'loading-line';
-    span.textContent = '> ' + lines[lineIndex];
-    if (lineIndex === lines.length - 1) span.classList.add('access-granted');
-    log.appendChild(span);
-    bar.style.width = ((lineIndex + 1) / lines.length * 100) + '%';
-    lineIndex++;
+    try {
+      if (log) {
+        const span = document.createElement('div');
+        span.className = 'loading-line';
+        span.textContent = '> ' + lines[lineIndex];
+        if (lineIndex === lines.length - 1) span.classList.add('access-granted');
+        log.appendChild(span);
+      }
+      if (bar) {
+        bar.style.width = ((lineIndex + 1) / lines.length * 100) + '%';
+      }
+      lineIndex++;
 
-    if (lineIndex < lines.length) {
-      setTimeout(appendLine, 280 + Math.random() * 220);
-    } else {
-      setTimeout(() => {
-        screen.classList.add('fade-out');
-        setTimeout(() => {
-          screen.remove();
-          sessionStorage.setItem('ta_loaded', '1');
-        }, 600);
-      }, 700);
+      if (lineIndex < lines.length) {
+        setTimeout(appendLine, 280 + Math.random() * 220);
+      } else {
+        clearTimeout(safetyTimer);
+        setTimeout(() => dismissLoadingScreen(screen), 700);
+      }
+    } catch(e) {
+      clearTimeout(safetyTimer);
+      dismissLoadingScreen(screen);
     }
   };
 
