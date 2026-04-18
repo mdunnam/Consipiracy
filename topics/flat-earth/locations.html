@@ -545,6 +545,7 @@
   </script>
 
 
+
   <script>
   (function() {
     const canvas = document.getElementById('fe-map-canvas');
@@ -554,228 +555,204 @@
     const ctx = canvas.getContext('2d');
     const CX = S/2, CY = S/2, R = S * 0.455;
 
-    function project(lat, lon) {
+    // Azimuthal equidistant, north-pole centred
+    // coords are [longitude, latitude] GeoJSON convention
+    function project(lon, lat) {
       const rho = R * (90 - lat) / 180;
       const t = lon * Math.PI / 180;
       return [CX + rho * Math.sin(t), CY - rho * Math.cos(t)];
     }
 
-    function drawPoly(pts, fill, stroke, lw) {
-      ctx.beginPath();
-      const [x0,y0] = project(pts[0][0],pts[0][1]); ctx.moveTo(x0,y0);
-      for (let i=1;i<pts.length;i++) { const [x,y]=project(pts[i][0],pts[i][1]); ctx.lineTo(x,y); }
-      ctx.closePath();
-      if (fill)   { ctx.fillStyle=fill; ctx.fill(); }
-      if (stroke) { ctx.strokeStyle=stroke; ctx.lineWidth=lw||0.8; ctx.stroke(); }
-    }
-
-    function label(lat, lon, text, size, col, offsetX, offsetY) {
-      const [x,y] = project(lat,lon);
+    function drawBg() {
+      // Clip everything to the disc
       ctx.save();
-      ctx.font = `${size||11}px "Share Tech Mono", monospace`;
-      ctx.fillStyle = col || 'rgba(210,190,140,0.75)';
-      ctx.textAlign = 'center';
-      ctx.shadowColor = '#000'; ctx.shadowBlur = 4;
-      ctx.fillText(text, x+(offsetX||0), y+(offsetY||0));
+      ctx.beginPath(); ctx.arc(CX,CY,R+1,0,Math.PI*2); ctx.clip();
+      const bg = ctx.createRadialGradient(CX,CY,0,CX,CY,R);
+      bg.addColorStop(0,'#0d1c2e'); bg.addColorStop(0.6,'#081018'); bg.addColorStop(1,'#030810');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0,0,S,S);
       ctx.restore();
     }
 
-    // ── Background ──
-    const bg = ctx.createRadialGradient(CX,CY,0,CX,CY,R*1.05);
-    bg.addColorStop(0,'#0c1825'); bg.addColorStop(0.65,'#080f1a'); bg.addColorStop(1,'#030810');
-    ctx.beginPath(); ctx.arc(CX,CY,R*1.05,0,Math.PI*2); ctx.fillStyle=bg; ctx.fill();
-
-    // ── Longitude lines ──
-    ctx.save(); ctx.globalAlpha=0.12; ctx.strokeStyle='#4a7aaa'; ctx.lineWidth=0.6;
-    for (let lon=0;lon<360;lon+=15) {
-      const [x1,y1]=project(89,lon),[x2,y2]=project(-88,lon);
-      ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+    function drawGraticule() {
+      ctx.save();
+      ctx.beginPath(); ctx.arc(CX,CY,R,0,Math.PI*2); ctx.clip();
+      ctx.globalAlpha=0.12; ctx.strokeStyle='#3a6a9a'; ctx.lineWidth=0.5;
+      for (let lon=0; lon<360; lon+=15) {
+        const [x1,y1]=project(lon,89), [x2,y2]=project(lon,-88);
+        ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+      }
+      const latRings = [66.5,23.5,0,-23.5,-66.5];
+      latRings.forEach(lat => {
+        const rho = R*(90-lat)/180;
+        const col = lat===0 ? '#c9a227' : '#2a4a7a';
+        const alpha = lat===0 ? 0.55 : 0.25;
+        ctx.globalAlpha=alpha; ctx.strokeStyle=col;
+        ctx.lineWidth = lat===0 ? 1.2 : 0.6;
+        ctx.setLineDash(lat===0 ? [] : [4,4]);
+        ctx.beginPath(); ctx.arc(CX,CY,rho,0,Math.PI*2); ctx.stroke();
+      });
+      ctx.restore();
     }
-    ctx.restore();
 
-    // ── Latitude rings ──
-    const rings = [
-      {lat:66.5, color:'#2a4a6a', lw:0.7, dash:[4,3], alpha:0.45, name:'ARCTIC CIRCLE'},
-      {lat:23.5, color:'#3a5a3a', lw:0.7, dash:[4,3], alpha:0.45, name:'TROPIC OF CANCER'},
-      {lat:0,   color:'#c9a227', lw:1.4, dash:[], alpha:0.65, name:'EQUATOR'},
-      {lat:-23.5,color:'#3a5a3a',lw:0.7, dash:[4,3], alpha:0.45, name:'TROPIC OF CAPRICORN'},
-      {lat:-66.5,color:'#2a4a6a',lw:0.7, dash:[4,3], alpha:0.45, name:'ANTARCTIC CIRCLE'},
-    ];
-    rings.forEach(r => {
-      const rho = R*(90-r.lat)/180;
-      ctx.save(); ctx.globalAlpha=r.alpha; ctx.strokeStyle=r.color; ctx.lineWidth=r.lw;
-      if (r.dash.length) ctx.setLineDash(r.dash);
-      ctx.beginPath(); ctx.arc(CX,CY,rho,0,Math.PI*2); ctx.stroke(); ctx.restore();
-    });
+    function decodeTopoJSON(data) {
+      const {scale, translate} = data.transform;
+      function decArc(i) {
+        const fwd = i >= 0;
+        const arc = data.arcs[fwd ? i : ~i];
+        let x=0, y=0;
+        const pts = arc.map(d => { x+=d[0]; y+=d[1]; return [x*scale[0]+translate[0], y*scale[1]+translate[1]]; });
+        return fwd ? pts : pts.slice().reverse();
+      }
 
-    // ── Landmasses ──
-    const LAND_FILL   = '#1c3320';
-    const LAND_STROKE = '#2e5535';
-    const LAND_LW     = 0.9;
+      ctx.save();
+      ctx.beginPath(); ctx.arc(CX,CY,R,0,Math.PI*2); ctx.clip();
 
-    // North America
-    drawPoly([
-      [71,-157],[68,-166],[64,-168],[62,-165],[59,-152],[58,-137],
-      [54,-130],[50,-127],[47,-124],[42,-124],[37,-122],[32,-117],
-      [28,-115],[22,-106],[17,-100],[15,-92],[11,-85],[8,-77],
-      [10,-75],[18,-67],[22,-73],[25,-80],[27,-80],[30,-81],[32,-80],
-      [35,-76],[37,-76],[41,-71],[43,-70],[45,-66],[47,-53],[50,-56],
-      [55,-59],[60,-65],[63,-68],[65,-84],[68,-84],[70,-92],[68,-108],
-      [65,-128],[68,-141],[71,-157]
-    ], LAND_FILL, LAND_STROKE, LAND_LW);
-
-    // Greenland
-    drawPoly([
-      [83,-42],[76,-18],[70,-22],[66,-34],[65,-52],[68,-54],
-      [72,-56],[76,-65],[78,-74],[82,-62],[83,-42]
-    ], LAND_FILL, LAND_STROKE, LAND_LW);
-
-    // South America
-    drawPoly([
-      [10,-75],[8,-77],[2,-80],[-5,-81],[-12,-77],[-18,-70],
-      [-22,-70],[-28,-71],[-33,-71],[-38,-73],[42,-74],[-46,-75],
-      [-52,-68],[-55,-64],[-52,-58],[-44,-65],[-38,-62],[-28,-49],
-      [-20,-40],[-10,-37],[0,-50],[5,-52],[10,-62],[10,-75]
-    ], LAND_FILL, LAND_STROKE, LAND_LW);
-
-    // Europe mainland
-    drawPoly([
-      [71,28],[68,20],[65,14],[62,6],[58,5],[55,8],[54,9],
-      [54,12],[50,14],[47,16],[44,13],[44,8],[43,5],[43,-9],
-      [36,-9],[36,-5],[38,0],[40,4],[44,3],[46,6],[47,8],
-      [48,16],[52,14],[54,14],[58,11],[60,18],[63,20],[65,22],[68,24],[71,28]
-    ], LAND_FILL, LAND_STROKE, LAND_LW);
-
-    // Scandinavia
-    drawPoly([
-      [71,28],[70,24],[68,18],[65,14],[62,6],[58,5],[57,8],
-      [57,12],[58,11],[60,18],[62,25],[65,22],[68,24],[71,28]
-    ], LAND_FILL, LAND_STROKE, LAND_LW);
-
-    // British Isles
-    drawPoly([[58,-5],[51,-5],[50,2],[53,2],[55,-1],[58,-4],[58,-5]], LAND_FILL, LAND_STROKE, LAND_LW);
-
-    // Africa
-    drawPoly([
-      [37,9],[37,-1],[30,-10],[22,-17],[16,-17],[5,-8],[4,2],
-      [-5,10],[-18,12],[-25,15],[-34,18],[-35,24],[-29,32],[-10,40],
-      [0,42],[11,44],[22,37],[30,32],[35,24],[37,9]
-    ], LAND_FILL, LAND_STROKE, LAND_LW);
-
-    // Madagascar
-    drawPoly([[-12,49],[-16,50],[-20,48],[-24,44],[-18,44],[-12,49]], LAND_FILL, LAND_STROKE, LAND_LW);
-
-    // Asia (west + central)
-    drawPoly([
-      [71,30],[68,30],[65,38],[60,40],[50,40],[45,42],[40,50],
-      [38,57],[25,57],[22,58],[22,63],[25,68],[30,79],[28,86],
-      [25,90],[22,88],[18,83],[13,80],[8,78],[8,72],[12,52],
-      [22,57],[22,63],[25,68],[30,50],[35,38],[40,30],[42,28],
-      [45,40],[50,40],[60,40],[65,38],[71,30]
-    ], LAND_FILL, LAND_STROKE, LAND_LW);
-
-    // East Asia + China + SEA
-    drawPoly([
-      [50,140],[60,140],[70,130],[70,80],[65,38],[60,40],[50,40],
-      [45,42],[40,50],[35,58],[28,48],[22,88],[22,90],[25,90],
-      [28,86],[25,90],[20,92],[15,80],[8,78],[2,102],[0,108],
-      [0,110],[-8,115],[0,108],[1,104],[10,104],[22,114],
-      [30,120],[38,122],[42,130],[46,130],[50,140]
-    ], LAND_FILL, LAND_STROKE, LAND_LW);
-
-    // Japan
-    drawPoly([[35,130],[33,131],[32,130],[34,129],[35,130]], LAND_FILL, LAND_STROKE, LAND_LW);
-    drawPoly([[38,141],[36,136],[34,132],[36,133],[38,141]], LAND_FILL, LAND_STROKE, LAND_LW);
-    drawPoly([[43,142],[41,140],[42,141],[44,144],[43,142]], LAND_FILL, LAND_STROKE, LAND_LW);
-
-    // Australia
-    drawPoly([
-      [-15,130],[-14,136],[-12,136],[-14,136],[-12,130],[-12,136],
-      [-16,145],[-18,148],[-24,151],[-32,152],[38,145],[-38,140],
-      [-32,126],[-22,114],[-18,122],[-15,130]
-    ], LAND_FILL, LAND_STROKE, LAND_LW);
-    // Corrected Australia
-    drawPoly([
-      [-15,130],[-15,136],[-18,148],[-24,152],[-32,152],
-      [-38,147],[-38,140],[-34,122],[-22,114],[-18,122],[-15,130]
-    ], LAND_FILL, LAND_STROKE, LAND_LW);
-
-    // New Zealand
-    drawPoly([[-34,172],[-36,175],[-40,176],[44,171],[-46,168],[-40,168],[-34,172]], LAND_FILL, LAND_STROKE, LAND_LW);
-
-    // ── Ice wall ──
-    ctx.beginPath(); ctx.arc(CX,CY,R,0,Math.PI*2);
-    ctx.strokeStyle='#7a9ab8'; ctx.lineWidth=10; ctx.globalAlpha=0.6; ctx.stroke();
-    ctx.beginPath(); ctx.arc(CX,CY,R-4,0,Math.PI*2);
-    ctx.strokeStyle='#a8c4dc'; ctx.lineWidth=3; ctx.globalAlpha=0.3; ctx.stroke();
-    ctx.beginPath(); ctx.arc(CX,CY,R+6,0,Math.PI*2);
-    ctx.strokeStyle='#c8dff0'; ctx.lineWidth=2; ctx.globalAlpha=0.2; ctx.stroke();
-    ctx.globalAlpha=1.0;
-
-    // ── North Pole ──
-    ctx.beginPath(); ctx.arc(CX,CY,5,0,Math.PI*2);
-    ctx.fillStyle='#c9a227'; ctx.fill();
-    ctx.beginPath(); ctx.arc(CX,CY,14,0,Math.PI*2);
-    ctx.strokeStyle='#c9a227'; ctx.lineWidth=1.5; ctx.globalAlpha=0.55; ctx.stroke();
-    ctx.globalAlpha=1.0;
-
-    // ── Outer decorative ring ──
-    ctx.beginPath(); ctx.arc(CX,CY,R+20,0,Math.PI*2);
-    ctx.strokeStyle='rgba(201,162,39,0.3)'; ctx.lineWidth=1; ctx.stroke();
-    ctx.beginPath(); ctx.arc(CX,CY,R+28,0,Math.PI*2);
-    ctx.strokeStyle='rgba(201,162,39,0.15)'; ctx.lineWidth=8; ctx.stroke();
-
-    // ── Degree tick marks on outer ring ──
-    ctx.save(); ctx.globalAlpha=0.4;
-    for (let lon=0;lon<360;lon+=10) {
-      const t = lon*Math.PI/180;
-      const r1=R+18, r2=R+(lon%30===0?28:22);
       ctx.beginPath();
-      ctx.moveTo(CX+r1*Math.sin(t), CY-r1*Math.cos(t));
-      ctx.lineTo(CX+r2*Math.sin(t), CY-r2*Math.cos(t));
-      ctx.strokeStyle = lon%90===0 ? '#c9a227' : '#4a6a8a';
-      ctx.lineWidth = lon%30===0 ? 1.2 : 0.6;
+      const land = data.objects.land;
+      const geoms = land.type==='GeometryCollection' ? land.geometries : [land];
+      for (const geom of geoms) {
+        const polys = geom.type==='MultiPolygon' ? geom.arcs : [geom.arcs];
+        for (const poly of polys) {
+          for (const ring of poly) {
+            let pts = [];
+            for (const ai of ring) pts = pts.concat(decArc(ai));
+            if (!pts.length) continue;
+            const [x0,y0] = project(pts[0][0], pts[0][1]);
+            ctx.moveTo(x0,y0);
+            for (let i=1;i<pts.length;i++) {
+              const [x,y] = project(pts[i][0], pts[i][1]);
+              ctx.lineTo(x,y);
+            }
+            ctx.closePath();
+          }
+        }
+      }
+      ctx.fillStyle = '#1b3320';
+      ctx.globalAlpha = 0.9;
+      ctx.fill();
+      ctx.strokeStyle = '#2d5535';
+      ctx.lineWidth = 0.7;
+      ctx.globalAlpha = 0.7;
       ctx.stroke();
+      ctx.restore();
     }
-    ctx.restore();
 
-    // ── Continent labels ──
-    label(48,-100,'NORTH AMERICA',11,'rgba(210,195,160,0.7)');
-    label(-15,-55,'SOUTH AMERICA',10,'rgba(210,195,160,0.7)');
-    label(50,15,'EUROPE',10,'rgba(210,195,160,0.7)');
-    label(5,20,'AFRICA',11,'rgba(210,195,160,0.7)');
-    label(45,85,'ASIA',13,'rgba(210,195,160,0.7)');
-    label(-27,135,'AUSTRALIA',9,'rgba(210,195,160,0.7)');
-    label(73,-38,'GREENLAND',8,'rgba(210,195,160,0.6)');
+    function drawIceWall() {
+      // White/blue ice ring
+      ctx.beginPath(); ctx.arc(CX,CY,R,0,Math.PI*2);
+      ctx.strokeStyle='#8ab0cc'; ctx.lineWidth=9; ctx.globalAlpha=0.65; ctx.stroke();
+      ctx.beginPath(); ctx.arc(CX,CY,R-5,0,Math.PI*2);
+      ctx.strokeStyle='#b0cee0'; ctx.lineWidth=2; ctx.globalAlpha=0.3; ctx.stroke();
+      ctx.globalAlpha=1;
+      // Decorative gold outer ring
+      ctx.beginPath(); ctx.arc(CX,CY,R+18,0,Math.PI*2);
+      ctx.strokeStyle='rgba(201,162,39,0.35)'; ctx.lineWidth=1.5; ctx.stroke();
+      ctx.beginPath(); ctx.arc(CX,CY,R+28,0,Math.PI*2);
+      ctx.strokeStyle='rgba(201,162,39,0.12)'; ctx.lineWidth=10; ctx.stroke();
+      // Tick marks
+      ctx.save(); ctx.globalAlpha=0.35;
+      for (let lon=0;lon<360;lon+=10) {
+        const t=lon*Math.PI/180, r1=R+16, r2=R+(lon%30===0?28:22);
+        ctx.beginPath();
+        ctx.moveTo(CX+r1*Math.sin(t), CY-r1*Math.cos(t));
+        ctx.lineTo(CX+r2*Math.sin(t), CY-r2*Math.cos(t));
+        ctx.strokeStyle = lon%90===0 ? '#c9a227' : '#4a6a8a';
+        ctx.lineWidth = lon%30===0 ? 1.2 : 0.6;
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
 
-    // ── Ring labels ──
-    ctx.save();
-    ctx.font = '8px "Share Tech Mono", monospace';
-    ctx.fillStyle = 'rgba(201,162,39,0.55)';
-    ctx.textAlign = 'left';
-    rings.forEach(r => {
-      const rho = R*(90-r.lat)/180;
-      ctx.fillText(r.name, CX+rho+4, CY-2);
-    });
-    // North Pole label
-    ctx.fillStyle = 'rgba(201,162,39,0.8)';
-    ctx.textAlign = 'center';
-    ctx.fillText('NORTH POLE', CX, CY-18);
-    // Ice wall label
-    ctx.fillStyle = 'rgba(168,196,220,0.6)';
-    ctx.fillText('ICE WALL / ANTARCTICA', CX, CY+R+4);
-    ctx.restore();
+    function drawNorthPole() {
+      ctx.globalAlpha=1;
+      ctx.beginPath(); ctx.arc(CX,CY,5,0,Math.PI*2);
+      ctx.fillStyle='#c9a227'; ctx.fill();
+      ctx.beginPath(); ctx.arc(CX,CY,13,0,Math.PI*2);
+      ctx.strokeStyle='#c9a227'; ctx.lineWidth=1.5; ctx.globalAlpha=0.55; ctx.stroke();
+      ctx.globalAlpha=1;
+    }
 
-    // ── Cardinal labels at rim ──
-    ctx.save(); ctx.font='bold 10px "Share Tech Mono",monospace'; ctx.textAlign='center';
-    ctx.fillStyle='rgba(201,162,39,0.5)';
-    const cardinals=[['N',0],['E',90],['S',180],['W',270]];
-    cardinals.forEach(([dir,deg])=>{
-      const t=deg*Math.PI/180, rr=R+38;
-      ctx.fillText(dir, CX+rr*Math.sin(t), CY-rr*Math.cos(t)+4);
-    });
-    ctx.restore();
+    function drawLabels() {
+      ctx.save();
+      ctx.setLineDash([]);
 
+      // Continent labels
+      const lbls = [
+        [50, -100,'NORTH AMERICA',11],
+        [-15, -55,'SOUTH AMERICA',10],
+        [52,  15, 'EUROPE',       10],
+        [2,   22, 'AFRICA',       11],
+        [50,  90, 'ASIA',         13],
+        [-27, 134,'AUSTRALIA',     9],
+        [73, -42, 'GREENLAND',     8],
+      ];
+      lbls.forEach(([lat,lon,text,sz]) => {
+        const [x,y] = project(lon,lat);
+        ctx.font=`${sz}px "Share Tech Mono",monospace`;
+        ctx.fillStyle='rgba(210,195,155,0.75)';
+        ctx.textAlign='center';
+        ctx.shadowColor='#000'; ctx.shadowBlur=5;
+        ctx.fillText(text,x,y);
+      });
+
+      // Ring labels — staggered so they don't overlap
+      const rLbls=[
+        [66.5, 'ARCTIC CIRCLE',   150],
+        [23.5, 'TROPIC OF CANCER',150],
+        [-23.5,'TROPIC OF CAPRICORN',150],
+        [-66.5,'ANTARCTIC CIRCLE',150],
+      ];
+      ctx.font='7.5px "Share Tech Mono",monospace';
+      ctx.fillStyle='rgba(100,155,210,0.5)';
+      ctx.textAlign='left';
+      ctx.shadowBlur=3;
+      rLbls.forEach(([lat,name,offset]) => {
+        const rho=R*(90-lat)/180;
+        ctx.fillText(name, CX+rho+3, CY-2);
+      });
+
+      // Equator label
+      const eqR=R*0.5;
+      ctx.fillStyle='rgba(201,162,39,0.6)';
+      ctx.fillText('EQUATOR', CX+eqR+3, CY-2);
+
+      // Center labels
+      ctx.textAlign='center'; ctx.font='8px "Share Tech Mono",monospace';
+      ctx.fillStyle='rgba(201,162,39,0.75)';
+      ctx.fillText('NORTH POLE',CX,CY-18);
+
+      // Ice wall label
+      ctx.fillStyle='rgba(168,196,220,0.55)';
+      ctx.fillText('ICE WALL / ANTARCTICA', CX, CY+R+14);
+
+      // Cardinals
+      ctx.font='bold 11px "Share Tech Mono",monospace';
+      [['N',0],['E',90],['S',180],['W',270]].forEach(([d,deg])=>{
+        const t=deg*Math.PI/180, rr=R+42;
+        ctx.fillStyle='rgba(201,162,39,0.5)';
+        ctx.fillText(d, CX+rr*Math.sin(t), CY-rr*Math.cos(t)+4);
+      });
+      ctx.restore();
+    }
+
+    // Render pipeline
+    drawBg();
+    drawGraticule();
+
+    fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/land-110m.json')
+      .then(r => r.json())
+      .then(data => {
+        decodeTopoJSON(data);
+        drawIceWall();
+        drawNorthPole();
+        drawLabels();
+      })
+      .catch(() => {
+        drawIceWall();
+        drawNorthPole();
+        drawLabels();
+      });
   })();
   </script>
 </body>
