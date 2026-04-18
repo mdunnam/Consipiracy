@@ -298,6 +298,69 @@ app.post('/resend-access', apiLimiter, async (req, res) => {
   }
 });
 
+
+/* ── In-memory depth store (survives PM2 restarts via file) ─────────────── */
+const fs   = require('fs');
+const DEPTH_FILE = '/tmp/ta-depth.json';
+
+function loadDepths() {
+  try { return JSON.parse(fs.readFileSync(DEPTH_FILE, 'utf8')); } catch(e) { return {}; }
+}
+function saveDepths(d) {
+  try { fs.writeFileSync(DEPTH_FILE, JSON.stringify(d)); } catch(e) {}
+}
+
+/* ── POST /depth/sync ───────────────────────────────────────────────────── */
+/* Body: { sessionId, depth, visited: [...slugs] }
+   Verifies the session is paid, then stores the depth.
+   Returns { depth } — the higher of server vs client (so neither loses pages). */
+app.post('/depth/sync', apiLimiter, async (req, res) => {
+  const { sessionId, depth, visited } = req.body;
+  if (!sessionId || !String(sessionId).match(/^cs_/)) {
+    return res.status(400).json({ error: 'Invalid session ID' });
+  }
+
+  try {
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
+    if (session.payment_status !== 'paid') {
+      return res.status(403).json({ error: 'Session not paid' });
+    }
+
+    const depths   = loadDepths();
+    const key      = sessionId;
+    const existing = depths[key] || { depth: 0, visited: [] };
+
+    // Merge visited arrays, deduplicate
+    const mergedVisited = [...new Set([...(existing.visited || []), ...(visited || [])])];
+    const mergedDepth   = Math.max(existing.depth || 0, depth || 0, mergedVisited.length);
+
+    depths[key] = { depth: mergedDepth, visited: mergedVisited, updated: Date.now() };
+    saveDepths(depths);
+
+    res.json({ depth: mergedDepth, visited: mergedVisited });
+  } catch(err) {
+    console.error('Depth sync error:', err.message);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+/* ── GET /depth/:sessionId ──────────────────────────────────────────────── */
+app.get('/depth/:sessionId', apiLimiter, async (req, res) => {
+  const { sessionId } = req.params;
+  if (!sessionId.match(/^cs_/)) return res.status(400).json({ error: 'Invalid' });
+
+  try {
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
+    if (session.payment_status !== 'paid') return res.status(403).json({ error: 'Not paid' });
+
+    const depths = loadDepths();
+    const data   = depths[sessionId] || { depth: 0, visited: [] };
+    res.json(data);
+  } catch(err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 /* ── Start ───────────────────────────────────────────────────────────────── */
 
 app.listen(PORT, () => {

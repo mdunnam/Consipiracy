@@ -1114,6 +1114,7 @@
         const data = await res.json();
         if (data.valid) {
           localStorage.setItem('ta_unlock', 'full_access');
+          localStorage.setItem('ta_session_id', sessionId);
           msg.textContent = 'Access restored! Reloading...';
           setTimeout(() => window.location.reload(), 800);
         } else {

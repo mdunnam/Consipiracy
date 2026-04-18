@@ -79,6 +79,22 @@ function initLoadingScreen() {
    2. RABBIT HOLE TRACKER — depth + chapter counter
    ============================================================ */
 
+function updateRabbitHoleWidget(depth) {
+  const widget = document.getElementById('rabbit-hole-widget');
+  if (!widget) return;
+  const counter = widget.querySelector('.rh-depth');
+  const label   = widget.querySelector('.rh-label');
+  if (counter) counter.textContent = depth;
+  if (label) {
+    if (depth < 3)       label.textContent = "Surface level. You've barely started.";
+    else if (depth < 10) label.textContent = "Going deeper. There's no coming back.";
+    else if (depth < 25) label.textContent = "They're watching you now.";
+    else if (depth < 50) label.textContent = "You know too much.";
+    else                 label.textContent = "LEVEL OMEGA. You see what they don't want you to see.";
+  }
+  setTimeout(() => widget.classList.add('visible'), 2000);
+}
+
 function initRabbitHoleTracker() {
   const visited = JSON.parse(localStorage.getItem('ta_visited') || '[]');
   const current = window.location.pathname.split('/').pop() || 'index.html';
@@ -88,24 +104,45 @@ function initRabbitHoleTracker() {
     localStorage.setItem('ta_visited', JSON.stringify(visited));
   }
 
-  const depth = visited.length;
-  const widget = document.getElementById('rabbit-hole-widget');
-  if (!widget) return;
+  const localDepth = visited.length;
+  updateRabbitHoleWidget(localDepth);
 
-  const counter = widget.querySelector('.rh-depth');
-  const label   = widget.querySelector('.rh-label');
+  // If the user has a paid session ID, sync with server
+  const sessionId = localStorage.getItem('ta_session_id');
+  if (!sessionId) return;
 
-  if (counter) counter.textContent = depth;
-  if (label) {
-    if (depth < 3)       label.textContent = 'Surface level. You\'ve barely started.';
-    else if (depth < 10) label.textContent = 'Going deeper. There\'s no coming back.';
-    else if (depth < 25) label.textContent = 'They\'re watching you now.';
-    else if (depth < 50) label.textContent = 'You know too much.';
-    else                 label.textContent = 'LEVEL OMEGA. You see what they don\'t want you to see.';
-  }
+  // Push local state to server, get back merged depth
+  fetch('/depth/sync', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ sessionId, depth: localDepth, visited })
+  })
+  .then(r => r.ok ? r.json() : null)
+  .then(data => {
+    if (!data) return;
+    // Server may know about more pages from other devices
+    if (data.depth > localDepth) {
+      // Merge server visited list into local
+      const merged = [...new Set([...visited, ...(data.visited || [])])];
+      localStorage.setItem('ta_visited', JSON.stringify(merged));
+      updateRabbitHoleWidget(data.depth);
+    }
+  })
+  .catch(() => {}); // fail silently — tracker is non-critical
+}
 
-  // Show the widget after a moment
-  setTimeout(() => widget.classList.add('visible'), 2000);
+// On new device: pull server depth immediately after unlock restores session ID
+function syncDepthFromServer(sessionId) {
+  fetch('/depth/' + encodeURIComponent(sessionId))
+  .then(r => r.ok ? r.json() : null)
+  .then(data => {
+    if (!data || !data.depth) return;
+    const local = JSON.parse(localStorage.getItem('ta_visited') || '[]');
+    const merged = [...new Set([...local, ...(data.visited || [])])];
+    localStorage.setItem('ta_visited', JSON.stringify(merged));
+    updateRabbitHoleWidget(data.depth);
+  })
+  .catch(() => {});
 }
 
 /* ============================================================
@@ -465,6 +502,18 @@ function showAccessInterstitial() {
    8. INJECT PERSISTENT UI ELEMENTS into every page
    ============================================================ */
 
+function initDepthSync() {
+  // On page load: if we have a session ID but visited list is short,
+  // pull from server (handles "new device" case where localStorage was blank)
+  const sessionId = localStorage.getItem('ta_session_id');
+  if (!sessionId) return;
+  const visited = JSON.parse(localStorage.getItem('ta_visited') || '[]');
+  // Only sync from server if local is sparse (new device)
+  if (visited.length < 3) {
+    syncDepthFromServer(sessionId);
+  }
+}
+
 function injectPersistentUI() {
   // Rabbit hole widget
   if (!document.getElementById('rabbit-hole-widget')) {
@@ -527,4 +576,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initDecodeOnScroll();
   initSearch();
   initShareMechanic();
+  initDepthSync();
 });

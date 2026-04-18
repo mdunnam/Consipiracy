@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Payment Confirmed — The Truth Archive</title>
-  <link rel="stylesheet" href="css/style.css" />`n  <link rel="stylesheet" href="css/enhancements.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/enhancements.css" />
   <style>
     .success-page {
       min-height: 100vh;
@@ -59,7 +60,11 @@
     }
   </style>
 </head>
-<body>`n`n  <!-- Loading Screen -->`n  <div id="ta-loading-screen">`n    <div class="loading-logo">&#11041; THE TRUTH ARCHIVE &#11041;</div>`n    <div class="loading-bar-wrap"><div class="loading-bar-fill"></div></div>`n    <div class="loading-log"></div>`n  </div>`n`n  <div id="reading-progress"></div>
+<body>
+
+  <!-- Loading Screen -->`n  <div id="ta-loading-screen">`n    <div class="loading-logo">&#11041; THE TRUTH ARCHIVE &#11041;</div>`n    <div class="loading-bar-wrap"><div class="loading-bar-fill"></div></div>`n    <div class="loading-log"></div>`n  </div>
+
+  <div id="reading-progress"></div>
 
   <nav class="site-nav" role="navigation" aria-label="Main navigation">
     <a href="index.html" class="nav-logo"><span class="eye-symbol">👁</span> Truth Archive</a>
@@ -120,6 +125,7 @@
         if (data.valid) {
           // Store the unlock token in localStorage
           localStorage.setItem('ta_unlock', 'full_access');
+          localStorage.setItem('ta_session_id', sessionId);
 
           // Update UI to success state
           icon.textContent      = '✅';
@@ -153,5 +159,7 @@
     })();
   </script>
 
-  <script src="js/app.js"></script>`n  <script src="js/enhancements.js"></script>`n</body>
+  <script src="js/app.js"></script>
+  <script src="js/enhancements.js"></script>
+</body>
 </html>
