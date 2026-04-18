@@ -224,8 +224,6 @@
   </style>
 </head>
 <body>
-    <div class="loading-bar-wrap"><div class="loading-bar-fill"></div></div>
-    <div class="loading-log"></div>
   </div>
 
   <div id="reading-progress"></div>
@@ -237,7 +235,18 @@
       <li><a href="index.html">← Back to Site</a></li>
       <li><a href="#toc">Contents</a></li>
       <li><a href="#cover">↑ Top</a></li>
+      <li id="restore-nav-li"><a href="#" id="restore-nav-btn" onclick="event.preventDefault();openRestoreModal();" style="color:rgba(201,162,39,0.8);font-size:0.75rem;">&#128273; Restore Purchase</a></li>
     </ul>
+
+  <script>
+    // Hide restore button if already unlocked on this device
+    if (localStorage.getItem('ta_unlock') === 'full_access') {
+      document.addEventListener('DOMContentLoaded', function() {
+        var el = document.getElementById('restore-nav-li');
+        if (el) el.style.display = 'none';
+      });
+    }
+  </script>
   </nav>
 
   <!-- ===================================================================

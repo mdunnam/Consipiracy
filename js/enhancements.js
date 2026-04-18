@@ -517,18 +517,6 @@ function initDepthSync() {
 function buildRestoreModal() {
   // Only on ebook page
   if (!window.location.pathname.includes('ebook')) return;
-  // Don't add if already unlocked
-  if (localStorage.getItem('ta_unlock') === 'full_access') return;
-
-  // Add "Restore Purchase" button to nav
-  const nav = document.querySelector('.nav-links');
-  if (nav && !document.getElementById('restore-nav-btn')) {
-    const li = document.createElement('li');
-    li.innerHTML = '<a href="#" id="restore-nav-btn" style="color:rgba(201,162,39,0.7);font-size:0.7rem;letter-spacing:0.05em;" title="Restore previous purchase">&#128273; Restore</a>';
-    nav.insertBefore(li, nav.firstChild);
-    li.querySelector('a').addEventListener('click', e => { e.preventDefault(); openRestoreModal(); });
-  }
-
   // Build modal
   if (document.getElementById('restore-modal')) return;
   const modal = document.createElement('div');
