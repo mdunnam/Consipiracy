@@ -514,6 +514,101 @@ function initDepthSync() {
   }
 }
 
+function buildRestoreModal() {
+  // Only on ebook page
+  if (!window.location.pathname.includes('ebook')) return;
+  // Don't add if already unlocked
+  if (localStorage.getItem('ta_unlock') === 'full_access') return;
+
+  // Add "Restore Purchase" button to nav
+  const nav = document.querySelector('.nav-links');
+  if (nav && !document.getElementById('restore-nav-btn')) {
+    const li = document.createElement('li');
+    li.innerHTML = '<a href="#" id="restore-nav-btn" style="color:rgba(201,162,39,0.7);font-size:0.7rem;letter-spacing:0.05em;" title="Restore previous purchase">&#128273; Restore</a>';
+    nav.insertBefore(li, nav.firstChild);
+    li.querySelector('a').addEventListener('click', e => { e.preventDefault(); openRestoreModal(); });
+  }
+
+  // Build modal
+  if (document.getElementById('restore-modal')) return;
+  const modal = document.createElement('div');
+  modal.id = 'restore-modal';
+  modal.style.cssText = 'position:fixed;inset:0;z-index:99990;background:rgba(2,2,2,0.94);display:none;align-items:center;justify-content:center;padding:2rem;';
+  modal.innerHTML = `
+    <div style="background:#0a0a0a;border:1px solid rgba(201,162,39,0.35);max-width:480px;width:100%;padding:2rem;position:relative;">
+      <button onclick="closeRestoreModal()" style="position:absolute;top:0.8rem;right:0.8rem;background:none;border:none;color:#4a4a4a;cursor:pointer;font-size:1rem;">&#x2715;</button>
+      <div style="font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.3em;color:var(--red-bright);margin-bottom:1rem;">RESTORE ACCESS</div>
+      <h3 style="color:var(--gold);font-size:1.1rem;margin-bottom:0.5rem;">Already purchased?</h3>
+      <p style="font-size:0.85rem;color:#7a7a7a;margin-bottom:1.5rem;line-height:1.6;">Enter your purchase email and we'll resend your access link, or paste your session ID directly.</p>
+
+      <div style="display:flex;gap:0;margin-bottom:1.2rem;border:1px solid #1a1a1a;">
+        <button id="rmod-tab-email" onclick="switchRestoreTab('email')" style="flex:1;padding:0.45rem;font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;background:#c9a227;color:#000;border:none;">Email Me</button>
+        <button id="rmod-tab-session" onclick="switchRestoreTab('session')" style="flex:1;padding:0.45rem;font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;background:transparent;color:#4a4a4a;border:none;">Session ID</button>
+      </div>
+
+      <div id="rmod-email-panel">
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+          <input id="rmod-email-input" type="email" placeholder="your@email.com"
+            style="flex:1;min-width:160px;background:#111;border:1px solid #2a2a2a;color:#d8d8d8;padding:0.55rem 0.8rem;font-family:var(--font-mono);font-size:0.78rem;outline:none;" />
+          <button onclick="modalResendAccess()" style="background:transparent;border:1px solid rgba(201,162,39,0.5);color:#c9a227;font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.1em;padding:0.55rem 1rem;cursor:pointer;white-space:nowrap;">SEND</button>
+        </div>
+        <div id="rmod-email-msg" style="font-family:var(--font-mono);font-size:0.68rem;margin-top:0.6rem;color:#4a4a4a;min-height:1rem;"></div>
+      </div>
+
+      <div id="rmod-session-panel" style="display:none;">
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+          <input id="rmod-session-input" type="text" placeholder="cs_live_..."
+            style="flex:1;min-width:160px;background:#111;border:1px solid #2a2a2a;color:#d8d8d8;padding:0.55rem 0.8rem;font-family:var(--font-mono);font-size:0.78rem;outline:none;" />
+          <button onclick="modalRestoreSession()" style="background:transparent;border:1px solid rgba(201,162,39,0.5);color:#c9a227;font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.1em;padding:0.55rem 1rem;cursor:pointer;white-space:nowrap;">RESTORE</button>
+        </div>
+        <div id="rmod-session-msg" style="font-family:var(--font-mono);font-size:0.68rem;margin-top:0.6rem;color:#4a4a4a;min-height:1rem;"></div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeRestoreModal(); });
+}
+
+window.openRestoreModal  = () => { const m = document.getElementById('restore-modal'); if(m) { m.style.display='flex'; document.body.style.overflow='hidden'; } };
+window.closeRestoreModal = () => { const m = document.getElementById('restore-modal'); if(m) { m.style.display='none'; document.body.style.overflow=''; } };
+
+window.switchRestoreTab = (tab) => {
+  document.getElementById('rmod-email-panel').style.display   = tab==='email'   ? 'block' : 'none';
+  document.getElementById('rmod-session-panel').style.display = tab==='session' ? 'block' : 'none';
+  document.getElementById('rmod-tab-email').style.cssText   = 'flex:1;padding:0.45rem;font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border:none;' + (tab==='email'   ? 'background:#c9a227;color:#000;' : 'background:transparent;color:#4a4a4a;');
+  document.getElementById('rmod-tab-session').style.cssText = 'flex:1;padding:0.45rem;font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border:none;' + (tab==='session' ? 'background:#c9a227;color:#000;' : 'background:transparent;color:#4a4a4a;');
+};
+
+window.modalResendAccess = async () => {
+  const email = document.getElementById('rmod-email-input').value.trim();
+  const msg   = document.getElementById('rmod-email-msg');
+  if (!email || !email.includes('@')) { msg.style.color='#cc2222'; msg.textContent='Enter a valid email.'; return; }
+  msg.style.color='#4a7a4a'; msg.textContent='Sending...';
+  try {
+    const res  = await fetch('/resend-access', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({email}) });
+    const data = await res.json();
+    msg.textContent = data.sent ? 'If a purchase was found, your link has been sent. Check your inbox.' : (data.error || 'Error. Try again.');
+    if (!data.sent) msg.style.color = '#cc2222';
+  } catch(e) { msg.style.color='#cc2222'; msg.textContent='Server error.'; }
+};
+
+window.modalRestoreSession = async () => {
+  const sessionId = document.getElementById('rmod-session-input').value.trim();
+  const msg       = document.getElementById('rmod-session-msg');
+  if (!sessionId.match(/^cs_/)) { msg.style.color='#cc2222'; msg.textContent='Should start with cs_'; return; }
+  msg.style.color='#4a7a4a'; msg.textContent='Verifying...';
+  try {
+    const res  = await fetch('/verify-session/' + encodeURIComponent(sessionId));
+    const data = await res.json();
+    if (data.valid) {
+      localStorage.setItem('ta_unlock', 'full_access');
+      localStorage.setItem('ta_session_id', sessionId);
+      msg.textContent = 'Restored! Reloading...';
+      setTimeout(() => window.location.reload(), 800);
+    } else { msg.style.color='#cc2222'; msg.textContent='Not found or payment incomplete.'; }
+  } catch(e) { msg.style.color='#cc2222'; msg.textContent='Server error.'; }
+};
+
 function injectPersistentUI() {
   // Rabbit hole widget
   if (!document.getElementById('rabbit-hole-widget')) {
@@ -577,4 +672,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initSearch();
   initShareMechanic();
   initDepthSync();
+  buildRestoreModal();
 });

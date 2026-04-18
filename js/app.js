@@ -270,20 +270,26 @@ function initEbookPaywall() {
   const locked          = document.querySelector('.ebook-locked');
   const paywallSection  = document.getElementById('paywall-section');
   const previewFade     = document.querySelector('.ebook-preview-fade');
+  const restoreBox      = document.getElementById('restore-access-box');
   if (!locked) return;
 
   const token = localStorage.getItem('ta_unlock');
   if (token === 'full_access') {
     // Unblur locked content
     locked.classList.add('unlocked');
-    // Hide entire paywall section (teasers, stats, testimonials, buy button)
+    // Hide entire paywall section
     if (paywallSection) paywallSection.style.display = 'none';
     if (previewFade)    previewFade.style.display    = 'none';
+    // Hide restore box (not needed — already unlocked on this device)
+    if (restoreBox)     restoreBox.style.display     = 'none';
     // Show unlocked banner
     const banner = document.createElement('div');
     banner.style.cssText = 'text-align:center;padding:1.5rem;font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.2em;color:#4a7a4a;border-bottom:1px solid #1a1a1a;margin-bottom:2rem;';
     banner.innerHTML = '&#9660; FULL ARCHIVE UNLOCKED &#9660;';
     locked.insertAdjacentElement('beforebegin', banner);
+  } else {
+    // Not unlocked — show the restore box
+    if (restoreBox) restoreBox.style.display = 'block';
   }
 }
 
