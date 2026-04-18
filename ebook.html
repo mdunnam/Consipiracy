@@ -399,6 +399,23 @@
   <!-- ═══════════════════════════════════════════════════════════════════
        PAYWALL
        ═══════════════════════════════════════════════════════════════════ -->
+  <!-- Restore Access — for returning buyers on new device/browser -->
+  <div id="restore-access-box" style="max-width:560px;margin:0 auto 0;padding:0 1.5rem;">
+    <details style="border:1px solid #1a1a1a;background:var(--bg-card);margin-bottom:0;">
+      <summary style="padding:0.7rem 1rem;font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.15em;color:var(--text-muted);cursor:pointer;list-style:none;text-transform:uppercase;">
+        &#128273; Already purchased? Restore access &rsaquo;
+      </summary>
+      <div style="padding:1rem;border-top:1px solid #1a1a1a;">
+        <p style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:0.8rem;">Check your email for your access link, or paste your Stripe session ID below.</p>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+          <input id="restore-session-input" type="text" placeholder="cs_live_..." style="flex:1;min-width:200px;background:#0a0a0a;border:1px solid #2a2a2a;color:#d8d8d8;padding:0.5rem 0.8rem;font-family:var(--font-mono);font-size:0.78rem;outline:none;" />
+          <button onclick="restoreAccess()" style="background:transparent;border:1px solid rgba(201,162,39,0.5);color:#c9a227;font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.1em;padding:0.5rem 1rem;cursor:pointer;white-space:nowrap;">RESTORE</button>
+        </div>
+        <div id="restore-msg" style="font-family:var(--font-mono);font-size:0.68rem;margin-top:0.5rem;color:#4a4a4a;"></div>
+      </div>
+    </details>
+  </div>
+
   <div id="paywall-section">
   <div class="ebook-preview-fade"></div>
 
@@ -1020,6 +1037,34 @@
      * Redirects the user to the Stripe Checkout session.
      * The server creates the session and returns a URL to redirect to.
      */
+    async function restoreAccess() {
+      const input = document.getElementById('restore-session-input');
+      const msg   = document.getElementById('restore-msg');
+      const sessionId = input.value.trim();
+      if (!sessionId.match(/^cs_/)) {
+        msg.style.color = '#cc2222';
+        msg.textContent = 'Invalid session ID. It should start with cs_';
+        return;
+      }
+      msg.style.color = '#4a7a4a';
+      msg.textContent = 'Verifying...';
+      try {
+        const res  = await fetch(`/verify-session/${encodeURIComponent(sessionId)}`);
+        const data = await res.json();
+        if (data.valid) {
+          localStorage.setItem('ta_unlock', 'full_access');
+          msg.textContent = 'Access restored! Reloading...';
+          setTimeout(() => window.location.reload(), 800);
+        } else {
+          msg.style.color = '#cc2222';
+          msg.textContent = 'Session not found or payment incomplete.';
+        }
+      } catch(e) {
+        msg.style.color = '#cc2222';
+        msg.textContent = 'Server error. Try again.';
+      }
+    }
+
     async function startCheckout() {
       const btn = document.getElementById('checkout-btn');
       const origText = btn.textContent;
