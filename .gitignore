@@ -1,16 +1,35 @@
 
 
+# ── Secrets ───────────────────────────────────────────────
 .env
+.env.example
+
+# ── Dependencies ──────────────────────────────────────────
 node_modules/
 package-lock.json
+
+# ── Build / dev scripts (not needed on server) ────────────
 generate-ebook-pdf.js
-ebook-print.html
+build-ebook.js
 restructure_site.js
+
+# ── Generated / temporary files ───────────────────────────
+ebook-print.html
+ebook-head.tmp
+*.pdf
+
+# ── Stripe CLI (binary, not source) ───────────────────────
 stripe-cli/
 stripe-cli.zip
-*.pdf
-build-ebook.js
+
+# ── Local working notes ───────────────────────────────────
 PLAN.md
 flat-earth-map-locations.md
-ebook-head.tmp
+
+# ── Editor / OS ───────────────────────────────────────────
 .history/
+conspiracy.code-workspace
+.vscode/
+*.code-workspace
+Thumbs.db
+.DS_Store
