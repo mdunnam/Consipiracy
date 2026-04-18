@@ -21,6 +21,66 @@ const path         = require('path');
 const helmet       = require('helmet');
 const rateLimit    = require('express-rate-limit');
 const stripe       = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const { SESv2Client, SendEmailCommand } = require('@aws-sdk/client-sesv2');
+
+const ses = new SESv2Client({ region: process.env.AWS_REGION || 'us-east-1' });
+
+/**
+ * Sends a purchase confirmation email with the customer's re-access link.
+ * @param {string} toEmail - Customer's email address from Stripe.
+ * @param {string} sessionId - Stripe checkout session ID used as the access token.
+ */
+async function sendPurchaseEmail(toEmail, sessionId) {
+  const accessUrl = `${process.env.SITE_URL}/ebook-success.html?session_id=${sessionId}`;
+  const fromAddress = process.env.SES_FROM_EMAIL || 'noreply@thetrutharchive.org';
+
+  const html = `
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"></head>
+<body style="margin:0;padding:0;background:#0a0a0a;font-family:'Georgia',serif;color:#e8e0d0;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a0a0a;padding:40px 20px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#111;border:1px solid #2a2a2a;border-radius:4px;max-width:600px;">
+        <tr><td style="padding:40px;text-align:center;border-bottom:1px solid #2a2a2a;">
+          <div style="font-size:2rem;margin-bottom:12px;">👁</div>
+          <h1 style="color:#c9a227;font-size:1.5rem;margin:0;letter-spacing:0.15em;text-transform:uppercase;">The Truth Archive</h1>
+          <p style="color:#666;font-size:0.75rem;letter-spacing:0.3em;text-transform:uppercase;margin:8px 0 0;">Access Confirmed</p>
+        </td></tr>
+        <tr><td style="padding:40px;">
+          <p style="color:#c9a227;font-size:1.1rem;margin:0 0 16px;">Your access has been unlocked.</p>
+          <p style="color:#aaa;line-height:1.8;margin:0 0 24px;">Thank you for your purchase. Use the link below any time to re-access the full 12-chapter eBook — on any device, in any browser.</p>
+          <div style="text-align:center;margin:32px 0;">
+            <a href="${accessUrl}" style="display:inline-block;background:#c9a227;color:#000;text-decoration:none;padding:14px 32px;font-family:monospace;font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:700;border-radius:3px;">Open Full eBook →</a>
+          </div>
+          <p style="color:#555;font-size:0.8rem;line-height:1.7;">Bookmark this email or save the link. It is your permanent key to the archive.<br>Questions? Reply to this email.</p>
+        </td></tr>
+        <tr><td style="padding:20px 40px;border-top:1px solid #1a1a1a;text-align:center;">
+          <p style="color:#444;font-size:0.72rem;margin:0;letter-spacing:0.1em;">THE TRUTH ARCHIVE &nbsp;·&nbsp; THETRUTHARCHIVE.ORG</p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+
+  const command = new SendEmailCommand({
+    FromEmailAddress: fromAddress,
+    Destination: { ToAddresses: [toEmail] },
+    Content: {
+      Simple: {
+        Subject: { Data: '📖 Your Truth Archive Access Link', Charset: 'UTF-8' },
+        Body: {
+          Html: { Data: html, Charset: 'UTF-8' },
+          Text: { Data: `Your Truth Archive access link:\n\n${accessUrl}\n\nBookmark this email — it is your permanent key.\n\nthetrutharchive.org`, Charset: 'UTF-8' },
+        },
+      },
+    },
+  });
+
+  await ses.send(command);
+  console.log(`Purchase email sent to ${toEmail}`);
+}
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
@@ -165,8 +225,14 @@ app.post('/webhook', (req, res) => {
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object;
     console.log('Payment confirmed via webhook. Session:', session.id, 'Customer:', session.customer_email);
-    // No server-side session store needed for this client-token approach.
-    // The /verify-session endpoint handles per-request validation.
+
+    if (session.customer_email) {
+      sendPurchaseEmail(session.customer_email, session.id).catch(err =>
+        console.error('Failed to send purchase email:', err.message)
+      );
+    } else {
+      console.warn('Webhook: no customer_email on session', session.id);
+    }
   }
 
   res.sendStatus(200);
