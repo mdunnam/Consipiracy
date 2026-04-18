@@ -68,7 +68,7 @@
     <a href="index.html" class="nav-logo"><span class="eye-symbol">👁</span> Truth Archive</a>
     <button class="nav-toggle" aria-expanded="false" aria-label="Toggle menu">☰</button>
     <ul class="nav-links">
-      <li><a href="map.html">&#128378; Map</a></li>`n      <li><a href="ebook.html" class="ebook-link">📖 eBook</a></li>
+      <li><a href="ebook.html" class="ebook-link">📖 eBook</a></li>
       <li><a href="index.html">← Home</a></li>
     </ul>
   </nav>
@@ -85,6 +85,10 @@
         📖 Open the Full eBook
       </a>
       <a href="index.html" class="btn btn-outline">← Return to Archive</a>
+    </div>
+    <div id="manual-unlock" style="display:none;margin-top:2rem;text-align:center;">
+      <p style="font-size:0.8rem;color:#4a4a4a;font-family:var(--font-mono);margin-bottom:0.8rem;">Taking too long? Click below to unlock manually.</p>
+      <button onclick="manualUnlock()" class="btn btn-gold" style="font-size:0.9rem;">🔓 Unlock Now</button>
     </div>
   </section>
 
@@ -127,18 +131,20 @@
 
           // Update UI to success state
           icon.textContent      = '✅';
-          title.textContent     = 'Payment Confirmed — You\'re In.';
-          message.textContent   = 'Your access has been unlocked. Click below to open the full archive.';
+          title.textContent     = 'Access Confirmed.';
+          message.textContent   = 'Redirecting to the full archive...';
           verifying.textContent = 'ACCESS GRANTED — LEVEL OMEGA CLEARANCE';
           verifying.style.color = 'var(--gold)';
           actions.style.display = 'flex';
+          // Auto-redirect so unlock token is already set when ebook.html loads
+          setTimeout(() => { window.location.href = 'ebook.html'; }, 1800);
 
         } else {
           showError('Payment could not be verified. If you were charged, please contact support with your session ID: ' + sessionId);
         }
 
       } catch (err) {
-        showError('Could not reach the verification server. Please try refreshing the page, or contact support.');
+        showError('Could not reach the verification server. Error: ' + err.message + '. Please try refreshing, or contact support@thetrutharchive.org');
         console.error('Verification fetch failed:', err);
       }
 
@@ -155,6 +161,25 @@
         errorBox.style.display = 'block';
       }
     })();
+
+    // Show manual fallback after 5s in case fetch is blocked/slow
+    setTimeout(() => {
+      const box = document.getElementById('manual-unlock');
+      const title = document.getElementById('title');
+      if (box && title && title.textContent.includes('Verifying')) {
+        box.style.display = 'block';
+      }
+    }, 5000);
+
+    function manualUnlock() {
+      const params    = new URLSearchParams(window.location.search);
+      const sessionId = params.get('session_id');
+      if (sessionId && sessionId.match(/^cs_/)) {
+        localStorage.setItem('ta_unlock', 'full_access');
+        localStorage.setItem('ta_session_id', sessionId);
+        window.location.href = 'ebook.html';
+      }
+    }
   </script>
 
   <script src="js/app.js"></script>
