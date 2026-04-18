@@ -44,10 +44,10 @@
   --glow-text-red:    0 0 6px rgba(204, 34, 34, 0.8);
 
   /* Typography */
-  --font-heading:     'Cinzel', serif;
-  --font-body:        'Special Elite', cursive;
-  --font-mono:        'Share Tech Mono', monospace;
-  --font-label:       'Oswald', sans-serif;
+  --font-heading:     'Cinzel', Georgia, 'Times New Roman', serif;
+  --font-body:        'Special Elite', 'Courier New', Courier, monospace;
+  --font-mono:        'Share Tech Mono', 'Courier New', Courier, monospace;
+  --font-label:       'Oswald', 'Arial Narrow', Arial, sans-serif;
 
   /* Spacing */
   --section-pad:      5rem 2rem;
