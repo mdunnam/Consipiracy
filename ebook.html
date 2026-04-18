@@ -406,12 +406,33 @@
         &#128273; Already purchased? Restore access &rsaquo;
       </summary>
       <div style="padding:1rem;border-top:1px solid #1a1a1a;">
-        <p style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:0.8rem;">Check your email for your access link, or paste your Stripe session ID below.</p>
-        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
-          <input id="restore-session-input" type="text" placeholder="cs_live_..." style="flex:1;min-width:200px;background:#0a0a0a;border:1px solid #2a2a2a;color:#d8d8d8;padding:0.5rem 0.8rem;font-family:var(--font-mono);font-size:0.78rem;outline:none;" />
-          <button onclick="restoreAccess()" style="background:transparent;border:1px solid rgba(201,162,39,0.5);color:#c9a227;font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.1em;padding:0.5rem 1rem;cursor:pointer;white-space:nowrap;">RESTORE</button>
+
+        <!-- Tab switcher -->
+        <div style="display:flex;gap:0;margin-bottom:1rem;border:1px solid #2a2a2a;">
+          <button id="tab-email-btn" onclick="switchTab('email')" style="flex:1;padding:0.45rem;font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;background:#c9a227;color:#000;border:none;">Resend Email</button>
+          <button id="tab-session-btn" onclick="switchTab('session')" style="flex:1;padding:0.45rem;font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;background:transparent;color:#4a4a4a;border:none;">Paste Session ID</button>
         </div>
-        <div id="restore-msg" style="font-family:var(--font-mono);font-size:0.68rem;margin-top:0.5rem;color:#4a4a4a;"></div>
+
+        <!-- Resend by email tab -->
+        <div id="tab-email">
+          <p style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:0.8rem;">Enter the email address you used to purchase. We'll resend your access link.</p>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+            <input id="resend-email-input" type="email" placeholder="your@email.com" style="flex:1;min-width:200px;background:#0a0a0a;border:1px solid #2a2a2a;color:#d8d8d8;padding:0.5rem 0.8rem;font-family:var(--font-mono);font-size:0.78rem;outline:none;" />
+            <button onclick="resendAccess()" style="background:transparent;border:1px solid rgba(201,162,39,0.5);color:#c9a227;font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.1em;padding:0.5rem 1rem;cursor:pointer;white-space:nowrap;">SEND LINK</button>
+          </div>
+          <div id="resend-msg" style="font-family:var(--font-mono);font-size:0.68rem;margin-top:0.5rem;color:#4a4a4a;"></div>
+        </div>
+
+        <!-- Restore by session ID tab -->
+        <div id="tab-session" style="display:none;">
+          <p style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:0.8rem;">Paste the session ID from your confirmation email (starts with cs_).</p>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+            <input id="restore-session-input" type="text" placeholder="cs_live_..." style="flex:1;min-width:200px;background:#0a0a0a;border:1px solid #2a2a2a;color:#d8d8d8;padding:0.5rem 0.8rem;font-family:var(--font-mono);font-size:0.78rem;outline:none;" />
+            <button onclick="restoreAccess()" style="background:transparent;border:1px solid rgba(201,162,39,0.5);color:#c9a227;font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.1em;padding:0.5rem 1rem;cursor:pointer;white-space:nowrap;">RESTORE</button>
+          </div>
+          <div id="restore-msg" style="font-family:var(--font-mono);font-size:0.68rem;margin-top:0.5rem;color:#4a4a4a;"></div>
+        </div>
+
       </div>
     </details>
   </div>
@@ -1037,6 +1058,45 @@
      * Redirects the user to the Stripe Checkout session.
      * The server creates the session and returns a URL to redirect to.
      */
+    function switchTab(tab) {
+      document.getElementById('tab-email').style.display    = tab === 'email'   ? 'block' : 'none';
+      document.getElementById('tab-session').style.display  = tab === 'session' ? 'block' : 'none';
+      document.getElementById('tab-email-btn').style.background   = tab === 'email'   ? '#c9a227' : 'transparent';
+      document.getElementById('tab-email-btn').style.color        = tab === 'email'   ? '#000'    : '#4a4a4a';
+      document.getElementById('tab-session-btn').style.background = tab === 'session' ? '#c9a227' : 'transparent';
+      document.getElementById('tab-session-btn').style.color      = tab === 'session' ? '#000'    : '#4a4a4a';
+    }
+
+    async function resendAccess() {
+      const input = document.getElementById('resend-email-input');
+      const msg   = document.getElementById('resend-msg');
+      const email = input.value.trim();
+      if (!email || !email.includes('@')) {
+        msg.style.color = '#cc2222';
+        msg.textContent = 'Please enter a valid email address.';
+        return;
+      }
+      msg.style.color = '#4a7a4a';
+      msg.textContent = 'Sending...';
+      try {
+        const res  = await fetch('/resend-access', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+        if (data.sent) {
+          msg.textContent = 'If a purchase was found, your access link has been sent. Check your inbox (and spam folder).';
+        } else {
+          msg.style.color = '#cc2222';
+          msg.textContent = data.error || 'Something went wrong. Try again.';
+        }
+      } catch(e) {
+        msg.style.color = '#cc2222';
+        msg.textContent = 'Server error. Please try again.';
+      }
+    }
+
     async function restoreAccess() {
       const input = document.getElementById('restore-session-input');
       const msg   = document.getElementById('restore-msg');

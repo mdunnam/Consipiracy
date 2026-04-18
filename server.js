@@ -253,6 +253,51 @@ app.post('/webhook', (req, res) => {
   res.sendStatus(200);
 });
 
+
+/* ── POST /resend-access ─────────────────────────────────────────────────── */
+
+/**
+ * Looks up a Stripe customer by email and resends their access link.
+ */
+app.post('/resend-access', apiLimiter, async (req, res) => {
+  const { email } = req.body;
+  if (!email || typeof email !== 'string' || !email.includes('@')) {
+    return res.status(400).json({ error: 'Valid email required.' });
+  }
+
+  try {
+    // Search Stripe customers by email
+    const customers = await stripe.customers.list({ email: email.toLowerCase().trim(), limit: 5 });
+
+    if (!customers.data.length) {
+      // Don't reveal whether email exists — just say "if found, we sent it"
+      return res.json({ sent: true });
+    }
+
+    // Find a paid checkout session for any of these customers
+    let foundSession = null;
+    for (const customer of customers.data) {
+      const sessions = await stripe.checkout.sessions.list({
+        customer: customer.id,
+        limit: 10,
+      });
+      const paid = sessions.data.find(s => s.payment_status === 'paid');
+      if (paid) { foundSession = paid; break; }
+    }
+
+    if (foundSession) {
+      await sendPurchaseEmail(email.toLowerCase().trim(), foundSession.id);
+      console.log('Resent access email to', email);
+    }
+
+    // Always return success (don't leak whether email/purchase exists)
+    res.json({ sent: true });
+  } catch (err) {
+    console.error('Resend error:', err.message);
+    res.status(500).json({ error: 'Server error. Please try again.' });
+  }
+});
+
 /* ── Start ───────────────────────────────────────────────────────────────── */
 
 app.listen(PORT, () => {
