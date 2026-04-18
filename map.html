@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connection Map — The Truth Archive</title>
+  <meta name="description" content="Interactive network map showing the documented connections between elite families, institutions, events, and secret orders." />
+  <meta property="og:title" content="The Connection Map — Truth Archive" />
+  <meta property="og:description" content="Every node connected. See how it all links together." />
+  <meta property="og:image" content="https://thetrutharchive.org/images/og-preview.jpg" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/enhancements.css" />
+  <style>
+    body { overflow: hidden; }
+    #map-container {
+      position: fixed;
+      inset: 64px 0 0 0;
+      background: #010103;
+      overflow: hidden;
+    }
+    #conspiracy-map {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: grab;
+    }
+    #conspiracy-map:active { cursor: grabbing; }
+
+    .map-controls {
+      position: fixed;
+      top: 64px;
+      left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 1rem;
+      background: rgba(1,1,3,0.95);
+      border-bottom: 1px solid rgba(201,162,39,0.15);
+      flex-wrap: wrap;
+    }
+
+    .map-filter-btn {
+      background: transparent;
+      border: 1px solid #1c1c1c;
+      color: #5a5a5a;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.28rem 0.7rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-radius: 2px;
+    }
+    .map-filter-btn:hover, .map-filter-btn.active {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201,162,39,0.06);
+    }
+
+    .map-controls-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
+      color: #2a2a2a;
+      letter-spacing: 0.1em;
+      margin-right: 0.3rem;
+    }
+
+    .map-instructions {
+      position: fixed;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      color: #2a2a2a;
+      letter-spacing: 0.1em;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .map-tooltip {
+      position: fixed;
+      background: rgba(4,4,4,0.97);
+      border: 1px solid rgba(201,162,39,0.4);
+      padding: 0.7rem 1rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.72rem;
+      color: #d8d8d8;
+      pointer-events: none;
+      z-index: 9000;
+      max-width: 240px;
+      line-height: 1.5;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+      display: none;
+    }
+    .map-tooltip.visible { display: block; }
+    .map-tooltip-title {
+      color: #c9a227;
+      font-weight: 700;
+      font-size: 0.8rem;
+      margin-bottom: 0.3rem;
+    }
+    .map-tooltip-cat {
+      font-size: 0.6rem;
+      color: #4a4a4a;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .map-tooltip-desc { color: #6a6a6a; font-size: 0.68rem; line-height: 1.45; }
+    .map-tooltip-link {
+      display: inline-block;
+      margin-top: 0.5rem;
+      color: #c9a227;
+      font-size: 0.65rem;
+      text-decoration: none;
+      letter-spacing: 0.08em;
+    }
+
+    #map-controls-bar { top: 98px; }
+  </style>
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-logo"><span class="eye-symbol">👁</span> Truth Archive</a>
+    <button class="nav-toggle" aria-expanded="false" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="great-awakening.html">The Great Awakening</a></li>
+      <li><a href="flat-earth.html">Flat Earth</a></li>
+      <li><a href="deep-state.html">Deep State</a></li>
+      <li><a href="secret-societies.html">Secret Societies</a></li>
+      <li><a href="banking-control.html">Banking Control</a></li>
+      <li><a href="media-control.html">Media Control</a></li>
+      <li><a href="space-deception.html">Space Deception</a></li>
+      <li><a href="topics/index.html">All Topics</a></li>
+      <li><a href="map.html" class="active">🕸 Map</a></li>
+      <li><a href="ebook.html" class="ebook-link">📖 eBook</a></li>
+    </ul>
+  </nav>
+
+  <!-- Filter bar -->
+  <div class="map-controls" id="map-controls-bar">
+    <span class="map-controls-label">FILTER:</span>
+    <button class="map-filter-btn active" data-cat="all">All Nodes</button>
+    <button class="map-filter-btn" data-cat="banking">Banking</button>
+    <button class="map-filter-btn" data-cat="deepstate">Deep State</button>
+    <button class="map-filter-btn" data-cat="societies">Societies</button>
+    <button class="map-filter-btn" data-cat="media">Media</button>
+    <button class="map-filter-btn" data-cat="health">Health</button>
+    <button class="map-filter-btn" data-cat="space">Space/ET</button>
+    <button class="map-filter-btn" data-cat="ancient">Ancient</button>
+  </div>
+
+  <div id="map-container">
+    <canvas id="conspiracy-map"></canvas>
+  </div>
+
+  <div class="map-tooltip" id="map-tooltip">
+    <div class="map-tooltip-title" id="tt-title"></div>
+    <div class="map-tooltip-cat" id="tt-cat"></div>
+    <div class="map-tooltip-desc" id="tt-desc"></div>
+    <a class="map-tooltip-link" id="tt-link" href="#">→ READ FILE</a>
+  </div>
+
+  <div class="map-instructions">DRAG to pan · SCROLL to zoom · CLICK node to open file</div>
+
+  <script src="js/app.js"></script>
+  <script src="js/enhancements.js"></script>
+  <script>
+  (function() {
+    'use strict';
+
+    /* ── NODE DATA ── */
+    const NODES = [
+      // Banking & Finance
+      { id:'rothschilds',    label:'Rothschild Family',      cat:'banking',  url:'topics/great-awakening/rothschilds.html',    desc:'250 years funding both sides of every war.',       size:28 },
+      { id:'federal-reserve',label:'Federal Reserve',         cat:'banking',  url:'topics/great-awakening/federal-reserve.html',  desc:'Private corporation issuing the world reserve currency.', size:22 },
+      { id:'bis',            label:'BIS',                     cat:'banking',  url:'topics/great-awakening/bis.html',              desc:'Central bank of central banks.',                  size:18 },
+      { id:'rockefellers',   label:'Rockefeller Family',      cat:'banking',  url:'topics/great-awakening/rockefellers.html',     desc:'Standard Oil to Big Pharma to the CFR.',          size:22 },
+      { id:'blackrock',      label:'BlackRock/Vanguard',      cat:'banking',  url:'topics/great-awakening/blackrock-vanguard.html',desc:'The Big Three owning every corporation.',         size:20 },
+      { id:'wef',            label:'WEF / Schwab',            cat:'banking',  url:'topics/great-awakening/wef-schwab.html',        desc:'50 years penetrating and reshaping governments.',  size:18 },
+      { id:'soros',          label:'George Soros',            cat:'banking',  url:'topics/great-awakening/george-soros.html',     desc:'Currency speculator. Open Society globalism.',      size:16 },
+      { id:'great-reset',    label:'The Great Reset',         cat:'banking',  url:'topics/great-awakening/great-reset.html',      desc:'You will own nothing and be happy.',               size:16 },
+      { id:'imf',            label:'IMF / World Bank',        cat:'banking',  url:'topics/great-awakening/imf-world-bank.html',   desc:'Debt trap diplomacy and structural adjustment.',   size:16 },
+      { id:'petrodollar',    label:'Petrodollar System',      cat:'banking',  url:'topics/great-awakening/petrodollar.html',       desc:'Oil-dollar linkage enforcing US financial hegemony.',size:15 },
+      { id:'cbdc',           label:'CBDCs',                   cat:'banking',  url:'topics/great-awakening/cbdc.html',             desc:'Programmable money that expires and restricts.',   size:14 },
+
+      // Deep State
+      { id:'cia',            label:'CIA Operations',          cat:'deepstate',url:'topics/great-awakening/cia-operations.html',   desc:'Coups, drug trafficking, assassination, surveillance.',size:24 },
+      { id:'mkultra',        label:'MKUltra',                 cat:'deepstate',url:'topics/great-awakening/mkultra.html',          desc:'CIA mind-control programme, confirmed by Congress.', size:22 },
+      { id:'mockingbird',    label:'Op. Mockingbird',         cat:'deepstate',url:'topics/great-awakening/operation-mockingbird.html',desc:'400+ journalists on CIA payroll.',               size:20 },
+      { id:'five-eyes',      label:'Five Eyes',               cat:'deepstate',url:'topics/great-awakening/five-eyes.html',        desc:'Global surveillance alliance.',                    size:18 },
+      { id:'shadow-gov',     label:'Shadow Government',       cat:'deepstate',url:'topics/great-awakening/shadow-government.html',desc:'34 levels above POTUS. Never elected.',            size:22 },
+      { id:'paperclip',      label:'Op. Paperclip',           cat:'deepstate',url:'topics/great-awakening/operation-paperclip.html',desc:'1,600+ Nazi scientists imported post-WWII.',      size:18 },
+      { id:'q-op',           label:'The Q Operation',         cat:'deepstate',url:'topics/great-awakening/q-operation.html',      desc:'4,953 drops from Q-cleared military intelligence.', size:20 },
+      { id:'fema',           label:'FEMA',                    cat:'deepstate',url:'topics/great-awakening/fema.html',             desc:'Emergency powers as authoritarian infrastructure.',  size:14 },
+      { id:'ses',            label:'SES',                     cat:'deepstate',url:'topics/great-awakening/ses-senior-executive.html',desc:'8,000+ unelected officials in every agency.',     size:14 },
+      { id:'9-11',           label:'9/11 Inside Job',         cat:'deepstate',url:'topics/great-awakening/9-11-inside-job.html', desc:'WTC7 free-fall. Nanothermite. PNAC blueprint.',     size:24 },
+      { id:'jfk',            label:'JFK Assassination',       cat:'deepstate',url:'topics/great-awakening/jfk-assassination.html',desc:'Single-bullet impossibility. Still-classified docs.', size:22 },
+      { id:'epstein',        label:'Epstein Network',         cat:'deepstate',url:'topics/great-awakening/epstein-network.html', desc:'Epstein, Maxwell, Little Saint James.',             size:24 },
+      { id:'blackmail',      label:'Blackmail Control',       cat:'deepstate',url:'topics/great-awakening/blackmail-control.html',desc:'Epstein honeypot. NXIVM. Mossad-linked.',          size:18 },
+
+      // Secret Societies
+      { id:'illuminati',     label:'The Illuminati',          cat:'societies',url:'topics/great-awakening/illuminati.html',       desc:"Weishaupt's 1776 order, continued through Masonry.", size:26 },
+      { id:'freemasonry',    label:'Freemasonry',             cat:'societies',url:'topics/great-awakening/freemasonry.html',      desc:'33rd degree. Lower ranks misled.',                 size:24 },
+      { id:'skull-bones',    label:'Skull & Bones',           cat:'societies',url:'topics/great-awakening/skull-bones.html',      desc:"Yale's 800-person order. Multiple CIA directors.",  size:20 },
+      { id:'bohemian-grove', label:'Bohemian Grove',          cat:'societies',url:'topics/great-awakening/bohemian-grove.html',  desc:'2,000 world leaders. Stone owl. Ritual.',           size:20 },
+      { id:'jesuits',        label:'Vatican & Jesuits',       cat:'societies',url:'topics/great-awakening/vatican-jesuits.html',  desc:'Military intelligence and infiltration order.',     size:22 },
+      { id:'bilderberg',     label:'Bilderberg Group',        cat:'societies',url:'topics/great-awakening/bilderberg.html',       desc:'Private meetings. 150 world leaders. No press.',    size:20 },
+      { id:'cfr',            label:'Council on Foreign Relations',cat:'societies',url:'topics/great-awakening/council-foreign-relations.html',desc:"US foreign policy's real decision body.",  size:18 },
+      { id:'black-nobility', label:'Black Nobility',          cat:'societies',url:'topics/great-awakening/black-nobility.html',  desc:'Old Venetian/Roman bloodlines.',                   size:18 },
+      { id:'tavistock',      label:'Tavistock Institute',     cat:'societies',url:'topics/great-awakening/tavistock-institute.html',desc:"UK's premier psychological operations think-tank.", size:16 },
+      { id:'club-rome',      label:'Club of Rome',            cat:'societies',url:'topics/great-awakening/club-of-rome.html',    desc:'"The enemy of humanity is humanity itself."',      size:16 },
+      { id:'cern',           label:'CERN',                    cat:'societies',url:'topics/great-awakening/cern-occult.html',      desc:'The Shiva statue. Dimensional boundary research.',  size:16 },
+
+      // Media & Control
+      { id:'six-corps',      label:'6 Media Corporations',   cat:'media',    url:'media-control.html',                            desc:'Control 90% of what the world sees.',              size:22 },
+      { id:'hollywood',      label:'Hollywood Satanism',     cat:'media',    url:'topics/great-awakening/hollywood-satanism.html',desc:'CIA-Hollywood liaison. Monarch programming.',       size:18 },
+      { id:'social-media',   label:'Social Media Control',   cat:'media',    url:'topics/great-awakening/social-media-control.html',desc:'Algorithmic censorship. ADL pipeline.',            size:16 },
+      { id:'predictive',     label:'Predictive Programming', cat:'media',    url:'topics/great-awakening/predictive-programming.html',desc:'Film and TV pre-announces real events.',         size:16 },
+      { id:'disney',         label:'Disney Programming',     cat:'media',    url:'topics/great-awakening/disney-programming.html',desc:'Subliminal content. MKUltra imagery.',             size:16 },
+      { id:'kubrick',        label:'Stanley Kubrick',        cat:'media',    url:'topics/great-awakening/stanley-kubrick.html',   desc:'The Shining as coded confession. Filmed Apollo.',   size:16 },
+
+      // Health
+      { id:'big-pharma',     label:'Big Pharma Cartel',      cat:'health',   url:'topics/great-awakening/big-pharma.html',         desc:'Suppress cures. Patent drugs. Manage illness.',    size:24 },
+      { id:'covid',          label:'COVID-19 Plandemic',     cat:'health',   url:'topics/great-awakening/covid-plandemic.html',    desc:'Event 201. Gain-of-function. Follow the money.',   size:22 },
+      { id:'gates',          label:'Bill Gates',             cat:'health',   url:'topics/great-awakening/bill-gates.html',         desc:'Global vaccine czar. Population reduction.',        size:20 },
+      { id:'who',            label:'WHO',                    cat:'health',   url:'topics/great-awakening/who-control.html',        desc:'Gates-funded. Pandemic-treaty-seeking.',           size:18 },
+      { id:'fluoride',       label:'Fluoride Neurotoxin',    cat:'health',   url:'topics/great-awakening/fluoride-poison.html',   desc:'Pineal calcification. IQ suppression.',            size:16 },
+      { id:'mrna',           label:'mRNA Vaccines',          cat:'health',   url:'topics/great-awakening/mrna-vaccines.html',     desc:'Experimental gene therapy. Spike protein.',        size:18 },
+      { id:'adrenochrome',   label:'Adrenochrome',           cat:'health',   url:'topics/great-awakening/adrenochrome.html',      desc:"Elite's alleged harvested compound.",               size:18 },
+
+      // Space & ET
+      { id:'nasa',           label:'NASA Deceptions',        cat:'space',    url:'topics/great-awakening/nasa-deceptions.html',   desc:'Lost telemetry. Erased footage. Von Braun SS.',    size:22 },
+      { id:'ssp',            label:'Secret Space Program',   cat:'space',    url:'topics/great-awakening/secret-space-program.html',desc:'X-37B. Non-terrestrial officers. Space Force.',   size:24 },
+      { id:'dark-fleet',     label:'Dark Fleet',             cat:'space',    url:'topics/great-awakening/dark-fleet.html',        desc:'Offensive space fleet. Nazi command structure.',    size:20 },
+      { id:'solar-warden',   label:'Solar Warden',           cat:'space',    url:'topics/great-awakening/solar-warden.html',      desc:'US Navy space fleet. McKinnon hacked the roster.',  size:20 },
+      { id:'mj12',           label:'Majestic MJ-12',         cat:'space',    url:'topics/great-awakening/majestic-mj12.html',    desc:'12 people managing ET contact since 1947.',        size:18 },
+      { id:'reptilians',     label:'Draco Reptilians',       cat:'space',    url:'topics/great-awakening/draco-reptilians.html', desc:'Service-to-self. AI link. Control hierarchy.',     size:20 },
+      { id:'annunaki',       label:'Annunaki',               cat:'space',    url:'topics/great-awakening/annunaki.html',         desc:'"Those from heaven to earth came." Sumerian tablets.',size:20 },
+      { id:'dumbs',          label:'DUMBs',                  cat:'space',    url:'topics/great-awakening/dumbs.html',            desc:'Deep Underground Military Bases.',                  size:18 },
+      { id:'greys',          label:'Greys, Nordics & EBEs',  cat:'space',    url:'topics/great-awakening/greys-nordics-ebes.html',desc:'ET races in contact with governments.',            size:16 },
+
+      // Ancient
+      { id:'tartaria',       label:'Tartaria',               cat:'ancient',  url:'topics/great-awakening/tartaria.html',          desc:'Largest empire. On every atlas. Erased.',           size:22 },
+      { id:'atlantis',       label:'Atlantis / Lemuria',     cat:'ancient',  url:'topics/great-awakening/atlantis-lemuria-mu.html',desc:'Pre-flood advanced civilisations.',                size:20 },
+      { id:'mud-flood',      label:'Mud Flood',              cat:'ancient',  url:'topics/great-awakening/mud-flood.html',         desc:'Evidence of a massive civilisational reset.',       size:18 },
+      { id:'giza',           label:'Giza / Ascension Machine',cat:'ancient', url:'topics/great-awakening/giza-complex.html',      desc:'Great Pyramid as precision frequency device.',      size:20 },
+      { id:'tesla',          label:'Nikola Tesla',           cat:'ancient',  url:'topics/great-awakening/nikola-tesla.html',      desc:'Free energy. Suppressed by J.P. Morgan.',           size:22 },
+      { id:'ley-lines',      label:'Ley Lines',              cat:'ancient',  url:'topics/great-awakening/planetary-grid-ley-lines.html',desc:"Earth's energetic grid. Sacred site placement.", size:16 },
+      { id:'vimanas',        label:'Vimanas',                cat:'ancient',  url:'topics/great-awakening/vimanas.html',           desc:'Sanskrit texts describing ancient flying craft.',   size:14 },
+    ];
+
+    /* ── EDGES ── */
+    const EDGES = [
+      // Banking core
+      ['rothschilds','federal-reserve'],['rothschilds','bis'],['rothschilds','rockefellers'],
+      ['rothschilds','imf'],['rothschilds','great-reset'],['rockefellers','big-pharma'],
+      ['rockefellers','cfr'],['rockefellers','gates'],['federal-reserve','petrodollar'],
+      ['federal-reserve','cbdc'],['bis','imf'],['wef','great-reset'],['wef','cbdc'],
+      ['soros','wef'],['blackrock','wef'],['blackrock','federal-reserve'],
+
+      // Deep state
+      ['cia','mkultra'],['cia','mockingbird'],['cia','paperclip'],['cia','9-11'],
+      ['cia','jfk'],['shadow-gov','cia'],['shadow-gov','five-eyes'],['shadow-gov','ses'],
+      ['five-eyes','nsa'],['mkultra','hollywood'],['mkultra','disney'],['epstein','blackmail'],
+      ['epstein','rothschilds'],['epstein','hollywood'],['q-op','shadow-gov'],
+      ['q-op','jfk'],['fema','shadow-gov'],
+
+      // Societies ↔ Banking
+      ['illuminati','rothschilds'],['illuminati','freemasonry'],['freemasonry','skull-bones'],
+      ['freemasonry','jesuits'],['freemasonry','cfr'],['jesuits','black-nobility'],
+      ['bilderberg','wef'],['bilderberg','cfr'],['bilderberg','rothschilds'],
+      ['skull-bones','cia'],['bohemian-grove','bilderberg'],['club-rome','wef'],
+      ['tavistock','mockingbird'],['tavistock','disney'],['cern','black-nobility'],
+
+      // Media ↔ Control
+      ['six-corps','mockingbird'],['six-corps','predictive'],['hollywood','predictive'],
+      ['disney','six-corps'],['kubrick','nasa'],['social-media','cia'],
+      ['social-media','six-corps'],
+
+      // Health ↔ Banking
+      ['big-pharma','rockefellers'],['big-pharma','gates'],['big-pharma','who'],
+      ['covid','gates'],['covid','wef'],['covid','mrna'],['mrna','transhumanism'],
+      ['fluoride','big-pharma'],['adrenochrome','epstein'],['who','cfr'],
+
+      // Space & ET ↔ Deep State
+      ['nasa','ssp'],['nasa','paperclip'],['ssp','dark-fleet'],['ssp','solar-warden'],
+      ['ssp','mj12'],['ssp','dumbs'],['dark-fleet','nazi'],['mj12','cia'],
+      ['reptilians','annunaki'],['reptilians','shadow-gov'],['reptilians','illuminati'],
+      ['greys','mj12'],['dumbs','cia'],['dumbs','epstein'],
+
+      // Ancient
+      ['tartaria','mud-flood'],['atlantis','giza'],['atlantis','ley-lines'],
+      ['giza','ley-lines'],['tesla','free-energy'],['tesla','ssp'],
+      ['annunaki','giza'],['annunaki','tartaria'],['vimanas','annunaki'],
+      ['mud-flood','tartaria'],
+
+      // Cross-pillar links
+      ['rothschilds','jesuits'],['cern','ssp'],['tavistock','mkultra'],
+      ['wef','shadow-gov'],['gates','rfid'],['rfid','five-eyes'],
+    ].filter(([a, b]) => NODES.find(n=>n.id===a) && NODES.find(n=>n.id===b));
+
+    /* ── FORCE SIMULATION ── */
+    const canvas = document.getElementById('conspiracy-map');
+    const ctx    = canvas.getContext('2d');
+    const tooltip= document.getElementById('map-tooltip');
+    let W, H;
+
+    // Category colours
+    const CAT_COLOR = {
+      banking:  '#c9a227',
+      deepstate:'#cc2222',
+      societies:'#8b44cc',
+      media:    '#4488cc',
+      health:   '#44aa66',
+      space:    '#cc6622',
+      ancient:  '#aaaa44',
+    };
+
+    let nodes = [], edges = [], sim = null;
+    let offsetX = 0, offsetY = 0, scale = 1;
+    let isDragging = false, dragStart = null, panStart = null;
+    let hoveredNode = null;
+    let activeFilter = 'all';
+
+    function resize() {
+      const container = document.getElementById('map-container');
+      W = canvas.width  = container.offsetWidth;
+      H = canvas.height = container.offsetHeight;
+    }
+
+    function initNodes() {
+      nodes = NODES.map(n => ({
+        ...n,
+        x: W / 2 + (Math.random() - 0.5) * W * 0.7,
+        y: H / 2 + (Math.random() - 0.5) * H * 0.7,
+        vx: 0, vy: 0,
+        visible: true,
+      }));
+      edges = EDGES.map(([a, b]) => ({
+        source: nodes.find(n => n.id === a),
+        target: nodes.find(n => n.id === b),
+      })).filter(e => e.source && e.target);
+    }
+
+    function applyFilter(cat) {
+      activeFilter = cat;
+      nodes.forEach(n => {
+        n.visible = (cat === 'all') || n.cat === cat;
+      });
+    }
+
+    /* Simple force-directed layout */
+    function tick() {
+      const visNodes = nodes.filter(n => n.visible);
+      const visEdges = edges.filter(e => e.source.visible && e.target.visible);
+
+      // Repulsion
+      for (let i = 0; i < visNodes.length; i++) {
+        for (let j = i + 1; j < visNodes.length; j++) {
+          const a = visNodes[i], b = visNodes[j];
+          const dx = b.x - a.x, dy = b.y - a.y;
+          const d  = Math.sqrt(dx*dx + dy*dy) || 1;
+          const f  = 3000 / (d * d);
+          const fx = (dx / d) * f, fy = (dy / d) * f;
+          a.vx -= fx; a.vy -= fy;
+          b.vx += fx; b.vy += fy;
+        }
+      }
+
+      // Attraction along edges
+      visEdges.forEach(e => {
+        const dx = e.target.x - e.source.x;
+        const dy = e.target.y - e.source.y;
+        const d  = Math.sqrt(dx*dx + dy*dy) || 1;
+        const ideal = 160;
+        const f  = (d - ideal) * 0.03;
+        const fx = (dx / d) * f, fy = (dy / d) * f;
+        e.source.vx += fx; e.source.vy += fy;
+        e.target.vx -= fx; e.target.vy -= fy;
+      });
+
+      // Center gravity
+      visNodes.forEach(n => {
+        n.vx += (W/2 - n.x) * 0.003;
+        n.vy += (H/2 - n.y) * 0.003;
+      });
+
+      // Integrate + dampen
+      visNodes.forEach(n => {
+        n.vx *= 0.82; n.vy *= 0.82;
+        n.x  += n.vx; n.y  += n.vy;
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      ctx.save();
+      ctx.translate(offsetX + W/2, offsetY + H/2);
+      ctx.scale(scale, scale);
+      ctx.translate(-W/2, -H/2);
+
+      const visEdges = edges.filter(e => e.source.visible && e.target.visible);
+      const visNodes = nodes.filter(n => n.visible);
+
+      // Draw edges
+      visEdges.forEach(e => {
+        const isHovered = hoveredNode && (e.source === hoveredNode || e.target === hoveredNode);
+        ctx.beginPath();
+        ctx.moveTo(e.source.x, e.source.y);
+        ctx.lineTo(e.target.x, e.target.y);
+        ctx.strokeStyle = isHovered ? 'rgba(201,162,39,0.5)' : 'rgba(255,255,255,0.04)';
+        ctx.lineWidth   = isHovered ? 1.2 : 0.6;
+        ctx.stroke();
+      });
+
+      // Draw nodes
+      visNodes.forEach(n => {
+        const col     = CAT_COLOR[n.cat] || '#888';
+        const isHov   = n === hoveredNode;
+        const r       = (n.size || 14) * (isHov ? 1.25 : 1);
+        const alpha   = activeFilter === 'all' ? 1 : (n.cat === activeFilter ? 1 : 0.2);
+
+        ctx.globalAlpha = alpha;
+
+        // Glow on hover
+        if (isHov) {
+          ctx.shadowColor = col;
+          ctx.shadowBlur  = 20;
+        }
+
+        // Node circle
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = isHov ? col : col + '55';
+        ctx.fill();
+        ctx.strokeStyle = col;
+        ctx.lineWidth   = isHov ? 2 : 1;
+        ctx.stroke();
+
+        ctx.shadowBlur = 0;
+
+        // Label
+        if (scale > 0.6 || isHov) {
+          ctx.font      = `${isHov ? 600 : 400} ${Math.max(9, 11 * scale)}px Oswald, sans-serif`;
+          ctx.fillStyle = isHov ? '#fff' : 'rgba(210,210,210,0.7)';
+          ctx.textAlign = 'center';
+          ctx.fillText(n.label, n.x, n.y + r + 13);
+        }
+
+        ctx.globalAlpha = 1;
+      });
+
+      ctx.restore();
+    }
+
+    function loop() {
+      tick();
+      draw();
+      requestAnimationFrame(loop);
+    }
+
+    /* ── INPUT ── */
+    function canvasToWorld(cx, cy) {
+      return {
+        x: (cx - offsetX - W/2) / scale + W/2,
+        y: (cy - offsetY - H/2) / scale + H/2,
+      };
+    }
+
+    function nodeAt(cx, cy) {
+      const w = canvasToWorld(cx, cy);
+      return nodes.find(n => {
+        if (!n.visible) return false;
+        const dx = w.x - n.x, dy = w.y - n.y;
+        return Math.sqrt(dx*dx + dy*dy) < (n.size || 14) * 1.4;
+      }) || null;
+    }
+
+    canvas.addEventListener('mousedown', e => {
+      const hit = nodeAt(e.offsetX, e.offsetY);
+      if (hit) return; // handled by click
+      isDragging = true;
+      dragStart  = { x: e.clientX, y: e.clientY };
+      panStart   = { x: offsetX, y: offsetY };
+    });
+
+    window.addEventListener('mousemove', e => {
+      if (isDragging && dragStart) {
+        offsetX = panStart.x + (e.clientX - dragStart.x);
+        offsetY = panStart.y + (e.clientY - dragStart.y);
+        return;
+      }
+      const rect = canvas.getBoundingClientRect();
+      const hit  = nodeAt(e.clientX - rect.left, e.clientY - rect.top);
+      hoveredNode = hit || null;
+      canvas.style.cursor = hit ? 'pointer' : 'grab';
+
+      if (hit) {
+        const ttEl = tooltip;
+        document.getElementById('tt-title').textContent = hit.label;
+        document.getElementById('tt-cat').textContent   = hit.cat.toUpperCase();
+        document.getElementById('tt-desc').textContent  = hit.desc;
+        document.getElementById('tt-link').href         = hit.url;
+        ttEl.classList.add('visible');
+        let tx = e.clientX + 16, ty = e.clientY + 16;
+        if (tx + 260 > window.innerWidth)  tx = e.clientX - 260;
+        if (ty + 120 > window.innerHeight) ty = e.clientY - 120;
+        ttEl.style.left = tx + 'px';
+        ttEl.style.top  = ty + 'px';
+      } else {
+        tooltip.classList.remove('visible');
+      }
+    });
+
+    window.addEventListener('mouseup', () => { isDragging = false; });
+
+    canvas.addEventListener('click', e => {
+      const rect = canvas.getBoundingClientRect();
+      const hit  = nodeAt(e.clientX - rect.left, e.clientY - rect.top);
+      if (hit) window.location.href = hit.url;
+    });
+
+    canvas.addEventListener('wheel', e => {
+      e.preventDefault();
+      const delta = e.deltaY > 0 ? 0.9 : 1.1;
+      scale = Math.min(4, Math.max(0.25, scale * delta));
+    }, { passive: false });
+
+    // Touch support
+    let lastTouch = null;
+    canvas.addEventListener('touchstart', e => {
+      if (e.touches.length === 1) {
+        lastTouch  = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        panStart   = { x: offsetX, y: offsetY };
+      }
+    }, { passive: true });
+    canvas.addEventListener('touchmove', e => {
+      if (e.touches.length === 1 && lastTouch) {
+        offsetX = panStart.x + (e.touches[0].clientX - lastTouch.x);
+        offsetY = panStart.y + (e.touches[0].clientY - lastTouch.y);
+      }
+    }, { passive: true });
+
+    // Filter buttons
+    document.querySelectorAll('.map-filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.map-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        applyFilter(btn.dataset.cat);
+      });
+    });
+
+    // Init
+    resize();
+    window.addEventListener('resize', () => { resize(); });
+    initNodes();
+    loop();
+  })();
+  </script>
+</body>
+</html>
