@@ -1296,6 +1296,7 @@ img {
   pointer-events: none;
   user-select: none;
 }
+.ebook-locked a, .ebook-locked button { pointer-events: auto; }
 .ebook-locked > * {
   filter: blur(6px);
   opacity: 0.45;
@@ -1305,6 +1306,8 @@ img {
 .ebook-preview-fade {
   position: relative;
   pointer-events: none;
+  height: 0;
+  overflow: visible;
 }
 .ebook-preview-fade::after {
   content: '';
@@ -1320,7 +1323,8 @@ img {
 /* Paywall overlay card */
 .ebook-paywall {
   position: relative;
-  z-index: 10;
+  z-index: 100;
+  pointer-events: auto;
   text-align: center;
   background: linear-gradient(135deg, rgba(139,20,20,0.18) 0%, rgba(201,162,39,0.06) 100%);
   border: 1px solid var(--border-gold);
