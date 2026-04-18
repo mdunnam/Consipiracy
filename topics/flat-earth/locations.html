@@ -197,7 +197,7 @@
 
       <!-- ═══ INTERACTIVE MAP ══════════════════════════════════════ -->
       <div class="map-explorer fade-in">
-        <img src="../../images/flat-earth-map.svg" alt="Flat Earth Azimuthal Equidistant Map" loading="lazy" style="width:100%;height:auto;display:block;opacity:0.88;">
+        <canvas id="fe-map-canvas" style="width:100%;height:auto;display:block;"></canvas>
         <div class="map-overlay">
           <!-- Zone pins — positions as % of container width/height -->
           <!-- North Pole: centre -->
@@ -542,6 +542,158 @@
         filterZone(this.dataset.filter);
       });
     });
+  </script>
+
+  <script>
+  (function() {
+    const canvas = document.getElementById('fe-map-canvas');
+    if (!canvas) return;
+
+    const SIZE = 900;
+    canvas.width  = SIZE;
+    canvas.height = SIZE;
+    const ctx = canvas.getContext('2d');
+    const CX = SIZE / 2, CY = SIZE / 2;
+    const R  = SIZE * 0.46; // radius to ice wall
+
+    // Azimuthal equidistant projection (north pole centred)
+    function project(lat, lon) {
+      const rho = R * (90 - lat) / 180;
+      const theta = lon * Math.PI / 180;
+      return [CX + rho * Math.sin(theta), CY - rho * Math.cos(theta)];
+    }
+
+    // Draw ocean background
+    const bgGrad = ctx.createRadialGradient(CX,CY,0,CX,CY,R+25);
+    bgGrad.addColorStop(0,   '#0d1520');
+    bgGrad.addColorStop(0.7, '#080f18');
+    bgGrad.addColorStop(1,   '#020609');
+    ctx.beginPath(); ctx.arc(CX,CY,R+25,0,Math.PI*2);
+    ctx.fillStyle = bgGrad; ctx.fill();
+
+    // Graticule rings + lon lines
+    ctx.save(); ctx.globalAlpha = 0.25;
+    ctx.strokeStyle = '#1e3a5f'; ctx.lineWidth = 0.7;
+    [66.5, 23.5, 0, -23.5, -66.5].forEach(lat => {
+      const rho = R * (90 - lat) / 180;
+      ctx.beginPath(); ctx.arc(CX,CY,rho,0,Math.PI*2);
+      ctx.strokeStyle = lat === 0 ? '#c9a227' : '#1e3a5f';
+      ctx.globalAlpha = lat === 0 ? 0.6 : 0.25;
+      ctx.stroke();
+    });
+    for (let lon = 0; lon < 360; lon += 30) {
+      const [x1,y1] = project(89,lon), [x2,y2] = project(-89,lon);
+      ctx.globalAlpha = 0.15; ctx.strokeStyle = '#1e3a5f'; ctx.lineWidth = 0.5;
+      ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+    }
+    ctx.restore();
+
+    // Draw a continent polygon from lat/lon arrays
+    function drawLand(pts, fill, stroke) {
+      if (pts.length < 2) return;
+      ctx.beginPath();
+      const [x0,y0] = project(pts[0][0], pts[0][1]);
+      ctx.moveTo(x0,y0);
+      for (let i=1;i<pts.length;i++) {
+        const [x,y] = project(pts[i][0], pts[i][1]);
+        ctx.lineTo(x,y);
+      }
+      ctx.closePath();
+      ctx.fillStyle   = fill   || '#1a3a1a';
+      ctx.strokeStyle = stroke || '#2d5a2d';
+      ctx.lineWidth   = 0.8;
+      ctx.fill(); ctx.stroke();
+    }
+
+    // ----- Continent outlines -----
+    ctx.globalAlpha = 0.88;
+
+    // North America
+    drawLand([
+      [71,-156],[70,-149],[68,-166],[65,-168],[63,-165],[60,-147],[57,-152],
+      [55,-130],[52,-128],[49,-124],[46,-124],[42,-124],[38,-123],[35,-121],
+      [32,-117],[28,-115],[23,-110],[20,-105],[16,-99],[15,-92],[11,-86],
+      [8,-77],[10,-75],[16,-62],[18,-67],[20,-74],[23,-82],[25,-80],
+      [28,-81],[30,-81],[32,-80],[35,-76],[37,-76],[40,-74],[42,-70],
+      [43,-70],[44,-67],[45,-65],[47,-53],[52,-56],[55,-59],[60,-64],
+      [63,-68],[65,-84],[68,-83],[70,-92],[70,-100],[68,-108],[65,-126],
+      [68,-141],[71,-156]
+    ]);
+
+    // Greenland
+    drawLand([
+      [83,-40],[76,-20],[70,-22],[65,-38],[65,-52],[68,-54],[72,-56],
+      [76,-65],[78,-74],[82,-62],[83,-40]
+    ]);
+
+    // South America
+    drawLand([
+      [10,-75],[8,-77],[1,-80],[-6,-80],[-15,-75],[-18,-70],[-22,-70],
+      [-30,-71],[-38,-73],[-42,-74],[-46,-75],[-55,-65],[-52,-58],
+      [-46,-65],[-38,-62],[-34,-58],[-22,-42],[-10,-37],[0,-50],
+      [5,-52],[10,-63],[10,-75]
+    ]);
+
+    // Europe mainland (simplified)
+    drawLand([
+      [71,28],[70,20],[68,16],[65,14],[60,5],[58,5],[55,8],
+      [54,9],[54,12],[55,15],[56,21],[58,22],[60,25],[65,25],[70,28],[71,28]
+    ]);
+    // Iberia
+    drawLand([[44,3],[43,-9],[36,-9],[36,-5],[38,0],[40,4],[44,3]]);
+    // British Isles
+    drawLand([[58,-5],[51,-5],[50,2],[53,2],[55,0],[58,-4],[58,-5]]);
+
+    // Africa
+    drawLand([
+      [37,10],[37,-5],[30,-10],[20,-17],[15,-17],[4,-8],[4,2],[-5,10],
+      [-25,15],[-35,18],[-35,27],[-10,40],[0,42],[11,43],[22,37],
+      [35,25],[37,10]
+    ]);
+
+    // Asia (large, simplified)
+    drawLand([
+      [70,30],[68,30],[65,37],[60,40],[50,40],[45,40],[42,50],[40,50],
+      [35,58],[28,48],[22,57],[22,63],[25,68],[30,78],[28,85],[27,88],
+      [22,90],[22,88],[13,80],[1,104],[0,108],[0,109],[-8,115],
+      [5,100],[10,105],[25,120],[35,125],[50,140],[60,140],[70,140],[70,30]
+    ]);
+
+    // Australia
+    drawLand([
+      [-15,130],[-15,135],[-18,148],[-24,152],[-32,152],
+      [-38,145],[-38,140],[-32,126],[-22,114],[-18,122],[-15,130]
+    ]);
+
+    // New Zealand
+    drawLand([[-34,172],[-38,176],[-44,171],[-46,168],[-40,168],[-34,172]]);
+
+    ctx.globalAlpha = 1.0;
+
+    // Ice wall outer ring
+    ctx.beginPath(); ctx.arc(CX,CY,R,0,Math.PI*2);
+    ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 8; ctx.globalAlpha = 0.75; ctx.stroke();
+    ctx.beginPath(); ctx.arc(CX,CY,R+10,0,Math.PI*2);
+    ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 3; ctx.globalAlpha = 0.4; ctx.stroke();
+    ctx.globalAlpha = 1.0;
+
+    // Equator ring highlight
+    const eqR = R * 90 / 180;
+    ctx.beginPath(); ctx.arc(CX,CY,eqR,0,Math.PI*2);
+    ctx.strokeStyle = '#c9a227'; ctx.lineWidth = 1.2; ctx.globalAlpha = 0.55; ctx.stroke();
+
+    // North Pole dot
+    ctx.globalAlpha = 1.0;
+    ctx.beginPath(); ctx.arc(CX,CY,5,0,Math.PI*2);
+    ctx.fillStyle = '#c9a227'; ctx.fill();
+    ctx.beginPath(); ctx.arc(CX,CY,13,0,Math.PI*2);
+    ctx.strokeStyle = '#c9a227'; ctx.lineWidth = 1.5; ctx.globalAlpha = 0.6; ctx.stroke();
+
+    // Outer border
+    ctx.beginPath(); ctx.arc(CX,CY,R+22,0,Math.PI*2);
+    ctx.strokeStyle = 'rgba(201,162,39,0.25)'; ctx.lineWidth = 1; ctx.globalAlpha = 1.0; ctx.stroke();
+
+  })();
   </script>
 </body>
 </html>
