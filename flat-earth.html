@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flat Earth & the Cosmological Lie — Truth Archive</title>
+  <meta name="description" content="The globe model is a centuries-old deception. Discover the true flat, enclosed Earth, the firmament dome, the Antarctic ice wall, and the local sun and moon." />
+    <!-- Open Graph / Social Preview -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:url"         content="https://thetrutharchive.org/flat-earth.html" />
+    <meta property="og:title"       content="Flat Earth & the Cosmological Lie — Truth Archive" />
+    <meta property="og:description" content="The globe model is a centuries-old deception. Discover the true flat, enclosed Earth, the firmament dome, the Antarctic ice wall, and the local sun and moon." />
+    <meta property="og:image"       content="https://thetrutharchive.org/images/og-preview.jpg" />
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:url"         content="https://thetrutharchive.org/flat-earth.html" />
+    <meta name="twitter:title"       content="Flat Earth & the Cosmological Lie — Truth Archive" />
+    <meta name="twitter:description" content="The globe model is a centuries-old deception. Discover the true flat, enclosed Earth, the firmament dome, the Antarctic ice wall, and the local sun and moon." />
+    <meta name="twitter:image"       content="https://thetrutharchive.org/images/og-preview.jpg" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .fade-in { opacity:0; transform:translateY(24px); transition:opacity .35s ease, transform .35s ease; }
+    .fade-in.visible { opacity:1; transform:none; }
+
+    .map-highlight {
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius);
+      overflow: hidden;
+      text-align: center;
+      margin: 2.5rem 0;
+      background: var(--bg-card);
+    }
+    .map-highlight img {
+      width: 100%;
+      max-height: 520px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      opacity: 0.88;
+    }
+    .map-caption {
+      padding: 0.8rem 1.2rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Location Panel ─────────────────────────────── */
+    .fe-loc-panel {
+      margin: 2.5rem 0;
+      padding: 2rem 0 0;
+      border-top: 1px solid var(--border-gold);
+    }
+    .fe-loc-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.63rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--red-bright);
+      display: block;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .fe-loc-panel > h2 {
+      text-align: center;
+      font-size: 1.35rem;
+      margin-bottom: 0.35rem;
+    }
+    .fe-loc-panel > p.fe-loc-sub {
+      text-align: center;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 2rem;
+    }
+    .fe-loc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 768px) { .fe-loc-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .fe-loc-grid { grid-template-columns: 1fr; } }
+    .fe-loc-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.15rem 0.9rem;
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .fe-loc-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--zc, var(--gold));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+    .fe-loc-card:hover::before { transform: scaleX(1); }
+    .fe-loc-card:hover {
+      border-color: var(--border-gold);
+      background: var(--bg-card-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.55);
+      color: inherit;
+    }
+    .fe-loc-badge {
+      display: inline-block;
+      font-family: var(--font-label);
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.12rem 0.55rem;
+      border-radius: 2px;
+      color: var(--zc, var(--gold));
+      border: 1px solid var(--zc, var(--gold));
+      width: fit-content;
+    }
+    .fe-loc-card h3 {
+      font-size: 0.92rem;
+      color: var(--text-primary);
+      font-family: var(--font-label);
+      letter-spacing: 0.04em;
+      line-height: 1.3;
+      margin: 0;
+    }
+    .fe-loc-card p {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      flex: 1;
+      margin: 0;
+    }
+    .fe-loc-pos {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+    .fe-loc-cta {
+      text-align: center;
+      margin-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+    .fe-loc-cta a {
+      display: inline-block;
+      padding: 0.7rem 2.2rem;
+      background: transparent;
+      border: 1px solid var(--border-gold);
+      color: var(--gold);
+      font-family: var(--font-label);
+      font-size: 0.76rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: var(--radius);
+      transition: var(--transition);
+    }
+    .fe-loc-cta a:hover { background: var(--gold); color: #000; text-shadow: none; }
+    /* ── Location Panel ───────────────────────────────────────────── */
+    .fe-loc-panel { margin: 2.5rem 0; padding: 2rem 0 0; border-top: 1px solid var(--border-gold); }
+    .fe-loc-eyebrow { font-family: var(--font-mono); font-size: 0.63rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--red-bright); display: block; text-align: center; margin-bottom: 0.5rem; }
+    .fe-loc-panel-title { text-align: center; font-size: 1.35rem; margin-bottom: 0.35rem; }
+    .fe-loc-sub { text-align: center; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; margin-bottom: 2rem; }
+    .fe-loc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+    @media (max-width: 768px) { .fe-loc-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .fe-loc-grid { grid-template-columns: 1fr; } }
+    .fe-loc-card { display: flex; flex-direction: column; gap: 0.45rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.15rem 0.9rem; text-decoration: none; color: inherit; transition: var(--transition); position: relative; overflow: hidden; }
+    .fe-loc-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--zc, var(--gold)); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
+    .fe-loc-card:hover::before { transform: scaleX(1); }
+    .fe-loc-card:hover { border-color: var(--border-gold); background: var(--bg-card-hover); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.55); color: inherit; }
+    .fe-loc-badge { display: inline-block; font-family: var(--font-label); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.12rem 0.55rem; border-radius: 2px; color: var(--zc, var(--gold)); border: 1px solid var(--zc, var(--gold)); width: fit-content; }
+    .fe-loc-card h3 { font-size: 0.92rem; color: var(--text-primary); font-family: var(--font-label); letter-spacing: 0.04em; line-height: 1.3; margin: 0; }
+    .fe-loc-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.55; flex: 1; margin: 0; }
+    .fe-loc-pos { font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-muted); letter-spacing: 0.06em; padding-top: 0.5rem; border-top: 1px solid var(--border); margin-top: auto; }
+    .fe-loc-cta { text-align: center; margin-top: 0.5rem; padding-bottom: 0.5rem; }
+    .fe-loc-cta a { display: inline-block; padding: 0.7rem 2.2rem; background: transparent; border: 1px solid var(--border-gold); color: var(--gold); font-family: var(--font-label); font-size: 0.76rem; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; border-radius: var(--radius); transition: var(--transition); }
+    .fe-loc-cta a:hover { background: var(--gold); color: #000; text-shadow: none; }
+    /* ── Location Panel ───────────────────────────────────────────── */
+    .fe-loc-panel { margin: 2.5rem 0; padding: 2rem 0 0; border-top: 1px solid var(--border-gold); }
+    .fe-loc-eyebrow { font-family: var(--font-mono); font-size: 0.63rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--red-bright); display: block; text-align: center; margin-bottom: 0.5rem; }
+    .fe-loc-panel-title { text-align: center; font-size: 1.35rem; margin-bottom: 0.35rem; }
+    .fe-loc-sub { text-align: center; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; margin-bottom: 2rem; }
+    .fe-loc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+    @media (max-width: 768px) { .fe-loc-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .fe-loc-grid { grid-template-columns: 1fr; } }
+    .fe-loc-card { display: flex; flex-direction: column; gap: 0.45rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.15rem 0.9rem; text-decoration: none; color: inherit; transition: var(--transition); position: relative; overflow: hidden; }
+    .fe-loc-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--zc, var(--gold)); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
+    .fe-loc-card:hover::before { transform: scaleX(1); }
+    .fe-loc-card:hover { border-color: var(--border-gold); background: var(--bg-card-hover); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.55); color: inherit; }
+    .fe-loc-badge { display: inline-block; font-family: var(--font-label); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.12rem 0.55rem; border-radius: 2px; color: var(--zc, var(--gold)); border: 1px solid var(--zc, var(--gold)); width: fit-content; }
+    .fe-loc-card h3 { font-size: 0.92rem; color: var(--text-primary); font-family: var(--font-label); letter-spacing: 0.04em; line-height: 1.3; margin: 0; }
+    .fe-loc-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.55; flex: 1; margin: 0; }
+    .fe-loc-pos { font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-muted); letter-spacing: 0.06em; padding-top: 0.5rem; border-top: 1px solid var(--border); margin-top: auto; }
+    .fe-loc-cta { text-align: center; margin-top: 0.5rem; padding-bottom: 0.5rem; }
+    .fe-loc-cta a { display: inline-block; padding: 0.7rem 2.2rem; background: transparent; border: 1px solid var(--border-gold); color: var(--gold); font-family: var(--font-label); font-size: 0.76rem; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; border-radius: var(--radius); transition: var(--transition); }
+    .fe-loc-cta a:hover { background: var(--gold); color: #000; text-shadow: none; }
+
+    /* ── Location Panel ───────────────────────────────────────────── */
+    .fe-loc-panel { margin: 2.5rem 0; padding: 2rem 0 0; border-top: 1px solid var(--border-gold); }
+    .fe-loc-eyebrow { font-family: var(--font-mono); font-size: 0.63rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--red-bright); display: block; text-align: center; margin-bottom: 0.5rem; }
+    .fe-loc-panel-title { text-align: center; font-size: 1.35rem; margin-bottom: 0.35rem; }
+    .fe-loc-sub { text-align: center; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; margin-bottom: 2rem; }
+    .fe-loc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+    @media (max-width: 768px) { .fe-loc-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .fe-loc-grid { grid-template-columns: 1fr; } }
+    .fe-loc-card { display: flex; flex-direction: column; gap: 0.45rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.15rem 0.9rem; text-decoration: none; color: inherit; transition: var(--transition); position: relative; overflow: hidden; }
+    .fe-loc-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--zc, var(--gold)); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
+    .fe-loc-card:hover::before { transform: scaleX(1); }
+    .fe-loc-card:hover { border-color: var(--border-gold); background: var(--bg-card-hover); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.55); color: inherit; }
+    .fe-loc-badge { display: inline-block; font-family: var(--font-label); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.12rem 0.55rem; border-radius: 2px; color: var(--zc, var(--gold)); border: 1px solid var(--zc, var(--gold)); width: fit-content; }
+    .fe-loc-card h3 { font-size: 0.92rem; color: var(--text-primary); font-family: var(--font-label); letter-spacing: 0.04em; line-height: 1.3; margin: 0; }
+    .fe-loc-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.55; flex: 1; margin: 0; }
+    .fe-loc-pos { font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-muted); letter-spacing: 0.06em; padding-top: 0.5rem; border-top: 1px solid var(--border); margin-top: auto; }
+    .fe-loc-cta { text-align: center; margin-top: 0.5rem; padding-bottom: 0.5rem; }
+    .fe-loc-cta a { display: inline-block; padding: 0.7rem 2.2rem; background: transparent; border: 1px solid var(--border-gold); color: var(--gold); font-family: var(--font-label); font-size: 0.76rem; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; border-radius: var(--radius); transition: var(--transition); }
+    .fe-loc-cta a:hover { background: var(--gold); color: #000; text-shadow: none; } 
+    /* ── Location Panel ───────────────────────────────────────────── */
+    .fe-loc-panel { margin: 2.5rem 0; padding: 2rem 0 0; border-top: 1px solid var(--border-gold); }
+    .fe-loc-eyebrow { font-family: var(--font-mono); font-size: 0.63rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--red-bright); display: block; text-align: center; margin-bottom: 0.5rem; }
+    .fe-loc-panel-title { text-align: center; font-size: 1.35rem; margin-bottom: 0.35rem; }
+    .fe-loc-sub { text-align: center; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; margin-bottom: 2rem; }
+    .fe-loc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+    @media (max-width: 768px) { .fe-loc-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .fe-loc-grid { grid-template-columns: 1fr; } }
+    .fe-loc-card { display: flex; flex-direction: column; gap: 0.45rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.15rem 0.9rem; text-decoration: none; color: inherit; transition: var(--transition); position: relative; overflow: hidden; }
+    .fe-loc-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--zc, var(--gold)); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
+    .fe-loc-card:hover::before { transform: scaleX(1); }
+    .fe-loc-card:hover { border-color: var(--border-gold); background: var(--bg-card-hover); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.55); color: inherit; }
+    .fe-loc-badge { display: inline-block; font-family: var(--font-label); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.12rem 0.55rem; border-radius: 2px; color: var(--zc, var(--gold)); border: 1px solid var(--zc, var(--gold)); width: fit-content; }
+    .fe-loc-card h3 { font-size: 0.92rem; color: var(--text-primary); font-family: var(--font-label); letter-spacing: 0.04em; line-height: 1.3; margin: 0; }
+    .fe-loc-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.55; flex: 1; margin: 0; }
+    .fe-loc-pos { font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-muted); letter-spacing: 0.06em; padding-top: 0.5rem; border-top: 1px solid var(--border); margin-top: auto; }
+    .fe-loc-cta { text-align: center; margin-top: 0.5rem; padding-bottom: 0.5rem; }
+    .fe-loc-cta a { display: inline-block; padding: 0.7rem 2.2rem; background: transparent; border: 1px solid var(--border-gold); color: var(--gold); font-family: var(--font-label); font-size: 0.76rem; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; border-radius: var(--radius); transition: var(--transition); }
+    .fe-loc-cta a:hover { background: var(--gold); color: #000; text-shadow: none; } 
+    /* ── Location Panel ───────────────────────────────────────────── */
+    .fe-loc-panel { margin: 2.5rem 0; padding: 2rem 0 0; border-top: 1px solid var(--border-gold); }
+    .fe-loc-eyebrow { font-family: var(--font-mono); font-size: 0.63rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--red-bright); display: block; text-align: center; margin-bottom: 0.5rem; }
+    .fe-loc-panel-title { text-align: center; font-size: 1.35rem; margin-bottom: 0.35rem; }
+    .fe-loc-sub { text-align: center; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; margin-bottom: 2rem; }
+    .fe-loc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+    @media (max-width: 768px) { .fe-loc-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .fe-loc-grid { grid-template-columns: 1fr; } }
+    .fe-loc-card { display: flex; flex-direction: column; gap: 0.45rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.15rem 0.9rem; text-decoration: none; color: inherit; transition: var(--transition); position: relative; overflow: hidden; }
+    .fe-loc-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--zc, var(--gold)); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
+    .fe-loc-card:hover::before { transform: scaleX(1); }
+    .fe-loc-card:hover { border-color: var(--border-gold); background: var(--bg-card-hover); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.55); color: inherit; }
+    .fe-loc-badge { display: inline-block; font-family: var(--font-label); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.12rem 0.55rem; border-radius: 2px; color: var(--zc, var(--gold)); border: 1px solid var(--zc, var(--gold)); width: fit-content; }
+    .fe-loc-card h3 { font-size: 0.92rem; color: var(--text-primary); font-family: var(--font-label); letter-spacing: 0.04em; line-height: 1.3; margin: 0; }
+    .fe-loc-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.55; flex: 1; margin: 0; }
+    .fe-loc-pos { font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-muted); letter-spacing: 0.06em; padding-top: 0.5rem; border-top: 1px solid var(--border); margin-top: auto; }
+    .fe-loc-cta { text-align: center; margin-top: 0.5rem; padding-bottom: 0.5rem; }
+    .fe-loc-cta a { display: inline-block; padding: 0.7rem 2.2rem; background: transparent; border: 1px solid var(--border-gold); color: var(--gold); font-family: var(--font-label); font-size: 0.76rem; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; border-radius: var(--radius); transition: var(--transition); }
+    .fe-loc-cta a:hover { background: var(--gold); color: #000; text-shadow: none; }</style>
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-logo"><span class="eye-symbol">👁</span> Truth Archive</a>
+    <button class="nav-toggle" aria-expanded="false" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="great-awakening.html">The Great Awakening</a></li>
+      <li><a href="flat-earth.html">Flat Earth</a></li>
+      <li><a href="deep-state.html">Deep State</a></li>
+      <li><a href="secret-societies.html">Secret Societies</a></li>
+      <li><a href="banking-control.html">Banking Control</a></li>
+      <li><a href="media-control.html">Media Control</a></li>
+      <li><a href="space-deception.html">Space Deception</a></li>
+      <li><a href="big-pharma.html">Big Pharma</a></li>
+      <li><a href="tech-control.html">Tech &amp; Control</a></li>
+      <li><a href="false-flags.html">False Flags</a></li>
+      <li><a href="suppressed-history.html">Suppressed History</a></li>
+      <li><a href="metaphysical.html">Metaphysical</a></li>
+      <li><a href="ebook.html" class="ebook-link">📖 eBook</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container-narrow">
+      <span class="chapter-label">Chapter 01</span>
+      <h1 class="glitch" data-text="FLAT EARTH &amp; THE COSMOLOGICAL LIE">FLAT EARTH &amp; THE COSMOLOGICAL LIE</h1>
+      <div class="divider"></div>
+      <p class="subtitle">The heliocentric model is the greatest and most consequential deception ever imposed upon humanity.</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="section">
+    <div class="container-narrow">
+
+      <!-- ─── MAP LOCATION PANEL ────────────────────────────── -->
+      <div class="fe-loc-panel fade-in">
+        <span class="fe-loc-eyebrow">Map Analysis — 104 Documented Locations</span>
+        <h2 class="fe-loc-panel-title">Every Location on the Flat Earth Map</h2>
+        <p class="fe-loc-sub">Structural rings &nbsp;·&nbsp; evidence sites &nbsp;·&nbsp; suppressed zones &nbsp;·&nbsp; ancient power points &nbsp;·&nbsp; flight anomalies</p>
+
+        <div class="fe-loc-grid">
+
+          <a href="topics/flat-earth/locations.html#structural" class="fe-loc-card" style="--zc:#c9a227">
+            <span class="fe-loc-badge">Zone 1 &middot; Structural</span>
+            <h3>The North Pole — Dead Centre</h3>
+            <p>The geometric and cosmological centre of the flat disc. Polaris sits stationary directly above it — an impossibility on a spinning globe, a certainty on a fixed flat plane.</p>
+            <span class="fe-loc-pos">◎ Image Centre &nbsp;&middot;&nbsp; 90°N &nbsp;&middot;&nbsp; All Meridians</span>
+          </a>
+
+          <a href="topics/flat-earth/locations.html#boundary" class="fe-loc-card" style="--zc:#94a3b8">
+            <span class="fe-loc-badge">Zone 1 &middot; Boundary</span>
+            <h3>The Antarctic Ice Wall</h3>
+            <p>A 150–200 ft vertical cliff of ice encircling the entire known world. First documented by James Clark Ross in 1841. Now guarded by the 56-nation Antarctic Treaty.</p>
+            <span class="fe-loc-pos">◎ Outer Ring &nbsp;&middot;&nbsp; All Longitudes</span>
+          </a>
+
+          <a href="topics/flat-earth/locations.html#evidence" class="fe-loc-card" style="--zc:#4ade80">
+            <span class="fe-loc-badge">Zone 4 &middot; Evidence</span>
+            <h3>The Bedford Level, England</h3>
+            <p>A perfectly straight 6-mile drainage canal. Samuel Rowbotham's 1838 experiment showed zero curvature across the full length. Reproduced dozens of times. Never refuted.</p>
+            <span class="fe-loc-pos">◎ Upper-Centre Arc &nbsp;&middot;&nbsp; Cambridgeshire, England</span>
+          </a>
+
+          <a href="topics/flat-earth/locations.html#ancient" class="fe-loc-card" style="--zc:#c084fc">
+            <span class="fe-loc-badge">Zone 10 &middot; Ancient</span>
+            <h3>Giza — Centre of All Land Mass</h3>
+            <p>The Great Pyramid sits within 1/60th of a degree of the geographic centre of all land mass on the flat plane — a placement impossible to achieve without a flat earth map.</p>
+            <span class="fe-loc-pos">◎ Right-Centre Arc &nbsp;&middot;&nbsp; Egypt</span>
+          </a>
+
+          <a href="topics/flat-earth/locations.html#suppressed" class="fe-loc-card" style="--zc:#f87171">
+            <span class="fe-loc-badge">Zone 6 &middot; Suppressed</span>
+            <h3>HAARP — Gakona, Alaska</h3>
+            <p>A 3.6 MW ionospheric heater on the upper-left arc. Capable of heating the ionosphere — the underside of the firmament dome — to produce weather modification and seismic effects.</p>
+            <span class="fe-loc-pos">◎ Upper-Left Arc &nbsp;&middot;&nbsp; Alaska, USA</span>
+          </a>
+
+          <a href="topics/flat-earth/locations.html#flight" class="fe-loc-card" style="--zc:#60a5fa">
+            <span class="fe-loc-badge">Zone 8 &middot; Flight Anomaly</span>
+            <h3>Sydney → Santiago Route</h3>
+            <p>On a globe the shortest path crosses Antarctica. Airlines route via Los Angeles — adding 6+ hours. On the flat map the Los Angeles arc IS the shortest path. The detour exposes the globe lie.</p>
+            <span class="fe-loc-pos">◎ Right Arc → Left Arc &nbsp;&middot;&nbsp; Trans-Pacific</span>
+          </a>
+
+        </div>
+
+        <div class="fe-loc-cta">
+          <a href="topics/flat-earth/locations.html">Explore All 104 Locations on the Map →</a>
+        </div>
+      </div>
+
+
+      <!-- TOC -->
+      <nav class="toc fade-in" aria-label="Chapter contents">
+        <h3>Contents</h3>
+        <ol>
+          <li><a href="#model">The True Flat Earth Model</a></li>
+          <li><a href="#firmament">The Firmament — A Glass Dome Above Us</a></li>
+          <li><a href="#icewall">Antarctica: The Great Ice Wall</a></li>
+          <li><a href="#sun-moon">The Local Sun &amp; Moon</a></li>
+          <li><a href="#gravity-lie">Gravity: The Invented Force</a></li>
+          <li><a href="#globe-psyop">How the Globe Model Was Imposed</a></li>
+          <li><a href="#nasa">NASA: Never A Straight Answer</a></li>
+          <li><a href="#evidence">Evidence Believers Point To</a></li>
+        </ol>
+      </nav>
+
+      <div class="chapter-content">
+
+        <!-- 1 -->
+        <h2 id="model" class="fade-in">The True Flat Earth Model</h2>
+        <p class="fade-in">
+          The Earth is a flat, circular plane. At its centre lies the Arctic — the North Pole — with all continents fanning outward. What mainstream cartography calls Antarctica is not a southern continent but rather a continuous ring of towering ice that forms the outer boundary of the known world, preventing the oceans from cascading off the edge.
+        </p>
+        <p class="fade-in">
+          The disc has a radius of approximately 12,400 statute miles from the North Pole to the inner face of the ice wall. The total surface area of the flat Earth exceeds that of the claimed globe, which is why Antarctica — protected by international treaty since 1959 — remains off limits to independent exploration. Researchers who have mapped the coastline report that it stretches far beyond the 11,000 miles claimed by orthodox cartography.
+        </p>
+        <div class="fact-box fade-in">
+          <span class="fact-label">Key Observation</span>
+          <p>Flat Earth proponents note that long-distance flights in the Southern Hemisphere follow routes that make no logical sense on a globe, but are perfectly rational on a flat disc map. Sydney to Johannesburg or Buenos Aires to Cape Town both require multi-stop northward routing under current airline scheduling — inexplicable on a globe, obvious on flat Earth geometry.</p>
+        </div>
+
+        <!-- 2 -->
+        <h2 id="firmament" class="fade-in">The Firmament — A Glass Dome Above Us</h2>
+        <p class="fade-in">
+          Above the flat plane stretches the firmament: a solid, crystalline or glass-like dome described in virtually every ancient culture's cosmology. The Hebrew <em>raqia</em>, the Greek <em>stereoma</em>, the Sumerian <em>heaven-vault</em>, the Egyptian <em>nut</em> — all describe a fixed overhead structure that separates the waters above from the waters below.
+        </p>
+        <p class="fade-in">
+          The stars are not trillions of miles away. They are luminous points affixed to the interior surface of this dome, rotating in regular, predictable cycles. The zodiac constellations remain perfectly consistent year after year because they are physical features of the firmament — not random light-years-distant suns at all.
+        </p>
+        <p class="fade-in">
+          Above the firmament lies a reservoir of water — the biblical "waters above the heavens." This explains the distinctive blue colour seen at altitude, reports of mysterious electrical discharges along the dome's inner surface, and historical accounts of falls of crystalline material that orthodox science labels as unusual atmospheric ice events.
+        </p>
+        <div class="alert-box fade-in">
+          <span class="alert-label">⚠ Consider This</span>
+          <p>Genesis 1:6-7 describes God creating the <em>firmament</em> to divide the waters above from the waters below. Psalm 19:1 states "The heavens declare the glory of God; the skies proclaim the work of his hands." Every ancient sacred text describes a <strong>closed, enclosed sky</strong> — not the void of space marketed by modern science.</p>
+        </div>
+
+        <!-- 3 -->
+        <h2 id="icewall" class="fade-in">Antarctica: The Great Ice Wall</h2>
+        <p class="fade-in">
+          The Antarctic Treaty of 1959, signed by twelve nations and now maintained by 56 signatories, prohibits military activity, resource extraction, and — crucially — independent civilian exploration of Antarctica without governmental oversight. No free individual has ever independently circumnavigated Antarctica. Every expedition account comes from state-sanctioned or military-adjacent organisations.
+        </p>
+        <p class="fade-in">
+          Explorer James Clark Ross reported a vertical ice cliff rising between 150 and 200 feet out of the ocean, extending further than any ship could sail in either direction. Modern reports from research stations describe the same phenomenon — continuous, sheer ice walls. On the globe model, this is unexplained. On the flat Earth model, it is the boundary of our world.
+        </p>
+
+        <div class="evidence-board fade-in">
+          <div class="evidence-card" data-tag="TREATY">
+            <h4>The Antarctic Treaty</h4>
+            <p>All 56 signatory nations agreed to prohibit independent exploration. No commercial flights cross Antarctica. Why protect a barren frozen continent so aggressively unless it guards something critical?</p>
+          </div>
+          <div class="evidence-card" data-tag="NAVIGATION">
+            <h4>No Independent Circumnavigation</h4>
+            <p>Every documented "Antarctic circumnavigation" stays far north of the continent. Solo adventurers who have attempted to reach the ice wall independently report being turned back by naval vessels.</p>
+          </div>
+          <div class="evidence-card" data-tag="GEOGRAPHY">
+            <h4>Ice Wall Height Reports</h4>
+            <p>Ross (1841), Wilkes (1840), and D'Urville (1840) all independently described encountering a continuous vertical ice barrier stretching beyond the horizon in both directions.</p>
+          </div>
+          <div class="evidence-card" data-tag="FLIGHT PATHS">
+            <h4>Southern Hemisphere Air Routes</h4>
+            <p>Airline routes in the southern hemisphere consistently route northward through hub cities — a massive detour on the globe, but the most direct path on the flat Earth disc model.</p>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <h2 id="sun-moon" class="fade-in">The Local Sun &amp; Moon</h2>
+        <p class="fade-in">
+          The sun and moon are not what mainstream astronomy claims. Both are <strong>local luminaries</strong> travelling in circular paths above the flat plane at an altitude of approximately 3,000 miles. Their apparent rising and setting is a perspective effect — they move away from the observer, not below a curved horizon. The same mechanism explains why the sun appears to rise and set at slightly different compass points through the year — it is following a spiral path between the Tropic of Capricorn (wide spiral, summer in the north) and the Tropic of Cancer (wide spiral, summer in the south).
+        </p>
+        <p class="fade-in">
+          The moon produces its own cool, unique light — confirmed by experimenters who measure the temperature of moonlit ground and shadowed ground and consistently find that moonlit areas are <em>cooler</em>. A reflected light from the sun would warm its target, as reflection does not change photon energy. This indicates the moon generates its own light of a different spectrum entirely.
+        </p>
+        <p class="fade-in">
+          The moon also shows consistent face-on illumination patterns that cannot be explained by a distant sun reflecting off a spherical body. Its illuminated crescent often does not align with the angular direction of the sun — a phenomenon the flat Earth model resolves by treating the moon as a semi-transparent disc with its own internal light source.
+        </p>
+
+        <!-- 5 -->
+        <h2 id="gravity-lie" class="fade-in">Gravity: The Invented Force</h2>
+        <p class="fade-in">
+          Isaac Newton invented gravity as an invisible, undetectable, action-at-a-distance force to explain why a spherical Earth would not shed its atmosphere and oceans into space. Einstein later replaced the concept with "curved spacetime" — a geometric abstraction that cannot be directly measured or falsified in any independent laboratory setting.
+        </p>
+        <p class="fade-in">
+          On the flat Earth model, there is no need for gravity. All observed phenomena attributed to gravity are explained by <strong>density and buoyancy</strong>: dense objects sink in less dense mediums, lighter objects rise. A lead ball drops and a helium balloon rises — not because of a mysterious pull toward a planetary centre, but because of their relative densities compared to the air around them.
+        </p>
+        <p class="fade-in">
+          The atmosphere is retained not by gravitational pull but by the enclosed dome of the firmament. Water finds its level — demonstrated in every experiment across every flat surface of water ever measured — because the Earth is flat.
+        </p>
+
+        <!-- 6 -->
+        <h2 id="globe-psyop" class="fade-in">How the Globe Model Was Imposed</h2>
+        <p class="fade-in">
+          The heliocentric globe model was not the result of scientific discovery but of a coordinated ideological agenda, accelerated by the Copernican Revolution in the 16th century and consolidated through the subsequent centuries by institutions — royal societies, universities, and observatories — all funded by the same elite banking families who needed to sever humanity's connection to a purposeful, created, enclosed world.
+        </p>
+        <p class="fade-in">
+          A purposeful enclosed creation implies a Creator. A vast, cold, random, infinite universe implies human insignificance — making populations far more malleable and far easier to control. Remove God from cosmology and you remove the moral bedrock that limits the power of the state over its subjects.
+        </p>
+        <blockquote class="fade-in">
+          "We are not evolved pond scum on a spinning rock around an average star in an unremarkable galaxy. We are <em>put here</em>. In a specially constructed, enclosed world. That changes <em>everything</em>."
+        </blockquote>
+
+        <!-- 7 -->
+        <h2 id="nasa" class="fade-in">NASA: Never A Straight Answer</h2>
+        <p class="fade-in">
+          The National Aeronautics and Space Administration was founded in 1958, directly employing Operation Paperclip scientists — former Nazi engineers brought to the United States under classified programmes after World War II. Its founding director, Wernher von Braun, was a former SS officer. The agency's original seal included a forked serpent's tongue. Its name, NASA, in Hebrew (<em>nāśāʾ</em>) means "to deceive."
+        </p>
+
+        <div class="connection-node fade-in">
+          <span class="node-number">01</span>
+          <div class="node-content">
+            <h4>No Unedited Photographs of Earth</h4>
+            <p>Every "photograph" of the full Earth from space is either a composite CGI image or artwork — admitted to by NASA's own image teams in agency documentation. The famous "Blue Marble" is a composite assembled from satellite image strips.</p>
+          </div>
+        </div>
+        <div class="connection-node fade-in">
+          <span class="node-number">02</span>
+          <div class="node-content">
+            <h4>The Van Allen Belts</h4>
+            <p>The Van Allen radiation belts surround Earth with lethal levels of charged particle radiation. In 1959, Explorer probes measured doses that would be fatal to humans within hours of prolonged exposure. The Apollo moon missions claimed to pass through these belts — in aluminium foil-insulated capsules — with no adverse health effects. Modern NASA engineers have publicly stated that the agency must first "solve" the Van Allen belt problem before sending humans beyond low Earth orbit.</p>
+          </div>
+        </div>
+        <div class="connection-node fade-in">
+          <span class="node-number">03</span>
+          <div class="node-content">
+            <h4>The ISS: Studio or Station?</h4>
+            <p>Underwater neutral buoyancy tanks, green-screen studios, and harness rigs have been identified in ISS footage through analysis of floating hair that behaves inconsistently with true microgravity, air bubbles visible during spacewalks, and camera artefacts consistent with blue-screen compositing.</p>
+          </div>
+        </div>
+        <div class="connection-node fade-in">
+          <span class="node-number">04</span>
+          <div class="node-content">
+            <h4>Disappearing Moon Rock</h4>
+            <p>Of the 842 pounds of Moon rock NASA claims to have returned, significant portions distributed to world governments and institutions have been confirmed as petrified wood, glass, and terrestrial material of unexplained origin — not lunar minerals. The Netherlands received "Moon rock" from Apollo 11 that was later identified by professional geologists as fossilised wood.</p>
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <h2 id="evidence" class="fade-in">Evidence Believers Point To</h2>
+        <p class="fade-in">
+          The flat Earth position is not based on blind faith but on a systematic catalogue of observable, reproducible experimentation and logical inference:
+        </p>
+        <ul class="fade-in">
+          <li><strong>The Bedford Level Experiment (1838):</strong> Samuel Rowbotham observed a boat travelling 6 miles along a straight canal and remained fully visible through a telescope at water level when globe curvature should have obscured it entirely.</li>
+          <li><strong>Chicago Skyline over Lake Michigan:</strong> The Chicago skyline is visible from the eastern shore some 60 miles distant at water level — geometrically impossible on a globe with 8 inches of curvature per mile squared.</li>
+          <li><strong>Canal and Railway Construction:</strong> Surveyors in the 19th century building the Old Bedford Level drainage and the Suez Canal explicitly documented that no curvature allowance was made — and the works were executed perfectly level over distances where significant curvature should have been measurable.</li>
+          <li><strong>Polaris — Fixed North Star:</strong> Polaris sits stationary at precisely 0° above the North Pole at all times from all northern latitudes. On a spinning globe, this should not be possible without the star being infinitely far away — which contradicts parallax measurements.</li>
+          <li><strong>Water Always Finds Its Level:</strong> Every large body of water — ocean, lake, reservoir — maintains a flat, level surface. Curvature on a globe of Earth's claimed diameter would produce measurable drop-off over any significant distance. It is never observed.</li>
+          <li><strong>The Horizon Rises to Eye Level:</strong> At any altitude — hilltop, aircraft, balloon — the horizon rises to meet the eye rather than dropping below, as it would on a globe. This is consistent with a flat surface extending to a vanishing point set by atmospheric perspective.</li>
+        </ul>
+
+      </div><!-- end chapter-content -->
+      <!-- ─── FLAT EARTH DEEP DIVES ─────────────────────────── -->
+      <hr class="fade-in" />
+      <h2 class="fade-in" style="text-align:center;margin-bottom:0.3rem;">27 Flat Earth Deep Dives</h2>
+      <p class="fade-in" style="text-align:center;color:var(--text-muted);font-family:var(--font-mono);font-size:0.78rem;letter-spacing:0.1em;margin-bottom:2rem;">Every cosmological node — individually researched</p>
+
+            <div class="cat-header fade-in"><h2>Structure &amp; Cosmology</h2><span class="cat-count">6 topics</span></div>
+      <div class="topic-hub-grid fade-in">
+        <a href="topics/flat-earth/firmament.html" class="topic-hub-card fe"><span class="hub-cat">Structure</span><span class="hub-title">The Firmament</span><span class="hub-desc">The solid crystalline dome stretched above the flat plane — every ancient civilisation described it.</span></a>
+        <a href="topics/flat-earth/north-pole-center.html" class="topic-hub-card fe"><span class="hub-cat">Geography</span><span class="hub-title">North Pole as Centre</span><span class="hub-desc">The Arctic is the geometric centre of the disc. All continents radiate outward from it.</span></a>
+        <a href="topics/flat-earth/waters-above.html" class="topic-hub-card fe"><span class="hub-cat">Cosmology</span><span class="hub-title">The Waters Above</span><span class="hub-desc">Beyond the firmament dome lies a reservoir of water — the upper heavens of antiquity.</span></a>
+        <a href="topics/flat-earth/waters-below.html" class="topic-hub-card fe"><span class="hub-cat">Cosmology</span><span class="hub-title">The Deep &amp; Waters Below</span><span class="hub-desc">The primordial ocean beneath the flat plane — the tehom, the Apsu, the Deep.</span></a>
+        <a href="topics/flat-earth/outer-lands.html" class="topic-hub-card fe"><span class="hub-cat">Geography</span><span class="hub-title">Outer Lands Beyond the Ice Wall</span><span class="hub-desc">What Admiral Byrd really reported — historical maps and the possibility of more land.</span></a>
+        <a href="topics/flat-earth/globe-psyop.html" class="topic-hub-card fe"><span class="hub-cat">History</span><span class="hub-title">How the Globe Was Imposed</span><span class="hub-desc">The Copernican revolution as coordinated ideological operation — not scientific discovery.</span></a>
+      </div>
+
+            <div class="cat-header fade-in"><h2>Luminaries</h2><span class="cat-count">6 topics</span></div>
+      <div class="topic-hub-grid fade-in">
+        <a href="topics/flat-earth/local-sun.html" class="topic-hub-card fe"><span class="hub-cat">Luminaries</span><span class="hub-title">The Local Sun</span><span class="hub-desc">A small light 3,000 miles up, circling the flat plane — not 93 million miles away.</span></a>
+        <a href="topics/flat-earth/local-moon.html" class="topic-hub-card fe"><span class="hub-cat">Luminaries</span><span class="hub-title">The Local Moon</span><span class="hub-desc">Its own cool light, semi-transparency, and phases that do not require a reflecting surface.</span></a>
+        <a href="topics/flat-earth/sun-circuit.html" class="topic-hub-card fe"><span class="hub-cat">Luminaries</span><span class="hub-title">The Sun's Circuit &amp; Path</span><span class="hub-desc">The sun's horizontal daily circuit explains sunrise, sunset, and all seasonal variation.</span></a>
+        <a href="topics/flat-earth/moon-circuit.html" class="topic-hub-card fe"><span class="hub-cat">Luminaries</span><span class="hub-title">The Moon's Path &amp; Phases</span><span class="hub-desc">The moon's independent circuit and the true mechanics of its phases.</span></a>
+        <a href="topics/flat-earth/stars-on-dome.html" class="topic-hub-card fe"><span class="hub-cat">Celestial</span><span class="hub-title">Stars Affixed to the Dome</span><span class="hub-desc">Not trillions of miles away — stars are lights on the interior of the firmament.</span></a>
+        <a href="topics/flat-earth/planets-wandering.html" class="topic-hub-card fe"><span class="hub-cat">Celestial</span><span class="hub-title">Planets as Wandering Lights</span><span class="hub-desc">Named from the Greek for "wanderer" — local luminaries, not distant globes.</span></a>
+      </div>
+
+            <div class="cat-header fade-in"><h2>Physics &amp; Proofs</h2><span class="cat-count">6 topics</span></div>
+      <div class="topic-hub-grid fade-in">
+        <a href="topics/flat-earth/gravity-lie.html" class="topic-hub-card fe"><span class="hub-cat">Physics</span><span class="hub-title">The Gravity Lie</span><span class="hub-desc">Invented to explain a globe. Density and buoyancy explain every observation.</span></a>
+        <a href="topics/flat-earth/water-finds-level.html" class="topic-hub-card fe"><span class="hub-cat">Physics</span><span class="hub-title">Water Always Finds Its Level</span><span class="hub-desc">Canals, lakes, oceans — no curvature has ever been measured in standing water.</span></a>
+        <a href="topics/flat-earth/horizon-perspective.html" class="topic-hub-card fe"><span class="hub-cat">Optics</span><span class="hub-title">Horizon &amp; Perspective</span><span class="hub-desc">The horizon is a perspective limit — not curvature. Ships can always be zoomed back.</span></a>
+        <a href="topics/flat-earth/polaris-north-star.html" class="topic-hub-card fe"><span class="hub-cat">Navigation</span><span class="hub-title">Polaris: The Fixed North Star</span><span class="hub-desc">Fixed directly above the North Pole for every observer. Impossible on a spinning globe.</span></a>
+        <a href="topics/flat-earth/tropics-seasons.html" class="topic-hub-card fe"><span class="hub-cat">Climate</span><span class="hub-title">Tropics &amp; Seasons Explained</span><span class="hub-desc">The sun's spiral between the tropics creates seasons — no axial tilt required.</span></a>
+        <a href="topics/flat-earth/auroras.html" class="topic-hub-card fe"><span class="hub-cat">Phenomena</span><span class="hub-title">Auroras &amp; the Dome's Edge</span><span class="hub-desc">Electrical discharges at the dome's polar perimeter — ancient cultures knew what they were.</span></a>
+      </div>
+
+            <div class="cat-header fade-in"><h2>Suppression, Evidence &amp; Scripture</h2><span class="cat-count">9 topics</span></div>
+      <div class="topic-hub-grid fade-in">
+        <a href="topics/flat-earth/ice-wall.html" class="topic-hub-card fe"><span class="hub-cat">Boundary</span><span class="hub-title">The Antarctic Ice Wall</span><span class="hub-desc">A 150–200 ft vertical cliff of ice encircling the world — guarded by international treaty.</span></a>
+        <a href="topics/flat-earth/antarctic-treaty.html" class="topic-hub-card fe"><span class="hub-cat">Suppression</span><span class="hub-title">The Antarctic Treaty</span><span class="hub-desc">56 nations. Military escorts. A banned continent. Why?</span></a>
+        <a href="topics/flat-earth/southern-flight-paths.html" class="topic-hub-card fe"><span class="hub-cat">Evidence</span><span class="hub-title">Southern Hemisphere Flight Paths</span><span class="hub-desc">Routes that make no sense on a globe — perfect on the flat Earth map.</span></a>
+        <a href="topics/flat-earth/200-proofs.html" class="topic-hub-card fe"><span class="hub-cat">Evidence</span><span class="hub-title">200 Proofs of Flat Earth</span><span class="hub-desc">The complete catalogue — physical, optical, navigational, and celestial proofs.</span></a>
+        <a href="topics/flat-earth/flat-earth-bible.html" class="topic-hub-card fe"><span class="hub-cat">Scripture</span><span class="hub-title">Biblical Flat Earth</span><span class="hub-desc">Cosmological passages across scripture interpreted literally in an enclosed-world model.</span></a>
+        <a href="topics/flat-earth/space-fakery.html" class="topic-hub-card fe"><span class="hub-cat">Suppression</span><span class="hub-title">NASA Space Fakery</span><span class="hub-desc">CGI compositing, studio artifacts, and the systematic suppression of true cosmology.</span></a>
+        <a href="topics/flat-earth/moonlanding-hoax.html" class="topic-hub-card fe"><span class="hub-cat">Suppression</span><span class="hub-title">Moon Landing Hoax</span><span class="hub-desc">Van Allen belt contradiction, missing 700-box telemetry, and production staging evidence.</span></a>
+        <a href="topics/flat-earth/electromagnetic-dome.html" class="topic-hub-card fe"><span class="hub-cat">Physics</span><span class="hub-title">Electromagnetic Dome</span><span class="hub-desc">Tesla, Schumann resonance, and ionospheric-boundary interpretations of the sky structure.</span></a>
+        <a href="topics/flat-earth/maps-truth.html" class="topic-hub-card fe"><span class="hub-cat">Cartography</span><span class="hub-title">Gleason Map &amp; Cartography</span><span class="hub-desc">Map projection logic and boundary implications under flat-earth geography.</span></a>
+      </div>
+
+      <!-- Chapter Navigation -->
+      <nav class="chapter-nav" aria-label="Chapter navigation">
+        <a href="index.html">← Back to Archive</a>
+        <a href="great-awakening.html" class="next">The Great Awakening →</a>
+      </nav>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid" style="max-width:1200px; margin:0 auto;">
+      <div class="footer-brand">
+        <h3>The Truth Archive</h3>
+        <p>Independent research. Unfiltered truth.</p>
+      </div>
+      <div class="footer-links">
+        <h5>All Chapters</h5>
+        <ul>
+          <li><a href="flat-earth.html">Flat Earth</a></li>
+          <li><a href="great-awakening.html">Great Awakening</a></li>
+          <li><a href="deep-state.html">Deep State</a></li>
+          <li><a href="secret-societies.html">Secret Societies</a></li>
+          <li><a href="banking-control.html">Banking Control</a></li>
+          <li><a href="media-control.html">Media Control</a></li>
+          <li><a href="space-deception.html">Space Deception</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>◆ THE TRUTH ARCHIVE ◆ QUESTION EVERYTHING ◆</p></div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,16 @@
+
+
+.env
+node_modules/
+package-lock.json
+generate-ebook-pdf.js
+ebook-print.html
+restructure_site.js
+stripe-cli/
+stripe-cli.zip
+*.pdf
+build-ebook.js
+PLAN.md
+flat-earth-map-locations.md
+ebook-head.tmp
+.history/

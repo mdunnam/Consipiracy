@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>104 Locations on the Flat Earth Map — Truth Archive</title>
+  <meta name="description" content="Every location catalogued on the Flat Earth 8K reference map — structural rings, evidence sites, suppressed zones, ancient power points, flight anomalies, and the outer lands beyond the ice wall." />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <style>
+    .fade-in { opacity:0; transform:translateY(20px); transition:opacity .35s ease, transform .35s ease; }
+    .fade-in.visible { opacity:1; transform:none; }
+
+    /* ── Page hero ─────────────────────────────────────────────── */
+    .loc-hero {
+      padding: 6rem 1.5rem 3rem;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at center, rgba(201,162,39,0.07) 0%, transparent 65%),
+        var(--bg-primary);
+    }
+    .loc-hero .eyebrow { font-family: var(--font-mono); font-size: 0.63rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--red-bright); display: block; margin-bottom: 1rem; }
+    .loc-hero h1 { font-size: clamp(1.6rem, 4vw, 2.8rem); margin-bottom: 0.5rem; }
+    .loc-hero p  { color: var(--text-secondary); max-width: 58ch; margin: 0 auto 2rem; font-size: 0.95rem; line-height: 1.8; }
+
+    /* ── Stats bar ─────────────────────────────────────────────── */
+    .loc-stats {
+      display: flex; gap: 0; flex-wrap: wrap;
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius);
+      overflow: hidden;
+      max-width: 760px; margin: 0 auto 2.5rem;
+    }
+    .loc-stat {
+      flex: 1; min-width: 120px;
+      padding: 1rem 0.5rem;
+      text-align: center;
+      border-right: 1px solid var(--border-gold);
+      background: var(--bg-card);
+    }
+    .loc-stat:last-child { border-right: none; }
+    .loc-stat .n { font-family: var(--font-heading); font-size: 1.6rem; color: var(--gold); display: block; }
+    .loc-stat .l { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); display: block; margin-top: 0.15rem; }
+
+    /* ── Map + zone pins ───────────────────────────────────────── */
+    .map-explorer {
+      position: relative;
+      max-width: 820px; margin: 0 auto 3rem;
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--bg-card);
+    }
+    .map-explorer img { display: block; width: 100%; height: auto; opacity: 0.88; }
+    .map-explorer .map-overlay {
+      position: absolute; inset: 0;
+      pointer-events: none;
+    }
+    /* Zone pins */
+    .zpin {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      pointer-events: all; cursor: pointer; z-index: 4; text-decoration: none;
+    }
+    .zpin .dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--pc, var(--gold));
+      box-shadow: 0 0 5px var(--pc, var(--gold)), 0 0 12px var(--pc, var(--gold));
+      animation: zpulse 2.2s ease-in-out infinite;
+      transition: transform 0.2s;
+    }
+    .zpin:hover .dot { transform: scale(1.7); }
+    .zpin .lbl {
+      font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--pc, var(--gold));
+      background: rgba(0,0,0,0.82); padding: 1px 5px; border-radius: 2px;
+      white-space: nowrap; opacity: 0; transition: opacity 0.2s;
+    }
+    .zpin:hover .lbl { opacity: 1; }
+    @keyframes zpulse {
+      0%,100% { box-shadow: 0 0 4px var(--pc, var(--gold)), 0 0 8px var(--pc, var(--gold)); }
+      50%      { box-shadow: 0 0 8px var(--pc, var(--gold)), 0 0 20px var(--pc, var(--gold)); }
+    }
+    .map-caption-bar {
+      padding: 0.65rem 1rem;
+      font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.2em;
+      color: var(--text-muted); text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Zone filter bar ───────────────────────────────────────── */
+    .filter-bar {
+      display: flex; flex-wrap: wrap; gap: 0.45rem;
+      justify-content: center; margin-bottom: 2.5rem;
+    }
+    .filter-btn {
+      font-family: var(--font-label); font-size: 0.65rem; letter-spacing: 0.18em;
+      text-transform: uppercase; padding: 0.35rem 0.85rem;
+      border: 1px solid var(--border); border-radius: 2px;
+      background: transparent; color: var(--text-muted);
+      cursor: pointer; transition: var(--transition);
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--zone-c, var(--gold));
+      border-color: var(--zone-c, var(--gold));
+      color: #000;
+    }
+
+    /* ── Zone section headers ──────────────────────────────────── */
+    .zone-section { margin-bottom: 3.5rem; }
+    .zone-header {
+      display: flex; align-items: center; gap: 1rem;
+      border-bottom: 1px solid var(--border-gold);
+      padding-bottom: 0.75rem; margin-bottom: 1.5rem;
+    }
+    .zone-color-bar { width: 4px; height: 36px; border-radius: 2px; flex-shrink: 0; }
+    .zone-header h2 { font-size: 1.1rem; margin: 0; }
+    .zone-header .zone-desc { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); letter-spacing: 0.08em; }
+    .zone-count { margin-left: auto; font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); letter-spacing: 0.1em; white-space: nowrap; }
+
+    /* ── Location cards ────────────────────────────────────────── */
+    .loc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0.85rem;
+    }
+    .loc-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1rem 1.1rem 0.85rem;
+      display: flex; flex-direction: column; gap: 0.4rem;
+      position: relative; overflow: hidden;
+      transition: var(--transition);
+    }
+    .loc-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--zc, var(--gold)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease;
+    }
+    .loc-card:hover::before { transform: scaleX(1); }
+    .loc-card:hover { border-color: var(--border-gold); background: var(--bg-card-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.5); }
+    .loc-num { font-family: var(--font-mono); font-size: 0.58rem; color: var(--text-muted); letter-spacing: 0.1em; }
+    .loc-card h3 { font-family: var(--font-label); font-size: 0.88rem; letter-spacing: 0.04em; line-height: 1.25; color: var(--text-primary); margin: 0; }
+    .loc-card p { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; flex: 1; margin: 0; }
+    .loc-pos { font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-muted); letter-spacing: 0.05em; padding-top: 0.45rem; border-top: 1px solid var(--border); margin-top: auto; }
+    .loc-badge {
+      display: inline-block; font-family: var(--font-label); font-size: 0.55rem;
+      letter-spacing: 0.18em; text-transform: uppercase; padding: 0.1rem 0.45rem;
+      border-radius: 2px; color: var(--zc, var(--gold)); border: 1px solid var(--zc, var(--gold));
+      width: fit-content;
+    }
+
+    /* ── Back link ─────────────────────────────────────────────── */
+    .back-bar { text-align: center; margin: 3rem 0 1rem; }
+    .back-bar a { font-family: var(--font-label); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .back-bar a:hover { color: var(--gold); }
+  </style>
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <a href="../../index.html" class="nav-logo"><span class="eye-symbol">👁</span> Truth Archive</a>
+    <button class="nav-toggle" aria-expanded="false" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="../../great-awakening.html">The Great Awakening</a></li>
+      <li><a href="../../flat-earth.html">Flat Earth</a></li>
+      <li><a href="../../deep-state.html">Deep State</a></li>
+      <li><a href="../../secret-societies.html">Secret Societies</a></li>
+      <li><a href="../../banking-control.html">Banking Control</a></li>
+      <li><a href="../../media-control.html">Media Control</a></li>
+      <li><a href="../../space-deception.html">Space Deception</a></li>
+      <li><a href="../../big-pharma.html">Big Pharma</a></li>
+      <li><a href="../../tech-control.html">Tech &amp; Control</a></li>
+      <li><a href="../../false-flags.html">False Flags</a></li>
+      <li><a href="../../suppressed-history.html">Suppressed History</a></li>
+      <li><a href="../../metaphysical.html">Metaphysical</a></li>
+      <li><a href="../../ebook.html" class="ebook-link">📖 eBook</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══ HERO ═══════════════════════════════════════════════════ -->
+  <header class="loc-hero">
+    <span class="eyebrow">Flat Earth Map Analysis — FlatEarth_8k Reference Diagram</span>
+    <h1>104 Locations on the Flat Earth Map</h1>
+    <p>Every region, evidence site, suppressed zone, ancient power point, flight anomaly, and outer-land documented on the 8K azimuthal equidistant map — catalogued and cross-referenced.</p>
+
+    <div class="loc-stats fade-in">
+      <div class="loc-stat"><span class="n">10</span><span class="l">Zone Categories</span></div>
+      <div class="loc-stat"><span class="n">104</span><span class="l">Total Locations</span></div>
+      <div class="loc-stat"><span class="n">6</span><span class="l">Evidence Sites</span></div>
+      <div class="loc-stat"><span class="n">10</span><span class="l">Suppressed Zones</span></div>
+      <div class="loc-stat"><span class="n">12</span><span class="l">Ancient Power Points</span></div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+
+      <!-- ═══ INTERACTIVE MAP ══════════════════════════════════════ -->
+      <div class="map-explorer fade-in">
+
+        <div class="map-overlay">
+          <!-- Zone pins — positions as % of container width/height -->
+          <!-- North Pole: centre -->
+          <a href="#structural" class="zpin" style="left:50%;top:50%;--pc:#c9a227" title="North Pole — Centre"><span class="dot"></span><span class="lbl">North Pole</span></a>
+          <!-- North America -->
+          <a href="#landmass" class="zpin" style="left:27%;top:31%;--pc:#fbbf24" title="North America"><span class="dot"></span><span class="lbl">N. America</span></a>
+          <!-- South America -->
+          <a href="#landmass" class="zpin" style="left:29%;top:66%;--pc:#fbbf24" title="South America"><span class="dot"></span><span class="lbl">S. America</span></a>
+          <!-- Greenland -->
+          <a href="#landmass" class="zpin" style="left:37%;top:26%;--pc:#fbbf24" title="Greenland"><span class="dot"></span><span class="lbl">Greenland</span></a>
+          <!-- Europe -->
+          <a href="#landmass" class="zpin" style="left:52%;top:31%;--pc:#fbbf24" title="Europe"><span class="dot"></span><span class="lbl">Europe</span></a>
+          <!-- Russia -->
+          <a href="#landmass" class="zpin" style="left:65%;top:24%;--pc:#fbbf24" title="Russia / Siberia"><span class="dot"></span><span class="lbl">Russia</span></a>
+          <!-- Africa -->
+          <a href="#landmass" class="zpin" style="left:57%;top:52%;--pc:#fbbf24" title="Africa"><span class="dot"></span><span class="lbl">Africa</span></a>
+          <!-- Middle East -->
+          <a href="#ancient" class="zpin" style="left:61%;top:44%;--pc:#c084fc" title="Middle East — Jerusalem, Giza, Mecca"><span class="dot"></span><span class="lbl">Middle East</span></a>
+          <!-- Asia / China -->
+          <a href="#landmass" class="zpin" style="left:71%;top:35%;--pc:#fbbf24" title="East Asia"><span class="dot"></span><span class="lbl">E. Asia</span></a>
+          <!-- India -->
+          <a href="#landmass" class="zpin" style="left:66%;top:48%;--pc:#fbbf24" title="India"><span class="dot"></span><span class="lbl">India</span></a>
+          <!-- Australia -->
+          <a href="#landmass" class="zpin" style="left:72%;top:67%;--pc:#fbbf24" title="Australia"><span class="dot"></span><span class="lbl">Australia</span></a>
+          <!-- Bedford Level evidence -->
+          <a href="#evidence" class="zpin" style="left:50%;top:29%;--pc:#4ade80" title="Bedford Level — England"><span class="dot"></span><span class="lbl">Bedford Level</span></a>
+          <!-- HAARP -->
+          <a href="#suppressed" class="zpin" style="left:23%;top:26%;--pc:#f87171" title="HAARP — Alaska"><span class="dot"></span><span class="lbl">HAARP</span></a>
+          <!-- Bermuda Triangle -->
+          <a href="#anomalous" class="zpin" style="left:31%;top:44%;--pc:#fb923c" title="Bermuda Triangle"><span class="dot"></span><span class="lbl">Bermuda △</span></a>
+          <!-- Pine Gap -->
+          <a href="#suppressed" class="zpin" style="left:70%;top:72%;--pc:#f87171" title="Pine Gap — Australia"><span class="dot"></span><span class="lbl">Pine Gap</span></a>
+          <!-- Ice Wall — bottom -->
+          <a href="#boundary" class="zpin" style="left:50%;top:89%;--pc:#94a3b8" title="Antarctic Ice Wall"><span class="dot"></span><span class="lbl">Ice Wall</span></a>
+          <!-- Ice Wall — left -->
+          <a href="#boundary" class="zpin" style="left:14%;top:74%;--pc:#94a3b8" title="Antarctic Ice Wall — West Arc"><span class="dot"></span><span class="lbl">Ice Wall</span></a>
+          <!-- Ice Wall — right -->
+          <a href="#boundary" class="zpin" style="left:86%;top:74%;--pc:#94a3b8" title="Antarctic Ice Wall — East Arc"><span class="dot"></span><span class="lbl">Ice Wall</span></a>
+          <!-- Giza -->
+          <a href="#ancient" class="zpin" style="left:58%;top:42%;--pc:#c084fc" title="Giza — Geometric Centre of Land Mass"><span class="dot"></span><span class="lbl">Giza</span></a>
+          <!-- Pacific left -->
+          <a href="#ocean" class="zpin" style="left:14%;top:52%;--pc:#38bdf8" title="Pacific Ocean — West Arc"><span class="dot"></span><span class="lbl">Pacific</span></a>
+          <!-- Atlantic -->
+          <a href="#ocean" class="zpin" style="left:41%;top:47%;--pc:#38bdf8" title="Atlantic Ocean"><span class="dot"></span><span class="lbl">Atlantic</span></a>
+        </div>
+        <div class="map-caption-bar">◆ FLAT EARTH 8K AZIMUTHAL EQUIDISTANT MAP — NORTH POLE CENTRED — HOVER PINS TO IDENTIFY ZONES ◆</div>
+      </div>
+
+      <!-- ═══ FILTER BAR ═══════════════════════════════════════════ -->
+      <div class="filter-bar fade-in">
+        <button class="filter-btn active" data-filter="all" style="--zone-c:var(--gold)">All Zones</button>
+        <button class="filter-btn" data-filter="structural" style="--zone-c:#c9a227">Structural</button>
+        <button class="filter-btn" data-filter="landmass" style="--zone-c:#fbbf24">Landmasses</button>
+        <button class="filter-btn" data-filter="ocean" style="--zone-c:#38bdf8">Oceans &amp; Seas</button>
+        <button class="filter-btn" data-filter="evidence" style="--zone-c:#4ade80">Evidence</button>
+        <button class="filter-btn" data-filter="celestial" style="--zone-c:#818cf8">Celestial</button>
+        <button class="filter-btn" data-filter="suppressed" style="--zone-c:#f87171">Suppressed</button>
+        <button class="filter-btn" data-filter="outer" style="--zone-c:#94a3b8">Outer Lands</button>
+        <button class="filter-btn" data-filter="flight" style="--zone-c:#60a5fa">Flight Paths</button>
+        <button class="filter-btn" data-filter="anomalous" style="--zone-c:#fb923c">Anomalous</button>
+        <button class="filter-btn" data-filter="ancient" style="--zone-c:#c084fc">Ancient</button>
+      </div>
+
+      <!-- ═══ ZONE 1 — STRUCTURAL RINGS ═══════════════════════════ -->
+      <section class="zone-section fade-in" data-zone="structural" id="structural">
+        <div class="zone-header">
+          <div class="zone-color-bar" style="background:#c9a227"></div>
+          <div>
+            <h2>Structural Rings</h2>
+            <span class="zone-desc">The concentric circles that define the flat earth's architecture</span>
+          </div>
+          <span class="zone-count">6 locations</span>
+        </div>
+        <div class="loc-grid">
+          <div class="loc-card" style="--zc:#c9a227"><span class="loc-num">#01</span><span class="loc-badge">Structural</span><h3>The North Pole — Dead Centre</h3><p>The geometric and cosmological centre of the entire flat plane. Polaris sits directly above it, stationary for every observer on Earth — impossible on a spinning globe, certain on a fixed flat disc.</p><span class="loc-pos">◎ Image centre · 90°N · All meridians</span></div>
+          <div class="loc-card" style="--zc:#c9a227"><span class="loc-num">#02</span><span class="loc-badge">Structural</span><h3>The Arctic Circle</h3><p>The innermost habitable cold zone. Midnight sun and polar night are fully explained by the sun's local circuit above the plane — not axial tilt. The sun simply never leaves this zone in summer.</p><span class="loc-pos">◎ Inner ring · ~66°N equivalent</span></div>
+          <div class="loc-card" style="--zc:#c9a227"><span class="loc-num">#03</span><span class="loc-badge">Structural</span><h3>Tropic of Cancer</h3><p>The northernmost circle the sun reaches in its annual spiral. The midsummer solstice track. Beyond this ring the days grow shorter as the sun spirals southward and its circuit widens.</p><span class="loc-pos">◎ Inner-mid ring · ~23°N equivalent</span></div>
+          <div class="loc-card" style="--zc:#c9a227"><span class="loc-num">#04</span><span class="loc-badge">Structural</span><h3>The Equatorial Ring</h3><p>The midpoint of the flat disc — equidistant between the North Pole centre and the Antarctic Ice Wall outer boundary. At equinox the sun travels this ring, producing equal day and night for all latitudes simultaneously.</p><span class="loc-pos">◎ Mid-disc ring · True equator</span></div>
+          <div class="loc-card" style="--zc:#c9a227"><span class="loc-num">#05</span><span class="loc-badge">Structural</span><h3>Tropic of Capricorn</h3><p>The southernmost circle the sun's path reaches. Midwinter for northern lands. The sun's circuit is at its widest here — longer days for observers on the outer arc, shorter for those near centre.</p><span class="loc-pos">◎ Outer-mid ring · ~23°S equivalent</span></div>
+          <div class="loc-card" style="--zc:#94a3b8" id="boundary"><span class="loc-num">#06</span><span class="loc-badge" style="color:#94a3b8;border-color:#94a3b8">Boundary</span><h3>The Antarctic Ice Wall</h3><p>A vertical ice cliff 150–200 ft high encircling the entire known world. James Clark Ross documented it in 1841. The 1959 Antarctic Treaty (56 signatories) prohibits independent civilian access. No one has independently verified what lies beyond.</p><span class="loc-pos">◎ Outer boundary ring · All longitudes</span></div>
+        </div>
+      </section>
+
+      <!-- ═══ ZONE 2 — MAJOR LANDMASSES ═══════════════════════════ -->
+      <section class="zone-section fade-in" data-zone="landmass" id="landmass">
+        <div class="zone-header">
+          <div class="zone-color-bar" style="background:#fbbf24"></div>
+          <div>
+            <h2>Major Landmasses</h2>
+            <span class="zone-desc">Continents and islands fanning outward from the North Pole</span>
+          </div>
+          <span class="zone-count">18 locations</span>
+        </div>
+        <div class="loc-grid">
+          <div class="loc-card" style="--zc:#fbbf24"><span class="loc-num">#07</span><span class="loc-badge">Landmass</span><h3>North America</h3><p>Upper-left quadrant of the flat map. The Rocky Mountains, Great Plains, and Eastern seaboard align correctly under the azimuthal projection. Major HAARP and deep state infrastructure concentrated in the interior and Alaska arcs.</p><span class="loc-pos">◎ Upper-left quadrant</span></div>
+          <div class="loc-card" style="--zc:#fbbf24"><span class="loc-num">#08</span><span class="loc-badge">Landmass</span><h3>Greenland</h3><p>On a Mercator globe map, Greenland appears the same size as Africa. On the flat azimuthal map its true proportional size is restored — smaller than South America. The globe projection deliberately distorted northern landmasses.</p><span class="loc-pos">◎ Upper-left, close to centre</span></div>
+          <div class="loc-card" style="--zc:#fbbf24"><span class="loc-num">#09</span><span class="loc-badge">Landmass</span><h3>South America</h3><p>Lower-left quadrant. The Amazon drainage basin radiates outward toward the outer ice zone — consistent with flat-plane centrifugal hydrology. Flight route anomalies from South America to Africa and Australia expose the globe model's geometry.</p><span class="loc-pos">◎ Lower-left quadrant</span></div>
+          <div class="loc-card" style="--zc:#fbbf24"><span class="loc-num">#10</span><span class="loc-badge">Landmass</span><h3>Europe</h3><p>Upper-centre cluster. The densest concentration of Freemasonic architecture, obelisks, and occult city layouts on the flat map. The Vatican, the City of London, and Paris form the three primary control nodes of the western arc.</p><span class="loc-pos">◎ Upper-centre (slightly right)</span></div>
+          <div class="loc-card" style="--zc:#fbbf24"><span class="loc-num">#11</span><span class="loc-badge">Landmass</span><h3>The British Isles</h3><p>London — financial capital of the world's control system. The City of London (one square mile) is a sovereign jurisdiction inside the UK with its own laws. The Greenwich Meridian as Prime Meridian was chosen by the banking dynasties who dominated the 1884 International Meridian Conference.</p><span class="loc-pos">◎ Upper-centre</span></div>
+          <div class="loc-card" style="--zc:#fbbf24"><span class="loc-num">#12</span><span class="loc-badge">Landmass</span><h3>Africa</h3><p>The most geographically centred landmass on the flat map. Its position at the intersection of all major arc paths places it at the functional crossroads of the known world. Contains the Nile — the river that flows "uphill" in globe terms but downhill on the flat plane.</p><span class="loc-pos">◎ Right-centre</span></div>
+          <div class="loc-card" style="--zc:#fbbf24"><span class="loc-num">#13</span><span class="loc-badge">Landmass</span><h3>The Arabian Peninsula</h3><p>Jerusalem, Mecca, and the Nile cradle all cluster within this zone. The geographic land gateway between the African, European, and Asian arcs. Three of the world's major religions converge here — each pointing to this zone as sacred centre.</p><span class="loc-pos">◎ Right-centre arc junction</span></div>
+          <div class="loc-card" style="--zc:#fbbf24"><span class="loc-num">#14</span><span class="loc-badge">Landmass</span><h3>Russia / Siberia</h3><p>Enormous upper-right arc. Largest single land area on the flat map. Contains HAARP-equivalent scalar weapon installations across the Siberian interior — including the Sura Ionospheric Heating Facility, the Russian equivalent of HAARP.</p><span class="loc-pos">◎ Upper-right — vast arc</span></div>
+          <div class="loc-card" style="--zc:#fbbf24"><span class="loc-num">#15</span><span class="loc-badge">Landmass</span><h3>Central Asia / Tibet</h3><p>The world's highest plateau — the "roof of the world." In flat earth terms, the highest surface point on the plane, the closest land to the underside of the firmament dome. The Tibetan tradition preserved cosmological knowledge that Western academia has never assimilated.</p><span class="loc-pos">◎ Right-upper mid-arc</span></div>
+          <div class="loc-card" style="--zc:#fbbf24"><span class="loc-num">#16</span><span class="loc-badge">Landmass</span><h3>India</h3><p>The Vedic tradition preserved the most accurate pre-suppression cosmological knowledge, including descriptions of enclosed sky, vimanas (flying craft), and a flat, supported earth. Sanskrit texts describe cosmological layers that map precisely to the flat earth model.</p><span class="loc-pos">◎ Right-centre arc</span></div>
+          <div class="loc-card" style="--zc:#fbbf24"><span class="loc-num">#17</span><span class="loc-badge">Landmass</span><h3>China / East Asia</h3><p>China's ancient Gai Tian cosmological model described a square earth under a round sky — an enclosed, covered world. The modern Chinese social credit surveillance system is the template for the global smart-city control grid being deployed worldwide.</p><span class="loc-pos">◎ Right side arc</span></div>
+          <div class="loc-card" style="--zc:#fbbf24"><span class="loc-num">#18</span><span class="loc-badge">Landmass</span><h3>Japan</h3><p>Island chain at the outer rightward arc. The Japanese word for horizon — chihei-sen — means "the line where land and sky meet" — a perspective description, not a curvature reference. Japan's ancient cosmology described a disc-world supported by pillars.</p><span class="loc-pos">◎ Far right arc</span></div>
+          <div class="loc-card" style="--zc:#fbbf24"><span class="loc-num">#19</span><span class="loc-badge">Landmass</span><h3>Southeast Asia / Indonesia</h3><p>The Ring of Fire arc — in flat earth terms, a fracture zone in the plane's outer crust near the equatorial ring where volcanic and seismic activity is concentrated. The 2004 Indian Ocean earthquake and tsunami originated here — the largest seismic event in modern recorded history.</p><span class="loc-pos">◎ Right-lower arc</span></div>
+          <div class="loc-card" style="--zc:#fbbf24"><span class="loc-num">#20</span><span class="loc-badge">Landmass</span><h3>Australia</h3><p>The most anomalous continent for globe flight paths. Sydney–Santiago, Sydney–Dubai, and Sydney–Johannesburg routes are all geometrically impossible on a globe but perfectly arc-sensible on the flat map. Pine Gap (classified CIA facility) sits in its interior.</p><span class="loc-pos">◎ Right-lower arc</span></div>
+          <div class="loc-card" style="--zc:#fbbf24"><span class="loc-num">#21</span><span class="loc-badge">Landmass</span><h3>New Zealand</h3><p>The southernmost inhabited point of the flat disc before the outer ice zones begin. Its geographic isolation — and its emergence as a test case for the Great Reset (cashless society, biosecurity state) — positions it as a key cabal policy laboratory.</p><span class="loc-pos">◎ Far right-lower arc</span></div>
+          <div class="loc-card" style="--zc:#fbbf24"><span class="loc-num">#22</span><span class="loc-badge">Landmass</span><h3>Pacific Islands / Hawaii</h3><p>Hawaii sits at the precise midpoint between the North American and Asian arcs on the flat azimuthal map — as expected geometrically. The Pacific Military Command is based here, at the dead centre of the Pacific arc's strategic radius.</p><span class="loc-pos">◎ Centre-lower, Pacific arc</span></div>
+          <div class="loc-card" style="--zc:#fbbf24"><span class="loc-num">#23</span><span class="loc-badge">Landmass</span><h3>Caribbean Islands</h3><p>The Bermuda Triangle sits within this zone — a region of documented navigation and communication anomalies. The Caribbean is also the geographic location of Epstein's Island (Little Saint James) and surrounding infrastructure linked to the intelligence-network trafficking operation.</p><span class="loc-pos">◎ Left-centre arc</span></div>
+          <div class="loc-card" style="--zc:#fbbf24"><span class="loc-num">#24</span><span class="loc-badge">Landmass</span><h3>Antarctica (The Ice Ring)</h3><p>Not a continent at the bottom of a globe. A continuous ring of ice of unknown depth and width forming the outer boundary of the known world. Explorer accounts describe an insurmountable wall of ice — not a traversable continent with a geographic south pole.</p><span class="loc-pos">◎ Outer rim — all arcs</span></div>
+        </div>
+      </section>
+
+      <!-- ═══ ZONE 3 — OCEANS & SEAS ══════════════════════════════ -->
+      <section class="zone-section fade-in" data-zone="ocean" id="ocean">
+        <div class="zone-header">
+          <div class="zone-color-bar" style="background:#38bdf8"></div>
+          <div>
+            <h2>Oceans &amp; Seas</h2>
+            <span class="zone-desc">Water bodies whose behaviour confirms flat-plane hydrology</span>
+          </div>
+          <span class="zone-count">15 locations</span>
+        </div>
+        <div class="loc-grid">
+          <div class="loc-card" style="--zc:#38bdf8"><span class="loc-num">#25</span><span class="loc-badge">Ocean</span><h3>Pacific Ocean</h3><p>The globe convention of a single unified Pacific is an artefact of Mercator projection. On the flat azimuthal map, the Pacific splits across both the leftmost and rightmost edges — two arcs of the same body. This split is why trans-Pacific flight routes behave unexpectedly.</p><span class="loc-pos">◎ Left and right outer arcs</span></div>
+          <div class="loc-card" style="--zc:#38bdf8"><span class="loc-num">#26</span><span class="loc-badge">Ocean</span><h3>Atlantic Ocean</h3><p>The central oceanic corridor on the flat map — the primary navigational highway between the European and American arcs. Its relatively narrow width on the flat map explains why early navigators could cross it in weeks without magnetic compass anomalies.</p><span class="loc-pos">◎ Central corridor</span></div>
+          <div class="loc-card" style="--zc:#38bdf8"><span class="loc-num">#27</span><span class="loc-badge">Ocean</span><h3>Indian Ocean</h3><p>The outward-spreading ocean between the African and Australian arcs. Its currents radiate toward the outer boundary — consistent with flat-plane water flowing outward from the centre. The Indian Ocean is the primary bottleneck for global shipping.</p><span class="loc-pos">◎ Right-lower arc space</span></div>
+          <div class="loc-card" style="--zc:#38bdf8"><span class="loc-num">#28</span><span class="loc-badge">Ocean</span><h3>Arctic Ocean</h3><p>Small, near the centre of the flat disc, directly below the sun's winter circuit path. Its shallow, frozen nature is consistent with the flat model's inner zones receiving less solar energy as the sun's circuit widens southward in winter.</p><span class="loc-pos">◎ Inner zone — around North Pole</span></div>
+          <div class="loc-card" style="--zc:#38bdf8"><span class="loc-num">#29</span><span class="loc-badge">Sea</span><h3>Mediterranean Sea</h3><p>The Roman lake — an enclosed, nearly non-tidal sea at the centre of the ancient world's civilisation cluster. Its enclosed nature and minimal tidal range (unlike open oceans) are more consistent with a contained flat-plane water body than an oceanic extension.</p><span class="loc-pos">◎ Centre-upper arc — Europe/Africa</span></div>
+          <div class="loc-card" style="--zc:#38bdf8"><span class="loc-num">#30</span><span class="loc-badge">Sea</span><h3>Red Sea</h3><p>The parting of the Red Sea in Exodus is fully consistent with a flat-plane, shallow-sea wind-tide event. Its perfectly straight channel orientation is noted by flat earth cartographers as consistent with the radial geography of the flat disc.</p><span class="loc-pos">◎ Right-centre arc — Egypt/Arabia</span></div>
+          <div class="loc-card" style="--zc:#38bdf8"><span class="loc-num">#31</span><span class="loc-badge">Sea</span><h3>Persian Gulf</h3><p>The oil-rich shallow sea whose control underpins the entire petrodollar system. Its geographic position on the flat map — between the African, Arabian, and Asian arcs — made it the strategic prize of 20th-century imperial competition.</p><span class="loc-pos">◎ Right-centre arc</span></div>
+          <div class="loc-card" style="--zc:#38bdf8"><span class="loc-num">#32</span><span class="loc-badge">Sea</span><h3>Caspian Sea</h3><p>The world's largest enclosed body of water — entirely landlocked, no tidal influence, no oceanic connection. Its flat, level surface confirms flat-plane hydrology. The globe model offers no explanation for why the world's largest lake has no connection to any ocean.</p><span class="loc-pos">◎ Right-upper arc — Central Asia</span></div>
+          <div class="loc-card" style="--zc:#38bdf8"><span class="loc-num">#33</span><span class="loc-badge">Sea</span><h3>Dead Sea</h3><p>The lowest point on the flat plane's surface — 430m below the surrounding plain. Water flows down to it from the Jordan River and evaporates. No outlet. Its perfectly flat surface is the lowest confirmed level reference point on the known world.</p><span class="loc-pos">◎ Right-centre arc — Israel/Jordan</span></div>
+          <div class="loc-card" style="--zc:#38bdf8"><span class="loc-num">#34</span><span class="loc-badge">Sea</span><h3>Black Sea</h3><p>Another nearly enclosed basin with minimal tidal activity. Ancient flood legends from every surrounding culture — Sumerian, Greek, Hebrew, and Anatolian — describe a catastrophic filling event consistent with a flat-plane basin breach.</p><span class="loc-pos">◎ Upper-right arc junction</span></div>
+          <div class="loc-card" style="--zc:#38bdf8"><span class="loc-num">#35</span><span class="loc-badge">Sea</span><h3>South China Sea</h3><p>The disputed zone at the intersection of the Chinese and Pacific arcs on the flat map. China's aggressive territorial expansion here reflects an understanding of its strategic position as the gateway between the Asian arc and the right-side Pacific expanse.</p><span class="loc-pos">◎ Right-lower arc junction</span></div>
+          <div class="loc-card" style="--zc:#38bdf8"><span class="loc-num">#36</span><span class="loc-badge">Sea</span><h3>Gulf of Mexico</h3><p>The curved basin in the inner arc of North America. Its near-circular shape is consistent with an impact or structural feature of the flat plane. The 2010 Deepwater Horizon disaster occurred here — the largest accidental marine oil spill in history, in an area that flat earth researchers note for anomalous seabed geology.</p><span class="loc-pos">◎ Left-centre arc — N. America</span></div>
+          <div class="loc-card" style="--zc:#38bdf8"><span class="loc-num">#37</span><span class="loc-badge">Sea</span><h3>Bay of Bengal</h3><p>The inward-curving bay separating the Indian subcontinent from Southeast Asia. The 2004 Indian Ocean earthquake — the third largest ever recorded — originated beneath it. In flat earth terms, a fracture line in the outer-mid arc of the plane.</p><span class="loc-pos">◎ Right-centre arc</span></div>
+          <div class="loc-card" style="--zc:#38bdf8"><span class="loc-num">#38</span><span class="loc-badge">Sea</span><h3>Caribbean Sea / Bermuda Triangle</h3><p>The Bermuda Triangle (Miami–Bermuda–Puerto Rico) sits within this zone. Documented anomalous compass variation, navigation equipment failures, and unexplained disappearances of aircraft and vessels over decades — possibly a convergence zone for electromagnetic energy from the firmament above.</p><span class="loc-pos">◎ Left-centre arc</span></div>
+          <div class="loc-card" style="--zc:#38bdf8"><span class="loc-num">#39</span><span class="loc-badge">Sea</span><h3>Bering Sea / Strait</h3><p>On the flat map, Alaska and Russia are neighbours across a narrow strait — not opposite sides of a globe. The Bering Land Bridge migration theory depends on globe geography. On the flat map, Alaska–Russia proximity makes cultural exchange a simple matter of crossing a channel.</p><span class="loc-pos">◎ Upper arc — Alaska/Russia junction</span></div>
+        </div>
+      </section>
+
+      <!-- ═══ ZONE 4 — EVIDENCE LOCATIONS ══════════════════════════ -->
+      <section class="zone-section fade-in" data-zone="evidence" id="evidence">
+        <div class="zone-header">
+          <div class="zone-color-bar" style="background:#4ade80"></div>
+          <div>
+            <h2>Key Evidence Locations</h2>
+            <span class="zone-desc">Documented sites where flat earth physics has been physically tested</span>
+          </div>
+          <span class="zone-count">11 locations</span>
+        </div>
+        <div class="loc-grid">
+          <div class="loc-card" style="--zc:#4ade80"><span class="loc-num">#40</span><span class="loc-badge">Evidence</span><h3>The Bedford Level, England</h3><p>A 6-mile perfectly straight drainage canal in Cambridgeshire. Rowbotham's 1838 experiment showed a boat remaining fully visible at water level across the full 6 miles — no curvature observable. Reproduced dozens of times. The Royal Geographical Society's attempted debunking inadvertently confirmed the result.</p><span class="loc-pos">◎ Upper-centre arc · Cambridgeshire, UK</span></div>
+          <div class="loc-card" style="--zc:#4ade80"><span class="loc-num">#41</span><span class="loc-badge">Evidence</span><h3>The Suez Canal, Egypt</h3><p>193.3 km long, built completely level with no curvature accommodation. At globe curvature rate (8 inches per mile²), the canal should drop 1,666 feet from end to end. Official British engineering specifications confirm: no curvature adjustment was made. The canal works perfectly at sea level its entire length.</p><span class="loc-pos">◎ Right-centre arc · Egypt</span></div>
+          <div class="loc-card" style="--zc:#4ade80"><span class="loc-num">#42</span><span class="loc-badge">Evidence</span><h3>The Panama Canal</h3><p>82 km long, built entirely level. Official US Army Corps of Engineers documents confirm no curvature adjustment was required or made. The Gatun Lake section sits at 26m above sea level across its entire flat surface — confirming a level plane, not a curved surface.</p><span class="loc-pos">◎ Left-centre arc · Panama</span></div>
+          <div class="loc-card" style="--zc:#4ade80"><span class="loc-num">#43</span><span class="loc-badge">Evidence</span><h3>Lake Pontchartrain Causeway, Louisiana</h3><p>At 38.6 km, the longest continuous bridge over water in the world. Should show approximately 29m of curvature drop from centre to ends. Engineers confirm: no curvature allowance was made. The bridge is built perfectly level from shore to shore.</p><span class="loc-pos">◎ Left-centre arc · Louisiana, USA</span></div>
+          <div class="loc-card" style="--zc:#4ade80"><span class="loc-num">#44</span><span class="loc-badge">Evidence</span><h3>Chesapeake Bay Bridge-Tunnel, Virginia</h3><p>37 km over open water. Should show ~27m of curvature. Laser measurements and photography confirm the full length is built level. The globe curvature calculation predicts a drop that is simply not there.</p><span class="loc-pos">◎ Left-centre arc · Virginia, USA</span></div>
+          <div class="loc-card" style="--zc:#4ade80"><span class="loc-num">#45</span><span class="loc-badge">Evidence</span><h3>Trans-Siberian Railway</h3><p>9,289 km across Russia — the world's longest railway, built essentially level through the vast Siberian plain. At globe curvature, the track should drop thousands of metres from end to end. It does not. The engineering was performed on a flat surface.</p><span class="loc-pos">◎ Upper-right arc · Russia</span></div>
+          <div class="loc-card" style="--zc:#4ade80"><span class="loc-num">#46</span><span class="loc-badge">Evidence</span><h3>Chicago Skyline from Lake Michigan</h3><p>The Chicago skyline is regularly photographed from 60+ miles across Lake Michigan, showing the full base of skyscrapers at water level — buildings that should be 610m below the horizon on a globe. Multiple independent photographs from different observers, different conditions. Never explained by globe defenders.</p><span class="loc-pos">◎ Left-centre arc · Lake Michigan, USA</span></div>
+          <div class="loc-card" style="--zc:#4ade80"><span class="loc-num">#47</span><span class="loc-badge">Evidence</span><h3>The Nile River, Egypt</h3><p>Flows northward for 6,650 km from its highland source in the East African Rift to the Mediterranean. On the globe model this means flowing "uphill" relative to Earth's alleged spherical geometry. On the flat plane it flows naturally downhill from an elevated inland source toward the sea.</p><span class="loc-pos">◎ Right-centre arc · Egypt/Sudan/Ethiopia</span></div>
+          <div class="loc-card" style="--zc:#4ade80"><span class="loc-num">#48</span><span class="loc-badge">Evidence</span><h3>The Amazon River, South America</h3><p>Drains a continent in a radial pattern perfectly consistent with flat-plane drainage toward a lower perimeter. The Amazon basin's near-perfect flatness — less than 100m total elevation change across 3,000 km — is a defining exhibit for flat-surface hydrology.</p><span class="loc-pos">◎ Lower-left arc · Brazil</span></div>
+          <div class="loc-card" style="--zc:#4ade80"><span class="loc-num">#49</span><span class="loc-badge">Evidence</span><h3>The Maldives</h3><p>A nation of islands averaging 1.2m above sea level with a perfectly flat ocean surface visible in all directions. The claim that the Maldives are "sinking" due to climate change is contradicted by tide gauge records showing no net sea level rise relative to the islands over the measurement period.</p><span class="loc-pos">◎ Right arc · Indian Ocean</span></div>
+          <div class="loc-card" style="--zc:#4ade80"><span class="loc-num">#50</span><span class="loc-badge">Evidence</span><h3>Lake Titicaca, Peru / Bolivia</h3><p>3,800m above sea level — the world's highest navigable body of water. Its surface is perfectly flat across its entire 8,372 km² expanse. An enormous flat water surface at altitude, confirming that flat-plane hydrology applies even to elevated bodies of water far from sea level.</p><span class="loc-pos">◎ Lower-left arc · Peru/Bolivia</span></div>
+        </div>
+      </section>
+
+      <!-- ═══ ZONE 5 — CELESTIAL REFERENCE POINTS ══════════════════ -->
+      <section class="zone-section fade-in" data-zone="celestial" id="celestial">
+        <div class="zone-header">
+          <div class="zone-color-bar" style="background:#818cf8"></div>
+          <div>
+            <h2>Celestial &amp; Cosmological Reference Points</h2>
+            <span class="zone-desc">Features corresponding to the sun's circuit, the firmament, and cosmic structure</span>
+          </div>
+          <span class="zone-count">9 locations</span>
+        </div>
+        <div class="loc-grid">
+          <div class="loc-card" style="--zc:#818cf8"><span class="loc-num">#51</span><span class="loc-badge">Celestial</span><h3>The Sun's Northern Circuit Path</h3><p>The circle traced by the sun 3,000 miles above the flat plane at midsummer — near the Tropic of Cancer ring. The sun spirals outward from here as summer ends, explaining the shortening days without requiring axial tilt or orbital ellipses.</p><span class="loc-pos">◎ Inner-mid ring circuit</span></div>
+          <div class="loc-card" style="--zc:#818cf8"><span class="loc-num">#52</span><span class="loc-badge">Celestial</span><h3>The Sun's Southern Circuit Path</h3><p>The circle traced at midwinter — near the Tropic of Capricorn ring. The sun's circuit is at its widest here, meaning sunrise and sunset happen at wider azimuth angles. This explains winter's shorter days for northern observers: the sun is circling further away.</p><span class="loc-pos">◎ Outer-mid ring circuit</span></div>
+          <div class="loc-card" style="--zc:#818cf8"><span class="loc-num">#53</span><span class="loc-badge">Celestial</span><h3>The Equatorial Sun Path</h3><p>The intermediate solar circuit at the spring and autumn equinoxes — directly over the equatorial ring. Produces equal day and night for all observers simultaneously, which is geometrically consistent with the flat azimuthal model but presents calculation difficulties on the globe model.</p><span class="loc-pos">◎ Mid-disc circuit</span></div>
+          <div class="loc-card" style="--zc:#818cf8"><span class="loc-num">#54</span><span class="loc-badge">Celestial</span><h3>Polaris — The Fixed North Star</h3><p>Positioned directly above the North Pole at all times from all northern latitudes. Every star in the sky rotates around Polaris in perfect concentric circles. The angular elevation of Polaris above the horizon equals your latitude precisely — confirming the geometry of a flat disc with a centre-point above.</p><span class="loc-pos">◎ Directly above map centre — all times</span></div>
+          <div class="loc-card" style="--zc:#818cf8"><span class="loc-num">#55</span><span class="loc-badge">Celestial</span><h3>The Southern Cross Constellation Zone</h3><p>Visible simultaneously from the entire southern arc of the flat disc. On a globe, observers in widely separated southern locations should have their view blocked by curvature. The simultaneous visibility of the Southern Cross across all southern longitudes is consistent with stars affixed to the interior of the firmament dome.</p><span class="loc-pos">◎ Visible from outer southern arc</span></div>
+          <div class="loc-card" style="--zc:#818cf8"><span class="loc-num">#56</span><span class="loc-badge">Celestial</span><h3>Aurora Borealis Zone</h3><p>The northern lights occur near the inner Arctic Circle arc — electrical discharges at the inner edge of the firmament dome where it meets the plane. Ancient Norse, Sámi, and Indigenous Alaskan traditions consistently described the aurora as a boundary phenomenon, not a random atmospheric event.</p><span class="loc-pos">◎ Inner arctic zone — circular band</span></div>
+          <div class="loc-card" style="--zc:#818cf8"><span class="loc-num">#57</span><span class="loc-badge">Celestial</span><h3>Aurora Australis Zone</h3><p>Southern lights occur near the outer Antarctic arc — electrical discharges at the outer dome edge. Both auroras follow circular paths perfectly consistent with a dome structure. The globe model cannot explain why auroras form in consistent circular bands — the flat firmament dome model predicts exactly this pattern.</p><span class="loc-pos">◎ Outer ice ring zone — circular band</span></div>
+          <div class="loc-card" style="--zc:#818cf8"><span class="loc-num">#58</span><span class="loc-badge">Celestial</span><h3>The Firmament Dome</h3><p>The solid crystalline vault above the flat plane — not visible on the surface map but implied by the behaviour of all celestial objects. The Hebrew raqia, Greek stereoma, Sumerian heaven-vault, and Egyptian nut all describe the same structure. Stars, sun, and moon all move within it. Nothing passes through it.</p><span class="loc-pos">◎ Above entire map — all locations</span></div>
+          <div class="loc-card" style="--zc:#818cf8"><span class="loc-num">#59</span><span class="loc-badge">Celestial</span><h3>The Waters Above the Firmament</h3><p>The reservoir of water above the dome — described in Genesis 1:6-7, in Vedic cosmology, and in the traditions of over 200 indigenous cultures worldwide. Responsible for the sky's distinctive blue and the source of the biblical Flood. The Schumann resonance — the electromagnetic resonance of the space between Earth and firmament — was predicted by Tesla and detected by Schumann in 1952.</p><span class="loc-pos">◎ Beyond firmament — above all</span></div>
+        </div>
+      </section>
+
+      <!-- ═══ ZONE 6 — SUPPRESSED LOCATIONS ════════════════════════ -->
+      <section class="zone-section fade-in" data-zone="suppressed" id="suppressed">
+        <div class="zone-header">
+          <div class="zone-color-bar" style="background:#f87171"></div>
+          <div>
+            <h2>Suppressed &amp; Classified Locations</h2>
+            <span class="zone-desc">Military installations, treaty zones, and restricted access sites</span>
+          </div>
+          <span class="zone-count">10 locations</span>
+        </div>
+        <div class="loc-grid">
+          <div class="loc-card" style="--zc:#f87171"><span class="loc-num">#60</span><span class="loc-badge">Suppressed</span><h3>McMurdo Station, Antarctica</h3><p>The largest Antarctic research station — the primary gateway through which all Antarctic access is controlled. Independent researchers approaching without official sanctioning are intercepted and turned back. What McMurdo actually studies has never been publicly disclosed in full. The US military maintains a permanent armed presence.</p><span class="loc-pos">◎ Outer ring — Ross Ice Shelf</span></div>
+          <div class="loc-card" style="--zc:#f87171"><span class="loc-num">#61</span><span class="loc-badge">Suppressed</span><h3>Amundsen-Scott South Pole Station</h3><p>Located at the alleged geographic South Pole. In flat earth terms, there is no South Pole — this station is positioned somewhere on the inner face of the Antarctic Ice Wall ring. Its true location relative to the flat plane's geometry has never been independently verified. Access requires full government authorisation.</p><span class="loc-pos">◎ Outer ring — claimed pole position</span></div>
+          <div class="loc-card" style="--zc:#f87171"><span class="loc-num">#62</span><span class="loc-badge">Suppressed</span><h3>HAARP — Gakona, Alaska</h3><p>The High-frequency Active Auroral Research Programme. 3.6 MW ionospheric heater officially for atmospheric research. The European Parliament called for an international ban in 1999. Can heat the ionosphere — the underside of the firmament dome — to produce weather modification, communication disruption, and electromagnetic pulse effects at range.</p><span class="loc-pos">◎ Upper-left arc · Alaska, USA</span></div>
+          <div class="loc-card" style="--zc:#f87171"><span class="loc-num">#63</span><span class="loc-badge">Suppressed</span><h3>Pine Gap, Australia</h3><p>Jointly operated CIA/ASD facility in the central Australian desert. Officially a satellite ground control station — but in a flat earth model with no orbiting satellites, it serves a different function: monitoring firmament-reflective electromagnetic signals and coordinating the southern hemisphere surveillance network.</p><span class="loc-pos">◎ Right-lower arc · Central Australia</span></div>
+          <div class="loc-card" style="--zc:#f87171"><span class="loc-num">#64</span><span class="loc-badge">Suppressed</span><h3>Area 51, Nevada</h3><p>The Tonopah test ranges and Groom Lake facilities. Home to reverse-engineered craft recovered from what are officially described as crashes but which flat earth researchers argue were discoveries of advanced technology originating from beyond the ice wall or from the firmament boundary itself.</p><span class="loc-pos">◎ Left-centre arc · Nevada, USA</span></div>
+          <div class="loc-card" style="--zc:#f87171"><span class="loc-num">#65</span><span class="loc-badge">Suppressed</span><h3>Diego Garcia, Indian Ocean</h3><p>A remote British-American military base at the centre of the Indian Ocean arc — the most geographically isolated major military installation on the flat plane. Flight MH370 was last tracked heading toward Diego Garcia. The atoll's population was forcibly displaced in the 1960s by the British government to make way for the base.</p><span class="loc-pos">◎ Right arc · Central Indian Ocean</span></div>
+          <div class="loc-card" style="--zc:#f87171"><span class="loc-num">#66</span><span class="loc-badge">Suppressed</span><h3>RAF Menwith Hill, Yorkshire</h3><p>The largest electronic monitoring station in the world. Part of the ECHELON Five Eyes global surveillance network. On the flat map it sits at the geometric communication hub between the American and European arcs — intercepting transatlantic communications at the nodal junction of the two major western arcs.</p><span class="loc-pos">◎ Upper-centre arc · Yorkshire, UK</span></div>
+          <div class="loc-card" style="--zc:#f87171"><span class="loc-num">#67</span><span class="loc-badge">Suppressed</span><h3>Svalbard Global Seed Vault, Norway</h3><p>Deep inside the Arctic Circle arc, accessible only by treaty-controlled travel. The elite's biological insurance policy — storing specimens of every food crop seed in the most controlled zone of the flat map. Funded by the Rockefeller Foundation, the Gates Foundation, and the Norwegian government. Built to survive "global catastrophe."</p><span class="loc-pos">◎ Upper-centre arc · Svalbard, Norway</span></div>
+          <div class="loc-card" style="--zc:#f87171"><span class="loc-num">#68</span><span class="loc-badge">Suppressed</span><h3>The Strait of Gibraltar</h3><p>The narrow gateway between the Atlantic and the Mediterranean — the choke point of the ancient world's trade and the western entrance to what the Romans called Mare Nostrum (Our Sea). The Rock of Gibraltar is one of the two mythological Pillars of Hercules — the boundary markers of the known ancient world.</p><span class="loc-pos">◎ Centre arc · Europe/Africa junction</span></div>
+          <div class="loc-card" style="--zc:#f87171"><span class="loc-num">#69</span><span class="loc-badge">Suppressed</span><h3>The Antarctic Treaty Zone</h3><p>Not a single location but the entire outer ring of the flat disc — the 56-nation military exclusion zone that prevents independent verification of what lies beyond the ice wall. Signed 1959. No public vote. No expiry. Every attempt to independently access Antarctica's true coastline has been intercepted or refused.</p><span class="loc-pos">◎ Entire outer boundary</span></div>
+        </div>
+      </section>
+
+      <!-- ═══ ZONE 7 — OUTER LANDS ══════════════════════════════════ -->
+      <section class="zone-section fade-in" data-zone="outer" id="outer">
+        <div class="zone-header">
+          <div class="zone-color-bar" style="background:#94a3b8"></div>
+          <div>
+            <h2>The Outer Lands</h2>
+            <span class="zone-desc">What explorers and historical records suggest lies beyond the ice wall</span>
+          </div>
+          <span class="zone-count">6 locations</span>
+        </div>
+        <div class="loc-grid">
+          <div class="loc-card" style="--zc:#94a3b8"><span class="loc-num">#70</span><span class="loc-badge">Outer</span><h3>The Antarctic Ice Wall — Inner Face</h3><p>The vertical cliff of ice, 150–200 feet high, stretching beyond any ship's sight in either direction. First documented by James Clark Ross, 1841. Ross sailed east and west along its face for days without finding any gap. Its full extent has never been measured by any independent explorer.</p><span class="loc-pos">◎ Outer boundary — inner face</span></div>
+          <div class="loc-card" style="--zc:#94a3b8"><span class="loc-num">#71</span><span class="loc-badge">Outer</span><h3>Beyond the Wall — Admiral Byrd's Account</h3><p>Admiral Richard Byrd's 1954 interview referenced "that enchanted continent in the sky, that land of everlasting mystery" — a description incompatible with the globe model of Antarctica. His Operation Highjump (1946–47) involved 4,700 men, 33 aircraft, and 13 ships — an extraordinary military force for a "scientific expedition."</p><span class="loc-pos">◎ Beyond outer boundary</span></div>
+          <div class="loc-card" style="--zc:#94a3b8"><span class="loc-num">#72</span><span class="loc-badge">Outer</span><h3>The Piri Reis Map Evidence</h3><p>The 1513 Piri Reis Map shows an Antarctic coastline in accurate detail 300 years before its official discovery (1820), and without the ice sheet — suggesting the map was compiled from much earlier source documents depicting the coastline before glaciation. Either pre-existing knowledge or access to regions officially unexplored.</p><span class="loc-pos">◎ Outer boundary charted</span></div>
+          <div class="loc-card" style="--zc:#94a3b8"><span class="loc-num">#73</span><span class="loc-badge">Outer</span><h3>Speculation — Second Ring of Continents</h3><p>Researchers studying the azimuthal projection at extended scales note that the known continental pattern could theoretically repeat — a second ring of landmasses further out, separated by a second body of water and a second ice ring. No confirmed evidence exists, but the possibility is consistent with the cosmological model.</p><span class="loc-pos">◎ Beyond outer boundary — unknown</span></div>
+          <div class="loc-card" style="--zc:#94a3b8"><span class="loc-num">#74</span><span class="loc-badge">Outer</span><h3>The Outer Waters</h3><p>If the flat plane extends beyond the ice wall, a second expanse of ocean would lie beyond the boundary — consistent with the biblical description of waters surrounding and enclosing the known world. Scriptural references to the "sea of glass" and the "ocean that encircles all" point to this structure.</p><span class="loc-pos">◎ Beyond outer boundary</span></div>
+          <div class="loc-card" style="--zc:#94a3b8"><span class="loc-num">#75</span><span class="loc-badge">Outer</span><h3>Terra Australis Incognita</h3><p>The "unknown southern land" appeared on European maps from the 1500s through the 1700s, drawn in considerable geographic detail before any confirmed southern hemisphere exploration. Cartographers from Ptolemy onward included it. Either it was drawn from pre-existing knowledge of what lies beyond the ice wall, or from exploration that was subsequently suppressed.</p><span class="loc-pos">◎ Beyond outer boundary — historical maps</span></div>
+        </div>
+      </section>
+
+      <!-- ═══ ZONE 8 — FLIGHT PATH ANOMALIES ═══════════════════════ -->
+      <section class="zone-section fade-in" data-zone="flight" id="flight">
+        <div class="zone-header">
+          <div class="zone-color-bar" style="background:#60a5fa"></div>
+          <div>
+            <h2>Flight Path Anomalies</h2>
+            <span class="zone-desc">Routes that are geometrically impossible on a globe — perfectly logical on the flat map</span>
+          </div>
+          <span class="zone-count">6 locations</span>
+        </div>
+        <div class="loc-grid">
+          <div class="loc-card" style="--zc:#60a5fa"><span class="loc-num">#76</span><span class="loc-badge">Flight Path</span><h3>Sydney &#8594; Santiago (Chile)</h3><p>On a globe the shortest great circle route crosses directly over Antarctica. No airline flies this route. All Sydney–Santiago flights detour via Los Angeles — adding 6+ hours. On the flat azimuthal map, the Los Angeles arc IS the geometrically shortest path between Australia (right arc) and South America (left arc). The detour makes no sense on a globe. It is mandatory on the flat map.</p><span class="loc-pos">◎ Right arc → Left arc · Trans-Pacific</span></div>
+          <div class="loc-card" style="--zc:#60a5fa"><span class="loc-num">#77</span><span class="loc-badge">Flight Path</span><h3>Cape Town &#8594; Sydney</h3><p>Globe shortest route: directly east across the southern ocean (16 hours). Actual flights: via Dubai, Singapore, or Perth — heading northeast first and adding hours. On the flat map, South Africa (right-centre) to Australia (far right) requires travelling outward along the right arc — which is exactly northeast on the flat map. The globe route simply does not exist in practice.</p><span class="loc-pos">◎ Right-centre → Right arc</span></div>
+          <div class="loc-card" style="--zc:#60a5fa"><span class="loc-num">#78</span><span class="loc-badge">Flight Path</span><h3>Johannesburg &#8594; Santiago</h3><p>Should be a direct southern hemisphere route (8–9 hours) on a globe. No direct flight exists. All routes go via São Paulo, Atlanta, or London — adding 6–10 hours. On the flat map, Joburg (right arc) to Santiago (left arc) requires travelling inward toward the North Pole centre then outward to the left arc — consistent with the São Paulo routing.</p><span class="loc-pos">◎ Right arc → Left arc · Via centre</span></div>
+          <div class="loc-card" style="--zc:#60a5fa"><span class="loc-num">#79</span><span class="loc-badge">Flight Path</span><h3>Auckland &#8594; Buenos Aires</h3><p>One of the rare trans-southern routes that does exist. Should take approximately 10–11 hours on a globe. Takes 10–12 hours in practice. This is one of the few routes where globe and flat map arc predictions agree closely — providing a calibration point. The route exists; it is not the trans-southern anomaly routes that expose the lie.</p><span class="loc-pos">◎ Far right → Lower left arc</span></div>
+          <div class="loc-card" style="--zc:#60a5fa"><span class="loc-num">#80</span><span class="loc-badge">Flight Path</span><h3>Tokyo &#8594; London (Polar Route)</h3><p>Takes approximately 12 hours flying northwest over Russia and Siberia. On the globe this requires flying over the top of the Earth. On the flat azimuthal map, Tokyo (right arc) to London (upper-centre) via the Russian upper arc is simply the shortest straight arc path — requiring no "over the top of a globe" explanation.</p><span class="loc-pos">◎ Right arc → Upper-centre · Via Russia</span></div>
+          <div class="loc-card" style="--zc:#60a5fa"><span class="loc-num">#81</span><span class="loc-badge">Flight Path</span><h3>Los Angeles &#8594; Dubai</h3><p>On a globe the shortest western route crosses the Atlantic and Europe. Actual flights head northeast over Alaska and Russia — the "wrong" direction on a globe. On the flat map, going upper-left (Alaska) then across the Russian upper arc to Dubai (right-centre arc) is the correct and shortest path. Every polar route confirms the flat map geometry.</p><span class="loc-pos">◎ Left arc → Upper arc → Right arc</span></div>
+        </div>
+      </section>
+
+      <!-- ═══ ZONE 9 — ANOMALOUS NATURAL FEATURES ═══════════════════ -->
+      <section class="zone-section fade-in" data-zone="anomalous" id="anomalous">
+        <div class="zone-header">
+          <div class="zone-color-bar" style="background:#fb923c"></div>
+          <div>
+            <h2>Anomalous Natural Features</h2>
+            <span class="zone-desc">Geographic features that defy globe explanation but confirm flat earth physics</span>
+          </div>
+          <span class="zone-count">11 locations</span>
+        </div>
+        <div class="loc-grid">
+          <div class="loc-card" style="--zc:#fb923c"><span class="loc-num">#82</span><span class="loc-badge">Anomalous</span><h3>The Sahara Desert</h3><p>The world's largest hot desert sits at the zone where the sun's local circuit passes directly overhead for the longest duration each year. Maximum solar energy at minimum atmospheric angle = maximum surface heating = desertification. No globe model orbital mechanics are required to explain the Sahara's position — only the flat earth sun circuit does so cleanly.</p><span class="loc-pos">◎ Right-centre arc · North Africa</span></div>
+          <div class="loc-card" style="--zc:#fb923c"><span class="loc-num">#83</span><span class="loc-badge">Anomalous</span><h3>The Himalayas / Tibetan Plateau</h3><p>The highest surface feature on the flat plane. In flat earth terms, this represents the maximum upwelling of the plane itself — closest any land gets to the firmament above. The Tibetan plateau sits at an average of 4,500m elevation. Buddhist and Hindu cosmological traditions from this region describe the most accurate pre-suppression models of the enclosed universe.</p><span class="loc-pos">◎ Right-upper arc · Central Asia</span></div>
+          <div class="loc-card" style="--zc:#fb923c"><span class="loc-num">#84</span><span class="loc-badge">Anomalous</span><h3>The Mariana Trench</h3><p>The deepest known point in the ocean — up to 11km below the surface in the Challenger Deep. On the flat plane this represents the deepest penetration into the "waters below" the disc — the primordial deep described in Genesis as the tehom. The trench's existence is consistent with a flat disc of significant thickness overlying a deeper oceanic basement.</p><span class="loc-pos">◎ Right arc · Western Pacific</span></div>
+          <div class="loc-card" style="--zc:#fb923c"><span class="loc-num">#85</span><span class="loc-badge">Anomalous</span><h3>The Great Barrier Reef</h3><p>The world's largest living structure — 2,300 km long — parallels the Australian coastline along the flat map's outer right arc. Its formation pattern and orientation are consistent with the radial geography of the flat azimuthal map. The reef has been dying at the arc where the sun's local circuit passes closest to the Australian coastline in summer.</p><span class="loc-pos">◎ Right arc · Queensland, Australia</span></div>
+          <div class="loc-card" style="--zc:#fb923c"><span class="loc-num">#86</span><span class="loc-badge">Anomalous</span><h3>The Bermuda Triangle</h3><p>Located between Miami, Bermuda, and Puerto Rico in the western Atlantic. Documented anomalous compass variation, navigation equipment failures, and the disappearance of aircraft and vessels over decades — with no wreckage found. Possibly a convergence zone for electromagnetic energy channelled through or reflected by the firmament dome above.</p><span class="loc-pos">◎ Left-centre arc · Western Atlantic</span></div>
+          <div class="loc-card" style="--zc:#fb923c"><span class="loc-num">#87</span><span class="loc-badge">Anomalous</span><h3>The Dragon's Triangle</h3><p>The Pacific equivalent of the Bermuda Triangle — off the coast of Japan in the Philippine Sea. Same anomalous electromagnetic phenomena, same pattern of unexplained vessel and aircraft disappearances. If both are firmament energy convergence points, their opposing positions on the flat map's right arc and left arc mirror the bilateral symmetry of the disc structure.</p><span class="loc-pos">◎ Right arc · Philippine Sea</span></div>
+          <div class="loc-card" style="--zc:#fb923c"><span class="loc-num">#88</span><span class="loc-badge">Anomalous</span><h3>The Congo Basin</h3><p>Africa's second great river system — home to the world's deepest river (the Congo reaches 230m depth). Its drainage pattern is fully consistent with flat-plane hydrology radiating toward the outer boundary. The Congo Basin also contains the world's second-largest tropical rainforest, whose oxygen production makes it a global life-support system.</p><span class="loc-pos">◎ Right-centre arc · Central Africa</span></div>
+          <div class="loc-card" style="--zc:#fb923c"><span class="loc-num">#89</span><span class="loc-badge">Anomalous</span><h3>The Great Victoria Desert, Australia</h3><p>An enormous flat, featureless desert in Australia's interior where Pine Gap — the classified CIA facility — is hidden. Its geographic isolation from population centres makes it ideal for operations requiring distance from civilian oversight. Laser ranging and interferometry experiments conducted from its flat surface consistently produce results inconsistent with globe curvature.</p><span class="loc-pos">◎ Right-lower arc · Central Australia</span></div>
+          <div class="loc-card" style="--zc:#fb923c"><span class="loc-num">#90</span><span class="loc-badge">Anomalous</span><h3>The Tibetan Plateau Ice Caps</h3><p>At 4,500m average elevation, Tibet's glaciers drain into all major Asian river systems — the Ganges, Brahmaputra, Yangtze, Mekong, Yellow River, and Irrawaddy. In flat earth terms, this is the elevated central dome of the Asian arc acting as the region's water tower, feeding the outward-flowing rivers of the continent.</p><span class="loc-pos">◎ Right-upper arc · Tibet</span></div>
+          <div class="loc-card" style="--zc:#fb923c"><span class="loc-num">#91</span><span class="loc-badge">Anomalous</span><h3>Death Valley, California</h3><p>The lowest, hottest, driest place in North America — 86m below sea level. Consistent with flat earth solar circuit physics: when the sun's local path passes directly overhead at midsummer in this zone, maximum surface temperatures occur. Death Valley holds the world record for highest reliably recorded air temperature (56.7°C, 1913).</p><span class="loc-pos">◎ Left-centre arc · California, USA</span></div>
+          <div class="loc-card" style="--zc:#fb923c"><span class="loc-num">#92</span><span class="loc-badge">Anomalous</span><h3>The Ganges Delta, Bangladesh</h3><p>One of the world's most fertile and most densely populated flat plains — perfectly level for hundreds of miles. The delta of the Ganges and Brahmaputra rivers confirms flat-plane surface hydrology: multiple rivers spreading across a flat plain to the sea with no curvature observable across hundreds of kilometres of water surface.</p><span class="loc-pos">◎ Right-centre arc · Bangladesh</span></div>
+        </div>
+      </section>
+
+      <!-- ═══ ZONE 10 — ANCIENT & OCCULT ════════════════════════════ -->
+      <section class="zone-section fade-in" data-zone="ancient" id="ancient">
+        <div class="zone-header">
+          <div class="zone-color-bar" style="background:#c084fc"></div>
+          <div>
+            <h2>Ancient &amp; Occult Significance</h2>
+            <span class="zone-desc">Places carrying suppressed historical, spiritual, or geometric significance on the flat map</span>
+          </div>
+          <span class="zone-count">12 locations</span>
+        </div>
+        <div class="loc-grid">
+          <div class="loc-card" style="--zc:#c084fc"><span class="loc-num">#93</span><span class="loc-badge">Ancient</span><h3>Giza / Cairo, Egypt</h3><p>The Great Pyramid complex sits within 1/60th of a degree of the geographic centre of all land mass on the flat plane — a placement geometrically impossible to achieve by accident, and impossible to know without a flat earth map. The Pyramid also encodes pi, phi, the speed of light in its dimensions, and the precession of the equinoxes in its orientation.</p><span class="loc-pos">◎ Right-centre arc · Egypt</span></div>
+          <div class="loc-card" style="--zc:#c084fc"><span class="loc-num">#94</span><span class="loc-badge">Ancient</span><h3>Jerusalem</h3><p>Three of the world's dominant religions converge on a single point. Its position on the flat map sits at the land gateway between the African, European, and Asian arcs — the functional centre of the inhabited world on the azimuthal projection. On the flat map, Jerusalem is visually central in a way that the globe model obscures.</p><span class="loc-pos">◎ Right-centre arc · Israel</span></div>
+          <div class="loc-card" style="--zc:#c084fc"><span class="loc-num">#95</span><span class="loc-badge">Ancient</span><h3>Vatican City, Rome</h3><p>The spiritual capital of the institution that suppressed the flat earth model and imposed heliocentrism through the Inquisition. The Vatican's LUCIFER infrared telescope (Vatican Advanced Technology Telescope) is named explicitly. Vatican astronomers have issued statements preparing Catholics for "extraterrestrial life" disclosure.</p><span class="loc-pos">◎ Upper-centre arc · Italy</span></div>
+          <div class="loc-card" style="--zc:#c084fc"><span class="loc-num">#96</span><span class="loc-badge">Ancient</span><h3>Washington D.C.</h3><p>The political capital of the control system. Its street layout — designed by Freemason Pierre Charles L'Enfant — forms an inverted pentagram pointing north toward the White House when viewed from above. The Washington Monument obelisk marks the centre. The Capitol building sits on Jenkins Hill, formerly called Rome — named by its developer.</p><span class="loc-pos">◎ Left-centre arc · USA</span></div>
+          <div class="loc-card" style="--zc:#c084fc"><span class="loc-num">#97</span><span class="loc-badge">Ancient</span><h3>London — The City of London</h3><p>The financial capital — a one-square-mile independent state within Greater London, not subject to UK law, with its own police force and its own Lord Mayor. Home of the Bank of England, the Temple Bar (Templar gateway), and the financial mechanisms of the central banking cabal. The three City obelisks mark its territory.</p><span class="loc-pos">◎ Upper-centre arc · England</span></div>
+          <div class="loc-card" style="--zc:#c084fc"><span class="loc-num">#98</span><span class="loc-badge">Ancient</span><h3>Stonehenge, England</h3><p>Megalithic monument with precise astronomical alignments — tracking the sun's local circuit on the flat plane, not heliocentric orbital mechanics. The heel stone aligns with midsummer sunrise on the sun's northern circuit track. Built to a precision requiring knowledge of the actual path of the local sun above the flat disc.</p><span class="loc-pos">◎ Upper-centre arc · Wiltshire, England</span></div>
+          <div class="loc-card" style="--zc:#c084fc"><span class="loc-num">#99</span><span class="loc-badge">Ancient</span><h3>Teotihuac&aacute;n, Mexico</h3><p>The "City of the Gods" — whose pyramidal layout mirrors the Orion constellation, whose proportions encode the same mathematical constants as Giza, and whose original builders are unknown. The Avenue of the Dead aligns with the setting sun at specific times. Its construction predates the Aztec civilisation by centuries.</p><span class="loc-pos">◎ Left-centre arc · Mexico</span></div>
+          <div class="loc-card" style="--zc:#c084fc"><span class="loc-num">#100</span><span class="loc-badge">Ancient</span><h3>Angkor Wat, Cambodia</h3><p>The world's largest religious monument. Built with the same Fibonacci-encoded proportions as Giza and Teotihuac&aacute;n. Faces precisely east — tracking the flat plane sun's equatorial circuit path at the equinoxes. The temple complex encodes the Hindu cosmological age cycles in its architectural dimensions.</p><span class="loc-pos">◎ Right arc · Cambodia</span></div>
+          <div class="loc-card" style="--zc:#c084fc"><span class="loc-num">#101</span><span class="loc-badge">Ancient</span><h3>Easter Island, Pacific</h3><p>The most remote inhabited island on the flat map — thousands of miles from any continent. The 887 Moai statues face inland, watching over the land. Their builders — the Rapa Nui — were allegedly decimated by European contact. The island's position at the extreme outer arc of the Pacific made it a natural observation and ceremony site for monitoring the sun's circuit at that longitude.</p><span class="loc-pos">◎ Far left-lower arc · Pacific</span></div>
+          <div class="loc-card" style="--zc:#c084fc"><span class="loc-num">#102</span><span class="loc-badge">Ancient</span><h3>G&ouml;bekli Tepe, Turkey</h3><p>The world's oldest known megalithic structure at 12,000+ years — predating the standard archaeological timeline by 6,000 years and pushing back evidence of organised religion and astronomy before any known civilisation. Deliberately buried by its own builders. Its astronomical alignments track the flat plane sun and star circuits with precision matching modern instrumentation.</p><span class="loc-pos">◎ Right-upper arc · Southeast Turkey</span></div>
+          <div class="loc-card" style="--zc:#c084fc"><span class="loc-num">#103</span><span class="loc-badge">Ancient</span><h3>The Nazca Lines, Peru</h3><p>Enormous geoglyphs visible only from altitude, on the perfectly flat Nazca plateau of southern Peru. Their function remains officially unexplained. Flat earth interpretations: astronomical calendar markings for the local sun's circuit, landing indicators for craft operating above the flat plane, or communication patterns for entities operating at altitude above the firmament boundary.</p><span class="loc-pos">◎ Lower-left arc · Peru</span></div>
+          <div class="loc-card" style="--zc:#c084fc"><span class="loc-num">#104</span><span class="loc-badge">Ancient</span><h3>Mecca / The Kaaba, Saudi Arabia</h3><p>Every Muslim on Earth faces this single point when praying — regardless of location. Over 1.8 billion people orient toward a single spot. On a globe this would require prayer directions curving around a spherical surface. On the flat azimuthal map, all prayer directions from all locations converge on a single point geometrically — exactly as Islam requires.</p><span class="loc-pos">◎ Right-centre arc · Saudi Arabia</span></div>
+        </div>
+      </section>
+
+      <div class="back-bar fade-in">
+        <a href="../../flat-earth.html">← Return to Flat Earth Chapter</a>
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+        <a href="../../index.html">← Truth Archive Home</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.3em;color:var(--text-muted);text-align:center;">
+        ◆ THE TRUTH ARCHIVE ◆ FLAT EARTH MAP ANALYSIS ◆ 104 LOCATIONS CATALOGUED ◆
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../js/app.js"></script>
+  <script>
+    /**
+     * Zone filter — show/hide location sections by data-zone attribute.
+     * @param {string} zone - Zone key or 'all'
+     */
+    function filterZone(zone) {
+      document.querySelectorAll('.zone-section').forEach(function(s) {
+        s.style.display = (zone === 'all' || s.dataset.zone === zone) ? '' : 'none';
+      });
+      document.querySelectorAll('.filter-btn').forEach(function(b) {
+        b.classList.toggle('active', b.dataset.filter === zone);
+      });
+    }
+
+    document.querySelectorAll('.filter-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        filterZone(this.dataset.filter);
+      });
+    });
+  </script>
+</body>
+</html>

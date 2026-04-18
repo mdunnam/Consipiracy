@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Confirmed — The Truth Archive</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .success-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      background:
+        radial-gradient(ellipse at center, rgba(201,162,39,0.08) 0%, transparent 65%),
+        var(--bg-primary);
+    }
+    .success-icon {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 1.5rem;
+      animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+    }
+    @keyframes pop {
+      from { transform: scale(0.5); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+    .success-page h1 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      margin-bottom: 1rem;
+    }
+    .success-page p {
+      color: var(--text-secondary);
+      max-width: 48ch;
+      margin: 0 auto 1rem;
+      line-height: 1.8;
+    }
+    .verifying {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      color: var(--text-muted);
+      margin: 1.5rem 0;
+      min-height: 1.5rem;
+    }
+    .error-box {
+      background: rgba(139,20,20,0.15);
+      border: 1px solid var(--border-red);
+      border-radius: var(--radius);
+      padding: 1rem 1.5rem;
+      max-width: 480px;
+      margin: 1.5rem auto;
+      font-size: 0.9rem;
+      color: var(--red-bright);
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-logo"><span class="eye-symbol">👁</span> Truth Archive</a>
+    <button class="nav-toggle" aria-expanded="false" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="ebook.html" class="ebook-link">📖 eBook</a></li>
+      <li><a href="index.html">← Home</a></li>
+    </ul>
+  </nav>
+
+  <section class="success-page">
+    <span class="success-icon" id="icon">⏳</span>
+    <h1 id="title">Verifying Payment...</h1>
+    <p id="message">Please wait while we confirm your purchase.</p>
+    <p class="verifying" id="verifying-text">CONTACTING STRIPE SERVERS...</p>
+    <div class="error-box" id="error-box"></div>
+
+    <div id="actions" style="display:none; flex-direction:column; align-items:center; gap:1rem; margin-top:2rem;">
+      <a href="ebook.html" class="btn btn-gold" style="font-size:1rem; padding:1rem 2.5rem;">
+        📖 Open the Full eBook
+      </a>
+      <a href="index.html" class="btn btn-outline">← Return to Archive</a>
+    </div>
+  </section>
+
+  <script>
+    /**
+     * Reads the Stripe session_id from the URL, calls the server to verify
+     * the payment, and if valid stores the unlock token in localStorage
+     * so ebook.html knows to unlock the content.
+     */
+    (async function verifyPayment() {
+      const params    = new URLSearchParams(window.location.search);
+      const sessionId = params.get('session_id');
+
+      const icon       = document.getElementById('icon');
+      const title      = document.getElementById('title');
+      const message    = document.getElementById('message');
+      const verifying  = document.getElementById('verifying-text');
+      const actions    = document.getElementById('actions');
+      const errorBox   = document.getElementById('error-box');
+
+      if (!sessionId) {
+        showError('No session ID found in URL. If you completed payment, please contact support.');
+        return;
+      }
+
+      // Validate session ID format client-side before sending to server
+      if (!/^cs_[a-zA-Z0-9_]+$/.test(sessionId)) {
+        showError('Invalid session ID format.');
+        return;
+      }
+
+      try {
+        const res  = await fetch(`/verify-session/${encodeURIComponent(sessionId)}`);
+        const data = await res.json();
+
+        if (data.valid) {
+          // Store the unlock token in localStorage
+          localStorage.setItem('ta_unlock', 'full_access');
+
+          // Update UI to success state
+          icon.textContent      = '✅';
+          title.textContent     = 'Payment Confirmed — You\'re In.';
+          message.textContent   = 'Your access has been unlocked. Click below to open the full archive.';
+          verifying.textContent = 'ACCESS GRANTED — LEVEL OMEGA CLEARANCE';
+          verifying.style.color = 'var(--gold)';
+          actions.style.display = 'flex';
+
+        } else {
+          showError('Payment could not be verified. If you were charged, please contact support with your session ID: ' + sessionId);
+        }
+
+      } catch (err) {
+        showError('Could not reach the verification server. Please try refreshing the page, or contact support.');
+        console.error('Verification fetch failed:', err);
+      }
+
+      /**
+       * Displays an error state with the given message.
+       * @param {string} msg - Error message to display.
+       */
+      function showError(msg) {
+        icon.textContent      = '❌';
+        title.textContent     = 'Verification Failed';
+        message.textContent   = 'Something went wrong.';
+        verifying.style.display = 'none';
+        errorBox.textContent  = msg;
+        errorBox.style.display = 'block';
+      }
+    })();
+  </script>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
