@@ -269,6 +269,7 @@ const COLORS = {
 let markers  = JSON.parse(localStorage.getItem('fe_markers') || '[]');
 let pendingX = null;
 let pendingY = null;
+let moveIdx  = null;  // index of marker being repositioned
 
 const pinLayer = document.getElementById('pin-layer');
 const xhair    = document.getElementById('xhair');
@@ -295,10 +296,21 @@ pinLayer.addEventListener('mouseleave', () => {
   xhair.style.display = 'none';
 });
 
-// ── Click: drop or move pending pin ───────────────────────────────────────
+// ── Click: drop/move pending pin OR reposition existing marker ───────────
 pinLayer.addEventListener('click', e => {
   const x = parseFloat((e.offsetX / pinLayer.offsetWidth  * 100).toFixed(3));
   const y = parseFloat((e.offsetY / pinLayer.offsetHeight * 100).toFixed(3));
+
+  // MOVE MODE: reposition an existing saved marker
+  if (moveIdx !== null) {
+    markers[moveIdx].x = x;
+    markers[moveIdx].y = y;
+    persist();
+    cancelMove();
+    render();
+    return;
+  }
+
   pendingX = x;
   pendingY = y;
 
@@ -345,6 +357,7 @@ function saveMarker() {
 
 // ── Clear pending pin ──────────────────────────────────────────────────────
 function clearPending() {
+  if (moveIdx !== null) { cancelMove(); return; }
   pendingX = pendingY = null;
   document.getElementById('pending-pin')?.remove();
   document.getElementById('fcoords').value = '';
@@ -469,6 +482,35 @@ function drawLabel(m, idx) {
   pinLayer.appendChild(svg);
 }
 
+// ── Move existing marker ─────────────────────────────────────────────────────
+function startMove(i) {
+  // Cancel any pending new-marker placement
+  clearPending();
+  moveIdx = i;
+  // Show banner
+  const status = document.getElementById('pending-status');
+  status.textContent = `MOVING: "${markers[i].name}" — click map to set new position. Press CANCEL to abort.`;
+  status.className = 'active';
+  document.getElementById('save-btn').disabled  = true;
+  document.getElementById('clear-btn').disabled = false;
+  document.getElementById('clear-btn').textContent = '✕ CANCEL MOVE';
+  // Highlight the pin being moved
+  render();
+  // Flash the pin
+  const pins = pinLayer.querySelectorAll('.pin:not(.pending)');
+  if (pins[i]) pins[i].style.boxShadow = '0 0 0 3px #4ade80, 0 0 12px #4ade80';
+}
+
+function cancelMove() {
+  moveIdx = null;
+  document.getElementById('clear-btn').textContent = '✕ CLEAR PIN';
+  document.getElementById('clear-btn').disabled = true;
+  const status = document.getElementById('pending-status');
+  status.textContent = 'Click anywhere on the map to drop a pin. Click again to move it. Fill in details below then hit SAVE.';
+  status.className = '';
+  render();
+}
+
 // ── Render saved pins + list ───────────────────────────────────────────────
 function render() {
   // Remove saved pins + labels (keep pending)
@@ -480,6 +522,7 @@ function render() {
     d.style.left       = m.x + '%';
     d.style.top        = m.y + '%';
     d.style.background = COLORS[m.cat] || '#c9a227';
+    if (i === moveIdx) d.style.boxShadow = '0 0 0 3px #4ade80, 0 0 14px #4ade80aa';
     pinLayer.appendChild(d);
 
     if (m.showLabel && m.name) {
@@ -502,6 +545,7 @@ function render() {
       <div style="margin-top:0.3rem;display:flex;gap:0.3rem;flex-wrap:wrap;">
         <button class="btn" style="font-size:0.56rem;padding:0.15rem 0.4rem;" onclick="toggleLabel(${i})">${m.showLabel ? 'HIDE LABEL' : 'SHOW LABEL'}</button>
         <button class="btn" style="font-size:0.56rem;padding:0.15rem 0.4rem;color:#38bdf8;border-color:rgba(56,189,248,0.4);" onclick="editLabel(${i})">EDIT LABEL</button>
+        <button class="btn" style="font-size:0.56rem;padding:0.15rem 0.4rem;color:#4ade80;border-color:rgba(74,222,128,0.4);" onclick="startMove(${i})">MOVE</button>
         <button class="btn red" style="font-size:0.56rem;padding:0.15rem 0.4rem;" onclick="del(${i})">DELETE</button>
       </div>`;
     list.appendChild(el);
