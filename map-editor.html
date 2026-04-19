@@ -394,85 +394,79 @@ function render() {
 
     if (m.showLabel && m.name) {
       const style  = m.labelStyle  || 'flat';
-      const radius = m.labelRadius || 120;
       const fsize  = m.labelSize   || 11;
       const col    = COLORS[m.cat] || '#ffffff';
 
-      // Convert % position to px for SVG origin
+      // Convert % position to px (recalculated every render so zoom works)
       const px = m.x / 100 * pinLayer.offsetWidth;
       const py = m.y / 100 * pinLayer.offsetHeight;
 
-      // Build SVG
-      const svgNS = 'http://www.w3.org/2000/svg';
-      const svg = document.createElementNS(svgNS, 'svg');
-      svg.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:11;';
-      svg.setAttribute('id', 'svg-label-' + i);
+      // Estimate text length generously so no letters clip
+      const letterSpacing = 2.5;
+      const textLen = m.name.length * (fsize * 0.68) + (m.name.length - 1) * letterSpacing;
+      const pathLen = textLen * 1.5; // 50% extra padding on each side
+      const half    = pathLen / 2;
 
-      const defs = document.createElementNS(svgNS, 'defs');
-      const pathEl = document.createElementNS(svgNS, 'path');
-      const pathId = 'lp-' + i;
-      pathEl.setAttribute('id', pathId);
+      // Radius must be >= half-chord or SVG silently drops the arc
+      const r = Math.max(m.labelRadius || 120, half + 20);
 
-      // Build arc path based on style
+      // Build arc path
       let d;
-      const r = radius;
-      const textLen = m.name.length * fsize * 0.72; // rough estimate
-      const half = textLen / 2;
-
-      if (style === 'flat') {
-        d = `M ${px - half} ${py - 14} h ${textLen}`;
-      } else if (style === 'arc-up') {
-        // Arc curving upward (text sits on top of arc)
-        const sx = px - half, sy = py - 14;
-        const ex = px + half, ey = py - 14;
-        d = `M ${sx} ${sy} A ${r} ${r} 0 0 1 ${ex} ${ey}`;
+      if (style === 'arc-up') {
+        // sweep=1 clockwise: arc bulges upward in screen coords
+        d = `M ${px - half} ${py - 14} A ${r} ${r} 0 0 1 ${px + half} ${py - 14}`;
       } else if (style === 'arc-down') {
-        const sx = px - half, sy = py - 14;
-        const ex = px + half, ey = py - 14;
-        d = `M ${sx} ${sy} A ${r} ${r} 0 0 0 ${ex} ${ey}`;
+        // sweep=0 counter-clockwise: arc dips downward
+        d = `M ${px - half} ${py + 4} A ${r} ${r} 0 0 0 ${px + half} ${py + 4}`;
       } else if (style === 'arc-left') {
-        // Vertical arc, text follows left side
-        const sx = px - 14, sy = py - half;
-        const ex = px - 14, ey = py + half;
-        d = `M ${sx} ${sy} A ${r} ${r} 0 0 0 ${ex} ${ey}`;
+        d = `M ${px - 14} ${py - half} A ${r} ${r} 0 0 0 ${px - 14} ${py + half}`;
       } else if (style === 'arc-right') {
-        const sx = px - 14, sy = py - half;
-        const ex = px - 14, ey = py + half;
-        d = `M ${sx} ${sy} A ${r} ${r} 0 0 1 ${ex} ${ey}`;
+        d = `M ${px - 14} ${py - half} A ${r} ${r} 0 0 1 ${px - 14} ${py + half}`;
+      } else {
+        // flat
+        d = `M ${px - half} ${py - 18} L ${px + half} ${py - 18}`;
       }
 
+      // Build SVG — one per marker, covers full pin-layer
+      const svgNS = 'http://www.w3.org/2000/svg';
+      const svg = document.createElementNS(svgNS, 'svg');
+      svg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:11;';
+      svg.setAttribute('id', 'svg-label-' + i);
+
+      const defs   = document.createElementNS(svgNS, 'defs');
+      const pathEl = document.createElementNS(svgNS, 'path');
+      const pathId = 'lp' + Date.now() + i;
+      pathEl.setAttribute('id', pathId);
       pathEl.setAttribute('d', d);
       defs.appendChild(pathEl);
       svg.appendChild(defs);
 
-      // Text shadow (stroke trick)
-      const mkText = (stroke, strokeW) => {
-        const t = document.createElementNS(svgNS, 'text');
-        t.setAttribute('font-family', 'Cinzel, Georgia, serif');
-        t.setAttribute('font-size', fsize);
-        t.setAttribute('font-weight', '700');
-        t.setAttribute('letter-spacing', '2.5');
-        t.setAttribute('text-anchor', 'middle');
+      const mkText = (isOutline) => {
+        const t  = document.createElementNS(svgNS, 'text');
         const tp = document.createElementNS(svgNS, 'textPath');
         tp.setAttribute('href', '#' + pathId);
         tp.setAttribute('startOffset', '50%');
         tp.textContent = m.name.toUpperCase();
-        t.appendChild(tp);
-        if (stroke) {
-          t.setAttribute('stroke', '#000');
-          t.setAttribute('stroke-width', strokeW || 3);
+        t.setAttribute('font-family', 'Cinzel, Georgia, serif');
+        t.setAttribute('font-size', String(fsize));
+        t.setAttribute('font-weight', '700');
+        t.setAttribute('letter-spacing', String(letterSpacing));
+        t.setAttribute('text-anchor', 'middle');
+        if (isOutline) {
+          t.setAttribute('stroke', 'rgba(0,0,0,0.95)');
+          t.setAttribute('stroke-width', '3.5');
           t.setAttribute('stroke-linejoin', 'round');
           t.setAttribute('fill', 'none');
-          t.setAttribute('paint-order', 'stroke');
         } else {
           t.setAttribute('fill', '#ffffff');
-          t.setAttribute('filter', `drop-shadow(0 0 4px ${col})`);
+          t.style.filter = `drop-shadow(0 0 5px ${col})`;
         }
+        t.appendChild(tp);
         return t;
       };
 
-      svg.appendChild(mkText(true, 4));  // shadow/outline
-      svg.appendChild(mkText(false));    // fill
+      svg.appendChild(mkText(true));
+      svg.appendChild(mkText(false));
       pinLayer.appendChild(svg);
     }
   });
@@ -580,6 +574,8 @@ function applyZoom() {
   const pct = ZOOM_STEPS[zoomIdx];
   mapImg.style.width = (naturalW * pct / 100) + 'px';
   document.getElementById('zoom-display').textContent = pct + '%';
+  // Re-render labels so px positions match new zoom
+  render();
 }
 
 function zoom(dir) {
