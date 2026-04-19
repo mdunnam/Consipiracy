@@ -121,6 +121,7 @@
       5. Click <b>EXPORT JSON</b> when done<br>
       6. Send the JSON to Axis to activate the live map
     </div>
+    <button class="btn" style="margin-bottom:1rem;font-size:0.62rem;" onclick="form.style.display='none';pendingX=null;pendingY=null;document.getElementById('pending-pin')?.remove();">✕ CLOSE FORM / RESET STATE</button>
 
     <div class="marker-form" id="marker-form">
       <h3>NEW MARKER — <span id="form-coords"></span></h3>
@@ -215,7 +216,9 @@ overlay.addEventListener('mouseleave', () => {
 });
 
 overlay.addEventListener('click', e => {
-  // Ignore clicks on pins themselves
+  // Ignore if form is already open
+  if (form.style.display === 'block') return;
+  // Ignore clicks on pins
   if (e.target.classList.contains('map-pin')) return;
   const [x, y] = getCoords(e);
   pendingX = parseFloat(x);
@@ -345,7 +348,10 @@ function clearAll() {
   renderList();
 }
 
-// Init
+// Init — always start with form closed
+form.style.display = 'none';
+const pendingOld = document.getElementById('pending-pin');
+if (pendingOld) pendingOld.remove();
 renderPins();
 renderList();
 </script>
