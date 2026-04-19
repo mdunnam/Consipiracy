@@ -8,77 +8,66 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #050505; color: #d8d8d8; font-family: 'Share Tech Mono', monospace; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
 
-    #topbar {
-      background: #0a0a0a; border-bottom: 1px solid #1a1a1a;
-      padding: 0.6rem 1rem; display: flex; align-items: center; gap: 1rem; flex-shrink: 0;
-    }
+    #topbar { background: #0a0a0a; border-bottom: 1px solid #1a1a1a; padding: 0.6rem 1rem; display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
     #topbar h1 { color: #c9a227; font-size: 0.85rem; letter-spacing: 0.2em; flex: 1; }
-    .tbtn {
-      background: transparent; border: 1px solid rgba(201,162,39,0.4); color: #c9a227;
-      font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em;
-      padding: 0.35rem 0.7rem; cursor: pointer;
-    }
+    .tbtn { background: transparent; border: 1px solid rgba(201,162,39,0.4); color: #c9a227; font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; padding: 0.35rem 0.7rem; cursor: pointer; }
     .tbtn:hover { background: rgba(201,162,39,0.1); }
     .tbtn.red { border-color: rgba(200,50,50,0.4); color: #cc4444; }
     .tbtn.red:hover { background: rgba(200,50,50,0.1); }
-    #status { font-size: 0.65rem; color: #4a4a4a; min-width: 120px; text-align: right; }
+    #status { font-size: 0.65rem; color: #4a4a4a; }
 
     #main { display: flex; flex: 1; overflow: hidden; }
 
-    /* MAP SIDE */
-    #map-scroll { flex: 1; overflow: auto; background: #000; position: relative; }
-    #map-wrap {
-      position: relative; display: inline-block; line-height: 0;
-      min-width: 100%; min-height: 100%;
-    }
-    #map-img { display: block; max-width: none; pointer-events: none; user-select: none; }
-    #pin-layer {
-      position: absolute; inset: 0; cursor: crosshair;
-    }
-    .pin {
-      position: absolute; width: 14px; height: 14px; border-radius: 50%;
-      transform: translate(-50%, -50%); pointer-events: none;
-      border: 2px solid rgba(255,255,255,0.55); z-index: 5;
-    }
-    .pin.pending { background: #fff !important; border-color: #c9a227 !important; animation: blink 0.6s ease-in-out infinite alternate; }
-    .pin.selected { box-shadow: 0 0 0 3px rgba(255,255,255,0.4); transform: translate(-50%,-50%) scale(1.5); }
-    @keyframes blink { from { opacity: 1; } to { opacity: 0.4; } }
-    #xhair {
-      position: absolute; pointer-events: none; display: none; z-index: 10;
-      transform: translate(-50%, -50%);
-    }
-    #xhair::before { content:''; position:absolute; width:1px; height:18px; left:8px; top:0; background:#c9a227; }
-    #xhair::after  { content:''; position:absolute; width:18px; height:1px; left:0; top:8px; background:#c9a227; }
-    #coords { position: fixed; bottom: 8px; left: 8px; background: rgba(0,0,0,0.9); padding: 3px 8px; font-size: 0.62rem; color: #c9a227; pointer-events: none; z-index: 9999; border: 1px solid #1a1a1a; }
+    /* MAP: scroll container */
+    #map-scroll { flex: 1; overflow: auto; background: #111; cursor: crosshair; }
+
+    /* map-wrap is EXACTLY the image size — no min-width/height */
+    #map-wrap { position: relative; display: inline-block; line-height: 0; }
+
+    /* image fills wrap exactly */
+    #map-img { display: block; width: 900px; height: auto; user-select: none; pointer-events: none; }
+
+    /* pin-layer covers image exactly */
+    #pin-layer { position: absolute; inset: 0; cursor: crosshair; }
+
+    /* crosshair lives inside pin-layer */
+    .xhair { position: absolute; pointer-events: none; display: none; z-index: 20; transform: translate(-50%,-50%); }
+    .xhair::before { content:''; position:absolute; width:1px; height:20px; left:9px; top:0; background:#c9a227; opacity:0.8; }
+    .xhair::after  { content:''; position:absolute; width:20px; height:1px; left:0; top:9px; background:#c9a227; opacity:0.8; }
+
+    /* pins live inside pin-layer — pointer-events:none so they NEVER block clicks */
+    .pin { position: absolute; width: 13px; height: 13px; border-radius: 50%; transform: translate(-50%,-50%); pointer-events: none; border: 2px solid rgba(255,255,255,0.5); z-index: 10; }
+    .pin.pending { background: #fff !important; border-color: #c9a227 !important; animation: blink 0.5s ease-in-out infinite alternate; }
+    @keyframes blink { to { opacity: 0.35; } }
+
+    #coords { position: fixed; bottom: 8px; left: 8px; background: rgba(0,0,0,0.92); padding: 3px 10px; font-size: 0.62rem; color: #c9a227; pointer-events: none; z-index: 9999; border: 1px solid #1a1a1a; }
 
     /* SIDEBAR */
-    #sidebar { width: 320px; flex-shrink: 0; background: #0a0a0a; border-left: 1px solid #1a1a1a; display: flex; flex-direction: column; overflow: hidden; }
-    #form-panel { padding: 1rem; border-bottom: 1px solid #1a1a1a; display: none; }
+    #sidebar { width: 310px; flex-shrink: 0; background: #0a0a0a; border-left: 1px solid #1a1a1a; display: flex; flex-direction: column; overflow: hidden; }
+
+    #form-panel { padding: 1rem; border-bottom: 1px solid #1a1a1a; }
     #form-panel h3 { color: #c9a227; font-size: 0.7rem; letter-spacing: 0.12em; margin-bottom: 0.8rem; }
     .row { margin-bottom: 0.55rem; }
-    .row label { display: block; font-size: 0.6rem; color: #4a4a4a; margin-bottom: 0.2rem; letter-spacing: 0.08em; text-transform: uppercase; }
-    .row input, .row textarea, .row select {
-      width: 100%; background: #050505; border: 1px solid #222; color: #d8d8d8;
-      padding: 0.4rem 0.55rem; font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; outline: none;
-    }
-    .row textarea { height: 55px; resize: vertical; }
-    .btn { background: transparent; border: 1px solid rgba(201,162,39,0.4); color: #c9a227; font-family: 'Share Tech Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; padding: 0.35rem 0.7rem; cursor: pointer; margin-right: 0.3rem; margin-top: 0.3rem; }
+    .row label { display: block; font-size: 0.6rem; color: #4a4a4a; margin-bottom: 0.18rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .row input, .row textarea, .row select { width: 100%; background: #050505; border: 1px solid #222; color: #d8d8d8; padding: 0.38rem 0.55rem; font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; outline: none; }
+    .row textarea { height: 52px; resize: vertical; }
+    .btn { background: transparent; border: 1px solid rgba(201,162,39,0.4); color: #c9a227; font-family: 'Share Tech Mono', monospace; font-size: 0.62rem; padding: 0.32rem 0.7rem; cursor: pointer; margin-right: 0.3rem; margin-top: 0.3rem; }
     .btn:hover { background: rgba(201,162,39,0.1); }
     .btn.red { border-color: rgba(200,50,50,0.4); color: #cc4444; }
     .btn.red:hover { background: rgba(200,50,50,0.1); }
 
+    #idle-msg { font-size: 0.65rem; color: #2a2a2a; line-height: 1.8; padding: 1rem; }
+    #idle-msg b { color: #4a4a4a; }
+
     #list-panel { flex: 1; overflow-y: auto; padding: 0.8rem; }
-    #list-panel h4 { font-size: 0.65rem; color: #3a3a3a; letter-spacing: 0.1em; margin-bottom: 0.6rem; }
-    .mitem { background: #111; border: 1px solid #1c1c1c; padding: 0.6rem; margin-bottom: 0.35rem; }
-    .mitem .mname { font-size: 0.75rem; margin-bottom: 0.15rem; }
-    .mitem .mmeta { font-size: 0.58rem; color: #3a3a3a; letter-spacing: 0.05em; }
-    .mitem .mbtns { margin-top: 0.35rem; }
+    #list-head { font-size: 0.62rem; color: #3a3a3a; letter-spacing: 0.1em; margin-bottom: 0.6rem; display: none; }
+    .mitem { background: #111; border: 1px solid #1c1c1c; padding: 0.55rem; margin-bottom: 0.3rem; }
+    .mname { font-size: 0.72rem; margin-bottom: 0.12rem; }
+    .mmeta { font-size: 0.58rem; color: #333; }
 
     #export-panel { padding: 0.8rem; border-top: 1px solid #1a1a1a; flex-shrink: 0; }
-    #export-panel h4 { font-size: 0.65rem; color: #4a7a4a; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
-    #json-out { font-size: 0.58rem; color: #3a3a3a; white-space: pre; overflow: auto; max-height: 100px; margin-top: 0.5rem; background: #050505; padding: 0.4rem; border: 1px solid #1a1a1a; }
-    #hint { font-size: 0.62rem; color: #2a2a2a; line-height: 1.7; margin-bottom: 0.6rem; }
-    #hint b { color: #5a5a5a; }
+    #export-panel h4 { font-size: 0.62rem; color: #4a7a4a; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+    #json-out { font-size: 0.56rem; color: #3a3a3a; white-space: pre; overflow: auto; max-height: 80px; margin-top: 0.5rem; background: #050505; padding: 0.35rem; border: 1px solid #1a1a1a; }
   </style>
 </head>
 <body>
@@ -86,47 +75,53 @@
 <div id="topbar">
   <h1>⊕ FLAT EARTH MAP — MARKER EDITOR</h1>
   <span id="status">0 markers</span>
-  <button class="tbtn" onclick="closeForm()">✕ CLOSE FORM</button>
+  <button class="tbtn" onclick="closeForm()">✕ CANCEL / CLOSE FORM</button>
   <button class="tbtn red" onclick="clearAll()">CLEAR ALL</button>
 </div>
 
 <div id="main">
+
   <div id="map-scroll">
     <div id="map-wrap">
-      <img src="images/flatearthmap.jpg" id="map-img" alt="Flat Earth Map" />
-      <div id="pin-layer"></div>
-      <div id="xhair"></div>
+      <img id="map-img" src="images/flatearthmap.jpg" alt="Flat Earth Map" />
+      <div id="pin-layer">
+        <div class="xhair" id="xhair"></div>
+      </div>
     </div>
   </div>
 
   <div id="sidebar">
+
     <div id="form-panel">
-      <h3>NEW MARKER — <span id="fcoords"></span></h3>
-      <div class="row"><label>Name</label><input id="fname" type="text" placeholder="e.g. North Pole" /></div>
-      <div class="row"><label>Description (hover text)</label><textarea id="fdesc" placeholder="Short description shown on hover"></textarea></div>
-      <div class="row">
-        <label>Category</label>
-        <select id="fcat">
-          <option value="structural">Structural Ring</option>
-          <option value="landmass">Landmass</option>
-          <option value="evidence">Evidence Site</option>
-          <option value="suppressed">Suppressed / Restricted</option>
-          <option value="ancient">Ancient / Sacred</option>
-          <option value="anomalous">Anomalous Zone</option>
-          <option value="boundary">Boundary</option>
-          <option value="ocean">Ocean</option>
-        </select>
-      </div>
-      <div class="row"><label>URL (page it links to)</label><input id="furl" type="text" placeholder="topics/flat-earth/north-pole-center.html" /></div>
-      <div>
-        <button class="btn" onclick="saveMarker()">✓ SAVE</button>
-        <button class="btn red" onclick="closeForm()">✕ CANCEL</button>
+      <!-- shows "click map" hint when no marker pending, shows form when pending -->
+      <div id="idle-msg"><b>CLICK THE MAP</b> to place a marker pin, then fill in the details here.</div>
+      <div id="marker-fields" style="display:none;">
+        <h3>NEW MARKER &mdash; <span id="fcoords"></span></h3>
+        <div class="row"><label>Name</label><input id="fname" type="text" placeholder="e.g. North Pole" /></div>
+        <div class="row"><label>Description (hover text)</label><textarea id="fdesc" placeholder="Short description shown on hover…"></textarea></div>
+        <div class="row">
+          <label>Category</label>
+          <select id="fcat">
+            <option value="structural">Structural Ring</option>
+            <option value="landmass">Landmass</option>
+            <option value="evidence">Evidence Site</option>
+            <option value="suppressed">Suppressed / Restricted</option>
+            <option value="ancient">Ancient / Sacred</option>
+            <option value="anomalous">Anomalous Zone</option>
+            <option value="boundary">Boundary</option>
+            <option value="ocean">Ocean</option>
+          </select>
+        </div>
+        <div class="row"><label>URL (page it links to)</label><input id="furl" type="text" placeholder="topics/flat-earth/north-pole-center.html" /></div>
+        <div>
+          <button class="btn" onclick="saveMarker()">✓ SAVE MARKER</button>
+          <button class="btn red" onclick="closeForm()">✕ CANCEL</button>
+        </div>
       </div>
     </div>
 
     <div id="list-panel">
-      <p id="hint"><b>CLICK THE MAP</b> to place a marker.<br>Fill in the form, click SAVE.<br>Use EXPORT when done.</p>
-      <h4 id="list-head" style="display:none"></h4>
+      <div id="list-head"></div>
       <div id="mlist"></div>
     </div>
 
@@ -135,138 +130,181 @@
       <button class="btn" onclick="doExport()">COPY JSON TO CLIPBOARD</button>
       <pre id="json-out"></pre>
     </div>
+
   </div>
 </div>
 
-<div id="coords">x: —  y: —</div>
+<div id="coords">x: —&nbsp;&nbsp;y: —</div>
 
 <script>
 const COLORS = {
   structural:'#c9a227', landmass:'#fbbf24', evidence:'#4ade80',
   suppressed:'#f87171', ancient:'#c084fc', anomalous:'#fb923c',
-  boundary:'#94a3b8',   ocean:'#38bdf8'
+  boundary:'#94a3b8', ocean:'#38bdf8'
 };
 
-let data = JSON.parse(localStorage.getItem('fe_markers') || '[]');
-let pX = null, pY = null;
+// ── State ──
+let markers = JSON.parse(localStorage.getItem('fe_markers') || '[]');
+let pendingX = null, pendingY = null;
+let formOpen = false;   // BOOLEAN flag — never check style.display
 
-const img       = document.getElementById('map-img');
-const pinLayer  = document.getElementById('pin-layer');
-const xhair     = document.getElementById('xhair');
-const formPanel = document.getElementById('form-panel');
+// ── Elements ──
+const pinLayer    = document.getElementById('pin-layer');
+const xhair       = document.getElementById('xhair');
+const idleMsg     = document.getElementById('idle-msg');
+const markerFields= document.getElementById('marker-fields');
 
-/* ── coord helper ── */
-function coords(e) {
-  const r = img.getBoundingClientRect();
+// ── Coord helper: % relative to the IMAGE ──
+function pct(e) {
+  const r = document.getElementById('map-img').getBoundingClientRect();
   return [
     Math.max(0, Math.min(100, (e.clientX - r.left) / r.width  * 100)).toFixed(3),
     Math.max(0, Math.min(100, (e.clientY - r.top)  / r.height * 100)).toFixed(3)
   ];
 }
 
-/* ── pin layer events ── */
+// ── Mouse events on pin-layer ──
 pinLayer.addEventListener('mousemove', e => {
   xhair.style.display = 'block';
   xhair.style.left = e.offsetX + 'px';
   xhair.style.top  = e.offsetY + 'px';
-  const [x,y] = coords(e);
+  const [x,y] = pct(e);
   document.getElementById('coords').textContent = `x: ${x}%  y: ${y}%`;
 });
-pinLayer.addEventListener('mouseleave', () => xhair.style.display = 'none');
+
+pinLayer.addEventListener('mouseleave', () => {
+  xhair.style.display = 'none';
+});
+
 pinLayer.addEventListener('click', e => {
-  if (formPanel.style.display === 'block') return; // form already open
-  const [x,y] = coords(e);
-  pX = parseFloat(x); pY = parseFloat(y);
+  if (formOpen) return;              // form already open — wait for save/cancel
+  const [x,y] = pct(e);
+  pendingX = parseFloat(x);
+  pendingY = parseFloat(y);
+  openForm(x, y);
+  placePending(pendingX, pendingY);
+});
+
+// ── Open / close form ──
+function openForm(x, y) {
+  formOpen = true;
+  idleMsg.style.display      = 'none';
+  markerFields.style.display = 'block';
   document.getElementById('fcoords').textContent = `${x}%, ${y}%`;
-  formPanel.style.display = 'block';
   document.getElementById('fname').value = '';
   document.getElementById('fdesc').value = '';
   document.getElementById('furl').value  = '';
   document.getElementById('fname').focus();
-  dropPin('pending-pin', pX, pY, '#ffffff', true);
-});
-
-/* ── drop a pin ── */
-function dropPin(id, x, y, color, pending) {
-  const old = document.getElementById(id);
-  if (old) old.remove();
-  const d = document.createElement('div');
-  d.className = 'pin' + (pending ? ' pending' : '');
-  d.id = id;
-  d.style.left       = x + '%';
-  d.style.top        = y + '%';
-  d.style.background = color;
-  pinLayer.appendChild(d);
 }
 
-/* ── save marker ── */
+function closeForm() {
+  formOpen = false;
+  idleMsg.style.display      = 'block';
+  markerFields.style.display = 'none';
+  pendingX = pendingY = null;
+  removePending();
+}
+
+// ── Pending pin ──
+function placePending(x, y) {
+  removePending();
+  const d = document.createElement('div');
+  d.className = 'pin pending';
+  d.id = 'pending-pin';
+  d.style.left = x + '%';
+  d.style.top  = y + '%';
+  pinLayer.appendChild(d);
+}
+function removePending() {
+  document.getElementById('pending-pin')?.remove();
+}
+
+// ── Save marker ──
 function saveMarker() {
   const name = document.getElementById('fname').value.trim();
   if (!name) { document.getElementById('fname').focus(); return; }
-  data.push({ x: pX, y: pY, name, desc: document.getElementById('fdesc').value.trim(), cat: document.getElementById('fcat').value, url: document.getElementById('furl').value.trim() });
-  localStorage.setItem('fe_markers', JSON.stringify(data));
+  markers.push({
+    x: pendingX, y: pendingY,
+    name,
+    desc: document.getElementById('fdesc').value.trim(),
+    cat:  document.getElementById('fcat').value,
+    url:  document.getElementById('furl').value.trim(),
+  });
+  save();
   closeForm();
   render();
 }
 
-/* ── close form ── */
-function closeForm() {
-  formPanel.style.display = 'none';
-  pX = pY = null;
-  const p = document.getElementById('pending-pin');
-  if (p) p.remove();
-}
-
-/* ── delete marker ── */
+// ── Delete ──
 function del(i) {
-  data.splice(i, 1);
-  localStorage.setItem('fe_markers', JSON.stringify(data));
+  markers.splice(i, 1);
+  save();
   render();
 }
 
-/* ── render all pins + list ── */
+// ── Persist ──
+function save() {
+  localStorage.setItem('fe_markers', JSON.stringify(markers));
+}
+
+// ── Render pins + list ──
 function render() {
-  // Pins
+  // Pins — remove non-pending, re-add
   pinLayer.querySelectorAll('.pin:not(.pending)').forEach(p => p.remove());
-  data.forEach((m, i) => dropPin('pin-' + i, m.x, m.y, COLORS[m.cat] || '#c9a227', false));
+  markers.forEach((m, i) => {
+    const d = document.createElement('div');
+    d.className = 'pin';
+    d.style.left       = m.x + '%';
+    d.style.top        = m.y + '%';
+    d.style.background = COLORS[m.cat] || '#c9a227';
+    pinLayer.appendChild(d);
+  });
+
+  // Status
+  document.getElementById('status').textContent = markers.length + ' marker' + (markers.length !== 1 ? 's' : '');
 
   // List
-  const list = document.getElementById('mlist');
   const head = document.getElementById('list-head');
-  document.getElementById('status').textContent = data.length + ' marker' + (data.length !== 1 ? 's' : '');
-  document.getElementById('hint').style.display = data.length ? 'none' : 'block';
-  head.style.display = data.length ? 'block' : 'none';
-  head.textContent = data.length + ' MARKER' + (data.length !== 1 ? 'S' : '') + ' PLACED';
+  const list = document.getElementById('mlist');
+  head.style.display = markers.length ? 'block' : 'none';
+  head.textContent   = markers.length + ' MARKER' + (markers.length !== 1 ? 'S' : '') + ' PLACED';
   list.innerHTML = '';
-  data.forEach((m, i) => {
+  markers.forEach((m, i) => {
     const el = document.createElement('div');
     el.className = 'mitem';
-    el.innerHTML = `<div class="mname" style="color:${COLORS[m.cat]||'#c9a227'}">${m.name}</div><div class="mmeta">${m.cat} · x:${m.x}% y:${m.y}%</div><div class="mbtns"><button class="btn red" style="font-size:0.58rem;padding:0.2rem 0.5rem;" onclick="del(${i})">DELETE</button></div>`;
+    el.innerHTML = `
+      <div class="mname" style="color:${COLORS[m.cat]||'#c9a227'}">${m.name}</div>
+      <div class="mmeta">${m.cat} &middot; x:${m.x}% y:${m.y}%</div>
+      <div style="margin-top:0.35rem;">
+        <button class="btn red" style="font-size:0.58rem;padding:0.18rem 0.45rem;" onclick="del(${i})">DELETE</button>
+      </div>`;
     list.appendChild(el);
   });
 }
 
-/* ── export ── */
+// ── Export ──
 function doExport() {
-  const json = JSON.stringify(data, null, 2);
+  const json = JSON.stringify(markers, null, 2);
   document.getElementById('json-out').textContent = json;
   navigator.clipboard?.writeText(json).then(() => {
     const b = event.target;
+    const orig = b.textContent;
     b.textContent = '✓ COPIED!';
-    setTimeout(() => b.textContent = 'COPY JSON TO CLIPBOARD', 2000);
+    setTimeout(() => b.textContent = orig, 2000);
   });
 }
 
-/* ── clear all ── */
+// ── Clear all ──
 function clearAll() {
-  if (!data.length || !confirm('Delete all ' + data.length + ' markers?')) return;
-  data = [];
-  localStorage.removeItem('fe_markers');
+  if (!markers.length || !confirm('Delete all ' + markers.length + ' markers?')) return;
+  markers = [];
+  save();
   closeForm();
   render();
 }
 
-// Init
+// ── Init ──
+closeForm();   // always start clean
 render();
 </script>
 </body>
