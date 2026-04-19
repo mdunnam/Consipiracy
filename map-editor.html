@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flat Earth Map — Marker Placement Tool</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #050505; color: #d8d8d8; font-family: 'Share Tech Mono', monospace; }
+    h1 { color: #c9a227; padding: 1rem; font-size: 1rem; letter-spacing: 0.2em; border-bottom: 1px solid #1a1a1a; }
+    .layout { display: flex; height: calc(100vh - 50px); }
+    .map-area { flex: 1; position: relative; overflow: auto; background: #000; cursor: crosshair; }
+    .map-area img { display: block; max-width: none; }
+    .sidebar { width: 340px; background: #0a0a0a; border-left: 1px solid #1a1a1a; overflow-y: auto; padding: 1rem; }
+    .sidebar h2 { color: #c9a227; font-size: 0.75rem; letter-spacing: 0.2em; margin-bottom: 1rem; }
+    .instructions { background: #111; border: 1px solid #1c1c1c; padding: 0.8rem; margin-bottom: 1rem; font-size: 0.7rem; color: #7a7a7a; line-height: 1.7; }
+    .instructions b { color: #c9a227; }
+    .marker-form { background: #111; border: 1px solid #1c1c1c; padding: 0.8rem; margin-bottom: 1rem; display: none; }
+    .marker-form h3 { color: #c9a227; font-size: 0.7rem; letter-spacing: 0.15em; margin-bottom: 0.8rem; }
+    .form-row { margin-bottom: 0.6rem; }
+    .form-row label { display: block; font-size: 0.65rem; color: #5a5a5a; margin-bottom: 0.2rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .form-row input, .form-row textarea, .form-row select {
+      width: 100%; background: #0a0a0a; border: 1px solid #2a2a2a; color: #d8d8d8;
+      padding: 0.4rem 0.6rem; font-family: 'Share Tech Mono', monospace; font-size: 0.72rem; outline: none;
+    }
+    .form-row textarea { height: 60px; resize: vertical; }
+    .btn { background: transparent; border: 1px solid rgba(201,162,39,0.5); color: #c9a227; font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; padding: 0.4rem 0.8rem; cursor: pointer; margin-right: 0.4rem; margin-top: 0.4rem; }
+    .btn:hover { background: rgba(201,162,39,0.1); }
+    .btn-danger { border-color: rgba(200,50,50,0.5); color: #cc3333; }
+    .btn-danger:hover { background: rgba(200,50,50,0.1); }
+    .marker-list { }
+    .marker-item { background: #111; border: 1px solid #1c1c1c; padding: 0.7rem; margin-bottom: 0.4rem; cursor: pointer; transition: border-color 0.2s; }
+    .marker-item:hover { border-color: rgba(201,162,39,0.4); }
+    .marker-item .mi-name { color: #c9a227; font-size: 0.75rem; margin-bottom: 0.2rem; }
+    .marker-item .mi-cat { font-size: 0.6rem; color: #4a4a4a; letter-spacing: 0.1em; text-transform: uppercase; }
+    .marker-item .mi-pos { font-size: 0.6rem; color: #333; }
+    .output-area { background: #050505; border: 1px solid #1a1a1a; padding: 0.8rem; margin-top: 1rem; }
+    .output-area h3 { color: #4a7a4a; font-size: 0.7rem; letter-spacing: 0.15em; margin-bottom: 0.5rem; }
+    #json-output { font-size: 0.6rem; color: #4a4a4a; white-space: pre; overflow-x: auto; max-height: 200px; overflow-y: auto; }
+    /* Map marker dots */
+    .map-pin {
+      position: absolute; width: 14px; height: 14px; border-radius: 50%;
+      transform: translate(-50%, -50%); cursor: pointer;
+      border: 2px solid rgba(255,255,255,0.6);
+      transition: transform 0.15s ease;
+      z-index: 10;
+    }
+    .map-pin:hover { transform: translate(-50%,-50%) scale(1.5); z-index: 20; }
+    .map-pin.selected { transform: translate(-50%,-50%) scale(1.6); box-shadow: 0 0 0 3px rgba(255,255,255,0.4); }
+    .crosshair { position: absolute; width: 16px; height: 16px; pointer-events: none; display: none; z-index: 30; }
+    .crosshair::before, .crosshair::after { content:''; position:absolute; background: #c9a227; }
+    .crosshair::before { width:1px; height:16px; left:7px; top:0; }
+    .crosshair::after  { width:16px; height:1px; left:0; top:7px; }
+    .coord-display { position: fixed; bottom: 10px; left: 10px; background: rgba(0,0,0,0.8); padding: 4px 8px; font-size: 0.65rem; color: #c9a227; pointer-events: none; z-index: 100; }
+  </style>
+</head>
+<body>
+<h1>⊕ FLAT EARTH MAP — MARKER PLACEMENT TOOL</h1>
+<div class="layout">
+  <div class="map-area" id="map-area">
+    <img src="images/flatearthmap.jpg" id="map-img" alt="Flat Earth Map" />
+    <div class="crosshair" id="crosshair"></div>
+  </div>
+
+  <div class="sidebar">
+    <h2>MARKER TOOL</h2>
+    <div class="instructions">
+      <b>HOW TO USE:</b><br>
+      1. Click anywhere on the map to place a marker<br>
+      2. Fill in the name, description, category, and page URL<br>
+      3. Click <b>SAVE MARKER</b><br>
+      4. Repeat for all locations<br>
+      5. Click <b>EXPORT JSON</b> when done<br>
+      6. Send the JSON to Axis to activate the live map
+    </div>
+
+    <div class="marker-form" id="marker-form">
+      <h3>NEW MARKER — <span id="form-coords"></span></h3>
+      <div class="form-row">
+        <label>Name</label>
+        <input type="text" id="f-name" placeholder="e.g. North Pole" />
+      </div>
+      <div class="form-row">
+        <label>Short Description (shown on hover)</label>
+        <textarea id="f-desc" placeholder="e.g. Geographic and cosmological centre of the flat plane."></textarea>
+      </div>
+      <div class="form-row">
+        <label>Category</label>
+        <select id="f-cat">
+          <option value="structural">Structural Ring</option>
+          <option value="landmass">Landmass</option>
+          <option value="evidence">Evidence Site</option>
+          <option value="suppressed">Suppressed / Restricted</option>
+          <option value="ancient">Ancient / Sacred</option>
+          <option value="anomalous">Anomalous Zone</option>
+          <option value="boundary">Boundary</option>
+          <option value="ocean">Ocean</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Link URL (page it opens on click)</label>
+        <input type="text" id="f-url" placeholder="e.g. topics/flat-earth/north-pole-center.html" />
+      </div>
+      <div>
+        <button class="btn" onclick="saveMarker()">SAVE MARKER</button>
+        <button class="btn btn-danger" onclick="cancelMarker()">CANCEL</button>
+      </div>
+    </div>
+
+    <div id="marker-list" class="marker-list"></div>
+
+    <div class="output-area">
+      <h3>EXPORT</h3>
+      <button class="btn" onclick="exportJSON()">COPY JSON TO CLIPBOARD</button>
+      <button class="btn" onclick="clearAll()" style="color:#cc3333;border-color:rgba(200,50,50,0.4);">CLEAR ALL</button>
+      <pre id="json-output">// Click COPY JSON when ready</pre>
+    </div>
+  </div>
+</div>
+
+<div class="coord-display" id="coord-display">x: 0 y: 0</div>
+
+<script>
+const CAT_COLORS = {
+  structural: '#c9a227',
+  landmass:   '#fbbf24',
+  evidence:   '#4ade80',
+  suppressed: '#f87171',
+  ancient:    '#c084fc',
+  anomalous:  '#fb923c',
+  boundary:   '#94a3b8',
+  ocean:      '#38bdf8',
+};
+
+let markers = JSON.parse(localStorage.getItem('fe_markers') || '[]');
+let pendingX = null, pendingY = null;
+let selectedIdx = null;
+
+const mapArea = document.getElementById('map-area');
+const mapImg  = document.getElementById('map-img');
+const form    = document.getElementById('marker-form');
+
+function getImgCoords(e) {
+  const rect = mapImg.getBoundingClientRect();
+  const x = ((e.clientX - rect.left) / rect.width  * 100).toFixed(3);
+  const y = ((e.clientY - rect.top)  / rect.height * 100).toFixed(3);
+  return [parseFloat(x), parseFloat(y)];
+}
+
+mapArea.addEventListener('mousemove', e => {
+  const [x,y] = getImgCoords(e);
+  document.getElementById('coord-display').textContent = `x: ${x}%  y: ${y}%`;
+  const ch = document.getElementById('crosshair');
+  ch.style.display = 'block';
+  ch.style.left = (e.clientX - mapArea.getBoundingClientRect().left) + 'px';
+  ch.style.top  = (e.clientY - mapArea.getBoundingClientRect().top)  + 'px';
+});
+
+mapArea.addEventListener('mouseleave', () => {
+  document.getElementById('crosshair').style.display = 'none';
+});
+
+mapArea.addEventListener('click', e => {
+  if (e.target.classList.contains('map-pin')) return;
+  const [x, y] = getImgCoords(e);
+  pendingX = x; pendingY = y;
+  document.getElementById('form-coords').textContent = `${x}%, ${y}%`;
+  form.style.display = 'block';
+  document.getElementById('f-name').focus();
+  // Show pending pin
+  renderPins();
+  const pending = document.createElement('div');
+  pending.className = 'map-pin';
+  pending.id = 'pending-pin';
+  pending.style.left = x + '%';
+  pending.style.top  = y + '%';
+  pending.style.background = '#ffffff';
+  pending.style.borderColor = '#c9a227';
+  pending.style.animation = 'pulse 1s ease-in-out infinite alternate';
+  mapArea.appendChild(pending);
+});
+
+function saveMarker() {
+  const name = document.getElementById('f-name').value.trim();
+  if (!name) { document.getElementById('f-name').focus(); return; }
+  markers.push({
+    x:    pendingX,
+    y:    pendingY,
+    name: name,
+    desc: document.getElementById('f-desc').value.trim(),
+    cat:  document.getElementById('f-cat').value,
+    url:  document.getElementById('f-url').value.trim(),
+  });
+  localStorage.setItem('fe_markers', JSON.stringify(markers));
+  document.getElementById('f-name').value = '';
+  document.getElementById('f-desc').value = '';
+  document.getElementById('f-url').value  = '';
+  form.style.display = 'none';
+  pendingX = pendingY = null;
+  renderPins();
+  renderList();
+}
+
+function cancelMarker() {
+  form.style.display = 'none';
+  pendingX = pendingY = null;
+  const p = document.getElementById('pending-pin');
+  if (p) p.remove();
+}
+
+function deleteMarker(idx) {
+  markers.splice(idx, 1);
+  localStorage.setItem('fe_markers', JSON.stringify(markers));
+  renderPins();
+  renderList();
+}
+
+function renderPins() {
+  // Remove all existing pins
+  mapArea.querySelectorAll('.map-pin').forEach(p => p.remove());
+  markers.forEach((m, i) => {
+    const pin = document.createElement('div');
+    pin.className = 'map-pin' + (i === selectedIdx ? ' selected' : '');
+    pin.style.left       = m.x + '%';
+    pin.style.top        = m.y + '%';
+    pin.style.background = CAT_COLORS[m.cat] || '#c9a227';
+    pin.title = m.name;
+    pin.addEventListener('click', e => {
+      e.stopPropagation();
+      selectedIdx = i;
+      renderPins();
+      renderList();
+      document.getElementById('marker-item-' + i)?.scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+    mapArea.appendChild(pin);
+  });
+}
+
+function renderList() {
+  const list = document.getElementById('marker-list');
+  list.innerHTML = markers.length
+    ? `<div style="font-size:0.65rem;color:#3a3a3a;margin-bottom:0.5rem;letter-spacing:0.1em;">${markers.length} MARKER${markers.length!==1?'S':''} PLACED</div>`
+    : '<div style="font-size:0.65rem;color:#2a2a2a;padding:0.5rem 0;">No markers yet. Click the map to add one.</div>';
+
+  markers.forEach((m, i) => {
+    const el = document.createElement('div');
+    el.className = 'marker-item' + (i === selectedIdx ? ' selected' : '');
+    el.id = 'marker-item-' + i;
+    if (i === selectedIdx) el.style.borderColor = CAT_COLORS[m.cat] || '#c9a227';
+    el.innerHTML = `
+      <div class="mi-name" style="color:${CAT_COLORS[m.cat]||'#c9a227'}">${m.name}</div>
+      <div class="mi-cat">${m.cat}</div>
+      <div class="mi-pos">x:${m.x}% y:${m.y}%</div>
+      <div style="margin-top:0.4rem;">
+        <button class="btn" style="font-size:0.6rem;padding:0.2rem 0.5rem;" onclick="focusMarker(${i})">FOCUS</button>
+        <button class="btn btn-danger" style="font-size:0.6rem;padding:0.2rem 0.5rem;" onclick="deleteMarker(${i})">DELETE</button>
+      </div>
+    `;
+    list.appendChild(el);
+  });
+}
+
+function focusMarker(i) {
+  selectedIdx = i;
+  renderPins();
+  renderList();
+}
+
+function exportJSON() {
+  const json = JSON.stringify(markers, null, 2);
+  document.getElementById('json-output').textContent = json;
+  navigator.clipboard?.writeText(json).then(() => {
+    const btn = event.target;
+    btn.textContent = 'COPIED!';
+    setTimeout(() => btn.textContent = 'COPY JSON TO CLIPBOARD', 2000);
+  });
+}
+
+function clearAll() {
+  if (!confirm('Delete all ' + markers.length + ' markers?')) return;
+  markers = [];
+  localStorage.removeItem('fe_markers');
+  renderPins();
+  renderList();
+}
+
+// Init
+renderPins();
+renderList();
+</script>
+</body>
+</html>

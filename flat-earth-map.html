@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flat Earth Map — The Truth Archive</title>
+  <meta name="description" content="Interactive flat earth azimuthal equidistant map with 100+ documented locations, evidence sites, suppressed zones, ancient power points, and structural rings." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/enhancements.css" />
+  <style>
+    .fe-map-page { padding-top: 80px; }
+
+    .fe-map-header {
+      text-align: center;
+      padding: 3rem 1.5rem 2rem;
+      border-bottom: 1px solid var(--border-gold);
+    }
+    .fe-map-header h1 { font-size: clamp(1.4rem, 3vw, 2.2rem); margin-bottom: 0.5rem; }
+    .fe-map-header p  { color: var(--text-secondary); max-width: 60ch; margin: 0 auto; font-size: 0.9rem; }
+
+    /* Map container */
+    .fe-map-wrap {
+      position: relative;
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      user-select: none;
+    }
+
+    .fe-map-img-wrap {
+      position: relative;
+      border: 1px solid rgba(201,162,39,0.3);
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 0 60px rgba(0,0,0,0.8);
+    }
+
+    .fe-map-img-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+      opacity: 0.92;
+    }
+
+    /* Pins */
+    .fe-pin {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      border: 2px solid rgba(255,255,255,0.5);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      z-index: 10;
+    }
+    .fe-pin:hover {
+      transform: translate(-50%,-50%) scale(1.8);
+      box-shadow: 0 0 12px currentColor;
+      z-index: 20;
+    }
+    .fe-pin::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1px solid currentColor;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .fe-pin:hover::after { opacity: 0.4; }
+
+    /* Tooltip */
+    .fe-tooltip {
+      position: fixed;
+      z-index: 9999;
+      background: rgba(4,4,4,0.97);
+      border: 1px solid rgba(201,162,39,0.4);
+      padding: 0.75rem 1rem;
+      max-width: 240px;
+      pointer-events: none;
+      display: none;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.8);
+    }
+    .fe-tooltip.visible { display: block; }
+    .fe-tooltip-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      color: #c9a227;
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.05em;
+    }
+    .fe-tooltip-cat {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.58rem;
+      color: #4a4a4a;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .fe-tooltip-desc {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.68rem;
+      color: #7a7a7a;
+      line-height: 1.5;
+    }
+    .fe-tooltip-cta {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
+      color: rgba(201,162,39,0.6);
+      margin-top: 0.4rem;
+    }
+
+    /* Legend */
+    .fe-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.2rem;
+      justify-content: center;
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border);
+      margin-top: 0.5rem;
+    }
+    .fe-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+    .fe-legend-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      flex-shrink: 0;
+    }
+
+    /* Filter bar */
+    .fe-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      justify-content: center;
+      padding: 1rem 1.5rem;
+    }
+    .fe-filter-btn {
+      background: transparent;
+      border: 1px solid #1c1c1c;
+      color: #5a5a5a;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.28rem 0.7rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-radius: 2px;
+    }
+    .fe-filter-btn:hover, .fe-filter-btn.active {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201,162,39,0.06);
+    }
+
+    @media (max-width: 600px) {
+      .fe-pin { width: 10px; height: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="reading-progress"></div>
+
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-logo"><span class="eye-symbol">👁</span> Truth Archive</a>
+    <button class="nav-toggle" aria-expanded="false" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="great-awakening.html">The Great Awakening</a></li>
+      <li><a href="flat-earth.html">Flat Earth</a></li>
+      <li><a href="deep-state.html">Deep State</a></li>
+      <li><a href="map.html">🕸 Connection Map</a></li>
+      <li><a href="flat-earth-map.html" class="active">🌍 Flat Earth Map</a></li>
+      <li><a href="ebook.html" class="ebook-link">📖 eBook</a></li>
+    </ul>
+  </nav>
+
+  <div class="fe-map-page">
+    <div class="fe-map-header">
+      <span class="eyebrow">Interactive Research Map</span>
+      <h1 class="glitch" data-text="THE FLAT EARTH MAP">THE FLAT EARTH MAP</h1>
+      <p>Every documented location, evidence site, suppressed zone, and ancient power point. Hover a pin for details. Click to read the full file.</p>
+    </div>
+
+    <!-- Filter bar -->
+    <div class="fe-filters" id="fe-filters">
+      <button class="fe-filter-btn active" data-cat="all">All</button>
+      <button class="fe-filter-btn" data-cat="structural">Structural</button>
+      <button class="fe-filter-btn" data-cat="landmass">Landmass</button>
+      <button class="fe-filter-btn" data-cat="evidence">Evidence</button>
+      <button class="fe-filter-btn" data-cat="suppressed">Suppressed</button>
+      <button class="fe-filter-btn" data-cat="ancient">Ancient</button>
+      <button class="fe-filter-btn" data-cat="anomalous">Anomalous</button>
+      <button class="fe-filter-btn" data-cat="boundary">Boundary</button>
+      <button class="fe-filter-btn" data-cat="ocean">Ocean</button>
+    </div>
+
+    <!-- Map -->
+    <div class="fe-map-wrap">
+      <div class="fe-map-img-wrap" id="fe-map-img-wrap">
+        <img src="images/flatearthmap.jpg" alt="Flat Earth Azimuthal Equidistant Map" id="fe-map-img" />
+        <!-- Pins injected by JS -->
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="fe-legend" id="fe-legend"></div>
+  </div>
+
+  <!-- Tooltip -->
+  <div class="fe-tooltip" id="fe-tooltip">
+    <div class="fe-tooltip-name" id="tt-name"></div>
+    <div class="fe-tooltip-cat" id="tt-cat"></div>
+    <div class="fe-tooltip-desc" id="tt-desc"></div>
+    <div class="fe-tooltip-cta" id="tt-cta">→ CLICK TO READ FILE</div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/enhancements.js"></script>
+  <script>
+  (function() {
+    const CAT_COLORS = {
+      structural: '#c9a227',
+      landmass:   '#fbbf24',
+      evidence:   '#4ade80',
+      suppressed: '#f87171',
+      ancient:    '#c084fc',
+      anomalous:  '#fb923c',
+      boundary:   '#94a3b8',
+      ocean:      '#38bdf8',
+    };
+
+    // ── MARKERS ── (populated after you use the editor tool)
+    const MARKERS = [];
+
+    // ── Build legend ──
+    const legend = document.getElementById('fe-legend');
+    Object.entries(CAT_COLORS).forEach(([cat, color]) => {
+      const item = document.createElement('div');
+      item.className = 'fe-legend-item';
+      item.innerHTML = `<span class="fe-legend-dot" style="background:${color};color:${color};border-color:${color}40;"></span>${cat.charAt(0).toUpperCase()+cat.slice(1)}`;
+      legend.appendChild(item);
+    });
+
+    // ── Render pins ──
+    const wrap    = document.getElementById('fe-map-img-wrap');
+    const tooltip = document.getElementById('fe-tooltip');
+    let   activeFilter = 'all';
+
+    function renderPins() {
+      wrap.querySelectorAll('.fe-pin').forEach(p => p.remove());
+      const filtered = activeFilter === 'all' ? MARKERS : MARKERS.filter(m => m.cat === activeFilter);
+      filtered.forEach((m, i) => {
+        const pin = document.createElement('div');
+        pin.className = 'fe-pin';
+        pin.style.left       = m.x + '%';
+        pin.style.top        = m.y + '%';
+        pin.style.background = CAT_COLORS[m.cat] || '#c9a227';
+        pin.style.color      = CAT_COLORS[m.cat] || '#c9a227';
+
+        pin.addEventListener('mouseenter', e => showTooltip(e, m));
+        pin.addEventListener('mousemove',  e => moveTooltip(e));
+        pin.addEventListener('mouseleave', hideTooltip);
+        pin.addEventListener('click', () => { if (m.url) window.location.href = m.url; });
+
+        wrap.appendChild(pin);
+      });
+    }
+
+    function showTooltip(e, m) {
+      document.getElementById('tt-name').textContent = m.name;
+      document.getElementById('tt-cat').textContent  = m.cat.toUpperCase();
+      document.getElementById('tt-desc').textContent = m.desc || '';
+      document.getElementById('tt-cta').style.display = m.url ? 'block' : 'none';
+      tooltip.classList.add('visible');
+      moveTooltip(e);
+    }
+    function moveTooltip(e) {
+      let x = e.clientX + 16, y = e.clientY + 16;
+      if (x + 260 > window.innerWidth)  x = e.clientX - 260;
+      if (y + 130 > window.innerHeight) y = e.clientY - 130;
+      tooltip.style.left = x + 'px';
+      tooltip.style.top  = y + 'px';
+    }
+    function hideTooltip() { tooltip.classList.remove('visible'); }
+
+    // ── Filters ──
+    document.getElementById('fe-filters').querySelectorAll('.fe-filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.fe-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.dataset.cat;
+        renderPins();
+      });
+    });
+
+    renderPins();
+
+    // Show pin count
+    if (MARKERS.length === 0) {
+      const notice = document.createElement('div');
+      notice.style.cssText = 'text-align:center;padding:1rem;font-family:var(--font-mono);font-size:0.7rem;color:#3a3a3a;letter-spacing:0.1em;';
+      notice.textContent = 'MARKERS LOADING — USE THE EDITOR TOOL TO PLACE PINS';
+      wrap.appendChild(notice);
+    }
+  })();
+  </script>
+</body>
+</html>
