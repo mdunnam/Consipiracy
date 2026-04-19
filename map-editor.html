@@ -3,139 +3,110 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Flat Earth Map — Marker Placement Tool</title>
+  <title>Flat Earth Map Editor</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #050505; color: #d8d8d8; font-family: 'Share Tech Mono', monospace; }
-    h1 { color: #c9a227; padding: 1rem; font-size: 1rem; letter-spacing: 0.2em; border-bottom: 1px solid #1a1a1a; }
-    .layout { display: flex; height: calc(100vh - 50px); }
+    body { background: #050505; color: #d8d8d8; font-family: 'Share Tech Mono', monospace; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
 
-    /* Scrollable map area */
-    .map-scroll { flex: 1; overflow: auto; background: #000; cursor: crosshair; }
-
-    /* This wraps image + pins together — pins % are relative to this */
-    .map-inner {
-      position: relative;
-      display: inline-block; /* shrink to image size */
-      line-height: 0;
+    #topbar {
+      background: #0a0a0a; border-bottom: 1px solid #1a1a1a;
+      padding: 0.6rem 1rem; display: flex; align-items: center; gap: 1rem; flex-shrink: 0;
     }
-    .map-inner img { display: block; max-width: none; user-select: none; }
-
-    /* Overlay sits exactly on top of the image */
-    .map-overlay {
-      position: absolute;
-      inset: 0;
-      cursor: crosshair;
-      /* overlay is on top of image, handles all mouse events */
+    #topbar h1 { color: #c9a227; font-size: 0.85rem; letter-spacing: 0.2em; flex: 1; }
+    .tbtn {
+      background: transparent; border: 1px solid rgba(201,162,39,0.4); color: #c9a227;
+      font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em;
+      padding: 0.35rem 0.7rem; cursor: pointer;
     }
+    .tbtn:hover { background: rgba(201,162,39,0.1); }
+    .tbtn.red { border-color: rgba(200,50,50,0.4); color: #cc4444; }
+    .tbtn.red:hover { background: rgba(200,50,50,0.1); }
+    #status { font-size: 0.65rem; color: #4a4a4a; min-width: 120px; text-align: right; }
 
-    /* Crosshair follows mouse inside overlay */
-    .crosshair {
-      position: absolute;
-      width: 20px; height: 20px;
-      pointer-events: none;
-      display: none;
+    #main { display: flex; flex: 1; overflow: hidden; }
+
+    /* MAP SIDE */
+    #map-scroll { flex: 1; overflow: auto; background: #000; position: relative; }
+    #map-wrap {
+      position: relative; display: inline-block; line-height: 0;
+      min-width: 100%; min-height: 100%;
+    }
+    #map-img { display: block; max-width: none; pointer-events: none; user-select: none; }
+    #pin-layer {
+      position: absolute; inset: 0; cursor: crosshair;
+    }
+    .pin {
+      position: absolute; width: 14px; height: 14px; border-radius: 50%;
+      transform: translate(-50%, -50%); pointer-events: none;
+      border: 2px solid rgba(255,255,255,0.55); z-index: 5;
+    }
+    .pin.pending { background: #fff !important; border-color: #c9a227 !important; animation: blink 0.6s ease-in-out infinite alternate; }
+    .pin.selected { box-shadow: 0 0 0 3px rgba(255,255,255,0.4); transform: translate(-50%,-50%) scale(1.5); }
+    @keyframes blink { from { opacity: 1; } to { opacity: 0.4; } }
+    #xhair {
+      position: absolute; pointer-events: none; display: none; z-index: 10;
       transform: translate(-50%, -50%);
     }
-    .crosshair::before {
-      content: ''; position: absolute;
-      width: 1px; height: 20px; left: 9px; top: 0;
-      background: #c9a227;
-    }
-    .crosshair::after {
-      content: ''; position: absolute;
-      width: 20px; height: 1px; left: 0; top: 9px;
-      background: #c9a227;
-    }
+    #xhair::before { content:''; position:absolute; width:1px; height:18px; left:8px; top:0; background:#c9a227; }
+    #xhair::after  { content:''; position:absolute; width:18px; height:1px; left:0; top:8px; background:#c9a227; }
+    #coords { position: fixed; bottom: 8px; left: 8px; background: rgba(0,0,0,0.9); padding: 3px 8px; font-size: 0.62rem; color: #c9a227; pointer-events: none; z-index: 9999; border: 1px solid #1a1a1a; }
 
-    /* Pins — % relative to .map-inner which is exactly the image size */
-    .map-pin {
-      position: absolute;
-      width: 14px; height: 14px; border-radius: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      border: 2px solid rgba(255,255,255,0.6);
-      transition: transform 0.15s ease;
-      z-index: 10;
+    /* SIDEBAR */
+    #sidebar { width: 320px; flex-shrink: 0; background: #0a0a0a; border-left: 1px solid #1a1a1a; display: flex; flex-direction: column; overflow: hidden; }
+    #form-panel { padding: 1rem; border-bottom: 1px solid #1a1a1a; display: none; }
+    #form-panel h3 { color: #c9a227; font-size: 0.7rem; letter-spacing: 0.12em; margin-bottom: 0.8rem; }
+    .row { margin-bottom: 0.55rem; }
+    .row label { display: block; font-size: 0.6rem; color: #4a4a4a; margin-bottom: 0.2rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .row input, .row textarea, .row select {
+      width: 100%; background: #050505; border: 1px solid #222; color: #d8d8d8;
+      padding: 0.4rem 0.55rem; font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; outline: none;
     }
-    .map-pin.active { transform: translate(-50%,-50%) scale(1.7); box-shadow: 0 0 0 3px rgba(255,255,255,0.5); }
-
-    /* Click target on image */
-    .map-click-layer {
-      position: absolute;
-      inset: 0;
-      cursor: crosshair;
-      z-index: 5;
-    }
-
-    /* Sidebar */
-    .sidebar { width: 340px; background: #0a0a0a; border-left: 1px solid #1a1a1a; overflow-y: auto; padding: 1rem; flex-shrink: 0; }
-    .sidebar h2 { color: #c9a227; font-size: 0.75rem; letter-spacing: 0.2em; margin-bottom: 1rem; }
-    .instructions { background: #111; border: 1px solid #1c1c1c; padding: 0.8rem; margin-bottom: 1rem; font-size: 0.7rem; color: #7a7a7a; line-height: 1.7; }
-    .instructions b { color: #c9a227; }
-    .marker-form { background: #111; border: 1px solid #1c1c1c; padding: 0.8rem; margin-bottom: 1rem; display: none; }
-    .marker-form h3 { color: #c9a227; font-size: 0.7rem; letter-spacing: 0.15em; margin-bottom: 0.8rem; }
-    .form-row { margin-bottom: 0.6rem; }
-    .form-row label { display: block; font-size: 0.65rem; color: #5a5a5a; margin-bottom: 0.2rem; letter-spacing: 0.1em; text-transform: uppercase; }
-    .form-row input, .form-row textarea, .form-row select {
-      width: 100%; background: #0a0a0a; border: 1px solid #2a2a2a; color: #d8d8d8;
-      padding: 0.4rem 0.6rem; font-family: 'Share Tech Mono', monospace; font-size: 0.72rem; outline: none;
-    }
-    .form-row textarea { height: 60px; resize: vertical; }
-    .btn { background: transparent; border: 1px solid rgba(201,162,39,0.5); color: #c9a227; font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; padding: 0.4rem 0.8rem; cursor: pointer; margin-right: 0.4rem; margin-top: 0.4rem; }
+    .row textarea { height: 55px; resize: vertical; }
+    .btn { background: transparent; border: 1px solid rgba(201,162,39,0.4); color: #c9a227; font-family: 'Share Tech Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; padding: 0.35rem 0.7rem; cursor: pointer; margin-right: 0.3rem; margin-top: 0.3rem; }
     .btn:hover { background: rgba(201,162,39,0.1); }
-    .btn-danger { border-color: rgba(200,50,50,0.5); color: #cc3333; }
-    .btn-danger:hover { background: rgba(200,50,50,0.1); }
-    .marker-item { background: #111; border: 1px solid #1c1c1c; padding: 0.7rem; margin-bottom: 0.4rem; }
-    .marker-item .mi-name { color: #c9a227; font-size: 0.75rem; margin-bottom: 0.2rem; }
-    .marker-item .mi-cat  { font-size: 0.6rem; color: #4a4a4a; letter-spacing: 0.1em; text-transform: uppercase; }
-    .marker-item .mi-pos  { font-size: 0.6rem; color: #333; }
-    .output-area { background: #050505; border: 1px solid #1a1a1a; padding: 0.8rem; margin-top: 1rem; }
-    .output-area h3 { color: #4a7a4a; font-size: 0.7rem; letter-spacing: 0.15em; margin-bottom: 0.5rem; }
-    #json-output { font-size: 0.6rem; color: #4a4a4a; white-space: pre; overflow-x: auto; max-height: 200px; overflow-y: auto; }
-    .coord-bar { position: fixed; bottom: 8px; left: 8px; background: rgba(0,0,0,0.85); padding: 3px 8px; font-size: 0.62rem; color: #c9a227; pointer-events: none; z-index: 9999; border: 1px solid #1a1a1a; }
+    .btn.red { border-color: rgba(200,50,50,0.4); color: #cc4444; }
+    .btn.red:hover { background: rgba(200,50,50,0.1); }
+
+    #list-panel { flex: 1; overflow-y: auto; padding: 0.8rem; }
+    #list-panel h4 { font-size: 0.65rem; color: #3a3a3a; letter-spacing: 0.1em; margin-bottom: 0.6rem; }
+    .mitem { background: #111; border: 1px solid #1c1c1c; padding: 0.6rem; margin-bottom: 0.35rem; }
+    .mitem .mname { font-size: 0.75rem; margin-bottom: 0.15rem; }
+    .mitem .mmeta { font-size: 0.58rem; color: #3a3a3a; letter-spacing: 0.05em; }
+    .mitem .mbtns { margin-top: 0.35rem; }
+
+    #export-panel { padding: 0.8rem; border-top: 1px solid #1a1a1a; flex-shrink: 0; }
+    #export-panel h4 { font-size: 0.65rem; color: #4a7a4a; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+    #json-out { font-size: 0.58rem; color: #3a3a3a; white-space: pre; overflow: auto; max-height: 100px; margin-top: 0.5rem; background: #050505; padding: 0.4rem; border: 1px solid #1a1a1a; }
+    #hint { font-size: 0.62rem; color: #2a2a2a; line-height: 1.7; margin-bottom: 0.6rem; }
+    #hint b { color: #5a5a5a; }
   </style>
 </head>
 <body>
-<h1>⊕ FLAT EARTH MAP — MARKER PLACEMENT TOOL</h1>
-<div class="layout">
 
-  <div class="map-scroll" id="map-scroll">
-    <div class="map-inner" id="map-inner">
-      <img src="images/flatearthmap.jpg" id="map-img" alt="Flat Earth Map" draggable="false" />
-      <!-- Pins and crosshair — all inside map-inner so % = image % -->
-      <div class="map-overlay" id="map-overlay">
-        <div class="crosshair" id="crosshair"></div>
-      </div>
+<div id="topbar">
+  <h1>⊕ FLAT EARTH MAP — MARKER EDITOR</h1>
+  <span id="status">0 markers</span>
+  <button class="tbtn" onclick="closeForm()">✕ CLOSE FORM</button>
+  <button class="tbtn red" onclick="clearAll()">CLEAR ALL</button>
+</div>
+
+<div id="main">
+  <div id="map-scroll">
+    <div id="map-wrap">
+      <img src="images/flatearthmap.jpg" id="map-img" alt="Flat Earth Map" />
+      <div id="pin-layer"></div>
+      <div id="xhair"></div>
     </div>
   </div>
 
-  <div class="sidebar">
-    <h2>MARKER TOOL</h2>
-    <div class="instructions">
-      <b>HOW TO USE:</b><br>
-      1. Click anywhere on the map to place a marker<br>
-      2. Fill in the name, description, category, and page URL<br>
-      3. Click <b>SAVE MARKER</b><br>
-      4. Repeat for all locations<br>
-      5. Click <b>EXPORT JSON</b> when done<br>
-      6. Send the JSON to Axis to activate the live map
-    </div>
-    <button class="btn" style="margin-bottom:1rem;font-size:0.62rem;" onclick="resetState()">✕ CLOSE FORM / RESET STATE</button>
-
-    <div class="marker-form" id="marker-form">
-      <h3>NEW MARKER — <span id="form-coords"></span></h3>
-      <div class="form-row">
-        <label>Name</label>
-        <input type="text" id="f-name" placeholder="e.g. North Pole" />
-      </div>
-      <div class="form-row">
-        <label>Short Description (shown on hover)</label>
-        <textarea id="f-desc" placeholder="e.g. Geographic and cosmological centre of the flat plane."></textarea>
-      </div>
-      <div class="form-row">
+  <div id="sidebar">
+    <div id="form-panel">
+      <h3>NEW MARKER — <span id="fcoords"></span></h3>
+      <div class="row"><label>Name</label><input id="fname" type="text" placeholder="e.g. North Pole" /></div>
+      <div class="row"><label>Description (hover text)</label><textarea id="fdesc" placeholder="Short description shown on hover"></textarea></div>
+      <div class="row">
         <label>Category</label>
-        <select id="f-cat">
+        <select id="fcat">
           <option value="structural">Structural Ring</option>
           <option value="landmass">Landmass</option>
           <option value="evidence">Evidence Site</option>
@@ -146,219 +117,157 @@
           <option value="ocean">Ocean</option>
         </select>
       </div>
-      <div class="form-row">
-        <label>Link URL (page it opens on click)</label>
-        <input type="text" id="f-url" placeholder="e.g. topics/flat-earth/north-pole-center.html" />
-      </div>
+      <div class="row"><label>URL (page it links to)</label><input id="furl" type="text" placeholder="topics/flat-earth/north-pole-center.html" /></div>
       <div>
-        <button class="btn" onclick="saveMarker()">SAVE MARKER</button>
-        <button class="btn btn-danger" onclick="cancelMarker()">CANCEL</button>
+        <button class="btn" onclick="saveMarker()">✓ SAVE</button>
+        <button class="btn red" onclick="closeForm()">✕ CANCEL</button>
       </div>
     </div>
 
-    <div id="marker-list"></div>
+    <div id="list-panel">
+      <p id="hint"><b>CLICK THE MAP</b> to place a marker.<br>Fill in the form, click SAVE.<br>Use EXPORT when done.</p>
+      <h4 id="list-head" style="display:none"></h4>
+      <div id="mlist"></div>
+    </div>
 
-    <div class="output-area">
-      <h3>EXPORT</h3>
-      <button class="btn" onclick="exportJSON()">COPY JSON TO CLIPBOARD</button>
-      <button class="btn btn-danger" onclick="clearAll()">CLEAR ALL</button>
-      <pre id="json-output">// Place markers then click COPY JSON</pre>
+    <div id="export-panel">
+      <h4>EXPORT MARKERS</h4>
+      <button class="btn" onclick="doExport()">COPY JSON TO CLIPBOARD</button>
+      <pre id="json-out"></pre>
     </div>
   </div>
 </div>
 
-<div class="coord-bar" id="coord-bar">x: 0.000%  y: 0.000%</div>
+<div id="coords">x: —  y: —</div>
 
 <script>
-const CAT_COLORS = {
-  structural: '#c9a227',
-  landmass:   '#fbbf24',
-  evidence:   '#4ade80',
-  suppressed: '#f87171',
-  ancient:    '#c084fc',
-  anomalous:  '#fb923c',
-  boundary:   '#94a3b8',
-  ocean:      '#38bdf8',
+const COLORS = {
+  structural:'#c9a227', landmass:'#fbbf24', evidence:'#4ade80',
+  suppressed:'#f87171', ancient:'#c084fc', anomalous:'#fb923c',
+  boundary:'#94a3b8',   ocean:'#38bdf8'
 };
 
-let markers    = JSON.parse(localStorage.getItem('fe_markers') || '[]');
-let pendingX   = null, pendingY = null;
-let selectedIdx = null;
+let data = JSON.parse(localStorage.getItem('fe_markers') || '[]');
+let pX = null, pY = null;
 
-const mapInner  = document.getElementById('map-inner');
-const mapImg    = document.getElementById('map-img');
-const overlay   = document.getElementById('map-overlay');
-const crosshair = document.getElementById('crosshair');
-const form      = document.getElementById('marker-form');
+const img       = document.getElementById('map-img');
+const pinLayer  = document.getElementById('pin-layer');
+const xhair     = document.getElementById('xhair');
+const formPanel = document.getElementById('form-panel');
 
-// Get coords as % of the image — use mapImg bounds
-function getCoords(e) {
-  const rect = mapImg.getBoundingClientRect();
-  const x = ((e.clientX - rect.left) / rect.width  * 100);
-  const y = ((e.clientY - rect.top)  / rect.height * 100);
+/* ── coord helper ── */
+function coords(e) {
+  const r = img.getBoundingClientRect();
   return [
-    Math.max(0, Math.min(100, x)).toFixed(3),
-    Math.max(0, Math.min(100, y)).toFixed(3)
+    Math.max(0, Math.min(100, (e.clientX - r.left) / r.width  * 100)).toFixed(3),
+    Math.max(0, Math.min(100, (e.clientY - r.top)  / r.height * 100)).toFixed(3)
   ];
 }
 
-// All mouse events go on the overlay
-overlay.addEventListener('mousemove', e => {
-  crosshair.style.display = 'block';
-  crosshair.style.left = e.offsetX + 'px';
-  crosshair.style.top  = e.offsetY + 'px';
-  const [x, y] = getCoords(e);
-  document.getElementById('coord-bar').textContent = `x: ${x}%  y: ${y}%`;
+/* ── pin layer events ── */
+pinLayer.addEventListener('mousemove', e => {
+  xhair.style.display = 'block';
+  xhair.style.left = e.offsetX + 'px';
+  xhair.style.top  = e.offsetY + 'px';
+  const [x,y] = coords(e);
+  document.getElementById('coords').textContent = `x: ${x}%  y: ${y}%`;
+});
+pinLayer.addEventListener('mouseleave', () => xhair.style.display = 'none');
+pinLayer.addEventListener('click', e => {
+  if (formPanel.style.display === 'block') return; // form already open
+  const [x,y] = coords(e);
+  pX = parseFloat(x); pY = parseFloat(y);
+  document.getElementById('fcoords').textContent = `${x}%, ${y}%`;
+  formPanel.style.display = 'block';
+  document.getElementById('fname').value = '';
+  document.getElementById('fdesc').value = '';
+  document.getElementById('furl').value  = '';
+  document.getElementById('fname').focus();
+  dropPin('pending-pin', pX, pY, '#ffffff', true);
 });
 
-overlay.addEventListener('mouseleave', () => {
-  crosshair.style.display = 'none';
-});
-
-overlay.addEventListener('click', e => {
-  // Ignore if form is already open
-  if (form.style.display === 'block') return;
-  // Ignore clicks on pins
-  if (e.target.classList.contains('map-pin')) return;
-  const [x, y] = getCoords(e);
-  pendingX = parseFloat(x);
-  pendingY = parseFloat(y);
-  document.getElementById('form-coords').textContent = `${x}%, ${y}%`;
-  form.style.display = 'block';
-  document.getElementById('f-name').focus();
-  addPendingPin(pendingX, pendingY);
-});
-
-function addPendingPin(x, y) {
-  const old = document.getElementById('pending-pin');
+/* ── drop a pin ── */
+function dropPin(id, x, y, color, pending) {
+  const old = document.getElementById(id);
   if (old) old.remove();
-  const pin = document.createElement('div');
-  pin.className = 'map-pin';
-  pin.id = 'pending-pin';
-  pin.style.left       = x + '%';
-  pin.style.top        = y + '%';
-  pin.style.background = '#ffffff';
-  pin.style.borderColor= '#c9a227';
-  pin.style.zIndex     = '30';
-  overlay.appendChild(pin);
+  const d = document.createElement('div');
+  d.className = 'pin' + (pending ? ' pending' : '');
+  d.id = id;
+  d.style.left       = x + '%';
+  d.style.top        = y + '%';
+  d.style.background = color;
+  pinLayer.appendChild(d);
 }
 
-function resetState() {
-  document.getElementById('marker-form').style.display = 'none';
-  document.getElementById('f-name').value = '';
-  document.getElementById('f-desc').value = '';
-  document.getElementById('f-url').value  = '';
+/* ── save marker ── */
+function saveMarker() {
+  const name = document.getElementById('fname').value.trim();
+  if (!name) { document.getElementById('fname').focus(); return; }
+  data.push({ x: pX, y: pY, name, desc: document.getElementById('fdesc').value.trim(), cat: document.getElementById('fcat').value, url: document.getElementById('furl').value.trim() });
+  localStorage.setItem('fe_markers', JSON.stringify(data));
+  closeForm();
+  render();
+}
+
+/* ── close form ── */
+function closeForm() {
+  formPanel.style.display = 'none';
+  pX = pY = null;
   const p = document.getElementById('pending-pin');
   if (p) p.remove();
-  pendingX = null; pendingY = null;
 }
 
-function saveMarker() {
-  const name = document.getElementById('f-name').value.trim();
-  if (!name) { document.getElementById('f-name').focus(); return; }
-  markers.push({
-    x:    pendingX,
-    y:    pendingY,
-    name: name,
-    desc: document.getElementById('f-desc').value.trim(),
-    cat:  document.getElementById('f-cat').value,
-    url:  document.getElementById('f-url').value.trim(),
-  });
-  localStorage.setItem('fe_markers', JSON.stringify(markers));
-  document.getElementById('f-name').value = '';
-  document.getElementById('f-desc').value = '';
-  document.getElementById('f-url').value  = '';
-  form.style.display = 'none';
-  pendingX = pendingY = null;
-  renderPins();
-  renderList();
+/* ── delete marker ── */
+function del(i) {
+  data.splice(i, 1);
+  localStorage.setItem('fe_markers', JSON.stringify(data));
+  render();
 }
 
-function cancelMarker() { resetState(); }
+/* ── render all pins + list ── */
+function render() {
+  // Pins
+  pinLayer.querySelectorAll('.pin:not(.pending)').forEach(p => p.remove());
+  data.forEach((m, i) => dropPin('pin-' + i, m.x, m.y, COLORS[m.cat] || '#c9a227', false));
 
-function deleteMarker(idx) {
-  markers.splice(idx, 1);
-  localStorage.setItem('fe_markers', JSON.stringify(markers));
-  renderPins();
-  renderList();
-}
-
-function renderPins() {
-  // Remove all pins from overlay (keep crosshair)
-  overlay.querySelectorAll('.map-pin').forEach(p => p.remove());
-  markers.forEach((m, i) => {
-    const pin = document.createElement('div');
-    pin.className = 'map-pin' + (i === selectedIdx ? ' active' : '');
-    pin.style.left       = m.x + '%';
-    pin.style.top        = m.y + '%';
-    pin.style.background = CAT_COLORS[m.cat] || '#c9a227';
-    pin.title            = m.name;
-    pin.addEventListener('click', e => {
-      e.stopPropagation();
-      selectedIdx = i;
-      renderPins();
-      renderList();
-      document.getElementById('mi-' + i)?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    });
-    overlay.appendChild(pin);
-  });
-}
-
-function renderList() {
-  const list = document.getElementById('marker-list');
+  // List
+  const list = document.getElementById('mlist');
+  const head = document.getElementById('list-head');
+  document.getElementById('status').textContent = data.length + ' marker' + (data.length !== 1 ? 's' : '');
+  document.getElementById('hint').style.display = data.length ? 'none' : 'block';
+  head.style.display = data.length ? 'block' : 'none';
+  head.textContent = data.length + ' MARKER' + (data.length !== 1 ? 'S' : '') + ' PLACED';
   list.innerHTML = '';
-  if (!markers.length) {
-    list.innerHTML = '<div style="font-size:0.65rem;color:#2a2a2a;padding:0.5rem 0;">No markers yet. Click the map to place one.</div>';
-    return;
-  }
-  const count = document.createElement('div');
-  count.style.cssText = 'font-size:0.65rem;color:#3a3a3a;margin-bottom:0.5rem;letter-spacing:0.1em;';
-  count.textContent = markers.length + ' MARKER' + (markers.length !== 1 ? 'S' : '') + ' PLACED';
-  list.appendChild(count);
-
-  markers.forEach((m, i) => {
+  data.forEach((m, i) => {
     const el = document.createElement('div');
-    el.className = 'marker-item';
-    el.id = 'mi-' + i;
-    if (i === selectedIdx) el.style.borderColor = CAT_COLORS[m.cat] || '#c9a227';
-    el.innerHTML = `
-      <div class="mi-name" style="color:${CAT_COLORS[m.cat]||'#c9a227'}">${m.name}</div>
-      <div class="mi-cat">${m.cat}</div>
-      <div class="mi-pos">x:${m.x}%  y:${m.y}%</div>
-      <div style="margin-top:0.4rem;">
-        <button class="btn" style="font-size:0.6rem;padding:0.2rem 0.5rem;" onclick="selectedIdx=${i};renderPins();renderList();">SELECT</button>
-        <button class="btn btn-danger" style="font-size:0.6rem;padding:0.2rem 0.5rem;" onclick="deleteMarker(${i})">DELETE</button>
-      </div>`;
+    el.className = 'mitem';
+    el.innerHTML = `<div class="mname" style="color:${COLORS[m.cat]||'#c9a227'}">${m.name}</div><div class="mmeta">${m.cat} · x:${m.x}% y:${m.y}%</div><div class="mbtns"><button class="btn red" style="font-size:0.58rem;padding:0.2rem 0.5rem;" onclick="del(${i})">DELETE</button></div>`;
     list.appendChild(el);
   });
 }
 
-function exportJSON() {
-  const json = JSON.stringify(markers, null, 2);
-  document.getElementById('json-output').textContent = json;
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(json).then(() => {
-      event.target.textContent = '✓ COPIED!';
-      setTimeout(() => event.target.textContent = 'COPY JSON TO CLIPBOARD', 2000);
-    });
-  }
+/* ── export ── */
+function doExport() {
+  const json = JSON.stringify(data, null, 2);
+  document.getElementById('json-out').textContent = json;
+  navigator.clipboard?.writeText(json).then(() => {
+    const b = event.target;
+    b.textContent = '✓ COPIED!';
+    setTimeout(() => b.textContent = 'COPY JSON TO CLIPBOARD', 2000);
+  });
 }
 
+/* ── clear all ── */
 function clearAll() {
-  if (!confirm('Delete all ' + markers.length + ' markers?')) return;
-  markers = [];
-  selectedIdx = null;
+  if (!data.length || !confirm('Delete all ' + data.length + ' markers?')) return;
+  data = [];
   localStorage.removeItem('fe_markers');
-  renderPins();
-  renderList();
+  closeForm();
+  render();
 }
 
-// Init — always start with form closed
-form.style.display = 'none';
-const pendingOld = document.getElementById('pending-pin');
-if (pendingOld) pendingOld.remove();
-renderPins();
-renderList();
+// Init
+render();
 </script>
 </body>
 </html>
