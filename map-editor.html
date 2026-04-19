@@ -24,8 +24,8 @@
     /* map-wrap is EXACTLY the image size — no min-width/height */
     #map-wrap { position: relative; display: inline-block; line-height: 0; }
 
-    /* image fills wrap exactly */
-    #map-img { display: block; width: 900px; height: auto; user-select: none; pointer-events: none; }
+    /* image fills wrap exactly — natural size, no fixed width */
+    #map-img { display: block; max-width: none; user-select: none; pointer-events: none; }
 
     /* pin-layer covers image exactly */
     #pin-layer { position: absolute; inset: 0; cursor: crosshair; }
@@ -154,12 +154,11 @@ const xhair       = document.getElementById('xhair');
 const idleMsg     = document.getElementById('idle-msg');
 const markerFields= document.getElementById('marker-fields');
 
-// ── Coord helper: % relative to the IMAGE ──
+// ── Coord helper: offsetX/Y are already relative to pin-layer = image ──
 function pct(e) {
-  const r = document.getElementById('map-img').getBoundingClientRect();
   return [
-    Math.max(0, Math.min(100, (e.clientX - r.left) / r.width  * 100)).toFixed(3),
-    Math.max(0, Math.min(100, (e.clientY - r.top)  / r.height * 100)).toFixed(3)
+    Math.max(0, Math.min(100, e.offsetX / pinLayer.clientWidth  * 100)).toFixed(3),
+    Math.max(0, Math.min(100, e.offsetY / pinLayer.clientHeight * 100)).toFixed(3)
   ];
 }
 
