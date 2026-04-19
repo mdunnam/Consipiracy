@@ -379,6 +379,133 @@ function del(i) {
 
 function persist() { localStorage.setItem('fe_markers', JSON.stringify(markers)); }
 
+// ── Draw a single label (called from render + live preview) ────────────────────
+function drawLabel(m, idx, svgIdOverride) {
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const col   = COLORS[m.cat] || '#ffffff';
+  const fsize = m.labelSize   || 11;
+  const rot   = m.labelRotate || 0;   // degrees, 0 = label sits directly above pin
+  const style = m.labelStyle  || 'flat';
+  const stemLen = 8;                  // px from pin edge to text baseline
+
+  const px = m.x / 100 * pinLayer.offsetWidth;
+  const py = m.y / 100 * pinLayer.offsetHeight;
+
+  const letterSpacing = 2.5;
+  const textLen = m.name.length * (fsize * 0.68) + (m.name.length - 1) * letterSpacing;
+  const pathLen = textLen * 1.6;  // generous so no clipping
+  const half    = pathLen / 2;
+
+  // stem end point: rotate around pin
+  const rotRad = rot * Math.PI / 180;
+  const pinR   = 8; // pin radius px
+  const stemX  = px + Math.sin(rotRad) * (pinR + stemLen);
+  const stemY  = py - Math.cos(rotRad) * (pinR + stemLen);
+
+  // label centre: a bit further from pin
+  const labelDist = pinR + stemLen + 6;
+  const lx = px + Math.sin(rotRad) * (labelDist + 2);
+  const ly = py - Math.cos(rotRad) * (labelDist + 2);
+
+  // arc radius (must be > half or SVG drops it)
+  const r = Math.max(m.labelRadius || 150, half * 0.6 + 10);
+
+  // Build path — all styles start from label centre, rotate to match orientation
+  let d;
+  if (style === 'arc-up') {
+    d = `M ${lx - half} ${ly} A ${r} ${r} 0 0 1 ${lx + half} ${ly}`;
+  } else if (style === 'arc-down') {
+    d = `M ${lx - half} ${ly} A ${r} ${r} 0 0 0 ${lx + half} ${ly}`;
+  } else if (style === 'arc-left') {
+    d = `M ${lx} ${ly - half} A ${r} ${r} 0 0 0 ${lx} ${ly + half}`;
+  } else if (style === 'arc-right') {
+    d = `M ${lx} ${ly - half} A ${r} ${r} 0 0 1 ${lx} ${ly + half}`;
+  } else {
+    d = `M ${lx - half} ${ly} L ${lx + half} ${ly}`;
+  }
+
+  // Wrap everything in a group rotated around the pin
+  const svgId = svgIdOverride || ('svg-label-' + idx);
+  document.getElementById(svgId)?.remove();
+
+  const svg = document.createElementNS(svgNS, 'svg');
+  svg.id = svgId;
+  svg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:11;';
+
+  const g = document.createElementNS(svgNS, 'g');
+  g.setAttribute('transform', `rotate(${rot},${px},${py})`);
+
+  // Stem line
+  const line = document.createElementNS(svgNS, 'line');
+  line.setAttribute('x1', String(px));
+  line.setAttribute('y1', String(py));
+  line.setAttribute('x2', String(stemX - Math.sin(rotRad) * px + Math.sin(rotRad) * px));
+  line.setAttribute('y2', String(stemY + Math.cos(rotRad) * py - Math.cos(rotRad) * py));
+  // Simpler: stem goes from pin to stemY in rotated group coords
+  const stemLine = document.createElementNS(svgNS, 'line');
+  stemLine.setAttribute('x1', String(px));
+  stemLine.setAttribute('y1', String(py - pinR));
+  stemLine.setAttribute('x2', String(px));
+  stemLine.setAttribute('y2', String(py - pinR - stemLen - 2));
+  stemLine.setAttribute('stroke', col + 'aa');
+  stemLine.setAttribute('stroke-width', '1');
+  g.appendChild(stemLine);
+
+  // Text path
+  const defs   = document.createElementNS(svgNS, 'defs');
+  const pathEl = document.createElementNS(svgNS, 'path');
+  const pathId = 'lp-' + svgId;
+  pathEl.setAttribute('id', pathId);
+  // In rotated group: recalc lx/ly relative to unrotated coords
+  // Since the group rotates around px,py we use unrotated offsets
+  const offX = Math.sin(rotRad) * (labelDist + 2);
+  const offY = -Math.cos(rotRad) * (labelDist + 2);
+  let dp;
+  if (style === 'arc-up') {
+    dp = `M ${px + offX - half} ${py + offY} A ${r} ${r} 0 0 1 ${px + offX + half} ${py + offY}`;
+  } else if (style === 'arc-down') {
+    dp = `M ${px + offX - half} ${py + offY} A ${r} ${r} 0 0 0 ${px + offX + half} ${py + offY}`;
+  } else if (style === 'arc-left') {
+    dp = `M ${px + offX} ${py + offY - half} A ${r} ${r} 0 0 0 ${px + offX} ${py + offY + half}`;
+  } else if (style === 'arc-right') {
+    dp = `M ${px + offX} ${py + offY - half} A ${r} ${r} 0 0 1 ${px + offX} ${py + offY + half}`;
+  } else {
+    dp = `M ${px + offX - half} ${py + offY - 2} L ${px + offX + half} ${py + offY - 2}`;
+  }
+  pathEl.setAttribute('d', dp);
+  defs.appendChild(pathEl);
+  svg.appendChild(defs);
+
+  const mkText = (isOutline) => {
+    const t  = document.createElementNS(svgNS, 'text');
+    const tp = document.createElementNS(svgNS, 'textPath');
+    tp.setAttribute('href', '#' + pathId);
+    tp.setAttribute('startOffset', '50%');
+    tp.textContent = m.name.toUpperCase();
+    t.setAttribute('font-family', 'Cinzel, Georgia, serif');
+    t.setAttribute('font-size', String(fsize));
+    t.setAttribute('font-weight', '700');
+    t.setAttribute('letter-spacing', String(letterSpacing));
+    t.setAttribute('text-anchor', 'middle');
+    if (isOutline) {
+      t.setAttribute('stroke', 'rgba(0,0,0,0.95)');
+      t.setAttribute('stroke-width', '3.5');
+      t.setAttribute('stroke-linejoin', 'round');
+      t.setAttribute('fill', 'none');
+    } else {
+      t.setAttribute('fill', '#ffffff');
+      t.style.filter = `drop-shadow(0 0 5px ${col})`;
+    }
+    t.appendChild(tp);
+    return t;
+  };
+
+  g.appendChild(mkText(true));
+  g.appendChild(mkText(false));
+  svg.appendChild(g);
+  pinLayer.appendChild(svg);
+}
+
 // ── Render saved pins + list ───────────────────────────────────────────────
 function render() {
   // Remove saved pins + labels (keep pending)
@@ -393,81 +520,7 @@ function render() {
     pinLayer.appendChild(d);
 
     if (m.showLabel && m.name) {
-      const style  = m.labelStyle  || 'flat';
-      const fsize  = m.labelSize   || 11;
-      const col    = COLORS[m.cat] || '#ffffff';
-
-      // Convert % position to px (recalculated every render so zoom works)
-      const px = m.x / 100 * pinLayer.offsetWidth;
-      const py = m.y / 100 * pinLayer.offsetHeight;
-
-      // Estimate text length generously so no letters clip
-      const letterSpacing = 2.5;
-      const textLen = m.name.length * (fsize * 0.68) + (m.name.length - 1) * letterSpacing;
-      const pathLen = textLen * 1.5; // 50% extra padding on each side
-      const half    = pathLen / 2;
-
-      // Radius must be >= half-chord or SVG silently drops the arc
-      const r = Math.max(m.labelRadius || 120, half + 20);
-
-      // Build arc path
-      let d;
-      if (style === 'arc-up') {
-        // sweep=1 clockwise: arc bulges upward in screen coords
-        d = `M ${px - half} ${py - 14} A ${r} ${r} 0 0 1 ${px + half} ${py - 14}`;
-      } else if (style === 'arc-down') {
-        // sweep=0 counter-clockwise: arc dips downward
-        d = `M ${px - half} ${py + 4} A ${r} ${r} 0 0 0 ${px + half} ${py + 4}`;
-      } else if (style === 'arc-left') {
-        d = `M ${px - 14} ${py - half} A ${r} ${r} 0 0 0 ${px - 14} ${py + half}`;
-      } else if (style === 'arc-right') {
-        d = `M ${px - 14} ${py - half} A ${r} ${r} 0 0 1 ${px - 14} ${py + half}`;
-      } else {
-        // flat
-        d = `M ${px - half} ${py - 18} L ${px + half} ${py - 18}`;
-      }
-
-      // Build SVG — one per marker, covers full pin-layer
-      const svgNS = 'http://www.w3.org/2000/svg';
-      const svg = document.createElementNS(svgNS, 'svg');
-      svg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:11;';
-      svg.setAttribute('id', 'svg-label-' + i);
-
-      const defs   = document.createElementNS(svgNS, 'defs');
-      const pathEl = document.createElementNS(svgNS, 'path');
-      const pathId = 'lp' + Date.now() + i;
-      pathEl.setAttribute('id', pathId);
-      pathEl.setAttribute('d', d);
-      defs.appendChild(pathEl);
-      svg.appendChild(defs);
-
-      const mkText = (isOutline) => {
-        const t  = document.createElementNS(svgNS, 'text');
-        const tp = document.createElementNS(svgNS, 'textPath');
-        tp.setAttribute('href', '#' + pathId);
-        tp.setAttribute('startOffset', '50%');
-        tp.textContent = m.name.toUpperCase();
-        t.setAttribute('font-family', 'Cinzel, Georgia, serif');
-        t.setAttribute('font-size', String(fsize));
-        t.setAttribute('font-weight', '700');
-        t.setAttribute('letter-spacing', String(letterSpacing));
-        t.setAttribute('text-anchor', 'middle');
-        if (isOutline) {
-          t.setAttribute('stroke', 'rgba(0,0,0,0.95)');
-          t.setAttribute('stroke-width', '3.5');
-          t.setAttribute('stroke-linejoin', 'round');
-          t.setAttribute('fill', 'none');
-        } else {
-          t.setAttribute('fill', '#ffffff');
-          t.style.filter = `drop-shadow(0 0 5px ${col})`;
-        }
-        t.appendChild(tp);
-        return t;
-      };
-
-      svg.appendChild(mkText(true));
-      svg.appendChild(mkText(false));
-      pinLayer.appendChild(svg);
+      drawLabel(m, i);
     }
   });
 
@@ -495,22 +548,21 @@ function render() {
 // ── Edit label settings for existing marker ────────────────────────────────────────
 function editLabel(i) {
   const m = markers[i];
-  // Build a small inline editor in the list item
-  const existing = document.getElementById('label-edit-panel');
-  if (existing) existing.remove();
+  document.getElementById('label-edit-panel')?.remove();
+  document.getElementById('label-edit-backdrop')?.remove();
 
   const panel = document.createElement('div');
   panel.id = 'label-edit-panel';
-  panel.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999;background:#0a0a0a;border:1px solid rgba(56,189,248,0.4);padding:1.2rem;width:280px;box-shadow:0 0 40px rgba(0,0,0,0.9);';
+  panel.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999;background:#0a0a0a;border:1px solid rgba(56,189,248,0.4);padding:1.2rem;width:300px;box-shadow:0 0 40px rgba(0,0,0,0.9);max-height:90vh;overflow-y:auto;';
   panel.innerHTML = `
     <div style="font-size:0.7rem;color:#38bdf8;letter-spacing:0.15em;margin-bottom:0.8rem;">EDIT LABEL — ${m.name}</div>
-    <div style="margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem;">
-      <input type="checkbox" id="el-show" ${m.showLabel ? 'checked' : ''} style="accent-color:#c9a227;" />
+    <div style="margin-bottom:0.6rem;display:flex;align-items:center;gap:0.5rem;">
+      <input type="checkbox" id="el-show" ${m.showLabel?'checked':''} style="accent-color:#c9a227;cursor:pointer;" onchange="livePreview(${i})" />
       <label for="el-show" style="font-size:0.62rem;color:#7a7a7a;cursor:pointer;">Show label on map</label>
     </div>
     <div style="margin-bottom:0.5rem;">
       <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Style</label>
-      <select id="el-style" style="width:100%;background:#050505;border:1px solid #222;color:#d8d8d8;padding:0.35rem 0.5rem;font-family:'Share Tech Mono',monospace;font-size:0.7rem;outline:none;">
+      <select id="el-style" onchange="livePreview(${i})" style="width:100%;background:#050505;border:1px solid #222;color:#d8d8d8;padding:0.35rem 0.5rem;font-family:'Share Tech Mono',monospace;font-size:0.7rem;outline:none;">
         <option value="flat" ${(m.labelStyle||'flat')==='flat'?'selected':''}>Flat (straight)</option>
         <option value="arc-up" ${m.labelStyle==='arc-up'?'selected':''}>Arc — curves up</option>
         <option value="arc-down" ${m.labelStyle==='arc-down'?'selected':''}>Arc — curves down</option>
@@ -519,41 +571,70 @@ function editLabel(i) {
       </select>
     </div>
     <div style="margin-bottom:0.5rem;">
-      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Curve radius: <span id="el-rval" style="color:#c9a227;">${m.labelRadius||120}px</span></label>
-      <input type="range" id="el-radius" min="40" max="400" value="${m.labelRadius||120}" step="10"
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Rotation around pin: <span id="el-rotval" style="color:#c9a227;">${m.labelRotate||0}°</span></label>
+      <input type="range" id="el-rot" min="0" max="359" value="${m.labelRotate||0}" step="1"
         style="width:100%;accent-color:#c9a227;"
-        oninput="document.getElementById('el-rval').textContent=this.value+'px'" />
+        oninput="document.getElementById('el-rotval').textContent=this.value+'°';livePreview(${i})" />
+    </div>
+    <div style="margin-bottom:0.5rem;">
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Curve radius: <span id="el-rval" style="color:#c9a227;">${m.labelRadius||150}px</span></label>
+      <input type="range" id="el-radius" min="40" max="600" value="${m.labelRadius||150}" step="10"
+        style="width:100%;accent-color:#c9a227;"
+        oninput="document.getElementById('el-rval').textContent=this.value+'px';livePreview(${i})" />
     </div>
     <div style="margin-bottom:0.8rem;">
       <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Font size: <span id="el-fval" style="color:#c9a227;">${m.labelSize||11}px</span></label>
-      <input type="range" id="el-fsize" min="7" max="24" value="${m.labelSize||11}" step="1"
+      <input type="range" id="el-fsize" min="7" max="28" value="${m.labelSize||11}" step="1"
         style="width:100%;accent-color:#c9a227;"
-        oninput="document.getElementById('el-fval').textContent=this.value+'px'" />
+        oninput="document.getElementById('el-fval').textContent=this.value+'px';livePreview(${i})" />
     </div>
     <div style="display:flex;gap:0.5rem;">
-      <button class="btn" style="flex:1;" onclick="applyLabelEdit(${i})">APPLY</button>
-      <button class="btn red" style="flex:1;" onclick="document.getElementById('label-edit-panel').remove()">CANCEL</button>
+      <button class="btn" style="flex:1;" onclick="applyLabelEdit(${i})">SAVE</button>
+      <button class="btn red" style="flex:1;" onclick="cancelLabelEdit(${i})">CANCEL</button>
     </div>
   `;
 
-  // Close on backdrop click
   const backdrop = document.createElement('div');
   backdrop.id = 'label-edit-backdrop';
-  backdrop.style.cssText = 'position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,0.6);';
-  backdrop.onclick = () => { panel.remove(); backdrop.remove(); };
+  backdrop.style.cssText = 'position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,0.5);';
+  backdrop.onclick = () => cancelLabelEdit(i);
   document.body.appendChild(backdrop);
   document.body.appendChild(panel);
+
+  // Show live preview immediately
+  livePreview(i);
+}
+
+// Read current panel values into a temp marker and draw it
+function livePreview(i) {
+  const show = document.getElementById('el-show')?.checked;
+  if (!show) { document.getElementById('svg-label-' + i)?.remove(); return; }
+  const tmp = Object.assign({}, markers[i], {
+    showLabel:   true,
+    labelStyle:  document.getElementById('el-style')?.value   || markers[i].labelStyle,
+    labelRotate: parseInt(document.getElementById('el-rot')?.value    || markers[i].labelRotate || 0),
+    labelRadius: parseInt(document.getElementById('el-radius')?.value || markers[i].labelRadius || 150),
+    labelSize:   parseInt(document.getElementById('el-fsize')?.value  || markers[i].labelSize   || 11),
+  });
+  drawLabel(tmp, i);
 }
 
 function applyLabelEdit(i) {
   markers[i].showLabel   = document.getElementById('el-show').checked;
   markers[i].labelStyle  = document.getElementById('el-style').value;
+  markers[i].labelRotate = parseInt(document.getElementById('el-rot').value);
   markers[i].labelRadius = parseInt(document.getElementById('el-radius').value);
   markers[i].labelSize   = parseInt(document.getElementById('el-fsize').value);
   persist();
   render();
   document.getElementById('label-edit-panel')?.remove();
   document.getElementById('label-edit-backdrop')?.remove();
+}
+
+function cancelLabelEdit(i) {
+  document.getElementById('label-edit-panel')?.remove();
+  document.getElementById('label-edit-backdrop')?.remove();
+  render(); // restore original
 }
 
 function clearAll() {
