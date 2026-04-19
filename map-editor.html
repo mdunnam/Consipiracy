@@ -596,7 +596,36 @@ function editLabel(i) {
   panel.id = 'label-edit-panel';
   panel.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999;background:#0a0a0a;border:1px solid rgba(56,189,248,0.4);padding:1.2rem;width:300px;box-shadow:0 0 40px rgba(0,0,0,0.9);max-height:90vh;overflow-y:auto;';
   panel.innerHTML = `
-    <div style="font-size:0.7rem;color:#38bdf8;letter-spacing:0.15em;margin-bottom:0.8rem;">EDIT LABEL — ${m.name}</div>
+    <div style="font-size:0.7rem;color:#38bdf8;letter-spacing:0.15em;margin-bottom:0.8rem;">EDIT MARKER — ${m.name}</div>
+    <div style="margin-bottom:0.5rem;">
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Name</label>
+      <input type="text" id="el-name" value="${m.name}"
+        style="width:100%;background:#050505;border:1px solid #222;color:#d8d8d8;padding:0.35rem 0.5rem;font-family:'Share Tech Mono',monospace;font-size:0.7rem;outline:none;" />
+    </div>
+    <div style="margin-bottom:0.5rem;">
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Description (hover text)</label>
+      <textarea id="el-desc" style="width:100%;background:#050505;border:1px solid #222;color:#d8d8d8;padding:0.35rem 0.5rem;font-family:'Share Tech Mono',monospace;font-size:0.7rem;outline:none;height:48px;resize:vertical;">${m.desc||''}</textarea>
+    </div>
+    <div style="margin-bottom:0.5rem;">
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Category</label>
+      <select id="el-cat" style="width:100%;background:#050505;border:1px solid #222;color:#d8d8d8;padding:0.35rem 0.5rem;font-family:'Share Tech Mono',monospace;font-size:0.7rem;outline:none;">
+        <option value="structural" ${m.cat==='structural'?'selected':''}>Structural Ring</option>
+        <option value="landmass"   ${m.cat==='landmass'?'selected':''}>Landmass</option>
+        <option value="evidence"   ${m.cat==='evidence'?'selected':''}>Evidence Site</option>
+        <option value="suppressed" ${m.cat==='suppressed'?'selected':''}>Suppressed / Restricted</option>
+        <option value="ancient"    ${m.cat==='ancient'?'selected':''}>Ancient / Sacred</option>
+        <option value="anomalous"  ${m.cat==='anomalous'?'selected':''}>Anomalous Zone</option>
+        <option value="boundary"   ${m.cat==='boundary'?'selected':''}>Boundary</option>
+        <option value="ocean"      ${m.cat==='ocean'?'selected':''}>Ocean</option>
+      </select>
+    </div>
+    <div style="margin-bottom:0.6rem;">
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">URL</label>
+      <input type="text" id="el-url" value="${m.url||''}" placeholder="topics/flat-earth/..."
+        style="width:100%;background:#050505;border:1px solid #222;color:#d8d8d8;padding:0.35rem 0.5rem;font-family:'Share Tech Mono',monospace;font-size:0.7rem;outline:none;" />
+    </div>
+    <hr style="border-color:#1a1a1a;margin:0.6rem 0;" />
+    <div style="font-size:0.62rem;color:#c9a227;letter-spacing:0.12em;margin-bottom:0.6rem;">LABEL SETTINGS</div>
     <div style="margin-bottom:0.6rem;display:flex;align-items:center;gap:0.5rem;">
       <input type="checkbox" id="el-show" ${m.showLabel?'checked':''} style="accent-color:#c9a227;cursor:pointer;" onchange="livePreview(${i})" />
       <label for="el-show" style="font-size:0.62rem;color:#7a7a7a;cursor:pointer;">Show label on map</label>
@@ -713,6 +742,7 @@ function livePreview(i) {
   const show = document.getElementById('el-show')?.checked;
   if (!show) { document.getElementById('svg-label-' + i)?.remove(); return; }
   const tmp = Object.assign({}, markers[i], {
+    name: document.getElementById('el-name')?.value || markers[i].name,
     showLabel:    true,
     labelStyle:   document.getElementById('el-style')?.value    || markers[i].labelStyle,
     labelRotate:  parseInt(document.getElementById('el-rot')?.value     || markers[i].labelRotate   || 0),
@@ -732,7 +762,11 @@ function livePreview(i) {
 }
 
 function applyLabelEdit(i) {
-  markers[i].showLabel   = document.getElementById('el-show').checked;
+  markers[i].name       = document.getElementById('el-name').value.trim() || markers[i].name;
+  markers[i].desc       = document.getElementById('el-desc').value.trim();
+  markers[i].cat        = document.getElementById('el-cat').value;
+  markers[i].url        = document.getElementById('el-url').value.trim();
+  markers[i].showLabel  = document.getElementById('el-show').checked;
   markers[i].labelStyle  = document.getElementById('el-style').value;
   markers[i].labelRotate = parseInt(document.getElementById('el-rot').value);
   markers[i].labelDistance = parseInt(document.getElementById('el-dist').value);
