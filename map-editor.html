@@ -491,10 +491,75 @@ function render() {
       <div class="mmeta">${m.cat} &middot; ${m.x}%, ${m.y}%</div>
       <div style="margin-top:0.3rem;display:flex;gap:0.3rem;flex-wrap:wrap;">
         <button class="btn" style="font-size:0.56rem;padding:0.15rem 0.4rem;" onclick="toggleLabel(${i})">${m.showLabel ? 'HIDE LABEL' : 'SHOW LABEL'}</button>
+        <button class="btn" style="font-size:0.56rem;padding:0.15rem 0.4rem;color:#38bdf8;border-color:rgba(56,189,248,0.4);" onclick="editLabel(${i})">EDIT LABEL</button>
         <button class="btn red" style="font-size:0.56rem;padding:0.15rem 0.4rem;" onclick="del(${i})">DELETE</button>
       </div>`;
     list.appendChild(el);
   });
+}
+
+// ── Edit label settings for existing marker ────────────────────────────────────────
+function editLabel(i) {
+  const m = markers[i];
+  // Build a small inline editor in the list item
+  const existing = document.getElementById('label-edit-panel');
+  if (existing) existing.remove();
+
+  const panel = document.createElement('div');
+  panel.id = 'label-edit-panel';
+  panel.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999;background:#0a0a0a;border:1px solid rgba(56,189,248,0.4);padding:1.2rem;width:280px;box-shadow:0 0 40px rgba(0,0,0,0.9);';
+  panel.innerHTML = `
+    <div style="font-size:0.7rem;color:#38bdf8;letter-spacing:0.15em;margin-bottom:0.8rem;">EDIT LABEL — ${m.name}</div>
+    <div style="margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem;">
+      <input type="checkbox" id="el-show" ${m.showLabel ? 'checked' : ''} style="accent-color:#c9a227;" />
+      <label for="el-show" style="font-size:0.62rem;color:#7a7a7a;cursor:pointer;">Show label on map</label>
+    </div>
+    <div style="margin-bottom:0.5rem;">
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Style</label>
+      <select id="el-style" style="width:100%;background:#050505;border:1px solid #222;color:#d8d8d8;padding:0.35rem 0.5rem;font-family:'Share Tech Mono',monospace;font-size:0.7rem;outline:none;">
+        <option value="flat" ${(m.labelStyle||'flat')==='flat'?'selected':''}>Flat (straight)</option>
+        <option value="arc-up" ${m.labelStyle==='arc-up'?'selected':''}>Arc — curves up</option>
+        <option value="arc-down" ${m.labelStyle==='arc-down'?'selected':''}>Arc — curves down</option>
+        <option value="arc-left" ${m.labelStyle==='arc-left'?'selected':''}>Arc — curves left</option>
+        <option value="arc-right" ${m.labelStyle==='arc-right'?'selected':''}>Arc — curves right</option>
+      </select>
+    </div>
+    <div style="margin-bottom:0.5rem;">
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Curve radius: <span id="el-rval" style="color:#c9a227;">${m.labelRadius||120}px</span></label>
+      <input type="range" id="el-radius" min="40" max="400" value="${m.labelRadius||120}" step="10"
+        style="width:100%;accent-color:#c9a227;"
+        oninput="document.getElementById('el-rval').textContent=this.value+'px'" />
+    </div>
+    <div style="margin-bottom:0.8rem;">
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Font size: <span id="el-fval" style="color:#c9a227;">${m.labelSize||11}px</span></label>
+      <input type="range" id="el-fsize" min="7" max="24" value="${m.labelSize||11}" step="1"
+        style="width:100%;accent-color:#c9a227;"
+        oninput="document.getElementById('el-fval').textContent=this.value+'px'" />
+    </div>
+    <div style="display:flex;gap:0.5rem;">
+      <button class="btn" style="flex:1;" onclick="applyLabelEdit(${i})">APPLY</button>
+      <button class="btn red" style="flex:1;" onclick="document.getElementById('label-edit-panel').remove()">CANCEL</button>
+    </div>
+  `;
+
+  // Close on backdrop click
+  const backdrop = document.createElement('div');
+  backdrop.id = 'label-edit-backdrop';
+  backdrop.style.cssText = 'position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,0.6);';
+  backdrop.onclick = () => { panel.remove(); backdrop.remove(); };
+  document.body.appendChild(backdrop);
+  document.body.appendChild(panel);
+}
+
+function applyLabelEdit(i) {
+  markers[i].showLabel   = document.getElementById('el-show').checked;
+  markers[i].labelStyle  = document.getElementById('el-style').value;
+  markers[i].labelRadius = parseInt(document.getElementById('el-radius').value);
+  markers[i].labelSize   = parseInt(document.getElementById('el-fsize').value);
+  persist();
+  render();
+  document.getElementById('label-edit-panel')?.remove();
+  document.getElementById('label-edit-backdrop')?.remove();
 }
 
 function clearAll() {
