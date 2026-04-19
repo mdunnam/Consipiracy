@@ -121,7 +121,7 @@
       5. Click <b>EXPORT JSON</b> when done<br>
       6. Send the JSON to Axis to activate the live map
     </div>
-    <button class="btn" style="margin-bottom:1rem;font-size:0.62rem;" onclick="form.style.display='none';pendingX=null;pendingY=null;document.getElementById('pending-pin')?.remove();">✕ CLOSE FORM / RESET STATE</button>
+    <button class="btn" style="margin-bottom:1rem;font-size:0.62rem;" onclick="resetState()">✕ CLOSE FORM / RESET STATE</button>
 
     <div class="marker-form" id="marker-form">
       <h3>NEW MARKER — <span id="form-coords"></span></h3>
@@ -243,6 +243,16 @@ function addPendingPin(x, y) {
   overlay.appendChild(pin);
 }
 
+function resetState() {
+  document.getElementById('marker-form').style.display = 'none';
+  document.getElementById('f-name').value = '';
+  document.getElementById('f-desc').value = '';
+  document.getElementById('f-url').value  = '';
+  const p = document.getElementById('pending-pin');
+  if (p) p.remove();
+  pendingX = null; pendingY = null;
+}
+
 function saveMarker() {
   const name = document.getElementById('f-name').value.trim();
   if (!name) { document.getElementById('f-name').focus(); return; }
@@ -264,12 +274,7 @@ function saveMarker() {
   renderList();
 }
 
-function cancelMarker() {
-  form.style.display = 'none';
-  pendingX = pendingY = null;
-  const p = document.getElementById('pending-pin');
-  if (p) p.remove();
-}
+function cancelMarker() { resetState(); }
 
 function deleteMarker(idx) {
   markers.splice(idx, 1);
