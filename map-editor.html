@@ -597,7 +597,7 @@ function editLabel(i) {
     </div>
     <div style="margin-bottom:0.8rem;">
       <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Font size: <span id="el-fval" style="color:#c9a227;">${m.labelSize||11}px</span></label>
-      <input type="range" id="el-fsize" min="7" max="28" value="${m.labelSize||11}" step="1"
+      <input type="range" id="el-fsize" min="7" max="120" value="${m.labelSize||11}" step="1"
         style="width:100%;accent-color:#c9a227;"
         oninput="document.getElementById('el-fval').textContent=this.value+'px';livePreview(${i})" />
     </div>
