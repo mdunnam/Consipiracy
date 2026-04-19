@@ -383,7 +383,7 @@ function persist() { localStorage.setItem('fe_markers', JSON.stringify(markers))
 function drawLabel(m, idx) {
   const svgNS = 'http://www.w3.org/2000/svg';
   const col   = COLORS[m.cat] || '#ffffff';
-  const fsize = m.labelSize     || 11;
+  const fsize = (m.labelSize || 11) * zoomScale;  // scale with zoom
   const rot   = m.labelRotate   || 0;    // 0=above, 90=right, 180=below, 270=left
   const style = m.labelStyle    || 'flat';
   const dist  = m.labelDistance || 30;   // px pin-center to text baseline (fixed, unaffected by other params)
@@ -427,7 +427,7 @@ function drawLabel(m, idx) {
   stem.setAttribute('x2', String(px));
   stem.setAttribute('y2', String(lcy + fsize * 0.6));
   stem.setAttribute('stroke', col + '99');
-  stem.setAttribute('stroke-width', '1');
+  stem.setAttribute('stroke-width', String(Math.max(0.5, zoomScale)));
   g.appendChild(stem);
 
   // Text path
@@ -452,7 +452,7 @@ function drawLabel(m, idx) {
     t.setAttribute('text-anchor', 'middle');
     if (isOutline) {
       t.setAttribute('stroke', 'rgba(0,0,0,0.95)');
-      t.setAttribute('stroke-width', '3.5');
+      t.setAttribute('stroke-width', String(Math.max(1, 3.5 * zoomScale)));
       t.setAttribute('stroke-linejoin', 'round');
       t.setAttribute('fill', 'none');
     } else {
@@ -619,11 +619,13 @@ function clearAll() {
 // ── Zoom ─────────────────────────────────────────────────────────────────
 const ZOOM_STEPS = [25, 33, 50, 75, 100, 125, 150, 200, 300, 400];
 let zoomIdx = 4; // start at 100%
+let zoomScale = 1.0; // current scale factor (1.0 = 100%)
 const mapImg = document.getElementById('map-img');
 const naturalW = 4096;
 
 function applyZoom() {
   const pct = ZOOM_STEPS[zoomIdx];
+  zoomScale = pct / 100;
   mapImg.style.width = (naturalW * pct / 100) + 'px';
   document.getElementById('zoom-display').textContent = pct + '%';
   // Re-render labels so px positions match new zoom
