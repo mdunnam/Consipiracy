@@ -783,23 +783,63 @@ function applyZoom() {
 }
 
 function zoom(dir) {
+  const scroll = document.getElementById('map-scroll');
+
   if (dir === 0) {
-    const avail = document.getElementById('map-scroll').clientWidth;
+    // FIT
+    const avail = scroll.clientWidth;
     let best = 0;
     for (let i = 0; i < ZOOM_STEPS.length; i++) {
       if ((naturalW * ZOOM_STEPS[i] / 100) <= avail) best = i;
     }
     zoomIdx = best;
-  } else {
-    zoomIdx = Math.max(0, Math.min(ZOOM_STEPS.length - 1, zoomIdx + dir));
+    applyZoom();
+    return;
   }
+
+  // Zoom toward centre of current viewport
+  const cx = scroll.scrollLeft + scroll.clientWidth  / 2;
+  const cy = scroll.scrollTop  + scroll.clientHeight / 2;
+  const fracX = cx / mapImg.offsetWidth;
+  const fracY = cy / mapImg.offsetHeight;
+
+  zoomIdx = Math.max(0, Math.min(ZOOM_STEPS.length - 1, zoomIdx + dir));
   applyZoom();
+
+  scroll.scrollLeft = fracX * mapImg.offsetWidth  - scroll.clientWidth  / 2;
+  scroll.scrollTop  = fracY * mapImg.offsetHeight - scroll.clientHeight / 2;
 }
 
 document.getElementById('map-scroll').addEventListener('wheel', e => {
   if (!e.ctrlKey) return;
   e.preventDefault();
-  zoom(e.deltaY < 0 ? 1 : -1);
+
+  const scroll = document.getElementById('map-scroll');
+  const rect   = scroll.getBoundingClientRect();
+
+  // Mouse position relative to scroll container
+  const mouseX = e.clientX - rect.left;
+  const mouseY = e.clientY - rect.top;
+
+  // Fraction of the scroll content the mouse is over (0..1)
+  const fracX = (scroll.scrollLeft + mouseX) / mapImg.offsetWidth;
+  const fracY = (scroll.scrollTop  + mouseY) / mapImg.offsetHeight;
+
+  // Apply zoom
+  const dir = e.deltaY < 0 ? 1 : -1;
+  zoomIdx = Math.max(0, Math.min(ZOOM_STEPS.length - 1, zoomIdx + dir));
+  zoomScale = ZOOM_STEPS[zoomIdx] / 100;
+  mapImg.style.width = (naturalW * zoomScale) + 'px';
+  document.getElementById('zoom-display').textContent = ZOOM_STEPS[zoomIdx] + '%';
+
+  // After zoom, scroll so the mouse stays over the same map point
+  // New content size
+  const newW = mapImg.offsetWidth;
+  const newH = mapImg.offsetHeight;
+  scroll.scrollLeft = fracX * newW - mouseX;
+  scroll.scrollTop  = fracY * newH - mouseY;
+
+  render();
 }, { passive: false });
 
 window.addEventListener('load', () => zoom(0));
