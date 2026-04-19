@@ -419,7 +419,7 @@ function buildPath(svgNS, id, lcx, lcy, half, r, style) {
   return el;
 }
 
-function addTextOnPath(svgNS, pathId, text, fontSize, letterSp, fillColor, outlineColor, isOutline, zs, shadowColor, shadowBlur, shadowOpacity) {
+function addTextOnPath(svgNS, pathId, text, fontSize, letterSp, fillColor, outlineColor, isOutline, zs, shadowFilterId) {
   const t  = document.createElementNS(svgNS, 'text');
   const tp = document.createElementNS(svgNS, 'textPath');
   tp.setAttribute('href', '#' + pathId);
@@ -437,14 +437,8 @@ function addTextOnPath(svgNS, pathId, text, fontSize, letterSp, fillColor, outli
     t.setAttribute('fill', 'none');
   } else {
     t.setAttribute('fill', fillColor);
-    if (shadowBlur > 0) {
-      const sr = parseInt((shadowColor||'#000000').slice(1,3),16);
-      const sg = parseInt((shadowColor||'#000000').slice(3,5),16);
-      const sb2= parseInt((shadowColor||'#000000').slice(5,7),16);
-      const so = shadowOpacity ?? 0.8;
-      t.style.filter = `drop-shadow(0 0 ${shadowBlur * zs}px rgba(${sr},${sg},${sb2},${so}))`;
-    } else {
-      t.style.filter = 'none';
+    if (shadowBlur > 0 && shadowFilterId) {
+      t.setAttribute('filter', `url(#${shadowFilterId})`);
     }
   }
   t.appendChild(tp);
@@ -501,26 +495,52 @@ function drawLabel(m, idx) {
   stem.setAttribute('stroke-width', String(Math.max(0.5, zoomScale)));
   g.appendChild(stem);
 
-  // Defs for paths
+  // Defs: paths + SVG feFlood shadow filter
   const defs = document.createElementNS(svgNS, 'defs');
-  const pid  = 'lp-' + idx;
+  const pid  = 'lp-'  + idx;
   const spid = 'lps-' + idx;
+  const sfid = 'sf-'  + idx;
   defs.appendChild(buildPath(svgNS, pid,  lcx, lcy,                   half,    r,    style));
   if (hasSub)
     defs.appendChild(buildPath(svgNS, spid, lcx, lcy + fsize + subOff, subHalf, subR, subStyle));
+
+  // Build proper SVG shadow filter (feFlood+feComposite+feGaussianBlur+feMerge)
+  const sc   = m.shadowColor   || '#000000';
+  const sbpx = (m.shadowBlur   ?? 4) * zoomScale;
+  const so   = m.shadowOpacity ?? 0.8;
+  let filtRef = null;
+  if (sbpx > 0) {
+    filtRef = sfid;
+    const filt = document.createElementNS(svgNS, 'filter');
+    filt.setAttribute('id', sfid);
+    filt.setAttribute('x', '-60%'); filt.setAttribute('width',  '220%');
+    filt.setAttribute('y', '-60%'); filt.setAttribute('height', '220%');
+    const mk = (tag, attrs) => {
+      const el = document.createElementNS(svgNS, tag);
+      Object.entries(attrs).forEach(([k,v]) => el.setAttribute(k, v));
+      return el;
+    };
+    filt.appendChild(mk('feFlood',      { 'flood-color': sc, 'flood-opacity': String(so), result: 'color' }));
+    filt.appendChild(mk('feComposite',  { in: 'color', in2: 'SourceAlpha', operator: 'in', result: 'shaped' }));
+    filt.appendChild(mk('feGaussianBlur',{ in: 'shaped', stdDeviation: String(sbpx), result: 'blurred' }));
+    filt.appendChild(mk('feOffset',     { dx: '0', dy: '0', result: 'offset' }));
+    const merge = document.createElementNS(svgNS, 'feMerge');
+    merge.appendChild(mk('feMergeNode', { in: 'offset' }));
+    merge.appendChild(mk('feMergeNode', { in: 'SourceGraphic' }));
+    filt.appendChild(merge);
+    defs.appendChild(filt);
+  }
+
   svg.appendChild(defs);
 
-  // Main text (outline then fill)
-  const sc = m.shadowColor || '#000000';
-  const sb = m.shadowBlur  ?? 4;
-  const so = m.shadowOpacity ?? 0.8;
-  g.appendChild(addTextOnPath(svgNS, pid, m.name.toUpperCase(),    fsize,   letterSpacing, fill,    outline, true,  zoomScale, sc, sb, so));
-  g.appendChild(addTextOnPath(svgNS, pid, m.name.toUpperCase(),    fsize,   letterSpacing, fill,    outline, false, zoomScale, sc, sb, so));
+  // Main text
+  g.appendChild(addTextOnPath(svgNS, pid,  m.name.toUpperCase(),       fsize,   letterSpacing, fill,    outline, true,  zoomScale, null));
+  g.appendChild(addTextOnPath(svgNS, pid,  m.name.toUpperCase(),       fsize,   letterSpacing, fill,    outline, false, zoomScale, filtRef));
 
   // Subtitle
   if (hasSub) {
-    g.appendChild(addTextOnPath(svgNS, spid, m.subtitle.toUpperCase(), subSize, 1.5, subFill, '#000000', true,  zoomScale, sc, sb, so));
-    g.appendChild(addTextOnPath(svgNS, spid, m.subtitle.toUpperCase(), subSize, 1.5, subFill, '#000000', false, zoomScale, sc, sb, so));
+    g.appendChild(addTextOnPath(svgNS, spid, m.subtitle.toUpperCase(), subSize, 1.5, subFill, '#000000', true,  zoomScale, null));
+    g.appendChild(addTextOnPath(svgNS, spid, m.subtitle.toUpperCase(), subSize, 1.5, subFill, '#000000', false, zoomScale, filtRef));
   }
 
   svg.appendChild(g);
