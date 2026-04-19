@@ -88,6 +88,34 @@
       border-color: #c9a227 !important;
       box-shadow: 0 0 8px rgba(201,162,39,0.8);
     }
+    /* flag label attached to pin */
+    .pin-label {
+      position: absolute;
+      pointer-events: none;
+      z-index: 11;
+      transform: translate(-50%, -100%);
+      margin-top: -10px;
+      white-space: nowrap;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .pin-label-text {
+      background: rgba(4,4,4,0.82);
+      border: 1px solid rgba(201,162,39,0.5);
+      color: #c9a227;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      padding: 1px 5px;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      line-height: 1.5;
+    }
+    .pin-label-stem {
+      width: 1px;
+      height: 8px;
+      background: rgba(201,162,39,0.6);
+    }
 
     #coordbar {
       position: fixed; bottom: 8px; left: 8px;
@@ -174,6 +202,10 @@
         </select>
       </div>
       <div class="row"><label>URL (page it links to)</label><input id="furl" type="text" placeholder="topics/flat-earth/north-pole-center.html" /></div>
+      <div class="row" style="display:flex;align-items:center;gap:0.6rem;">
+        <input type="checkbox" id="fshowlabel" style="width:auto;accent-color:#c9a227;cursor:pointer;" />
+        <label for="fshowlabel" style="display:inline;font-size:0.62rem;color:#7a7a7a;letter-spacing:0.05em;cursor:pointer;">Show name as label on map</label>
+      </div>
       <button class="btn" id="save-btn" onclick="saveMarker()" disabled>✓ SAVE MARKER</button>
       <button class="btn red" id="clear-btn" onclick="clearPending()" disabled>✕ CLEAR PIN</button>
     </div>
@@ -263,6 +295,7 @@ function saveMarker() {
     desc: document.getElementById('fdesc').value.trim(),
     cat:  document.getElementById('fcat').value,
     url:  document.getElementById('furl').value.trim(),
+    showLabel: document.getElementById('fshowlabel').checked,
   });
   persist();
   clearPending();
@@ -277,6 +310,7 @@ function clearPending() {
   document.getElementById('fname').value   = '';
   document.getElementById('fdesc').value   = '';
   document.getElementById('furl').value    = '';
+  document.getElementById('fshowlabel').checked = false;
   document.getElementById('pending-status').textContent = 'Click anywhere on the map to drop a pin. Click again to move it. Fill in details below then hit SAVE.';
   document.getElementById('pending-status').className = '';
   document.getElementById('save-btn').disabled  = true;
@@ -284,6 +318,12 @@ function clearPending() {
 }
 
 // ── Delete saved marker ───────────────────────────────────────────────────
+function toggleLabel(i) {
+  markers[i].showLabel = !markers[i].showLabel;
+  persist();
+  render();
+}
+
 function del(i) {
   markers.splice(i, 1);
   persist();
@@ -294,8 +334,8 @@ function persist() { localStorage.setItem('fe_markers', JSON.stringify(markers))
 
 // ── Render saved pins + list ───────────────────────────────────────────────
 function render() {
-  // Remove saved pins (keep pending)
-  pinLayer.querySelectorAll('.pin:not(.pending)').forEach(p => p.remove());
+  // Remove saved pins + labels (keep pending)
+  pinLayer.querySelectorAll('.pin:not(.pending), .pin-label').forEach(p => p.remove());
 
   markers.forEach((m, i) => {
     const d = document.createElement('div');
@@ -304,6 +344,16 @@ function render() {
     d.style.top        = m.y + '%';
     d.style.background = COLORS[m.cat] || '#c9a227';
     pinLayer.appendChild(d);
+
+    if (m.showLabel && m.name) {
+      const lbl = document.createElement('div');
+      lbl.className = 'pin-label';
+      lbl.style.left = m.x + '%';
+      lbl.style.top  = m.y + '%';
+      lbl.style.marginTop = '-7px'; // sit above the pin
+      lbl.innerHTML = `<div class="pin-label-text" style="border-color:${COLORS[m.cat]||'#c9a227'}40;color:${COLORS[m.cat]||'#c9a227'}">${m.name}</div><div class="pin-label-stem" style="background:${COLORS[m.cat]||'#c9a227'}80;"></div>`;
+      pinLayer.appendChild(lbl);
+    }
   });
 
   document.getElementById('topcount').textContent = markers.length + ' marker' + (markers.length !== 1 ? 's' : '');
@@ -316,9 +366,12 @@ function render() {
     const el = document.createElement('div');
     el.className = 'mitem';
     el.innerHTML = `
-      <div class="mname" style="color:${COLORS[m.cat]||'#c9a227'}">${m.name}</div>
+      <div class="mname" style="color:${COLORS[m.cat]||'#c9a227'}">${m.name}${m.showLabel ? ' <span style="font-size:0.55rem;opacity:0.6;">[LABEL]</span>' : ''}</div>
       <div class="mmeta">${m.cat} &middot; ${m.x}%, ${m.y}%</div>
-      <button class="btn red" style="font-size:0.56rem;padding:0.15rem 0.4rem;margin-top:0.3rem;" onclick="del(${i})">DELETE</button>`;
+      <div style="margin-top:0.3rem;display:flex;gap:0.3rem;flex-wrap:wrap;">
+        <button class="btn" style="font-size:0.56rem;padding:0.15rem 0.4rem;" onclick="toggleLabel(${i})">${m.showLabel ? 'HIDE LABEL' : 'SHOW LABEL'}</button>
+        <button class="btn red" style="font-size:0.56rem;padding:0.15rem 0.4rem;" onclick="del(${i})">DELETE</button>
+      </div>`;
     list.appendChild(el);
   });
 }
