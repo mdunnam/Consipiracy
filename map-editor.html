@@ -437,7 +437,7 @@ function addTextOnPath(svgNS, pathId, text, fontSize, letterSp, fillColor, outli
     t.setAttribute('fill', 'none');
   } else {
     t.setAttribute('fill', fillColor);
-    if (shadowBlur > 0 && shadowFilterId) {
+    if (shadowFilterId) {
       t.setAttribute('filter', `url(#${shadowFilterId})`);
     }
   }
