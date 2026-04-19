@@ -14,6 +14,7 @@
     .tbtn:hover { background: rgba(201,162,39,0.1); }
     .tbtn.red { border-color: rgba(200,50,50,0.4); color: #cc4444; }
     .tbtn.red:hover { background: rgba(200,50,50,0.1); }
+    #zoom-display { font-size: 0.65rem; color: #4a4a4a; min-width: 42px; text-align: center; }
 
     #main { display: flex; flex: 1; overflow: hidden; }
 
@@ -133,6 +134,10 @@
 <div id="topbar">
   <h1>⊕ FLAT EARTH MAP — MARKER EDITOR</h1>
   <span id="topcount" style="font-size:0.65rem;color:#4a4a4a;">0 markers</span>
+  <button class="tbtn" onclick="zoom(-1)">&minus;</button>
+  <span id="zoom-display">100%</span>
+  <button class="tbtn" onclick="zoom(1)">+</button>
+  <button class="tbtn" onclick="zoom(0)">FIT</button>
   <button class="tbtn red" onclick="clearAll()">CLEAR ALL</button>
 </div>
 
@@ -326,15 +331,39 @@ function clearAll() {
   render();
 }
 
-function doExport() {
-  const json = JSON.stringify(markers, null, 2);
-  document.getElementById('json-out').textContent = json;
-  navigator.clipboard?.writeText(json).then(() => {
-    const b = event.target;
-    b.textContent = '✓ COPIED!';
-    setTimeout(() => b.textContent = 'COPY JSON TO CLIPBOARD', 2000);
-  });
+// ── Zoom ─────────────────────────────────────────────────────────────────
+const ZOOM_STEPS = [25, 33, 50, 75, 100, 125, 150, 200, 300, 400];
+let zoomIdx = 4; // start at 100%
+const mapImg = document.getElementById('map-img');
+const naturalW = 4096;
+
+function applyZoom() {
+  const pct = ZOOM_STEPS[zoomIdx];
+  mapImg.style.width = (naturalW * pct / 100) + 'px';
+  document.getElementById('zoom-display').textContent = pct + '%';
 }
+
+function zoom(dir) {
+  if (dir === 0) {
+    const avail = document.getElementById('map-scroll').clientWidth;
+    let best = 0;
+    for (let i = 0; i < ZOOM_STEPS.length; i++) {
+      if ((naturalW * ZOOM_STEPS[i] / 100) <= avail) best = i;
+    }
+    zoomIdx = best;
+  } else {
+    zoomIdx = Math.max(0, Math.min(ZOOM_STEPS.length - 1, zoomIdx + dir));
+  }
+  applyZoom();
+}
+
+document.getElementById('map-scroll').addEventListener('wheel', e => {
+  if (!e.ctrlKey) return;
+  e.preventDefault();
+  zoom(e.deltaY < 0 ? 1 : -1);
+}, { passive: false });
+
+window.addEventListener('load', () => zoom(0));
 
 render();
 </script>
