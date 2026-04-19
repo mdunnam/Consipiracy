@@ -111,6 +111,31 @@
       margin-top: 0.4rem;
     }
 
+    /* Map labels — cartographic style */
+    .fe-pin-label {
+      position: absolute;
+      pointer-events: none;
+      z-index: 11;
+      transform: translate(-50%, -100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .fe-pin-label-text {
+      color: #fff;
+      font-family: 'Cinzel', Georgia, serif;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      line-height: 1;
+      padding-bottom: 4px;
+    }
+    .fe-pin-label-stem {
+      width: 1px;
+      height: 10px;
+    }
+
     /* Legend */
     .fe-legend {
       display: flex;
@@ -240,7 +265,13 @@
     };
 
     // ── MARKERS ── (populated after you use the editor tool)
-    const MARKERS = [];
+    const MARKERS = [
+  { "x": 54.45, "y": 50.2,  "name": "Asia",          "desc": "The largest continent, spanning from the Middle East to the Pacific.", "cat": "landmass", "url": "" },
+  { "x": 52.0,  "y": 51.05, "name": "Europe",         "desc": "Dense concentration of Freemasonic architecture and occult city layouts.", "cat": "landmass", "url": "" },
+  { "x": 46.4,  "y": 49.6,  "name": "North America",  "desc": "Upper-left quadrant. Major HAARP and deep state infrastructure concentrated here.", "cat": "landmass", "url": "" },
+  { "x": 43.05, "y": 53.7,  "name": "South America",  "desc": "Lower-left arc. Flight paths here are geometrically impossible on a globe.", "cat": "landmass", "url": "" },
+  { "x": 52.85, "y": 55.35, "name": "Africa",          "desc": "Most geographically centred landmass on the flat map. Contains the Nile.", "cat": "landmass", "url": "" }
+];
 
     // ── Build legend ──
     const legend = document.getElementById('fe-legend');

@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Flat Earth Map Editor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #050505; color: #d8d8d8; font-family: 'Share Tech Mono', monospace; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
@@ -94,27 +96,34 @@
       pointer-events: none;
       z-index: 11;
       transform: translate(-50%, -100%);
-      margin-top: -10px;
-      white-space: nowrap;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
     .pin-label-text {
-      background: rgba(4,4,4,0.82);
-      border: 1px solid rgba(201,162,39,0.5);
-      color: #c9a227;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 10px;
-      padding: 1px 5px;
-      letter-spacing: 0.04em;
+      color: #fff;
+      font-family: 'Cinzel', 'Georgia', serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
       white-space: nowrap;
-      line-height: 1.5;
+      text-shadow:
+        0 0 4px rgba(0,0,0,1),
+        0 0 8px rgba(0,0,0,0.9),
+        1px 1px 0 rgba(0,0,0,0.9),
+        -1px -1px 0 rgba(0,0,0,0.9),
+        1px -1px 0 rgba(0,0,0,0.9),
+        -1px 1px 0 rgba(0,0,0,0.9);
+      line-height: 1;
+      padding-bottom: 4px;
     }
+    .pin-label-text.lbl-sm  { font-size: 9px;  letter-spacing: 0.14em; }
+    .pin-label-text.lbl-lg  { font-size: 14px; letter-spacing: 0.22em; }
     .pin-label-stem {
       width: 1px;
-      height: 8px;
-      background: rgba(201,162,39,0.6);
+      height: 10px;
+      background: rgba(255,255,255,0.55);
     }
 
     #coordbar {
@@ -350,8 +359,21 @@ function render() {
       lbl.className = 'pin-label';
       lbl.style.left = m.x + '%';
       lbl.style.top  = m.y + '%';
-      lbl.style.marginTop = '-7px'; // sit above the pin
-      lbl.innerHTML = `<div class="pin-label-text" style="border-color:${COLORS[m.cat]||'#c9a227'}40;color:${COLORS[m.cat]||'#c9a227'}">${m.name}</div><div class="pin-label-stem" style="background:${COLORS[m.cat]||'#c9a227'}80;"></div>`;
+      // Size class based on category
+      const sizeClass = ['ocean','boundary','structural'].includes(m.cat) ? 'lbl-lg' :
+                        ['evidence','suppressed'].includes(m.cat)         ? 'lbl-sm' : '';
+      const col = COLORS[m.cat] || '#ffffff';
+      const txt = document.createElement('div');
+      txt.className = 'pin-label-text ' + sizeClass;
+      txt.textContent = m.name;
+      // Tint text toward category color
+      txt.style.color = '#ffffff';
+      txt.style.textShadow = `0 0 6px ${col}cc, 0 0 12px ${col}66, 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000`;
+      const stem = document.createElement('div');
+      stem.className = 'pin-label-stem';
+      stem.style.background = col + '88';
+      lbl.appendChild(txt);
+      lbl.appendChild(stem);
       pinLayer.appendChild(lbl);
     }
   });
