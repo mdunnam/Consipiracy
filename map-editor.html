@@ -393,91 +393,112 @@ function del(i) {
 function persist() { localStorage.setItem('fe_markers', JSON.stringify(markers)); }
 
 // ── Draw a single label ─────────────────────────────────────────────────────
-function drawLabel(m, idx) {
-  const svgNS = 'http://www.w3.org/2000/svg';
-  const col   = COLORS[m.cat] || '#ffffff';
-  const fsize = (m.labelSize || 11) * zoomScale;  // scale with zoom
-  const rot   = m.labelRotate   || 0;    // 0=above, 90=right, 180=below, 270=left
-  const style = m.labelStyle    || 'flat';
-  const dist  = m.labelDistance || 30;   // px pin-center to text baseline (fixed, unaffected by other params)
-
-  const px = m.x / 100 * pinLayer.offsetWidth;
-  const py = m.y / 100 * pinLayer.offsetHeight;
-
-  const letterSpacing = 2.5;
-  const textLen = m.name.length * (fsize * 0.68) + (m.name.length - 1) * letterSpacing;
-  const pathLen = textLen * 1.6;
-  const half    = pathLen / 2;
-  const r       = Math.max(m.labelRadius || 150, half * 0.5 + 10);
-  const pinR    = 7;
-
-  // ── All drawn in LOCAL space: label above pin at (px, py-dist) ──
-  // Then entire group rotated by `rot` degrees around (px, py).
-  // This means: distance from pin to label is ALWAYS `dist`, rotation just orbits it.
-  const lcy = py - dist;
-  const lcx = px;
-
+function buildPath(svgNS, id, lcx, lcy, half, r, style) {
+  const el = document.createElementNS(svgNS, 'path');
+  el.setAttribute('id', id);
   let d;
   if      (style === 'arc-up')    d = `M ${lcx-half} ${lcy} A ${r} ${r} 0 0 1 ${lcx+half} ${lcy}`;
   else if (style === 'arc-down')  d = `M ${lcx-half} ${lcy} A ${r} ${r} 0 0 0 ${lcx+half} ${lcy}`;
   else if (style === 'arc-left')  d = `M ${lcx} ${lcy-half} A ${r} ${r} 0 0 0 ${lcx} ${lcy+half}`;
   else if (style === 'arc-right') d = `M ${lcx} ${lcy-half} A ${r} ${r} 0 0 1 ${lcx} ${lcy+half}`;
   else                             d = `M ${lcx-half} ${lcy} L ${lcx+half} ${lcy}`;
+  el.setAttribute('d', d);
+  return el;
+}
 
+function addTextOnPath(svgNS, pathId, text, fontSize, letterSp, fillColor, outlineColor, isOutline, zs) {
+  const t  = document.createElementNS(svgNS, 'text');
+  const tp = document.createElementNS(svgNS, 'textPath');
+  tp.setAttribute('href', '#' + pathId);
+  tp.setAttribute('startOffset', '50%');
+  tp.textContent = text;
+  t.setAttribute('font-family', 'Cinzel, Georgia, serif');
+  t.setAttribute('font-size', String(fontSize));
+  t.setAttribute('font-weight', '700');
+  t.setAttribute('letter-spacing', String(letterSp));
+  t.setAttribute('text-anchor', 'middle');
+  if (isOutline) {
+    t.setAttribute('stroke', outlineColor);
+    t.setAttribute('stroke-width', String(Math.max(1, 3.5 * zs)));
+    t.setAttribute('stroke-linejoin', 'round');
+    t.setAttribute('fill', 'none');
+  } else {
+    t.setAttribute('fill', fillColor);
+    t.style.filter = `drop-shadow(0 0 4px ${fillColor}88)`;
+  }
+  t.appendChild(tp);
+  return t;
+}
+
+function drawLabel(m, idx) {
+  const svgNS  = 'http://www.w3.org/2000/svg';
+  const rot    = m.labelRotate   || 0;
+  const style  = m.labelStyle    || 'flat';
+  const dist   = m.labelDistance || 30;
+  const fsize  = (m.labelSize    || 11) * zoomScale;
+  const fill   = m.labelColor    || '#ffffff';
+  const outline= m.labelOutline  || '#000000';
+  const pinR   = 7;
+  const letterSpacing = 2.5;
+
+  const px = m.x / 100 * pinLayer.offsetWidth;
+  const py = m.y / 100 * pinLayer.offsetHeight;
+
+  // Main text path
+  const textLen = m.name.length * (fsize * 0.68) + (m.name.length - 1) * letterSpacing;
+  const half    = textLen * 0.85;
+  const r       = Math.max(m.labelRadius || 150, half * 0.5 + 10);
+  const lcy     = py - dist;
+  const lcx     = px;
+
+  // Subtitle
+  const hasSub  = m.subtitle && m.subtitle.trim();
+  const subSize = (m.subSize  || 8) * zoomScale;
+  const subOff  = (m.subOffset|| 14) * zoomScale;
+  const subFill = m.subColor  || '#aaaaaa';
+  const subStyle= m.subStyle  || 'flat';
+  const subR    = Math.max(m.subRadius || 150, (m.subtitle||'').length * subSize * 0.5 + 10);
+  const subHalf = (m.subtitle||'').length * (subSize * 0.68) * 0.85;
+
+  // Remove old
   document.getElementById('svg-label-' + idx)?.remove();
   const svg = document.createElementNS(svgNS, 'svg');
   svg.id = 'svg-label-' + idx;
   svg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:11;';
 
-  // Group rotated around pin — everything inside uses local coords
+  // Group — rotated around pin
   const g = document.createElementNS(svgNS, 'g');
   g.setAttribute('transform', `rotate(${rot},${px},${py})`);
 
-  // Stem from pin edge straight up to text
+  // Stem
   const stem = document.createElementNS(svgNS, 'line');
   stem.setAttribute('x1', String(px));
   stem.setAttribute('y1', String(py - pinR));
   stem.setAttribute('x2', String(px));
   stem.setAttribute('y2', String(lcy + fsize * 0.6));
-  stem.setAttribute('stroke', col + '99');
+  stem.setAttribute('stroke', fill + '88');
   stem.setAttribute('stroke-width', String(Math.max(0.5, zoomScale)));
   g.appendChild(stem);
 
-  // Text path
+  // Defs for paths
   const defs = document.createElementNS(svgNS, 'defs');
-  const pathEl = document.createElementNS(svgNS, 'path');
-  const pathId = 'lp-' + idx;
-  pathEl.setAttribute('id', pathId);
-  pathEl.setAttribute('d', d);
-  defs.appendChild(pathEl);
+  const pid  = 'lp-' + idx;
+  const spid = 'lps-' + idx;
+  defs.appendChild(buildPath(svgNS, pid,  lcx, lcy,                   half,    r,    style));
+  if (hasSub)
+    defs.appendChild(buildPath(svgNS, spid, lcx, lcy + fsize + subOff, subHalf, subR, subStyle));
   svg.appendChild(defs);
 
-  const mkText = (isOutline) => {
-    const t  = document.createElementNS(svgNS, 'text');
-    const tp = document.createElementNS(svgNS, 'textPath');
-    tp.setAttribute('href', '#' + pathId);
-    tp.setAttribute('startOffset', '50%');
-    tp.textContent = m.name.toUpperCase();
-    t.setAttribute('font-family', 'Cinzel, Georgia, serif');
-    t.setAttribute('font-size', String(fsize));
-    t.setAttribute('font-weight', '700');
-    t.setAttribute('letter-spacing', String(letterSpacing));
-    t.setAttribute('text-anchor', 'middle');
-    if (isOutline) {
-      t.setAttribute('stroke', 'rgba(0,0,0,0.95)');
-      t.setAttribute('stroke-width', String(Math.max(1, 3.5 * zoomScale)));
-      t.setAttribute('stroke-linejoin', 'round');
-      t.setAttribute('fill', 'none');
-    } else {
-      t.setAttribute('fill', '#ffffff');
-      t.style.filter = `drop-shadow(0 0 5px ${col})`;
-    }
-    t.appendChild(tp);
-    return t;
-  };
+  // Main text (outline then fill)
+  g.appendChild(addTextOnPath(svgNS, pid, m.name.toUpperCase(),    fsize,   letterSpacing, fill,    outline, true,  zoomScale));
+  g.appendChild(addTextOnPath(svgNS, pid, m.name.toUpperCase(),    fsize,   letterSpacing, fill,    outline, false, zoomScale));
 
-  g.appendChild(mkText(true));
-  g.appendChild(mkText(false));
+  // Subtitle
+  if (hasSub) {
+    g.appendChild(addTextOnPath(svgNS, spid, m.subtitle.toUpperCase(), subSize, 1.5, subFill, '#000000', true,  zoomScale));
+    g.appendChild(addTextOnPath(svgNS, spid, m.subtitle.toUpperCase(), subSize, 1.5, subFill, '#000000', false, zoomScale));
+  }
+
   svg.appendChild(g);
   pinLayer.appendChild(svg);
 }
@@ -601,6 +622,60 @@ function editLabel(i) {
         style="width:100%;accent-color:#c9a227;"
         oninput="document.getElementById('el-fval').textContent=this.value+'px';livePreview(${i})" />
     </div>
+    <div style="margin-bottom:0.5rem;">
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Text color</label>
+      <input type="color" id="el-color" value="${m.labelColor||'#ffffff'}"
+        style="width:100%;height:28px;border:1px solid #222;background:#050505;cursor:pointer;padding:1px;"
+        oninput="livePreview(${i})" />
+    </div>
+    <div style="margin-bottom:0.5rem;">
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Outline color</label>
+      <input type="color" id="el-outline" value="${m.labelOutline||'#000000'}"
+        style="width:100%;height:28px;border:1px solid #222;background:#050505;cursor:pointer;padding:1px;"
+        oninput="livePreview(${i})" />
+    </div>
+    <hr style="border-color:#1a1a1a;margin:0.6rem 0;" />
+    <div style="font-size:0.62rem;color:#38bdf8;letter-spacing:0.12em;margin-bottom:0.6rem;">SUBTITLE</div>
+    <div style="margin-bottom:0.5rem;">
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Subtitle text</label>
+      <input type="text" id="el-sub" value="${m.subtitle||''}" placeholder="e.g. Indian Ocean"
+        style="width:100%;background:#050505;border:1px solid #222;color:#d8d8d8;padding:0.35rem 0.5rem;font-family:'Share Tech Mono',monospace;font-size:0.7rem;outline:none;"
+        oninput="livePreview(${i})" />
+    </div>
+    <div style="margin-bottom:0.5rem;">
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Subtitle style</label>
+      <select id="el-substyle" onchange="livePreview(${i})" style="width:100%;background:#050505;border:1px solid #222;color:#d8d8d8;padding:0.35rem 0.5rem;font-family:'Share Tech Mono',monospace;font-size:0.7rem;outline:none;">
+        <option value="flat"      ${(m.subStyle||'flat')==='flat'?'selected':''}>Flat</option>
+        <option value="arc-up"    ${m.subStyle==='arc-up'?'selected':''}>Arc up</option>
+        <option value="arc-down"  ${m.subStyle==='arc-down'?'selected':''}>Arc down</option>
+        <option value="arc-left"  ${m.subStyle==='arc-left'?'selected':''}>Arc left</option>
+        <option value="arc-right" ${m.subStyle==='arc-right'?'selected':''}>Arc right</option>
+      </select>
+    </div>
+    <div style="margin-bottom:0.5rem;">
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Subtitle font size: <span id="el-subfval" style="color:#c9a227;">${m.subSize||8}px</span></label>
+      <input type="range" id="el-subfsize" min="5" max="80" value="${m.subSize||8}" step="1"
+        style="width:100%;accent-color:#c9a227;"
+        oninput="document.getElementById('el-subfval').textContent=this.value+'px';livePreview(${i})" />
+    </div>
+    <div style="margin-bottom:0.5rem;">
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Subtitle offset: <span id="el-suboffval" style="color:#c9a227;">${m.subOffset||14}px</span></label>
+      <input type="range" id="el-suboff" min="0" max="80" value="${m.subOffset||14}" step="1"
+        style="width:100%;accent-color:#c9a227;"
+        oninput="document.getElementById('el-suboffval').textContent=this.value+'px';livePreview(${i})" />
+    </div>
+    <div style="margin-bottom:0.5rem;">
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Subtitle color</label>
+      <input type="color" id="el-subcolor" value="${m.subColor||'#aaaaaa'}"
+        style="width:100%;height:28px;border:1px solid #222;background:#050505;cursor:pointer;padding:1px;"
+        oninput="livePreview(${i})" />
+    </div>
+    <div style="margin-bottom:0.8rem;">
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Subtitle curve radius: <span id="el-subrval" style="color:#c9a227;">${m.subRadius||150}px</span></label>
+      <input type="range" id="el-subradius" min="40" max="600" value="${m.subRadius||150}" step="10"
+        style="width:100%;accent-color:#c9a227;"
+        oninput="document.getElementById('el-subrval').textContent=this.value+'px';livePreview(${i})" />
+    </div>
     <div style="display:flex;gap:0.5rem;">
       <button class="btn" style="flex:1;" onclick="applyLabelEdit(${i})">SAVE</button>
       <button class="btn red" style="flex:1;" onclick="cancelLabelEdit(${i})">CANCEL</button>
@@ -623,12 +698,20 @@ function livePreview(i) {
   const show = document.getElementById('el-show')?.checked;
   if (!show) { document.getElementById('svg-label-' + i)?.remove(); return; }
   const tmp = Object.assign({}, markers[i], {
-    showLabel:   true,
-    labelStyle:  document.getElementById('el-style')?.value   || markers[i].labelStyle,
-    labelRotate: parseInt(document.getElementById('el-rot')?.value    || markers[i].labelRotate || 0),
-    labelDistance: parseInt(document.getElementById('el-dist')?.value   || markers[i].labelDistance || 30),
-    labelRadius: parseInt(document.getElementById('el-radius')?.value || markers[i].labelRadius || 150),
-    labelSize:   parseInt(document.getElementById('el-fsize')?.value  || markers[i].labelSize   || 11),
+    showLabel:    true,
+    labelStyle:   document.getElementById('el-style')?.value    || markers[i].labelStyle,
+    labelRotate:  parseInt(document.getElementById('el-rot')?.value     || markers[i].labelRotate   || 0),
+    labelDistance:parseInt(document.getElementById('el-dist')?.value    || markers[i].labelDistance || 30),
+    labelRadius:  parseInt(document.getElementById('el-radius')?.value  || markers[i].labelRadius   || 150),
+    labelSize:    parseInt(document.getElementById('el-fsize')?.value   || markers[i].labelSize     || 11),
+    labelColor:   document.getElementById('el-color')?.value    || markers[i].labelColor   || '#ffffff',
+    labelOutline: document.getElementById('el-outline')?.value  || markers[i].labelOutline || '#000000',
+    subtitle:     document.getElementById('el-sub')?.value      ?? markers[i].subtitle     ?? '',
+    subStyle:     document.getElementById('el-substyle')?.value || markers[i].subStyle     || 'flat',
+    subSize:      parseInt(document.getElementById('el-subfsize')?.value || markers[i].subSize   || 8),
+    subOffset:    parseInt(document.getElementById('el-suboff')?.value  || markers[i].subOffset || 14),
+    subColor:     document.getElementById('el-subcolor')?.value || markers[i].subColor     || '#aaaaaa',
+    subRadius:    parseInt(document.getElementById('el-subradius')?.value || markers[i].subRadius || 150),
   });
   drawLabel(tmp, i);
 }
@@ -639,7 +722,15 @@ function applyLabelEdit(i) {
   markers[i].labelRotate = parseInt(document.getElementById('el-rot').value);
   markers[i].labelDistance = parseInt(document.getElementById('el-dist').value);
   markers[i].labelRadius   = parseInt(document.getElementById('el-radius').value);
-  markers[i].labelSize   = parseInt(document.getElementById('el-fsize').value);
+  markers[i].labelSize     = parseInt(document.getElementById('el-fsize').value);
+  markers[i].labelColor    = document.getElementById('el-color').value;
+  markers[i].labelOutline  = document.getElementById('el-outline').value;
+  markers[i].subtitle      = document.getElementById('el-sub').value;
+  markers[i].subStyle      = document.getElementById('el-substyle').value;
+  markers[i].subSize       = parseInt(document.getElementById('el-subfsize').value);
+  markers[i].subOffset     = parseInt(document.getElementById('el-suboff').value);
+  markers[i].subColor      = document.getElementById('el-subcolor').value;
+  markers[i].subRadius     = parseInt(document.getElementById('el-subradius').value);
   persist();
   render();
   document.getElementById('label-edit-panel')?.remove();
