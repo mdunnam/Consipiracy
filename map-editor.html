@@ -419,7 +419,7 @@ function buildPath(svgNS, id, lcx, lcy, half, r, style) {
   return el;
 }
 
-function addTextOnPath(svgNS, pathId, text, fontSize, letterSp, fillColor, outlineColor, isOutline, zs) {
+function addTextOnPath(svgNS, pathId, text, fontSize, letterSp, fillColor, outlineColor, isOutline, zs, shadowColor, shadowBlur, shadowOpacity) {
   const t  = document.createElementNS(svgNS, 'text');
   const tp = document.createElementNS(svgNS, 'textPath');
   tp.setAttribute('href', '#' + pathId);
@@ -503,13 +503,16 @@ function drawLabel(m, idx) {
   svg.appendChild(defs);
 
   // Main text (outline then fill)
-  g.appendChild(addTextOnPath(svgNS, pid, m.name.toUpperCase(),    fsize,   letterSpacing, fill,    outline, true,  zoomScale));
-  g.appendChild(addTextOnPath(svgNS, pid, m.name.toUpperCase(),    fsize,   letterSpacing, fill,    outline, false, zoomScale));
+  const sc = m.shadowColor || '#000000';
+  const sb = m.shadowBlur  ?? 4;
+  const so = m.shadowOpacity ?? 0.8;
+  g.appendChild(addTextOnPath(svgNS, pid, m.name.toUpperCase(),    fsize,   letterSpacing, fill,    outline, true,  zoomScale, sc, sb, so));
+  g.appendChild(addTextOnPath(svgNS, pid, m.name.toUpperCase(),    fsize,   letterSpacing, fill,    outline, false, zoomScale, sc, sb, so));
 
   // Subtitle
   if (hasSub) {
-    g.appendChild(addTextOnPath(svgNS, spid, m.subtitle.toUpperCase(), subSize, 1.5, subFill, '#000000', true,  zoomScale));
-    g.appendChild(addTextOnPath(svgNS, spid, m.subtitle.toUpperCase(), subSize, 1.5, subFill, '#000000', false, zoomScale));
+    g.appendChild(addTextOnPath(svgNS, spid, m.subtitle.toUpperCase(), subSize, 1.5, subFill, '#000000', true,  zoomScale, sc, sb, so));
+    g.appendChild(addTextOnPath(svgNS, spid, m.subtitle.toUpperCase(), subSize, 1.5, subFill, '#000000', false, zoomScale, sc, sb, so));
   }
 
   svg.appendChild(g);
@@ -623,6 +626,24 @@ function editLabel(i) {
       <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">URL</label>
       <input type="text" id="el-url" value="${m.url||''}" placeholder="topics/flat-earth/..."
         style="width:100%;background:#050505;border:1px solid #222;color:#d8d8d8;padding:0.35rem 0.5rem;font-family:'Share Tech Mono',monospace;font-size:0.7rem;outline:none;" />
+    </div>
+    <div style="margin-bottom:0.5rem;">
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Shadow color</label>
+      <input type="color" id="el-shadow-color" value="${m.shadowColor||'#000000'}"
+        style="width:100%;height:28px;border:1px solid #222;background:#050505;cursor:pointer;padding:1px;"
+        oninput="livePreview(${i})" />
+    </div>
+    <div style="margin-bottom:0.5rem;">
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Shadow blur: <span id="el-sblurval" style="color:#c9a227;">${m.shadowBlur||4}px</span></label>
+      <input type="range" id="el-shadow-blur" min="0" max="40" value="${m.shadowBlur||4}" step="1"
+        style="width:100%;accent-color:#c9a227;"
+        oninput="document.getElementById('el-sblurval').textContent=this.value+'px';livePreview(${i})" />
+    </div>
+    <div style="margin-bottom:0.6rem;">
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Shadow opacity: <span id="el-sopacval" style="color:#c9a227;">${Math.round((m.shadowOpacity??0.8)*100)}%</span></label>
+      <input type="range" id="el-shadow-opacity" min="0" max="100" value="${Math.round((m.shadowOpacity??0.8)*100)}" step="1"
+        style="width:100%;accent-color:#c9a227;"
+        oninput="document.getElementById('el-sopacval').textContent=this.value+'%';livePreview(${i})" />
     </div>
     <hr style="border-color:#1a1a1a;margin:0.6rem 0;" />
     <div style="font-size:0.62rem;color:#c9a227;letter-spacing:0.12em;margin-bottom:0.6rem;">LABEL SETTINGS</div>
@@ -749,7 +770,10 @@ function livePreview(i) {
     labelDistance:parseInt(document.getElementById('el-dist')?.value    || markers[i].labelDistance || 30),
     labelRadius:  parseInt(document.getElementById('el-radius')?.value  || markers[i].labelRadius   || 150),
     labelSize:    parseInt(document.getElementById('el-fsize')?.value   || markers[i].labelSize     || 11),
-    labelColor:   document.getElementById('el-color')?.value    || markers[i].labelColor   || '#ffffff',
+    labelColor:    document.getElementById('el-color')?.value         || markers[i].labelColor    || '#ffffff',
+    shadowColor:   document.getElementById('el-shadow-color')?.value   || markers[i].shadowColor   || '#000000',
+    shadowBlur:    parseInt(document.getElementById('el-shadow-blur')?.value    || markers[i].shadowBlur    || 4),
+    shadowOpacity: parseInt(document.getElementById('el-shadow-opacity')?.value || Math.round((markers[i].shadowOpacity??0.8)*100)) / 100,
     labelOutline: document.getElementById('el-outline')?.value  || markers[i].labelOutline || '#000000',
     subtitle:     document.getElementById('el-sub')?.value      ?? markers[i].subtitle     ?? '',
     subStyle:     document.getElementById('el-substyle')?.value || markers[i].subStyle     || 'flat',
@@ -773,6 +797,9 @@ function applyLabelEdit(i) {
   markers[i].labelRadius   = parseInt(document.getElementById('el-radius').value);
   markers[i].labelSize     = parseInt(document.getElementById('el-fsize').value);
   markers[i].labelColor    = document.getElementById('el-color').value;
+  markers[i].shadowColor   = document.getElementById('el-shadow-color').value;
+  markers[i].shadowBlur    = parseInt(document.getElementById('el-shadow-blur').value);
+  markers[i].shadowOpacity = parseInt(document.getElementById('el-shadow-opacity').value) / 100;
   markers[i].labelOutline  = document.getElementById('el-outline').value;
   markers[i].subtitle      = document.getElementById('el-sub').value;
   markers[i].subStyle      = document.getElementById('el-substyle').value;
