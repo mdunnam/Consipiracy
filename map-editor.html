@@ -397,10 +397,23 @@ function buildPath(svgNS, id, lcx, lcy, half, r, style) {
   const el = document.createElementNS(svgNS, 'path');
   el.setAttribute('id', id);
   let d;
+  // S-curve: cubic bezier with control points pulling opposite directions
+  // amplitude = how tall/wide the S is (use r as the amplitude)
+  const amp = Math.min(r * 0.4, half * 0.6);
   if      (style === 'arc-up')    d = `M ${lcx-half} ${lcy} A ${r} ${r} 0 0 1 ${lcx+half} ${lcy}`;
   else if (style === 'arc-down')  d = `M ${lcx-half} ${lcy} A ${r} ${r} 0 0 0 ${lcx+half} ${lcy}`;
   else if (style === 'arc-left')  d = `M ${lcx} ${lcy-half} A ${r} ${r} 0 0 0 ${lcx} ${lcy+half}`;
   else if (style === 'arc-right') d = `M ${lcx} ${lcy-half} A ${r} ${r} 0 0 1 ${lcx} ${lcy+half}`;
+  else if (style === 's-curve') {
+    // Horizontal S: first half curves up, second half curves down
+    const mx = lcx, my = lcy;
+    d = `M ${lcx-half} ${lcy} C ${lcx-half*0.5} ${lcy-amp} ${mx} ${lcy-amp} ${mx} ${lcy} C ${mx} ${lcy+amp} ${lcx+half*0.5} ${lcy+amp} ${lcx+half} ${lcy}`;
+  }
+  else if (style === 's-curve-v') {
+    // Vertical S: first half curves left, second half curves right
+    const my = lcy, mx = lcx;
+    d = `M ${lcx} ${lcy-half} C ${lcx-amp} ${lcy-half*0.5} ${lcx-amp} ${my} ${lcx} ${my} C ${lcx+amp} ${my} ${lcx+amp} ${lcy+half*0.5} ${lcx} ${lcy+half}`;
+  }
   else                             d = `M ${lcx-half} ${lcy} L ${lcx+half} ${lcy}`;
   el.setAttribute('d', d);
   return el;
@@ -650,6 +663,8 @@ function editLabel(i) {
         <option value="arc-down"  ${m.subStyle==='arc-down'?'selected':''}>Arc down</option>
         <option value="arc-left"  ${m.subStyle==='arc-left'?'selected':''}>Arc left</option>
         <option value="arc-right" ${m.subStyle==='arc-right'?'selected':''}>Arc right</option>
+        <option value="s-curve"   ${m.subStyle==='s-curve'?'selected':''}>S-curve (horizontal)</option>
+        <option value="s-curve-v" ${m.subStyle==='s-curve-v'?'selected':''}>S-curve (vertical)</option>
       </select>
     </div>
     <div style="margin-bottom:0.5rem;">
