@@ -25,7 +25,8 @@
     .map-overlay {
       position: absolute;
       inset: 0;
-      pointer-events: none; /* clicks pass through to img */
+      cursor: crosshair;
+      /* overlay is on top of image, handles all mouse events */
     }
 
     /* Crosshair follows mouse inside overlay */
@@ -52,14 +53,12 @@
       position: absolute;
       width: 14px; height: 14px; border-radius: 50%;
       transform: translate(-50%, -50%);
-      pointer-events: auto;
-      cursor: pointer;
+      pointer-events: none;
       border: 2px solid rgba(255,255,255,0.6);
       transition: transform 0.15s ease;
       z-index: 10;
     }
-    .map-pin:hover  { transform: translate(-50%,-50%) scale(1.5); z-index: 20; }
-    .map-pin.active { transform: translate(-50%,-50%) scale(1.7); box-shadow: 0 0 0 3px rgba(255,255,255,0.5); z-index: 25; }
+    .map-pin.active { transform: translate(-50%,-50%) scale(1.7); box-shadow: 0 0 0 3px rgba(255,255,255,0.5); }
 
     /* Click target on image */
     .map-click-layer {
@@ -104,9 +103,7 @@
   <div class="map-scroll" id="map-scroll">
     <div class="map-inner" id="map-inner">
       <img src="images/flatearthmap.jpg" id="map-img" alt="Flat Earth Map" draggable="false" />
-      <!-- Click layer — catches clicks, passes through mouse coords -->
-      <div class="map-click-layer" id="click-layer"></div>
-      <!-- Crosshair and pins go here, inside map-inner so % = image % -->
+      <!-- Pins and crosshair — all inside map-inner so % = image % -->
       <div class="map-overlay" id="map-overlay">
         <div class="crosshair" id="crosshair"></div>
       </div>
@@ -189,12 +186,11 @@ let selectedIdx = null;
 
 const mapInner  = document.getElementById('map-inner');
 const mapImg    = document.getElementById('map-img');
-const clickLayer= document.getElementById('click-layer');
 const overlay   = document.getElementById('map-overlay');
 const crosshair = document.getElementById('crosshair');
 const form      = document.getElementById('marker-form');
 
-// Get coords as % of the image
+// Get coords as % of the image — use mapImg bounds
 function getCoords(e) {
   const rect = mapImg.getBoundingClientRect();
   const x = ((e.clientX - rect.left) / rect.width  * 100);
@@ -205,32 +201,28 @@ function getCoords(e) {
   ];
 }
 
-// Crosshair follows mouse — position relative to map-inner
-clickLayer.addEventListener('mousemove', e => {
-  const rect = mapImg.getBoundingClientRect();
-  const innerRect = mapInner.getBoundingClientRect();
-  const cx = e.clientX - innerRect.left;
-  const cy = e.clientY - innerRect.top;
+// All mouse events go on the overlay
+overlay.addEventListener('mousemove', e => {
   crosshair.style.display = 'block';
-  crosshair.style.left = cx + 'px';
-  crosshair.style.top  = cy + 'px';
+  crosshair.style.left = e.offsetX + 'px';
+  crosshair.style.top  = e.offsetY + 'px';
   const [x, y] = getCoords(e);
   document.getElementById('coord-bar').textContent = `x: ${x}%  y: ${y}%`;
 });
 
-clickLayer.addEventListener('mouseleave', () => {
+overlay.addEventListener('mouseleave', () => {
   crosshair.style.display = 'none';
 });
 
-clickLayer.addEventListener('click', e => {
+overlay.addEventListener('click', e => {
+  // Ignore clicks on pins themselves
+  if (e.target.classList.contains('map-pin')) return;
   const [x, y] = getCoords(e);
   pendingX = parseFloat(x);
   pendingY = parseFloat(y);
   document.getElementById('form-coords').textContent = `${x}%, ${y}%`;
   form.style.display = 'block';
   document.getElementById('f-name').focus();
-  renderPins(); // re-render to remove old pending
-  // Show pending pin at exact click position
   addPendingPin(pendingX, pendingY);
 });
 
