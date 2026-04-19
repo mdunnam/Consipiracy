@@ -379,100 +379,63 @@ function del(i) {
 
 function persist() { localStorage.setItem('fe_markers', JSON.stringify(markers)); }
 
-// ── Draw a single label (called from render + live preview) ────────────────────
-function drawLabel(m, idx, svgIdOverride) {
+// ── Draw a single label ─────────────────────────────────────────────────────
+function drawLabel(m, idx) {
   const svgNS = 'http://www.w3.org/2000/svg';
   const col   = COLORS[m.cat] || '#ffffff';
-  const fsize = m.labelSize   || 11;
-  const rot   = m.labelRotate || 0;   // degrees, 0 = label sits directly above pin
-  const style = m.labelStyle  || 'flat';
-  const stemLen = 8;                  // px from pin edge to text baseline
+  const fsize = m.labelSize     || 11;
+  const rot   = m.labelRotate   || 0;    // 0=above, 90=right, 180=below, 270=left
+  const style = m.labelStyle    || 'flat';
+  const dist  = m.labelDistance || 30;   // px pin-center to text baseline (fixed, unaffected by other params)
 
   const px = m.x / 100 * pinLayer.offsetWidth;
   const py = m.y / 100 * pinLayer.offsetHeight;
 
   const letterSpacing = 2.5;
   const textLen = m.name.length * (fsize * 0.68) + (m.name.length - 1) * letterSpacing;
-  const pathLen = textLen * 1.6;  // generous so no clipping
+  const pathLen = textLen * 1.6;
   const half    = pathLen / 2;
+  const r       = Math.max(m.labelRadius || 150, half * 0.5 + 10);
+  const pinR    = 7;
 
-  // stem end point: rotate around pin
-  const rotRad = rot * Math.PI / 180;
-  const pinR   = 8; // pin radius px
-  const stemX  = px + Math.sin(rotRad) * (pinR + stemLen);
-  const stemY  = py - Math.cos(rotRad) * (pinR + stemLen);
+  // ── All drawn in LOCAL space: label above pin at (px, py-dist) ──
+  // Then entire group rotated by `rot` degrees around (px, py).
+  // This means: distance from pin to label is ALWAYS `dist`, rotation just orbits it.
+  const lcy = py - dist;
+  const lcx = px;
 
-  // label centre: a bit further from pin
-  const labelDist = pinR + stemLen + 6;
-  const lx = px + Math.sin(rotRad) * (labelDist + 2);
-  const ly = py - Math.cos(rotRad) * (labelDist + 2);
-
-  // arc radius (must be > half or SVG drops it)
-  const r = Math.max(m.labelRadius || 150, half * 0.6 + 10);
-
-  // Build path — all styles start from label centre, rotate to match orientation
   let d;
-  if (style === 'arc-up') {
-    d = `M ${lx - half} ${ly} A ${r} ${r} 0 0 1 ${lx + half} ${ly}`;
-  } else if (style === 'arc-down') {
-    d = `M ${lx - half} ${ly} A ${r} ${r} 0 0 0 ${lx + half} ${ly}`;
-  } else if (style === 'arc-left') {
-    d = `M ${lx} ${ly - half} A ${r} ${r} 0 0 0 ${lx} ${ly + half}`;
-  } else if (style === 'arc-right') {
-    d = `M ${lx} ${ly - half} A ${r} ${r} 0 0 1 ${lx} ${ly + half}`;
-  } else {
-    d = `M ${lx - half} ${ly} L ${lx + half} ${ly}`;
-  }
+  if      (style === 'arc-up')    d = `M ${lcx-half} ${lcy} A ${r} ${r} 0 0 1 ${lcx+half} ${lcy}`;
+  else if (style === 'arc-down')  d = `M ${lcx-half} ${lcy} A ${r} ${r} 0 0 0 ${lcx+half} ${lcy}`;
+  else if (style === 'arc-left')  d = `M ${lcx} ${lcy-half} A ${r} ${r} 0 0 0 ${lcx} ${lcy+half}`;
+  else if (style === 'arc-right') d = `M ${lcx} ${lcy-half} A ${r} ${r} 0 0 1 ${lcx} ${lcy+half}`;
+  else                             d = `M ${lcx-half} ${lcy} L ${lcx+half} ${lcy}`;
 
-  // Wrap everything in a group rotated around the pin
-  const svgId = svgIdOverride || ('svg-label-' + idx);
-  document.getElementById(svgId)?.remove();
-
+  document.getElementById('svg-label-' + idx)?.remove();
   const svg = document.createElementNS(svgNS, 'svg');
-  svg.id = svgId;
+  svg.id = 'svg-label-' + idx;
   svg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:11;';
 
+  // Group rotated around pin — everything inside uses local coords
   const g = document.createElementNS(svgNS, 'g');
   g.setAttribute('transform', `rotate(${rot},${px},${py})`);
 
-  // Stem line
-  const line = document.createElementNS(svgNS, 'line');
-  line.setAttribute('x1', String(px));
-  line.setAttribute('y1', String(py));
-  line.setAttribute('x2', String(stemX - Math.sin(rotRad) * px + Math.sin(rotRad) * px));
-  line.setAttribute('y2', String(stemY + Math.cos(rotRad) * py - Math.cos(rotRad) * py));
-  // Simpler: stem goes from pin to stemY in rotated group coords
-  const stemLine = document.createElementNS(svgNS, 'line');
-  stemLine.setAttribute('x1', String(px));
-  stemLine.setAttribute('y1', String(py - pinR));
-  stemLine.setAttribute('x2', String(px));
-  stemLine.setAttribute('y2', String(py - pinR - stemLen - 2));
-  stemLine.setAttribute('stroke', col + 'aa');
-  stemLine.setAttribute('stroke-width', '1');
-  g.appendChild(stemLine);
+  // Stem from pin edge straight up to text
+  const stem = document.createElementNS(svgNS, 'line');
+  stem.setAttribute('x1', String(px));
+  stem.setAttribute('y1', String(py - pinR));
+  stem.setAttribute('x2', String(px));
+  stem.setAttribute('y2', String(lcy + fsize * 0.6));
+  stem.setAttribute('stroke', col + '99');
+  stem.setAttribute('stroke-width', '1');
+  g.appendChild(stem);
 
   // Text path
-  const defs   = document.createElementNS(svgNS, 'defs');
+  const defs = document.createElementNS(svgNS, 'defs');
   const pathEl = document.createElementNS(svgNS, 'path');
-  const pathId = 'lp-' + svgId;
+  const pathId = 'lp-' + idx;
   pathEl.setAttribute('id', pathId);
-  // In rotated group: recalc lx/ly relative to unrotated coords
-  // Since the group rotates around px,py we use unrotated offsets
-  const offX = Math.sin(rotRad) * (labelDist + 2);
-  const offY = -Math.cos(rotRad) * (labelDist + 2);
-  let dp;
-  if (style === 'arc-up') {
-    dp = `M ${px + offX - half} ${py + offY} A ${r} ${r} 0 0 1 ${px + offX + half} ${py + offY}`;
-  } else if (style === 'arc-down') {
-    dp = `M ${px + offX - half} ${py + offY} A ${r} ${r} 0 0 0 ${px + offX + half} ${py + offY}`;
-  } else if (style === 'arc-left') {
-    dp = `M ${px + offX} ${py + offY - half} A ${r} ${r} 0 0 0 ${px + offX} ${py + offY + half}`;
-  } else if (style === 'arc-right') {
-    dp = `M ${px + offX} ${py + offY - half} A ${r} ${r} 0 0 1 ${px + offX} ${py + offY + half}`;
-  } else {
-    dp = `M ${px + offX - half} ${py + offY - 2} L ${px + offX + half} ${py + offY - 2}`;
-  }
-  pathEl.setAttribute('d', dp);
+  pathEl.setAttribute('d', d);
   defs.appendChild(pathEl);
   svg.appendChild(defs);
 
@@ -577,6 +540,12 @@ function editLabel(i) {
         oninput="document.getElementById('el-rotval').textContent=this.value+'°';livePreview(${i})" />
     </div>
     <div style="margin-bottom:0.5rem;">
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Distance from pin: <span id="el-dval" style="color:#c9a227;">${m.labelDistance||30}px</span></label>
+      <input type="range" id="el-dist" min="10" max="200" value="${m.labelDistance||30}" step="2"
+        style="width:100%;accent-color:#c9a227;"
+        oninput="document.getElementById('el-dval').textContent=this.value+'px';livePreview(${i})" />
+    </div>
+    <div style="margin-bottom:0.5rem;">
       <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Curve radius: <span id="el-rval" style="color:#c9a227;">${m.labelRadius||150}px</span></label>
       <input type="range" id="el-radius" min="40" max="600" value="${m.labelRadius||150}" step="10"
         style="width:100%;accent-color:#c9a227;"
@@ -613,6 +582,7 @@ function livePreview(i) {
     showLabel:   true,
     labelStyle:  document.getElementById('el-style')?.value   || markers[i].labelStyle,
     labelRotate: parseInt(document.getElementById('el-rot')?.value    || markers[i].labelRotate || 0),
+    labelDistance: parseInt(document.getElementById('el-dist')?.value   || markers[i].labelDistance || 30),
     labelRadius: parseInt(document.getElementById('el-radius')?.value || markers[i].labelRadius || 150),
     labelSize:   parseInt(document.getElementById('el-fsize')?.value  || markers[i].labelSize   || 11),
   });
@@ -623,7 +593,8 @@ function applyLabelEdit(i) {
   markers[i].showLabel   = document.getElementById('el-show').checked;
   markers[i].labelStyle  = document.getElementById('el-style').value;
   markers[i].labelRotate = parseInt(document.getElementById('el-rot').value);
-  markers[i].labelRadius = parseInt(document.getElementById('el-radius').value);
+  markers[i].labelDistance = parseInt(document.getElementById('el-dist').value);
+  markers[i].labelRadius   = parseInt(document.getElementById('el-radius').value);
   markers[i].labelSize   = parseInt(document.getElementById('el-fsize').value);
   persist();
   render();
