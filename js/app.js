@@ -101,10 +101,21 @@ function initFadeIn() {
     });
   }, options);
 
-  document.querySelectorAll('.fade-in').forEach((el, i) => {
-    el.dataset.delay = i * 25;
-    observer.observe(el);
-  });
+  /**
+   * Observes all unregistered .fade-in elements currently in the DOM.
+   */
+  function observeAll() {
+    document.querySelectorAll('.fade-in:not([data-observed])').forEach((el, i) => {
+      el.dataset.observed = '1';
+      el.dataset.delay = el.dataset.delay || i * 25;
+      observer.observe(el);
+    });
+  }
+
+  observeAll();
+
+  // Re-observe whenever new nodes are injected (corkboard, clippings, quiz, etc.)
+  new MutationObserver(observeAll).observe(document.body, { childList: true, subtree: true });
 }
 
 /* ============================================================
