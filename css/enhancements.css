@@ -831,6 +831,27 @@ kbd {
   overflow: hidden;
 }
 
+@media (max-width: 900px) {
+  .corkboard {
+    position: static;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1.5rem;
+    overflow: visible;
+  }
+  .cork-pin {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+  }
+  .cork-thread { display: none; }
+  .cork-photo, .cork-note { width: 100%; transform: none !important; }
+}
+
 .cork-pin {
   position: absolute;
 }
