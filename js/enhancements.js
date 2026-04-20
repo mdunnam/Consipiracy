@@ -79,18 +79,47 @@ function initLoadingScreen() {
    2. RABBIT HOLE TRACKER — depth + chapter counter
    ============================================================ */
 
+const RH_TIERS = [
+  { min:   0, name: 'INITIATE',   label: "Surface level. You've barely started." },
+  { min:  10, name: 'SEEKER',     label: "The pattern is becoming visible." },
+  { min:  20, name: 'AWAKE',      label: "You see what others refuse to look at." },
+  { min:  30, name: 'HUNTED',     label: "They're watching you now." },
+  { min:  40, name: 'UNBOUND',    label: "You cannot unknow this." },
+  { min:  50, name: 'SOVEREIGN',  label: "You know too much. Welcome to the other side." },
+  { min:  60, name: 'CIPHER',     label: "You move through the system like a ghost." },
+  { min:  70, name: 'ARCHITECT',  label: "You understand the machine from inside." },
+  { min:  80, name: 'ORACLE',     label: "The next layer is for those who dare." },
+  { min:  90, name: 'UNSEEN',     label: "You exist outside their model of the world." },
+  { min: 100, name: 'OMEGA',      label: "OMEGA CLEARANCE. You see what they buried." },
+];
+
+function getRhTier(depth) {
+  let tier = RH_TIERS[0];
+  for (const t of RH_TIERS) { if (depth >= t.min) tier = t; }
+  return tier;
+}
+
 function updateRabbitHoleWidget(depth) {
   const widget = document.getElementById('rabbit-hole-widget');
   if (!widget) return;
   const counter = widget.querySelector('.rh-depth');
   const label   = widget.querySelector('.rh-label');
+  const tier    = widget.querySelector('.rh-tier');
+  const tier2   = widget.querySelector('.rh-tier-next');
+  const t       = getRhTier(depth);
+  const nextIdx = RH_TIERS.findIndex(x => x.name === t.name) + 1;
+  const nextTier = RH_TIERS[nextIdx];
   if (counter) counter.textContent = depth;
-  if (label) {
-    if (depth < 3)       label.textContent = "Surface level. You've barely started.";
-    else if (depth < 10) label.textContent = "Going deeper. There's no coming back.";
-    else if (depth < 25) label.textContent = "They're watching you now.";
-    else if (depth < 50) label.textContent = "You know too much.";
-    else                 label.textContent = "LEVEL OMEGA. You see what they don't want you to see.";
+  if (tier)    tier.textContent    = t.name;
+  if (label)   label.textContent   = t.label;
+  if (tier2) {
+    if (nextTier) {
+      const toNext = nextTier.min - depth;
+      tier2.textContent = toNext + ' pages to ' + nextTier.name;
+      tier2.style.display = '';
+    } else {
+      tier2.style.display = 'none';
+    }
   }
   setTimeout(() => widget.classList.add('visible'), 2000);
 }
@@ -604,9 +633,11 @@ function injectPersistentUI() {
     widget.id = 'rabbit-hole-widget';
     widget.className = 'rabbit-hole-widget';
     widget.innerHTML = `
-      <div class="rh-header">🐇 RABBIT HOLE DEPTH</div>
+      <div class="rh-header">&#x2B21; RABBIT HOLE DEPTH</div>
       <div class="rh-count"><span class="rh-depth">0</span> <span class="rh-unit">levels deep</span></div>
+      <div class="rh-tier">INITIATE</div>
       <div class="rh-label"></div>
+      <div class="rh-tier-next"></div>
     `;
     document.body.appendChild(widget);
   }
@@ -650,6 +681,637 @@ function injectPersistentUI() {
    BOOT
    ============================================================ */
 
+
+/* ============================================================
+   FEATURE 1 — REDACTED TEXT REVEALS
+   Usage: <span class="redacted">secret word</span>
+   ============================================================ */
+
+function initRedactedReveals() {
+  const els = document.querySelectorAll('.redacted');
+  if (!els.length) return;
+  const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@%$';
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      obs.unobserve(e.target);
+      const el = e.target;
+      const original = el.dataset.text || el.textContent;
+      el.dataset.text = original;
+      el.classList.add('redacted-revealed');
+      let iter = 0;
+      const total = original.length;
+      const interval = setInterval(() => {
+        el.textContent = original.split('').map((c, i) => {
+          if (c === ' ') return ' ';
+          if (i < iter) return original[i];
+          return CHARS[Math.floor(Math.random() * CHARS.length)];
+        }).join('');
+        iter += 0.4;
+        if (iter >= total) {
+          el.textContent = original;
+          clearInterval(interval);
+        }
+      }, 30);
+    });
+  }, { threshold: 0.6 });
+  els.forEach(el => {
+    el.dataset.text = el.textContent;
+    obs.observe(el);
+  });
+}
+
+/* ============================================================
+   FEATURE 2 — RECENTLY ACCESSED TICKER
+   ============================================================ */
+
+function initAccessTicker() {
+  if (document.getElementById('ta-access-ticker')) return;
+  const ENTRIES = [
+    'Unknown user accessed: Banking Control',
+    'New researcher entered: Deep State',
+    'File opened: Secret Societies',
+    'Anomalous access detected: Flat Earth',
+    'Signal traced: Media Control',
+    'Session began: The Great Awakening',
+    'Document retrieved: False Flags',
+    'Terminal unlocked: Space Deception',
+    'Identity masked: Big Pharma',
+    'Location: UNKNOWN — accessed: Suppressed History',
+    'Clearance elevated: Tech Control',
+    'WARNING: Monitored access to Metaphysical',
+  ];
+  const wrap = document.createElement('div');
+  wrap.id = 'ta-access-ticker';
+  wrap.className = 'access-ticker';
+  const inner = document.createElement('div');
+  inner.className = 'access-ticker-inner';
+  const timeAgo = () => {
+    const n = Math.floor(Math.random() * 9) + 1;
+    return n === 1 ? '1 min ago' : n + ' min ago';
+  };
+  // Build double list for seamless loop
+  const items = [...ENTRIES, ...ENTRIES].map(t => {
+    const s = document.createElement('span');
+    s.className = 'ticker-item';
+    s.textContent = t + ' — ' + timeAgo();
+    return s;
+  });
+  items.forEach(i => inner.appendChild(i));
+  wrap.appendChild(inner);
+  // Insert after nav
+  const nav = document.querySelector('.site-nav');
+  if (nav) nav.after(wrap);
+  else document.body.prepend(wrap);
+}
+
+/* ============================================================
+   FEATURE 3 — LOCKED CHAPTER 13 (injected into chapter grids)
+   ============================================================ */
+
+function injectLockedChapter() {
+  const grids = document.querySelectorAll('.grid-3');
+  if (!grids.length) return;
+  const grid = grids[0];
+  if (grid.querySelector('.chapter-locked')) return;
+  const card = document.createElement('div');
+  card.className = 'chapter-card chapter-locked fade-in';
+  card.innerHTML = `
+    <div class="chapter-card-body locked-body">
+      <span class="chapter-icon locked-icon">🔒</span>
+      <div class="locked-stamp">CLASSIFIED</div>
+      <h3 class="locked-title">Chapter 13 — [REDACTED]</h3>
+      <p class="locked-desc">This file has been restricted. Contents suppressed by order of the
+      <span class="redacted" data-text="Oversight Committee">Oversight Committee</span>.
+      Omega clearance required to proceed.</p>
+      <div class="locked-blur-preview">
+        <span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+    <div class="chapter-card-footer">
+      <span class="chapter-number" style="color:var(--red-bright);">CHAPTER // 13</span>
+      <a href="ebook.html" class="chapter-cta locked-cta">Unlock Access →</a>
+    </div>
+  `;
+  grid.appendChild(card);
+}
+
+/* ============================================================
+   FEATURE 4 — HERO CONSTELLATION CANVAS
+   ============================================================ */
+
+function initConstellationCanvas() {
+  const hero = document.querySelector('.hero-redesign');
+  if (!hero || document.getElementById('ta-constellation')) return;
+  const canvas = document.createElement('canvas');
+  canvas.id = 'ta-constellation';
+  canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.35;';
+  hero.insertBefore(canvas, hero.firstChild);
+
+  const ctx = canvas.getContext('2d');
+  let W, H, nodes;
+  const NUM = 38, MAX_DIST = 160;
+
+  function resize() {
+    W = canvas.width  = hero.offsetWidth;
+    H = canvas.height = hero.offsetHeight;
+  }
+
+  function makeNodes() {
+    nodes = Array.from({ length: NUM }, () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.28,
+      vy: (Math.random() - 0.5) * 0.18,
+      r: Math.random() * 1.8 + 0.6,
+    }));
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    // Lines
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+        const d = Math.sqrt(dx*dx + dy*dy);
+        if (d < MAX_DIST) {
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = `rgba(201,162,39,${0.15 * (1 - d/MAX_DIST)})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+    // Nodes
+    nodes.forEach(n => {
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(201,162,39,0.55)';
+      ctx.fill();
+    });
+    // Move
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > W) n.vx *= -1;
+      if (n.y < 0 || n.y > H) n.vy *= -1;
+    });
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  makeNodes();
+  draw();
+  window.addEventListener('resize', () => { resize(); makeNodes(); });
+}
+
+/* ============================================================
+   FEATURE 5 — CIPHER DECODE ON SECTION HEADERS
+   ============================================================ */
+
+function initCipherHeaders() {
+  const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%@!?';
+  const headers = document.querySelectorAll('.section-header h2:not(.decode-done)');
+  if (!headers.length) return;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      obs.unobserve(e.target);
+      const el = e.target;
+      el.classList.add('decode-done');
+      const original = el.textContent;
+      let iter = 0;
+      const interval = setInterval(() => {
+        el.textContent = original.split('').map((c, i) => {
+          if (c === ' ') return ' ';
+          if (i < iter) return original[i];
+          return CHARS[Math.floor(Math.random() * CHARS.length)];
+        }).join('');
+        iter += 0.35;
+        if (iter >= original.length) { el.textContent = original; clearInterval(interval); }
+      }, 28);
+    });
+  }, { threshold: 0.5 });
+  headers.forEach(h => obs.observe(h));
+}
+
+/* ============================================================
+   FEATURE 6 — CORKBOARD / CONSPIRACY BOARD (injected section)
+   ============================================================ */
+
+function injectCorkboard() {
+  if (document.getElementById('ta-corkboard-section')) return;
+  const ref = document.querySelector('#spotlight');
+  if (!ref) return;
+  const section = document.createElement('section');
+  section.id = 'ta-corkboard-section';
+  section.className = 'section corkboard-section';
+  section.innerHTML = `
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="eyebrow">The Board</span>
+        <h2>Everything Connects</h2>
+        <div class="divider"></div>
+        <p>Every thread leads back to the same origin. Pull one — and the whole board moves.</p>
+      </div>
+      <div class="corkboard fade-in">
+        <div class="cork-pin pin-a">
+          <div class="cork-photo"><span>[ PHOTO ]</span><div class="photo-label">Bilderberg Meeting 2019</div></div>
+        </div>
+        <div class="cork-pin pin-b">
+          <div class="cork-note note-red">The Fed was created<br>in secret — December 23,<br>1913. Congress was empty.</div>
+        </div>
+        <div class="cork-pin pin-c">
+          <div class="cork-photo"><span>[ MAP ]</span><div class="photo-label">Known Deep State Nodes</div></div>
+        </div>
+        <div class="cork-pin pin-d">
+          <div class="cork-note note-gold">"Who controls the<br>past controls the future."<br>— Orwell</div>
+        </div>
+        <div class="cork-pin pin-e">
+          <div class="cork-photo"><span>[ DIAGRAM ]</span><div class="photo-label">Bloodline Family Tree</div></div>
+        </div>
+        <div class="cork-pin pin-f">
+          <div class="cork-note note-white">Operation Mockingbird:<br>CIA planted journalists<br>in 25+ major outlets.</div>
+        </div>
+        <div class="cork-pin pin-g">
+          <div class="cork-photo"><span>[ DOCUMENT ]</span><div class="photo-label">Declassified: Op. Northwoods</div></div>
+        </div>
+        <div class="cork-thread thread-1"></div>
+        <div class="cork-thread thread-2"></div>
+        <div class="cork-thread thread-3"></div>
+      </div>
+    </div>
+  `;
+  ref.before(section);
+}
+
+/* ============================================================
+   FEATURE 7 — ARCHIVE PROGRESS BAR
+   ============================================================ */
+
+function initArchiveProgress() {
+  const TOTAL = 422;
+  const visited = JSON.parse(localStorage.getItem('ta_visited') || '[]');
+  const pct = Math.min(100, Math.round((visited.length / TOTAL) * 100));
+  const bars = document.querySelectorAll('.archive-progress-wrap');
+  bars.forEach(wrap => {
+    wrap.querySelector('.ap-count').textContent  = visited.length;
+    wrap.querySelector('.ap-total').textContent  = TOTAL;
+    wrap.querySelector('.ap-pct').textContent    = pct + '%';
+    const fill = wrap.querySelector('.ap-fill');
+    setTimeout(() => { fill.style.width = Math.max(pct, 0.4) + '%'; }, 400);
+  });
+}
+
+/* ============================================================
+   FEATURE 8 — NAV EYE BLINK
+   ============================================================ */
+
+function initEyeBlink() {
+  const eye = document.querySelector('.nav-logo .eye-symbol');
+  if (!eye) return;
+  eye.classList.add('eye-blink');
+}
+
+
+/* ============================================================
+   FEATURE: COUNTDOWN TIMER — "Next document drop"
+   ============================================================ */
+function initDocumentDropCountdown() {
+  const wraps = document.querySelectorAll('.doc-drop-countdown');
+  if (!wraps.length) return;
+  function getNextMidnight() {
+    const d = new Date(); d.setHours(24,0,0,0); return d;
+  }
+  function fmt(ms) {
+    const s = Math.floor(ms/1000);
+    const h = Math.floor(s/3600), m = Math.floor((s%3600)/60), sec = s%60;
+    return [h,m,sec].map(n=>String(n).padStart(2,'0')).join(':');
+  }
+  function tick() {
+    const remaining = getNextMidnight() - Date.now();
+    wraps.forEach(w => { w.textContent = fmt(remaining); });
+  }
+  tick();
+  setInterval(tick, 1000);
+}
+
+/* ============================================================
+   FEATURE: SUBSCRIBER COUNTER — animated count-up
+   ============================================================ */
+function initSubscriberCounter() {
+  const els = document.querySelectorAll('.sub-counter');
+  if (!els.length) return;
+  const TARGET = 847293;
+  const base = parseInt(localStorage.getItem('ta_subbase') || '0');
+  if (!base) localStorage.setItem('ta_subbase', TARGET + Math.floor(Math.random()*1200));
+  const display = parseInt(localStorage.getItem('ta_subbase'));
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      obs.unobserve(e.target);
+      const el = e.target;
+      let cur = 0;
+      const step = Math.ceil(display / 80);
+      const iv = setInterval(() => {
+        cur = Math.min(cur + step, display);
+        el.textContent = cur.toLocaleString();
+        if (cur >= display) clearInterval(iv);
+      }, 18);
+    });
+  }, { threshold: 0.5 });
+  els.forEach(el => obs.observe(el));
+}
+
+/* ============================================================
+   FEATURE: ASK THE ORACLE widget
+   ============================================================ */
+const ORACLE_RESPONSES = [
+  { keys:['bank','fed','money','debt','finance','rothschild','reserve'],  reply:'The Federal Reserve has never been fully audited. Chapter 05 holds the ledger.' },
+  { keys:['flat','earth','globe','nasa','space','firmament','dome'],       reply:'The horizon does not curve. Begin your investigation at Chapter 01.' },
+  { keys:['deep','state','cia','nsa','shadow','government','intel'],       reply:'The shadow government predates every administration. Chapter 03 is the entry point.' },
+  { keys:['media','news','propaganda','cnn','mockingbird','press'],        reply:'Operation Mockingbird never ended. It merely evolved. See Chapter 06.' },
+  { keys:['secret','society','mason','illuminati','skull','bohemian'],     reply:'The orders do not recruit — they select. Chapter 04 maps the bloodlines.' },
+  { keys:['pharma','vaccine','medicine','cancer','cure','rockefeller'],    reply:'The cure has always existed. The suppression is the product. Chapter 08.' },
+  { keys:['tech','5g','surveillance','ai','chip','transhumanist'],         reply:'Every smart device reports upward. Chapter 09 traces the nodes.' },
+  { keys:['history','tartaria','mud','flood','reset','ancient'],           reply:'The civilisation you were taught about is an edited fiction. Chapter 11.' },
+  { keys:['consciousness','pineal','dmt','spiritual','metaphysical'],      reply:'The deepest layer of control targets the mind itself. Chapter 12.' },
+  { keys:['awakening','q','plan','storm','white','hat'],                   reply:'The Storm is not coming. It has already begun. Chapter 02.' },
+  { keys:['false','flag','911','9/11','staged','operation'],               reply:'Every major event follows the same template. Chapter 10 runs the pattern.' },
+  { keys:['ebook','book','download','read','buy','purchase'],              reply:'The complete archive — all 12 chapters — is available. Access via the eBook.' },
+  { keys:['who','start','begin','new','first'],                            reply:'You did not find this archive by accident. Begin at Chapter 01 or consult the Connection Map.' },
+];
+const ORACLE_FALLBACK = [
+  'That signal is classified at this clearance level.',
+  'The archive does not yet index that thread. Keep descending.',
+  'Seek first what you already suspect. The answer is already here.',
+  'Every question leads to the same door. Which chapter calls to you?',
+  'The pattern is visible to those who look. Begin anywhere.',
+];
+
+function initOracle() {
+  if (document.getElementById('ta-oracle')) return;
+  const wrap = document.createElement('div');
+  wrap.id = 'ta-oracle';
+  wrap.className = 'oracle-widget';
+  wrap.innerHTML = `
+    <div class="oracle-toggle" id="oracle-toggle" title="Ask the Oracle">&#x1F441;</div>
+    <div class="oracle-panel" id="oracle-panel">
+      <div class="oracle-header">
+        <span class="oracle-title">&#x2B21; THE ORACLE</span>
+        <button class="oracle-close" id="oracle-close">&#x2715;</button>
+      </div>
+      <div class="oracle-messages" id="oracle-messages">
+        <div class="oracle-msg oracle-msg-in">Ask anything. The archive will answer.</div>
+      </div>
+      <div class="oracle-input-row">
+        <input class="oracle-input" id="oracle-input" type="text" placeholder="Enter your query…" maxlength="120" autocomplete="off" />
+        <button class="oracle-send" id="oracle-send">&#x21A9;</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(wrap);
+
+  const toggle = document.getElementById('oracle-toggle');
+  const panel  = document.getElementById('oracle-panel');
+  const close  = document.getElementById('oracle-close');
+  const input  = document.getElementById('oracle-input');
+  const send   = document.getElementById('oracle-send');
+  const msgs   = document.getElementById('oracle-messages');
+
+  toggle.addEventListener('click', () => { wrap.classList.toggle('open'); if (wrap.classList.contains('open')) input.focus(); });
+  close.addEventListener('click',  () => wrap.classList.remove('open'));
+
+  function addMsg(text, dir) {
+    const d = document.createElement('div');
+    d.className = 'oracle-msg oracle-msg-' + dir;
+    d.textContent = text;
+    msgs.appendChild(d);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function respond(query) {
+    const q = query.toLowerCase();
+    let reply = null;
+    for (const r of ORACLE_RESPONSES) {
+      if (r.keys.some(k => q.includes(k))) { reply = r.reply; break; }
+    }
+    if (!reply) reply = ORACLE_FALLBACK[Math.floor(Math.random() * ORACLE_FALLBACK.length)];
+    setTimeout(() => addMsg(reply, 'in'), 650);
+  }
+
+  function submit() {
+    const val = input.value.trim();
+    if (!val) return;
+    addMsg(val, 'out');
+    input.value = '';
+    respond(val);
+  }
+
+  send.addEventListener('click', submit);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
+}
+
+/* ============================================================
+   FEATURE: CHAPTER-SPECIFIC AMBIENT SOUND
+   ============================================================ */
+const PAGE_AUDIO_PROFILES = {
+  'deep-state.html':       { type:'phone',     freq:440,  q:8,    gain:0.12 },
+  'banking-control.html':  { type:'ticker',    freq:1200, q:20,   gain:0.08 },
+  'space-deception.html':  { type:'shortwave', freq:600,  q:2,    gain:0.15 },
+  'flat-earth.html':       { type:'wind',      freq:200,  q:1,    gain:0.10 },
+  'secret-societies.html': { type:'drone',     freq:80,   q:0.5,  gain:0.14 },
+  'metaphysical.html':     { type:'drone',     freq:40,   q:0.3,  gain:0.12 },
+  'great-awakening.html':  { type:'shortwave', freq:900,  q:3,    gain:0.13 },
+  'big-pharma.html':       { type:'phone',     freq:500,  q:6,    gain:0.10 },
+};
+function getPageAudioProfile() {
+  const page = window.location.pathname.split('/').pop() || 'index.html';
+  return PAGE_AUDIO_PROFILES[page] || null;
+}
+// Patch initAmbientSound to use per-page profile when available
+const _origAmbient = typeof initAmbientSound === 'function' ? initAmbientSound : null;
+function patchAmbientForPage(ctx, gainNode) {
+  const profile = getPageAudioProfile();
+  if (!profile) return;
+  const filter = ctx.createBiquadFilter();
+  filter.type = profile.type === 'ticker' ? 'bandpass' : profile.type === 'drone' ? 'lowpass' : 'bandpass';
+  filter.frequency.value = profile.freq;
+  filter.Q.value = profile.q;
+  gainNode.gain.value = profile.gain;
+  return filter;
+}
+
+/* ============================================================
+   FEATURE: NEWSPAPER CLIPPINGS (inject section)
+   ============================================================ */
+function injectNewspaperClippings() {
+  if (document.getElementById('ta-clippings-section')) return;
+  const ref = document.getElementById('ta-corkboard-section') || document.querySelector('#spotlight');
+  if (!ref) return;
+  const section = document.createElement('section');
+  section.id = 'ta-clippings-section';
+  section.className = 'section clippings-section';
+  section.innerHTML = `
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="eyebrow">Suppressed Press</span>
+        <h2>What They Didn't Want You to Read</h2>
+        <div class="divider"></div>
+        <p>These stories ran once. Then they disappeared.</p>
+      </div>
+      <div class="clippings-grid fade-in">
+        <div class="clipping clipping-rotate-l">
+          <div class="clipping-inner">
+            <div class="clipping-dateline">THE NATIONAL HERALD &nbsp;·&nbsp; SEPT 14, 1963</div>
+            <h3 class="clipping-headline">Senator Found Dead Day Before Scheduled Testimony</h3>
+            <p class="clipping-body">Officials have ruled the death of Sen. — — — — — — as accidental, citing a fall from the — — — — floor of the — — — — — — hotel. No investigation has been opened. The Senate subcommittee hearing scheduled for Monday has been postponed indefinitely.</p>
+            <div class="clipping-stamp">SUPPRESSED</div>
+          </div>
+        </div>
+        <div class="clipping clipping-rotate-r">
+          <div class="clipping-inner">
+            <div class="clipping-dateline">THE EVENING WIRE &nbsp;·&nbsp; MAR 3, 1971</div>
+            <h3 class="clipping-headline">Documents Reveal Federal Reserve Not Subject to Congressional Audit</h3>
+            <p class="clipping-body">A memo circulated among senior Treasury officials confirms that the Federal Reserve Board of Governors operates outside the standard framework of congressional financial oversight. The memo was obtained by this reporter and is reprinted in full — — — — — — — —</p>
+            <div class="clipping-stamp clipping-stamp-gold">CLASSIFIED</div>
+          </div>
+        </div>
+        <div class="clipping clipping-rotate-l2">
+          <div class="clipping-inner">
+            <div class="clipping-dateline">PACIFIC DISPATCH &nbsp;·&nbsp; JUL 22, 1969</div>
+            <h3 class="clipping-headline">NASA Engineer: "We Cannot Survive the Van Allen Belts"</h3>
+            <p class="clipping-body">In a memo obtained by this correspondent, a senior propulsion engineer at the Manned Spacecraft Center raises serious doubts about crew survivability during the — — — — mission. The engineer, who requested anonymity, states the radiation levels in the — — — — belt would be — — — —</p>
+            <div class="clipping-stamp">REDACTED</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  ref.before(section);
+}
+
+/* ============================================================
+   FEATURE: THE PATTERN QUIZ
+   ============================================================ */
+const QUIZ_QUESTIONS = [
+  {
+    q: 'Which truth did you find first?',
+    opts: [
+      { label: '🌐 The world is not what it appears', chapter: 'flat-earth.html',       tier: 'COSMOLOGIST' },
+      { label: '🏛️ Those in power are not elected',  chapter: 'deep-state.html',        tier: 'ANALYST' },
+      { label: '💰 Money controls everything',        chapter: 'banking-control.html',   tier: 'ECONOMIST' },
+      { label: '🔺 Symbols hide in plain sight',      chapter: 'secret-societies.html',  tier: 'DECODER' },
+    ]
+  },
+  {
+    q: 'What do you trust least?',
+    opts: [
+      { label: '📺 The media',       boost: 'media-control.html' },
+      { label: '🏛️ The government',  boost: 'deep-state.html' },
+      { label: '💊 Medicine',        boost: 'big-pharma.html' },
+      { label: '🚀 Official science', boost: 'space-deception.html' },
+    ]
+  },
+  {
+    q: 'How deep are you willing to go?',
+    opts: [
+      { label: 'Show me the evidence',          depth: 'SEEKER'    },
+      { label: 'I already know most of this',   depth: 'AWAKE'     },
+      { label: 'I need the deepest layer',       depth: 'OMEGA'     },
+      { label: 'I just woke up',                 depth: 'INITIATE'  },
+    ]
+  },
+];
+
+function injectQuiz() {
+  if (document.getElementById('ta-quiz-section')) return;
+  const ref = document.querySelector('#routes');
+  if (!ref) return;
+  const section = document.createElement('section');
+  section.id = 'ta-quiz-section';
+  section.className = 'section quiz-section';
+  section.innerHTML = `
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="eyebrow">Pattern Recognition</span>
+        <h2>Find Your Thread</h2>
+        <div class="divider"></div>
+        <p>Three questions. We route you to the chapter that matches your instinct.</p>
+      </div>
+      <div class="quiz-shell fade-in" id="ta-quiz">
+        <div class="quiz-step" id="quiz-step-0">
+          <div class="quiz-q">${QUIZ_QUESTIONS[0].q}</div>
+          <div class="quiz-opts">
+            ${QUIZ_QUESTIONS[0].opts.map((o,i) => `<button class="quiz-opt" data-q="0" data-i="${i}">${o.label}</button>`).join('')}
+          </div>
+        </div>
+        <div class="quiz-step hidden" id="quiz-step-1">
+          <div class="quiz-q">${QUIZ_QUESTIONS[1].q}</div>
+          <div class="quiz-opts">
+            ${QUIZ_QUESTIONS[1].opts.map((o,i) => `<button class="quiz-opt" data-q="1" data-i="${i}">${o.label}</button>`).join('')}
+          </div>
+        </div>
+        <div class="quiz-step hidden" id="quiz-step-2">
+          <div class="quiz-q">${QUIZ_QUESTIONS[2].q}</div>
+          <div class="quiz-opts">
+            ${QUIZ_QUESTIONS[2].opts.map((o,i) => `<button class="quiz-opt" data-q="2" data-i="${i}">${o.label}</button>`).join('')}
+          </div>
+        </div>
+        <div class="quiz-result hidden" id="quiz-result">
+          <div class="quiz-result-inner">
+            <div class="quiz-result-tier" id="qr-tier"></div>
+            <h3 class="quiz-result-title" id="qr-title"></h3>
+            <p class="quiz-result-desc" id="qr-desc"></p>
+            <div class="quiz-result-actions">
+              <a id="qr-cta" href="#" class="btn btn-gold">Enter Your Chapter →</a>
+              <button class="btn btn-outline" id="qr-retry">Retake</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  ref.before(section);
+  initQuizLogic();
+}
+
+function initQuizLogic() {
+  let answers = {};
+  document.querySelectorAll('.quiz-opt').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const q = parseInt(btn.dataset.q);
+      const i = parseInt(btn.dataset.i);
+      answers[q] = i;
+      const cur = document.getElementById('quiz-step-' + q);
+      cur.querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      setTimeout(() => {
+        cur.classList.add('hidden');
+        const next = document.getElementById('quiz-step-' + (q+1));
+        if (next) { next.classList.remove('hidden'); }
+        else { showQuizResult(answers); }
+      }, 320);
+    });
+  });
+  document.getElementById('qr-retry')?.addEventListener('click', () => {
+    answers = {};
+    document.querySelectorAll('.quiz-step').forEach((s,i) => { s.classList.toggle('hidden', i !== 0); });
+    document.getElementById('quiz-result').classList.add('hidden');
+    document.querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('selected'));
+  });
+}
+
+function showQuizResult(answers) {
+  const q0 = QUIZ_QUESTIONS[0].opts[answers[0] ?? 0];
+  const q2 = QUIZ_QUESTIONS[2].opts[answers[2] ?? 2];
+  document.getElementById('qr-tier').textContent  = q2.depth || 'SEEKER';
+  document.getElementById('qr-title').textContent = 'You are a ' + q2.depth;
+  document.getElementById('qr-desc').textContent  = 'Your instinct points to ' + q0.label.replace(/^.{2}\s/,'') + '. The archive has been waiting for you.';
+  document.getElementById('qr-cta').href          = q0.chapter;
+  document.getElementById('quiz-result').classList.remove('hidden');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   injectPersistentUI();
   initLoadingScreen();
@@ -661,4 +1323,17 @@ document.addEventListener('DOMContentLoaded', () => {
   initShareMechanic();
   initDepthSync();
   buildRestoreModal();
+  initRedactedReveals();
+  initAccessTicker();
+  injectLockedChapter();
+  initConstellationCanvas();
+  initCipherHeaders();
+  injectCorkboard();
+  initArchiveProgress();
+  initEyeBlink();
+  initDocumentDropCountdown();
+  initSubscriberCounter();
+  initOracle();
+  injectNewspaperClippings();
+  injectQuiz();
 });
