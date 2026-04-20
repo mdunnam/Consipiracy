@@ -819,8 +819,10 @@ kbd {
 }
 
 .corkboard {
-  position: relative;
-  min-height: 520px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+  padding: 1.5rem;
   background:
     radial-gradient(ellipse at 20% 40%, rgba(139,20,20,0.08), transparent 45%),
     radial-gradient(ellipse at 75% 60%, rgba(201,162,39,0.06), transparent 40%),
@@ -828,60 +830,30 @@ kbd {
     repeating-linear-gradient(90deg, rgba(201,162,39,0.015) 0px, rgba(201,162,39,0.015) 1px, transparent 1px, transparent 32px);
   border: 1px solid var(--border);
   border-radius: 4px;
-  overflow: hidden;
-}
-
-@media (max-width: 900px) {
-  .corkboard {
-    position: static;
-    min-height: 0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    padding: 1.5rem;
-    overflow: visible;
-  }
-  .cork-pin {
-    position: static !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-  }
-  .cork-thread { display: none; }
-  .cork-photo, .cork-note { width: 100%; transform: none !important; }
 }
 
 .cork-pin {
-  position: absolute;
+  position: relative;
 }
 
 .cork-pin::before {
   content: '';
-  position: absolute;
-  top: -8px;
-  left: 50%;
-  transform: translateX(-50%);
+  display: block;
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #e6c84a, #8b1414);
   box-shadow: 0 2px 6px rgba(0,0,0,0.5);
-  z-index: 2;
+  margin: 0 auto 0.5rem;
 }
 
-.pin-a { top: 6%;  left: 4%;  }
-.pin-b { top: 8%;  left: 28%; }
-.pin-c { top: 5%;  left: 52%; }
-.pin-d { top: 10%; right: 5%; }
-.pin-e { bottom: 12%; left: 6%;  }
-.pin-f { bottom: 10%; left: 34%; }
-.pin-g { bottom: 14%; right: 6%; }
+/* Grid positions no longer needed — removed */
+.pin-a, .pin-b, .pin-c, .pin-d, .pin-e, .pin-f, .pin-g {}
 
 .cork-photo {
-  width: 180px;
+  width: 100%;
   min-height: 120px;
-  background: rgba(14,14,14,0.92);
+  background: rgba(30,22,10,0.95);
   border: 1px solid var(--border-gold);
   display: flex;
   flex-direction: column;
@@ -891,13 +863,13 @@ kbd {
   box-shadow: 4px 4px 14px rgba(0,0,0,0.55);
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: var(--text-muted);
+  color: var(--gold-light);
   letter-spacing: 0.12em;
   text-align: center;
-  transform: rotate(-2deg);
+  transform: rotate(-1deg);
 }
 
-.cork-photo:nth-child(even) { transform: rotate(1.5deg); }
+.cork-photo:nth-child(even) { transform: rotate(1deg); }
 
 .photo-label {
   margin-top: 0.5rem;
@@ -909,31 +881,35 @@ kbd {
 }
 
 .cork-note {
-  width: 170px;
+  width: 100%;
   min-height: 100px;
   padding: 1rem;
   font-family: var(--font-body);
   font-size: 0.82rem;
   line-height: 1.65;
   box-shadow: 3px 3px 12px rgba(0,0,0,0.4);
-  transform: rotate(1.8deg);
+  transform: rotate(1deg);
 }
 
-.note-red   { background: rgba(139,20,20,0.25); border: 1px solid var(--border-red);  color: var(--text-primary); }
-.note-gold  { background: rgba(201,162,39,0.1);  border: 1px solid var(--border-gold); color: var(--text-primary); font-style: italic; }
-.note-white { background: rgba(20,20,20,0.9);    border: 1px solid var(--border);      color: var(--text-secondary); }
+.note-red   { background: rgba(139,20,20,0.35); border: 1px solid var(--border-red);  color: var(--text-primary); }
+.note-gold  { background: rgba(201,162,39,0.15); border: 1px solid var(--border-gold); color: var(--text-primary); font-style: italic; }
+.note-white { background: rgba(30,30,30,0.95);   border: 1px solid var(--border);      color: var(--text-secondary); }
 
-.cork-thread {
-  position: absolute;
-  height: 1px;
-  background: rgba(204,34,34,0.4);
-  transform-origin: left center;
-  pointer-events: none;
+/* Threads hidden in grid mode */
+.cork-thread { display: none; }
+
+@media (max-width: 900px) {
+  .corkboard {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
-.thread-1 { top: 22%; left: 18%;  width: 22%;  transform: rotate(12deg); }
-.thread-2 { top: 35%; left: 42%;  width: 18%;  transform: rotate(-8deg); }
-.thread-3 { top: 55%; left: 24%;  width: 32%;  transform: rotate(-14deg); }
+@media (max-width: 600px) {
+  .corkboard {
+    grid-template-columns: 1fr;
+  }
+  .cork-photo, .cork-note { transform: none !important; }
+}
 
 /* ============================================================
    FEATURE 7 — ARCHIVE PROGRESS BAR
