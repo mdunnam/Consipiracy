@@ -953,11 +953,57 @@ function initArchiveProgress() {
   const TOTAL = 422;
   const visited = JSON.parse(localStorage.getItem('ta_visited') || '[]');
   const pct = Math.min(100, Math.round((visited.length / TOTAL) * 100));
+
+  // Conspiracy-themed rank names
+  // Every 10 pages up to 100, then every 25 up to 500, then every 50
+  const LEVELS = [
+    [0,   'Uninitiated'],
+    [10,  'Curious Citizen'],
+    [20,  'Normie Awakening'],
+    [30,  'Red Pill Seeker'],
+    [40,  'Pattern Watcher'],
+    [50,  'Signal Receiver'],
+    [60,  'Veil Lifter'],
+    [70,  'Thread Puller'],
+    [80,  'Rabbit Hole Diver'],
+    [90,  'Archive Initiate'],
+    [100, 'Order of the Initiated'],
+    [125, 'Shadow Reader'],
+    [150, 'Deep State Analyst'],
+    [175, 'Bloodline Tracker'],
+    [200, 'Symbol Decoder'],
+    [225, 'False Flag Investigator'],
+    [250, 'Network Cartographer'],
+    [275, 'Omega Clearance Seeker'],
+    [300, 'Cabal Architect'],
+    [325, 'Reality Hacker'],
+    [350, 'Firmament Witness'],
+    [375, 'Level Omega Agent'],
+    [400, 'The Awakened Elite'],
+    [422, 'Truth Archive: Complete'],
+  ];
+
+  /**
+   * Returns the rank name for a given page count.
+   * @param {number} count - Number of pages accessed.
+   * @returns {string} The rank name.
+   */
+  function getRankName(count) {
+    let name = LEVELS[0][1];
+    for (const [threshold, label] of LEVELS) {
+      if (count >= threshold) name = label;
+      else break;
+    }
+    return name;
+  }
+
   const bars = document.querySelectorAll('.archive-progress-wrap');
   bars.forEach(wrap => {
     wrap.querySelector('.ap-count').textContent  = visited.length;
     wrap.querySelector('.ap-total').textContent  = TOTAL;
     wrap.querySelector('.ap-pct').textContent    = pct + '%';
+    const levelEl = wrap.querySelector('.ap-level');
+    if (levelEl) levelEl.textContent = '\u25CF ' + getRankName(visited.length);
     const fill = wrap.querySelector('.ap-fill');
     setTimeout(() => { fill.style.width = Math.max(pct, 0.4) + '%'; }, 400);
   });

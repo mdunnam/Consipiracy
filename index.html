@@ -30,7 +30,7 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      padding: 8rem 2rem 5rem;
+      padding: 4.5rem 2rem 2rem;
       position: relative;
       overflow: hidden;
       border-bottom: 1px solid var(--border-gold);
@@ -201,8 +201,9 @@
     .archive-progress-section { padding: 1rem 2rem 2rem; }
     .archive-progress-inner { width: min(1320px, 100%); margin: 0 auto; }
     .archive-progress-wrap { padding: 1.25rem 1.5rem; border: 1px solid var(--border); border-radius: var(--radius); background: rgba(10,10,10,0.7); }
-    .ap-label { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.6rem; }
+    .ap-label { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.6rem; gap: 1rem; flex-wrap: wrap; }
     .ap-label em { color: var(--gold-light); font-style: normal; }
+    .ap-level { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.2rem 0.6rem; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; border: 1px solid var(--border-gold); background: rgba(201,162,39,0.08); color: var(--gold-light); white-space: nowrap; }
     .ap-track { height: 3px; background: rgba(201,162,39,0.12); border-radius: 2px; overflow: hidden; }
     .ap-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--red-bright), var(--gold)); transition: width 1.5s ease; }
 
@@ -543,6 +544,7 @@
       <div class="archive-progress-wrap fade-in">
         <div class="ap-label">
           <span>Archive accessed: <em><span class="ap-count">0</span> of <span class="ap-total">422</span> files</em></span>
+          <span class="ap-level">&#x25CF; Uninitiated</span>
           <em><span class="ap-pct">0%</span></em>
         </div>
         <div class="ap-track"><div class="ap-fill"></div></div>
