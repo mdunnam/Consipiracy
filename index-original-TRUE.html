@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Truth Archive - Conspiracy Research Network</title>
+  <meta name="description" content="A comprehensive research archive covering the Flat Earth, The Great Awakening, Deep State operations, secret societies, financial control, and more." />
+    <!-- Open Graph / Social Preview -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:url"         content="https://thetrutharchive.org" />
+    <meta property="og:title"       content="The Truth Archive" />
+    <meta property="og:description" content="A comprehensive research archive covering the Flat Earth, The Great Awakening, Deep State operations, secret societies, financial control, and more." />
+    <meta property="og:image"       content="https://thetrutharchive.org/images/og-preview.jpg" />
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:url"         content="https://thetrutharchive.org" />
+    <meta name="twitter:title"       content="The Truth Archive" />
+    <meta name="twitter:description" content="A comprehensive research archive covering the Flat Earth, The Great Awakening, Deep State operations, secret societies, financial control, and more." />
+    <meta name="twitter:image"       content="https://thetrutharchive.org/images/og-preview.jpg" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/enhancements.css" />
+  <style>
+    /* === Fade-in animation =========================================== */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.35s ease, transform 0.35s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* === Hero h1: let the gradient show through the glitch layers === */
+    .hero .glitch::before,
+    .hero .glitch::after { background: transparent; }
+    .hero .glitch::before { text-shadow: -2px 0 rgba(204,34,34,0.55); }
+    .hero .glitch::after  { text-shadow:  2px 0 rgba(201,162,39,0.45); }
+
+    /* === Chapter grid cards ========================================== */
+    .chapter-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--transition);
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+    }
+    .chapter-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .chapter-card:hover::before { transform: scaleX(1); }
+    .chapter-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-gold);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 0 1px var(--border-gold);
+      color: inherit;
+      text-shadow: none;
+    }
+    .chapter-card-body { padding: 1.8rem; flex: 1; }
+    .chapter-card-footer {
+      padding: 0.9rem 1.8rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .chapter-number {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: var(--text-muted);
+    }
+    .chapter-cta {
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .chapter-icon {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      display: block;
+      filter: drop-shadow(0 0 10px rgba(201,162,39,0.35));
+    }
+    .chapter-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.6rem;
+      color: var(--gold);
+    }
+    .chapter-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 0;
+      max-width: 100%;
+      line-height: 1.7;
+    }
+
+    /* === Truth meter ================================================= */
+    .truth-meter-section {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-gold);
+      border-bottom: 1px solid var(--border-gold);
+    }
+    .truth-stat {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      border-right: 1px solid var(--border);
+    }
+    .truth-stat:last-child { border-right: none; }
+    .truth-number {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      color: var(--gold);
+      text-shadow: var(--glow-text-gold);
+      display: block;
+      line-height: 1.1;
+    }
+    .truth-label {
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-top: 0.4rem;
+      display: block;
+    }
+    .truth-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+
+    /* === Pyramid / Hierarchy visual ==================================== */
+    .hierarchy-section { position: relative; }
+    .hierarchy-list { list-style: none; padding: 0; counter-reset: h-counter; }
+    .hierarchy-list li {
+      counter-increment: h-counter;
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 0.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: var(--transition);
+    }
+    .hierarchy-list li:hover { border-color: var(--border-red); background: var(--red-muted); }
+    .hierarchy-list li::before {
+      content: "0" counter(h-counter);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--red-bright);
+      font-weight: 700;
+      min-width: 2.4rem;
+      margin-top: 0.15rem;
+    }
+    .hierarchy-list strong { display: block; color: var(--gold); margin-bottom: 0.3rem; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.95rem; }
+    .hierarchy-list span { font-size: 0.88rem; color: var(--text-secondary); }
+
+    /* === Scroll down indicator ======================================== */
+    .scroll-down {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: var(--text-muted);
+      animation: bounce 2s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+    .scroll-down::after { content: '▼'; font-size: 0.6rem; }
+
+    /* === Ebook CTA banner ============================================= */
+    .ebook-banner {
+      background: linear-gradient(135deg, rgba(139,20,20,0.2) 0%, rgba(201,162,39,0.08) 100%);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius);
+      padding: 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .ebook-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(201,162,39,0.02) 20px, rgba(201,162,39,0.02) 40px);
+    }
+    .ebook-banner > * { position: relative; z-index: 1; }
+  </style>
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="ta-loading-screen">
+    <div class="loading-logo">⬡ THE TRUTH ARCHIVE ⬡</div>
+    <div class="loading-bar-wrap"><div class="loading-bar-fill"></div></div>
+    <div class="loading-log"></div>
+  </div>
+
+  <!-- Reading progress bar -->
+  <div id="reading-progress"></div>
+
+  <!-- ======================== NAVIGATION ======================== -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-logo">
+      <span class="eye-symbol">👁</span>
+      Truth Archive
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="great-awakening.html">The Great Awakening</a></li>
+      <li><a href="flat-earth.html">Flat Earth</a></li>
+      <li><a href="deep-state.html">Deep State</a></li>
+      <li><a href="secret-societies.html">Secret Societies</a></li>
+      <li><a href="banking-control.html">Banking Control</a></li>
+      <li><a href="media-control.html">Media Control</a></li>
+      <li><a href="space-deception.html">Space Deception</a></li>
+      <li><a href="big-pharma.html">Big Pharma</a></li>
+      <li><a href="tech-control.html">Tech &amp; Control</a></li>
+      <li><a href="false-flags.html">False Flags</a></li>
+      <li><a href="suppressed-history.html">Suppressed History</a></li>
+      <li><a href="metaphysical.html">Metaphysical</a></li>
+      <li><a href="ebook.html" class="ebook-link">📖 eBook</a></li>
+    </ul>
+  </nav>
+
+  <!-- ======================== HERO ============================== -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+
+    <div class="hero-content">
+      <span class="hero-eyebrow typewriter" data-text="CLASSIFIED RESEARCH ARCHIVE - LEVEL OMEGA CLEARANCE">CLASSIFIED RESEARCH ARCHIVE - LEVEL OMEGA CLEARANCE</span>
+
+      <h1 class="glitch" data-text="THE TRUTH ARCHIVE">THE TRUTH ARCHIVE</h1>
+
+      <div class="hero-divider"><span>◆</span></div>
+
+      <p>
+        Everything you were taught about history, science, government, and reality
+        is a carefully constructed illusion. The systems you trust have been
+        designed to keep you blind, compliant, and divided.
+        This archive pulls back the curtain - one layer at a time.
+      </p>
+
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="#chapters" class="btn btn-primary">↓ Enter the Archive</a>
+        <a href="ebook.html" class="btn btn-gold">📖 Read the eBook</a>
+        <a href="map.html" class="btn" style="border:1px solid rgba(201,162,39,0.4);color:#c9a227;padding:0.75rem 1.5rem;font-family:var(--font-label);font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;transition:all 0.3s ease;">🕸 Connection Map</a>
+      </div>
+      <div style="margin-top:1.5rem;"><span class="live-counter-wrap"></span></div>
+    </div>
+
+    <div class="scroll-down">SCROLL</div>
+  </section>
+
+  <!-- ======================== STATS BAR ========================= -->
+  <div class="truth-meter-section">
+    <div class="truth-stats-grid">
+      <div class="truth-stat fade-in">
+        <span class="truth-number">12</span>
+        <span class="truth-label">Core Truth Chapters</span>
+      </div>
+      <div class="truth-stat fade-in">
+        <span class="truth-number">200+</span>
+        <span class="truth-label">Documented Connections</span>
+      </div>
+      <div class="truth-stat fade-in">
+        <span class="truth-number">500</span>
+        <span class="truth-label">Years of Hidden History</span>
+      </div>
+      <div class="truth-stat fade-in">
+        <span class="truth-number">1</span>
+        <span class="truth-label">Agenda Behind It All</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== INTRO ============================= -->
+  <section class="section">
+    <div class="container-narrow">
+      <div class="section-header fade-in">
+        <span class="eyebrow">The Red Pill</span>
+        <h2>Welcome to the Archive</h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="fade-in">
+        <p>
+          You did not find this archive by accident. Something compelled you to
+          look beyond the official narrative - to question what you see on the
+          news, in your textbooks, and in the night sky. That instinct is correct.
+        </p>
+        <p>
+          For centuries, a small class of interconnected families, institutions,
+          and orders has managed the flow of information, money, energy, and
+          belief on this planet. Their tools are sophisticated: control the
+          money supply and you control governments; control the media and you
+          control perception; control perception and you control behaviour.
+        </p>
+        <p>
+          This archive synthesises the most critical research across every major
+          domain of control - from the true shape of our world, to the banking
+          families who fund both sides of every war, to the secret societies whose
+          symbolism appears on currency, monuments, and corporate logos in plain sight.
+        </p>
+
+        <div class="declassified-banner">◆ &nbsp; ALL INFORMATION IN THIS ARCHIVE IS FOR RESEARCH AND EDUCATIONAL PURPOSES &nbsp; ◆</div>
+
+        <blockquote>
+          "The individual is handicapped by coming face to face with a conspiracy so monstrous he cannot believe it exists."
+          <br><strong>- J. Edgar Hoover</strong>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== CHAPTERS ========================== -->
+  <section class="section-alt" id="chapters">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="eyebrow">Research Chapters</span>
+        <h2>Choose Your Path Down the Rabbit Hole</h2>
+        <div class="divider"></div>
+        <p>Each chapter is a self-contained investigation. Start anywhere - every thread leads to the same web.</p>
+      </div>
+
+      <div class="grid-3">
+
+        <a href="flat-earth.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">🌐</span>
+            <h3>Flat Earth & the Cosmological Lie</h3>
+            <p>The globe model is a psyop imposed centuries ago. Understand the true flat, enclosed world - complete with a firmament dome, an ice wall, and a local sun and moon.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 01</span>
+            <span class="chapter-cta">Read More →</span>
+          </div>
+        </a>
+
+        <a href="great-awakening.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">⚡</span>
+            <h3>The Great Awakening</h3>
+            <p>A global counter-movement is exposing the hidden cabal that has controlled civilisation for millennia. Learn about The Plan, Q, the White Hats, and the coming Storm.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 02</span>
+            <span class="chapter-cta">Read More →</span>
+          </div>
+        </a>
+
+        <a href="deep-state.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">🏛️</span>
+            <h3>The Deep State & Shadow Government</h3>
+            <p>Beneath elected governments lies a permanent, unaccountable power structure. False flags, Agenda 2030, population control, and the Great Reset - all connected.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 03</span>
+            <span class="chapter-cta">Read More →</span>
+          </div>
+        </a>
+
+        <a href="secret-societies.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">🔺</span>
+            <h3>Secret Societies & Ancient Orders</h3>
+            <p>The Illuminati, Freemasonry, Skull &amp; Bones, Bohemian Grove, Jesuits - discover how these interlocking orders have shepherded history from boardrooms and lodge rooms.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 04</span>
+            <span class="chapter-cta">Read More →</span>
+          </div>
+        </a>
+
+        <a href="banking-control.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">💰</span>
+            <h3>The Central Banking Cartel</h3>
+            <p>Every nation on Earth is in debt to private bankers. Learn how the Federal Reserve, the BIS, and the petrodollar system enslave humanity through manufactured debt.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 05</span>
+            <span class="chapter-cta">Read More →</span>
+          </div>
+        </a>
+
+        <a href="media-control.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">📺</span>
+            <h3>Media Control & The Propaganda Machine</h3>
+            <p>Six corporations control 90% of what the world sees, reads, and hears. Operation Mockingbird, Hollywood social engineering, and algorithmic censorship exposed.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 06</span>
+            <span class="chapter-cta">Read More →</span>
+          </div>
+        </a>
+
+        <a href="space-deception.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">🚀</span>
+            <h3>The Space Program Deception</h3>
+            <p>NASA stands for "Never A Straight Answer." Examine the Van Allen belt problem, the Kubrick moon-landing evidence, the ISS illusion, and what really lies beyond the firmament.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 07</span>
+            <span class="chapter-cta">Read More →</span>
+          </div>
+        </a>
+
+        <a href="big-pharma.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">💊</span>
+            <h3>Big Pharma &amp; Medical Control</h3>
+            <p>Medicine was redesigned to manage disease, not cure it. Rockefeller medicine, suppressed cancer cures, fluoride in the water supply, and the mRNA experiment exposed.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 08</span>
+            <span class="chapter-cta">Read More →</span>
+          </div>
+        </a>
+
+        <a href="tech-control.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">📡</span>
+            <h3>Technology &amp; Digital Control</h3>
+            <p>Every smart device is a surveillance node. PRISM, 5G sensor grids, AI citizen scoring, directed energy weapons, and the transhumanist agenda to merge you with the machine.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 09</span>
+            <span class="chapter-cta">Read More →</span>
+          </div>
+        </a>
+
+        <a href="false-flags.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">🚨</span>
+            <h3>False Flags &amp; Staged Events</h3>
+            <p>Governments have staged attacks on their own citizens to justify wars and control. Operation Northwoods, 9/11, JFK, and every manufactured crisis follows the same template.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 10</span>
+            <span class="chapter-cta">Read More →</span>
+          </div>
+        </a>
+
+        <a href="suppressed-history.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">🏛️</span>
+            <h3>Suppressed History &amp; The SSP</h3>
+            <p>Tartaria, the Mud Flood, the Ancient Builder Race, and a Secret Space Programme operating since the 1950s. The civilisation you were taught about is an edited fiction.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 11</span>
+            <span class="chapter-cta">Read More →</span>
+          </div>
+        </a>
+
+        <a href="metaphysical.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">🔮</span>
+            <h3>Metaphysical &amp; Spiritual Truth</h3>
+            <p>Consciousness is primary. The pineal gland, sacred geometry, suppressed free energy, Tesla, DMT, and the Law of One - the deepest layer of the control system explained.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 12</span>
+            <span class="chapter-cta">Read More →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== POWER HIERARCHY =================== -->
+  <section class="section hierarchy-section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="eyebrow">The Control Structure</span>
+        <h2>Who Really Runs the World?</h2>
+        <div class="divider"></div>
+        <p>Power is not exercised by those you can see. It flows through layers specifically designed to obscure origin and intent.</p>
+      </div>
+
+      <div class="grid-2" style="align-items: start;">
+        <div class="fade-in">
+          <ul class="hierarchy-list">
+            <li>
+              <div>
+                <strong>The Hidden Hand - Ancient Bloodlines</strong>
+                <span>A clutch of dynastic families whose wealth and influence predate modern nation-states. They operate through foundations, trusts, and intermediaries, never appearing on any ballot.</span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Secret Orders &amp; Occult Fraternities</strong>
+                <span>Initiatic brotherhoods whose upper degrees share a hidden religious and philosophical doctrine fundamentally at odds with the exoteric faiths they publicly support.</span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Supranational Institutions</strong>
+                <span>The Bank for International Settlements, the IMF, the World Economic Forum, the United Nations - policy bodies accountable to no electorate, advancing a single global agenda.</span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>National Governments &amp; Intelligence Agencies</strong>
+                <span>The visible face of power - elected officials who believe they govern but are constrained by frameworks set by those above. Intelligence agencies serve as enforcement arms.</span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Corporations, Media &amp; Academia</strong>
+                <span>The delivery mechanism for the agenda - normalising it through entertainment, journalism, and education until populations police each other's compliance.</span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>The General Public - Managed Masses</strong>
+                <span>Kept distracted, divided, and dependent. Sports, celebrity culture, pharmaceuticals, and social media serve as the modern bread and circuses of ancient Rome.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="fade-in">
+          <div class="fact-box" style="margin-bottom:1.5rem;">
+            <span class="fact-label">Key Insight</span>
+            <p>The most effective form of control is one the controlled do not know exists. The system is not broken - it is working precisely as designed.</p>
+          </div>
+          <div class="alert-box" style="margin-bottom:1.5rem;">
+            <span class="alert-label">⚠ Notice</span>
+            <p>Every major war, financial crash, pandemic, and social revolution of the last three centuries can be traced to decisions made by people who were never voted into office.</p>
+          </div>
+          <div class="card" style="margin-top:0;">
+            <h4>The Maps as Roadmaps</h4>
+            <p style="font-size:0.9rem; max-width:100%;">
+              The <strong>Great Awakening Map</strong> and the <strong>Flat Earth cosmological diagram</strong> are not fringe art - they are the most comprehensive visual representations of interlocking control systems ever assembled. Every node on those maps corresponds to a chapter in this archive.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== EBOOK CTA ========================= -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="ebook-banner fade-in">
+        <span class="hero-eyebrow" style="display:block; margin-bottom:1rem;">📖 Complete eBook</span>
+        <h2 style="margin-bottom:1rem;">All 12 Chapters — In One Document</h2>
+        <p style="max-width:55ch; margin:0 auto 2rem; color:var(--text-secondary);">
+          Download or print the complete Truth Archive as a single, beautifully formatted document. Share it. Give it to those who are ready to wake up.
+        </p>
+        <a href="ebook.html" class="btn btn-gold" style="font-size:1rem; padding:1rem 3rem;">Open the eBook →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== FOOTER ============================ -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>The Truth Archive</h3>
+        <p>An independent research network dedicated to exposing the hidden architecture of power.</p>
+        <p style="margin-top:1rem; font-family:var(--font-mono); font-size:0.68rem; color:var(--text-muted); letter-spacing:0.1em;">
+          "Once you see it, you cannot unsee it."
+        </p>
+      </div>
+      <div class="footer-links">
+        <h5>Chapters</h5>
+        <ul>
+          <li><a href="flat-earth.html">Flat Earth</a></li>
+          <li><a href="great-awakening.html">Great Awakening</a></li>
+          <li><a href="deep-state.html">Deep State</a></li>
+          <li><a href="secret-societies.html">Secret Societies</a></li>
+          <li><a href="banking-control.html">Banking Control</a></li>
+          <li><a href="media-control.html">Media Control</a></li>
+          <li><a href="space-deception.html">Space Deception</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>Reference</h5>
+        <ul>
+          <li><a href="ebook.html">Complete eBook</a></li>
+          <li><a href="images/FlatEarth_8k.jpg" target="_blank">Flat Earth Map</a></li>
+          <li><a href="images/GreatAwakeningMap_2024_V11.jpg" target="_blank">Great Awakening Map V11</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>◆ &nbsp; THE TRUTH ARCHIVE &nbsp; ◆ &nbsp; RESEARCH &amp; EDUCATION &nbsp; ◆ &nbsp; QUESTION EVERYTHING &nbsp; ◆</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script src="js/enhancements.js"></script>
+</body>
+</html>
+
