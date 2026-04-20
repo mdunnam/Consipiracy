@@ -955,7 +955,7 @@ function initArchiveProgress() {
   const pct = Math.min(100, Math.round((visited.length / TOTAL) * 100));
 
   // Conspiracy-themed rank names
-  // Every 10 pages up to 100, then every 25 up to 500, then every 50
+  // Every 10 pages up to 100, then every 25 up to 500, then every 50 up to 1000
   const LEVELS = [
     [0,   'Uninitiated'],
     [10,  'Curious Citizen'],
@@ -980,7 +980,20 @@ function initArchiveProgress() {
     [350, 'Firmament Witness'],
     [375, 'Level Omega Agent'],
     [400, 'The Awakened Elite'],
-    [422, 'Truth Archive: Complete'],
+    [425, 'Black Site Operative'],
+    [450, 'Cipher Breaker'],
+    [475, 'Watcher of Watchers'],
+    [500, 'Grandmaster of the Hidden Thread'],
+    [550, 'Keeper of Forbidden Records'],
+    [600, 'Architect of the Veil'],
+    [650, 'Inner Sanctum Scholar'],
+    [700, 'Oracle of the Deep State'],
+    [750, 'Shepherd of Lost Signals'],
+    [800, 'Chronicler of the Damned'],
+    [850, 'The Unseen Hand'],
+    [900, 'Lux et Tenebris'],
+    [950, 'Sovereign of the Firmament'],
+    [1000, 'Illuminated One'],
   ];
 
   /**
