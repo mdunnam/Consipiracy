@@ -1290,6 +1290,7 @@ function injectQuiz() {
   const section = document.createElement('section');
   section.id = 'ta-quiz-section';
   section.className = 'section quiz-section';
+  section.style.paddingBottom = '1rem';
   section.innerHTML = `
     <div class="container">
       <div class="section-header fade-in">

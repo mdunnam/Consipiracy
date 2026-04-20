@@ -210,7 +210,7 @@
     .ap-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--red-bright), var(--gold)); transition: width 1.5s ease; }
 
     /* ── Route cards ─────────────────────────────────────────────────── */
-    .route-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem; }
+    #routes { padding-top: 1rem; }
     .route-card { position: relative; display: block; padding: 1.5rem; min-height: 260px; border: 1px solid var(--border); border-radius: 10px; background: linear-gradient(180deg, rgba(201,162,39,0.06), rgba(255,255,255,0.01)), var(--bg-card); overflow: hidden; transition: var(--transition); }
     .route-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(201,162,39,0.14), transparent 40%); opacity: 0; transition: var(--transition); }
     .route-card:hover { transform: translateY(-6px); border-color: var(--border-gold); box-shadow: 0 18px 50px rgba(0,0,0,0.45), 0 0 0 1px rgba(201,162,39,0.14); color: inherit; }
