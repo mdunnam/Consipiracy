@@ -7,23 +7,25 @@
   <title>The Truth Archive - Conspiracy Research Network</title>
   <meta name="robots" content="index, follow" />
   <meta name="description" content="A comprehensive research archive covering the Flat Earth, The Great Awakening, Deep State operations, secret societies, financial control, and more." />
-    <!-- Open Graph / Social Preview -->
-    <meta property="og:type"        content="website" />
-    <meta property="og:url"         content="https://thetrutharchive.org" />
-    <meta property="og:title"       content="The Truth Archive" />
-    <meta property="og:description" content="A comprehensive research archive covering the Flat Earth, The Great Awakening, Deep State operations, secret societies, financial control, and more." />
-    <meta property="og:image"       content="https://thetrutharchive.org/images/og-preview.jpg" />
-    <meta name="twitter:card"        content="summary_large_image" />
-    <meta name="twitter:url"         content="https://thetrutharchive.org" />
-    <meta name="twitter:title"       content="The Truth Archive" />
-    <meta name="twitter:description" content="A comprehensive research archive covering the Flat Earth, The Great Awakening, Deep State operations, secret societies, financial control, and more." />
-    <meta name="twitter:image"       content="https://thetrutharchive.org/images/og-preview.jpg" />
+  <!-- Open Graph / Social Preview -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://thetrutharchive.org" />
+  <meta property="og:title"       content="The Truth Archive" />
+  <meta property="og:description" content="A comprehensive research archive covering the Flat Earth, The Great Awakening, Deep State operations, secret societies, financial control, and more." />
+  <meta property="og:image"       content="https://thetrutharchive.org/images/og-preview.jpg" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:url"         content="https://thetrutharchive.org" />
+  <meta name="twitter:title"       content="The Truth Archive" />
+  <meta name="twitter:description" content="A comprehensive research archive covering the Flat Earth, The Great Awakening, Deep State operations, secret societies, financial control, and more." />
+  <meta name="twitter:image"       content="https://thetrutharchive.org/images/og-preview.jpg" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/enhancements.css" />
   <style>
+    /* ── Fade-in ─────────────────────────────────────────────────────── */
     .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.35s ease, transform 0.35s ease; }
     .fade-in.visible { opacity: 1; transform: none; }
 
+    /* ── Hero redesign ───────────────────────────────────────────────── */
     .hero.hero-redesign {
       min-height: 100vh;
       display: flex;
@@ -37,7 +39,6 @@
         radial-gradient(circle at 80% 30%, rgba(139,20,20,0.18), transparent 32%),
         linear-gradient(180deg, rgba(4,4,4,0.82), rgba(4,4,4,0.96));
     }
-
     .hero-redesign::before {
       content: '';
       position: absolute;
@@ -49,7 +50,6 @@
       mask-image: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent 92%);
       pointer-events: none;
     }
-
     .hero-redesign::after {
       content: '';
       position: absolute;
@@ -58,7 +58,6 @@
       background: linear-gradient(to top, rgba(4,4,4,0.95), transparent);
       pointer-events: none;
     }
-
     .hero-redesign-inner {
       width: min(1320px, 100%);
       margin: 0 auto;
@@ -69,14 +68,29 @@
       position: relative;
       z-index: 1;
     }
-
-    .signal-chip-row {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.4rem;
+    .hero-sigil-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
     }
+    .floating-glyph {
+      position: absolute;
+      font-family: var(--font-heading);
+      color: rgba(201,162,39,0.2);
+      text-shadow: 0 0 18px rgba(201,162,39,0.18);
+      user-select: none;
+      opacity: 0.9;
+    }
+    .glyph-1 { top: 12%; left: 6%; font-size: 2rem; }
+    .glyph-2 { top: 20%; right: 10%; font-size: 3rem; color: rgba(139,20,20,0.2); }
+    .glyph-3 { top: 52%; left: 3%; font-size: 1.75rem; }
+    .glyph-4 { bottom: 20%; right: 6%; font-size: 2.4rem; }
+    .glyph-5 { top: 10%; left: 45%; font-size: 1.6rem; }
+    .glyph-6 { bottom: 18%; left: 44%; font-size: 2rem; color: rgba(139,20,20,0.16); }
 
+    /* ── Signal chips ────────────────────────────────────────────────── */
+    .signal-chip-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
     .signal-chip {
       display: inline-flex;
       align-items: center;
@@ -87,67 +101,42 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       border: 1px solid var(--border-gold);
-      background: rgba(201, 162, 39, 0.08);
+      background: rgba(201,162,39,0.08);
       color: var(--gold-light);
       box-shadow: var(--glow-gold);
     }
 
-    .hero-copy h1 {
-      font-size: clamp(3rem, 7vw, 6.25rem);
-      line-height: 1.02;
-      margin-bottom: 1rem;
-      max-width: 11ch;
+    /* ── Hero copy ───────────────────────────────────────────────────── */
+    .hero-copy h1 { font-size: clamp(3rem, 7vw, 6.25rem); line-height: 1.02; margin-bottom: 1rem; max-width: 11ch; }
+    .hero-copy .lead { font-size: 1.12rem; line-height: 1.9; color: var(--text-primary); max-width: 64ch; margin-bottom: 1.8rem; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .hero-redesign .glitch::before, .hero-redesign .glitch::after { background: transparent; }
+    .hero-redesign .glitch::before { text-shadow: -2px 0 rgba(204,34,34,0.7); }
+    .hero-redesign .glitch::after  { text-shadow:  2px 0 rgba(201,162,39,0.6); }
+    .hero-redesign h1.glitch {
+      background: linear-gradient(180deg, #e6c84a 0%, #c9a227 60%, #9a7a18 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+      filter: drop-shadow(0 2px 22px rgba(201,162,39,0.3));
     }
 
-    .hero-copy .lead {
-      font-size: 1.12rem;
-      line-height: 1.9;
-      color: var(--text-primary);
-      max-width: 64ch;
-      margin-bottom: 1.8rem;
-    }
+    /* ── Symbol inline row ───────────────────────────────────────────── */
+    .symbol-inline-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.85rem; margin: 0 0 1.5rem; }
+    .symbol-inline { display: flex; align-items: center; gap: 0.8rem; padding: 0.85rem; border: 1px solid var(--border); border-radius: 8px; background: rgba(10,10,10,0.72); }
+    .symbol-inline-mark { width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border: 1px dashed var(--border-gold); border-radius: 50%; color: var(--gold-light); font-size: 1.15rem; flex-shrink: 0; background: rgba(201,162,39,0.05); }
+    .symbol-inline-copy strong { display: block; font-family: var(--font-label); font-size: 0.72rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.2rem; }
+    .symbol-inline-copy span { display: block; font-size: 0.75rem; color: var(--text-secondary); line-height: 1.5; }
 
-    .hero-actions {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.5rem;
-    }
+    /* ── Signal line (3-stat row) ────────────────────────────────────── */
+    .signal-line { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1.75rem; }
+    .signal-item { padding: 1rem 1rem 1.1rem; border: 1px solid var(--border); background: rgba(15,15,15,0.88); border-radius: var(--radius); }
+    .signal-item strong { display: block; font-family: var(--font-label); color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; font-size: 0.78rem; margin-bottom: 0.45rem; }
+    .signal-item span { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.7; }
 
-    .signal-line {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-      margin-top: 1.75rem;
-    }
-
-    .signal-item {
-      padding: 1rem 1rem 1.1rem;
-      border: 1px solid var(--border);
-      background: rgba(15, 15, 15, 0.88);
-      border-radius: var(--radius);
-    }
-
-    .signal-item strong {
-      display: block;
-      font-family: var(--font-label);
-      color: var(--gold);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      font-size: 0.78rem;
-      margin-bottom: 0.45rem;
-    }
-
-    .signal-item span {
-      color: var(--text-secondary);
-      font-size: 0.88rem;
-      line-height: 1.7;
-    }
-
-    .hero-panel-wrap {
-      position: relative;
-    }
-
+    /* ── Hero panel (right column) ───────────────────────────────────── */
+    .hero-panel-wrap { position: relative; }
     .hero-panel {
       position: relative;
       padding: 1.35rem;
@@ -157,810 +146,173 @@
       box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,162,39,0.08);
       overflow: hidden;
     }
+    .hero-panel::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 4px; background: linear-gradient(90deg, var(--red-bright), var(--gold), var(--red-bright)); }
+    .panel-topline { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1rem; font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-muted); }
+    .panel-status { color: var(--gold-light); text-shadow: var(--glow-text-gold); }
+    .hero-panel-sigil { display: grid; grid-template-columns: 92px 1fr; gap: 1rem; align-items: center; padding: 1rem; margin-bottom: 1rem; border: 1px solid var(--border); border-radius: 8px; background: linear-gradient(180deg, rgba(201,162,39,0.06), rgba(255,255,255,0.01)); }
+    .sigil-core { position: relative; width: 92px; height: 92px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-gold); border-radius: 50%; font-size: 2.2rem; color: var(--gold-light); background: radial-gradient(circle at center, rgba(201,162,39,0.14), rgba(201,162,39,0.03) 58%, transparent 70%); box-shadow: 0 0 30px rgba(201,162,39,0.12); }
+    .sigil-core::before, .sigil-core::after { content: ''; position: absolute; border-radius: 50%; inset: 10px; border: 1px dashed rgba(201,162,39,0.35); }
+    .sigil-core::after { inset: -10px; border-style: solid; border-color: rgba(139,20,20,0.18); }
+    .sigil-caption strong { display: block; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.76rem; color: var(--gold); margin-bottom: 0.35rem; }
+    .sigil-caption span { display: block; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.65; }
+    .featured-dossier { padding: 1.25rem; margin-bottom: 1rem; border: 1px solid var(--border); background: rgba(201,162,39,0.05); border-radius: 8px; }
+    .featured-dossier .eyebrow { margin-bottom: 0.5rem; }
+    .featured-dossier h3 { font-size: 1.45rem; margin-bottom: 0.7rem; }
+    .featured-dossier p { max-width: 100%; color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem; }
+    .dossier-meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; margin-bottom: 1rem; }
+    .dossier-meta div { padding: 0.8rem; background: rgba(4,4,4,0.5); border: 1px solid var(--border); border-radius: 8px; }
+    .dossier-meta strong, .dossier-meta span { display: block; }
+    .dossier-meta strong { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.16em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.35rem; }
+    .dossier-meta span { font-size: 1rem; color: var(--gold-light); font-family: var(--font-label); letter-spacing: 0.06em; }
+    .intel-list { display: grid; gap: 0.75rem; margin-top: 1rem; }
+    .intel-item { display: flex; gap: 0.85rem; align-items: flex-start; padding: 0.95rem 1rem; border: 1px solid var(--border); border-radius: 8px; background: rgba(255,255,255,0.01); }
+    .intel-index { font-family: var(--font-mono); font-size: 0.78rem; color: var(--red-bright); min-width: 2.4rem; letter-spacing: 0.1em; margin-top: 0.1rem; }
+    .intel-item strong { display: block; font-size: 0.93rem; margin-bottom: 0.25rem; color: var(--gold); font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.1em; }
+    .intel-item span { display: block; color: var(--text-secondary); font-size: 0.88rem; line-height: 1.65; }
 
-    .hero-panel::before {
-      content: '';
-      position: absolute;
-      inset: 0 0 auto 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--red-bright), var(--gold), var(--red-bright));
-    }
+    /* ── Red thread strip ────────────────────────────────────────────── */
+    .red-thread-section { padding: 0 2rem 5rem; position: relative; margin-top: -2.2rem; z-index: 2; }
+    .red-thread-grid { width: min(1320px, 100%); margin: 0 auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+    .thread-card { padding: 1.1rem 1rem; border-radius: 8px; border: 1px solid var(--border); background: linear-gradient(180deg, rgba(16,16,16,0.95), rgba(8,8,8,0.96)); position: relative; overflow: hidden; }
+    .thread-card::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 2px; background: linear-gradient(to bottom, var(--red-bright), transparent); }
+    .thread-card strong { display: block; margin-bottom: 0.45rem; color: var(--gold); font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; }
+    .thread-card p { max-width: 100%; margin: 0; color: var(--text-secondary); font-size: 0.88rem; }
 
-    .panel-topline {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--text-muted);
-    }
+    /* ── Countdown + subscriber counter ─────────────────────────────── */
+    .countdown-subscriber-section { padding: 1.5rem 2rem; background: var(--bg-secondary); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .countdown-subscriber-inner { width: min(1320px, 100%); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: center; }
+    .doc-drop-wrap { display: flex; flex-direction: column; gap: 0.5rem; }
+    .doc-drop-label { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+    .doc-drop-label strong { color: var(--gold); display: block; margin-bottom: 0.25rem; }
+    .doc-drop-countdown { font-family: var(--font-heading); font-size: clamp(1.8rem, 4vw, 3rem); color: var(--gold); text-shadow: var(--glow-text-gold); letter-spacing: 0.1em; }
+    .sub-counter-wrap { text-align: right; }
+    .sub-counter-number { font-family: var(--font-heading); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: var(--gold); text-shadow: var(--glow-text-gold); display: block; line-height: 1.1; }
+    .sub-counter-label { font-family: var(--font-label); font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-secondary); margin-top: 0.4rem; display: block; }
 
-    .panel-status {
-      color: var(--gold-light);
-      text-shadow: var(--glow-text-gold);
-    }
+    /* ── Stats bar ───────────────────────────────────────────────────── */
+    .truth-meter-section { background: var(--bg-secondary); border-top: 1px solid var(--border-gold); border-bottom: 1px solid var(--border-gold); }
+    .truth-stat { text-align: center; padding: 2.5rem 1rem; border-right: 1px solid var(--border); }
+    .truth-stat:last-child { border-right: none; }
+    .truth-number { font-family: var(--font-heading); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: var(--gold); text-shadow: var(--glow-text-gold); display: block; line-height: 1.1; }
+    .truth-label { font-family: var(--font-label); font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-secondary); margin-top: 0.4rem; display: block; }
+    .truth-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
 
-    .featured-dossier {
-      padding: 1.25rem;
-      margin-bottom: 1rem;
-      border: 1px solid var(--border);
-      background: rgba(201,162,39,0.05);
-      border-radius: 8px;
-    }
+    /* ── Archive progress bar ────────────────────────────────────────── */
+    .archive-progress-section { padding: 1rem 2rem 2rem; }
+    .archive-progress-inner { width: min(1320px, 100%); margin: 0 auto; }
+    .archive-progress-wrap { padding: 1.25rem 1.5rem; border: 1px solid var(--border); border-radius: var(--radius); background: rgba(10,10,10,0.7); }
+    .ap-label { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.6rem; }
+    .ap-label em { color: var(--gold-light); font-style: normal; }
+    .ap-track { height: 3px; background: rgba(201,162,39,0.12); border-radius: 2px; overflow: hidden; }
+    .ap-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--red-bright), var(--gold)); transition: width 1.5s ease; }
 
-    .featured-dossier .eyebrow {
-      margin-bottom: 0.5rem;
-    }
-
-    .featured-dossier h3 {
-      font-size: 1.45rem;
-      margin-bottom: 0.7rem;
-    }
-
-    .featured-dossier p {
-      max-width: 100%;
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
-    }
-
-    .dossier-meta {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.75rem;
-      margin-bottom: 1rem;
-    }
-
-    .dossier-meta div {
-      padding: 0.8rem;
-      background: rgba(4,4,4,0.5);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-    }
-
-    .dossier-meta strong,
-    .dossier-meta span {
-      display: block;
-    }
-
-    .dossier-meta strong {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.16em;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      margin-bottom: 0.35rem;
-    }
-
-    .dossier-meta span {
-      font-size: 1rem;
-      color: var(--gold-light);
-      font-family: var(--font-label);
-      letter-spacing: 0.06em;
-    }
-
-    .intel-list {
-      display: grid;
-      gap: 0.75rem;
-      margin-top: 1rem;
-    }
-
-    .intel-item {
-      display: flex;
-      gap: 0.85rem;
-      align-items: flex-start;
-      padding: 0.95rem 1rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: rgba(255,255,255,0.01);
-    }
-
-    .intel-index {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--red-bright);
-      min-width: 2.4rem;
-      letter-spacing: 0.1em;
-      margin-top: 0.1rem;
-    }
-
-    .intel-item strong {
-      display: block;
-      font-size: 0.93rem;
-      margin-bottom: 0.25rem;
-      color: var(--gold);
-      font-family: var(--font-label);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    .intel-item span {
-      display: block;
-      color: var(--text-secondary);
-      font-size: 0.88rem;
-      line-height: 1.65;
-    }
-
-    .red-thread-section {
-      padding: 0 2rem 5rem;
-      position: relative;
-      margin-top: -2.2rem;
-      z-index: 2;
-    }
-
-    .red-thread-grid {
-      width: min(1320px, 100%);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .thread-card {
-      padding: 1.1rem 1rem;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(16,16,16,0.95), rgba(8,8,8,0.96));
-      position: relative;
-      overflow: hidden;
-    }
-
-    .thread-card::before {
-      content: '';
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--red-bright), transparent);
-    }
-
-    .thread-card strong {
-      display: block;
-      margin-bottom: 0.45rem;
-      color: var(--gold);
-      font-family: var(--font-label);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 0.78rem;
-    }
-
-    .thread-card p {
-      max-width: 100%;
-      margin: 0;
-      color: var(--text-secondary);
-      font-size: 0.88rem;
-    }
-
-    .route-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.4rem;
-    }
-
-    .route-card {
-      position: relative;
-      display: block;
-      padding: 1.5rem;
-      min-height: 260px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background:
-        linear-gradient(180deg, rgba(201,162,39,0.06), rgba(255,255,255,0.01)),
-        var(--bg-card);
-      overflow: hidden;
-      transition: var(--transition);
-    }
-
-    .route-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top right, rgba(201,162,39,0.14), transparent 40%);
-      opacity: 0;
-      transition: var(--transition);
-    }
-
-    .route-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--border-gold);
-      box-shadow: 0 18px 50px rgba(0,0,0,0.45), 0 0 0 1px rgba(201,162,39,0.14);
-      color: inherit;
-    }
-
+    /* ── Route cards ─────────────────────────────────────────────────── */
+    .route-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem; }
+    .route-card { position: relative; display: block; padding: 1.5rem; min-height: 260px; border: 1px solid var(--border); border-radius: 10px; background: linear-gradient(180deg, rgba(201,162,39,0.06), rgba(255,255,255,0.01)), var(--bg-card); overflow: hidden; transition: var(--transition); }
+    .route-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(201,162,39,0.14), transparent 40%); opacity: 0; transition: var(--transition); }
+    .route-card:hover { transform: translateY(-6px); border-color: var(--border-gold); box-shadow: 0 18px 50px rgba(0,0,0,0.45), 0 0 0 1px rgba(201,162,39,0.14); color: inherit; }
     .route-card:hover::before { opacity: 1; }
+    .route-kicker { display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; padding: 0.35rem 0.65rem; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--border-red); color: var(--red-bright); background: rgba(139,20,20,0.12); }
+    .route-card h3 { font-size: 1.35rem; margin-bottom: 0.7rem; max-width: 12ch; }
+    .route-card p { max-width: 100%; color: var(--text-secondary); font-size: 0.92rem; line-height: 1.75; margin-bottom: 1.4rem; }
+    .route-footer { display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+    .route-depth { color: var(--gold-light); }
+    .route-icon-shell { position: relative; width: 76px; height: 76px; display: flex; align-items: center; justify-content: center; border: 1px dashed var(--border-gold); border-radius: 16px; background: rgba(201,162,39,0.05); margin-bottom: 1.4rem; }
+    .route-icon { font-size: 2rem; line-height: 1; color: var(--gold-light); text-shadow: var(--glow-text-gold); }
 
-    .route-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-      padding: 0.35rem 0.65rem;
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border: 1px solid var(--border-red);
-      color: var(--red-bright);
-      background: rgba(139,20,20,0.12);
-    }
+    /* ── Chapter grid cards ──────────────────────────────────────────── */
+    .chapter-card { display: flex; flex-direction: column; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: var(--transition); text-decoration: none; color: inherit; position: relative; }
+    .chapter-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--red), var(--gold)); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+    .chapter-card:hover::before { transform: scaleX(1); }
+    .chapter-card:hover { background: var(--bg-card-hover); border-color: var(--border-gold); transform: translateY(-5px); box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 0 1px var(--border-gold); color: inherit; text-shadow: none; }
+    .chapter-card-body { padding: 1.8rem; flex: 1; }
+    .chapter-card-footer { padding: 0.9rem 1.8rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .chapter-number { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.3em; color: var(--text-muted); }
+    .chapter-cta { font-family: var(--font-label); font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 0.4rem; }
+    .chapter-icon { font-size: 2.4rem; margin-bottom: 1rem; display: block; filter: drop-shadow(0 0 10px rgba(201,162,39,0.35)); }
+    .chapter-card h3 { font-size: 1.15rem; margin-bottom: 0.6rem; color: var(--gold); }
+    .chapter-card p { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0; max-width: 100%; line-height: 1.7; }
 
-    .route-card h3 {
-      font-size: 1.35rem;
-      margin-bottom: 0.7rem;
-      max-width: 12ch;
-    }
+    /* ── Symbol band ─────────────────────────────────────────────────── */
+    .symbol-band-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+    .symbol-slot { padding: 1.25rem 1rem; border: 1px solid var(--border); border-radius: 10px; background: linear-gradient(180deg, rgba(16,16,16,0.94), rgba(8,8,8,0.96)); text-align: center; position: relative; overflow: hidden; }
+    .symbol-slot::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 2px; background: linear-gradient(to bottom, var(--red-bright), transparent 75%); }
+    .symbol-mark { width: 84px; height: 84px; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; border: 1px dashed var(--border-gold); border-radius: 50%; font-size: 2rem; color: var(--gold-light); background: radial-gradient(circle at center, rgba(201,162,39,0.12), rgba(201,162,39,0.03) 62%, transparent 70%); }
+    .symbol-slot strong { display: block; font-family: var(--font-label); font-size: 0.78rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.35rem; }
+    .symbol-slot p { max-width: 100%; font-size: 0.82rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 0.7rem; }
+    .symbol-note { display: inline-block; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red-bright); border: 1px solid var(--border-red); padding: 0.22rem 0.45rem; background: rgba(139,20,20,0.12); }
 
-    .route-card p {
-      max-width: 100%;
-      color: var(--text-secondary);
-      font-size: 0.92rem;
-      line-height: 1.75;
-      margin-bottom: 1.4rem;
-    }
+    /* ── Power hierarchy ─────────────────────────────────────────────── */
+    .hierarchy-section { position: relative; }
+    .hierarchy-list { list-style: none; padding: 0; counter-reset: h-counter; }
+    .hierarchy-list li { counter-increment: h-counter; display: flex; align-items: flex-start; gap: 1.2rem; padding: 1.2rem 1.5rem; margin-bottom: 0.5rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); transition: var(--transition); }
+    .hierarchy-list li:hover { border-color: var(--border-red); background: var(--red-muted); }
+    .hierarchy-list li::before { content: "0" counter(h-counter); font-family: var(--font-mono); font-size: 0.75rem; color: var(--red-bright); font-weight: 700; min-width: 2.4rem; margin-top: 0.15rem; }
+    .hierarchy-list strong { display: block; color: var(--gold); margin-bottom: 0.3rem; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.95rem; }
+    .hierarchy-list span { font-size: 0.88rem; color: var(--text-secondary); }
 
-    .route-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
+    /* ── Spotlight section ───────────────────────────────────────────── */
+    .spotlight-layout { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1.5rem; align-items: start; }
+    .spotlight-main { padding: 2rem; border: 1px solid var(--border-gold); border-radius: 10px; background: linear-gradient(135deg, rgba(139,20,20,0.18), rgba(201,162,39,0.05) 55%, rgba(0,0,0,0.15)); position: relative; overflow: hidden; }
+    .spotlight-main::after { content: ''; position: absolute; right: -60px; bottom: -60px; width: 220px; height: 220px; border: 1px solid rgba(201,162,39,0.12); border-radius: 50%; pointer-events: none; }
+    .spotlight-main p, .spotlight-aside p { color: var(--text-secondary); max-width: 100%; }
+    .spotlight-points { display: grid; gap: 0.9rem; margin-top: 1.4rem; }
+    .spotlight-points div { padding: 0.9rem 1rem; border-left: 2px solid var(--red-bright); background: rgba(4,4,4,0.3); }
+    .spotlight-points strong { display: block; font-family: var(--font-label); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.3rem; font-size: 0.8rem; }
+    .spotlight-aside { display: grid; gap: 1rem; }
+    .aside-card { padding: 1.35rem; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-card); }
+    .aside-card h4 { margin-bottom: 0.75rem; font-size: 1.1rem; }
 
-    .route-depth {
-      color: var(--gold-light);
-    }
+    /* ── Signal matrix ───────────────────────────────────────────────── */
+    .signal-matrix { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .matrix-card { padding: 1.25rem; border: 1px solid var(--border); border-radius: 10px; background: linear-gradient(180deg, rgba(12,12,12,0.96), rgba(6,6,6,0.96)); }
+    .matrix-card h4 { font-size: 1rem; margin-bottom: 0.55rem; color: var(--gold-light); }
+    .matrix-card p { max-width: 100%; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.8rem; }
+    .matrix-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red-bright); }
 
-    .spotlight-layout {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 1.5rem;
-      align-items: start;
-    }
+    /* ── eBook banner ────────────────────────────────────────────────── */
+    .ebook-banner { background: linear-gradient(135deg, rgba(139,20,20,0.2) 0%, rgba(201,162,39,0.08) 100%); border: 1px solid var(--border-gold); border-radius: var(--radius); padding: 3rem; text-align: center; position: relative; overflow: hidden; }
+    .ebook-banner::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(201,162,39,0.02) 20px, rgba(201,162,39,0.02) 40px); }
+    .ebook-banner > * { position: relative; z-index: 1; }
 
-    .spotlight-main {
-      padding: 2rem;
-      border: 1px solid var(--border-gold);
-      border-radius: 10px;
-      background: linear-gradient(135deg, rgba(139,20,20,0.18), rgba(201,162,39,0.05) 55%, rgba(0,0,0,0.15));
-      position: relative;
-      overflow: hidden;
-    }
-
-    .spotlight-main::after {
-      content: '';
-      position: absolute;
-      right: -60px;
-      bottom: -60px;
-      width: 220px;
-      height: 220px;
-      border: 1px solid rgba(201,162,39,0.12);
-      border-radius: 50%;
-      box-shadow: inset 0 0 0 24px rgba(201,162,39,0.03), inset 0 0 0 56px rgba(201,162,39,0.02);
-      pointer-events: none;
-    }
-
-    .spotlight-main p,
-    .spotlight-aside p {
-      color: var(--text-secondary);
-      max-width: 100%;
-    }
-
-    .spotlight-points {
-      display: grid;
-      gap: 0.9rem;
-      margin-top: 1.4rem;
-    }
-
-    .spotlight-points div {
-      padding: 0.9rem 1rem;
-      border-left: 2px solid var(--red-bright);
-      background: rgba(4,4,4,0.3);
-    }
-
-    .spotlight-points strong {
-      display: block;
-      font-family: var(--font-label);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 0.3rem;
-      font-size: 0.8rem;
-    }
-
-    .spotlight-aside {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .aside-card {
-      padding: 1.35rem;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: var(--bg-card);
-    }
-
-    .aside-card h4 {
-      margin-bottom: 0.75rem;
-      font-size: 1.1rem;
-    }
-
-    .signal-matrix {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .matrix-card {
-      padding: 1.25rem;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: linear-gradient(180deg, rgba(12,12,12,0.96), rgba(6,6,6,0.96));
-    }
-
-    .matrix-card h4 {
-      font-size: 1rem;
-      margin-bottom: 0.55rem;
-      color: var(--gold-light);
-    }
-
-    .matrix-card p {
-      max-width: 100%;
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .matrix-card .matrix-tag {
-      display: inline-block;
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--red-bright);
-    }
-
-    .archive-cta {
-      padding: 2.4rem;
-      border: 1px solid var(--border-gold);
-      border-radius: 12px;
-      background:
-        linear-gradient(135deg, rgba(201,162,39,0.08), rgba(139,20,20,0.12)),
-        rgba(10,10,10,0.9);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .archive-cta::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(201,162,39,0.025) 18px, rgba(201,162,39,0.025) 36px);
-    }
-
-    .archive-cta > * { position: relative; z-index: 1; }
-
-    .archive-cta p {
-      margin-left: auto;
-      margin-right: auto;
-      color: var(--text-secondary);
-    }
-
-    .hero-sigil-layer {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .floating-glyph {
-      position: absolute;
-      font-family: var(--font-heading);
-      color: rgba(201, 162, 39, 0.2);
-      text-shadow: 0 0 18px rgba(201, 162, 39, 0.18);
-      user-select: none;
-      opacity: 0.9;
-    }
-
-    .glyph-1 { top: 12%; left: 6%; font-size: 2rem; }
-    .glyph-2 { top: 20%; right: 10%; font-size: 3rem; color: rgba(139, 20, 20, 0.2); }
-    .glyph-3 { top: 52%; left: 3%; font-size: 1.75rem; }
-    .glyph-4 { bottom: 20%; right: 6%; font-size: 2.4rem; }
-    .glyph-5 { top: 10%; left: 45%; font-size: 1.6rem; }
-    .glyph-6 { bottom: 18%; left: 44%; font-size: 2rem; color: rgba(139, 20, 20, 0.16); }
-
-    .symbol-inline-row {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 0.85rem;
-      margin: 0 0 1.5rem;
-    }
-
-    .symbol-inline {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      padding: 0.85rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: rgba(10, 10, 10, 0.72);
-    }
-
-    .symbol-inline-mark {
-      width: 42px;
-      height: 42px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px dashed var(--border-gold);
-      border-radius: 50%;
-      color: var(--gold-light);
-      font-size: 1.15rem;
-      flex-shrink: 0;
-      background: rgba(201, 162, 39, 0.05);
-      box-shadow: inset 0 0 0 6px rgba(201, 162, 39, 0.02);
-    }
-
-    .symbol-inline-copy strong,
-    .sigil-caption strong,
-    .symbol-slot strong,
-    .chapter-placeholder h4 {
-      display: block;
-      font-family: var(--font-label);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .symbol-inline-copy strong {
-      font-size: 0.72rem;
-      color: var(--gold);
-      margin-bottom: 0.2rem;
-    }
-
-    .symbol-inline-copy span {
-      display: block;
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
-    .hero-panel-sigil {
-      display: grid;
-      grid-template-columns: 92px 1fr;
-      gap: 1rem;
-      align-items: center;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: linear-gradient(180deg, rgba(201,162,39,0.06), rgba(255,255,255,0.01));
-    }
-
-    .sigil-core {
-      position: relative;
-      width: 92px;
-      height: 92px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--border-gold);
-      border-radius: 50%;
-      font-size: 2.2rem;
-      color: var(--gold-light);
-      background: radial-gradient(circle at center, rgba(201,162,39,0.14), rgba(201,162,39,0.03) 58%, transparent 70%);
-      box-shadow: 0 0 30px rgba(201,162,39,0.12);
-    }
-
-    .sigil-core::before,
-    .sigil-core::after {
-      content: '';
-      position: absolute;
-      border-radius: 50%;
-      inset: 10px;
-      border: 1px dashed rgba(201,162,39,0.35);
-    }
-
-    .sigil-core::after {
-      inset: -10px;
-      border-style: solid;
-      border-color: rgba(139,20,20,0.18);
-    }
-
-    .sigil-caption strong {
-      font-size: 0.76rem;
-      color: var(--gold);
-      margin-bottom: 0.35rem;
-    }
-
-    .sigil-caption span {
-      display: block;
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-      line-height: 1.65;
-    }
-
-    .sigil-caption code,
-    .symbol-note,
-    .route-placeholder,
-    .chapter-code,
-    .chapter-meta {
-      font-family: var(--font-mono);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .symbol-band-section {
-      position: relative;
-    }
-
-    .symbol-band-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .symbol-slot {
-      padding: 1.25rem 1rem;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: linear-gradient(180deg, rgba(16,16,16,0.94), rgba(8,8,8,0.96));
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .symbol-slot::before {
-      content: '';
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--red-bright), transparent 75%);
-    }
-
-    .symbol-mark {
-      width: 84px;
-      height: 84px;
-      margin: 0 auto 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px dashed var(--border-gold);
-      border-radius: 50%;
-      font-size: 2rem;
-      color: var(--gold-light);
-      background: radial-gradient(circle at center, rgba(201,162,39,0.12), rgba(201,162,39,0.03) 62%, transparent 70%);
-      box-shadow: inset 0 0 0 10px rgba(201,162,39,0.02);
-    }
-
-    .symbol-slot strong {
-      font-size: 0.78rem;
-      color: var(--gold);
-      margin-bottom: 0.35rem;
-    }
-
-    .symbol-slot p {
-      max-width: 100%;
-      font-size: 0.82rem;
-      line-height: 1.6;
-      color: var(--text-secondary);
-      margin-bottom: 0.7rem;
-    }
-
-    .symbol-note {
-      display: inline-block;
-      font-size: 0.62rem;
-      color: var(--red-bright);
-      border: 1px solid var(--border-red);
-      padding: 0.22rem 0.45rem;
-      background: rgba(139,20,20,0.12);
-    }
-
-    .route-icon-shell {
-      position: relative;
-      width: 76px;
-      height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px dashed var(--border-gold);
-      border-radius: 16px;
-      background: rgba(201,162,39,0.05);
-      margin-bottom: 1.4rem;
-      box-shadow: inset 0 0 0 8px rgba(201,162,39,0.02);
-    }
-
-    .route-icon {
-      font-size: 2rem;
-      line-height: 1;
-      color: var(--gold-light);
-      text-shadow: var(--glow-text-gold);
-    }
-
-    .route-placeholder {
-      position: absolute;
-      left: 50%;
-      bottom: -0.8rem;
-      transform: translateX(-50%);
-      white-space: nowrap;
-      font-size: 0.56rem;
-      color: var(--red-bright);
-      background: rgba(4,4,4,0.95);
-      padding: 0 0.3rem;
-    }
-
-    .chapter-directory-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .chapter-placeholder {
-      padding: 1rem;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: linear-gradient(180deg, rgba(201,162,39,0.04), rgba(255,255,255,0.01)), var(--bg-card);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .chapter-placeholder::after {
-      content: '';
-      position: absolute;
-      right: -24px;
-      top: -24px;
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      border: 1px solid rgba(201,162,39,0.08);
-    }
-
-    .chapter-placeholder-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.8rem;
-      margin-bottom: 0.9rem;
-    }
-
-    .chapter-icon-shell {
-      width: 58px;
-      height: 58px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px dashed var(--border-gold);
-      border-radius: 50%;
-      font-size: 1.4rem;
-      color: var(--gold-light);
-      background: rgba(201,162,39,0.05);
-      flex-shrink: 0;
-    }
-
-    .chapter-code {
-      font-size: 0.65rem;
-      color: var(--text-muted);
-    }
-
-    .chapter-placeholder h4 {
-      font-size: 0.9rem;
-      color: var(--gold);
-      margin-bottom: 0.35rem;
-    }
-
-    .chapter-placeholder p {
-      max-width: 100%;
-      margin-bottom: 0.75rem;
-      color: var(--text-secondary);
-      font-size: 0.82rem;
-      line-height: 1.55;
-    }
-
-    .chapter-meta {
-      display: inline-block;
-      font-size: 0.58rem;
-      color: var(--red-bright);
-      border-top: 1px solid var(--border-red);
-      padding-top: 0.45rem;
-    }
-
+    /* ── Responsive ──────────────────────────────────────────────────── */
     @media (max-width: 1100px) {
-      .hero-redesign-inner,
-      .spotlight-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .red-thread-grid,
-      .route-grid,
-      .symbol-band-grid,
-      .chapter-directory-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+      .hero-redesign-inner, .spotlight-layout { grid-template-columns: 1fr; }
+      .red-thread-grid, .route-grid, .symbol-band-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .countdown-subscriber-inner { grid-template-columns: 1fr; }
+      .sub-counter-wrap { text-align: left; }
     }
-
     @media (max-width: 760px) {
-      .hero.hero-redesign {
-        padding: 7rem 1.2rem 4rem;
-      }
-
-      .red-thread-section,
-      .section,
-      .section-alt {
-        padding-left: 1.2rem;
-        padding-right: 1.2rem;
-      }
-
-      .symbol-inline-row,
-      .signal-line,
-      .red-thread-grid,
-      .route-grid,
-      .signal-matrix,
-      .dossier-meta,
-      .symbol-band-grid,
-      .chapter-directory-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .hero-actions .btn {
-        text-align: center;
-        justify-content: center;
-      }
-
-      .hero-panel-sigil {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .sigil-core,
-      .symbol-mark {
-        margin-left: auto;
-        margin-right: auto;
-      }
-    }
-    /* === Hero h1: transparent glitch — no black boxes on gradient bg === */
-    .hero-redesign .glitch::before,
-    .hero-redesign .glitch::after {
-      background: transparent;
-    }
-    .hero-redesign .glitch::before { text-shadow: -2px 0 rgba(204,34,34,0.7); }
-    .hero-redesign .glitch::after  { text-shadow:  2px 0 rgba(201,162,39,0.6); }
-
-    /* === Hero h1: gold gradient text === */
-    .hero-redesign h1.glitch {
-      background: linear-gradient(180deg, #e6c84a 0%, #c9a227 60%, #9a7a18 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-shadow: none;
-      filter: drop-shadow(0 2px 22px rgba(201,162,39,0.3));
+      .hero.hero-redesign { padding: 7rem 1.2rem 4rem; }
+      .red-thread-section { padding-left: 1.2rem; padding-right: 1.2rem; }
+      .signal-line, .red-thread-grid, .route-grid, .signal-matrix, .dossier-meta, .symbol-band-grid { grid-template-columns: 1fr; }
+      .symbol-inline-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .hero-actions .btn { text-align: center; justify-content: center; }
+      .hero-panel-sigil { grid-template-columns: 1fr; text-align: center; }
+      .sigil-core { margin-left: auto; margin-right: auto; }
     }
   </style>
 </head>
 <body>
+
+  <!-- Loading Screen -->
   <div id="ta-loading-screen">
-    <div class="loading-logo">⬡ THE TRUTH ARCHIVE ⬡</div>
+    <div class="loading-logo">&#x2B21; THE TRUTH ARCHIVE &#x2B21;</div>
     <div class="loading-bar-wrap"><div class="loading-bar-fill"></div></div>
     <div class="loading-log"></div>
   </div>
 
+  <!-- Reading progress bar -->
   <div id="reading-progress"></div>
 
+  <!-- ======================== NAVIGATION ======================== -->
   <nav class="site-nav" role="navigation" aria-label="Main navigation">
     <a href="index.html" class="nav-logo">
-      <span class="eye-symbol">👁</span>
+      <span class="eye-symbol">&#x1F441;</span>
       Truth Archive
     </a>
-    <button class="nav-toggle" aria-expanded="false" aria-label="Toggle menu">☰</button>
+    <button class="nav-toggle" aria-expanded="false" aria-label="Toggle menu">&#x2630;</button>
     <ul class="nav-links">
       <li><a href="great-awakening.html">The Great Awakening</a></li>
       <li><a href="flat-earth.html">Flat Earth</a></li>
@@ -970,94 +322,102 @@
       <li><a href="media-control.html">Media Control</a></li>
       <li><a href="space-deception.html">Space Deception</a></li>
       <li><a href="big-pharma.html">Big Pharma</a></li>
-      <li><a href="ebook.html" class="ebook-link">📖 eBook</a></li>
+      <li><a href="tech-control.html">Tech &amp; Control</a></li>
+      <li><a href="false-flags.html">False Flags</a></li>
+      <li><a href="suppressed-history.html">Suppressed History</a></li>
+      <li><a href="metaphysical.html">Metaphysical</a></li>
+      <li><a href="ebook.html" class="ebook-link">&#x1F4D6; eBook</a></li>
     </ul>
   </nav>
 
+  <!-- ======================== HERO ============================== -->
   <section class="hero hero-redesign">
     <div class="hero-bg"></div>
     <div class="hero-grid"></div>
+
     <div class="hero-sigil-layer" aria-hidden="true">
-      <span class="floating-glyph glyph-1">△</span>
-      <span class="floating-glyph glyph-2">👁</span>
-      <span class="floating-glyph glyph-3">✦</span>
-      <span class="floating-glyph glyph-4">⬡</span>
-      <span class="floating-glyph glyph-5">☉</span>
-      <span class="floating-glyph glyph-6">☾</span>
+      <span class="floating-glyph glyph-1">&#x25B3;</span>
+      <span class="floating-glyph glyph-2">&#x1F441;</span>
+      <span class="floating-glyph glyph-3">&#x2726;</span>
+      <span class="floating-glyph glyph-4">&#x2B21;</span>
+      <span class="floating-glyph glyph-5">&#x2609;</span>
+      <span class="floating-glyph glyph-6">&#x263E;</span>
     </div>
 
     <div class="hero-redesign-inner">
+
+      <!-- Left: copy -->
       <div class="hero-copy fade-in">
         <div class="signal-chip-row">
-          <span class="signal-chip">● Live Archive</span>
+          <span class="signal-chip">&#x25CF; Live Archive</span>
           <span class="signal-chip">422 Pages Indexed</span>
           <span class="signal-chip">Level Omega Access</span>
         </div>
 
         <span class="hero-eyebrow typewriter" data-text="CLASSIFIED RESEARCH NETWORK // PATTERN RECOGNITION FOR THE AWAKE">CLASSIFIED RESEARCH NETWORK // PATTERN RECOGNITION FOR THE AWAKE</span>
         <h1 class="glitch" data-text="SEE THE PATTERN">SEE THE PATTERN</h1>
-        <div class="hero-divider"><span>◆</span></div>
+        <div class="hero-divider"><span>&#x25C6;</span></div>
 
         <p class="lead">
-        Every thread in this archive points back to the same architecture: <strong>money as leverage, media as <span class="redacted">perception control</span>, technology as <span class="redacted">surveillance</span>, and symbols as the language of power</strong>.
-        This version of the homepage leans harder into that feeling &mdash; faster entry, more atmosphere, and obvious places to drop custom icon and sigil artwork.
+          Every thread in this archive points back to the same architecture: <strong>money as leverage, media as <span class="redacted">perception control</span>, technology as <span class="redacted">surveillance</span>, and symbols as the language of power</strong>.
+          Everything you were taught about history, science, government, and reality is a carefully constructed illusion. This archive pulls back the curtain &mdash; one layer at a time.
         </p>
 
         <div class="hero-actions">
-          <a href="#routes" class="btn btn-primary">↓ Start the Descent</a>
-          <a href="map.html" class="btn btn-gold">🕸 Open Connection Map</a>
-          <a href="ebook.html" class="btn btn-outline">📖 Read Full eBook</a>
+          <a href="#routes" class="btn btn-primary">&#x2193; Start the Descent</a>
+          <a href="ebook.html" class="btn btn-gold">&#x1F4D6; Read the eBook</a>
+          <a href="map.html" class="btn btn-outline">&#x1F578; Connection Map</a>
         </div>
         <div style="margin-top:0.75rem; font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); letter-spacing:0.08em;"><span class="live-counter-wrap"></span></div>
 
-
         <div class="symbol-inline-row">
           <div class="symbol-inline">
-            <div class="symbol-inline-mark">👁</div>
+            <div class="symbol-inline-mark">&#x1F441;</div>
             <div class="symbol-inline-copy">
-              <strong>Hero Seal</strong>
-              <span>Primary symbol placeholder for custom artwork.</span>
+              <strong>All-Seeing Eye</strong>
+              <span>The watcher behind every system of control.</span>
             </div>
           </div>
           <div class="symbol-inline">
-            <div class="symbol-inline-mark">△</div>
+            <div class="symbol-inline-mark">&#x25B3;</div>
             <div class="symbol-inline-copy">
               <strong>Pyramid Mark</strong>
-              <span>Hierarchy / control structure accent.</span>
+              <span>Hierarchy, power, and hidden hands.</span>
             </div>
           </div>
           <div class="symbol-inline">
-            <div class="symbol-inline-mark">✦</div>
+            <div class="symbol-inline-mark">&#x2726;</div>
             <div class="symbol-inline-copy">
               <strong>Occult Glyph</strong>
-              <span>Swap for sigil, seal, or sacred geometry.</span>
+              <span>Sacred geometry hidden in plain sight.</span>
             </div>
           </div>
           <div class="symbol-inline">
-            <div class="symbol-inline-mark">⬡</div>
+            <div class="symbol-inline-mark">&#x2B21;</div>
             <div class="symbol-inline-copy">
-              <strong>Node Icon</strong>
-              <span>Works for map / archive system visual language.</span>
+              <strong>Archive Node</strong>
+              <span>Every node connects to every other node.</span>
             </div>
           </div>
         </div>
 
         <div class="signal-line">
           <div class="signal-item">
-            <strong>Built to Pull</strong>
-            <span>Big first impression, clearer pathways, and stronger "where do I go first?" energy.</span>
+            <strong>12 Rabbit Holes</strong>
+            <span>From flat earth cosmology to the hidden hand behind every war.</span>
           </div>
           <div class="signal-item">
-            <strong>Symbol-Ready</strong>
-            <span>Hero, route cards, and chapter blocks now have obvious placeholder art slots.</span>
+            <strong>422 Pages</strong>
+            <span>Cross-referenced research. Every thread leads to the same web.</span>
           </div>
           <div class="signal-item">
-            <strong>Standalone Mockup</strong>
-            <span>This file is separate from the live homepage and does not overwrite the current index.</span>
+            <strong>1 Thesis</strong>
+            <span>All roads converge on the same coordinated architecture of control.</span>
           </div>
         </div>
       </div>
 
+      <!-- Right: intel panel -->
       <div class="hero-panel-wrap fade-in">
         <div class="hero-panel">
           <div class="panel-topline">
@@ -1066,10 +426,10 @@
           </div>
 
           <div class="hero-panel-sigil">
-            <div class="sigil-core">👁</div>
+            <div class="sigil-core">&#x1F441;</div>
             <div class="sigil-caption">
-              <strong>Primary Symbol Placeholder</strong>
-              <span>Drop a custom eye, pyramid, occult seal, or branded glyph here. This is the main hero-side art slot.</span>
+              <strong>The All-Seeing Eye</strong>
+              <span>The most widely deployed symbol in modern civilization. Found on currency, monuments, corporate logos, and entertainment &mdash; hiding in plain sight.</span>
             </div>
           </div>
 
@@ -1077,26 +437,14 @@
             <span class="eyebrow">Primary Entry Point</span>
             <h3>The Architecture of Control</h3>
             <p>
-              A new homepage should make the central promise obvious immediately: all roads in the archive converge on the same power structure.
-              This featured block makes that thesis impossible to miss.
+              These are not separate conspiracy theories. They are interfaces into one system of narrative management, financial leverage, technological monitoring, and spiritual inversion.
             </p>
-
             <div class="dossier-meta">
-              <div>
-                <strong>Nodes</strong>
-                <span>65</span>
-              </div>
-              <div>
-                <strong>Threads</strong>
-                <span>200+</span>
-              </div>
-              <div>
-                <strong>Depth</strong>
-                <span>Omega</span>
-              </div>
+              <div><strong>Chapters</strong><span>12</span></div>
+              <div><strong>Connections</strong><span>200+</span></div>
+              <div><strong>Depth</strong><span>Omega</span></div>
             </div>
-
-            <a href="#spotlight" class="btn btn-gold">Review Core Thesis</a>
+            <a href="#chapters" class="btn btn-gold">Enter the Archive</a>
           </div>
 
           <div class="intel-list">
@@ -1111,61 +459,64 @@
               <div class="intel-index">INT-02</div>
               <div>
                 <strong>Perception is infrastructure</strong>
-                <span>Media, education, and entertainment do not just inform reality - they manufacture it.</span>
+                <span>Media, education, and entertainment do not just inform reality &mdash; they manufacture it.</span>
               </div>
             </div>
             <div class="intel-item">
               <div class="intel-index">INT-03</div>
               <div>
                 <strong>Every subject connects</strong>
-                <span>The homepage should preview the web, not present the chapters like isolated boxes.</span>
+                <span>The archive is not a list of topics. It is a map of a single converging web.</span>
               </div>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </section>
 
+  <!-- ======================== RED THREAD STRIP ================== -->
   <section class="red-thread-section">
     <div class="red-thread-grid">
       <div class="thread-card fade-in">
-        <strong>Banking → Policy</strong>
+        <strong>Banking &#x2192; Policy</strong>
         <p>Control the issuance of money, then shape every state response downstream.</p>
       </div>
       <div class="thread-card fade-in">
-        <strong>Media → Perception</strong>
+        <strong>Media &#x2192; Perception</strong>
         <p>Control what is seen, repeated, and socially permissible to question.</p>
       </div>
       <div class="thread-card fade-in">
-        <strong>Technology → Surveillance</strong>
+        <strong>Technology &#x2192; Surveillance</strong>
         <p>Devices become sensors, and convenience becomes a compliance layer.</p>
       </div>
       <div class="thread-card fade-in">
-        <strong>Metaphysics → Meaning</strong>
+        <strong>Metaphysics &#x2192; Meaning</strong>
         <p>At the deepest layer, reality itself becomes a contested battleground.</p>
       </div>
     </div>
   </section>
 
-  <!-- COUNTDOWN + SUBSCRIBER COUNTER -->
-  <section class="section" style="padding:1.5rem 2rem;">
-    <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:center;">
-      <div class="doc-drop-wrap">
+  <!-- ======================== COUNTDOWN + COUNTER ============== -->
+  <div class="countdown-subscriber-section">
+    <div class="countdown-subscriber-inner">
+      <div class="doc-drop-wrap fade-in">
         <div class="doc-drop-label">
           <strong>&#x2BC8; Next Classified File Release</strong>
           New documents drop every 24 hours
         </div>
         <div class="doc-drop-countdown">00:00:00</div>
       </div>
-      <div class="sub-counter-wrap">
+      <div class="sub-counter-wrap fade-in">
         <span class="sub-counter-number"><span class="sub-counter">0</span></span>
         <span class="sub-counter-label">Researchers Worldwide</span>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section class="truth-meter-section">
+  <!-- ======================== STATS BAR ========================= -->
+  <div class="truth-meter-section">
     <div class="truth-stats-grid">
       <div class="truth-stat fade-in">
         <span class="truth-number">422</span>
@@ -1176,16 +527,19 @@
         <span class="truth-label">Core Rabbit Holes</span>
       </div>
       <div class="truth-stat fade-in">
-        <span class="truth-number">65</span>
-        <span class="truth-label">Map Nodes Connected</span>
+        <span class="truth-number">200+</span>
+        <span class="truth-label">Documented Connections</span>
       </div>
       <div class="truth-stat fade-in">
         <span class="truth-number">1</span>
         <span class="truth-label">Unifying Power Thesis</span>
       </div>
     </div>
-  <section class="section" style="padding-top:0; padding-bottom:2.5rem;">
-    <div class="container">
+  </div>
+
+  <!-- ======================== ARCHIVE PROGRESS ================== -->
+  <section class="archive-progress-section">
+    <div class="archive-progress-inner">
       <div class="archive-progress-wrap fade-in">
         <div class="ap-label">
           <span>Archive accessed: <em><span class="ap-count">0</span> of <span class="ap-total">422</span> files</em></span>
@@ -1195,96 +549,27 @@
       </div>
     </div>
   </section>
-  </section>
 
-  <section class="section symbol-band-section">
-    <div class="container">
-      <div class="section-header fade-in">
-        <span class="eyebrow">Symbols &amp; Placeholder Art</span>
-        <h2>Drop-In Sigils, Icons, and Marks</h2>
-        <div class="divider"></div>
-        <p>
-          These are intentional placeholder zones - easy to replace later with custom vector art, occult symbols, glyph sets, logos, or chapter-specific iconography.
-        </p>
-      </div>
-
-      <div class="symbol-band-grid">
-        <div class="symbol-slot fade-in">
-          <div class="symbol-mark">👁</div>
-          <strong>All-Seeing Eye</strong>
-          <p>Main hero-side sigil for the archive seal, eye, or watchful observer motif.</p>
-          <span class="symbol-note">PLACEHOLDER ART</span>
-        </div>
-        <div class="symbol-slot fade-in">
-          <div class="symbol-mark">△</div>
-          <strong>Pyramid / Hierarchy</strong>
-          <p>Use for control structure, top-down power, or hidden hand visual framing.</p>
-          <span class="symbol-note">SIGIL SLOT</span>
-        </div>
-        <div class="symbol-slot fade-in">
-          <div class="symbol-mark">⬡</div>
-          <strong>Network Node</strong>
-          <p>Clean placeholder for map systems, chapter hubs, and archive navigation markers.</p>
-          <span class="symbol-note">ICON SLOT</span>
-        </div>
-        <div class="symbol-slot fade-in">
-          <div class="symbol-mark">✦</div>
-          <strong>Occult Glyph</strong>
-          <p>Swap with custom sacred geometry, alchemical mark, or secret-order insignia.</p>
-          <span class="symbol-note">GLYPH SLOT</span>
-        </div>
-        <div class="symbol-slot fade-in">
-          <div class="symbol-mark">☉</div>
-          <strong>Solar Seal</strong>
-          <p>Good for cosmology, space deception, enlightenment, and ritual symbolism.</p>
-          <span class="symbol-note">VECTOR SLOT</span>
-        </div>
-        <div class="symbol-slot fade-in">
-          <div class="symbol-mark">☾</div>
-          <strong>Lunar Mark</strong>
-          <p>Pairs well with metaphysical content, hidden cycles, or celestial narrative cues.</p>
-          <span class="symbol-note">ART SLOT</span>
-        </div>
-        <div class="symbol-slot fade-in">
-          <div class="symbol-mark">⌖</div>
-          <strong>Target / Crosshair</strong>
-          <p>Useful for dossiers, surveillance visuals, and "you found the signal" UI moments.</p>
-          <span class="symbol-note">UI ICON SLOT</span>
-        </div>
-        <div class="symbol-slot fade-in">
-          <div class="symbol-mark">◇</div>
-          <strong>Archive Diamond</strong>
-          <p>Minimal symbol that can become a recurring site motif across cards and headers.</p>
-          <span class="symbol-note">BRAND MARK</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  <!-- ======================== START HERE / ROUTES ============== -->
   <section class="section" id="routes">
     <div class="container">
       <div class="section-header fade-in">
         <span class="eyebrow">Start Here</span>
-        <h2>Three Better Entry Routes Into the Archive</h2>
+        <h2>Three Entry Routes Into the Archive</h2>
         <div class="divider"></div>
-        <p>
-          Instead of dropping visitors into a flat chapter wall immediately, this version gives them a way in based on curiosity type.
-        </p>
+        <p>Not sure where to begin? Choose your entry point based on what pulls you hardest. Every route leads to the same web.</p>
       </div>
 
       <div class="route-grid">
         <a href="deep-state.html" class="route-card fade-in">
           <span class="route-kicker">Route 01 // Systems</span>
           <div class="route-icon-shell">
-            <span class="route-icon">🏛</span>
-            <span class="route-placeholder">ICON SLOT</span>
+            <span class="route-icon">&#x1F3DB;</span>
           </div>
           <h3>Follow the Power Structure</h3>
-          <p>
-            Start with governments, intelligence, banking institutions, and supranational control bodies. Best for visitors who want the political and structural case first.
-          </p>
+          <p>Start with governments, intelligence agencies, banking institutions, and supranational control bodies. Best for visitors who want the political and structural case first.</p>
           <div class="route-footer">
-            <span>Deep State · Banking · Media</span>
+            <span>Deep State &middot; Banking &middot; Media</span>
             <span class="route-depth">High Depth</span>
           </div>
         </a>
@@ -1292,15 +577,12 @@
         <a href="flat-earth.html" class="route-card fade-in">
           <span class="route-kicker">Route 02 // Cosmology</span>
           <div class="route-icon-shell">
-            <span class="route-icon">🌐</span>
-            <span class="route-placeholder">ICON SLOT</span>
+            <span class="route-icon">&#x1F30D;</span>
           </div>
           <h3>Challenge the Shape of Reality</h3>
-          <p>
-            Start with the largest possible claim. This route leans into cosmology, space deception, and the idea that the foundational story itself is false.
-          </p>
+          <p>Start with the largest possible claim. This route leans into cosmology, space deception, and the idea that the foundational story of reality itself is false.</p>
           <div class="route-footer">
-            <span>Flat Earth · NASA · Firmament</span>
+            <span>Flat Earth &middot; NASA &middot; Firmament</span>
             <span class="route-depth">Extreme</span>
           </div>
         </a>
@@ -1308,15 +590,12 @@
         <a href="secret-societies.html" class="route-card fade-in">
           <span class="route-kicker">Route 03 // Symbolism</span>
           <div class="route-icon-shell">
-            <span class="route-icon">🔺</span>
-            <span class="route-placeholder">ICON SLOT</span>
+            <span class="route-icon">&#x1F53A;</span>
           </div>
           <h3>Track the Hidden Hand</h3>
-          <p>
-            Start with orders, rituals, symbols, bloodlines, and initiation structures. Best for visitors drawn to patterns hiding in plain sight.
-          </p>
+          <p>Start with orders, rituals, symbols, bloodlines, and initiation structures. Best for visitors drawn to patterns hiding in plain sight everywhere you look.</p>
           <div class="route-footer">
-            <span>Secret Societies · Symbols · Bloodlines</span>
+            <span>Secret Societies &middot; Symbols &middot; Bloodlines</span>
             <span class="route-depth">Layered</span>
           </div>
         </a>
@@ -1324,53 +603,333 @@
     </div>
   </section>
 
-  <section class="section-alt" id="spotlight">
-    <div class="container">
+  <!-- ======================== INTRO ============================= -->
+  <section class="section">
+    <div class="container-narrow">
       <div class="section-header fade-in">
-        <span class="eyebrow">Homepage Core Thesis</span>
-        <h2>Make the Entire Site's Argument Visible Up Front</h2>
+        <span class="eyebrow">The Red Pill</span>
+        <h2>Welcome to the Archive</h2>
         <div class="divider"></div>
       </div>
 
-      <div class="spotlight-layout">
-        <div class="spotlight-main fade-in">
-          <span class="hero-eyebrow" style="display:block; margin-bottom: 1rem;">CONTROL IS NOT CHAOS // IT IS COORDINATION</span>
-          <h3 style="margin-bottom: 0.85rem;">The strongest version of this homepage is not just "here are our topics."</h3>
-          <p>
-            It should say, immediately and with conviction, that these subjects are not separate rabbit holes. They are interfaces into one system of narrative management, financial leverage, technological monitoring, and spiritual inversion.
-          </p>
+      <div class="fade-in">
+        <p>
+          You did not find this archive by accident. Something compelled you to
+          look beyond the official narrative &mdash; to question what you see on the
+          news, in your textbooks, and in the night sky. That instinct is correct.
+        </p>
+        <p>
+          For centuries, a small class of interconnected families, institutions,
+          and orders has managed the flow of information, money, energy, and
+          belief on this planet. Their tools are sophisticated: control the
+          money supply and you control governments; control the media and you
+          control perception; control perception and you control behaviour.
+        </p>
+        <p>
+          This archive synthesises the most critical research across every major
+          domain of control &mdash; from the true shape of our world, to the banking
+          families who fund both sides of every war, to the secret societies whose
+          symbolism appears on currency, monuments, and corporate logos in plain sight.
+        </p>
 
-          <div class="spotlight-points">
-            <div>
-              <strong>Why this improves the homepage</strong>
-              <span>The current page is solid, but it behaves like an introduction. This version behaves like an invitation into a machine.</span>
-            </div>
-            <div>
-              <strong>What changes emotionally</strong>
-              <span>More momentum, more pressure, more sense that the visitor is about to uncover structure instead of reading a list.</span>
-            </div>
-            <div>
-              <strong>What stays intact</strong>
-              <span>The Truth Archive branding, the chapter destinations, the existing voice, and the black / gold / red visual language.</span>
-            </div>
+        <div class="declassified-banner">&#x25C6; &nbsp; ALL INFORMATION IN THIS ARCHIVE IS FOR RESEARCH AND EDUCATIONAL PURPOSES &nbsp; &#x25C6;</div>
+
+        <blockquote>
+          &ldquo;The individual is handicapped by coming face to face with a conspiracy so monstrous he cannot believe it exists.&rdquo;
+          <br><strong>&mdash; J. Edgar Hoover</strong>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== CHAPTERS ========================== -->
+  <section class="section-alt" id="chapters">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="eyebrow">Research Chapters</span>
+        <h2>Choose Your Path Down the Rabbit Hole</h2>
+        <div class="divider"></div>
+        <p>Each chapter is a self-contained investigation. Start anywhere &mdash; every thread leads to the same web.</p>
+      </div>
+
+      <div class="grid-3">
+
+        <a href="flat-earth.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">&#x1F310;</span>
+            <h3>Flat Earth &amp; the Cosmological Lie</h3>
+            <p>The globe model is a psyop imposed centuries ago. Understand the true flat, enclosed world &mdash; complete with a firmament dome, an ice wall, and a local sun and moon.</p>
           </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 01</span>
+            <span class="chapter-cta">Read More &#x2192;</span>
+          </div>
+        </a>
+
+        <a href="great-awakening.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">&#x26A1;</span>
+            <h3>The Great Awakening</h3>
+            <p>A global counter-movement is exposing the hidden cabal that has controlled civilisation for millennia. Learn about The Plan, Q, the White Hats, and the coming Storm.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 02</span>
+            <span class="chapter-cta">Read More &#x2192;</span>
+          </div>
+        </a>
+
+        <a href="deep-state.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">&#x1F3DB;&#xFE0F;</span>
+            <h3>The Deep State &amp; Shadow Government</h3>
+            <p>Beneath elected governments lies a permanent, unaccountable power structure. False flags, Agenda 2030, population control, and the Great Reset &mdash; all connected.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 03</span>
+            <span class="chapter-cta">Read More &#x2192;</span>
+          </div>
+        </a>
+
+        <a href="secret-societies.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">&#x1F53A;</span>
+            <h3>Secret Societies &amp; Ancient Orders</h3>
+            <p>The Illuminati, Freemasonry, Skull &amp; Bones, Bohemian Grove, Jesuits &mdash; discover how these interlocking orders have shepherded history from boardrooms and lodge rooms.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 04</span>
+            <span class="chapter-cta">Read More &#x2192;</span>
+          </div>
+        </a>
+
+        <a href="banking-control.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">&#x1F4B0;</span>
+            <h3>The Central Banking Cartel</h3>
+            <p>Every nation on Earth is in debt to private bankers. Learn how the Federal Reserve, the BIS, and the petrodollar system enslave humanity through manufactured debt.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 05</span>
+            <span class="chapter-cta">Read More &#x2192;</span>
+          </div>
+        </a>
+
+        <a href="media-control.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">&#x1F4FA;</span>
+            <h3>Media Control &amp; The Propaganda Machine</h3>
+            <p>Six corporations control 90% of what the world sees, reads, and hears. Operation Mockingbird, Hollywood social engineering, and algorithmic censorship exposed.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 06</span>
+            <span class="chapter-cta">Read More &#x2192;</span>
+          </div>
+        </a>
+
+        <a href="space-deception.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">&#x1F680;</span>
+            <h3>The Space Program Deception</h3>
+            <p>NASA stands for &ldquo;Never A Straight Answer.&rdquo; The Van Allen belt problem, the Kubrick moon-landing evidence, the ISS illusion, and what lies beyond the firmament.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 07</span>
+            <span class="chapter-cta">Read More &#x2192;</span>
+          </div>
+        </a>
+
+        <a href="big-pharma.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">&#x1F48A;</span>
+            <h3>Big Pharma &amp; Medical Control</h3>
+            <p>Medicine was redesigned to manage disease, not cure it. Rockefeller medicine, suppressed cancer cures, fluoride in the water supply, and the mRNA experiment exposed.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 08</span>
+            <span class="chapter-cta">Read More &#x2192;</span>
+          </div>
+        </a>
+
+        <a href="tech-control.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">&#x1F4E1;</span>
+            <h3>Technology &amp; Digital Control</h3>
+            <p>Every smart device is a surveillance node. PRISM, 5G sensor grids, AI citizen scoring, directed energy weapons, and the transhumanist agenda to merge you with the machine.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 09</span>
+            <span class="chapter-cta">Read More &#x2192;</span>
+          </div>
+        </a>
+
+        <a href="false-flags.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">&#x1F6A8;</span>
+            <h3>False Flags &amp; Staged Events</h3>
+            <p>Governments have staged attacks on their own citizens to justify wars and control. Operation Northwoods, 9/11, JFK, and every manufactured crisis follows the same template.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 10</span>
+            <span class="chapter-cta">Read More &#x2192;</span>
+          </div>
+        </a>
+
+        <a href="suppressed-history.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">&#x1F3DB;&#xFE0F;</span>
+            <h3>Suppressed History &amp; The SSP</h3>
+            <p>Tartaria, the Mud Flood, the Ancient Builder Race, and a Secret Space Programme operating since the 1950s. The civilisation you were taught about is an edited fiction.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 11</span>
+            <span class="chapter-cta">Read More &#x2192;</span>
+          </div>
+        </a>
+
+        <a href="metaphysical.html" class="chapter-card fade-in">
+          <div class="chapter-card-body">
+            <span class="chapter-icon">&#x1F52E;</span>
+            <h3>Metaphysical &amp; Spiritual Truth</h3>
+            <p>Consciousness is primary. The pineal gland, sacred geometry, suppressed free energy, Tesla, DMT, and the Law of One &mdash; the deepest layer of the control system explained.</p>
+          </div>
+          <div class="chapter-card-footer">
+            <span class="chapter-number">CHAPTER // 12</span>
+            <span class="chapter-cta">Read More &#x2192;</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== SYMBOL BAND ====================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="eyebrow">Symbols &amp; Sigils</span>
+        <h2>The Language of Hidden Power</h2>
+        <div class="divider"></div>
+        <p>These symbols appear on currency, monuments, corporate logos, and entertainment. They are not decoration. They are communication between initiates.</p>
+      </div>
+
+      <div class="symbol-band-grid">
+        <div class="symbol-slot fade-in">
+          <div class="symbol-mark">&#x1F441;</div>
+          <strong>All-Seeing Eye</strong>
+          <p>The watcher. Found on the US dollar, corporate logos, and broadcast media worldwide.</p>
+          <span class="symbol-note">UBIQUITOUS</span>
+        </div>
+        <div class="symbol-slot fade-in">
+          <div class="symbol-mark">&#x25B3;</div>
+          <strong>Pyramid / Hierarchy</strong>
+          <p>Top-down control. The capstone is never complete &mdash; the hidden hand above visible power.</p>
+          <span class="symbol-note">DOLLAR BILL</span>
+        </div>
+        <div class="symbol-slot fade-in">
+          <div class="symbol-mark">&#x2B21;</div>
+          <strong>Network Node</strong>
+          <p>The hexagon &mdash; bees, Saturn, carbon &mdash; a shape that appears wherever control is encoded.</p>
+          <span class="symbol-note">SATURN CULT</span>
+        </div>
+        <div class="symbol-slot fade-in">
+          <div class="symbol-mark">&#x2726;</div>
+          <strong>Occult Star</strong>
+          <p>Sacred geometry. The hidden mathematical language of initiatic orders across millennia.</p>
+          <span class="symbol-note">FREEMASONRY</span>
+        </div>
+        <div class="symbol-slot fade-in">
+          <div class="symbol-mark">&#x2609;</div>
+          <strong>Solar Seal</strong>
+          <p>Sun worship encoded in religion, architecture, and corporate branding &mdash; the original deity.</p>
+          <span class="symbol-note">SOLAR CULT</span>
+        </div>
+        <div class="symbol-slot fade-in">
+          <div class="symbol-mark">&#x263E;</div>
+          <strong>Lunar Mark</strong>
+          <p>The moon goddess. Cycles, tides, the feminine principle inverted by the control system.</p>
+          <span class="symbol-note">MYSTERY SCHOOLS</span>
+        </div>
+        <div class="symbol-slot fade-in">
+          <div class="symbol-mark">&#x2316;</div>
+          <strong>Target / Crosshair</strong>
+          <p>You are being watched. Surveillance as infrastructure, engineered from the start.</p>
+          <span class="symbol-note">PANOPTICON</span>
+        </div>
+        <div class="symbol-slot fade-in">
+          <div class="symbol-mark">&#x25C7;</div>
+          <strong>Diamond / Lozenge</strong>
+          <p>The vesica piscis, the womb, the portal. Hidden in religious architecture across every culture.</p>
+          <span class="symbol-note">SACRED GEOMETRY</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== POWER HIERARCHY ================== -->
+  <section class="section-alt hierarchy-section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="eyebrow">The Control Structure</span>
+        <h2>Who Really Runs the World?</h2>
+        <div class="divider"></div>
+        <p>Power is not exercised by those you can see. It flows through layers specifically designed to obscure origin and intent.</p>
+      </div>
+
+      <div class="grid-2" style="align-items: start;">
+        <div class="fade-in">
+          <ul class="hierarchy-list">
+            <li>
+              <div>
+                <strong>The Hidden Hand &mdash; Ancient Bloodlines</strong>
+                <span>A clutch of dynastic families whose wealth and influence predate modern nation-states. They operate through foundations, trusts, and intermediaries, never appearing on any ballot.</span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Secret Orders &amp; Occult Fraternities</strong>
+                <span>Initiatic brotherhoods whose upper degrees share a hidden religious and philosophical doctrine fundamentally at odds with the exoteric faiths they publicly support.</span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Supranational Institutions</strong>
+                <span>The Bank for International Settlements, the IMF, the World Economic Forum, the United Nations &mdash; policy bodies accountable to no electorate, advancing a single global agenda.</span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>National Governments &amp; Intelligence Agencies</strong>
+                <span>The visible face of power &mdash; elected officials who believe they govern but are constrained by frameworks set by those above. Intelligence agencies serve as enforcement arms.</span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Corporations, Media &amp; Academia</strong>
+                <span>The delivery mechanism for the agenda &mdash; normalising it through entertainment, journalism, and education until populations police each other&apos;s compliance.</span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>The General Public &mdash; Managed Masses</strong>
+                <span>Kept distracted, divided, and dependent. Sports, celebrity culture, pharmaceuticals, and social media serve as the modern bread and circuses of ancient Rome.</span>
+              </div>
+            </li>
+          </ul>
         </div>
 
-        <div class="spotlight-aside fade-in">
-          <div class="aside-card fact-box" style="margin:0;">
-            <span class="fact-label">Visual Direction</span>
-            <p>Less generic "mystery website," more premium dossier / classified intelligence terminal.</p>
+        <div class="fade-in">
+          <div class="fact-box" style="margin-bottom:1.5rem;">
+            <span class="fact-label">Key Insight</span>
+            <p>The most effective form of control is one the controlled do not know exists. The system is not broken &mdash; it is working precisely as designed.</p>
           </div>
-
-          <div class="aside-card alert-box" style="margin:0;">
-            <span class="alert-label">What This Mockup Changes</span>
-            <p>The landing flow, section hierarchy, and content framing - not the existing chapter destinations.</p>
+          <div class="alert-box" style="margin-bottom:1.5rem;">
+            <span class="alert-label">&#x26A0; Notice</span>
+            <p>Every major war, financial crash, pandemic, and social revolution of the last three centuries can be traced to decisions made by people who were never voted into office.</p>
           </div>
-
-          <div class="aside-card">
-            <h4>Recommended live changes if you like this direction</h4>
-            <p>
-              Rebuild the current <code>index.html</code> around this structure, keep the chapter cards further down, and add one featured "start here" route above the fold.
+          <div class="card" style="margin-top:0;">
+            <h4>The Maps as Roadmaps</h4>
+            <p style="font-size:0.9rem; max-width:100%;">
+              The <strong>Great Awakening Map</strong> and the <strong>Flat Earth cosmological diagram</strong> are not fringe art &mdash; they are the most comprehensive visual representations of interlocking control systems ever assembled. Every node on those maps corresponds to a chapter in this archive.
             </p>
           </div>
         </div>
@@ -1378,185 +937,142 @@
     </div>
   </section>
 
-  <section class="section">
+  <!-- ======================== SPOTLIGHT + SIGNAL MATRIX ======== -->
+  <section class="section" id="spotlight">
     <div class="container">
       <div class="section-header fade-in">
-        <span class="eyebrow">Signal Matrix</span>
-        <h2>What the Homepage Should Telegraph Instantly</h2>
+        <span class="eyebrow">The Core Thesis</span>
+        <h2>One System. Many Interfaces.</h2>
         <div class="divider"></div>
+      </div>
+
+      <div class="spotlight-layout" style="margin-bottom: 3rem;">
+        <div class="spotlight-main fade-in">
+          <span class="hero-eyebrow" style="display:block; margin-bottom:1rem;">CONTROL IS NOT CHAOS // IT IS COORDINATION</span>
+          <h3 style="margin-bottom:0.85rem;">These are not separate conspiracy theories. They are one system of control with twelve visible entry points.</h3>
+          <p>
+            Banking, media, cosmology, secret societies, false flags, surveillance technology, suppressed history, and spiritual inversion are not independent rabbit holes. They are coordinated interfaces into a single architecture whose purpose is to keep humanity blind, divided, and dependent.
+          </p>
+          <div class="spotlight-points">
+            <div>
+              <strong>Financial lever</strong>
+              <span>Private central banks manufacture debt as a mechanism of control, not as a side effect of economics.</span>
+            </div>
+            <div>
+              <strong>Perception lever</strong>
+              <span>Six media corporations, Hollywood, and algorithmic platforms manage what is permissible to believe.</span>
+            </div>
+            <div>
+              <strong>Spiritual lever</strong>
+              <span>The deepest layer inverts natural law and occults the true nature of consciousness and reality.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="spotlight-aside fade-in">
+          <div class="aside-card fact-box" style="margin:0;">
+            <span class="fact-label">The Archive&apos;s Purpose</span>
+            <p>Not to alarm. To orient. Once you understand the architecture, every news headline, every policy, every cultural trend becomes readable.</p>
+          </div>
+          <div class="aside-card alert-box" style="margin:0;">
+            <span class="alert-label">The Price of Knowing</span>
+            <p>You cannot unknow this. The archive is not a curiosity &mdash; it is a one-way door. Enter only if you are ready to see the pattern everywhere.</p>
+          </div>
+          <div class="aside-card">
+            <h4>Where to go next</h4>
+            <p>If you are new, start with <a href="deep-state.html" style="color:var(--gold);">The Deep State</a> for the political case, or <a href="flat-earth.html" style="color:var(--gold);">Flat Earth</a> for the cosmological case. Both roads lead to the same destination.</p>
+          </div>
+        </div>
       </div>
 
       <div class="signal-matrix">
         <div class="matrix-card fade-in">
           <h4>This archive is deep</h4>
-          <p>Not a novelty page. It is a large body of interconnected material with real density and internal links.</p>
+          <p>Not a novelty page. A large body of interconnected material with real density, 422 pages, and internal cross-references on every subject.</p>
           <span class="matrix-tag">Density Signal</span>
         </div>
         <div class="matrix-card fade-in">
           <h4>This archive has a thesis</h4>
-          <p>Visitors should instantly understand that every topic is framed as part of one coordinated architecture.</p>
+          <p>Every topic is framed as part of one coordinated architecture of control, not as isolated curiosities.</p>
           <span class="matrix-tag">Narrative Signal</span>
         </div>
         <div class="matrix-card fade-in">
           <h4>This archive is navigable</h4>
-          <p>Routes, featured dossiers, and map-first entry points lower friction and increase exploration.</p>
+          <p>Routes, featured dossiers, and map-first entry points lower friction and increase the depth of exploration.</p>
           <span class="matrix-tag">Usability Signal</span>
         </div>
         <div class="matrix-card fade-in">
-          <h4>This archive feels intentional</h4>
-          <p>The redesign keeps the same design language, but with better rhythm, stronger contrast, and more memorable section framing.</p>
-          <span class="matrix-tag">Brand Signal</span>
+          <h4>This archive is growing</h4>
+          <p>New documents, connections, and topic pages are added continuously. The pattern becomes clearer over time.</p>
+          <span class="matrix-tag">Live Signal</span>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ======================== EBOOK CTA ========================= -->
   <section class="section-alt">
     <div class="container">
-      <div class="section-header fade-in">
-        <span class="eyebrow">Chapter Icon Placeholders</span>
-        <h2>Every Rabbit Hole Can Carry Its Own Symbol</h2>
-        <div class="divider"></div>
-        <p>
-          If you want the homepage to feel more authored, these chapter cards can each carry their own icon, seal, or glyph instead of relying only on text.
+      <div class="ebook-banner fade-in">
+        <span class="hero-eyebrow" style="display:block; margin-bottom:1rem;">&#x1F4D6; Complete eBook</span>
+        <h2 style="margin-bottom:1rem;">All 12 Chapters &mdash; In One Document</h2>
+        <p style="max-width:55ch; margin:0 auto 2rem; color:var(--text-secondary);">
+          The complete Truth Archive as a single, beautifully formatted document. Share it. Print it. Give it to those who are ready to wake up.
         </p>
-      </div>
-
-      <div class="chapter-directory-grid">
-        <div class="chapter-placeholder fade-in">
-          <div class="chapter-placeholder-top"><div class="chapter-icon-shell">🌐</div><span class="chapter-code">CH-01</span></div>
-          <h4>Flat Earth</h4>
-          <p>Cosmology icon slot for firmament, ice wall, world map, or dome artwork.</p>
-          <span class="chapter-meta">PLACEHOLDER // COSMOLOGY ICON</span>
-        </div>
-        <div class="chapter-placeholder fade-in">
-          <div class="chapter-placeholder-top"><div class="chapter-icon-shell">⚡</div><span class="chapter-code">CH-02</span></div>
-          <h4>Great Awakening</h4>
-          <p>Awakening mark, lightning sigil, phoenix, or disclosure-themed symbol goes here.</p>
-          <span class="chapter-meta">PLACEHOLDER // AWAKENING ICON</span>
-        </div>
-        <div class="chapter-placeholder fade-in">
-          <div class="chapter-placeholder-top"><div class="chapter-icon-shell">🏛</div><span class="chapter-code">CH-03</span></div>
-          <h4>Deep State</h4>
-          <p>Government seal, obelisk, black site icon, or institutional control artwork.</p>
-          <span class="chapter-meta">PLACEHOLDER // POWER ICON</span>
-        </div>
-        <div class="chapter-placeholder fade-in">
-          <div class="chapter-placeholder-top"><div class="chapter-icon-shell">🔺</div><span class="chapter-code">CH-04</span></div>
-          <h4>Secret Societies</h4>
-          <p>Pyramid, eye, compass-and-square, or lodge-style insignia placeholder.</p>
-          <span class="chapter-meta">PLACEHOLDER // SIGIL ICON</span>
-        </div>
-        <div class="chapter-placeholder fade-in">
-          <div class="chapter-placeholder-top"><div class="chapter-icon-shell">💰</div><span class="chapter-code">CH-05</span></div>
-          <h4>Banking Control</h4>
-          <p>Currency seal, central bank crest, or debt-chain icon treatment fits here.</p>
-          <span class="chapter-meta">PLACEHOLDER // FINANCE ICON</span>
-        </div>
-        <div class="chapter-placeholder fade-in">
-          <div class="chapter-placeholder-top"><div class="chapter-icon-shell">📺</div><span class="chapter-code">CH-06</span></div>
-          <h4>Media Control</h4>
-          <p>Broadcast tower, CRT eye, transmission bars, or propaganda emblem slot.</p>
-          <span class="chapter-meta">PLACEHOLDER // MEDIA ICON</span>
-        </div>
-        <div class="chapter-placeholder fade-in">
-          <div class="chapter-placeholder-top"><div class="chapter-icon-shell">🚀</div><span class="chapter-code">CH-07</span></div>
-          <h4>Space Deception</h4>
-          <p>Rocket insignia, moon seal, NASA parody badge, or celestial deception art.</p>
-          <span class="chapter-meta">PLACEHOLDER // SPACE ICON</span>
-        </div>
-        <div class="chapter-placeholder fade-in">
-          <div class="chapter-placeholder-top"><div class="chapter-icon-shell">💊</div><span class="chapter-code">CH-08</span></div>
-          <h4>Big Pharma</h4>
-          <p>Medical symbol, vial, syringe, serpent staff, or control-through-health icon.</p>
-          <span class="chapter-meta">PLACEHOLDER // MEDICAL ICON</span>
-        </div>
-        <div class="chapter-placeholder fade-in">
-          <div class="chapter-placeholder-top"><div class="chapter-icon-shell">📡</div><span class="chapter-code">CH-09</span></div>
-          <h4>Tech Control</h4>
-          <p>Signal tower, satellite eye, circuit sigil, or surveillance node artwork.</p>
-          <span class="chapter-meta">PLACEHOLDER // TECH ICON</span>
-        </div>
-        <div class="chapter-placeholder fade-in">
-          <div class="chapter-placeholder-top"><div class="chapter-icon-shell">🚨</div><span class="chapter-code">CH-10</span></div>
-          <h4>False Flags</h4>
-          <p>Warning triangle, operation badge, or staged-event dossier symbol slot.</p>
-          <span class="chapter-meta">PLACEHOLDER // ALERT ICON</span>
-        </div>
-        <div class="chapter-placeholder fade-in">
-          <div class="chapter-placeholder-top"><div class="chapter-icon-shell">🏺</div><span class="chapter-code">CH-11</span></div>
-          <h4>Suppressed History</h4>
-          <p>Relic icon, ruined monument, buried empire crest, or Tartaria placeholder.</p>
-          <span class="chapter-meta">PLACEHOLDER // HISTORY ICON</span>
-        </div>
-        <div class="chapter-placeholder fade-in">
-          <div class="chapter-placeholder-top"><div class="chapter-icon-shell">🔮</div><span class="chapter-code">CH-12</span></div>
-          <h4>Metaphysical</h4>
-          <p>Eye, orb, sacred geometry, third-eye symbol, or consciousness glyph slot.</p>
-          <span class="chapter-meta">PLACEHOLDER // ARCANE ICON</span>
-        </div>
+        <a href="ebook.html" class="btn btn-gold" style="font-size:1rem; padding:1rem 3rem;">Open the eBook &#x2192;</a>
       </div>
     </div>
   </section>
 
-  <section class="section-alt">
-    <div class="container">
-      <div class="archive-cta fade-in">
-        <span class="hero-eyebrow" style="display:block; margin-bottom:1rem;">STANDALONE REDESIGN MOCKUP</span>
-        <h2 style="margin-bottom: 1rem;">This page is isolated from the live site</h2>
-        <p style="max-width: 60ch; margin-bottom: 1.75rem;">
-          It lives in the same directory so it can reuse the real site styling, but it does not replace or attach itself to the current homepage.
-          If this direction feels right, I can turn it into the actual <strong>index.html</strong> next.
-        </p>
-        <div class="hero-actions" style="justify-content:center; margin-bottom:0;">
-          <a href="index.html" class="btn btn-outline">View Current Homepage</a>
-          <a href="ebook.html" class="btn btn-gold">Open eBook</a>
-          <a href="map.html" class="btn btn-primary">Open Connection Map</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer class="site-footer" style="padding-left: max(2rem, 260px);">
-<div class="footer-grid" style="max-width: 1320px; grid-template-columns: 2fr 1fr 1fr 1fr;">
+  <!-- ======================== FOOTER ============================ -->
+  <footer class="site-footer">
+    <div class="footer-grid" style="grid-template-columns: 2fr 1fr 1fr 1fr;">
       <div class="footer-brand">
         <h3>The Truth Archive</h3>
         <p>An independent research network dedicated to exposing the hidden architecture of power.</p>
         <p style="margin-top:1rem; font-family:var(--font-mono); font-size:0.68rem; color:var(--text-muted); letter-spacing:0.1em;">
-          "Once you see it, you cannot unsee it."
+          &ldquo;Once you see it, you cannot unsee it.&rdquo;
         </p>
       </div>
       <div class="footer-links">
-        <h5>Live Pages</h5>
+        <h5>Chapters 01&ndash;06</h5>
         <ul>
-          <li><a href="index.html">Current Homepage</a></li>
-          <li><a href="map.html">Connection Map</a></li>
-          <li><a href="ebook.html">Complete eBook</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h5>Core Routes</h5>
-        <ul>
-          <li><a href="deep-state.html">Deep State</a></li>
           <li><a href="flat-earth.html">Flat Earth</a></li>
+          <li><a href="great-awakening.html">Great Awakening</a></li>
+          <li><a href="deep-state.html">Deep State</a></li>
           <li><a href="secret-societies.html">Secret Societies</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h5>More Chapters</h5>
-        <ul>
           <li><a href="banking-control.html">Banking Control</a></li>
           <li><a href="media-control.html">Media Control</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>Chapters 07&ndash;12</h5>
+        <ul>
+          <li><a href="space-deception.html">Space Deception</a></li>
           <li><a href="big-pharma.html">Big Pharma</a></li>
+          <li><a href="tech-control.html">Tech &amp; Control</a></li>
+          <li><a href="false-flags.html">False Flags</a></li>
+          <li><a href="suppressed-history.html">Suppressed History</a></li>
+          <li><a href="metaphysical.html">Metaphysical</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>Reference</h5>
+        <ul>
+          <li><a href="ebook.html">Complete eBook</a></li>
+          <li><a href="topics/index.html">All Topics</a></li>
+          <li><a href="images/FlatEarth_8k.jpg" target="_blank">Flat Earth Map</a></li>
+          <li><a href="images/GreatAwakeningMap_2024_V11.jpg" target="_blank">Great Awakening Map</a></li>
         </ul>
       </div>
     </div>
-<div class="footer-bottom" style="max-width: 1320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.62rem; letter-spacing: 0.1em;">
-  <p style="white-space: nowrap;">&#9670; &nbsp; THE TRUTH ARCHIVE &nbsp; &#9670; &nbsp; RESEARCH &amp; EDUCATION &nbsp; &#9670; &nbsp; QUESTION EVERYTHING &nbsp; &#9670; &nbsp; ONCE YOU SEE IT YOU CANNOT UNSEE IT &nbsp; &#9670;</p>
+    <div class="footer-bottom">
+      <p>&#x25C6; &nbsp; THE TRUTH ARCHIVE &nbsp; &#x25C6; &nbsp; RESEARCH &amp; EDUCATION &nbsp; &#x25C6; &nbsp; QUESTION EVERYTHING &nbsp; &#x25C6; &nbsp; ONCE YOU SEE IT YOU CANNOT UNSEE IT &nbsp; &#x25C6;</p>
     </div>
   </footer>
 
   <script src="js/app.js"></script>
   <script src="js/enhancements.js"></script>
+  <!-- 33.3N 44.4E // SIGNAL DETECTED // FOLLOW THE THREAD: /omega.html -->
 </body>
 </html>
