@@ -19,6 +19,10 @@ function initNavToggle() {
   const rail   = document.querySelector('.nav-links');
   if (!rail) return;
 
+  // Move the rail out of site-nav to document.body so it gets its own
+  // stacking context independent of site-nav's z-index 1000 layer.
+  document.body.appendChild(rail);
+
   // Icon map keyed by filename (without .html)
   const ICONS = {
     'great-awakening':   '◉',

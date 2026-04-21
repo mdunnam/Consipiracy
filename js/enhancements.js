@@ -1128,28 +1128,238 @@ function initSubscriberCounter() {
 /* ============================================================
    FEATURE: ASK THE ORACLE widget
    ============================================================ */
-const ORACLE_RESPONSES = [
-  { keys:['bank','fed','money','debt','finance','rothschild','reserve'],  reply:'The Federal Reserve has never been fully audited. Chapter 05 holds the ledger.' },
-  { keys:['flat','earth','globe','nasa','space','firmament','dome'],       reply:'The horizon does not curve. Begin your investigation at Chapter 01.' },
-  { keys:['deep','state','cia','nsa','shadow','government','intel'],       reply:'The shadow government predates every administration. Chapter 03 is the entry point.' },
-  { keys:['media','news','propaganda','cnn','mockingbird','press'],        reply:'Operation Mockingbird never ended. It merely evolved. See Chapter 06.' },
-  { keys:['secret','society','mason','illuminati','skull','bohemian'],     reply:'The orders do not recruit — they select. Chapter 04 maps the bloodlines.' },
-  { keys:['pharma','vaccine','medicine','cancer','cure','rockefeller'],    reply:'The cure has always existed. The suppression is the product. Chapter 08.' },
-  { keys:['tech','5g','surveillance','ai','chip','transhumanist'],         reply:'Every smart device reports upward. Chapter 09 traces the nodes.' },
-  { keys:['history','tartaria','mud','flood','reset','ancient'],           reply:'The civilisation you were taught about is an edited fiction. Chapter 11.' },
-  { keys:['consciousness','pineal','dmt','spiritual','metaphysical'],      reply:'The deepest layer of control targets the mind itself. Chapter 12.' },
-  { keys:['awakening','q','plan','storm','white','hat'],                   reply:'The Storm is not coming. It has already begun. Chapter 02.' },
-  { keys:['false','flag','911','9/11','staged','operation'],               reply:'Every major event follows the same template. Chapter 10 runs the pattern.' },
-  { keys:['ebook','book','download','read','buy','purchase'],              reply:'The complete archive — all 12 chapters — is available. Access via the eBook.' },
-  { keys:['who','start','begin','new','first'],                            reply:'You did not find this archive by accident. Begin at Chapter 01 or consult the Connection Map.' },
+
+/**
+ * Oracle knowledge base — every entry is a riddle or koan that hints
+ * toward content on the site without stating answers outright.
+ * Each entry has: keys (match words), replies (array, one picked at random),
+ * and optionally a link hint.
+ */
+const ORACLE_KB = [
+
+  /* ── Federal Reserve / Banking ────────────────────────────────────── */
+  { keys: ['federal reserve','fed reserve','central bank','rothschild','bank','money','debt','finance','currency','dollar','fiat'],
+    replies: [
+      'On the 23rd night of December, while Congress slept and families gathered, a decision was made that would govern every dollar you have ever touched. Who signed it into law, and why that night?',
+      'Seven men sailed to an island in secret. No names, only code names. What they wrote there still collects interest on your labour. The Banking Control chapter holds the ledger.',
+      'Ask yourself: who creates money from nothing, charges interest on it, and has never submitted to a full audit? The answer is not a government.',
+      'The Rothschild family financed both sides of the Napoleonic Wars. Study who profits when nations bleed, and you will find the same signatures across three centuries.',
+      'Before you ask who controls the banks, ask who controls the central banks — and before that, who controls those who control the central banks.',
+    ]
+  },
+
+  /* ── Flat Earth / Firmament ────────────────────────────────────────── */
+  { keys: ['flat earth','flat','firmament','dome','horizon','curvature','globe','ball earth','sphere','antarctic','antarctica','ice wall','waters above','polaris'],
+    replies: [
+      'The horizon always rises to meet the eye at eye level, regardless of altitude. On a sphere, it should fall. Have you tested this yourself, or only trusted those who told you not to?',
+      'Polaris does not move. Not in winter, not in summer, not in a thousand years of recorded observation. A star fixed above a spinning ball makes no sense. But above a stationary plane with a dome…',
+      'Antarctica is the only continent controlled by international military treaty, its interior inaccessible to private citizens. What lies beyond the ice that requires 53 nations to guard it?',
+      'The waters above the firmament. Genesis 1:7 names them. Every ancient cosmology describes a boundary between this world and what lies beyond. Why was it removed from the model?',
+      '"200 Proofs Earth is Not a Spinning Ball" — not a belief, but a challenge. Address one proof at a time. The Flat Earth chapter has documented them all.',
+    ]
+  },
+
+  /* ── NASA / Space ──────────────────────────────────────────────────── */
+  { keys: ['nasa','space','moon landing','apollo','astronaut','rocket','orbit','satellite','stars','planets'],
+    replies: [
+      'NASA\'s own footage of the Moon landing shows the crosshairs from the camera appearing behind objects in the frame. Crosshairs are etched into the lens. They cannot appear behind anything.',
+      'Van Allen radiation belts surround the Earth. In 1969, NASA claims to have passed through them six times without shielding capable of blocking the dose. Ask a radiologist what that dose would do.',
+      'The word "NASA" in Hebrew means "to deceive." Whether coincidence or design, every institution it has borrowed — Werner von Braun, the V2 programme, Operation Paperclip — carries the same history.',
+      'Stars do not twinkle in space. Yet every photo from the ISS shows a black, starless void. If the cameras can photograph Earth, why can\'t they photograph stars from the same position?',
+    ]
+  },
+
+  /* ── Deep State / Shadow Government ───────────────────────────────── */
+  { keys: ['deep state','shadow government','cia','nsa','mi6','intelligence','agency','operation','cabal','puppet'],
+    replies: [
+      'Presidents are chosen, not elected. The men who choose them do not appear on ballots. Trace every US president\'s cabinet back twenty years and count how many names repeat.',
+      'Operation Mockingbird, Northwoods, Paperclip, MK-Ultra — each was denied until the documents were declassified. How many operations remain classified today?',
+      'The National Security Act of 1947 created a permanent intelligence apparatus answerable to no elected body. Before that year, America had no CIA. Ask what changed in 1947.',
+      'The Deep State does not change with administrations. It is the water the fish swim in — invisible to the fish, essential to those who fill the tank.',
+    ]
+  },
+
+  /* ── Secret Societies ──────────────────────────────────────────────── */
+  { keys: ['freemason','masonry','illuminati','skull and bones','bohemian grove','jesuit','knight templar','rosicrucian','secret society','order','brotherhood'],
+    replies: [
+      'Every US president but one was a Freemason or had Masonic family ties. The one who wasn\'t was assassinated. Draw your own geometry.',
+      'The Skull and Bones initiation ritual requires the initiate to lie in a coffin and confess their deepest secrets. Those secrets are then held forever. Ask why that matters for a Yale club.',
+      'The Bohemian Grove hosts world leaders, heads of industry, and Nobel laureates each July in a Californian forest. They open with a ceremony called the Cremation of Care. Care, they say, must die.',
+      'The Templars were destroyed in 1307 on a Friday the 13th, their assets seized — or so the official record states. Assets do not vanish. They transfer. Follow the gold.',
+    ]
+  },
+
+  /* ── JFK / Assassination ────────────────────────────────────────────── */
+  { keys: ['jfk','kennedy','assassination','dallas','oswald','grassy knoll','warren','single bullet'],
+    replies: [
+      'Ten days before Dallas, Kennedy signed Executive Order 11110, authorising the Treasury — not the Federal Reserve — to issue silver-backed currency. The order was reversed within days of his death.',
+      'The Warren Commission was led by a 33rd degree Freemason. It concluded a single bullet changed direction five times in mid-air. This is known as the "magic bullet theory."',
+      'Lee Harvey Oswald said: "I\'m a patsy." Two days later he was shot dead in a police station, on live television, by a man with documented ties to organised crime. What witnesses fall silent?',
+    ]
+  },
+
+  /* ── 9/11 ──────────────────────────────────────────────────────────── */
+  { keys: ['9/11','911','twin towers','wtc','building 7','pentagon','inside job','false flag','controlled demolition'],
+    replies: [
+      'Building 7 was never struck by a plane. It fell symmetrically at freefall speed at 5:20pm on September 11th. The BBC reported its collapse 23 minutes before it happened.',
+      'NORAD was conducting a simulation that morning — a drill of planes being flown into buildings. When real planes hit, air defence was already stood down for the exercise.',
+      'Project for the New American Century published a document in 2000 calling for a "new Pearl Harbour" to accelerate military transformation. A year later, they had one.',
+      'The laws of physics do not grant exemptions for political narrative. Steel melts at 1,510°C. Jet fuel burns at 980°C. Ask a structural engineer what that gap means.',
+    ]
+  },
+
+  /* ── MK-Ultra / Mind Control ────────────────────────────────────────── */
+  { keys: ['mkultra','mk ultra','mind control','monarch','tavistock','programming','handler','manchurian','behavioural','psychology'],
+    replies: [
+      'MK-Ultra used 150 research institutions including 44 universities and 12 hospitals. It was not a fringe experiment — it was a funded programme. The documents were ordered destroyed. Not all were.',
+      'The Tavistock Institute was founded in 1946. It has advised governments, media corporations, and educational systems for 80 years. Its founding purpose was the study of group behaviour under stress.',
+      'Those who control the narrative control the identity. The question is not whether psychological operations are conducted on populations — the Church Committee confirmed it. The question is: are they still?',
+    ]
+  },
+
+  /* ── Media / Operation Mockingbird ─────────────────────────────────── */
+  { keys: ['media','news','cnn','bbc','mockingbird','propaganda','narrative','journalist','mainstream','press','television'],
+    replies: [
+      'Operation Mockingbird placed CIA assets in every major American news organisation. Director William Colby confirmed it in 1975. The programme\'s termination was announced. Programmes do not terminate — they reorganise.',
+      'Six corporations own 90% of all media consumed in America. In 1983, that number was 50. You are watching a coordinated narrowing. Who benefits from fewer voices?',
+      'When every channel, paper, and website uses the same phrase on the same day — "our democracy," "without evidence," "debunked" — ask who sends the memo.',
+    ]
+  },
+
+  /* ── Big Pharma / Vaccines ──────────────────────────────────────────── */
+  { keys: ['pharma','vaccine','covid','mrna','fauci','gates','who','cancer','cure','fluoride','medication','drug'],
+    replies: [
+      'The Rockefeller Foundation published "The Flexner Report" in 1910, which restructured medical education to exclude natural remedies and centre it on petroleum-based pharmaceuticals. They funded the restructuring.',
+      'A cure that works once is sold once. A treatment taken daily for life is sold every day. Ask which model the pharmaceutical industry is built on.',
+      'The WHO is primarily funded by private donors, not member states. Its largest non-state donor has a stated goal of vaccinating every person on Earth. There is no conflict of interest declared.',
+      'Fluoride was classified as a neurotoxin in the Harvard School of Public Health study, 2012. It is added to 70% of US water supplies. The original justification — dental health — has been questioned by the very body that issued it.',
+    ]
+  },
+
+  /* ── WEF / Great Reset / NWO ────────────────────────────────────────── */
+  { keys: ['wef','world economic forum','schwab','great reset','new world order','nwo','globalist','agenda 2030','agenda21','build back better','fourth industrial'],
+    replies: [
+      '"You will own nothing and you will be happy." This was a published WEF forecast, not a conspiracy. It was later quietly removed from their website. The deletion is documented.',
+      'Klaus Schwab\'s book "The Great Reset" outlines the merger of state and corporate power. This has a name from an earlier era. Mussolini called it corporatism.',
+      'The Young Global Leaders programme has graduated heads of government across five continents. Graduates include Macron, Trudeau, Merkel, Jacinda Ardern, and Tony Blair. Ask what they were taught.',
+    ]
+  },
+
+  /* ── Epstein / Elite Networks ───────────────────────────────────────── */
+  { keys: ['epstein','maxwell','pedophile','child trafficking','elite','lolita','island','blackmail','adrenochrome'],
+    replies: [
+      'Jeffrey Epstein\'s flight logs list names. Those names have not been charged. The question is not whether the network existed — a court found it did. The question is why it was allowed to exist for decades.',
+      'Ghislaine Maxwell was convicted of trafficking children to an unnamed buyer. The buyer has never been named in open court. The trial transcripts that would name them remain sealed.',
+      'Blackmail is not a crime of opportunity. It is a system of control. Those who hold the evidence hold the power. The island was not a secret to those who mattered.',
+    ]
+  },
+
+  /* ── Tartaria / History Reset ───────────────────────────────────────── */
+  { keys: ['tartaria','mud flood','reset','history','ruins','architecture','orphan','1800s','victorian','free energy','tesla'],
+    replies: [
+      'Every major city was rebuilt after a catastrophic "fire" in the mid-1800s. Chicago, London, Moscow, San Francisco — all within a 50-year window. Official histories attribute this to accidents. The architecture that survived belongs to a style that took centuries to learn. Who built it?',
+      'Old maps label an empire called "Tartaria" across most of Asia and Russia. By 1900 it had been removed from cartography and from history books. 200 years of documentation, vanished.',
+      'Nikola Tesla\'s original patents describe wireless transmission of energy — not for communication, but for power. His laboratory was burned. His papers were seized by government agents the morning he died.',
+    ]
+  },
+
+  /* ── Suppressed History / Annunaki ─────────────────────────────────── */
+  { keys: ['annunaki','sumerian','ancient','suppressed','history','giant','nephilim','biblical','creation','civilisation'],
+    replies: [
+      'The Sumerian tablets predate the Bible by 2,000 years and describe the same flood, the same garden, the same creation narrative — from an entirely different perspective. Who translated them, and who funds the institutions that decide their interpretation?',
+      'Skeletal remains of giants — 10, 12, 14 feet tall — have been documented across North America, the Middle East, and South America. The Smithsonian\'s own 1916 records describe them. Where are those remains today?',
+    ]
+  },
+
+  /* ── Metaphysical / Consciousness ──────────────────────────────────── */
+  { keys: ['consciousness','pineal','dmt','spiritual','soul','awakening','simulation','reality','astral','frequency','vibration'],
+    replies: [
+      'The pineal gland produces DMT — the only endogenous psychedelic compound in the human body. Fluoride calcifies it. This is documented. Ask who benefits from a calcified pineal gland.',
+      'Every major religion, every indigenous tradition, every ancient text describes an inner dimension of reality more fundamental than the physical. Modern science dismisses this entirely. Ask what was lost in that dismissal.',
+      'If reality is a consensus, then those who control the consensus control reality. This is not metaphysics. This is media theory.',
+    ]
+  },
+
+  /* ── CBDC / Digital Control ─────────────────────────────────────────── */
+  { keys: ['cbdc','digital currency','cashless','social credit','china','surveillance','smart city','15 minute','control'],
+    replies: [
+      'A currency that expires, a currency that can be restricted to certain goods, a currency that can be switched off — this is not money. It is a permission system. CBDC achieves all three.',
+      'China\'s social credit system is not science fiction. It is operational. It denies travel, employment, and education based on recorded behaviour. Ask which Western governments have toured it as a model.',
+    ]
+  },
+
+  /* ── Chemtrails / HAARP / Weather ──────────────────────────────────── */
+  { keys: ['chemtrail','haarp','weather','geoengineering','cloud seeding','aerosol','barium','aluminium'],
+    replies: [
+      'Cloud seeding is not a conspiracy theory. It is a weather modification programme licensed and operational in 56 countries. The question is not whether it happens — it is what else is being seeded.',
+      'HAARP — the High-frequency Active Auroral Research Program — was classified until 2014. It is capable of heating portions of the ionosphere. The patents for weather modification filed by Eastlund describe exactly this capability.',
+    ]
+  },
+
+  /* ── Rabbit Hole / Meta / Navigation ───────────────────────────────── */
+  { keys: ['start','begin','where','lost','help','guide','chapter','explore','navigate','new','first time'],
+    replies: [
+      'All rivers lead to the same ocean. But you must choose a river. Which pulls at you: the money, the earth beneath your feet, the sky above it, or the men who rule between them?',
+      'There are twelve doors in this archive. Behind each is a thread. Pull one and it connects to all the others. Most begin with the Federal Reserve. But any beginning is valid.',
+      'You are not here by accident. The first thread is always the one you already suspected. Name your suspicion and I will point you toward the evidence.',
+    ]
+  },
+
+  /* ── Rabbit Hole Depth / Progress ──────────────────────────────────── */
+  { keys: ['depth','level','progress','rank','tier','how far','clearance'],
+    replies: [
+      'Your clearance level is reflected in the archive tracker. Each page you open is a thread you have pulled. The board on the homepage shows you how deep you have gone.',
+      'Depth is not measured in pages. It is measured in connections seen. You may have read 10 pages and understood the shape of it all, or read 100 and still seen only surfaces.',
+    ]
+  },
+
+  /* ── eBook ──────────────────────────────────────────────────────────── */
+  { keys: ['ebook','book','pdf','download','purchase','buy','read offline','archive'],
+    replies: [
+      'The complete archive has been compiled into a single dossier — all twelve chapters, cross-referenced, in a form that cannot be altered after publication. Access it through the eBook in the navigation.',
+    ]
+  },
 ];
+
 const ORACLE_FALLBACK = [
-  'That signal is classified at this clearance level.',
-  'The archive does not yet index that thread. Keep descending.',
-  'Seek first what you already suspect. The answer is already here.',
-  'Every question leads to the same door. Which chapter calls to you?',
-  'The pattern is visible to those who look. Begin anywhere.',
+  'The archive contains the answer. But it will not reveal itself to a question it does not recognise. Rephrase. Dig deeper. What do you actually want to know?',
+  'Some questions are not yet indexed at your clearance level. Descend further. Visit more pages. The depth counter rises with each thread you pull.',
+  'Every truth in this archive began as a question that someone was told not to ask. You are asking it. That is already more than most.',
+  'I have seen this pattern before. The question that cannot be answered is always pointing at the answer that cannot be questioned. Look again.',
+  'The signal exists. The noise is merely louder. Strip away the official narrative and ask: who benefits from this being the accepted version?',
+  'Oracles do not give answers. They give better questions. Ask me something more specific — a name, a date, an event — and the archive will open.',
+  'The thread you are pulling is connected to a larger web. Which section of the archive called you here? Begin there, and the oracle will meet you.',
 ];
+
+/**
+ * Scores a query against a knowledge base entry.
+ * Returns the number of matched keywords.
+ * @param {string} q - Lowercased query string
+ * @param {string[]} keys - Keywords to match against
+ * @returns {number}
+ */
+function oracleScore(q, keys) {
+  return keys.reduce((n, k) => n + (q.includes(k) ? 1 : 0), 0);
+}
+
+/**
+ * Finds the best matching Oracle KB entry for a query.
+ * Uses highest-score selection with random reply pick from the matched entry.
+ * @param {string} query
+ * @returns {string}
+ */
+function oracleRespond(query) {
+  const q = query.toLowerCase();
+  let best = null, bestScore = 0;
+  for (const entry of ORACLE_KB) {
+    const score = oracleScore(q, entry.keys);
+    if (score > bestScore) { bestScore = score; best = entry; }
+  }
+  if (best) {
+    return best.replies[Math.floor(Math.random() * best.replies.length)];
+  }
+  return ORACLE_FALLBACK[Math.floor(Math.random() * ORACLE_FALLBACK.length)];
+}
 
 function initOracle() {
   if (document.getElementById('ta-oracle')) return;
@@ -1164,10 +1374,10 @@ function initOracle() {
         <button class="oracle-close" id="oracle-close">&#x2715;</button>
       </div>
       <div class="oracle-messages" id="oracle-messages">
-        <div class="oracle-msg oracle-msg-in">Ask anything. The archive will answer.</div>
+        <div class="oracle-msg oracle-msg-in">The archive is listening. Ask anything — a name, an event, a suspicion. I will not give you answers. I will give you better questions.</div>
       </div>
       <div class="oracle-input-row">
-        <input class="oracle-input" id="oracle-input" type="text" placeholder="Enter your query…" maxlength="120" autocomplete="off" />
+        <input class="oracle-input" id="oracle-input" type="text" placeholder="Ask the oracle…" maxlength="140" autocomplete="off" />
         <button class="oracle-send" id="oracle-send">&#x21A9;</button>
       </div>
     </div>
@@ -1181,9 +1391,17 @@ function initOracle() {
   const send   = document.getElementById('oracle-send');
   const msgs   = document.getElementById('oracle-messages');
 
-  toggle.addEventListener('click', () => { wrap.classList.toggle('open'); if (wrap.classList.contains('open')) input.focus(); });
-  close.addEventListener('click',  () => wrap.classList.remove('open'));
+  toggle.addEventListener('click', () => {
+    wrap.classList.toggle('open');
+    if (wrap.classList.contains('open')) input.focus();
+  });
+  close.addEventListener('click', () => wrap.classList.remove('open'));
 
+  /**
+   * Appends a message bubble to the oracle chat window.
+   * @param {string} text
+   * @param {'in'|'out'} dir - 'in' = oracle, 'out' = user
+   */
   function addMsg(text, dir) {
     const d = document.createElement('div');
     d.className = 'oracle-msg oracle-msg-' + dir;
@@ -1192,22 +1410,14 @@ function initOracle() {
     msgs.scrollTop = msgs.scrollHeight;
   }
 
-  function respond(query) {
-    const q = query.toLowerCase();
-    let reply = null;
-    for (const r of ORACLE_RESPONSES) {
-      if (r.keys.some(k => q.includes(k))) { reply = r.reply; break; }
-    }
-    if (!reply) reply = ORACLE_FALLBACK[Math.floor(Math.random() * ORACLE_FALLBACK.length)];
-    setTimeout(() => addMsg(reply, 'in'), 650);
-  }
-
+  /** Submits current input value to the oracle. */
   function submit() {
     const val = input.value.trim();
     if (!val) return;
     addMsg(val, 'out');
     input.value = '';
-    respond(val);
+    // Typing delay for dramatic effect
+    setTimeout(() => addMsg(oracleRespond(val), 'in'), 900);
   }
 
   send.addEventListener('click', submit);
