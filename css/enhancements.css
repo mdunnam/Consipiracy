@@ -96,11 +96,13 @@
 .rabbit-hole-widget {
   position: fixed;
   bottom: 1.5rem;
-  left: 1.5rem;
-  z-index: 900;
+  right: 1.5rem;
+  left: auto;
+  z-index: 1100;
   background: rgba(4, 4, 4, 0.95);
   border: 1px solid rgba(201, 162, 39, 0.3);
-  padding: 0.9rem 1.2rem;
+  border-radius: 6px;
+  padding: 0;
   font-family: 'Share Tech Mono', monospace;
   font-size: 0.72rem;
   letter-spacing: 0.05em;
@@ -110,12 +112,53 @@
   transform: translateY(10px);
   transition: opacity 0.5s ease, transform 0.5s ease;
   pointer-events: none;
+  overflow: hidden;
 }
 
 .rabbit-hole-widget.visible {
   opacity: 1;
   transform: none;
   pointer-events: auto;
+}
+
+/* Collapse toggle button */
+.rh-collapse-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: rgba(201, 162, 39, 0.06);
+  border: none;
+  border-bottom: 1px solid rgba(201, 162, 39, 0.15);
+  color: #c9a227;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.45rem 0.85rem;
+  cursor: pointer;
+  text-align: left;
+}
+.rh-collapse-btn:hover { background: rgba(201, 162, 39, 0.1); }
+.rh-collapse-arrow {
+  font-size: 0.55rem;
+  transition: transform 0.25s ease;
+  color: rgba(201, 162, 39, 0.6);
+}
+.rabbit-hole-widget.rh-collapsed .rh-collapse-arrow { transform: rotate(180deg); }
+
+/* Body shown/hidden on collapse */
+.rh-body {
+  padding: 0.75rem 1.1rem 0.85rem;
+  transition: max-height 0.25s ease, opacity 0.2s ease;
+  max-height: 200px;
+  overflow: hidden;
+}
+.rabbit-hole-widget.rh-collapsed .rh-body {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .rh-header {
@@ -640,10 +683,10 @@ kbd {
 @media (max-width: 640px) {
   .rabbit-hole-widget {
     bottom: 4rem;
-    left: 0.8rem;
+    right: 0.8rem;
+    left: auto;
     font-size: 0.65rem;
-    padding: 0.7rem 0.9rem;
-    min-width: 150px;
+    min-width: 160px;
   }
 
   .ambient-toggle {

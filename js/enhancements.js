@@ -629,13 +629,24 @@ function injectPersistentUI() {
     widget.id = 'rabbit-hole-widget';
     widget.className = 'rabbit-hole-widget';
     widget.innerHTML = `
-      <div class="rh-header">&#x2B21; RABBIT HOLE DEPTH</div>
-      <div class="rh-count"><span class="rh-depth">0</span> <span class="rh-unit">levels deep</span></div>
-      <div class="rh-tier">INITIATE</div>
-      <div class="rh-label"></div>
-      <div class="rh-tier-next"></div>
+      <button class="rh-collapse-btn" id="rh-collapse-btn" aria-expanded="true" aria-controls="rh-body">
+        <span>&#x2B21; RABBIT HOLE DEPTH</span>
+        <span class="rh-collapse-arrow">&#x25B2;</span>
+      </button>
+      <div class="rh-body" id="rh-body">
+        <div class="rh-count"><span class="rh-depth">0</span> <span class="rh-unit">levels deep</span></div>
+        <div class="rh-tier">INITIATE</div>
+        <div class="rh-label"></div>
+        <div class="rh-tier-next"></div>
+      </div>
     `;
     document.body.appendChild(widget);
+
+    // Collapse toggle
+    widget.querySelector('#rh-collapse-btn').addEventListener('click', () => {
+      const collapsed = widget.classList.toggle('rh-collapsed');
+      widget.querySelector('#rh-collapse-btn').setAttribute('aria-expanded', String(!collapsed));
+    });
   }
 
   // Ambient sound toggle button
@@ -1646,7 +1657,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initEyeBlink();
   initDocumentDropCountdown();
   initSubscriberCounter();
-  initOracle();
+  // initOracle(); // shelved — see ORACLE_KB below for future use
   injectNewspaperClippings();
   injectQuiz();
 });
