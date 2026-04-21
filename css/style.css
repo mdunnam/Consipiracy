@@ -177,25 +177,25 @@ hr::after {
 }
 
 /* === Navigation ============================================================= */
+
+/* ── Slim top bar: logo + hamburger only ────────────────────────────────── */
 .site-nav {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   z-index: 1000;
   background: rgba(4, 4, 4, 0.96);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border-gold);
-  padding: 0 2rem;
+  padding: 0 1.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  height: 52px;
 }
 
 .nav-logo {
   font-family: var(--font-heading);
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 900;
   color: var(--gold);
   text-shadow: var(--glow-text-gold);
@@ -203,10 +203,10 @@ hr::after {
   text-transform: uppercase;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
 }
 .nav-logo .eye-symbol {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   animation: pulse-eye 3s ease-in-out infinite;
 }
 
@@ -215,94 +215,172 @@ hr::after {
   50%       { opacity: 0.5; text-shadow: none; }
 }
 
+/* ── Left rail ───────────────────────────────────────────────────────────── */
 .nav-links {
-  display: flex;
-  align-items: center;
-  gap: 0;
+  position: fixed;
+  top: 52px;
+  left: 0;
+  bottom: 0;
+  width: 52px;
   list-style: none;
-  padding: 0;
+  padding: 0.5rem 0;
   margin: 0;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: rgba(4, 4, 4, 0.97);
+  border-right: 1px solid rgba(201, 162, 39, 0.18);
+  overflow: hidden;
+  overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  z-index: 999;
+  transition: width 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.22s ease,
+              box-shadow 0.22s ease;
 }
 .nav-links::-webkit-scrollbar { display: none; }
-.nav-links li { margin: 0; flex-shrink: 0; }
+
+/* Expand on hover — pointer devices only */
+@media (hover: hover) and (pointer: fine) {
+  .nav-links:hover {
+    width: 220px;
+    border-right-color: var(--border-gold);
+    box-shadow: 4px 0 28px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* JS-toggled open state */
+.nav-links.open {
+  width: 220px;
+  border-right-color: var(--border-gold);
+  box-shadow: 4px 0 28px rgba(0, 0, 0, 0.5);
+}
+
+/* Each list item: wider than rail so labels pre-render */
+.nav-links li {
+  margin: 0;
+  flex-shrink: 0;
+  width: 220px;
+}
+
+/* Last item (eBook) pushed to bottom */
+.nav-links li:last-child {
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  padding-top: 0.25rem;
+}
+
 .nav-links a {
-  display: block;
-  padding: 0.35rem 0.65rem;
+  display: flex;
+  align-items: center;
+  padding: 0.65rem 0;
   font-family: var(--font-label);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--text-secondary);
-  border-bottom: 2px solid transparent;
-  transition: var(--transition);
+  border-left: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
   white-space: nowrap;
+  width: 220px;
+  overflow: hidden;
+  text-decoration: none;
 }
 .nav-links a:hover,
 .nav-links a.active {
   color: var(--gold);
-  border-bottom-color: var(--gold);
+  background: rgba(201, 162, 39, 0.05);
   text-shadow: var(--glow-text-gold);
 }
-.nav-links a.ebook-link {
-  background: var(--gold-muted);
-  border: 1px solid var(--border-gold);
-  border-radius: var(--radius);
-  color: var(--gold);
-  margin-left: 0.5rem;
+.nav-links a:hover    { border-left-color: var(--border-gold); }
+.nav-links a.active   { border-left-color: var(--red-bright); color: var(--gold); }
+
+/* Icon + label spans injected by JS */
+.nav-rail-icon {
+  width: 52px;
+  min-width: 52px;
+  text-align: center;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+  line-height: 1;
 }
-.nav-links a.ebook-link:hover {
-  background: var(--gold);
-  color: var(--bg-primary);
-  border-bottom: 1px solid var(--gold);
-  text-shadow: none;
+.nav-rail-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 0.75rem;
 }
 
-/* Hamburger */
+.nav-links a.ebook-link {
+  color: var(--gold);
+  border-left-color: transparent;
+  background: rgba(201, 162, 39, 0.04);
+}
+.nav-links a.ebook-link:hover {
+  background: rgba(201, 162, 39, 0.12);
+  color: var(--gold-light);
+  border-left-color: var(--gold);
+  text-shadow: var(--glow-text-gold);
+}
+
+/* Mobile dim backdrop */
+.nav-backdrop {
+  display: none;
+  position: fixed;
+  inset: 52px 0 0 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 998;
+}
+.nav-backdrop.visible { display: block; }
+
+/* Hamburger — hidden on desktop */
 .nav-toggle {
   display: none;
   background: none;
   border: 1px solid var(--border-gold);
   color: var(--gold);
-  padding: 0.4rem 0.7rem;
+  padding: 0.35rem 0.6rem;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   border-radius: var(--radius);
 }
+
+/* Body offset for the fixed rail */
+@media (min-width: 901px) {
+  body { padding-left: 52px; }
+}
+
+/* ── Mobile: hamburger + left drawer ─────────────────────────────────────── */
 @media (max-width: 900px) {
   .nav-toggle { display: block; }
   .nav-links {
-    position: fixed;
-    top: 64px;
-    left: 0;
-    right: 0;
-    background: rgba(4, 4, 4, 0.98);
-    border-bottom: 1px solid var(--border-gold);
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem 2rem;
-    gap: 0.2rem;
-    transform: translateY(-100%);
+    top: 52px;
+    width: 270px;
+    transform: translateX(-100%);
     opacity: 0;
     pointer-events: none;
-    transition: var(--transition);
+    transition: transform 0.25s ease, opacity 0.2s ease;
+    overflow-y: auto;
+    box-shadow: none;
   }
   .nav-links.open {
-    transform: translateY(0);
+    transform: translateX(0);
     opacity: 1;
     pointer-events: all;
+    width: 270px;
+    box-shadow: 6px 0 40px rgba(0, 0, 0, 0.7);
+    border-right-color: var(--border-gold);
   }
-  .nav-links a { padding: 0.6rem 0; font-size: 0.9rem; }
+  .nav-links li       { width: 270px; }
+  .nav-links a        { width: 270px; font-size: 0.82rem; padding: 0.8rem 0; }
+  .nav-links li:last-child { margin-top: 0.5rem; }
 }
 
 /* === Page Header ============================================================ */
 .page-header {
-  padding-top: 120px;
+  padding-top: 100px;
   padding-bottom: 4rem;
   text-align: center;
   position: relative;

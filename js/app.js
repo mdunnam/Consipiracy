@@ -10,21 +10,77 @@
    ============================================================ */
 
 /**
- * Initialises the hamburger toggle for the mobile navigation menu.
+ * Builds the left-rail navigation:
+ * - Injects icon + label spans into every nav link based on href
+ * - Wires up the mobile hamburger toggle and backdrop dismiss
  */
 function initNavToggle() {
   const toggle = document.querySelector('.nav-toggle');
-  const links  = document.querySelector('.nav-links');
-  if (!toggle || !links) return;
+  const rail   = document.querySelector('.nav-links');
+  if (!rail) return;
 
-  toggle.addEventListener('click', () => {
-    const isOpen = links.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', String(isOpen));
+  // Icon map keyed by filename (without .html)
+  const ICONS = {
+    'great-awakening':   '◉',
+    'flat-earth':        '⊕',
+    'deep-state':        '◈',
+    'secret-societies':  '△',
+    'banking-control':   '⊗',
+    'media-control':     '◎',
+    'space-deception':   '✦',
+    'big-pharma':        '✚',
+    'tech-control':      '⊞',
+    'false-flags':       '⚑',
+    'suppressed-history':'≡',
+    'metaphysical':      '※',
+    'ebook':             '▶',
+  };
+
+  // Inject icon + label spans (idempotent)
+  rail.querySelectorAll('a').forEach(a => {
+    if (a.querySelector('.nav-rail-icon')) return;
+    const file  = (a.getAttribute('href') || '').split('/').pop().replace('.html', '');
+    const icon  = ICONS[file] || '◆';
+    const label = a.textContent.trim();
+    a.innerHTML = `<span class="nav-rail-icon" aria-hidden="true">${icon}</span>` +
+                  `<span class="nav-rail-label">${label}</span>`;
+    a.setAttribute('aria-label', label);
   });
 
-  // Close nav when a link is clicked
-  links.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => links.classList.remove('open'));
+  // Inject backdrop element for mobile (once per page)
+  let backdrop = document.getElementById('nav-backdrop');
+  if (!backdrop) {
+    backdrop = document.createElement('div');
+    backdrop.id        = 'nav-backdrop';
+    backdrop.className = 'nav-backdrop';
+    document.body.appendChild(backdrop);
+  }
+
+  const openRail = () => {
+    rail.classList.add('open');
+    backdrop.classList.add('visible');
+    if (toggle) toggle.setAttribute('aria-expanded', 'true');
+  };
+
+  const closeRail = () => {
+    rail.classList.remove('open');
+    backdrop.classList.remove('visible');
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+  };
+
+  if (toggle) {
+    toggle.addEventListener('click', () =>
+      rail.classList.contains('open') ? closeRail() : openRail()
+    );
+  }
+
+  backdrop.addEventListener('click', closeRail);
+
+  // Close drawer on link click (mobile only)
+  rail.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (window.innerWidth <= 900) closeRail();
+    });
   });
 }
 
