@@ -915,18 +915,7 @@ function injectCorkboard() {
         <p>Every thread leads back to the same origin. Pull one — and the whole board moves.</p>
       </div>
       <div class="corkboard fade-in">
-
-        <!-- SVG thread overlay — 3 strings connecting pins -->
-        <svg class="cork-threads-svg" viewBox="0 0 100 100" preserveAspectRatio="none"
-             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <!-- A(13,27) → D(88,27): red string sagging across the top row -->
-          <path d="M 13 27 Q 50 36 88 27" class="ct ct-red"/>
-          <!-- B(38,27) → E(13,63): gold diagonal cross-left -->
-          <line x1="38" y1="27" x2="13" y2="63" class="ct ct-gold"/>
-          <!-- C(63,27) → E(13,63): red long diagonal across the board -->
-          <line x1="63" y1="27" x2="13" y2="63" class="ct ct-red"/>
-        </svg>
-
+        <svg class="cork-threads-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
         <div class="cork-pin pin-a">
           <div class="cork-photo"><span>[ PHOTO ]</span><div class="photo-label">Bilderberg Meeting 2019</div></div>
         </div>
@@ -952,6 +941,55 @@ function injectCorkboard() {
     </div>
   `;
   ref.before(section);
+  // Draw threads after layout is painted so getBoundingClientRect is accurate
+  requestAnimationFrame(() => requestAnimationFrame(drawCorkboardThreads));
+}
+
+/**
+ * Reads actual DOM positions of the cork pins and draws 3 SVG threads
+ * connecting them precisely from pin-dot to pin-dot.
+ */
+function drawCorkboardThreads() {
+  const board = document.querySelector('#ta-corkboard-section .corkboard');
+  if (!board) return;
+  const svg = board.querySelector('.cork-threads-svg');
+  if (!svg) return;
+  const pins = board.querySelectorAll('.cork-pin');
+  if (pins.length < 5) return;
+
+  const bR = board.getBoundingClientRect();
+
+  /**
+   * Returns the SVG coordinate of the pin-dot (top-centre of each .cork-pin).
+   * @param {Element} pin
+   * @returns {{x: number, y: number}}
+   */
+  function pc(pin) {
+    const r = pin.getBoundingClientRect();
+    return {
+      x: r.left - bR.left + r.width / 2,
+      y: r.top  - bR.top  + 5,   // 5 = half the 10px dot
+    };
+  }
+
+  const p = Array.from(pins).map(pc); // [A,B,C,D,E,F,G]
+  const W = bR.width;
+  const H = bR.height;
+
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.setAttribute('width',  W);
+  svg.setAttribute('height', H);
+
+  // Thread 1: A → D  — red, sagging bezier across top row
+  const mx = (p[0].x + p[3].x) / 2;
+  const my = Math.max(p[0].y, p[3].y) + H * 0.08;
+  // Thread 2: B → E  — gold diagonal
+  // Thread 3: C → E  — red diagonal
+  svg.innerHTML = `
+    <path d="M ${p[0].x} ${p[0].y} Q ${mx} ${my} ${p[3].x} ${p[3].y}" class="ct ct-red"/>
+    <line x1="${p[1].x}" y1="${p[1].y}" x2="${p[4].x}" y2="${p[4].y}" class="ct ct-gold"/>
+    <line x1="${p[2].x}" y1="${p[2].y}" x2="${p[4].x}" y2="${p[4].y}" class="ct ct-red"/>
+  `;
 }
 
 /* ============================================================
