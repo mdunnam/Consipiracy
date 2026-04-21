@@ -312,7 +312,72 @@ function initEbookPaywall() {
    Boot sequence — run all initialisers on DOMContentLoaded
    ============================================================ */
 
+/* ============================================================
+   Page Visit Tracker — runs on every page
+   Records current page to ta_visited and refreshes the rabbit
+   hole widget depth counter wherever it exists in the DOM.
+   ============================================================ */
+
+const RH_TIERS_APP = [
+  { min:   0, name: 'INITIATE',   label: "Surface level. You've barely started." },
+  { min:  10, name: 'SEEKER',     label: "The pattern is becoming visible." },
+  { min:  20, name: 'AWAKE',      label: "You see what others refuse to look at." },
+  { min:  30, name: 'HUNTED',     label: "They're watching you now." },
+  { min:  40, name: 'UNBOUND',    label: "You cannot unknow this." },
+  { min:  50, name: 'SOVEREIGN',  label: "You know too much. Welcome to the other side." },
+  { min:  60, name: 'CIPHER',     label: "You move through the system like a ghost." },
+  { min:  70, name: 'ARCHITECT',  label: "You understand the machine from inside." },
+  { min:  80, name: 'ORACLE',     label: "The next layer is for those who dare." },
+  { min:  90, name: 'UNSEEN',     label: "You exist outside their model of the world." },
+  { min: 100, name: 'OMEGA',      label: "OMEGA CLEARANCE. You see what they buried." },
+];
+
+/**
+ * Records the current page to localStorage and updates any rabbit
+ * hole widget that exists in the DOM (homepage or topic pages).
+ */
+function trackPageVisit() {
+  const visited = JSON.parse(localStorage.getItem('ta_visited') || '[]');
+  const current = window.location.pathname.split('/').pop() || 'index.html';
+
+  if (!visited.includes(current)) {
+    visited.push(current);
+    localStorage.setItem('ta_visited', JSON.stringify(visited));
+  }
+
+  const depth = visited.length;
+
+  // Update widget if present (injected by enhancements.js on homepage,
+  // or embedded on topic pages)
+  const widget = document.getElementById('rabbit-hole-widget');
+  if (widget) {
+    const depthEl = widget.querySelector('.rh-depth');
+    const tierEl  = widget.querySelector('.rh-tier');
+    const labelEl = widget.querySelector('.rh-label');
+    const nextEl  = widget.querySelector('.rh-tier-next');
+
+    let tier = RH_TIERS_APP[0];
+    for (const t of RH_TIERS_APP) { if (depth >= t.min) tier = t; }
+    const nextIdx = RH_TIERS_APP.findIndex(x => x.name === tier.name) + 1;
+    const nextTier = RH_TIERS_APP[nextIdx];
+
+    if (depthEl) depthEl.textContent = depth;
+    if (tierEl)  tierEl.textContent  = tier.name;
+    if (labelEl) labelEl.textContent = tier.label;
+    if (nextEl) {
+      if (nextTier) {
+        nextEl.textContent  = (nextTier.min - depth) + ' pages to ' + nextTier.name;
+        nextEl.style.display = '';
+      } else {
+        nextEl.style.display = 'none';
+      }
+    }
+    setTimeout(() => widget.classList.add('visible'), 800);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  trackPageVisit();
   initNavToggle();
   highlightActiveNavLink();
   initReadingProgress();

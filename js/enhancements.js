@@ -125,14 +125,10 @@ function updateRabbitHoleWidget(depth) {
 }
 
 function initRabbitHoleTracker() {
+  // Visit recording and widget update already handled by trackPageVisit()
+  // in app.js which runs on every page. Here we just re-read and refresh
+  // the widget in case enhancements.js injects it after app.js ran.
   const visited = JSON.parse(localStorage.getItem('ta_visited') || '[]');
-  const current = window.location.pathname.split('/').pop() || 'index.html';
-
-  if (!visited.includes(current)) {
-    visited.push(current);
-    localStorage.setItem('ta_visited', JSON.stringify(visited));
-  }
-
   const localDepth = visited.length;
   updateRabbitHoleWidget(localDepth);
 
