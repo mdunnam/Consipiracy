@@ -915,6 +915,28 @@ function injectCorkboard() {
         <p>Every thread leads back to the same origin. Pull one — and the whole board moves.</p>
       </div>
       <div class="corkboard fade-in">
+
+        <!-- SVG thread overlay — coordinates match 4-col grid pin centres -->
+        <svg class="cork-threads-svg" viewBox="0 0 100 100" preserveAspectRatio="none"
+             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- a(12.5,25) → b(37.5,25) -->
+          <line x1="12.5" y1="25" x2="37.5" y2="25" class="ct ct-red"/>
+          <!-- b(37.5,25) → d(87.5,25) passing over c -->
+          <line x1="37.5" y1="25" x2="87.5" y2="25" class="ct ct-red"/>
+          <!-- a(12.5,25) → f(37.5,75) diagonal cross -->
+          <line x1="12.5" y1="25" x2="37.5" y2="75" class="ct ct-gold"/>
+          <!-- b(37.5,25) → e(12.5,75) -->
+          <line x1="37.5" y1="25" x2="12.5" y2="75" class="ct ct-gold"/>
+          <!-- c(62.5,25) → g(62.5,75) vertical -->
+          <line x1="62.5" y1="25" x2="62.5" y2="75" class="ct ct-red"/>
+          <!-- d(87.5,25) → g(62.5,75) diagonal -->
+          <line x1="87.5" y1="25" x2="62.5" y2="75" class="ct ct-white"/>
+          <!-- b(37.5,25) → g(62.5,75) long cross -->
+          <line x1="37.5" y1="25" x2="62.5" y2="75" class="ct ct-gold"/>
+          <!-- e(12.5,75) → g(62.5,75) bottom row -->
+          <line x1="12.5" y1="75" x2="62.5" y2="75" class="ct ct-red"/>
+        </svg>
+
         <div class="cork-pin pin-a">
           <div class="cork-photo"><span>[ PHOTO ]</span><div class="photo-label">Bilderberg Meeting 2019</div></div>
         </div>
@@ -936,9 +958,6 @@ function injectCorkboard() {
         <div class="cork-pin pin-g">
           <div class="cork-photo"><span>[ DOCUMENT ]</span><div class="photo-label">Declassified: Op. Northwoods</div></div>
         </div>
-        <div class="cork-thread thread-1"></div>
-        <div class="cork-thread thread-2"></div>
-        <div class="cork-thread thread-3"></div>
       </div>
     </div>
   `;

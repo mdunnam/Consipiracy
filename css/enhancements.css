@@ -823,6 +823,7 @@ kbd {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.25rem;
   padding: 1.5rem;
+  position: relative;
   background:
     radial-gradient(ellipse at 20% 40%, rgba(139,20,20,0.08), transparent 45%),
     radial-gradient(ellipse at 75% 60%, rgba(201,162,39,0.06), transparent 40%),
@@ -897,6 +898,27 @@ kbd {
 
 /* Threads hidden in grid mode */
 .cork-thread { display: none; }
+
+/* SVG thread overlay */
+.cork-threads-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  overflow: visible;
+}
+.ct {
+  stroke-width: 0.4;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 1.2 0.6;
+  opacity: 0.65;
+}
+.ct-red   { stroke: rgba(204, 34, 34, 0.8); }
+.ct-gold  { stroke: rgba(201,162, 39, 0.75); }
+.ct-white { stroke: rgba(200,190,160, 0.55); }
 
 @media (max-width: 900px) {
   .corkboard {
