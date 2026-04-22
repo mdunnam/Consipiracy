@@ -162,7 +162,31 @@
     .back-bar { text-align: center; margin: 3rem 0 1rem; }
     .back-bar a { font-family: var(--font-label); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
     .back-bar a:hover { color: var(--gold); }
-  </style>
+    /* ════════ INTERACTIVE FLAT EARTH MAP ════════ */
+    .fe-map-section { padding: 1rem 0 2rem; margin-bottom: 2rem; }
+    .fe-map-wrap { position: relative; max-width: 1000px; margin: 1rem auto; user-select: none; }
+    .fe-map-img-wrap { position: relative; border: 1px solid rgba(201,162,39,0.3); overflow: hidden; background: #000; box-shadow: 0 0 60px rgba(0,0,0,0.8); }
+    .fe-map-img-wrap img { display: block; width: 100%; height: auto; opacity: 0.92; }
+    .fe-pin { position: absolute; width: 12px; height: 12px; border-radius: 50%; transform: translate(-50%, -50%); cursor: pointer; border: 2px solid rgba(255,255,255,0.5); transition: transform 0.15s ease, box-shadow 0.15s ease; z-index: 10; }
+    .fe-pin:hover { transform: translate(-50%,-50%) scale(1.8); box-shadow: 0 0 12px currentColor; z-index: 20; }
+    .fe-pin::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 1px solid currentColor; opacity: 0; transition: opacity 0.15s; }
+    .fe-pin:hover::after { opacity: 0.4; }
+    .fe-tooltip { position: fixed; z-index: 9999; background: rgba(4,4,4,0.97); border: 1px solid rgba(201,162,39,0.4); padding: 0.75rem 1rem; max-width: 240px; pointer-events: none; display: none; box-shadow: 0 4px 24px rgba(0,0,0,0.8); border-radius: 3px; }
+    .fe-tooltip.visible { display: block; }
+    .fe-tooltip-name { font-family: 'Oswald', sans-serif; font-size: 0.85rem; color: #c9a227; margin-bottom: 0.3rem; letter-spacing: 0.05em; }
+    .fe-tooltip-cat  { font-family: 'Share Tech Mono', monospace; font-size: 0.58rem; color: #6a6a6a; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.4rem; }
+    .fe-tooltip-desc { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: #9a9a9a; line-height: 1.55; }
+    .fe-tooltip-cta  { font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; color: rgba(201,162,39,0.75); margin-top: 0.5rem; letter-spacing: 0.1em; }
+    .fe-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem; justify-content: center; padding: 1rem 1.5rem 0.5rem; }
+    .fe-legend-item { display: flex; align-items: center; gap: 0.4rem; font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--text-muted); letter-spacing: 0.05em; }
+    .fe-legend-dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.4); flex-shrink: 0; }
+    .fe-filters { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; padding: 0.5rem 1rem 1rem; }
+    .fe-filter-btn { background: transparent; border: 1px solid #1c1c1c; color: #5a5a5a; font-family: 'Oswald', sans-serif; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.28rem 0.7rem; cursor: pointer; transition: all 0.2s ease; border-radius: 2px; }
+    .fe-filter-btn:hover, .fe-filter-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(201,162,39,0.06); }
+    @media (max-width: 600px) {
+      .fe-pin { width: 10px; height: 10px; }
+      .fe-filter-btn { font-size: 0.55rem; padding: 0.22rem 0.55rem; }
+    }  </style>
 </head>
 <body>
   <div id="reading-progress"></div>
@@ -763,6 +787,101 @@
         drawNorthPole();
         drawLabels();
       });
+  })();
+  </script>
+
+  <!-- ═══ Interactive Flat Earth Map renderer ═══ -->
+  <script>
+  /**
+   * Interactive flat earth map.
+   * Renders pin markers over the azimuthal map image, supports category filtering,
+   * shows hover tooltips and links each pin to its full dossier page.
+   */
+  (function() {
+    const CAT_COLORS = {
+      structural: '#c9a227',
+      landmass:   '#fbbf24',
+      evidence:   '#4ade80',
+      suppressed: '#f87171',
+      ancient:    '#c084fc',
+      anomalous:  '#fb923c',
+      boundary:   '#94a3b8',
+      ocean:      '#38bdf8'
+    };
+
+    const MARKERS = [
+      { x: 54.45, y: 50.20, name: 'Asia',          desc: 'The largest continent, spanning from the Middle East to the Pacific. Right-arc landmass on the flat azimuthal map.', cat: 'landmass', url: 'location-detail.html?id=17' },
+      { x: 52.00, y: 51.05, name: 'Europe',        desc: 'Dense concentration of Freemasonic architecture and occult city layouts. Upper-centre arc.',                              cat: 'landmass', url: 'location-detail.html?id=10' },
+      { x: 46.40, y: 49.60, name: 'North America', desc: 'Upper-left quadrant. Major HAARP and deep state infrastructure concentrated here.',                                       cat: 'landmass', url: 'location-detail.html?id=7'  },
+      { x: 43.05, y: 53.70, name: 'South America', desc: 'Lower-left arc. Flight paths from here are geometrically impossible on a globe.',                                          cat: 'landmass', url: 'location-detail.html?id=9'  },
+      { x: 52.85, y: 55.35, name: 'Africa',        desc: 'Most geographically centred landmass on the flat map. Contains the Nile.',                                                cat: 'landmass', url: 'location-detail.html?id=12' }
+    ];
+
+    const wrap     = document.getElementById('fe-map-img-wrap');
+    const tooltip  = document.getElementById('fe-tooltip');
+    const legend   = document.getElementById('fe-legend');
+    const filters  = document.getElementById('fe-map-filters');
+    if (!wrap || !tooltip || !legend || !filters) return;
+
+    let activeFilter = 'all';
+
+    /** Build the colour-coded legend once at load. */
+    function buildLegend() {
+      Object.entries(CAT_COLORS).forEach(([cat, color]) => {
+        const item = document.createElement('div');
+        item.className = 'fe-legend-item';
+        item.innerHTML = '<span class="fe-legend-dot" style="background:' + color + ';color:' + color + ';border-color:' + color + '40;"></span>' + cat.charAt(0).toUpperCase() + cat.slice(1);
+        legend.appendChild(item);
+      });
+    }
+
+    /** Re-render pins for the current filter. */
+    function renderPins() {
+      wrap.querySelectorAll('.fe-pin').forEach(p => p.remove());
+      const filtered = activeFilter === 'all' ? MARKERS : MARKERS.filter(m => m.cat === activeFilter);
+      filtered.forEach(m => {
+        const pin = document.createElement('div');
+        pin.className = 'fe-pin';
+        pin.style.left       = m.x + '%';
+        pin.style.top        = m.y + '%';
+        pin.style.background = CAT_COLORS[m.cat] || '#c9a227';
+        pin.style.color      = CAT_COLORS[m.cat] || '#c9a227';
+        pin.addEventListener('mouseenter', e => showTooltip(e, m));
+        pin.addEventListener('mousemove',  moveTooltip);
+        pin.addEventListener('mouseleave', hideTooltip);
+        pin.addEventListener('click', () => { if (m.url) window.location.href = m.url; });
+        wrap.appendChild(pin);
+      });
+    }
+
+    function showTooltip(e, m) {
+      document.getElementById('tt-name').textContent = m.name;
+      document.getElementById('tt-cat').textContent  = m.cat.toUpperCase();
+      document.getElementById('tt-desc').textContent = m.desc || '';
+      document.getElementById('tt-cta').style.display = m.url ? 'block' : 'none';
+      tooltip.classList.add('visible');
+      moveTooltip(e);
+    }
+    function moveTooltip(e) {
+      let x = e.clientX + 16, y = e.clientY + 16;
+      if (x + 260 > window.innerWidth)  x = e.clientX - 260;
+      if (y + 130 > window.innerHeight) y = e.clientY - 130;
+      tooltip.style.left = x + 'px';
+      tooltip.style.top  = y + 'px';
+    }
+    function hideTooltip() { tooltip.classList.remove('visible'); }
+
+    filters.addEventListener('click', e => {
+      const btn = e.target.closest('.fe-filter-btn');
+      if (!btn) return;
+      filters.querySelectorAll('.fe-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.cat;
+      renderPins();
+    });
+
+    buildLegend();
+    renderPins();
   })();
   </script>
 </body>
