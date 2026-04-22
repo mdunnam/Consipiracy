@@ -229,55 +229,39 @@
   <main class="section">
     <div class="container">
 
-      <!-- ═══ INTERACTIVE MAP ══════════════════════════════════════ -->
-      <div class="map-explorer fade-in">
-        <canvas id="fe-map-canvas" style="width:100%;height:auto;display:block;"></canvas>
-        <div class="map-overlay">
-          <!-- Zone pins — positions as % of container width/height -->
-          <!-- North Pole: centre -->
-          <a href="#structural" class="zpin" style="left:50%;top:50%;--pc:#c9a227" title="North Pole — Centre"><span class="dot"></span><span class="lbl">North Pole</span></a>
-          <!-- North America -->
-          <a href="#landmass" class="zpin" style="left:27%;top:31%;--pc:#fbbf24" title="North America"><span class="dot"></span><span class="lbl">N. America</span></a>
-          <!-- South America -->
-          <a href="#landmass" class="zpin" style="left:29%;top:66%;--pc:#fbbf24" title="South America"><span class="dot"></span><span class="lbl">S. America</span></a>
-          <!-- Greenland -->
-          <a href="#landmass" class="zpin" style="left:37%;top:26%;--pc:#fbbf24" title="Greenland"><span class="dot"></span><span class="lbl">Greenland</span></a>
-          <!-- Europe -->
-          <a href="#landmass" class="zpin" style="left:52%;top:31%;--pc:#fbbf24" title="Europe"><span class="dot"></span><span class="lbl">Europe</span></a>
-          <!-- Russia -->
-          <a href="#landmass" class="zpin" style="left:65%;top:24%;--pc:#fbbf24" title="Russia / Siberia"><span class="dot"></span><span class="lbl">Russia</span></a>
-          <!-- Africa -->
-          <a href="#landmass" class="zpin" style="left:57%;top:52%;--pc:#fbbf24" title="Africa"><span class="dot"></span><span class="lbl">Africa</span></a>
-          <!-- Middle East -->
-          <a href="#ancient" class="zpin" style="left:61%;top:44%;--pc:#c084fc" title="Middle East — Jerusalem, Giza, Mecca"><span class="dot"></span><span class="lbl">Middle East</span></a>
-          <!-- Asia / China -->
-          <a href="#landmass" class="zpin" style="left:71%;top:35%;--pc:#fbbf24" title="East Asia"><span class="dot"></span><span class="lbl">E. Asia</span></a>
-          <!-- India -->
-          <a href="#landmass" class="zpin" style="left:66%;top:48%;--pc:#fbbf24" title="India"><span class="dot"></span><span class="lbl">India</span></a>
-          <!-- Australia -->
-          <a href="#landmass" class="zpin" style="left:72%;top:67%;--pc:#fbbf24" title="Australia"><span class="dot"></span><span class="lbl">Australia</span></a>
-          <!-- Bedford Level evidence -->
-          <a href="#evidence" class="zpin" style="left:50%;top:29%;--pc:#4ade80" title="Bedford Level — England"><span class="dot"></span><span class="lbl">Bedford Level</span></a>
-          <!-- HAARP -->
-          <a href="#suppressed" class="zpin" style="left:23%;top:26%;--pc:#f87171" title="HAARP — Alaska"><span class="dot"></span><span class="lbl">HAARP</span></a>
-          <!-- Bermuda Triangle -->
-          <a href="#anomalous" class="zpin" style="left:31%;top:44%;--pc:#fb923c" title="Bermuda Triangle"><span class="dot"></span><span class="lbl">Bermuda △</span></a>
-          <!-- Pine Gap -->
-          <a href="#suppressed" class="zpin" style="left:70%;top:72%;--pc:#f87171" title="Pine Gap — Australia"><span class="dot"></span><span class="lbl">Pine Gap</span></a>
-          <!-- Ice Wall — bottom -->
-          <a href="#boundary" class="zpin" style="left:50%;top:89%;--pc:#94a3b8" title="Antarctic Ice Wall"><span class="dot"></span><span class="lbl">Ice Wall</span></a>
-          <!-- Ice Wall — left -->
-          <a href="#boundary" class="zpin" style="left:14%;top:74%;--pc:#94a3b8" title="Antarctic Ice Wall — West Arc"><span class="dot"></span><span class="lbl">Ice Wall</span></a>
-          <!-- Ice Wall — right -->
-          <a href="#boundary" class="zpin" style="left:86%;top:74%;--pc:#94a3b8" title="Antarctic Ice Wall — East Arc"><span class="dot"></span><span class="lbl">Ice Wall</span></a>
-          <!-- Giza -->
-          <a href="#ancient" class="zpin" style="left:58%;top:42%;--pc:#c084fc" title="Giza — Geometric Centre of Land Mass"><span class="dot"></span><span class="lbl">Giza</span></a>
-          <!-- Pacific left -->
-          <a href="#ocean" class="zpin" style="left:14%;top:52%;--pc:#38bdf8" title="Pacific Ocean — West Arc"><span class="dot"></span><span class="lbl">Pacific</span></a>
-          <!-- Atlantic -->
-          <a href="#ocean" class="zpin" style="left:41%;top:47%;--pc:#38bdf8" title="Atlantic Ocean"><span class="dot"></span><span class="lbl">Atlantic</span></a>
+      <!-- ═══ INTERACTIVE FLAT EARTH MAP ═══════════════════════════ -->
+      <section class="fe-map-section fade-in" aria-label="Interactive flat earth map">
+        <!-- Map filter bar -->
+        <div class="fe-filters" id="fe-map-filters">
+          <button class="fe-filter-btn active" data-cat="all">All</button>
+          <button class="fe-filter-btn" data-cat="structural">Structural</button>
+          <button class="fe-filter-btn" data-cat="landmass">Landmass</button>
+          <button class="fe-filter-btn" data-cat="evidence">Evidence</button>
+          <button class="fe-filter-btn" data-cat="suppressed">Suppressed</button>
+          <button class="fe-filter-btn" data-cat="ancient">Ancient</button>
+          <button class="fe-filter-btn" data-cat="anomalous">Anomalous</button>
+          <button class="fe-filter-btn" data-cat="boundary">Boundary</button>
+          <button class="fe-filter-btn" data-cat="ocean">Ocean</button>
         </div>
-        <div class="map-caption-bar">◆ FLAT EARTH 8K AZIMUTHAL EQUIDISTANT MAP — NORTH POLE CENTRED — HOVER PINS TO IDENTIFY ZONES ◆</div>
+
+        <!-- Map -->
+        <div class="fe-map-wrap">
+          <div class="fe-map-img-wrap" id="fe-map-img-wrap">
+            <img src="../../images/flatearth_new.png" alt="Flat Earth Azimuthal Equidistant Map" id="fe-map-img" />
+            <!-- Pins injected by JS -->
+          </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="fe-legend" id="fe-legend"></div>
+      </section>
+
+      <!-- Tooltip -->
+      <div class="fe-tooltip" id="fe-tooltip">
+        <div class="fe-tooltip-name" id="tt-name"></div>
+        <div class="fe-tooltip-cat" id="tt-cat"></div>
+        <div class="fe-tooltip-desc" id="tt-desc"></div>
+        <div class="fe-tooltip-cta" id="tt-cta">→ CLICK TO OPEN DOSSIER</div>
       </div>
 
       <!-- ═══ FILTER BAR ═══════════════════════════════════════════ -->
