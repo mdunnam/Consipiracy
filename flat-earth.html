@@ -942,6 +942,166 @@
       text-shadow: none;
       filter: drop-shadow(0 2px 22px rgba(201,162,39,0.3));
     }
+
+    /* ════════ INTERACTIVE FLAT EARTH MAP ════════ */
+    .fe-map-section {
+      padding: 2rem 0 3rem;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .fe-map-section .fe-loc-eyebrow,
+    .fe-map-section .fe-loc-panel-title,
+    .fe-map-section .fe-loc-sub {
+      text-align: center;
+      display: block;
+    }
+    .fe-map-section .fe-loc-sub { margin-bottom: 1.5rem; }
+
+    .fe-map-wrap {
+      position: relative;
+      max-width: 1000px;
+      margin: 1.5rem auto;
+      padding: 0;
+      user-select: none;
+    }
+    .fe-map-img-wrap {
+      position: relative;
+      border: 1px solid rgba(201,162,39,0.3);
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 0 60px rgba(0,0,0,0.8);
+    }
+    .fe-map-img-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+      opacity: 0.92;
+    }
+
+    /* Pins */
+    .fe-pin {
+      position: absolute;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      border: 2px solid rgba(255,255,255,0.5);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      z-index: 10;
+    }
+    .fe-pin:hover {
+      transform: translate(-50%,-50%) scale(1.8);
+      box-shadow: 0 0 12px currentColor;
+      z-index: 20;
+    }
+    .fe-pin::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1px solid currentColor;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .fe-pin:hover::after { opacity: 0.4; }
+
+    /* Tooltip */
+    .fe-tooltip {
+      position: fixed;
+      z-index: 9999;
+      background: rgba(4,4,4,0.97);
+      border: 1px solid rgba(201,162,39,0.4);
+      padding: 0.75rem 1rem;
+      max-width: 240px;
+      pointer-events: none;
+      display: none;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.8);
+      border-radius: 3px;
+    }
+    .fe-tooltip.visible { display: block; }
+    .fe-tooltip-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      color: #c9a227;
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.05em;
+    }
+    .fe-tooltip-cat {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.58rem;
+      color: #6a6a6a;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .fe-tooltip-desc {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      color: #9a9a9a;
+      line-height: 1.55;
+    }
+    .fe-tooltip-cta {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
+      color: rgba(201,162,39,0.75);
+      margin-top: 0.5rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* Legend */
+    .fe-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.2rem;
+      justify-content: center;
+      padding: 1rem 1.5rem 0.5rem;
+    }
+    .fe-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+    .fe-legend-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      flex-shrink: 0;
+    }
+
+    /* Filter bar */
+    .fe-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      justify-content: center;
+      padding: 0.5rem 1rem 1rem;
+    }
+    .fe-filter-btn {
+      background: transparent;
+      border: 1px solid #1c1c1c;
+      color: #5a5a5a;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.28rem 0.7rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-radius: 2px;
+    }
+    .fe-filter-btn:hover, .fe-filter-btn.active {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201,162,39,0.06);
+    }
+
+    @media (max-width: 600px) {
+      .fe-pin { width: 10px; height: 10px; }
+      .fe-filter-btn { font-size: 0.55rem; padding: 0.22rem 0.55rem; }
+    }
   </style>
 </head>
 <body>
@@ -988,61 +1148,47 @@
   <main class="section">
     <div class="container-narrow">
 
-      <!-- ─── MAP LOCATION PANEL ────────────────────────────── -->
-      <div class="fe-loc-panel fade-in">
-        <span class="fe-loc-eyebrow">Map Analysis — 104 Documented Locations</span>
-        <h2 class="fe-loc-panel-title">Every Location on the Flat Earth Map</h2>
-        <p class="fe-loc-sub">Structural rings &nbsp;·&nbsp; evidence sites &nbsp;·&nbsp; suppressed zones &nbsp;·&nbsp; ancient power points &nbsp;·&nbsp; flight anomalies</p>
+      <!-- ─── INTERACTIVE FLAT EARTH MAP ────────────────────── -->
+      <section class="fe-map-section fade-in" aria-label="Interactive flat earth map">
+        <span class="fe-loc-eyebrow">Interactive Research Map — 104 Documented Locations</span>
+        <h2 class="fe-loc-panel-title">The Flat Earth Map</h2>
+        <p class="fe-loc-sub">Hover a pin for details &nbsp;·&nbsp; click to open the full dossier &nbsp;·&nbsp; filter by category</p>
 
-        <div class="fe-loc-grid">
-
-          <a href="topics/flat-earth/locations.html#structural" class="fe-loc-card" style="--zc:#c9a227">
-            <span class="fe-loc-badge">Zone 1 &middot; Structural</span>
-            <h3>The North Pole — Dead Centre</h3>
-            <p>The geometric and cosmological centre of the flat disc. Polaris sits stationary directly above it — an impossibility on a spinning globe, a certainty on a fixed flat plane.</p>
-            <span class="fe-loc-pos">◎ Image Centre &nbsp;&middot;&nbsp; 90°N &nbsp;&middot;&nbsp; All Meridians</span>
-          </a>
-
-          <a href="topics/flat-earth/locations.html#boundary" class="fe-loc-card" style="--zc:#94a3b8">
-            <span class="fe-loc-badge">Zone 1 &middot; Boundary</span>
-            <h3>The Antarctic Ice Wall</h3>
-            <p>A 150–200 ft vertical cliff of ice encircling the entire known world. First documented by James Clark Ross in 1841. Now guarded by the 56-nation Antarctic Treaty.</p>
-            <span class="fe-loc-pos">◎ Outer Ring &nbsp;&middot;&nbsp; All Longitudes</span>
-          </a>
-
-          <a href="topics/flat-earth/locations.html#evidence" class="fe-loc-card" style="--zc:#4ade80">
-            <span class="fe-loc-badge">Zone 4 &middot; Evidence</span>
-            <h3>The Bedford Level, England</h3>
-            <p>A perfectly straight 6-mile drainage canal. Samuel Rowbotham's 1838 experiment showed zero curvature across the full length. Reproduced dozens of times. Never refuted.</p>
-            <span class="fe-loc-pos">◎ Upper-Centre Arc &nbsp;&middot;&nbsp; Cambridgeshire, England</span>
-          </a>
-
-          <a href="topics/flat-earth/locations.html#ancient" class="fe-loc-card" style="--zc:#c084fc">
-            <span class="fe-loc-badge">Zone 10 &middot; Ancient</span>
-            <h3>Giza — Centre of All Land Mass</h3>
-            <p>The Great Pyramid sits within 1/60th of a degree of the geographic centre of all land mass on the flat plane — a placement impossible to achieve without a flat earth map.</p>
-            <span class="fe-loc-pos">◎ Right-Centre Arc &nbsp;&middot;&nbsp; Egypt</span>
-          </a>
-
-          <a href="topics/flat-earth/locations.html#suppressed" class="fe-loc-card" style="--zc:#f87171">
-            <span class="fe-loc-badge">Zone 6 &middot; Suppressed</span>
-            <h3>HAARP — Gakona, Alaska</h3>
-            <p>A 3.6 MW ionospheric heater on the upper-left arc. Capable of heating the ionosphere — the underside of the firmament dome — to produce weather modification and seismic effects.</p>
-            <span class="fe-loc-pos">◎ Upper-Left Arc &nbsp;&middot;&nbsp; Alaska, USA</span>
-          </a>
-
-          <a href="topics/flat-earth/locations.html#flight" class="fe-loc-card" style="--zc:#60a5fa">
-            <span class="fe-loc-badge">Zone 8 &middot; Flight Anomaly</span>
-            <h3>Sydney → Santiago Route</h3>
-            <p>On a globe the shortest path crosses Antarctica. Airlines route via Los Angeles — adding 6+ hours. On the flat map the Los Angeles arc IS the shortest path. The detour exposes the globe lie.</p>
-            <span class="fe-loc-pos">◎ Right Arc → Left Arc &nbsp;&middot;&nbsp; Trans-Pacific</span>
-          </a>
-
+        <!-- Filter bar -->
+        <div class="fe-filters" id="fe-filters">
+          <button class="fe-filter-btn active" data-cat="all">All</button>
+          <button class="fe-filter-btn" data-cat="structural">Structural</button>
+          <button class="fe-filter-btn" data-cat="landmass">Landmass</button>
+          <button class="fe-filter-btn" data-cat="evidence">Evidence</button>
+          <button class="fe-filter-btn" data-cat="suppressed">Suppressed</button>
+          <button class="fe-filter-btn" data-cat="ancient">Ancient</button>
+          <button class="fe-filter-btn" data-cat="anomalous">Anomalous</button>
+          <button class="fe-filter-btn" data-cat="boundary">Boundary</button>
+          <button class="fe-filter-btn" data-cat="ocean">Ocean</button>
         </div>
+
+        <!-- Map -->
+        <div class="fe-map-wrap">
+          <div class="fe-map-img-wrap" id="fe-map-img-wrap">
+            <img src="images/flatearth_new.png" alt="Flat Earth Azimuthal Equidistant Map" id="fe-map-img" />
+            <!-- Pins injected by JS -->
+          </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="fe-legend" id="fe-legend"></div>
 
         <div class="fe-loc-cta">
-          <a href="topics/flat-earth/locations.html">Explore All 104 Locations on the Map →</a>
+          <a href="topics/flat-earth/locations.html">Explore All 104 Locations →</a>
         </div>
+      </section>
+
+      <!-- Tooltip -->
+      <div class="fe-tooltip" id="fe-tooltip">
+        <div class="fe-tooltip-name" id="tt-name"></div>
+        <div class="fe-tooltip-cat" id="tt-cat"></div>
+        <div class="fe-tooltip-desc" id="tt-desc"></div>
+        <div class="fe-tooltip-cta" id="tt-cta">→ CLICK TO OPEN DOSSIER</div>
       </div>
 
 
@@ -1304,6 +1450,104 @@
 
   <script src="js/app.js"></script>
   <script src="js/enhancements.js"></script>
+
+  <!-- ═══ Interactive Flat Earth Map ═══ -->
+  <script>
+  /**
+   * Interactive flat earth map.
+   * Renders pin markers over the azimuthal map image, supports category filtering,
+   * shows hover tooltips and links each pin to its full dossier page.
+   */
+  (function() {
+    const CAT_COLORS = {
+      structural: '#c9a227',
+      landmass:   '#fbbf24',
+      evidence:   '#4ade80',
+      suppressed: '#f87171',
+      ancient:    '#c084fc',
+      anomalous:  '#fb923c',
+      boundary:   '#94a3b8',
+      ocean:      '#38bdf8'
+    };
+
+    // Pin coordinates are percentages of the map image (x, y).
+    // Each pin links to its full dossier in topics/flat-earth/location-detail.html.
+    const MARKERS = [
+      { x: 54.45, y: 50.20, name: 'Asia',          desc: "The largest continent, spanning from the Middle East to the Pacific. Right-arc landmass on the flat azimuthal map.", cat: 'landmass', url: 'topics/flat-earth/location-detail.html?id=17' },
+      { x: 52.00, y: 51.05, name: 'Europe',        desc: 'Dense concentration of Freemasonic architecture and occult city layouts. Upper-centre arc.',                              cat: 'landmass', url: 'topics/flat-earth/location-detail.html?id=10' },
+      { x: 46.40, y: 49.60, name: 'North America', desc: 'Upper-left quadrant. Major HAARP and deep state infrastructure concentrated here.',                                       cat: 'landmass', url: 'topics/flat-earth/location-detail.html?id=7'  },
+      { x: 43.05, y: 53.70, name: 'South America', desc: 'Lower-left arc. Flight paths from here are geometrically impossible on a globe.',                                          cat: 'landmass', url: 'topics/flat-earth/location-detail.html?id=9'  },
+      { x: 52.85, y: 55.35, name: 'Africa',        desc: 'Most geographically centred landmass on the flat map. Contains the Nile.',                                                cat: 'landmass', url: 'topics/flat-earth/location-detail.html?id=12' }
+    ];
+
+    const wrap     = document.getElementById('fe-map-img-wrap');
+    const tooltip  = document.getElementById('fe-tooltip');
+    const legend   = document.getElementById('fe-legend');
+    const filters  = document.getElementById('fe-filters');
+    if (!wrap || !tooltip || !legend || !filters) return;
+
+    let activeFilter = 'all';
+
+    /** Build the colour-coded legend once at load. */
+    function buildLegend() {
+      Object.entries(CAT_COLORS).forEach(([cat, color]) => {
+        const item = document.createElement('div');
+        item.className = 'fe-legend-item';
+        item.innerHTML = '<span class="fe-legend-dot" style="background:' + color + ';color:' + color + ';border-color:' + color + '40;"></span>' + cat.charAt(0).toUpperCase() + cat.slice(1);
+        legend.appendChild(item);
+      });
+    }
+
+    /** Re-render pins for the current filter. */
+    function renderPins() {
+      wrap.querySelectorAll('.fe-pin').forEach(p => p.remove());
+      const filtered = activeFilter === 'all' ? MARKERS : MARKERS.filter(m => m.cat === activeFilter);
+      filtered.forEach(m => {
+        const pin = document.createElement('div');
+        pin.className = 'fe-pin';
+        pin.style.left       = m.x + '%';
+        pin.style.top        = m.y + '%';
+        pin.style.background = CAT_COLORS[m.cat] || '#c9a227';
+        pin.style.color      = CAT_COLORS[m.cat] || '#c9a227';
+        pin.addEventListener('mouseenter', e => showTooltip(e, m));
+        pin.addEventListener('mousemove',  moveTooltip);
+        pin.addEventListener('mouseleave', hideTooltip);
+        pin.addEventListener('click', () => { if (m.url) window.location.href = m.url; });
+        wrap.appendChild(pin);
+      });
+    }
+
+    function showTooltip(e, m) {
+      document.getElementById('tt-name').textContent = m.name;
+      document.getElementById('tt-cat').textContent  = m.cat.toUpperCase();
+      document.getElementById('tt-desc').textContent = m.desc || '';
+      document.getElementById('tt-cta').style.display = m.url ? 'block' : 'none';
+      tooltip.classList.add('visible');
+      moveTooltip(e);
+    }
+    function moveTooltip(e) {
+      let x = e.clientX + 16, y = e.clientY + 16;
+      if (x + 260 > window.innerWidth)  x = e.clientX - 260;
+      if (y + 130 > window.innerHeight) y = e.clientY - 130;
+      tooltip.style.left = x + 'px';
+      tooltip.style.top  = y + 'px';
+    }
+    function hideTooltip() { tooltip.classList.remove('visible'); }
+
+    /** Filter button wiring. */
+    filters.addEventListener('click', e => {
+      const btn = e.target.closest('.fe-filter-btn');
+      if (!btn) return;
+      filters.querySelectorAll('.fe-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.cat;
+      renderPins();
+    });
+
+    buildLegend();
+    renderPins();
+  })();
+  </script>
 </body>
 </html>
 
