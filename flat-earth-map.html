@@ -211,7 +211,7 @@
 
   <div class="fe-map-page">
     <div class="fe-map-header">
-      <span class="eyebrow">Interactive Research Map — 104 Documented Locations</span>
+      <span class="eyebrow">Interactive Research Map</span>
       <h1 class="glitch" data-text="THE FLAT EARTH MAP">THE FLAT EARTH MAP</h1>
       <p>Every documented location, evidence site, suppressed zone, and ancient power point. Hover a pin for details. Click to read the full file.</p>
     </div>
@@ -264,8 +264,14 @@
       ocean:      '#38bdf8',
     };
 
-    // ── MARKERS ── 250+ documented locations
+    // ── MARKERS ── (populated after you use the editor tool)
     const MARKERS = [
+  { "x": 54.45, "y": 50.2,  "name": "Asia",          "desc": "The largest continent, spanning from the Middle East to the Pacific.", "cat": "landmass", "url": "" },
+  { "x": 52.0,  "y": 51.05, "name": "Europe",         "desc": "Dense concentration of Freemasonic architecture and occult city layouts.", "cat": "landmass", "url": "" },
+  { "x": 46.4,  "y": 49.6,  "name": "North America",  "desc": "Upper-left quadrant. Major HAARP and deep state infrastructure concentrated here.", "cat": "landmass", "url": "" },
+  { "x": 43.05, "y": 53.7,  "name": "South America",  "desc": "Lower-left arc. Flight paths here are geometrically impossible on a globe.", "cat": "landmass", "url": "" },
+  { "x": 52.85, "y": 55.35, "name": "Africa",          "desc": "Most geographically centred landmass on the flat map. Contains the Nile.", "cat": "landmass", "url": "" }
+];
   /* ── STRUCTURAL / RINGS ── */
   { x:50.00, y:50.00, name:"North Pole — Center of the Plane",    cat:"structural", desc:"The true centre of the flat earth. Polaris fixed directly above at all times.", url:"topics/flat-earth/polaris-north-star.html" },
   { x:50.00, y:95.00, name:"Antarctic Ice Wall — Southern Ring",  cat:"boundary",   desc:"The 200-foot wall of ice encircling all known oceans. Guarded by military treaty since 1959.", url:"topics/flat-earth/ice-wall.html" },
@@ -476,10 +482,12 @@
     renderPins();
 
     // Show pin count
-    const countEl = document.createElement('div');
-    countEl.style.cssText = 'text-align:center;padding:0.5rem;font-family:var(--font-mono);font-size:0.65rem;color:#3a3a3a;letter-spacing:0.1em;';
-    countEl.textContent = MARKERS.length + ' LOCATIONS MAPPED';
-    wrap.parentElement.appendChild(countEl);
+    if (MARKERS.length === 0) {
+      const notice = document.createElement('div');
+      notice.style.cssText = 'text-align:center;padding:1rem;font-family:var(--font-mono);font-size:0.7rem;color:#3a3a3a;letter-spacing:0.1em;';
+      notice.textContent = 'MARKERS LOADING — USE THE EDITOR TOOL TO PLACE PINS';
+      wrap.appendChild(notice);
+    }
   })();
   </script>
 </body>
