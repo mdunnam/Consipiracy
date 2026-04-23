@@ -481,7 +481,13 @@ function drawLabel(m, idx) {
   const textLen = m.name.length * (fsize * 0.68) + (m.name.length - 1) * letterSpacing;
   const half    = textLen * 0.85;
   const r       = m.labelRadius || 120;   // no floor — slider has full control
-  const lcy     = py - dist;
+
+  // Compensate lcy so the visual centre of the text (not the path baseline) stays at
+  // exactly `dist` pixels from the pin, regardless of font size.
+  // SVG text-on-path sits above its baseline by ~0.75em for arc-up, below for arc-down.
+  const isArcDown = style === 'arc-down';
+  const fontOffset = isArcDown ? fsize * 0.25 : -fsize * 0.75;
+  const lcy     = py - dist + fontOffset;
   const lcx     = px;
 
   // Subtitle
@@ -508,7 +514,7 @@ function drawLabel(m, idx) {
   stem.setAttribute('x1', String(px));
   stem.setAttribute('y1', String(py - pinR));
   stem.setAttribute('x2', String(px));
-  stem.setAttribute('y2', String(lcy + fsize * 0.6));
+  stem.setAttribute('y2', String(py - dist));  // stem always ends at the intended gap
   stem.setAttribute('stroke', fill + '88');
   stem.setAttribute('stroke-width', String(Math.max(0.5, zoomScale)));
   g.appendChild(stem);
