@@ -1,0 +1,222 @@
+[
+  {
+    "id": "auto-001",
+    "slug": "project-monarch",
+    "title": "Project Monarch — Mind Control Continuation",
+    "category": "great-awakening",
+    "section": "Intelligence Operations",
+    "mapBadge": "Intelligence",
+    "keywords": ["CIA", "MKULTRA", "trauma-based mind control", "Monarch", "Candy Jones", "Cathy O'Brien"],
+    "relatedSlugs": ["mkultra", "cia-operations", "hollywood-satanism", "tavistock-institute"],
+    "published": false
+  },
+  {
+    "id": "auto-002",
+    "slug": "global-depopulation-agenda",
+    "title": "The Global Depopulation Agenda",
+    "category": "great-awakening",
+    "section": "Population Control",
+    "mapBadge": "Health",
+    "keywords": ["Georgia Guidestones", "Bill Gates", "WHO", "fertility reduction", "sterilisation", "UN agenda"],
+    "relatedSlugs": ["georgia-guidestones", "bill-gates", "who-control", "mrna-vaccines", "agenda-2030"],
+    "published": false
+  },
+  {
+    "id": "auto-003",
+    "slug": "nikola-tesla-death-ray",
+    "title": "Tesla's Death Ray & Suppressed Weapons",
+    "category": "great-awakening",
+    "section": "Suppressed Technology",
+    "mapBadge": "Technology",
+    "keywords": ["Tesla", "teleforce", "death ray", "JPMorgan", "stolen patents", "Wardenclyffe"],
+    "relatedSlugs": ["nikola-tesla", "suppressed-technologies", "haarp", "scalar-weapons"],
+    "published": false
+  },
+  {
+    "id": "auto-004",
+    "slug": "council-of-13",
+    "title": "The Council of 13 — Top of the Pyramid",
+    "category": "great-awakening",
+    "section": "Power Structures",
+    "mapBadge": "Hierarchy",
+    "keywords": ["bloodlines", "13 families", "Rothschild", "black nobility", "satanic council"],
+    "relatedSlugs": ["cabal-hierarchy", "rothschilds", "black-nobility", "luciferian-doctrine"],
+    "published": false
+  },
+  {
+    "id": "auto-005",
+    "slug": "weather-warfare-patents",
+    "title": "Weather Warfare — The Patent Trail",
+    "category": "great-awakening",
+    "section": "Geoengineering",
+    "mapBadge": "Technology",
+    "keywords": ["weather modification", "HAARP", "cloud seeding", "ionospheric heaters", "patent 4686605"],
+    "relatedSlugs": ["haarp", "chemtrails", "dew-weapons", "scalar-weapons"],
+    "published": false
+  },
+  {
+    "id": "auto-006",
+    "slug": "electronic-voting-fraud",
+    "title": "Electronic Voting Machine Fraud",
+    "category": "great-awakening",
+    "section": "Election Control",
+    "mapBadge": "Politics",
+    "keywords": ["Dominion", "ES&S", "Smartmatic", "vote flipping", "2020 election", "Halderman report"],
+    "relatedSlugs": ["shadow-government", "cia-operations", "corporate-state-capture", "the-storm"],
+    "published": false
+  },
+  {
+    "id": "auto-007",
+    "slug": "operation-gladio",
+    "title": "Operation Gladio — NATO's Secret Army",
+    "category": "great-awakening",
+    "section": "False Flags",
+    "mapBadge": "Intelligence",
+    "keywords": ["NATO", "stay-behind networks", "false flag terrorism", "Bologna bombing", "Red Brigades", "CIA"],
+    "relatedSlugs": ["false-flags", "cia-operations", "cointelpro", "operation-northwoods"],
+    "published": false
+  },
+  {
+    "id": "auto-008",
+    "slug": "black-budget-economy",
+    "title": "The Black Budget — $21 Trillion Unaccounted",
+    "category": "great-awakening",
+    "section": "Finance",
+    "mapBadge": "Finance",
+    "keywords": ["DOD black budget", "Mark Skidmore", "21 trillion", "HUD", "Pentagon audit", "Catherine Austin Fitts"],
+    "relatedSlugs": ["federal-reserve", "usap", "secret-space-program", "shadow-government"],
+    "published": false
+  },
+  {
+    "id": "auto-009",
+    "slug": "food-supply-weaponisation",
+    "title": "Weaponisation of the Food Supply",
+    "category": "great-awakening",
+    "section": "Health",
+    "mapBadge": "Health",
+    "keywords": ["GMO", "glyphosate", "seed patents", "Monsanto", "Codex Alimentarius", "food additives"],
+    "relatedSlugs": ["weaponized-food", "big-pharma", "bill-gates", "organic-food-nongmo"],
+    "published": false
+  },
+  {
+    "id": "auto-010",
+    "slug": "smart-grid-surveillance",
+    "title": "The Smart Grid as a Surveillance Network",
+    "category": "great-awakening",
+    "section": "Surveillance",
+    "mapBadge": "Technology",
+    "keywords": ["smart meters", "AMI meters", "5G", "IoT surveillance", "energy monitoring", "DEW"],
+    "relatedSlugs": ["smart-cities", "rfid-surveillance", "5g-surveillance", "global-surveillance-grid"],
+    "published": false
+  },
+  {
+    "id": "auto-011",
+    "slug": "biometric-id-control",
+    "title": "Biometric ID & The End of Anonymity",
+    "category": "great-awakening",
+    "section": "Digital Control",
+    "mapBadge": "Technology",
+    "keywords": ["facial recognition", "iris scanning", "digital ID", "WEF ID2020", "CBDCs"],
+    "relatedSlugs": ["cbdc", "smart-cities", "transhumanism", "rfid-surveillance"],
+    "published": false
+  },
+  {
+    "id": "auto-012",
+    "slug": "rothschild-central-banks",
+    "title": "The Rothschild Central Bank Network",
+    "category": "great-awakening",
+    "section": "Banking",
+    "mapBadge": "Finance",
+    "keywords": ["Rothschild", "BIS", "central banks", "fiat currency", "fractional reserve", "debt slavery"],
+    "relatedSlugs": ["rothschilds", "federal-reserve", "bis", "babylonian-money-magic"],
+    "published": false
+  },
+  {
+    "id": "auto-013",
+    "slug": "ancient-egypt-suppressed-tech",
+    "title": "Ancient Egypt's Suppressed Technology",
+    "category": "great-awakening",
+    "section": "Ancient History",
+    "mapBadge": "History",
+    "keywords": ["Dendera reliefs", "Baghdad battery", "Giza power plant", "Christopher Dunn", "acoustic levitation"],
+    "relatedSlugs": ["giza-complex", "ancient-builder-race", "sound-levitation", "oopart"],
+    "published": false
+  },
+  {
+    "id": "auto-014",
+    "slug": "5eyes-nsa-cooperation",
+    "title": "Five Eyes — The Global Spy Cartel",
+    "category": "great-awakening",
+    "section": "Surveillance",
+    "mapBadge": "Intelligence",
+    "keywords": ["Five Eyes", "UKUSA agreement", "PRISM", "XKeyscore", "Tempora", "GCHQ"],
+    "relatedSlugs": ["five-eyes", "nsa-surveillance", "snowden-assange", "global-surveillance-grid"],
+    "published": false
+  },
+  {
+    "id": "auto-015",
+    "slug": "chemtrail-barium-aluminium",
+    "title": "Barium, Aluminium & the Aerosol Payload",
+    "category": "great-awakening",
+    "section": "Geoengineering",
+    "mapBadge": "Health",
+    "keywords": ["barium", "aluminium oxide", "strontium", "coal fly ash", "Marvin Herndon", "SCoPEx"],
+    "relatedSlugs": ["chemtrails", "haarp", "bill-gates", "fluoride-poison"],
+    "published": false
+  },
+  {
+    "id": "auto-016",
+    "slug": "adrenochrome-labs",
+    "title": "Adrenochrome Production & Elite Demand",
+    "category": "great-awakening",
+    "section": "Elite Crime",
+    "mapBadge": "Crime",
+    "keywords": ["adrenochrome", "adrenaline oxidation", "child trafficking", "Hollywood", "Hunter Biden"],
+    "relatedSlugs": ["adrenochrome", "epstein-network", "global-child-trafficking", "hollywood-satanism"],
+    "published": false
+  },
+  {
+    "id": "auto-017",
+    "slug": "bioweapons-fort-detrick",
+    "title": "Fort Detrick & US Bioweapon Development",
+    "category": "great-awakening",
+    "section": "Biowarfare",
+    "mapBadge": "Health",
+    "keywords": ["Fort Detrick", "USAMRIID", "anthrax letters", "gain-of-function", "COVID-19 origins"],
+    "relatedSlugs": ["engineered-diseases", "covid-plandemic", "cia-operations", "operation-paperclip"],
+    "published": false
+  },
+  {
+    "id": "auto-018",
+    "slug": "saturn-cube-worship",
+    "title": "Saturn Worship & the Black Cube",
+    "category": "great-awakening",
+    "section": "Occult",
+    "mapBadge": "Occult",
+    "keywords": ["Saturn", "black cube", "Kaaba", "tefillin", "hexagon", "Kronos", "occult symbolism"],
+    "relatedSlugs": ["saturn-rings", "cern-occult", "luciferian-doctrine", "dagon-mitre-hats"],
+    "published": false
+  },
+  {
+    "id": "auto-019",
+    "slug": "media-manufacturing-consent",
+    "title": "Manufacturing Consent — Media as Weapon",
+    "category": "great-awakening",
+    "section": "Media Control",
+    "mapBadge": "Media",
+    "keywords": ["Noam Chomsky", "propaganda model", "Operation Mockingbird", "narrative management", "Overton window"],
+    "relatedSlugs": ["operation-mockingbird", "corporate-media-control", "kill-your-tv", "tavistock-institute"],
+    "published": false
+  },
+  {
+    "id": "auto-020",
+    "slug": "dna-patent-ownership",
+    "title": "Corporate Ownership of the Human Genome",
+    "category": "great-awakening",
+    "section": "Biotech Control",
+    "mapBadge": "Technology",
+    "keywords": ["Myriad Genetics", "BRCA1 patent", "mRNA patents", "Moderna NIH", "DNA as property"],
+    "relatedSlugs": ["mrna-vaccines", "transhumanism", "big-pharma", "dna-upgrade"],
+    "published": false
+  }
+]

@@ -1079,5 +1079,43 @@
   <script src="js/app.js"></script>
   <script src="js/enhancements.js"></script>
   <!-- 33.3N 44.4E // SIGNAL DETECTED // FOLLOW THE THREAD: /omega.html -->
+
+  <script>
+  /* ── NEW TODAY BANNER ───────────────────────────────────────────────────
+     Fetches /data/latest-topic.json (written by the daily Lambda autopilot)
+     and injects a dismissible banner when the topic was published within
+     the last 24 hours.
+  ──────────────────────────────────────────────────────────────────────── */
+  (function initNewTodayBanner() {
+    const DISMISS_KEY = 'ta_dismissed_new_today';
+
+    fetch('/data/latest-topic.json?v=' + Date.now())
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (!data || !data.publishedAt) return;
+        const age = Date.now() - new Date(data.publishedAt).getTime();
+        if (age > 24 * 60 * 60 * 1000) return; // older than 24 h
+        if (sessionStorage.getItem(DISMISS_KEY) === data.slug) return; // dismissed
+
+        const banner = document.createElement('div');
+        banner.id = 'new-today-banner';
+        banner.innerHTML =
+          '<span class="ntb-pulse"></span>' +
+          '<span class="ntb-label">NEW TODAY</span>' +
+          '<a href="' + data.url + '" class="ntb-link">' + data.title + '</a>' +
+          '<span class="ntb-sub">' + (data.subtitle || '') + '</span>' +
+          '<button class="ntb-close" aria-label="Dismiss">&#x2715;</button>';
+
+        document.body.insertBefore(banner, document.body.firstChild);
+
+        banner.querySelector('.ntb-close').addEventListener('click', () => {
+          banner.style.opacity = '0';
+          setTimeout(() => banner.remove(), 300);
+          sessionStorage.setItem(DISMISS_KEY, data.slug);
+        });
+      })
+      .catch(() => {}); // fail silently — banner is non-critical
+  })();
+  </script>
 </body>
 </html>
