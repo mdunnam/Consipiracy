@@ -167,6 +167,10 @@
     #export-panel { padding: 0.8rem; border-top: 1px solid #1a1a1a; flex-shrink: 0; }
     #export-panel h4 { font-size: 0.62rem; color: #4a7a4a; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
     #json-out { font-size: 0.55rem; color: #3a3a3a; white-space: pre; overflow: auto; max-height: 80px; margin-top: 0.5rem; background: #050505; padding: 0.35rem; border: 1px solid #1a1a1a; }
+    #import-panel { padding: 0.8rem; border-top: 1px solid #1a1a1a; flex-shrink: 0; }
+    #import-panel h4 { font-size: 0.62rem; color: #4a6a8a; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+    #import-paste { font-size: 0.55rem; width: 100%; box-sizing: border-box; background: #050505; color: #888; border: 1px solid #1c1c1c; padding: 0.35rem; font-family: monospace; resize: vertical; min-height: 50px; max-height: 120px; margin-bottom: 0.4rem; }
+    #import-error { font-size: 0.58rem; color: #cc4444; margin-top: 0.3rem; min-height: 1em; }
   </style>
 </head>
 <body>
@@ -249,6 +253,17 @@
     <div id="list-panel">
       <div id="list-head"></div>
       <div id="mlist"></div>
+    </div>
+
+    <div id="import-panel">
+      <h4>IMPORT</h4>
+      <button class="btn" onclick="document.getElementById('import-file').click()">📂 LOAD JSON FILE</button>
+      <input type="file" id="import-file" accept=".json,application/json" style="display:none" onchange="importFromFile(this)" />
+      <div style="margin-top:0.5rem;">
+        <textarea id="import-paste" placeholder="…or paste JSON array here and hit LOAD"></textarea>
+        <button class="btn" onclick="importFromPaste()">LOAD PASTED JSON</button>
+      </div>
+      <div id="import-error"></div>
     </div>
 
     <div id="export-panel">
@@ -848,6 +863,84 @@ function cancelLabelEdit(i) {
   document.getElementById('label-edit-panel')?.remove();
   document.getElementById('label-edit-backdrop')?.remove();
   render(); // restore original
+}
+
+/**
+ * Merge or replace markers from a parsed JSON array.
+ * @param {Array} incoming - parsed marker array from file or paste
+ * @param {boolean} replace - if true, wipe existing markers first
+ */
+function importMarkers(incoming, replace) {
+  if (!Array.isArray(incoming) || incoming.length === 0) {
+    document.getElementById('import-error').textContent = 'ERROR: expected a non-empty JSON array.';
+    return;
+  }
+  const invalid = incoming.filter(m => typeof m.x !== 'number' || typeof m.y !== 'number');
+  if (invalid.length) {
+    document.getElementById('import-error').textContent =
+      'ERROR: ' + invalid.length + ' entries missing x/y coordinates.';
+    return;
+  }
+  document.getElementById('import-error').textContent = '';
+
+  if (replace) {
+    markers = incoming;
+  } else {
+    // Merge: skip duplicates by name+x+y
+    const existing = new Set(markers.map(m => m.name + '|' + m.x + '|' + m.y));
+    const fresh = incoming.filter(m => !existing.has(m.name + '|' + m.x + '|' + m.y));
+    markers = markers.concat(fresh);
+  }
+  persist();
+  render();
+  document.getElementById('import-paste').value = '';
+  document.getElementById('import-error').textContent =
+    '✓ Loaded ' + incoming.length + ' markers (' + markers.length + ' total).';
+  document.getElementById('import-error').style.color = '#4a7a4a';
+}
+
+/**
+ * Load markers from a .json file selected via the file input.
+ * @param {HTMLInputElement} input
+ */
+function importFromFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      const arr = Array.isArray(data) ? data : (data.markers || data.MARKERS || null);
+      if (!arr) throw new Error('No marker array found — expected root array or {markers:[...]}');
+      const replace = markers.length === 0 || confirm(
+        'Replace all ' + markers.length + ' existing markers with the ' + arr.length + ' from file?\n\nCancel = merge (keep both).');
+      importMarkers(arr, replace);
+    } catch (err) {
+      document.getElementById('import-error').textContent = 'ERROR: ' + err.message;
+      document.getElementById('import-error').style.color = '#cc4444';
+    }
+    input.value = '';
+  };
+  reader.readAsText(file);
+}
+
+/**
+ * Load markers from the paste textarea.
+ */
+function importFromPaste() {
+  const raw = document.getElementById('import-paste').value.trim();
+  if (!raw) { document.getElementById('import-error').textContent = 'Paste JSON first.'; return; }
+  try {
+    const data = JSON.parse(raw);
+    const arr = Array.isArray(data) ? data : (data.markers || data.MARKERS || null);
+    if (!arr) throw new Error('No marker array found — expected root array or {markers:[...]}');
+    const replace = markers.length === 0 || confirm(
+      'Replace all ' + markers.length + ' existing markers with the ' + arr.length + ' pasted?\n\nCancel = merge (keep both).');
+    importMarkers(arr, replace);
+  } catch (err) {
+    document.getElementById('import-error').textContent = 'ERROR: ' + err.message;
+    document.getElementById('import-error').style.color = '#cc4444';
+  }
 }
 
 function doExport() {
