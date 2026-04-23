@@ -230,8 +230,8 @@
           </select>
         </div>
         <div class="row">
-          <label>Curve radius <span id="radius-val" style="color:#c9a227;">120px</span></label>
-          <input type="range" id="fcurveradius" min="40" max="400" value="120" step="10"
+          <label>Curve radius <span id="radius-val" style="color:#c9a227;">120px</span> <span style="color:#555;font-size:0.55rem;">(smaller = tighter arc)</span></label>
+          <input type="range" id="fcurveradius" min="10" max="400" value="120" step="5"
             style="width:100%;accent-color:#c9a227;"
             oninput="document.getElementById('radius-val').textContent=this.value+'px'" />
         </div>
@@ -465,7 +465,7 @@ function drawLabel(m, idx) {
   // Main text path
   const textLen = m.name.length * (fsize * 0.68) + (m.name.length - 1) * letterSpacing;
   const half    = textLen * 0.85;
-  const r       = Math.max(m.labelRadius || 150, half * 0.5 + 10);
+  const r       = m.labelRadius || 120;   // no floor — slider has full control
   const lcy     = py - dist;
   const lcx     = px;
 
@@ -475,7 +475,7 @@ function drawLabel(m, idx) {
   const subOff  = (m.subOffset|| 14) * zoomScale;
   const subFill = m.subColor  || '#aaaaaa';
   const subStyle= m.subStyle  || 'flat';
-  const subR    = Math.max(m.subRadius || 150, (m.subtitle||'').length * subSize * 0.5 + 10);
+  const subR    = m.subRadius || 120;      // no floor — follows main radius control
   const subHalf = (m.subtitle||'').length * (subSize * 0.68) * 0.85;
 
   // Remove old
@@ -700,13 +700,13 @@ function editLabel(i) {
     </div>
     <div style="margin-bottom:0.5rem;">
       <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Distance from pin: <span id="el-dval" style="color:#c9a227;">${m.labelDistance||30}px</span></label>
-      <input type="range" id="el-dist" min="10" max="200" value="${m.labelDistance||30}" step="2"
+      <input type="range" id="el-dist" min="0" max="200" value="${m.labelDistance||30}" step="1"
         style="width:100%;accent-color:#c9a227;"
         oninput="document.getElementById('el-dval').textContent=this.value+'px';livePreview(${i})" />
     </div>
     <div style="margin-bottom:0.5rem;">
-      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Curve radius: <span id="el-rval" style="color:#c9a227;">${m.labelRadius||150}px</span></label>
-      <input type="range" id="el-radius" min="40" max="600" value="${m.labelRadius||150}" step="10"
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Curve radius: <span id="el-rval" style="color:#c9a227;">${m.labelRadius||120}px</span> <span style="color:#555;font-size:0.55rem;">(smaller = tighter)</span></label>
+      <input type="range" id="el-radius" min="10" max="600" value="${m.labelRadius||120}" step="5"
         style="width:100%;accent-color:#c9a227;"
         oninput="document.getElementById('el-rval').textContent=this.value+'px';livePreview(${i})" />
     </div>
@@ -799,7 +799,7 @@ function livePreview(i) {
     labelStyle:   document.getElementById('el-style')?.value    || markers[i].labelStyle,
     labelRotate:  parseInt(document.getElementById('el-rot')?.value     || markers[i].labelRotate   || 0),
     labelDistance:parseInt(document.getElementById('el-dist')?.value    || markers[i].labelDistance || 30),
-    labelRadius:  parseInt(document.getElementById('el-radius')?.value  || markers[i].labelRadius   || 150),
+    labelRadius:  parseInt(document.getElementById('el-radius')?.value  || markers[i].labelRadius   || 120),
     labelSize:    parseInt(document.getElementById('el-fsize')?.value   || markers[i].labelSize     || 11),
     labelColor:    document.getElementById('el-color')?.value         || markers[i].labelColor    || '#ffffff',
     shadowColor:   document.getElementById('el-shadow-color')?.value   || markers[i].shadowColor   || '#000000',
