@@ -398,7 +398,14 @@ const RH_TIERS_APP = [
  */
 function trackPageVisit() {
   const visited = JSON.parse(localStorage.getItem('ta_visited') || '[]');
-  const current = window.location.pathname.split('/').pop() || 'index.html';
+
+  // Build a unique key for this page. Use full pathname + query string so
+  // (a) same-named files in different folders count separately and
+  // (b) query-driven detail pages (e.g. location-detail.html?id=1..104)
+  // each count as their own rabbit-hole step.
+  let path = window.location.pathname || '/';
+  if (path.endsWith('/')) path += 'index.html';
+  const current = path + (window.location.search || '');
 
   if (!visited.includes(current)) {
     visited.push(current);
