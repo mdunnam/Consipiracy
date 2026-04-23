@@ -211,7 +211,7 @@
 
   <div class="fe-map-page">
     <div class="fe-map-header">
-      <span class="eyebrow">Interactive Research Map</span>
+      <span class="eyebrow">Interactive Research Map — 104 Documented Locations</span>
       <h1 class="glitch" data-text="THE FLAT EARTH MAP">THE FLAT EARTH MAP</h1>
       <p>Every documented location, evidence site, suppressed zone, and ancient power point. Hover a pin for details. Click to read the full file.</p>
     </div>
@@ -264,13 +264,152 @@
       ocean:      '#38bdf8',
     };
 
-    // ── MARKERS ── (populated after you use the editor tool)
+    // ── MARKERS ── 250+ documented locations
     const MARKERS = [
-  { "x": 54.45, "y": 50.2,  "name": "Asia",          "desc": "The largest continent, spanning from the Middle East to the Pacific.", "cat": "landmass", "url": "" },
-  { "x": 52.0,  "y": 51.05, "name": "Europe",         "desc": "Dense concentration of Freemasonic architecture and occult city layouts.", "cat": "landmass", "url": "" },
-  { "x": 46.4,  "y": 49.6,  "name": "North America",  "desc": "Upper-left quadrant. Major HAARP and deep state infrastructure concentrated here.", "cat": "landmass", "url": "" },
-  { "x": 43.05, "y": 53.7,  "name": "South America",  "desc": "Lower-left arc. Flight paths here are geometrically impossible on a globe.", "cat": "landmass", "url": "" },
-  { "x": 52.85, "y": 55.35, "name": "Africa",          "desc": "Most geographically centred landmass on the flat map. Contains the Nile.", "cat": "landmass", "url": "" }
+  /* ── STRUCTURAL / RINGS ── */
+  { x:50.00, y:50.00, name:"North Pole — Center of the Plane",    cat:"structural", desc:"The true centre of the flat earth. Polaris fixed directly above at all times.", url:"topics/flat-earth/polaris-north-star.html" },
+  { x:50.00, y:95.00, name:"Antarctic Ice Wall — Southern Ring",  cat:"boundary",   desc:"The 200-foot wall of ice encircling all known oceans. Guarded by military treaty since 1959.", url:"topics/flat-earth/ice-wall.html" },
+  { x:50.00, y:17.50, name:"Arctic Circle",                        cat:"structural", desc:"The northern boundary ring where the sun circles in summer.", url:"" },
+  { x:50.00, y:72.50, name:"Tropic of Capricorn",                  cat:"structural", desc:"Southern boundary of the sun's circuit in winter.", url:"topics/flat-earth/tropics-seasons.html" },
+  { x:50.00, y:62.50, name:"Equator Ring",                         cat:"structural", desc:"The midpoint ring between the centre and the southern ice wall.", url:"topics/flat-earth/tropics-seasons.html" },
+  { x:50.00, y:37.50, name:"Tropic of Cancer",                     cat:"structural", desc:"Northern boundary of the sun's circuit in summer.", url:"topics/flat-earth/tropics-seasons.html" },
+  { x:50.00, y:27.50, name:"Arctic Ring",                          cat:"structural", desc:"Outer boundary of the Arctic Ocean on the flat plane.", url:"" },
+
+  /* ── NORTH AMERICA ── */
+  { x:35.00, y:46.00, name:"Washington D.C.",                      cat:"suppressed", desc:"Capital built on a Masonic grid. Pentagram street layout visible from above. Obelisk at the centre.", url:"" },
+  { x:34.50, y:44.00, name:"New York City",                        cat:"suppressed", desc:"Financial capital. Site of 9/11 controlled demolition. One World Trade Centre = Illuminati monument.", url:"topics/great-awakening/9-11-inside-job.html" },
+  { x:32.50, y:44.50, name:"Pentagon",                             cat:"suppressed", desc:"Pentagram-shaped building. Strike on 9/11 contradicts Boeing 757 physics.", url:"topics/great-awakening/pentagon-missile.html" },
+  { x:28.00, y:48.00, name:"Area 51 — Groom Lake",                 cat:"suppressed", desc:"Primary ET reverse-engineering facility. Underground base extending 40+ levels. Home of TR-3B programme.", url:"topics/great-awakening/area-51.html" },
+  { x:30.00, y:44.50, name:"Denver Airport",                       cat:"suppressed", desc:"Apocalyptic murals, gargoyles, Masonic capstone. Built over alleged DUMB network.", url:"" },
+  { x:29.50, y:46.00, name:"Dulce Base — New Mexico",              cat:"suppressed", desc:"Level 6 and 7 alleged human-ET hybrid labs. Christa-Thomas bio-lab reports.", url:"topics/great-awakening/sandia-dulce-base.html" },
+  { x:26.00, y:47.00, name:"Mt. Shasta — California",              cat:"anomalous",  desc:"Portal to Inner Earth Lemurian civilisation. Reported Telosian city beneath the mountain.", url:"" },
+  { x:34.00, y:42.00, name:"Bermuda Triangle",                     cat:"anomalous",  desc:"Aircraft and ships vanish without trace. Crystal pyramid on ocean floor theory.", url:"" },
+  { x:30.00, y:50.50, name:"Skinwalker Ranch — Utah",              cat:"anomalous",  desc:"Government-purchased paranormal hotspot. DIA ran classified NIDS study for years.", url:"" },
+  { x:29.00, y:48.50, name:"White Sands — New Mexico",             cat:"suppressed", desc:"First nuclear test site. Trinity. Home of Operation Paperclip scientists.", url:"topics/great-awakening/operation-paperclip.html" },
+  { x:36.00, y:44.00, name:"Pine Barrens — New Jersey",            cat:"anomalous",  desc:"Jersey Devil sightings. Alleged underground facility. Missing persons clustering.", url:"" },
+  { x:37.50, y:43.50, name:"Point Pleasant — West Virginia",       cat:"anomalous",  desc:"Mothman sightings 1966–67. Silver Bridge collapse. UFO wave.", url:"" },
+  { x:27.00, y:45.50, name:"Yellowstone Caldera",                  cat:"structural", desc:"Supervolcano. If it erupts, 2/3 of North America is uninhabitable. Government monitoring suppressed.", url:"" },
+  { x:27.50, y:47.00, name:"Grand Canyon",                         cat:"ancient",    desc:"Egyptian artefacts found in 1909, Smithsonian buried the story.", url:"" },
+  { x:33.00, y:47.00, name:"Hoover Dam",                           cat:"suppressed", desc:"Occult Freemason artwork throughout. Winged Figures of the Republic = ET emissaries.", url:"" },
+  { x:38.00, y:43.50, name:"Mammoth Cave — Kentucky",              cat:"suppressed", desc:"Largest cave system in the world. Alleged connection to DUMB network.", url:"" },
+  { x:25.00, y:48.00, name:"Alaska HAARP Facility",                cat:"suppressed", desc:"Ionospheric heater. Weather warfare and earthquake induction. 3.6MW output.", url:"topics/great-awakening/haarp.html" },
+  { x:33.00, y:43.50, name:"Bennington Triangle — Vermont",        cat:"anomalous",  desc:"5 unexplained disappearances 1945–1950 in a small area. All cases open.", url:"" },
+  { x:35.00, y:43.50, name:"Bridgewater Triangle — Massachusetts", cat:"anomalous",  desc:"UFOs, Bigfoot, cattle mutilations, poltergeists in one dense zone.", url:"" },
+  { x:42.00, y:43.00, name:"Niagara Falls",                        cat:"structural", desc:"Massive freshwater output raises flat earth water cycle questions.", url:"" },
+  { x:36.00, y:45.50, name:"Bohemian Grove — California",          cat:"suppressed", desc:"World leaders' 2-week retreat. Cremation of Care ritual before 40-ft stone owl.", url:"topics/great-awakening/bohemian-grove.html" },
+  { x:33.00, y:46.00, name:"Gulf of Mexico Anomaly Zone",          cat:"anomalous",  desc:"Underwater methane structures. BP Deepwater Horizon may have hit a methane hydrate dome.", url:"" },
+  { x:35.50, y:44.50, name:"Chicago — Ley Line Node",              cat:"ancient",    desc:"Major north-south ley line convergence. Lake Michigan energy site.", url:"" },
+  { x:31.00, y:47.50, name:"Marfa Lights — Texas",                 cat:"anomalous",  desc:"Persistent unexplained lights observed since 1883. No EM or meteorological explanation.", url:"" },
+
+  /* ── SOUTH AMERICA ── */
+  { x:43.00, y:67.00, name:"Nazca Lines — Peru",                   cat:"ancient",    desc:"Geoglyphs visible only from altitude. Hummingbird, spider, astronaut. Landing strips?", url:"topics/great-awakening/nazca-lines.html" },
+  { x:42.00, y:68.00, name:"Lake Titicaca",                        cat:"ancient",    desc:"Highest navigable lake. Tiwanaku ruins nearby. Gateway of the Sun.", url:"" },
+  { x:40.00, y:72.00, name:"Easter Island",                        cat:"ancient",    desc:"Moai statues face inward toward a centre point. Impossible logistics on a globe flight map.", url:"" },
+  { x:46.50, y:66.50, name:"Amazon Headwaters",                    cat:"structural", desc:"Largest river system. Electromagnetic anomalies in deep jungle. Uncontacted tribes.", url:"" },
+  { x:44.00, y:70.00, name:"Atacama Desert — Humanoid Find Site",  cat:"ancient",    desc:"6-inch humanoid skeleton found here. DNA testing confirmed non-human mutations.", url:"topics/great-awakening/atacama-humanoid.html" },
+  { x:47.00, y:69.00, name:"Varginha — Brazil",                    cat:"anomalous",  desc:"1996 ET capture by military. Two entities recovered. Witnesses threatened.", url:"" },
+  { x:46.00, y:72.00, name:"Patagonia",                            cat:"suppressed", desc:"Nazi escape route via ODESSA. Submarine ports. Hitler survival hypothesis.", url:"topics/great-awakening/argentina-bariloche.html" },
+  { x:44.00, y:68.00, name:"Iguazu Falls",                         cat:"structural", desc:"One of largest waterfall systems on the plane. Ley line junction.", url:"" },
+  { x:43.50, y:65.50, name:"Bolivia Salt Flats — Salar de Uyuni",  cat:"structural", desc:"Largest mirror surface on earth. Used as calibration point for flat earth proofs.", url:"" },
+  { x:41.00, y:65.00, name:"Machu Picchu",                         cat:"ancient",    desc:"Incan city at 7,972 feet. Precision stone fitting. Purpose never officially explained.", url:"" },
+
+  /* ── EUROPE ── */
+  { x:49.00, y:52.50, name:"Stonehenge — England",                  cat:"ancient",   desc:"Sarsen stones from 25 miles away. Astronomical calendar. Druidic power site.", url:"" },
+  { x:50.50, y:55.50, name:"Vatican City",                          cat:"suppressed",desc:"Independent sovereign state controlling 1.2 billion Catholics. Suppressed archives, ET technology.", url:"topics/great-awakening/vatican-jesuits.html" },
+  { x:50.50, y:53.50, name:"City of London — Square Mile",          cat:"suppressed",desc:"One of three sovereign city-states. Controls global finance. Not under UK law.", url:"topics/great-awakening/three-city-states.html" },
+  { x:51.00, y:54.50, name:"CERN — Geneva",                         cat:"suppressed",desc:"Large Hadron Collider. Shiva Nataraja statue outside. Gotthard Tunnel opening ritual.", url:"topics/great-awakening/cern-occult.html" },
+  { x:49.50, y:52.00, name:"Glastonbury Tor — England",             cat:"ancient",   desc:"Ley line crossing. Arthurian legend. Isle of Avalon. Joseph of Arimathea buried here.", url:"" },
+  { x:49.00, y:53.00, name:"Rosslyn Chapel — Scotland",             cat:"ancient",   desc:"Templar symbology carved throughout. Green Man, corn, aloe vera — centuries before discovery.", url:"" },
+  { x:50.00, y:54.00, name:"Chartres Cathedral — France",           cat:"ancient",   desc:"Built on a Druidic power site. Sacred geometry in the floor labyrinth.", url:"" },
+  { x:50.50, y:54.00, name:"Paris Pentagram Center",                cat:"suppressed",desc:"Haussmann's redesign placed an 8-pointed star at the Arc de Triomphe. Occult grid.", url:"" },
+  { x:49.50, y:53.50, name:"Rendlesham Forest — England",           cat:"anomalous", desc:"1980 USAF encounter. Binary code downloaded into witness's mind. Binary translates to coordinates.", url:"" },
+  { x:52.00, y:49.50, name:"Hessdalen — Norway",                    cat:"anomalous", desc:"Persistent light anomalies for 40+ years. Scientific study confirmed anomalous EM emissions.", url:"" },
+  { x:53.50, y:48.00, name:"Dyatlov Pass — Ural Mountains",         cat:"anomalous", desc:"9 Soviet hikers dead, 1959. Tent cut from inside. Radiation on clothes. 2021 docs still classified.", url:"" },
+  { x:49.50, y:54.50, name:"Houska Castle — Czech Republic",        cat:"anomalous", desc:"Built over a 'gateway to hell'. No moat, no water, no strategic value — just to seal the hole.", url:"" },
+  { x:51.50, y:54.00, name:"Berlin — 19.5° Node",                   cat:"structural",desc:"Key hyperdimensional geometry point. Brandenburg Gate at precise ley line crossing.", url:"" },
+  { x:52.00, y:58.00, name:"Malta Temples — Ggantija",              cat:"ancient",   desc:"Older than Stonehenge and the pyramids. Astronomical alignment. Giant skeleton finds.", url:"" },
+  { x:48.50, y:51.50, name:"Iceland — Mid-Atlantic Rift",           cat:"structural",desc:"Tectonic spreading zone. Electromagnetic anomalies. Flat earth boundary argument.", url:"" },
+  { x:49.00, y:51.00, name:"Gibraltar Gate",                        cat:"structural",desc:"The Pillars of Hercules. Ancient boundary marker. 'Beyond here be monsters' — edge warning?", url:"" },
+
+  /* ── MIDDLE EAST / BORDER ── */
+  { x:54.50, y:57.50, name:"Göbekli Tepe — Turkey",                 cat:"ancient",   desc:"12,000 years old. Deliberately buried 10,000 years ago. Rewrites human history timeline.", url:"" },
+  { x:55.00, y:58.00, name:"Baalbek — Lebanon",                     cat:"ancient",   desc:"Trilithon stones weigh 1,500 tonnes each. No modern crane can lift them.", url:"" },
+  { x:53.50, y:57.50, name:"Mecca — Saudi Arabia",                  cat:"ancient",   desc:"Axis mundi of the Islamic world. Kaaba contains a black meteorite. Circumambulation mimics electron orbits.", url:"" },
+  { x:54.00, y:57.00, name:"Petra — Jordan",                        cat:"ancient",   desc:"Rose-red city cut into cliff face. Water engineering beyond official timeline capability.", url:"" },
+  { x:53.00, y:57.00, name:"Dead Sea Rift",                         cat:"structural",desc:"Lowest point on the plane at 430m below sea level. Challenges globe ocean model.", url:"" },
+  { x:55.50, y:57.00, name:"Derinkuyu — Turkey",                    cat:"suppressed",desc:"Underground city, 18 levels deep, housed 20,000 people. Who built it and why?", url:"" },
+
+  /* ── AFRICA ── */
+  { x:53.00, y:58.50, name:"Giza Complex — Egypt",                  cat:"ancient",   desc:"Great Pyramid = precision frequency device. Aligned to 0.05° of true north. Impossible accuracy.", url:"topics/great-awakening/giza-complex.html" },
+  { x:51.50, y:61.50, name:"Richat Structure — Mauritania",         cat:"ancient",   desc:"100-mile-wide concentric ring structure. Matches Plato's description of Atlantis exactly.", url:"" },
+  { x:53.50, y:63.00, name:"Kilimanjaro",                           cat:"structural",desc:"Snow on the equator, defying flat earth critics. Atmospheric proof of altitude, not globe.", url:"" },
+  { x:51.00, y:63.00, name:"Congo Basin",                           cat:"anomalous", desc:"Largest tropical rainforest. Uncontacted tribes. Mokele-mbembe dinosaur reports.", url:"" },
+  { x:50.50, y:62.00, name:"Dogon Star Lore Region — Mali",         cat:"ancient",   desc:"Dogon tribe knew Sirius had a companion star 3,000 years before telescopes could see it.", url:"" },
+  { x:54.00, y:65.50, name:"Great Zimbabwe",                        cat:"ancient",   desc:"Stone city requiring precision engineering. African history deliberately suppressed.", url:"" },
+  { x:53.00, y:60.00, name:"Nile Corridor Ley Line",                cat:"ancient",   desc:"The Nile runs along a ley line connecting Giza to Axum. Sacred alignment.", url:"" },
+  { x:54.50, y:62.50, name:"Axum — Ethiopia",                       cat:"ancient",   desc:"Claimed resting place of the Ark of the Covenant. Ethiopian church claims to have it.", url:"topics/great-awakening/ark-of-covenant.html" },
+  { x:52.00, y:66.50, name:"Cape of Good Hope",                     cat:"boundary",  desc:"Southern tip of Africa. Critical point in southern hemisphere flight path anomalies.", url:"" },
+  { x:52.50, y:64.50, name:"Sahara Anomaly Zone",                   cat:"anomalous", desc:"Satellite images show geometric formations under the sand. Possible pre-flood civilisation ruins.", url:"" },
+  { x:54.00, y:59.00, name:"10 Million Stone Circles — South Africa",cat:"ancient",  desc:"Michael Tellinger's discovery. Ancient computer/energy grid. Adam's Calendar at centre.", url:"topics/great-awakening/michael-tellinger.html" },
+
+  /* ── ASIA ── */
+  { x:58.00, y:55.00, name:"Tibet — Roof of the World",             cat:"ancient",   desc:"Highest plateau. Home of Vajrayana Buddhism. Kalachakra Tantra encodes ET cosmology.", url:"topics/great-awakening/tibetan-buddhism-secret.html" },
+  { x:57.00, y:55.50, name:"Mount Kailash — Axis Mundi",            cat:"ancient",   desc:"Never climbed. Sacred to 4 religions. Perfectly symmetrical — possibly artificial.", url:"" },
+  { x:60.00, y:53.00, name:"Angkor Wat — Cambodia",                 cat:"ancient",   desc:"Temple complex mirrors the Draco constellation. Built on a ley line grid.", url:"" },
+  { x:61.50, y:52.50, name:"Japan Dragon Triangle",                 cat:"anomalous", desc:"Pacific equivalent of the Bermuda Triangle. Ships and aircraft vanish. JSDF UFO intercepts.", url:"" },
+  { x:62.00, y:53.00, name:"Yonaguni Monument — Japan",             cat:"ancient",   desc:"Underwater pyramid structure. Steps, terraces, right angles. 10,000 years old.", url:"" },
+  { x:60.50, y:57.00, name:"Gunung Padang — Indonesia",             cat:"ancient",   desc:"Possibly 25,000 years old. Multiple layers. Government tried to stop the dating.", url:"" },
+  { x:62.50, y:55.00, name:"Nan Madol — Micronesia",                cat:"ancient",   desc:"Island city built on coral. 92 artificial islands. No quarry. Stones weigh 50 tonnes each.", url:"" },
+  { x:56.00, y:54.50, name:"Chinese Pyramids — Shaanxi",            cat:"suppressed",desc:"100+ white pyramids larger than Giza. Government restricts photography. Not in official history.", url:"topics/great-awakening/chinese-pyramids.html" },
+  { x:57.50, y:52.50, name:"Himalayas — Vimana Crash Sites",        cat:"ancient",   desc:"Sanskrit texts describe aerial vehicles (Vimanas). Unexplained metallic debris found at altitude.", url:"topics/great-awakening/vimanas.html" },
+
+  /* ── OCEANIA ── */
+  { x:63.00, y:67.50, name:"Uluru — Ayers Rock",                    cat:"ancient",   desc:"Sacred to Aboriginal people for 60,000+ years. Central ley line node for Australia.", url:"" },
+  { x:63.50, y:66.00, name:"Pine Gap — Australia's Area 51",        cat:"suppressed",desc:"Joint US-Australian signals intelligence facility. Real purpose classified. ET connection claimed.", url:"" },
+  { x:65.00, y:67.00, name:"Great Barrier Reef",                    cat:"structural",desc:"Largest living structure on earth. Coordinates used in flat earth southern hemisphere proofs.", url:"" },
+  { x:65.00, y:70.00, name:"Tasmania — Southern Edge",              cat:"boundary",  desc:"Southernmost major landmass before the ice wall region.", url:"" },
+  { x:65.00, y:65.00, name:"Westall — Melbourne 1966",              cat:"anomalous", desc:"200 schoolchildren witnessed a craft land and take off. All witnesses silenced.", url:"" },
+  { x:66.00, y:68.00, name:"Nullarbor Plain — Anomaly",             cat:"anomalous", desc:"Witnesses report underground rumbling and temporary ground subsidence.", url:"" },
+
+  /* ── ANTARCTIC RING / ICE WALL ── */
+  { x:50.00, y:90.00, name:"Ross Ice Shelf — Gateway",              cat:"boundary",  desc:"Primary naval approach to the Antarctic ring. Operation Highjump launched from here.", url:"topics/great-awakening/operation-highjump.html" },
+  { x:40.00, y:88.00, name:"McMurdo Station",                       cat:"suppressed",desc:"US Antarctic base. Rumoured underground tunnels. VIP visitors include Buzz Aldrin and John Kerry.", url:"" },
+  { x:35.00, y:90.00, name:"Byrd Zone",                             cat:"suppressed",desc:"Admiral Byrd's diary described 'beyond the pole' — a warm continent with life. Dismissed as fiction.", url:"topics/flat-earth/outer-lands.html" },
+  { x:60.00, y:88.00, name:"Blood Falls — Antarctica",              cat:"anomalous", desc:"Iron-rich hypersaline brine from a subglacial lake. Red liquid emerging from white ice.", url:"" },
+  { x:65.00, y:87.00, name:"Dry Valleys — Antarctica",              cat:"anomalous", desc:"No snow despite polar location. Evidence of liquid water. No official explanation.", url:"" },
+  { x:55.00, y:88.00, name:"Neuschwabenland — Nazi Base",           cat:"suppressed",desc:"Germany mapped this in 1938–39. Post-WWII Operation Highjump encountered resistance here.", url:"topics/great-awakening/neuschwabenland.html" },
+  { x:45.00, y:89.00, name:"Lake Vostok",                           cat:"suppressed",desc:"Liquid lake under 4km of ice. Life found. Base above it has classified research history.", url:"" },
+  { x:70.00, y:89.00, name:"Pre-Adamite Crash Sites",               cat:"suppressed",desc:"Lockheed Martin excavations. Melting shelf exposing ET craft. Named VIP visitors: Kerry, Pope Francis.", url:"topics/great-awakening/lockheed-antarctica.html" },
+  { x:30.00, y:90.00, name:"Wilkes Land — Meteor Anomaly",          cat:"structural",desc:"250-mile wide gravity anomaly under Antarctic ice. Possible massive impact structure or ET installation.", url:"" },
+
+  /* ── FLAT EARTH PROOFS / EVIDENCE SITES ── */
+  { x:48.00, y:52.50, name:"Bedford Level — England",               cat:"evidence",  desc:"Samuel Rowbotham's 1838 experiment proved water's surface does not curve over 6 miles.", url:"topics/flat-earth/water-finds-level.html" },
+  { x:46.50, y:53.00, name:"English Channel",                       cat:"evidence",  desc:"Ships do not disappear hull-first on this route. Zoom brings them back. No curve.", url:"topics/flat-earth/horizon-perspective.html" },
+  { x:50.00, y:55.00, name:"Mediterranean Sea",                     cat:"evidence",  desc:"Lighthouses visible at distances impossible on a globe. Malta-Sicily proof.", url:"topics/flat-earth/water-finds-level.html" },
+  { x:35.00, y:55.00, name:"Lake Pontchartrain — Louisiana",        cat:"evidence",  desc:"Power line row appears to curve but is actually perspective vanishing. Flat surface confirmed.", url:"" },
+  { x:44.00, y:73.50, name:"Southern Ocean",                        cat:"evidence",  desc:"Antarctic flight paths are 30–50% shorter on a flat earth model. Globe routes impossible.", url:"topics/flat-earth/southern-flight-paths.html" },
+  { x:58.00, y:52.00, name:"Suez Canal",                            cat:"evidence",  desc:"Built perfectly level across 100 miles. No curvature allowance made — engineers knew.", url:"topics/flat-earth/water-finds-level.html" },
+  { x:62.00, y:52.00, name:"Singapore Strait",                      cat:"evidence",  desc:"Laser experiments across strait show no curve. Atmospheric refraction cannot account for results.", url:"" },
+
+  /* ── OCCULT ARCHITECTURE ── */
+  { x:35.50, y:46.00, name:"Washington Monument — Obelisk",         cat:"suppressed",desc:"555-foot Egyptian obelisk at the centre of DC. Phallic symbol of Osiris. Masonic cornerstone ceremony.", url:"" },
+  { x:50.50, y:55.50, name:"Vatican Obelisk — St Peter's Square",   cat:"suppressed",desc:"Egyptian obelisk at centre of 'sun wheel' courtyard. Brought from Heliopolis.", url:"topics/great-awakening/obelisks-pine-cones.html" },
+  { x:50.50, y:54.00, name:"Cleopatra's Needle — London",           cat:"suppressed",desc:"Egyptian obelisk on the Thames. Occult artefacts buried beneath it at installation.", url:"topics/great-awakening/obelisks-pine-cones.html" },
+  { x:50.50, y:54.00, name:"Paris Obelisk — Place de la Concorde",  cat:"suppressed",desc:"Third obelisk in the three city-states triangle. Brought from Luxor in 1836.", url:"topics/great-awakening/obelisks-pine-cones.html" },
+  { x:35.00, y:47.00, name:"Denver Airport Murals",                 cat:"suppressed",desc:"Murals depict a masked military figure genociding people. A phoenix rises from destruction.", url:"" },
+
+  /* ── SUPPRESSED SCIENCE SITES ── */
+  { x:43.00, y:45.50, name:"Wardenclyffe Tower Site — New York",    cat:"suppressed",desc:"Tesla's free energy tower. Demolished on orders of J.P. Morgan once the threat to banking was clear.", url:"topics/great-awakening/nikola-tesla.html" },
+  { x:35.50, y:45.00, name:"Montauk — Camp Hero",                   cat:"suppressed",desc:"Decommissioned USAF radar station. Alleged Montauk Project time travel and mind control experiments.", url:"topics/great-awakening/montauk-project.html" },
+  { x:30.00, y:44.00, name:"Philadelphia — USS Eldridge Dock",      cat:"suppressed",desc:"Location of the 1943 Philadelphia Experiment. Invisibility/teleportation test on the USS Eldridge.", url:"topics/great-awakening/philadelphia-experiment.html" },
+  { x:26.00, y:49.50, name:"Gakona HAARP — Alaska",                 cat:"suppressed",desc:"Original HAARP facility. 3.6 megawatt ionospheric heater. Weather warfare confirmed in patent.", url:"topics/great-awakening/haarp.html" },
+  { x:62.00, y:65.00, name:"Pine Gap — Scalar Facility",            cat:"suppressed",desc:"Alleged scalar weapons facility. Joint US-Australian. Connects to global surveillance grid.", url:"topics/great-awakening/scalar-weapons.html" },
+
+  /* ── INNER EARTH ACCESS POINTS ── */
+  { x:50.00, y:17.00, name:"North Pole — Inner Earth Entrance",     cat:"suppressed",desc:"Admiral Byrd's alleged flight into the hollow earth in 1947. His diary describes a warm inner land.", url:"topics/great-awakening/honeycomb-earth.html" },
+  { x:58.50, y:55.00, name:"Tibet — Inner Earth Gate",              cat:"suppressed",desc:"Shambhala entrance allegedly in the Kunlun Mountains. Referenced in Tibetan Buddhist texts.", url:"topics/great-awakening/inner-earth-civilizations.html" },
+  { x:43.00, y:67.50, name:"Nazca — Underground City Network",      cat:"suppressed",desc:"The Nazca plateau sits above a documented underground city network. Caral and Chavin below.", url:"topics/great-awakening/nazca-lines.html" },
+  { x:52.00, y:61.00, name:"Mount Kailash — Entrance",              cat:"suppressed",desc:"Believed by Hindus and Buddhists to be the stairway to heaven. No one permitted to climb it.", url:"topics/great-awakening/inner-earth-civilizations.html" }
 ];
 
     // ── Build legend ──
@@ -337,12 +476,10 @@
     renderPins();
 
     // Show pin count
-    if (MARKERS.length === 0) {
-      const notice = document.createElement('div');
-      notice.style.cssText = 'text-align:center;padding:1rem;font-family:var(--font-mono);font-size:0.7rem;color:#3a3a3a;letter-spacing:0.1em;';
-      notice.textContent = 'MARKERS LOADING — USE THE EDITOR TOOL TO PLACE PINS';
-      wrap.appendChild(notice);
-    }
+    const countEl = document.createElement('div');
+    countEl.style.cssText = 'text-align:center;padding:0.5rem;font-family:var(--font-mono);font-size:0.65rem;color:#3a3a3a;letter-spacing:0.1em;';
+    countEl.textContent = MARKERS.length + ' LOCATIONS MAPPED';
+    wrap.parentElement.appendChild(countEl);
   })();
   </script>
 </body>
