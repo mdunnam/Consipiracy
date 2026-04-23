@@ -67,9 +67,8 @@ export const handler = async () => {
   const topic = pending[0];
   console.log(`Publishing: "${topic.title}" → ${topic.slug}.html`);
 
-  // 2. Pull secrets from SSM
-  const [openaiKey, sshKey, sshHost, sshUser, webRoot] = await Promise.all([
-    getParam('/ta/openai-api-key'),
+  // 2. Pull SSH secrets from SSM (no AI key needed — Bedrock uses IAM role)
+  const [sshKey, sshHost, sshUser, webRoot] = await Promise.all([
     getParam('/ta/vps-ssh-key'),
     getParam('/ta/vps-host'),
     getParam('/ta/vps-user'),
@@ -78,8 +77,8 @@ export const handler = async () => {
 
   const sshConfig = { host: sshHost, username: sshUser, privateKey: sshKey };
 
-  // 3. Generate content via OpenAI
-  const content = await generateContent(topic, openaiKey);
+  // 3. Generate content via AWS Bedrock (Claude Sonnet) — uses Lambda IAM role
+  const content = await generateContent(topic);
 
   // 4. Render full HTML page
   const html = renderHTML(topic, content);
