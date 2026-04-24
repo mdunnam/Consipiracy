@@ -305,6 +305,7 @@ const DEFAULT_LABEL_SETTINGS = {
   labelRotate:   0,
   labelColor:    '#ffffff',
   labelOutline:  '#000000',
+  outlineWidth:  3,
   shadowColor:   '#000000',
   shadowBlur:    4,
   shadowOpacity: 0.8,
@@ -343,6 +344,7 @@ function saveAsDefault(i) {
     labelRotate:   parseInt(document.getElementById('el-rot')?.value       || markerDefaults.labelRotate),
     labelColor:    document.getElementById('el-color')?.value        || markerDefaults.labelColor,
     labelOutline:  document.getElementById('el-outline')?.value      || markerDefaults.labelOutline,
+    outlineWidth:  parseInt(document.getElementById('el-outlinew')?.value   || markerDefaults.outlineWidth),
     shadowColor:   document.getElementById('el-shadow-color')?.value || markerDefaults.shadowColor,
     shadowBlur:    parseInt(document.getElementById('el-shadow-blur')?.value || markerDefaults.shadowBlur),
     shadowOpacity: parseFloat((parseInt(document.getElementById('el-shadow-opacity')?.value ?? Math.round(markerDefaults.shadowOpacity * 100)) / 100).toFixed(2)),
@@ -453,6 +455,7 @@ function saveMarker() {
     labelRotate:   markerDefaults.labelRotate,
     labelColor:    markerDefaults.labelColor,
     labelOutline:  markerDefaults.labelOutline,
+    outlineWidth:  markerDefaults.outlineWidth,
     shadowColor:   markerDefaults.shadowColor,
     shadowBlur:    markerDefaults.shadowBlur,
     shadowOpacity: markerDefaults.shadowOpacity,
@@ -531,7 +534,7 @@ function buildPath(svgNS, id, lcx, lcy, half, r, style, curvature) {
   return el;
 }
 
-function addTextOnPath(svgNS, pathId, text, fontSize, letterSp, fillColor, outlineColor, isOutline, zs, shadowFilterId) {
+function addTextOnPath(svgNS, pathId, text, fontSize, letterSp, fillColor, outlineColor, isOutline, zs, shadowFilterId, outlineW) {
   const t  = document.createElementNS(svgNS, 'text');
   const tp = document.createElementNS(svgNS, 'textPath');
   tp.setAttribute('href', '#' + pathId);
@@ -544,7 +547,7 @@ function addTextOnPath(svgNS, pathId, text, fontSize, letterSp, fillColor, outli
   t.setAttribute('text-anchor', 'middle');
   if (isOutline) {
     t.setAttribute('stroke', outlineColor);
-    t.setAttribute('stroke-width', String(Math.max(1, 3.5 * zs)));
+    t.setAttribute('stroke-width', String(outlineW ?? Math.max(1, 3.5 * zs)));
     t.setAttribute('stroke-linejoin', 'round');
     t.setAttribute('fill', 'none');
   } else {
@@ -565,6 +568,7 @@ function drawLabel(m, idx) {
   const fsize  = (m.labelSize    || 11) * zoomScale;
   const fill   = m.labelColor    || '#ffffff';
   const outline= m.labelOutline  || '#000000';
+  const outlineW = (m.outlineWidth ?? 3) * zoomScale;
   const pinR   = 7;
   const letterSpacing = 2.5;
 
@@ -620,7 +624,7 @@ function drawLabel(m, idx) {
   stem.setAttribute('x2', String(px));
   stem.setAttribute('y2', String(isArcDown ? py + dist : py - dist));
   stem.setAttribute('stroke', fill + '88');
-  stem.setAttribute('stroke-width', String(Math.max(0.5, zoomScale)));
+  stem.setAttribute('stroke-width', String(Math.max(1.5, zoomScale * 3)));
   g.appendChild(stem);
 
   // Defs: paths + SVG feFlood shadow filter
@@ -658,13 +662,13 @@ function drawLabel(m, idx) {
   svg.appendChild(defs);
 
   // Main text
-  g.appendChild(addTextOnPath(svgNS, pid,  m.name.toUpperCase(),       fsize,   letterSpacing, fill,    outline, true,  zoomScale, null));
-  g.appendChild(addTextOnPath(svgNS, pid,  m.name.toUpperCase(),       fsize,   letterSpacing, fill,    outline, false, zoomScale, filtRef));
+  g.appendChild(addTextOnPath(svgNS, pid,  m.name.toUpperCase(),       fsize,   letterSpacing, fill,    outline, true,  zoomScale, null,    outlineW));
+  g.appendChild(addTextOnPath(svgNS, pid,  m.name.toUpperCase(),       fsize,   letterSpacing, fill,    outline, false, zoomScale, filtRef, outlineW));
 
   // Subtitle
   if (hasSub) {
-    g.appendChild(addTextOnPath(svgNS, spid, m.subtitle.toUpperCase(), subSize, 1.5, subFill, '#000000', true,  zoomScale, null));
-    g.appendChild(addTextOnPath(svgNS, spid, m.subtitle.toUpperCase(), subSize, 1.5, subFill, '#000000', false, zoomScale, filtRef));
+    g.appendChild(addTextOnPath(svgNS, spid, m.subtitle.toUpperCase(), subSize, 1.5, subFill, '#000000', true,  zoomScale, null,    outlineW * 0.7));
+    g.appendChild(addTextOnPath(svgNS, spid, m.subtitle.toUpperCase(), subSize, 1.5, subFill, '#000000', false, zoomScale, filtRef, outlineW * 0.7));
   }
 
   svg.appendChild(g);
@@ -851,6 +855,12 @@ function editLabel(i) {
         style="width:100%;height:28px;border:1px solid #222;background:#050505;cursor:pointer;padding:1px;"
         oninput="livePreview(${i})" />
     </div>
+    <div style="margin-bottom:0.5rem;">
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Outline thickness: <span id="el-outlinewval" style="color:#c9a227;">${m.outlineWidth??3}px</span></label>
+      <input type="range" id="el-outlinew" min="0" max="20" value="${m.outlineWidth??3}" step="0.5"
+        style="width:100%;accent-color:#c9a227;"
+        oninput="document.getElementById('el-outlinewval').textContent=this.value+'px';livePreview(${i})" />
+    </div>
     <hr style="border-color:#1a1a1a;margin:0.6rem 0;" />
     <div style="font-size:0.62rem;color:#38bdf8;letter-spacing:0.12em;margin-bottom:0.6rem;">SUBTITLE</div>
     <div style="margin-bottom:0.5rem;">
@@ -930,6 +940,7 @@ function livePreview(i) {
     shadowBlur:    parseInt(document.getElementById('el-shadow-blur')?.value    || markers[i].shadowBlur    || 4),
     shadowOpacity: parseInt(document.getElementById('el-shadow-opacity')?.value || Math.round((markers[i].shadowOpacity??0.8)*100)) / 100,
     labelOutline: document.getElementById('el-outline')?.value  || markers[i].labelOutline || '#000000',
+    outlineWidth: parseFloat(document.getElementById('el-outlinew')?.value ?? markers[i].outlineWidth ?? 3),
     subtitle:     document.getElementById('el-sub')?.value      ?? markers[i].subtitle     ?? '',
     subStyle:     document.getElementById('el-substyle')?.value || markers[i].subStyle     || 'flat',
     subSize:      parseInt(document.getElementById('el-subfsize')?.value || markers[i].subSize   || 8),
@@ -956,6 +967,7 @@ function applyLabelEdit(i) {
   markers[i].shadowBlur    = parseInt(document.getElementById('el-shadow-blur').value);
   markers[i].shadowOpacity = parseInt(document.getElementById('el-shadow-opacity').value) / 100;
   markers[i].labelOutline  = document.getElementById('el-outline').value;
+  markers[i].outlineWidth   = parseFloat(document.getElementById('el-outlinew').value);
   markers[i].subtitle      = document.getElementById('el-sub').value;
   markers[i].subStyle      = document.getElementById('el-substyle').value;
   markers[i].subSize       = parseInt(document.getElementById('el-subfsize').value);
