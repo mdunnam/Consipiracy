@@ -293,6 +293,7 @@ let moveIdx  = null;  // index of marker being repositioned
 
 // ── Marker defaults (persisted in localStorage) ───────────────────────────
 const DEFAULT_LABEL_SETTINGS = {
+  cat:           'ancient',
   showLabel:     false,
   labelStyle:    'flat',
   labelRadius:   120,
@@ -330,23 +331,24 @@ refreshDefaultsIndicator();
  */
 function saveAsDefault(i) {
   markerDefaults = {
-    showLabel:     document.getElementById('el-show')?.checked     ?? markerDefaults.showLabel,
-    labelStyle:    document.getElementById('el-style')?.value      || markerDefaults.labelStyle,
-    labelRadius:   parseInt(document.getElementById('el-radius')?.value   || markerDefaults.labelRadius),
-    labelSize:     parseInt(document.getElementById('el-fsize')?.value    || markerDefaults.labelSize),
-    labelDistance: parseInt(document.getElementById('el-dist')?.value     || markerDefaults.labelDistance),
-    labelRotate:   parseInt(document.getElementById('el-rot')?.value      || markerDefaults.labelRotate),
-    labelColor:    document.getElementById('el-color')?.value      || markerDefaults.labelColor,
-    labelOutline:  document.getElementById('el-outline')?.value    || markerDefaults.labelOutline,
+    cat:           document.getElementById('el-cat')?.value          || markerDefaults.cat,
+    showLabel:     document.getElementById('el-show')?.checked       ?? markerDefaults.showLabel,
+    labelStyle:    document.getElementById('el-style')?.value        || markerDefaults.labelStyle,
+    labelRadius:   parseInt(document.getElementById('el-radius')?.value    || markerDefaults.labelRadius),
+    labelSize:     parseInt(document.getElementById('el-fsize')?.value     || markerDefaults.labelSize),
+    labelDistance: parseInt(document.getElementById('el-dist')?.value      || markerDefaults.labelDistance),
+    labelRotate:   parseInt(document.getElementById('el-rot')?.value       || markerDefaults.labelRotate),
+    labelColor:    document.getElementById('el-color')?.value        || markerDefaults.labelColor,
+    labelOutline:  document.getElementById('el-outline')?.value      || markerDefaults.labelOutline,
     shadowColor:   document.getElementById('el-shadow-color')?.value || markerDefaults.shadowColor,
     shadowBlur:    parseInt(document.getElementById('el-shadow-blur')?.value || markerDefaults.shadowBlur),
-    shadowOpacity: parseInt(document.getElementById('el-shadow-opacity')?.value || Math.round(markerDefaults.shadowOpacity * 100)) / 100,
-    subtitle:      document.getElementById('el-sub')?.value        ?? markerDefaults.subtitle,
-    subStyle:      document.getElementById('el-substyle')?.value   || markerDefaults.subStyle,
-    subSize:       parseInt(document.getElementById('el-subfsize')?.value  || markerDefaults.subSize),
-    subOffset:     parseInt(document.getElementById('el-suboff')?.value    || markerDefaults.subOffset),
-    subColor:      document.getElementById('el-subcolor')?.value   || markerDefaults.subColor,
-    subRadius:     parseInt(document.getElementById('el-subradius')?.value || markerDefaults.subRadius),
+    shadowOpacity: parseFloat((parseInt(document.getElementById('el-shadow-opacity')?.value ?? Math.round(markerDefaults.shadowOpacity * 100)) / 100).toFixed(2)),
+    subtitle:      document.getElementById('el-sub')?.value          ?? markerDefaults.subtitle,
+    subStyle:      document.getElementById('el-substyle')?.value     || markerDefaults.subStyle,
+    subSize:       parseInt(document.getElementById('el-subfsize')?.value   || markerDefaults.subSize),
+    subOffset:     parseInt(document.getElementById('el-suboff')?.value     || markerDefaults.subOffset),
+    subColor:      document.getElementById('el-subcolor')?.value     || markerDefaults.subColor,
+    subRadius:     parseInt(document.getElementById('el-subradius')?.value  || markerDefaults.subRadius),
   };
   localStorage.setItem('fe_marker_defaults', JSON.stringify(markerDefaults));
   refreshDefaultsIndicator();
@@ -472,7 +474,8 @@ function clearPending() {
   document.getElementById('fname').value   = '';
   document.getElementById('fdesc').value   = '';
   document.getElementById('furl').value    = '';
-  // Apply current defaults so every new pin inherits the last saved style
+  // Apply ALL current defaults so every new pin inherits the last saved settings
+  document.getElementById('fcat').value    = markerDefaults.cat;
   document.getElementById('fshowlabel').checked = markerDefaults.showLabel;
   document.getElementById('curve-options').style.display = markerDefaults.showLabel ? 'block' : 'none';
   document.getElementById('flabelstyle').value = markerDefaults.labelStyle;
