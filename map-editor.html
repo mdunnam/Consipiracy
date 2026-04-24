@@ -806,11 +806,13 @@ function editLabel(i) {
     <div style="margin-bottom:0.5rem;">
       <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Style</label>
       <select id="el-style" onchange="livePreview(${i})" style="width:100%;background:#050505;border:1px solid #222;color:#d8d8d8;padding:0.35rem 0.5rem;font-family:'Share Tech Mono',monospace;font-size:0.7rem;outline:none;">
-        <option value="flat" ${(m.labelStyle||'flat')==='flat'?'selected':''}>Flat (straight)</option>
-        <option value="arc-up" ${m.labelStyle==='arc-up'?'selected':''}>Arc — curves up</option>
-        <option value="arc-down" ${m.labelStyle==='arc-down'?'selected':''}>Arc — curves down</option>
-        <option value="arc-left" ${m.labelStyle==='arc-left'?'selected':''}>Arc — curves left</option>
+        <option value="flat"      ${(m.labelStyle||'flat')==='flat'?'selected':''}>Flat (straight)</option>
+        <option value="arc-up"    ${m.labelStyle==='arc-up'?'selected':''}>Arc — curves up</option>
+        <option value="arc-down"  ${m.labelStyle==='arc-down'?'selected':''}>Arc — curves down</option>
+        <option value="arc-left"  ${m.labelStyle==='arc-left'?'selected':''}>Arc — curves left</option>
         <option value="arc-right" ${m.labelStyle==='arc-right'?'selected':''}>Arc — curves right</option>
+        <option value="s-curve"   ${m.labelStyle==='s-curve'?'selected':''}>S-curve (horizontal)</option>
+        <option value="s-curve-v" ${m.labelStyle==='s-curve-v'?'selected':''}>S-curve (vertical)</option>
       </select>
     </div>
     <div style="margin-bottom:0.5rem;">
