@@ -436,25 +436,10 @@ function resetLabelPosition(idx) {
   render();
 }
 
-// pinLayer mousedown: hit-test label boxes → drag; otherwise pass through to map click handler
-pinLayer.addEventListener('mousedown', e => {
-  if (e.button !== 0) return;
-  const rect = pinLayer.getBoundingClientRect();
-  const mx = e.clientX - rect.left;
-  const my = e.clientY - rect.top;
-  for (const [idxStr, box] of Object.entries(_labelHitBoxes)) {
-    const hw = box.w / 2, hh = box.h / 2;
-    if (mx >= box.cx - hw && mx <= box.cx + hw && my >= box.cy - hh && my <= box.cy + hh) {
-      e.preventDefault();
-      e.stopPropagation();
-      pinLayer.style.cursor = 'grabbing';
-      startLabelDrag(parseInt(idxStr), e);
-      return;
-    }
-  }
-});
+const pinLayer = document.getElementById('pin-layer');
+const xhair    = document.getElementById('xhair');
 
-// pinLayer mousedown: check if click hits a label hit-box → start drag, otherwise let map handle it
+// Hit-test label boxes on mousedown — start drag if hit, otherwise let map handle normally
 pinLayer.addEventListener('mousedown', e => {
   if (e.button !== 0) return;
   const mx = e.offsetX;
@@ -470,9 +455,6 @@ pinLayer.addEventListener('mousedown', e => {
     }
   }
 });
-
-const pinLayer = document.getElementById('pin-layer');
-const xhair    = document.getElementById('xhair');
 
 // Show/hide curve options when label checkbox toggled
 document.getElementById('fshowlabel').addEventListener('change', function() {
