@@ -813,12 +813,15 @@ function drawLabel(m, idx) {
     lcx = px;
   }
 
-  // Stem — pin centre to text chord centre (lcx, lcy)
+  // Stem — pin centre to visual text position
+  // For arcs the text rides the arc peak (py ± dist), not the chord (lcy which is offset by sagitta).
+  // For flat/s-curve and dragged labels, use lcy directly.
+  const stemY2 = hasOffset ? lcy : (isArcStyle ? (isArcDown ? py + dist : py - dist) : lcy);
   const stem = document.createElementNS(svgNS, 'line');
   stem.setAttribute('x1', String(px));
   stem.setAttribute('y1', String(py));
   stem.setAttribute('x2', String(lcx));
-  stem.setAttribute('y2', String(lcy));
+  stem.setAttribute('y2', String(stemY2));
   stem.setAttribute('stroke', fill + '88');
   stem.setAttribute('stroke-width', String(Math.max(1.5, zoomScale * 3)));
   g.appendChild(stem);
