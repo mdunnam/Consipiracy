@@ -186,6 +186,7 @@
   <button class="tbtn red" onclick="clearAll()">CLEAR ALL</button>
   <span id="defaults-indicator" style="font-size:0.58rem;color:#4a6a4a;letter-spacing:0.08em;margin-left:0.8rem;"></span>
   <button class="tbtn" style="border-color:rgba(74,106,74,0.5);color:#4a8a4a;" onclick="resetDefaults()">RESET DEFAULTS</button>
+  <button class="tbtn" style="border-color:rgba(251,146,60,0.5);color:#fb923c;" onclick="resetAllLabelPositions()">RESET ALL LABEL POSITIONS</button>
 </div>
 
 <div id="main">
@@ -372,6 +373,21 @@ function resetDefaults() {
   localStorage.removeItem('fe_marker_defaults');
   markerDefaults = Object.assign({}, DEFAULT_LABEL_SETTINGS);
   refreshDefaultsIndicator();
+}
+
+/**
+ * Reset labelDistance, labelDx, labelDy on every marker back to the current default.
+ * Useful after a coordinate-system change breaks existing saved distances.
+ */
+function resetAllLabelPositions() {
+  if (!confirm('Reset label distance and position on ALL ' + markers.length + ' markers back to default (' + markerDefaults.labelDistance + 'px)?')) return;
+  markers.forEach(m => {
+    m.labelDistance = markerDefaults.labelDistance;
+    delete m.labelDx;
+    delete m.labelDy;
+  });
+  persist();
+  render();
 }
 
 // ── Draggable label state ───────────────────────────────────────────────
