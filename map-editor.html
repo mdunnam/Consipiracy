@@ -743,13 +743,13 @@ function drawLabel(m, idx) {
     const tcx = hasOffset ? textCx : px;
     const tcy = hasOffset ? textCy : py - dist - totalHeight / 2;
 
-    // Stem from pin centre to text centre
-    const stemEndY = tcy + totalHeight / 2;
+    // Stem from pin centre to bottom edge of text block
+    const stemEndY = tcy + totalHeight / 2;  // = py - dist (above pin)
     const stem = document.createElementNS(svgNS, 'line');
     stem.setAttribute('x1', String(px));
     stem.setAttribute('y1', String(py));
     stem.setAttribute('x2', hasOffset ? String(textCx) : String(px));
-    stem.setAttribute('y2', hasOffset ? String(textCy)  : String(Math.max(py, stemEndY)));
+    stem.setAttribute('y2', hasOffset ? String(textCy)  : String(stemEndY));
     stem.setAttribute('stroke', fill + '88');
     stem.setAttribute('stroke-width', String(Math.max(1.5, zoomScale * 3)));
     g.appendChild(stem);
