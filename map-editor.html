@@ -234,6 +234,8 @@
             <option value="arc-down">Arc — curves down</option>
             <option value="arc-left">Arc — curves left</option>
             <option value="arc-right">Arc — curves right</option>
+            <option value="s-curve">S-curve (horizontal)</option>
+            <option value="s-curve-v">S-curve (vertical)</option>
           </select>
         </div>
         <div class="row">
@@ -506,26 +508,23 @@ function del(i) {
 function persist() { localStorage.setItem('fe_markers', JSON.stringify(markers)); }
 
 // ── Draw a single label ─────────────────────────────────────────────────────
-function buildPath(svgNS, id, lcx, lcy, half, r, style) {
+function buildPath(svgNS, id, lcx, lcy, half, r, style, curvature) {
   const el = document.createElementNS(svgNS, 'path');
   el.setAttribute('id', id);
   let d;
-  // S-curve: cubic bezier with control points pulling opposite directions
-  // amplitude = how tall/wide the S is (use r as the amplitude)
-  const amp = Math.min(r * 0.4, half * 0.6);
+  // S-curve amplitude: driven by curvature slider (higher = more pronounced wave)
+  const amp = half * (curvature || 200) / 400 * 0.6;
   if      (style === 'arc-up')    d = `M ${lcx-half} ${lcy} A ${r} ${r} 0 0 1 ${lcx+half} ${lcy}`;
   else if (style === 'arc-down')  d = `M ${lcx-half} ${lcy} A ${r} ${r} 0 0 0 ${lcx+half} ${lcy}`;
   else if (style === 'arc-left')  d = `M ${lcx} ${lcy-half} A ${r} ${r} 0 0 0 ${lcx} ${lcy+half}`;
   else if (style === 'arc-right') d = `M ${lcx} ${lcy-half} A ${r} ${r} 0 0 1 ${lcx} ${lcy+half}`;
   else if (style === 's-curve') {
-    // Horizontal S: first half curves up, second half curves down
-    const mx = lcx, my = lcy;
+    const mx = lcx;
     d = `M ${lcx-half} ${lcy} C ${lcx-half*0.5} ${lcy-amp} ${mx} ${lcy-amp} ${mx} ${lcy} C ${mx} ${lcy+amp} ${lcx+half*0.5} ${lcy+amp} ${lcx+half} ${lcy}`;
   }
   else if (style === 's-curve-v') {
-    // Vertical S: first half curves left, second half curves right
-    const my = lcy, mx = lcx;
-    d = `M ${lcx} ${lcy-half} C ${lcx-amp} ${lcy-half*0.5} ${lcx-amp} ${my} ${lcx} ${my} C ${lcx+amp} ${my} ${lcx+amp} ${lcy+half*0.5} ${lcx} ${lcy+half}`;
+    const mx = lcx;
+    d = `M ${lcx} ${lcy-half} C ${lcx-amp} ${lcy-half*0.5} ${lcx-amp} ${mx} ${lcx} ${mx} C ${lcx+amp} ${mx} ${lcx+amp} ${lcy+half*0.5} ${lcx} ${lcy+half}`;
   }
   else                             d = `M ${lcx-half} ${lcy} L ${lcx+half} ${lcy}`;
   el.setAttribute('d', d);
@@ -629,9 +628,9 @@ function drawLabel(m, idx) {
   const pid  = 'lp-'  + idx;
   const spid = 'lps-' + idx;
   const sfid = 'sf-'  + idx;
-  defs.appendChild(buildPath(svgNS, pid,  lcx, lcy,                   half,    r,    style));
+  defs.appendChild(buildPath(svgNS, pid,  lcx, lcy,                   half,    r,    style,    curvature));
   if (hasSub)
-    defs.appendChild(buildPath(svgNS, spid, lcx, lcy + fsize + subOff, subHalf, subR, subStyle));
+    defs.appendChild(buildPath(svgNS, spid, lcx, lcy + fsize + subOff, subHalf, subR, subStyle, subCurv));
 
   // Build SVG drop-shadow filter for text.
   // feDropShadow composites the shadow correctly and produces genuinely dark shadows
