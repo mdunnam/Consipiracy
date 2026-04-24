@@ -380,9 +380,10 @@ function resetDefaults() {
  * Useful after a coordinate-system change breaks existing saved distances.
  */
 function resetAllLabelPositions() {
-  if (!confirm('Reset label distance and position on ALL ' + markers.length + ' markers back to default (' + markerDefaults.labelDistance + 'px)?')) return;
+  const factoryDist = DEFAULT_LABEL_SETTINGS.labelDistance; // always 30, never a saved custom
+  if (!confirm('Reset label distance and position on ALL ' + markers.length + ' markers back to factory default (' + factoryDist + 'px)?')) return;
   markers.forEach(m => {
-    m.labelDistance = markerDefaults.labelDistance;
+    m.labelDistance = factoryDist;
     delete m.labelDx;
     delete m.labelDy;
   });
@@ -677,7 +678,7 @@ function drawLabel(m, idx) {
   const svgNS  = 'http://www.w3.org/2000/svg';
   const rot    = m.labelRotate   || 0;
   const style  = m.labelStyle    || 'flat';
-  const dist   = m.labelDistance || 30;
+  const dist   = (m.labelDistance || 30) * zoomScale;
   const fsize  = (m.labelSize    || 11) * zoomScale;
   const fill   = m.labelColor    || '#ffffff';
   const outline= m.labelOutline  || '#000000';
