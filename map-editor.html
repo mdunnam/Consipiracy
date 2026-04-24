@@ -237,10 +237,10 @@
           </select>
         </div>
         <div class="row">
-          <label>Curve radius <span id="radius-val" style="color:#c9a227;">120px</span> <span style="color:#555;font-size:0.55rem;">(smaller = tighter arc)</span></label>
-          <input type="range" id="fcurveradius" min="10" max="400" value="120" step="5"
+          <label>Curvature <span id="radius-val" style="color:#c9a227;">200</span> <span style="color:#555;font-size:0.55rem;">(higher = tighter arc)</span></label>
+          <input type="range" id="fcurveradius" min="10" max="400" value="200" step="5"
             style="width:100%;accent-color:#c9a227;"
-            oninput="document.getElementById('radius-val').textContent=this.value+'px'" />
+            oninput="document.getElementById('radius-val').textContent=this.value" />
         </div>
         <div class="row">
           <label>Font size <span id="fsize-val" style="color:#c9a227;">11px</span></label>
@@ -297,7 +297,7 @@ const DEFAULT_LABEL_SETTINGS = {
   cat:           'ancient',
   showLabel:     false,
   labelStyle:    'flat',
-  labelRadius:   120,
+  labelRadius:   200,
   labelSize:     11,
   labelDistance: 30,
   labelRotate:   0,
@@ -311,7 +311,7 @@ const DEFAULT_LABEL_SETTINGS = {
   subSize:       8,
   subOffset:     14,
   subColor:      '#aaaaaa',
-  subRadius:     120,
+  subRadius:     200,
 };
 let markerDefaults = Object.assign({}, DEFAULT_LABEL_SETTINGS,
   JSON.parse(localStorage.getItem('fe_marker_defaults') || 'null') || {});
@@ -482,7 +482,7 @@ function clearPending() {
   document.getElementById('flabelstyle').value = markerDefaults.labelStyle;
   document.getElementById('fcurveradius').value = String(markerDefaults.labelRadius);
   document.getElementById('ffontsize').value = String(markerDefaults.labelSize);
-  document.getElementById('radius-val').textContent = markerDefaults.labelRadius + 'px';
+  document.getElementById('radius-val').textContent = String(markerDefaults.labelRadius);
   document.getElementById('fsize-val').textContent = markerDefaults.labelSize + 'px';
   document.getElementById('pending-status').textContent = 'Click anywhere on the map to drop a pin. Click again to move it. Fill in details below then hit SAVE.';
   document.getElementById('pending-status').className = '';
@@ -576,24 +576,22 @@ function drawLabel(m, idx) {
   const textLen = m.name.length * (fsize * 0.68) + (m.name.length - 1) * letterSpacing;
   const half    = textLen * 0.85;
 
-  // Clamp r so it is never smaller than half.
-  // When r < half, SVG silently scales the radius up to half to make the arc
-  // geometrically possible — but the JS sagitta calc would use the original r,
-  // producing a mismatch and a visible jump. Using the same effective radius in
-  // both places keeps JS and SVG in sync for all font sizes and curve values.
-  const rRaw    = m.labelRadius || 120;
+  // Convert "curvature" (slider 10=flat, 400=tight) to geometric SVG radius.
+  // r = half * 400 / curvature  →  higher slider = smaller r = tighter arc.
+  // Clamp r >= half so SVG never auto-rescales and sagitta stays real.
+  const curvature  = m.labelRadius || 200;
   const isArcDown  = style === 'arc-down';
   const isArcStyle = style === 'arc-up' || isArcDown;
-  const r       = (isArcStyle && rRaw < half) ? half : rRaw;
+  const r          = isArcStyle ? Math.max(half, half * 400 / curvature) : 1;
 
-  // Sagitta = how far the arc peak deviates from the chord.
-  // With r >= half guaranteed, sqrt is always real — no NaN guard needed.
-  const sagitta     = isArcStyle ? r - Math.sqrt(r * r - half * half) : 0;
+  // Sagitta = how far the arc peak deviates from the chord (always real now).
+  const sagitta = isArcStyle ? r - Math.sqrt(r * r - half * half) : 0;
 
-  // Shift the chord so the arc peak lands exactly at py-dist.
-  const sagittaComp = isArcDown ? -sagitta : sagitta;
-  const lcy         = py - dist + sagittaComp;
-  const lcx         = px;
+  // Position chord so the arc peak lands exactly `dist` from the pin:
+  //   arc-up:   peak is sagitta ABOVE chord  → chord at py - dist + sagitta
+  //   arc-down: peak is sagitta BELOW chord  → chord at py + dist - sagitta
+  const lcy = isArcDown ? (py + dist - sagitta) : (py - dist + sagitta);
+  const lcx = px;
 
   // Subtitle
   const hasSub  = m.subtitle && m.subtitle.trim();
@@ -601,8 +599,10 @@ function drawLabel(m, idx) {
   const subOff  = (m.subOffset|| 14) * zoomScale;
   const subFill = m.subColor  || '#aaaaaa';
   const subStyle= m.subStyle  || 'flat';
-  const subR    = m.subRadius || 120;      // no floor — follows main radius control
   const subHalf = (m.subtitle||'').length * (subSize * 0.68) * 0.85;
+  const subCurv = m.subRadius || 200;
+  const isSubArc = subStyle === 'arc-up' || subStyle === 'arc-down';
+  const subR    = isSubArc ? Math.max(subHalf, subHalf * 400 / subCurv) : 1;
 
   // Remove old
   document.getElementById('svg-label-' + idx)?.remove();
@@ -614,12 +614,12 @@ function drawLabel(m, idx) {
   const g = document.createElementNS(svgNS, 'g');
   g.setAttribute('transform', `rotate(${rot},${px},${py})`);
 
-  // Stem
+  // Stem — points toward the label, direction depends on arc style
   const stem = document.createElementNS(svgNS, 'line');
   stem.setAttribute('x1', String(px));
-  stem.setAttribute('y1', String(py - pinR));
+  stem.setAttribute('y1', String(isArcDown ? py + pinR : py - pinR));
   stem.setAttribute('x2', String(px));
-  stem.setAttribute('y2', String(py - dist));  // stem always ends at the intended gap
+  stem.setAttribute('y2', String(isArcDown ? py + dist : py - dist));
   stem.setAttribute('stroke', fill + '88');
   stem.setAttribute('stroke-width', String(Math.max(0.5, zoomScale)));
   g.appendChild(stem);
@@ -827,10 +827,10 @@ function editLabel(i) {
         oninput="document.getElementById('el-dval').textContent=this.value+'px';livePreview(${i})" />
     </div>
     <div style="margin-bottom:0.5rem;">
-      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Curve radius: <span id="el-rval" style="color:#c9a227;">${m.labelRadius||120}px</span> <span style="color:#555;font-size:0.55rem;">(smaller = tighter)</span></label>
-      <input type="range" id="el-radius" min="10" max="600" value="${m.labelRadius||120}" step="5"
+      <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Curvature: <span id="el-rval" style="color:#c9a227;">${m.labelRadius||200}</span> <span style="color:#555;font-size:0.55rem;">(higher = tighter)</span></label>
+      <input type="range" id="el-radius" min="10" max="400" value="${m.labelRadius||200}" step="5"
         style="width:100%;accent-color:#c9a227;"
-        oninput="document.getElementById('el-rval').textContent=this.value+'px';livePreview(${i})" />
+        oninput="document.getElementById('el-rval').textContent=this.value;livePreview(${i})" />
     </div>
     <div style="margin-bottom:0.8rem;">
       <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Font size: <span id="el-fval" style="color:#c9a227;">${m.labelSize||11}px</span></label>
