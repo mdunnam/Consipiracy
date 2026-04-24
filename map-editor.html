@@ -235,7 +235,9 @@
             <option value="arc-left">Arc — curves left</option>
             <option value="arc-right">Arc — curves right</option>
             <option value="s-curve">S-curve (horizontal)</option>
-            <option value="s-curve-v">S-curve (vertical)</option>
+            <option value="s-curve-v">S-curve vertical (stacked)</option>
+            <option value="vert-straight">Vertical straight (stacked)</option>
+            <option value="vert-arc">Vertical arc (stacked)</option>
           </select>
         </div>
         <div class="row">
@@ -569,32 +571,130 @@ function drawLabel(m, idx) {
   const fill   = m.labelColor    || '#ffffff';
   const outline= m.labelOutline  || '#000000';
   const outlineW = (m.outlineWidth ?? 3) * zoomScale;
+  const curvature = m.labelRadius || 200;
   const pinR   = 7;
   const letterSpacing = 2.5;
 
   const px = m.x / 100 * pinLayer.offsetWidth;
   const py = m.y / 100 * pinLayer.offsetHeight;
 
-  // Main text path
+  // ── Create SVG container and rotation group ──────────────────────────────
+  document.getElementById('svg-label-' + idx)?.remove();
+  const svg = document.createElementNS(svgNS, 'svg');
+  svg.id = 'svg-label-' + idx;
+  svg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:11;';
+  const g = document.createElementNS(svgNS, 'g');
+  g.setAttribute('transform', `rotate(${rot},${px},${py})`);
+
+  // ── Shadow filter (shared by all modes) ──────────────────────────────────
+  const defs = document.createElementNS(svgNS, 'defs');
+  const sfid = 'sf-' + idx;
+  const sc   = m.shadowColor   || '#000000';
+  const sbpx = (m.shadowBlur   ?? 4) * zoomScale;
+  const so   = m.shadowOpacity ?? 0.8;
+  let filtRef = null;
+  if (sbpx > 0) {
+    filtRef = sfid;
+    const filt = document.createElementNS(svgNS, 'filter');
+    filt.setAttribute('id', sfid);
+    filt.setAttribute('x', '-60%'); filt.setAttribute('width',  '220%');
+    filt.setAttribute('y', '-60%'); filt.setAttribute('height', '220%');
+    const ds = document.createElementNS(svgNS, 'feDropShadow');
+    ds.setAttribute('dx', '0'); ds.setAttribute('dy', '0');
+    ds.setAttribute('stdDeviation', String(sbpx));
+    ds.setAttribute('flood-color', sc); ds.setAttribute('flood-opacity', String(so));
+    filt.appendChild(ds);
+    defs.appendChild(filt);
+  }
+  svg.appendChild(defs);
+
+  // ── VERTICAL STACKED MODES: vert-straight, vert-arc, s-curve-v ───────────
+  // Letters are individually rendered upright — not rotated along a path.
+  // The column center is anchored at (px, py - dist).
+  // vert-straight: straight column  |  vert-arc: C-curve column  |  s-curve-v: S-shape column
+  const isVertStack = style === 'vert-straight' || style === 'vert-arc' || style === 's-curve-v';
+  if (isVertStack) {
+    const lineHeight  = fsize * 1.35;
+    const chars       = m.name.toUpperCase().split('');
+    const n           = chars.length;
+    const totalHeight = n * lineHeight;
+    // Amplitude of lateral deviation controlled by curvature slider
+    const amp = (curvature / 400) * 45 * zoomScale;
+
+    // Stem: pin top → bottom edge of text block
+    const textBottom = py - dist + totalHeight / 2;
+    const stem = document.createElementNS(svgNS, 'line');
+    stem.setAttribute('x1', String(px));
+    stem.setAttribute('y1', String(py - pinR));
+    stem.setAttribute('x2', String(px));
+    stem.setAttribute('y2', String(Math.min(textBottom, py - pinR)));
+    stem.setAttribute('stroke', fill + '88');
+    stem.setAttribute('stroke-width', String(Math.max(1.5, zoomScale * 3)));
+    g.appendChild(stem);
+
+    chars.forEach((char, i) => {
+      const t = n > 1 ? i / (n - 1) : 0.5; // 0→1 over chars
+      let xOff = 0;
+      if      (style === 'vert-arc')  xOff =  amp * Math.sin(t * Math.PI);       // C-curve
+      else if (style === 's-curve-v') xOff =  amp * Math.sin(t * Math.PI * 2);   // S-shape
+      const charX = px + xOff;
+      const charY = py - dist - totalHeight / 2 + i * lineHeight;
+
+      const mkChar = (isOut) => {
+        const el = document.createElementNS(svgNS, 'text');
+        el.setAttribute('x', String(charX));
+        el.setAttribute('y', String(charY));
+        el.setAttribute('text-anchor', 'middle');
+        el.setAttribute('dominant-baseline', 'middle');
+        el.setAttribute('font-family', 'Cinzel, Georgia, serif');
+        el.setAttribute('font-size', String(fsize));
+        el.setAttribute('font-weight', '700');
+        if (isOut) {
+          el.setAttribute('stroke', outline);
+          el.setAttribute('stroke-width', String(outlineW ?? Math.max(1, 3.5 * zoomScale)));
+          el.setAttribute('stroke-linejoin', 'round');
+          el.setAttribute('fill', 'none');
+        } else {
+          el.setAttribute('fill', fill);
+          if (filtRef) el.setAttribute('filter', `url(#${filtRef})`);
+        }
+        el.textContent = char;
+        return el;
+      };
+      g.appendChild(mkChar(true));   // outline pass
+      g.appendChild(mkChar(false));  // fill pass
+    });
+
+    svg.appendChild(g);
+    pinLayer.appendChild(svg);
+    return;
+  }
+
+  // ── TEXTPATH MODES: flat, arc-up, arc-down, arc-left, arc-right, s-curve ─
   const textLen = m.name.length * (fsize * 0.68) + (m.name.length - 1) * letterSpacing;
   const half    = textLen * 0.85;
 
-  // Convert "curvature" (slider 10=flat, 400=tight) to geometric SVG radius.
-  // r = half * 400 / curvature  →  higher slider = smaller r = tighter arc.
-  // Clamp r >= half so SVG never auto-rescales and sagitta stays real.
-  const curvature  = m.labelRadius || 200;
   const isArcDown  = style === 'arc-down';
   const isArcStyle = style === 'arc-up' || isArcDown;
   const r          = isArcStyle ? Math.max(half, half * 400 / curvature) : 1;
+  const sagitta    = isArcStyle ? r - Math.sqrt(r * r - half * half) : 0;
 
-  // Sagitta = how far the arc peak deviates from the chord (always real now).
-  const sagitta = isArcStyle ? r - Math.sqrt(r * r - half * half) : 0;
+  // For s-curve the text baseline sits ~0.55em above where the user set dist.
+  // Shift the chord down so the visual text centre lands at py - dist.
+  const sCurveComp = style === 's-curve' ? fsize * 0.55 : 0;
 
-  // Position chord so the arc peak lands exactly `dist` from the pin:
-  //   arc-up:   peak is sagitta ABOVE chord  → chord at py - dist + sagitta
-  //   arc-down: peak is sagitta BELOW chord  → chord at py + dist - sagitta
-  const lcy = isArcDown ? (py + dist - sagitta) : (py - dist + sagitta);
+  const lcy = isArcDown ? (py + dist - sagitta) : (py - dist + sagitta + sCurveComp);
   const lcx = px;
+
+  // Stem
+  const stem = document.createElementNS(svgNS, 'line');
+  stem.setAttribute('x1', String(px));
+  stem.setAttribute('y1', String(isArcDown ? py + pinR : py - pinR));
+  stem.setAttribute('x2', String(px));
+  stem.setAttribute('y2', String(isArcDown ? py + dist : py - dist));
+  stem.setAttribute('stroke', fill + '88');
+  stem.setAttribute('stroke-width', String(Math.max(1.5, zoomScale * 3)));
+  g.appendChild(stem);
 
   // Subtitle
   const hasSub  = m.subtitle && m.subtitle.trim();
@@ -607,65 +707,15 @@ function drawLabel(m, idx) {
   const isSubArc = subStyle === 'arc-up' || subStyle === 'arc-down';
   const subR    = isSubArc ? Math.max(subHalf, subHalf * 400 / subCurv) : 1;
 
-  // Remove old
-  document.getElementById('svg-label-' + idx)?.remove();
-  const svg = document.createElementNS(svgNS, 'svg');
-  svg.id = 'svg-label-' + idx;
-  svg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:11;';
-
-  // Group — rotated around pin
-  const g = document.createElementNS(svgNS, 'g');
-  g.setAttribute('transform', `rotate(${rot},${px},${py})`);
-
-  // Stem — points toward the label, direction depends on arc style
-  const stem = document.createElementNS(svgNS, 'line');
-  stem.setAttribute('x1', String(px));
-  stem.setAttribute('y1', String(isArcDown ? py + pinR : py - pinR));
-  stem.setAttribute('x2', String(px));
-  stem.setAttribute('y2', String(isArcDown ? py + dist : py - dist));
-  stem.setAttribute('stroke', fill + '88');
-  stem.setAttribute('stroke-width', String(Math.max(1.5, zoomScale * 3)));
-  g.appendChild(stem);
-
-  // Defs: paths + SVG feFlood shadow filter
-  const defs = document.createElementNS(svgNS, 'defs');
   const pid  = 'lp-'  + idx;
   const spid = 'lps-' + idx;
-  const sfid = 'sf-'  + idx;
   defs.appendChild(buildPath(svgNS, pid,  lcx, lcy,                   half,    r,    style,    curvature));
   if (hasSub)
     defs.appendChild(buildPath(svgNS, spid, lcx, lcy + fsize + subOff, subHalf, subR, subStyle, subCurv));
 
-  // Build SVG drop-shadow filter for text.
-  // feDropShadow composites the shadow correctly and produces genuinely dark shadows
-  // at high opacity — the old feFlood approach produced washed-out grey at max.
-  const sc   = m.shadowColor   || '#000000';
-  const sbpx = (m.shadowBlur   ?? 4) * zoomScale;
-  const so   = m.shadowOpacity ?? 0.8;
-  let filtRef = null;
-  if (sbpx > 0) {
-    filtRef = sfid;
-    const filt = document.createElementNS(svgNS, 'filter');
-    filt.setAttribute('id', sfid);
-    filt.setAttribute('x', '-60%'); filt.setAttribute('width',  '220%');
-    filt.setAttribute('y', '-60%'); filt.setAttribute('height', '220%');
-    const ds = document.createElementNS(svgNS, 'feDropShadow');
-    ds.setAttribute('dx', '0');
-    ds.setAttribute('dy', '0');
-    ds.setAttribute('stdDeviation', String(sbpx));
-    ds.setAttribute('flood-color', sc);
-    ds.setAttribute('flood-opacity', String(so));
-    filt.appendChild(ds);
-    defs.appendChild(filt);
-  }
-
-  svg.appendChild(defs);
-
-  // Main text
   g.appendChild(addTextOnPath(svgNS, pid,  m.name.toUpperCase(),       fsize,   letterSpacing, fill,    outline, true,  zoomScale, null,    outlineW));
   g.appendChild(addTextOnPath(svgNS, pid,  m.name.toUpperCase(),       fsize,   letterSpacing, fill,    outline, false, zoomScale, filtRef, outlineW));
 
-  // Subtitle
   if (hasSub) {
     g.appendChild(addTextOnPath(svgNS, spid, m.subtitle.toUpperCase(), subSize, 1.5, subFill, '#000000', true,  zoomScale, null,    outlineW * 0.7));
     g.appendChild(addTextOnPath(svgNS, spid, m.subtitle.toUpperCase(), subSize, 1.5, subFill, '#000000', false, zoomScale, filtRef, outlineW * 0.7));
@@ -810,13 +860,15 @@ function editLabel(i) {
     <div style="margin-bottom:0.5rem;">
       <label style="display:block;font-size:0.58rem;color:#4a4a4a;margin-bottom:0.18rem;text-transform:uppercase;letter-spacing:0.08em;">Style</label>
       <select id="el-style" onchange="livePreview(${i})" style="width:100%;background:#050505;border:1px solid #222;color:#d8d8d8;padding:0.35rem 0.5rem;font-family:'Share Tech Mono',monospace;font-size:0.7rem;outline:none;">
-        <option value="flat"      ${(m.labelStyle||'flat')==='flat'?'selected':''}>Flat (straight)</option>
-        <option value="arc-up"    ${m.labelStyle==='arc-up'?'selected':''}>Arc — curves up</option>
-        <option value="arc-down"  ${m.labelStyle==='arc-down'?'selected':''}>Arc — curves down</option>
-        <option value="arc-left"  ${m.labelStyle==='arc-left'?'selected':''}>Arc — curves left</option>
-        <option value="arc-right" ${m.labelStyle==='arc-right'?'selected':''}>Arc — curves right</option>
-        <option value="s-curve"   ${m.labelStyle==='s-curve'?'selected':''}>S-curve (horizontal)</option>
-        <option value="s-curve-v" ${m.labelStyle==='s-curve-v'?'selected':''}>S-curve (vertical)</option>
+        <option value="flat"        ${(m.labelStyle||'flat')==='flat'?'selected':''}>Flat (straight)</option>
+        <option value="arc-up"       ${m.labelStyle==='arc-up'?'selected':''}>Arc — curves up</option>
+        <option value="arc-down"     ${m.labelStyle==='arc-down'?'selected':''}>Arc — curves down</option>
+        <option value="arc-left"     ${m.labelStyle==='arc-left'?'selected':''}>Arc — curves left</option>
+        <option value="arc-right"    ${m.labelStyle==='arc-right'?'selected':''}>Arc — curves right</option>
+        <option value="s-curve"      ${m.labelStyle==='s-curve'?'selected':''}>S-curve (horizontal)</option>
+        <option value="s-curve-v"    ${m.labelStyle==='s-curve-v'?'selected':''}>S-curve vertical (stacked)</option>
+        <option value="vert-straight" ${m.labelStyle==='vert-straight'?'selected':''}>Vertical straight (stacked)</option>
+        <option value="vert-arc"     ${m.labelStyle==='vert-arc'?'selected':''}>Vertical arc (stacked)</option>
       </select>
     </div>
     <div style="margin-bottom:0.5rem;">
