@@ -86,6 +86,7 @@
       transform: translate(-50%, -50%);
       pointer-events: none;
       border: 2px solid rgba(255,255,255,0.5);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.85), 0 0 3px rgba(0,0,0,0.6);
       z-index: 10;
     }
     .pin.pending {
@@ -632,7 +633,9 @@ function drawLabel(m, idx) {
   if (hasSub)
     defs.appendChild(buildPath(svgNS, spid, lcx, lcy + fsize + subOff, subHalf, subR, subStyle));
 
-  // Build proper SVG shadow filter (feFlood+feComposite+feGaussianBlur+feMerge)
+  // Build SVG drop-shadow filter for text.
+  // feDropShadow composites the shadow correctly and produces genuinely dark shadows
+  // at high opacity — the old feFlood approach produced washed-out grey at max.
   const sc   = m.shadowColor   || '#000000';
   const sbpx = (m.shadowBlur   ?? 4) * zoomScale;
   const so   = m.shadowOpacity ?? 0.8;
@@ -643,19 +646,13 @@ function drawLabel(m, idx) {
     filt.setAttribute('id', sfid);
     filt.setAttribute('x', '-60%'); filt.setAttribute('width',  '220%');
     filt.setAttribute('y', '-60%'); filt.setAttribute('height', '220%');
-    const mk = (tag, attrs) => {
-      const el = document.createElementNS(svgNS, tag);
-      Object.entries(attrs).forEach(([k,v]) => el.setAttribute(k, v));
-      return el;
-    };
-    filt.appendChild(mk('feFlood',      { 'flood-color': sc, 'flood-opacity': String(so), result: 'color' }));
-    filt.appendChild(mk('feComposite',  { in: 'color', in2: 'SourceAlpha', operator: 'in', result: 'shaped' }));
-    filt.appendChild(mk('feGaussianBlur',{ in: 'shaped', stdDeviation: String(sbpx), result: 'blurred' }));
-    filt.appendChild(mk('feOffset',     { dx: '0', dy: '0', result: 'offset' }));
-    const merge = document.createElementNS(svgNS, 'feMerge');
-    merge.appendChild(mk('feMergeNode', { in: 'offset' }));
-    merge.appendChild(mk('feMergeNode', { in: 'SourceGraphic' }));
-    filt.appendChild(merge);
+    const ds = document.createElementNS(svgNS, 'feDropShadow');
+    ds.setAttribute('dx', '0');
+    ds.setAttribute('dy', '0');
+    ds.setAttribute('stdDeviation', String(sbpx));
+    ds.setAttribute('flood-color', sc);
+    ds.setAttribute('flood-opacity', String(so));
+    filt.appendChild(ds);
     defs.appendChild(filt);
   }
 
