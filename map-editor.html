@@ -376,6 +376,7 @@ function resetDefaults() {
 
 // ── Draggable label state ───────────────────────────────────────────────
 let _labelDrag = null;
+let _labelHitBoxes = {};  // idx → {cx,cy,w,h} in pinLayer px, updated on each render
 
 /**
  * Begin dragging a label. Called from the SVG drag handle mousedown.
@@ -419,6 +420,8 @@ function _onLabelDragEnd() {
   _labelDrag = null;
   document.removeEventListener('mousemove', _onLabelDragMove);
   document.removeEventListener('mouseup',   _onLabelDragEnd);
+  // Restore normal cursor on pinLayer
+  pinLayer.style.cursor = '';
 }
 
 /**
@@ -428,9 +431,45 @@ function _onLabelDragEnd() {
 function resetLabelPosition(idx) {
   delete markers[idx].labelDx;
   delete markers[idx].labelDy;
+  delete _labelHitBoxes[idx];
   persist();
   render();
 }
+
+// pinLayer mousedown: hit-test label boxes → drag; otherwise pass through to map click handler
+pinLayer.addEventListener('mousedown', e => {
+  if (e.button !== 0) return;
+  const rect = pinLayer.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+  for (const [idxStr, box] of Object.entries(_labelHitBoxes)) {
+    const hw = box.w / 2, hh = box.h / 2;
+    if (mx >= box.cx - hw && mx <= box.cx + hw && my >= box.cy - hh && my <= box.cy + hh) {
+      e.preventDefault();
+      e.stopPropagation();
+      pinLayer.style.cursor = 'grabbing';
+      startLabelDrag(parseInt(idxStr), e);
+      return;
+    }
+  }
+});
+
+// pinLayer mousedown: check if click hits a label hit-box → start drag, otherwise let map handle it
+pinLayer.addEventListener('mousedown', e => {
+  if (e.button !== 0) return;
+  const mx = e.offsetX;
+  const my = e.offsetY;
+  for (const [idxStr, box] of Object.entries(_labelHitBoxes)) {
+    const hw = box.w / 2, hh = box.h / 2;
+    if (mx >= box.cx - hw && mx <= box.cx + hw && my >= box.cy - hh && my <= box.cy + hh) {
+      e.preventDefault();
+      e.stopPropagation();
+      pinLayer.style.cursor = 'grabbing';
+      startLabelDrag(parseInt(idxStr), e);
+      return;
+    }
+  }
+});
 
 const pinLayer = document.getElementById('pin-layer');
 const xhair    = document.getElementById('xhair');
@@ -688,19 +727,9 @@ function drawLabel(m, idx) {
    * @param {number} h  - bounding height estimate
    */
   function addDragHandle(cx, cy, w, h) {
-    const pad = 8 * zoomScale;
-    const rect = document.createElementNS(svgNS, 'rect');
-    rect.setAttribute('x',      String(cx - w / 2 - pad));
-    rect.setAttribute('y',      String(cy - h / 2 - pad));
-    rect.setAttribute('width',  String(w + pad * 2));
-    rect.setAttribute('height', String(h + pad * 2));
-    rect.setAttribute('fill',   'transparent');
-    rect.setAttribute('style',  'cursor:grab;pointer-events:all;');
-    rect.addEventListener('mousedown', ev => startLabelDrag(idx, ev));
-    // Keep svg pointer-events active only via this rect
-    svg.style.pointerEvents = 'none';
-    rect.style.pointerEvents = 'all';
-    g.appendChild(rect);
+    // Register this label's bounding box for hit-testing on pinLayer mousedown.
+    // We do NOT use pointer-events on the SVG so wheel/scroll/click pass through.
+    _labelHitBoxes[idx] = { cx, cy, w: w + 16 * zoomScale, h: h + 16 * zoomScale };
   }
 
   // ── VERTICAL STACKED MODES ─────────────────────────────────────────────
@@ -1005,6 +1034,7 @@ function cancelMove() {
 
 // ── Render saved pins + list ───────────────────────────────────────────────
 function render() {
+  _labelHitBoxes = {};  // clear stale hit boxes before re-rendering
   // Remove saved pins + labels (keep pending)
   pinLayer.querySelectorAll('.pin:not(.pending), .pin-label, svg[id^="svg-label"]').forEach(p => p.remove());
 
