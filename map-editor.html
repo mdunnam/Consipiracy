@@ -482,13 +482,20 @@ function drawLabel(m, idx) {
   const half    = textLen * 0.85;
   const r       = m.labelRadius || 120;   // no floor — slider has full control
 
-  // Compensate lcy so the visual centre of the text (not the path baseline) stays at
-  // exactly `dist` pixels from the pin, regardless of font size.
-  // SVG text-on-path sits above its baseline by ~0.75em for arc-up, below for arc-down.
-  const isArcDown = style === 'arc-down';
-  const fontOffset = isArcDown ? fsize * 0.25 : -fsize * 0.75;
-  const lcy     = py - dist + fontOffset;
-  const lcx     = px;
+  // Sagitta: how far the arc's midpoint deviates from the chord baseline.
+  // Compensating for this keeps the text visually anchored at `dist` from the pin
+  // as the curve radius slider changes. Formula: r - sqrt(r² - half²).
+  // Guard with Math.max(0,...) to avoid NaN when r < half.
+  const isArcStyle = style === 'arc-up' || style === 'arc-down';
+  const sagitta    = isArcStyle ? r - Math.sqrt(Math.max(0, r * r - half * half)) : 0;
+
+  // Font offset: SVG text-on-path sits above its baseline by ~0.75em (arc-up) or
+  // below by ~0.25em (arc-down). Compensate so visual text centre = pin + dist.
+  const isArcDown   = style === 'arc-down';
+  const fontOffset  = isArcDown ? fsize * 0.25  : -fsize * 0.75;
+  const sagittaComp = isArcDown ? -sagitta       :  sagitta;
+  const lcy         = py - dist + fontOffset + sagittaComp;
+  const lcx         = px;
 
   // Subtitle
   const hasSub  = m.subtitle && m.subtitle.trim();
