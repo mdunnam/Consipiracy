@@ -183,6 +183,8 @@
   <button class="tbtn" onclick="zoom(1)">+</button>
   <button class="tbtn" onclick="zoom(0)">FIT</button>
   <button class="tbtn red" onclick="clearAll()">CLEAR ALL</button>
+  <span id="defaults-indicator" style="font-size:0.58rem;color:#4a6a4a;letter-spacing:0.08em;margin-left:0.8rem;"></span>
+  <button class="tbtn" style="border-color:rgba(74,106,74,0.5);color:#4a8a4a;" onclick="resetDefaults()">RESET DEFAULTS</button>
 </div>
 
 <div id="main">
@@ -289,6 +291,80 @@ let pendingX = null;
 let pendingY = null;
 let moveIdx  = null;  // index of marker being repositioned
 
+// ── Marker defaults (persisted in localStorage) ───────────────────────────
+const DEFAULT_LABEL_SETTINGS = {
+  showLabel:     false,
+  labelStyle:    'flat',
+  labelRadius:   120,
+  labelSize:     11,
+  labelDistance: 30,
+  labelRotate:   0,
+  labelColor:    '#ffffff',
+  labelOutline:  '#000000',
+  shadowColor:   '#000000',
+  shadowBlur:    4,
+  shadowOpacity: 0.8,
+  subtitle:      '',
+  subStyle:      'flat',
+  subSize:       8,
+  subOffset:     14,
+  subColor:      '#aaaaaa',
+  subRadius:     120,
+};
+let markerDefaults = Object.assign({}, DEFAULT_LABEL_SETTINGS,
+  JSON.parse(localStorage.getItem('fe_marker_defaults') || 'null') || {});
+
+/**
+ * Update the topbar indicator to show whether custom defaults are active.
+ */
+function refreshDefaultsIndicator() {
+  const el = document.getElementById('defaults-indicator');
+  const isCustom = localStorage.getItem('fe_marker_defaults') !== null;
+  el.textContent = isCustom ? '★ CUSTOM DEFAULTS ACTIVE' : '';
+}
+refreshDefaultsIndicator();
+
+/**
+ * Save current edit-panel label settings as the new defaults for all future markers.
+ * @param {number} i - marker index whose edit panel is open
+ */
+function saveAsDefault(i) {
+  markerDefaults = {
+    showLabel:     document.getElementById('el-show')?.checked     ?? markerDefaults.showLabel,
+    labelStyle:    document.getElementById('el-style')?.value      || markerDefaults.labelStyle,
+    labelRadius:   parseInt(document.getElementById('el-radius')?.value   || markerDefaults.labelRadius),
+    labelSize:     parseInt(document.getElementById('el-fsize')?.value    || markerDefaults.labelSize),
+    labelDistance: parseInt(document.getElementById('el-dist')?.value     || markerDefaults.labelDistance),
+    labelRotate:   parseInt(document.getElementById('el-rot')?.value      || markerDefaults.labelRotate),
+    labelColor:    document.getElementById('el-color')?.value      || markerDefaults.labelColor,
+    labelOutline:  document.getElementById('el-outline')?.value    || markerDefaults.labelOutline,
+    shadowColor:   document.getElementById('el-shadow-color')?.value || markerDefaults.shadowColor,
+    shadowBlur:    parseInt(document.getElementById('el-shadow-blur')?.value || markerDefaults.shadowBlur),
+    shadowOpacity: parseInt(document.getElementById('el-shadow-opacity')?.value || Math.round(markerDefaults.shadowOpacity * 100)) / 100,
+    subtitle:      document.getElementById('el-sub')?.value        ?? markerDefaults.subtitle,
+    subStyle:      document.getElementById('el-substyle')?.value   || markerDefaults.subStyle,
+    subSize:       parseInt(document.getElementById('el-subfsize')?.value  || markerDefaults.subSize),
+    subOffset:     parseInt(document.getElementById('el-suboff')?.value    || markerDefaults.subOffset),
+    subColor:      document.getElementById('el-subcolor')?.value   || markerDefaults.subColor,
+    subRadius:     parseInt(document.getElementById('el-subradius')?.value || markerDefaults.subRadius),
+  };
+  localStorage.setItem('fe_marker_defaults', JSON.stringify(markerDefaults));
+  refreshDefaultsIndicator();
+  // Flash confirmation on the button
+  const btn = document.getElementById('btn-save-default-' + i);
+  if (btn) { const orig = btn.textContent; btn.textContent = '✓ SAVED AS DEFAULT'; setTimeout(() => btn.textContent = orig, 2000); }
+}
+
+/**
+ * Clear custom defaults, reverting new markers back to factory settings.
+ */
+function resetDefaults() {
+  if (!confirm('Reset all defaults back to factory settings?')) return;
+  localStorage.removeItem('fe_marker_defaults');
+  markerDefaults = Object.assign({}, DEFAULT_LABEL_SETTINGS);
+  refreshDefaultsIndicator();
+}
+
 const pinLayer = document.getElementById('pin-layer');
 const xhair    = document.getElementById('xhair');
 
@@ -363,10 +439,24 @@ function saveMarker() {
     desc: document.getElementById('fdesc').value.trim(),
     cat:  document.getElementById('fcat').value,
     url:  document.getElementById('furl').value.trim(),
-    showLabel:   document.getElementById('fshowlabel').checked,
-    labelStyle:  document.getElementById('flabelstyle').value,
-    labelRadius: parseInt(document.getElementById('fcurveradius').value),
-    labelSize:   parseInt(document.getElementById('ffontsize').value),
+    // Label settings — start from current defaults, override with form values
+    showLabel:     document.getElementById('fshowlabel').checked,
+    labelStyle:    document.getElementById('flabelstyle').value,
+    labelRadius:   parseInt(document.getElementById('fcurveradius').value),
+    labelSize:     parseInt(document.getElementById('ffontsize').value),
+    labelDistance: markerDefaults.labelDistance,
+    labelRotate:   markerDefaults.labelRotate,
+    labelColor:    markerDefaults.labelColor,
+    labelOutline:  markerDefaults.labelOutline,
+    shadowColor:   markerDefaults.shadowColor,
+    shadowBlur:    markerDefaults.shadowBlur,
+    shadowOpacity: markerDefaults.shadowOpacity,
+    subtitle:      markerDefaults.subtitle,
+    subStyle:      markerDefaults.subStyle,
+    subSize:       markerDefaults.subSize,
+    subOffset:     markerDefaults.subOffset,
+    subColor:      markerDefaults.subColor,
+    subRadius:     markerDefaults.subRadius,
   });
   persist();
   clearPending();
@@ -382,13 +472,14 @@ function clearPending() {
   document.getElementById('fname').value   = '';
   document.getElementById('fdesc').value   = '';
   document.getElementById('furl').value    = '';
-  document.getElementById('fshowlabel').checked = false;
-  document.getElementById('curve-options').style.display = 'none';
-  document.getElementById('flabelstyle').value = 'flat';
-  document.getElementById('fcurveradius').value = '120';
-  document.getElementById('ffontsize').value = '11';
-  document.getElementById('radius-val').textContent = '120px';
-  document.getElementById('fsize-val').textContent = '11px';
+  // Apply current defaults so every new pin inherits the last saved style
+  document.getElementById('fshowlabel').checked = markerDefaults.showLabel;
+  document.getElementById('curve-options').style.display = markerDefaults.showLabel ? 'block' : 'none';
+  document.getElementById('flabelstyle').value = markerDefaults.labelStyle;
+  document.getElementById('fcurveradius').value = String(markerDefaults.labelRadius);
+  document.getElementById('ffontsize').value = String(markerDefaults.labelSize);
+  document.getElementById('radius-val').textContent = markerDefaults.labelRadius + 'px';
+  document.getElementById('fsize-val').textContent = markerDefaults.labelSize + 'px';
   document.getElementById('pending-status').textContent = 'Click anywhere on the map to drop a pin. Click again to move it. Fill in details below then hit SAVE.';
   document.getElementById('pending-status').className = '';
   document.getElementById('save-btn').disabled  = true;
@@ -803,10 +894,11 @@ function editLabel(i) {
         style="width:100%;accent-color:#c9a227;"
         oninput="document.getElementById('el-subrval').textContent=this.value+'px';livePreview(${i})" />
     </div>
-    <div style="display:flex;gap:0.5rem;">
+    <div style="display:flex;gap:0.5rem;margin-bottom:0.4rem;">
       <button class="btn" style="flex:1;" onclick="applyLabelEdit(${i})">SAVE</button>
       <button class="btn red" style="flex:1;" onclick="cancelLabelEdit(${i})">CANCEL</button>
     </div>
+    <button id="btn-save-default-${i}" class="btn" style="width:100%;border-color:rgba(74,106,74,0.6);color:#4a9a4a;" onclick="saveAsDefault(${i})">★ SAVE AS DEFAULT FOR NEW MARKERS</button>
   `;
 
   const backdrop = document.createElement('div');
