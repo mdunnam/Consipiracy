@@ -442,11 +442,14 @@ const xhair    = document.getElementById('xhair');
 // Hit-test label boxes on mousedown — start drag if hit, otherwise let map handle normally
 pinLayer.addEventListener('mousedown', e => {
   if (e.button !== 0) return;
-  const mx = e.offsetX;
-  const my = e.offsetY;
+  // offsetX/Y is unreliable when the event target is a child element (e.g. a .pin div)
+  // Always compute position relative to pinLayer using clientX/Y
+  const plRect = pinLayer.getBoundingClientRect();
+  const pmx = e.clientX - plRect.left;
+  const pmy = e.clientY - plRect.top;
   for (const [idxStr, box] of Object.entries(_labelHitBoxes)) {
     const hw = box.w / 2, hh = box.h / 2;
-    if (mx >= box.cx - hw && mx <= box.cx + hw && my >= box.cy - hh && my <= box.cy + hh) {
+    if (pmx >= box.cx - hw && pmx <= box.cx + hw && pmy >= box.cy - hh && pmy <= box.cy + hh) {
       e.preventDefault();
       e.stopPropagation();
       pinLayer.style.cursor = 'grabbing';
@@ -461,7 +464,7 @@ document.getElementById('fshowlabel').addEventListener('change', function() {
   document.getElementById('curve-options').style.display = this.checked ? 'block' : 'none';
 });
 
-// ── Mouse: move crosshair ──────────────────────────────────────────────────
+// ── Mouse: move crosshair + grab cursor over labels ────────────────────────
 pinLayer.addEventListener('mousemove', e => {
   xhair.style.display = 'block';
   // offsetX/Y are relative to pin-layer — same element pins are in
@@ -472,6 +475,19 @@ pinLayer.addEventListener('mousemove', e => {
   const x = (e.offsetX / pinLayer.offsetWidth  * 100).toFixed(3);
   const y = (e.offsetY / pinLayer.offsetHeight * 100).toFixed(3);
   document.getElementById('coordbar').textContent = `x: ${x}%  y: ${y}%`;
+
+  // Show grab cursor when hovering a draggable label
+  if (!_labelDrag) {
+    const plRect = pinLayer.getBoundingClientRect();
+    const pmx = e.clientX - plRect.left;
+    const pmy = e.clientY - plRect.top;
+    let over = false;
+    for (const box of Object.values(_labelHitBoxes)) {
+      if (pmx >= box.cx - box.w/2 && pmx <= box.cx + box.w/2 &&
+          pmy >= box.cy - box.h/2 && pmy <= box.cy + box.h/2) { over = true; break; }
+    }
+    pinLayer.style.cursor = over ? 'grab' : '';
+  }
 });
 
 pinLayer.addEventListener('mouseleave', () => {
