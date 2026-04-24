@@ -483,18 +483,18 @@ function drawLabel(m, idx) {
   const r       = m.labelRadius || 120;   // no floor — slider has full control
 
   // Sagitta: how far the arc's midpoint deviates from the chord baseline.
-  // Compensating for this keeps the text visually anchored at `dist` from the pin
-  // as the curve radius slider changes. Formula: r - sqrt(r² - half²).
-  // Guard with Math.max(0,...) to avoid NaN when r < half.
-  const isArcStyle = style === 'arc-up' || style === 'arc-down';
+  // Compensating for this keeps the text baseline anchored at exactly `dist`
+  // from the pin regardless of radius or font size.
+  // Formula: r - sqrt(r² - half²). Guard with max(0) to avoid NaN when r < half.
+  const isArcDown  = style === 'arc-down';
+  const isArcStyle = style === 'arc-up' || isArcDown;
   const sagitta    = isArcStyle ? r - Math.sqrt(Math.max(0, r * r - half * half)) : 0;
 
-  // Font offset: SVG text-on-path sits above its baseline by ~0.75em (arc-up) or
-  // below by ~0.25em (arc-down). Compensate so visual text centre = pin + dist.
-  const isArcDown   = style === 'arc-down';
-  const fontOffset  = isArcDown ? fsize * 0.25  : -fsize * 0.75;
-  const sagittaComp = isArcDown ? -sagitta       :  sagitta;
-  const lcy         = py - dist + fontOffset + sagittaComp;
+  // Move chord so the arc's peak (where text baseline sits) lands at exactly py-dist.
+  // arc-up: peak is sagitta ABOVE chord → push chord down by sagitta
+  // arc-down: peak is sagitta BELOW chord → push chord up by sagitta
+  const sagittaComp = isArcDown ? -sagitta : sagitta;
+  const lcy         = py - dist + sagittaComp;
   const lcx         = px;
 
   // Subtitle
