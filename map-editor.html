@@ -480,19 +480,22 @@ function drawLabel(m, idx) {
   // Main text path
   const textLen = m.name.length * (fsize * 0.68) + (m.name.length - 1) * letterSpacing;
   const half    = textLen * 0.85;
-  const r       = m.labelRadius || 120;   // no floor — slider has full control
 
-  // Sagitta: how far the arc's midpoint deviates from the chord baseline.
-  // Compensating for this keeps the text baseline anchored at exactly `dist`
-  // from the pin regardless of radius or font size.
-  // Formula: r - sqrt(r² - half²). Guard with max(0) to avoid NaN when r < half.
+  // Clamp r so it is never smaller than half.
+  // When r < half, SVG silently scales the radius up to half to make the arc
+  // geometrically possible — but the JS sagitta calc would use the original r,
+  // producing a mismatch and a visible jump. Using the same effective radius in
+  // both places keeps JS and SVG in sync for all font sizes and curve values.
+  const rRaw    = m.labelRadius || 120;
   const isArcDown  = style === 'arc-down';
   const isArcStyle = style === 'arc-up' || isArcDown;
-  const sagitta    = isArcStyle ? r - Math.sqrt(Math.max(0, r * r - half * half)) : 0;
+  const r       = (isArcStyle && rRaw < half) ? half : rRaw;
 
-  // Move chord so the arc's peak (where text baseline sits) lands at exactly py-dist.
-  // arc-up: peak is sagitta ABOVE chord → push chord down by sagitta
-  // arc-down: peak is sagitta BELOW chord → push chord up by sagitta
+  // Sagitta = how far the arc peak deviates from the chord.
+  // With r >= half guaranteed, sqrt is always real — no NaN guard needed.
+  const sagitta     = isArcStyle ? r - Math.sqrt(r * r - half * half) : 0;
+
+  // Shift the chord so the arc peak lands exactly at py-dist.
   const sagittaComp = isArcDown ? -sagitta : sagitta;
   const lcy         = py - dist + sagittaComp;
   const lcx         = px;
