@@ -408,9 +408,10 @@ function startLabelDrag(idx, e) {
   const mapH = pinLayer.offsetHeight;
   const px  = m.x / 100 * mapW;
   const py  = m.y / 100 * mapH;
-  // Current text-center in pinLayer px
+  // Current text-centre in pinLayer px — must match exactly what drawLabel renders
+  const dist0 = (m.labelDistance || 30) * zoomScale;
   const initTx = m.labelDx != null ? px + (m.labelDx / 100) * mapW : px;
-  const initTy = m.labelDy != null ? py + (m.labelDy / 100) * mapH : py - (m.labelDistance || 30);
+  const initTy = m.labelDy != null ? py + (m.labelDy / 100) * mapH : py - dist0;
   _labelDrag = { idx, initTx, initTy, startX: e.clientX, startY: e.clientY };
   document.addEventListener('mousemove', _onLabelDragMove);
   document.addEventListener('mouseup',   _onLabelDragEnd);
@@ -840,13 +841,12 @@ function drawLabel(m, idx) {
   stem.setAttribute('stroke-width', String(Math.max(1.5, zoomScale * 3)));
   g.appendChild(stem);
 
-  // Visual text centre Y: text sits above its baseline path.
-  // For arc-up the baseline peak is py-dist; for arc-down py+dist; for flat lcy.
-  // Glyphs extend ~0.5*fsize above baseline, so visual centre ≈ peak - 0.3*fsize.
-  const textVisualCy = hasOffset ? lcy
-    : isArcDown  ? (py + dist - fsize * 0.3)
-    : isArcStyle ? (py - dist - fsize * 0.3)
-    :               lcy - fsize * 0.3;
+  // Hitbox centred on the visual midpoint of the text glyphs.
+  // Cap-height midpoint sits ~0.35*fsize above the baseline.
+  // For arcs the baseline peak (where text is highest) is py±dist, not the chord lcy.
+  const hitCy = (isArcStyle && !hasOffset)
+    ? (isArcDown ? py + dist : py - dist) - fsize * 0.35
+    : lcy - fsize * 0.35;
 
   // Subtitle
   const hasSub  = m.subtitle && m.subtitle.trim();
@@ -873,7 +873,7 @@ function drawLabel(m, idx) {
     g.appendChild(addTextOnPath(svgNS, spid, m.subtitle.toUpperCase(), subSize, 1.5, subFill, '#000000', false, zoomScale, filtRef, outlineW * 0.7));
   }
 
-  addDragHandle(lcx, textVisualCy, half * 2, fsize * 2);
+  addDragHandle(lcx, hitCy, half * 2, fsize * 2);
   svg.appendChild(g);
   pinLayer.appendChild(svg);
 }
