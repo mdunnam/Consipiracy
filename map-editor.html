@@ -830,18 +830,23 @@ function drawLabel(m, idx) {
     lcx = px;
   }
 
-  // Stem — pin centre to visual text position
-  // For arcs the text rides the arc peak (py ± dist), not the chord (lcy which is offset by sagitta).
-  // For flat/s-curve and dragged labels, use lcy directly.
-  const stemY2 = hasOffset ? lcy : (isArcStyle ? (isArcDown ? py + dist : py - dist) : lcy);
+  // Stem — pin centre to text chord centre (matches where the SVG path begins)
   const stem = document.createElementNS(svgNS, 'line');
   stem.setAttribute('x1', String(px));
   stem.setAttribute('y1', String(py));
   stem.setAttribute('x2', String(lcx));
-  stem.setAttribute('y2', String(stemY2));
+  stem.setAttribute('y2', String(lcy));
   stem.setAttribute('stroke', fill + '88');
   stem.setAttribute('stroke-width', String(Math.max(1.5, zoomScale * 3)));
   g.appendChild(stem);
+
+  // Visual text centre Y: text sits above its baseline path.
+  // For arc-up the baseline peak is py-dist; for arc-down py+dist; for flat lcy.
+  // Glyphs extend ~0.5*fsize above baseline, so visual centre ≈ peak - 0.3*fsize.
+  const textVisualCy = hasOffset ? lcy
+    : isArcDown  ? (py + dist - fsize * 0.3)
+    : isArcStyle ? (py - dist - fsize * 0.3)
+    :               lcy - fsize * 0.3;
 
   // Subtitle
   const hasSub  = m.subtitle && m.subtitle.trim();
@@ -868,7 +873,7 @@ function drawLabel(m, idx) {
     g.appendChild(addTextOnPath(svgNS, spid, m.subtitle.toUpperCase(), subSize, 1.5, subFill, '#000000', false, zoomScale, filtRef, outlineW * 0.7));
   }
 
-  addDragHandle(lcx, lcy, half * 2, fsize * 1.6);
+  addDragHandle(lcx, textVisualCy, half * 2, fsize * 2);
   svg.appendChild(g);
   pinLayer.appendChild(svg);
 }
