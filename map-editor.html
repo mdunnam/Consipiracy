@@ -846,9 +846,11 @@ function drawLabel(m, idx) {
     lcx = px;
   }
 
-  // Arc peak = lcy ± sagitta (where text visually sits), always, whether dragged or not.
-  // Stem goes from pin centre to arc peak so the line visually reaches the text.
-  const arcPeakY = isArcStyle ? (isArcDown ? lcy + sagitta : lcy - sagitta) : lcy;
+  // Arc peak for arc-up = top of arc (lcy - sagitta). For arc-down, stem ends at the
+  // chord (lcy) = top of the downward arc, nearest the pin. Flat/dragged use lcy directly.
+  const arcPeakY = isArcStyle
+    ? (isArcDown ? lcy : lcy - sagitta)
+    : lcy;
   const stem = document.createElementNS(svgNS, 'line');
   stem.setAttribute('x1', String(px));
   stem.setAttribute('y1', String(py));
