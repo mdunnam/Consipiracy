@@ -846,10 +846,11 @@ function drawLabel(m, idx) {
     lcx = px;
   }
 
-  // Arc peak for arc-up = top of arc (lcy - sagitta). For arc-down, stem ends at the
-  // chord (lcy) = top of the downward arc, nearest the pin. Flat/dragged use lcy directly.
+  // Arc peak = lcy ± sagitta — the midpoint of the arc where the centre letter sits.
+  // arc-up: peak is above chord (lcy - sagitta). arc-down: peak is below chord (lcy + sagitta).
+  // Stem ends at the arc peak so it visually meets the text centre in all cases.
   const arcPeakY = isArcStyle
-    ? (isArcDown ? lcy : lcy - sagitta)
+    ? (isArcDown ? lcy + sagitta : lcy - sagitta)
     : lcy;
   const stem = document.createElementNS(svgNS, 'line');
   stem.setAttribute('x1', String(px));
