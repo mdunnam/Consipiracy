@@ -422,11 +422,14 @@ function startLabelDrag(idx, e) {
   const sag0    = isArc0 ? r0 - Math.sqrt(r0 * r0 - half0 * half0) : 0;
   const sCv0    = style0 === 's-curve' ? fsize0 * 0.55 : 0;
   const initTx = m.labelDx != null ? px + (m.labelDx / 100) * mapW : px;
+  // initTy must equal lcy (chord) for the given style — not the visual arc peak.
+  // Reason: when stored as textCy, drawLabel sets lcy=textCy and derives arcPeakY from there.
+  // Using lcy means zero displacement on first drag start → no jump.
   const initTy = m.labelDy != null
     ? py + (m.labelDy / 100) * mapH
-    : isArcD0 ? (py + dist0 - sag0)   // arc-down: chord = top of arc (stem ends here)
-    : isArc0  ? (py - dist0)           // arc-up:   arc peak = lcy - sagitta = py - dist
-    : (py - dist0 + sag0 + sCv0);     // flat / s-curve: chord = lcy
+    : isArcD0 ? (py + dist0 - sag0)          // arc-down lcy
+    : isArc0  ? (py - dist0 + sag0 + sCv0)   // arc-up   lcy
+    : (py - dist0 + sag0 + sCv0);            // flat/s-curve lcy
   _labelDrag = { idx, initTx, initTy, startX: e.clientX, startY: e.clientY };
   document.addEventListener('mousemove', _onLabelDragMove);
   document.addEventListener('mouseup',   _onLabelDragEnd);
