@@ -853,20 +853,20 @@ function drawLabel(m, idx) {
     lcx = px;
   }
 
-  // Stem ends at lcy (chord, nearest the pin).
-  // For arc-up:   chord is below text; arc curves up from here — line stops before text ✓
-  // For arc-down: chord is above text; arc curves down from here — line stops before text ✓
+  // Stem ends at the arc peak (py ± dist) for arcs — this is a fixed point, independent
+  // of sagitta/curvature/font, so the line never moves when those sliders change.
+  const stemY2 = (isArcStyle && !hasOffset) ? (isArcDown ? py + dist : py - dist) : lcy;
   const stem = document.createElementNS(svgNS, 'line');
   stem.setAttribute('x1', String(px));
   stem.setAttribute('y1', String(py));
   stem.setAttribute('x2', String(lcx));
-  stem.setAttribute('y2', String(lcy));
+  stem.setAttribute('y2', String(stemY2));
   stem.setAttribute('stroke', fill + '88');
   stem.setAttribute('stroke-width', String(Math.max(1.5, zoomScale * 3)));
   g.appendChild(stem);
 
-  // Hitbox at arc peak (visual text centre) − half cap-height.
-  const hitCy = isArcStyle && !hasOffset
+  // Hitbox at arc peak − half cap-height.
+  const hitCy = (isArcStyle && !hasOffset)
     ? (isArcDown ? py + dist : py - dist) - fsize * 0.35
     : lcy - fsize * 0.35;
 
