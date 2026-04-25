@@ -424,8 +424,9 @@ function startLabelDrag(idx, e) {
   const initTx = m.labelDx != null ? px + (m.labelDx / 100) * mapW : px;
   const initTy = m.labelDy != null
     ? py + (m.labelDy / 100) * mapH
-    : isArcD0 ? (py + dist0 - sag0)
-    : (py - dist0 + sag0 + sCv0);
+    : isArcD0 ? (py + dist0 - sag0)   // arc-down: chord = top of arc (stem ends here)
+    : isArc0  ? (py - dist0)           // arc-up:   arc peak = lcy - sagitta = py - dist
+    : (py - dist0 + sag0 + sCv0);     // flat / s-curve: chord = lcy
   _labelDrag = { idx, initTx, initTy, startX: e.clientX, startY: e.clientY };
   document.addEventListener('mousemove', _onLabelDragMove);
   document.addEventListener('mouseup',   _onLabelDragEnd);
@@ -846,11 +847,12 @@ function drawLabel(m, idx) {
     lcx = px;
   }
 
-  // Arc peak = lcy ± sagitta — the midpoint of the arc where the centre letter sits.
-  // arc-up: peak is above chord (lcy - sagitta). arc-down: peak is below chord (lcy + sagitta).
-  // Stem ends at the arc peak so it visually meets the text centre in all cases.
+  // Where the stem ends and the hitbox is centred:
+  //   arc-up:   top of arc = lcy - sagitta (farthest from pin, where text peaks)
+  //   arc-down: top of arc = lcy (the chord, nearest the pin — line stops before text)
+  //   flat/s-curve/dragged: lcy directly
   const arcPeakY = isArcStyle
-    ? (isArcDown ? lcy + sagitta : lcy - sagitta)
+    ? (isArcDown ? lcy : lcy - sagitta)
     : lcy;
   const stem = document.createElementNS(svgNS, 'line');
   stem.setAttribute('x1', String(px));
