@@ -408,23 +408,15 @@ function startLabelDrag(idx, e) {
   const mapH = pinLayer.offsetHeight;
   const px  = m.x / 100 * mapW;
   const py  = m.y / 100 * mapH;
-  // Current chord centre — exactly what drawLabel uses as lcy.
-  // Must replicate the lcy formula so the drag anchor is at the chord (no jump on click).
-  const dist0      = m.labelDistance || 30;
-  const fsize0     = (m.labelSize || 11) * zoomScale;
-  const half0      = (m.name.length * fsize0 * 0.68 + (m.name.length - 1) * 2.5) * 0.85;
-  const curvature0 = m.labelRadius || 200;
-  const style0     = m.labelStyle || 'flat';
-  const isArcDown0 = style0 === 'arc-down';
-  const isArc0     = style0 === 'arc-up' || isArcDown0;
-  const r0         = isArc0 ? Math.max(half0, half0 * 400 / curvature0) : 1;
-  const sagitta0   = isArc0 ? r0 - Math.sqrt(r0 * r0 - half0 * half0) : 0;
-  const sCurve0    = style0 === 's-curve' ? fsize0 * 0.55 : 0;
+  // initTy = arc peak for arc styles (where text visually is), chord for flat/s-curve, dragged for offset
+  const dist0  = m.labelDistance || 30;
+  const style0 = m.labelStyle || 'flat';
+  const isArcD0 = style0 === 'arc-down';
+  const isArc0  = style0 === 'arc-up' || isArcD0;
   const initTx = m.labelDx != null ? px + (m.labelDx / 100) * mapW : px;
   const initTy = m.labelDy != null
     ? py + (m.labelDy / 100) * mapH
-    : isArcDown0 ? (py + dist0 - sagitta0)
-    : (py - dist0 + sagitta0 + sCurve0);
+    : isArcD0 ? py + dist0 : py - dist0;
   _labelDrag = { idx, initTx, initTy, startX: e.clientX, startY: e.clientY };
   document.addEventListener('mousemove', _onLabelDragMove);
   document.addEventListener('mouseup',   _onLabelDragEnd);
@@ -845,22 +837,22 @@ function drawLabel(m, idx) {
     lcx = px;
   }
 
-  // Stem: pin centre → chord (lcy) where the arc path begins.
-  // The arc then sweeps from lcy up/down to the text, making the full connection visual.
+  // Stem: pin centre → arc peak (py±dist) for arcs, chord (lcy) for flat/s-curve/dragged.
+  // Arc peak = where text visually sits (midpoint of arc); chord = where path endpoints sit.
+  const stemY2 = (!hasOffset && isArcStyle)
+    ? (isArcDown ? py + dist : py - dist)
+    : lcy;
   const stem = document.createElementNS(svgNS, 'line');
   stem.setAttribute('x1', String(px));
   stem.setAttribute('y1', String(py));
   stem.setAttribute('x2', String(lcx));
-  stem.setAttribute('y2', String(lcy));
+  stem.setAttribute('y2', String(stemY2));
   stem.setAttribute('stroke', fill + '88');
   stem.setAttribute('stroke-width', String(Math.max(1.5, zoomScale * 3)));
   g.appendChild(stem);
 
-  // Hitbox centred on visual text midpoint: arc peak ± half cap-height.
-  const arcPeakY = isArcStyle && !hasOffset
-    ? (isArcDown ? py + dist : py - dist)
-    : lcy;
-  const hitCy = arcPeakY - fsize * 0.35;
+  // Hitbox at arc peak − half cap-height (where text glyphs visually are).
+  const hitCy = stemY2 - fsize * 0.35;
 
   // Subtitle
   const hasSub  = m.subtitle && m.subtitle.trim();
