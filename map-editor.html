@@ -408,8 +408,8 @@ function startLabelDrag(idx, e) {
   const mapH = pinLayer.offsetHeight;
   const px  = m.x / 100 * mapW;
   const py  = m.y / 100 * mapH;
-  // Current text-centre in pinLayer px — must match exactly what drawLabel renders
-  const dist0 = m.labelDistance || 30;  // unscaled, same as drawLabel
+  // Current text-centre in pinLayer px — must match hitbox (arc peak for arcs)
+  const dist0 = m.labelDistance || 30;
   const initTx = m.labelDx != null ? px + (m.labelDx / 100) * mapW : px;
   const initTy = m.labelDy != null ? py + (m.labelDy / 100) * mapH : py - dist0;
   _labelDrag = { idx, initTx, initTy, startX: e.clientX, startY: e.clientY };
@@ -817,18 +817,12 @@ function drawLabel(m, idx) {
 
   const isArcDown  = style === 'arc-down';
   const isArcStyle = style === 'arc-up' || isArcDown;
-  // Clamp sagitta so the chord never reaches or passes the pin.
-  // Raw r/sagitta from the curvature slider; then cap sagitta at (dist - 2) px.
-  const rawR       = isArcStyle ? Math.max(half, half * 400 / curvature) : 1;
-  const rawSagitta = isArcStyle ? rawR - Math.sqrt(rawR * rawR - half * half) : 0;
-  const sagitta    = Math.min(rawSagitta, dist > 2 ? dist - 2 : 0);
-  // Recalculate r so arc peak stays at py±dist even after sagitta clamp
-  const r = (isArcStyle && sagitta > 0 && sagitta < rawSagitta)
-              ? (half * half + sagitta * sagitta) / (2 * sagitta)
-              : rawR;
+  // r and sagitta come only from the curvature slider — completely independent of dist.
+  const r       = isArcStyle ? Math.max(half, half * 400 / curvature) : 1;
+  const sagitta = isArcStyle ? r - Math.sqrt(r * r - half * half) : 0;
   const sCurveComp = style === 's-curve' ? fsize * 0.55 : 0;
 
-  // Text chord centre (lcx, lcy)
+  // Text chord centre (lcx, lcy).  Arc peak = py ± dist (exactly dist from pin).
   let lcy, lcx;
   if (hasOffset) {
     lcx = textCx;
@@ -838,19 +832,19 @@ function drawLabel(m, idx) {
     lcx = px;
   }
 
-  // Stem — pin centre to text chord centre (matches where the SVG path begins)
+  // Stem: pin centre → arc peak (py ± dist), keeping distance meaning clear.
+  // For dragged labels use lcy directly.
+  const stemY2 = hasOffset ? lcy : (isArcStyle ? (isArcDown ? py + dist : py - dist) : lcy);
   const stem = document.createElementNS(svgNS, 'line');
   stem.setAttribute('x1', String(px));
   stem.setAttribute('y1', String(py));
   stem.setAttribute('x2', String(lcx));
-  stem.setAttribute('y2', String(lcy));
+  stem.setAttribute('y2', String(stemY2));
   stem.setAttribute('stroke', fill + '88');
   stem.setAttribute('stroke-width', String(Math.max(1.5, zoomScale * 3)));
   g.appendChild(stem);
 
-  // Hitbox centred on the visual midpoint of the text glyphs.
-  // Cap-height midpoint sits ~0.35*fsize above the baseline.
-  // For arcs the baseline peak (where text is highest) is py±dist, not the chord lcy.
+  // Hitbox centred on the visual midpoint of the text glyphs (arc peak − half cap-height).
   const hitCy = (isArcStyle && !hasOffset)
     ? (isArcDown ? py + dist : py - dist) - fsize * 0.35
     : lcy - fsize * 0.35;
