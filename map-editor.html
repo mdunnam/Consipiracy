@@ -409,7 +409,7 @@ function startLabelDrag(idx, e) {
   const px  = m.x / 100 * mapW;
   const py  = m.y / 100 * mapH;
   // Current text-centre in pinLayer px — must match exactly what drawLabel renders
-  const dist0 = (m.labelDistance || 30) * zoomScale;
+  const dist0 = m.labelDistance || 30;  // unscaled, same as drawLabel
   const initTx = m.labelDx != null ? px + (m.labelDx / 100) * mapW : px;
   const initTy = m.labelDy != null ? py + (m.labelDy / 100) * mapH : py - dist0;
   _labelDrag = { idx, initTx, initTy, startX: e.clientX, startY: e.clientY };
@@ -679,7 +679,7 @@ function drawLabel(m, idx) {
   const svgNS  = 'http://www.w3.org/2000/svg';
   const rot    = m.labelRotate   || 0;
   const style  = m.labelStyle    || 'flat';
-  const dist   = (m.labelDistance || 30) * zoomScale;
+  const dist   = m.labelDistance || 30;  // screen px, not scaled — slider = actual px distance
   const fsize  = (m.labelSize    || 11) * zoomScale;
   const fill   = m.labelColor    || '#ffffff';
   const outline= m.labelOutline  || '#000000';
@@ -817,8 +817,15 @@ function drawLabel(m, idx) {
 
   const isArcDown  = style === 'arc-down';
   const isArcStyle = style === 'arc-up' || isArcDown;
-  const r          = isArcStyle ? Math.max(half, half * 400 / curvature) : 1;
-  const sagitta    = isArcStyle ? r - Math.sqrt(r * r - half * half) : 0;
+  // Clamp sagitta so the chord never reaches or passes the pin.
+  // Raw r/sagitta from the curvature slider; then cap sagitta at (dist - 2) px.
+  const rawR       = isArcStyle ? Math.max(half, half * 400 / curvature) : 1;
+  const rawSagitta = isArcStyle ? rawR - Math.sqrt(rawR * rawR - half * half) : 0;
+  const sagitta    = Math.min(rawSagitta, dist > 2 ? dist - 2 : 0);
+  // Recalculate r so arc peak stays at py±dist even after sagitta clamp
+  const r = (isArcStyle && sagitta > 0 && sagitta < rawSagitta)
+              ? (half * half + sagitta * sagitta) / (2 * sagitta)
+              : rawR;
   const sCurveComp = style === 's-curve' ? fsize * 0.55 : 0;
 
   // Text chord centre (lcx, lcy)
@@ -861,9 +868,15 @@ function drawLabel(m, idx) {
 
   const pid  = 'lp-'  + idx;
   const spid = 'lps-' + idx;
-  defs.appendChild(buildPath(svgNS, pid,  lcx, lcy,                   half,    r,    style,    curvature));
-  if (hasSub)
-    defs.appendChild(buildPath(svgNS, spid, lcx, lcy + fsize + subOff, subHalf, subR, subStyle, subCurv));
+  // Paths go inside <g> (not defs) so they share the rotation transform — fixes rotation slider
+  const mainPath = buildPath(svgNS, pid, lcx, lcy, half, r, style, curvature);
+  mainPath.setAttribute('fill', 'none'); mainPath.setAttribute('stroke', 'none');
+  g.appendChild(mainPath);
+  if (hasSub) {
+    const subPath = buildPath(svgNS, spid, lcx, lcy + fsize + subOff, subHalf, subR, subStyle, subCurv);
+    subPath.setAttribute('fill', 'none'); subPath.setAttribute('stroke', 'none');
+    g.appendChild(subPath);
+  }
 
   g.appendChild(addTextOnPath(svgNS, pid,  m.name.toUpperCase(),       fsize,   letterSpacing, fill,    outline, true,  zoomScale, null,    outlineW));
   g.appendChild(addTextOnPath(svgNS, pid,  m.name.toUpperCase(),       fsize,   letterSpacing, fill,    outline, false, zoomScale, filtRef, outlineW));
