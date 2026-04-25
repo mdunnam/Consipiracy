@@ -1182,7 +1182,12 @@ function livePreview(i) {
     subOffset:    parseInt(document.getElementById('el-suboff')?.value  || markers[i].subOffset || 14),
     subColor:     document.getElementById('el-subcolor')?.value || markers[i].subColor     || '#aaaaaa',
     subRadius:    parseInt(document.getElementById('el-subradius')?.value || markers[i].subRadius || 150),
+    // Sliders must override any manual drag offset — otherwise hasOffset=true kills rotation/distance
+    labelDx: undefined,
+    labelDy: undefined,
   });
+  delete tmp.labelDx;
+  delete tmp.labelDy;
   drawLabel(tmp, i);
 }
 
