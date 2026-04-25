@@ -422,13 +422,13 @@ function startLabelDrag(idx, e) {
   const sag0    = isArc0 ? r0 - Math.sqrt(r0 * r0 - half0 * half0) : 0;
   const sCv0    = style0 === 's-curve' ? fsize0 * 0.55 : 0;
   const initTx = m.labelDx != null ? px + (m.labelDx / 100) * mapW : px;
-  // initTy = lcy for the given style so stored textCy reproduces exact same arc. No jump.
-  // With the new lcy formula (chord = py±dist for arcs), this is just py±dist.
+  // initTy = lcy exactly: arc-down = py+dist0-sag0, arc-up = py-dist0+sag0, flat = py-dist0+sCv0
+  // Storing this as textCy reproduces lcy unchanged → zero jump on first drag.
   const initTy = m.labelDy != null
     ? py + (m.labelDy / 100) * mapH
-    : isArcD0 ? (py + dist0)    // arc-down chord = py + dist
-    : isArc0  ? (py - dist0)    // arc-up   chord = py - dist
-    : (py - dist0 + sCv0);     // flat / s-curve
+    : isArcD0 ? (py + dist0 - sag0)
+    : isArc0  ? (py - dist0 + sag0)
+    : (py - dist0 + sCv0);
   _labelDrag = { idx, initTx, initTy, startX: e.clientX, startY: e.clientY };
   document.addEventListener('mousemove', _onLabelDragMove);
   document.addEventListener('mouseup',   _onLabelDragEnd);
@@ -840,24 +840,22 @@ function drawLabel(m, idx) {
   const sCurveComp = style === 's-curve' ? fsize * 0.55 : 0;
 
   // Chord centre (lcx, lcy).
-  // For arc styles: chord = exactly py ± dist, arc curves FURTHER from pin.
-  //   dist slider = distance from pin to chord (start of arc), independent of curvature/font.
-  // For flat/s-curve: lcy = py - dist + sCurveComp (existing behaviour).
+  // Arc peak = py ± dist always. Chord = py ± dist ∓ sagitta (nearer the pin).
+  // This makes dist = visual distance from pin to text centre, independent of curvature/font.
   let lcy, lcx;
   if (hasOffset) {
     lcx = textCx;
     lcy = textCy;
   } else {
-    lcy = isArcDown  ? (py + dist)
-        : isArcStyle ? (py - dist)
-        : (py - dist + sCurveComp);
+    lcy = isArcDown  ? (py + dist - sagitta)      // chord below pin; arc peak at py+dist
+        : isArcStyle ? (py - dist + sagitta)      // chord above pin; arc peak at py-dist
+        : (py - dist + sCurveComp);               // flat / s-curve
     lcx = px;
   }
 
-  // Stem ends at lcy — the chord, which is:
-  //   arc-up:   bottom of arc (nearest pin); arc curves upward away from line ✓
-  //   arc-down: top of arc (nearest pin); arc curves downward away from line ✓
-  //   flat/s-curve/dragged: text position directly
+  // Stem ends at lcy (chord, nearest the pin).
+  // For arc-up:   chord is below text; arc curves up from here — line stops before text ✓
+  // For arc-down: chord is above text; arc curves down from here — line stops before text ✓
   const stem = document.createElementNS(svgNS, 'line');
   stem.setAttribute('x1', String(px));
   stem.setAttribute('y1', String(py));
@@ -867,9 +865,9 @@ function drawLabel(m, idx) {
   stem.setAttribute('stroke-width', String(Math.max(1.5, zoomScale * 3)));
   g.appendChild(stem);
 
-  // Hitbox centre: arc-up text is above lcy (arc peak = lcy - sagitta); arc-down below (lcy + sagitta).
+  // Hitbox at arc peak (visual text centre) − half cap-height.
   const hitCy = isArcStyle && !hasOffset
-    ? (isArcDown ? lcy + sagitta - fsize * 0.35 : lcy - sagitta - fsize * 0.35)
+    ? (isArcDown ? py + dist : py - dist) - fsize * 0.35
     : lcy - fsize * 0.35;
 
   // Subtitle
