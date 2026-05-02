@@ -1417,6 +1417,19 @@ img {
   filter: blur(6px);
   opacity: 0.45;
 }
+.ebook-locked > .protected-loading {
+  filter: none;
+  opacity: 1;
+  text-align: center;
+  padding: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+}
+.ebook-locked > .protected-error {
+  color: #cc6666;
+}
 
 /* Gradient fade at the bottom of the free preview, leading into the locked zone */
 .ebook-preview-fade {

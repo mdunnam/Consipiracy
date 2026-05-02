@@ -966,10 +966,6 @@
       <a id="open-ebook-btn" href="ebook.html" class="btn btn-gold" style="font-size:1rem; padding:1rem 2.5rem;">📖 Open the Full eBook</a>
       <a href="index.html" class="btn btn-outline">← Return to Archive</a>
     </div>
-    <div id="manual-unlock" style="display:none;margin-top:2rem;text-align:center;">
-      <p style="font-size:0.8rem;color:#4a4a4a;font-family:var(--font-mono);margin-bottom:0.8rem;">Taking too long? Click below to unlock manually.</p>
-      <button onclick="manualUnlock()" class="btn btn-gold" style="font-size:0.9rem;">🔓 Unlock Now</button>
-    </div>
   </section>
 
   <script>
@@ -1044,24 +1040,6 @@
       }
     })();
 
-    // Show manual fallback after 5s in case fetch is blocked/slow
-    setTimeout(() => {
-      const box = document.getElementById('manual-unlock');
-      const title = document.getElementById('title');
-      if (box && title && title.textContent.includes('Verifying')) {
-        box.style.display = 'block';
-      }
-    }, 5000);
-
-    function manualUnlock() {
-      const params    = new URLSearchParams(window.location.search);
-      const sessionId = params.get('session_id');
-      if (sessionId && sessionId.match(/^cs_/)) {
-        localStorage.setItem('ta_unlock', 'full_access');
-        localStorage.setItem('ta_session_id', sessionId);
-        window.location.href = 'ebook.html?session_id=' + encodeURIComponent(sessionId);
-      }
-    }
   </script>
 
   <script src="js/app.js"></script>

@@ -337,34 +337,79 @@ function initContentProtection() {
  * removes blur and hides the paywall card.
  * Token is set by ebook-success.html after Stripe payment confirmation.
  */
-function initEbookPaywall() {
+async function initEbookPaywall() {
   const locked         = document.querySelector('.ebook-locked');
   const paywallSection = document.getElementById('paywall-section');
   const previewFade    = document.querySelector('.ebook-preview-fade');
   if (!locked) return;
 
-  // If URL has ?session_id= (e.g. landed here directly from Stripe),
-  // verify it and set unlock token without needing ebook-success.html
-  const urlSessionId = new URLSearchParams(window.location.search).get('session_id');
-  if (urlSessionId && urlSessionId.match(/^cs_/) && localStorage.getItem('ta_unlock') !== 'full_access') {
-    // Set unlock immediately (session already verified on success page)
-    // then confirm with server in background
+  const showLocked = (message = 'Access could not be verified. Please restore access with your emailed session link.') => {
+    localStorage.removeItem('ta_unlock');
+    localStorage.removeItem('ta_session_id');
+    locked.classList.remove('unlocked');
+    locked.innerHTML = `<div class="protected-loading protected-error">${message}</div>`;
+  };
+
+  const injectProtectedContent = async (sessionId) => {
+    const res = await fetch(`/ebook-content/${encodeURIComponent(sessionId)}`, {
+      headers: { Accept: 'text/html' },
+    });
+    if (!res.ok) throw new Error('Protected content request failed.');
+    const html = await res.text();
+    locked.outerHTML = html;
+    return document.getElementById('ebook-locked');
+  };
+
+  const unlockWithSession = async (sessionId, { cleanUrl = false } = {}) => {
+    if (!/^cs_[a-zA-Z0-9_]+$/.test(sessionId || '')) {
+      showLocked('Invalid session ID.');
+      return;
+    }
+
+    const res = await fetch(`/verify-session/${encodeURIComponent(sessionId)}`);
+    const data = await res.json();
+    if (!data.valid) {
+      showLocked('Session not found or payment incomplete.');
+      return;
+    }
+
+    const unlocked = await injectProtectedContent(sessionId);
     localStorage.setItem('ta_unlock', 'full_access');
-    localStorage.setItem('ta_session_id', urlSessionId);
-    // Clean URL and reload to show unlocked state
-    window.location.replace(window.location.pathname);
+    localStorage.setItem('ta_session_id', sessionId);
+
+    const activeLocked = unlocked || document.getElementById('ebook-locked');
+    if (activeLocked) activeLocked.classList.add('unlocked');
+    if (paywallSection) paywallSection.style.display = 'none';
+    if (previewFade)    previewFade.style.display    = 'none';
+
+    if (!document.getElementById('ebook-unlocked-banner') && activeLocked) {
+      const banner = document.createElement('div');
+      banner.id = 'ebook-unlocked-banner';
+      banner.style.cssText = 'text-align:center;padding:1.5rem;font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.2em;color:#4a7a4a;border-bottom:1px solid #1a1a1a;margin-bottom:2rem;';
+      banner.innerHTML = '&#9660; FULL ARCHIVE UNLOCKED &#9660;';
+      activeLocked.insertAdjacentElement('beforebegin', banner);
+    }
+
+    if (cleanUrl && window.history.replaceState) {
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  };
+
+  // If URL has ?session_id=, verify it before unlocking.
+  const urlSessionId = new URLSearchParams(window.location.search).get('session_id');
+  if (urlSessionId) {
+    await unlockWithSession(urlSessionId, { cleanUrl: true });
     return;
   }
 
   const token = localStorage.getItem('ta_unlock');
-  if (token === 'full_access') {
-    locked.classList.add('unlocked');
-    if (paywallSection) paywallSection.style.display = 'none';
-    if (previewFade)    previewFade.style.display    = 'none';
-    const banner = document.createElement('div');
-    banner.style.cssText = 'text-align:center;padding:1.5rem;font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.2em;color:#4a7a4a;border-bottom:1px solid #1a1a1a;margin-bottom:2rem;';
-    banner.innerHTML = '&#9660; FULL ARCHIVE UNLOCKED &#9660;';
-    locked.insertAdjacentElement('beforebegin', banner);
+  const storedSessionId = localStorage.getItem('ta_session_id');
+  if (token === 'full_access' && storedSessionId) {
+    try {
+      await unlockWithSession(storedSessionId);
+    } catch (err) {
+      showLocked();
+    }
   }
 }
 

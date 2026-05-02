@@ -17,6 +17,7 @@
 
 require('dotenv').config();
 const express      = require('express');
+const fs           = require('fs');
 const path         = require('path');
 const helmet       = require('helmet');
 const rateLimit    = require('express-rate-limit');
@@ -24,6 +25,9 @@ const stripe       = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const { SESv2Client, SendEmailCommand } = require('@aws-sdk/client-sesv2');
 
 const ses = new SESv2Client({ region: process.env.AWS_REGION || 'us-east-1' });
+const SITE_ROOT = __dirname;
+const PROTECTED_DIR = path.join(SITE_ROOT, 'protected');
+const EBOOK_CONTENT_FILE = path.join(PROTECTED_DIR, 'ebook-content.html');
 
 /**
  * Sends a purchase confirmation email with the customer's re-access link.
@@ -85,6 +89,15 @@ async function sendPurchaseEmail(toEmail, sessionId) {
 const app  = express();
 const PORT = process.env.PORT || 3000;
 
+async function getPaidCheckoutSession(sessionId) {
+  if (!/^cs_[a-zA-Z0-9_]+$/.test(sessionId || '')) {
+    return null;
+  }
+
+  const session = await stripe.checkout.sessions.retrieve(sessionId);
+  return session.payment_status === 'paid' ? session : null;
+}
+
 /* ── Security headers ────────────────────────────────────────────────────── */
 
 app.use(helmet({
@@ -128,8 +141,56 @@ app.use('/webhook', express.raw({ type: 'application/json' }));
 // JSON body parser for all other routes
 app.use(express.json());
 
-// Serve static site files
-app.use(express.static(path.join(__dirname)));
+const blockedStaticPrefixes = [
+  '/autopilot',
+  '/deploy',
+  '/docs',
+  '/node_modules',
+  '/protected',
+  '/stripe-cli',
+];
+
+const blockedStaticFiles = new Set([
+  '/.env',
+  '/.env.example',
+  '/.gitignore',
+  '/apply-redesign.js',
+  '/build-ebook.js',
+  '/ecosystem.config.js',
+  '/ebook-head.tmp',
+  '/generate-ebook-pdf.js',
+  '/make-preview.js',
+  '/package-lock.json',
+  '/package.json',
+  '/server.js',
+  '/stripe-cli.zip',
+  '/update-footers.js',
+]);
+
+app.use((req, res, next) => {
+  let pathname;
+  try {
+    pathname = decodeURIComponent(req.path || '');
+  } catch (err) {
+    return res.sendStatus(400);
+  }
+  const lowerPath = pathname.toLowerCase();
+
+  if (
+    blockedStaticFiles.has(pathname) ||
+    blockedStaticPrefixes.some(prefix => pathname === prefix || pathname.startsWith(`${prefix}/`)) ||
+    lowerPath.endsWith('.zip') ||
+    lowerPath.endsWith('.tmp') ||
+    lowerPath.endsWith('.pdf')
+  ) {
+    return res.sendStatus(404);
+  }
+
+  next();
+});
+
+// Serve public site files from the project root after blocking source/config paths.
+app.use(express.static(SITE_ROOT));
 
 /* ── POST /create-checkout-session ──────────────────────────────────────── */
 
@@ -188,12 +249,32 @@ app.get('/verify-session/:id', async (req, res) => {
   }
 
   try {
-    const session = await stripe.checkout.sessions.retrieve(id);
-    const paid    = session.payment_status === 'paid';
-    res.json({ valid: paid });
+    const session = await getPaidCheckoutSession(id);
+    res.json({ valid: Boolean(session) });
   } catch (err) {
     console.error('Session verify error:', err.message);
     res.status(400).json({ valid: false, error: 'Session not found.' });
+  }
+});
+
+/* ── GET /ebook-content/:id ─────────────────────────────────────────────── */
+
+/**
+ * Returns the paid ebook chapters only after Stripe confirms a paid session.
+ */
+app.get('/ebook-content/:id', apiLimiter, async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const session = await getPaidCheckoutSession(id);
+    if (!session) {
+      return res.status(403).send('Access denied.');
+    }
+
+    return res.type('html').sendFile(EBOOK_CONTENT_FILE);
+  } catch (err) {
+    console.error('Ebook content access error:', err.message);
+    return res.status(400).send('Access could not be verified.');
   }
 });
 
@@ -300,7 +381,6 @@ app.post('/resend-access', apiLimiter, async (req, res) => {
 
 
 /* ── In-memory depth store (survives PM2 restarts via file) ─────────────── */
-const fs   = require('fs');
 const DEPTH_FILE = '/tmp/ta-depth.json';
 
 function loadDepths() {

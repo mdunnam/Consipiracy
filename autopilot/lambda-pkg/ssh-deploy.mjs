@@ -83,6 +83,24 @@ function sshConnectOpts(cfg) {
   };
 }
 
+function htmlEscape(value) {
+  return String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function shellQuote(value) {
+  return `'${String(value).replace(/'/g, `'\\''`)}'`;
+}
+
+function assertSafeSlug(value, label) {
+  if (!/^[a-z0-9-]+$/i.test(value || '')) {
+    throw new Error(`Unsafe ${label}: ${value}`);
+  }
+}
+
 // ─── High-level deploy operations ────────────────────────────────────────────
 
 /**
@@ -94,6 +112,8 @@ function sshConnectOpts(cfg) {
  * @param {string} html
  */
 export async function deployFile(cfg, webRoot, topic, html) {
+  assertSafeSlug(topic.category, 'category');
+  assertSafeSlug(topic.slug, 'slug');
   const remotePath = `${webRoot}/topics/${topic.category}/${topic.slug}.html`;
   console.log(`SFTP write → ${remotePath}`);
   await sftpWrite(cfg, remotePath, html);
@@ -108,6 +128,8 @@ export async function deployFile(cfg, webRoot, topic, html) {
  * @param {Object} content - AI content (used for subtitle on card)
  */
 export async function updateSectionIndex(cfg, webRoot, topic, content) {
+  assertSafeSlug(topic.category, 'category');
+  assertSafeSlug(topic.slug, 'slug');
   const indexPath = `${webRoot}/topics/${topic.category}/index.html`;
   let html;
   try {
@@ -118,10 +140,10 @@ export async function updateSectionIndex(cfg, webRoot, topic, content) {
   }
 
   const card =
-    `<a href="${topic.slug}.html" class="topic-hub-card ga new-today">` +
-    `<span class="hub-cat">${topic.section}</span>` +
-    `<span class="hub-title">${topic.title}</span>` +
-    `<span class="hub-desc">${(content.subtitle || '').substring(0, 120)}</span>` +
+    `<a href="${htmlEscape(topic.slug)}.html" class="topic-hub-card ga new-today">` +
+    `<span class="hub-cat">${htmlEscape(topic.section)}</span>` +
+    `<span class="hub-title">${htmlEscape(topic.title)}</span>` +
+    `<span class="hub-desc">${htmlEscape((content.subtitle || '').substring(0, 120))}</span>` +
     `<span class="hub-new">NEW</span></a>`;
 
   // Inject directly after the first topic-hub-grid opening tag
@@ -149,8 +171,10 @@ export async function updateSectionIndex(cfg, webRoot, topic, content) {
  * @param {Object} content
  */
 export async function writeLatestTopic(cfg, webRoot, topic, content) {
+  assertSafeSlug(topic.category, 'category');
+  assertSafeSlug(topic.slug, 'slug');
   // Ensure the data directory exists
-  await sshExec(cfg, `mkdir -p ${webRoot}/data`);
+  await sshExec(cfg, `mkdir -p ${shellQuote(`${webRoot}/data`)}`);
 
   const payload = JSON.stringify({
     title:       topic.title,

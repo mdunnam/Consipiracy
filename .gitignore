@@ -6,7 +6,6 @@
 
 # ── Dependencies ──────────────────────────────────────────
 node_modules/
-package-lock.json
 
 # ── Build / dev scripts (not needed on server) ────────────
 generate-ebook-pdf.js
@@ -21,6 +20,7 @@ ebook-head.tmp
 # ── Stripe CLI (binary, not source) ───────────────────────
 stripe-cli/
 stripe-cli.zip
+autopilot/lambda.zip
 
 # ── Local working notes ───────────────────────────────────
 PLAN.md
