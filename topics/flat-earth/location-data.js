@@ -627,194 +627,290 @@ window.LOCATION_DATA = {
   }
 ,
   28: {
-    title: "Arctic Ocean",
-    zone: "Ocean", color: "#38bdf8",
-    position: "Inner zone — around North Pole",
-    summary: "Small, near the centre of the flat disc, directly below the sun's winter circuit path. Its shallow, frozen nature is consistent with the flat model's inner zones receiving less solar energy as the sun's circuit widens southward in winter.",
+    title: 'The DEW Line — America\'s Arctic Surveillance Ring',
+    zone: 'Suppressed', color: '#f87171',
+    position: 'Inner arc — Alaska to Greenland',
+    classification: 'USAF / NORAD — partially declassified',
+    first_recorded: 'Operational 1957',
+    summary: '63 radar stations strung across Alaska, northern Canada, and Greenland — forming a perfect surveillance ring on the flat earth map\'s inner arc. On the flat disc, the Soviet Union was right across the Bering Strait, not on the other side of a globe. The DEW Line\'s geometry makes sense only on the flat plane. Still operational today as the North Warning System.',
     analysis: [
-      "The Arctic Ocean is the smallest and shallowest of the world's oceans by official measurement. Its average depth is approximately 1,038 metres — less than one-quarter the depth of the Pacific. On the flat disc model, this is the central inner zone, surrounding the North Pole.",
-      "Its near-permanent ice cover is consistent with the flat plane's inner zones receiving the least time directly under the sun's circuit. The sun's annual path always remains south of this ring, except briefly at midsummer when its northernmost track grazes the inner edge.",
-      "Independent civilian research access to the Arctic Ocean above 80°N is severely restricted by overlapping military and economic interests of the bordering nations (US, Russia, Canada, Norway, Denmark/Greenland). Submarine mapping data remains largely classified."
+      'The Distant Early Warning (DEW) Line was a series of 63 radar stations built between 1954 and 1957 across the Arctic from Alaska through northern Canada to Greenland. Its official purpose: detect Soviet nuclear bombers approaching North America from the north.',
+      'On the flat azimuthal map, the DEW Line\'s geographic logic is immediately obvious. The Soviet Union was not on the other side of a globe from North America — it was directly across the Bering arc, just 82 km away at the narrowest point. A surveillance ring along the upper arc of the flat disc was the shortest and most direct defensive perimeter between the two superpowers. Military planners built it on the flat-plane geometry — not the globe.',
+      'The line was upgraded in 1985–93 as the North Warning System (NWS), with 47 modern unmanned radar installations running from Alaska to Baffin Island. The surveillance ring persists because the strategic reality has not changed. NORAD airspace protocols and overlapping military Air Defense Identification Zones (ADIZs) create an effective seal around the inner portion of the disc closest to the North Pole.',
+      'The Arctic zone above 80°N is one of the most restricted civilian access areas on the flat plane. Submarine mapping data for the Arctic Ocean remains largely classified. Several nations have competing territorial claims to the seafloor beneath the inner disc — claims that are impossible to adjudicate without independent access to the region.'
     ],
     facts: [
-      "Smallest and shallowest of the official oceans (avg depth 1,038m).",
-      "Surrounds the North Pole — the disc's geometric centre.",
-      "Permanent or near-permanent ice cover.",
-      "Civilian research access above 80°N is severely restricted."
+      '63 radar stations (1957): Alaska through northern Canada to Greenland.',
+      'Upgraded 1985–93 as North Warning System (NWS) — still fully operational.',
+      'On the flat map: a ring along the inner arc, directly facing Russia across the Bering arc.',
+      'Arctic ADIZ covers the entire inner arc — civilian airspace heavily restricted.'
     ],
-    significance: "The inner zone of the flat disc. Its small size and shallowness on the official record are consistent with the flat model's prediction of a small central feature surrounding the pole.",
-    related: [1, 2, 8]
+    significance: 'The DEW Line is Cold War confirmation that the US and USSR were inner-arc neighbours on the flat disc. Military planners built their entire Arctic defence on the flat-plane geometry. The surveillance ring traces the shape of the disc itself.',
+    sources: [
+      'USAF Air Defense Command — DEW Line construction records (partial)',
+      'NORAD — North Warning System operational documents',
+      'Diefenbaker, J. — Canadian parliamentary DEW Line debates (1955–57)'
+    ],
+    related: [1, 2, 62, 67]
   },
   29: {
-    title: "Mediterranean Sea",
-    zone: "Sea", color: "#38bdf8",
-    position: "Centre-upper arc — Europe/Africa",
-    summary: "The Roman lake — an enclosed, nearly non-tidal sea at the centre of the ancient world's civilisation cluster. Its enclosed nature and minimal tidal range (unlike open oceans) are more consistent with a contained flat-plane water body than an oceanic extension.",
+    title: 'Operation GLADIO — NATO\'s Secret Terror Network',
+    zone: 'Suppressed', color: '#f87171',
+    position: 'Centre-upper arc — Western Europe',
+    classification: 'NATO / CIA — partially declassified 1990',
+    first_recorded: 'Operational 1945; publicly confirmed 1990',
+    summary: 'The CIA-funded network of secret stay-behind armies across Western Europe, active 1945–1990. These covert forces committed bombings and assassinations that were blamed on communist groups — deliberate false flag terrorism. Italian Prime Minister Aldo Moro was kidnapped and murdered when he moved to expose the network. Confirmed by Italian parliamentary investigation in 1990.',
     analysis: [
-      "The Mediterranean is the cradle of Western civilisation. Its shores hosted the Phoenician, Greek, Egyptian, Roman, Byzantine, Ottoman, and modern European powers in continuous succession. The sea's nearly enclosed geography made it the world's premier trading basin for over three millennia.",
-      "Its tidal range is famously minimal — typically less than 30 cm, against 2-12 metres for open ocean coasts. The standard explanation invokes its near-enclosure and small surface area. The flat earth model offers an alternative: tides are gravitational responses on a flat plane, with the Mediterranean's minimal range reflecting its geometric position relative to the lunar circuit.",
-      "The Strait of Gibraltar — the sea's only natural connection to the Atlantic — is just 14 km wide at its narrowest. The Romans called it the Pillars of Hercules and treated it as the western boundary of the inhabited world. The myth encoded geographic understanding."
+      'Operation GLADIO was a NATO-wide programme of secret stay-behind paramilitary networks established across Western Europe after World War II. Funded and armed by the CIA and MI6, the networks were tasked with resistance operations in case of Soviet invasion. Their secondary function — committing terror attacks blamed on leftist groups to manipulate public opinion — was confirmed by Italian parliamentary investigation in 1990.',
+      'In Italy, the GLADIO network directly executed what became known as the "Strategy of Tension" — a campaign of bombings designed to terrorise the Italian electorate into rejecting the Communist Party. The 1969 Piazza Fontana bombing (Milan, 17 dead), the 1980 Bologna train station bombing (85 dead), and multiple other atrocities were eventually traced to GLADIO-linked operatives and neo-fascist groups operating under intelligence protection.',
+      'Italian Prime Minister Aldo Moro was kidnapped in March 1978 by the Red Brigades and held for 55 days before being murdered. Moro had been working to form a government that would include the Communist Party — a direct threat to the GLADIO strategy. His letters written in captivity explicitly state his belief that elements of the Italian state were complicit in his abduction and were actively preventing a rescue.',
+      'Judge Felice Casson discovered the GLADIO networks in 1990. Prime Minister Giulio Andreotti was forced to confirm their existence before parliament. Equivalent networks were then confirmed in Belgium, Switzerland, France, Germany, Greece, Turkey, and most other NATO members. The full scope of operations has never been publicly disclosed.'
     ],
     facts: [
-      "Cradle of Western civilisation — Phoenician through modern era.",
-      "Tidal range typically <30 cm — minimal compared to open oceans.",
-      "Connected to Atlantic only via 14-km-wide Strait of Gibraltar.",
-      "Site of Phoenician, Greek, Roman, Ottoman, and modern European naval power."
+      'CIA-NATO stay-behind network across Western Europe 1945–1990.',
+      'Linked to Bologna bombing (1980): 85 dead — Italy\'s worst post-war terrorist attack.',
+      'Aldo Moro murdered 1978 — his captivity letters reference state complicity.',
+      'Confirmed by Italian parliament 1990; similar networks found in all NATO states.',
+      'Full operational records remain classified in most countries.'
     ],
-    significance: "A nearly enclosed flat-plane basin. Its minimal tides distinguish it from open oceans and are more easily explained by flat-plane lunar gravitation than by globe-rotation Coriolis dynamics.",
-    related: [10, 26, 30, 68]
+    significance: 'GLADIO proves that Western governments planned and executed false flag terrorism against their own citizens for decades. The political violence attributed to communists was in significant measure conducted by state-sponsored operatives. This is confirmed by parliamentary investigation — not theory.',
+    sources: [
+      'Casson, F. — Italian parliamentary investigation testimony (1990)',
+      'Ganser, D. — "NATO\'s Secret Armies: Operation GLADIO and Terrorism in Western Europe" (2005)',
+      'Andreotti, G. — parliamentary admission, 24 October 1990',
+      'Moro, A. — letters from captivity (published in full 1978)'
+    ],
+    related: [10, 11, 34, 95, 97]
   },
   30: {
-    title: "Red Sea",
-    zone: "Sea", color: "#38bdf8",
-    position: "Right-centre arc — Egypt/Arabia",
-    summary: "The parting of the Red Sea in Exodus is fully consistent with a flat-plane, shallow-sea wind-tide event. Its perfectly straight channel orientation is noted by flat earth cartographers as consistent with the radial geography of the flat disc.",
+    title: 'Dimona — Israel\'s Secret Nuclear Arsenal',
+    zone: 'Suppressed', color: '#f87171',
+    position: 'Right-centre arc — Negev Desert, Israel',
+    classification: 'Israeli nuclear programme — officially unacknowledged',
+    first_recorded: 'Reactor operational 1963; publicly exposed 1986',
+    summary: 'The Negev Nuclear Research Centre at Dimona has been producing nuclear weapons since the early 1960s. Israel has never declared its nuclear programme to the IAEA, never signed the Nuclear Non-Proliferation Treaty, and operates a deliberate policy of ambiguity called "nuclear opacity." Technician Mordechai Vanunu photographed the facility in 1986 and was kidnapped by Mossad — he spent 18 years in prison, 11 in solitary confinement.',
     analysis: [
-      "The Red Sea is a long, narrow body of water separating Africa from the Arabian Peninsula. Its shape is unusually linear — a near-perfect channel running approximately northwest to southeast. On the flat azimuthal map, this orientation aligns radially with the disc's geometry, suggesting structural rather than tectonic origin.",
-      "The Red Sea crossing in the Book of Exodus describes a strong east wind blowing all night, parting the waters and exposing the seabed. This is a known meteorological-hydrological phenomenon called wind setdown — and it has been physically modelled as feasible at specific shallow-sea locations along the actual ancient routes. The biblical account is consistent with flat-plane shallow-sea fluid dynamics.",
-      "The sea's name has nothing to do with colour. The Hebrew Yam Suph means \"Sea of Reeds\" — a description consistent with the marshy, papyrus-rich shallow waters of the eastern Nile delta and the Bitter Lakes region, not the deep blue-green body now called the Red Sea on globe maps."
+      'The Negev Nuclear Research Centre near Dimona, Israel, was built with French assistance beginning in 1958 and became operational in 1963. It produces plutonium for nuclear weapons. Israel maintains a policy of "nuclear opacity" (amimut) — never confirming or denying its nuclear capability while refusing IAEA inspections.',
+      'The policy of opacity was formalised in a 1969 agreement between President Nixon and Prime Minister Golda Meir. In exchange for Israel maintaining deliberate ambiguity, the US agreed not to pressure Israel to sign the Nuclear Non-Proliferation Treaty. This agreement — made without any public or congressional disclosure — has held for over 50 years.',
+      'In September 1986, Mordechai Vanunu — a former Dimona technician — provided the Sunday Times with photographs taken inside the underground weapons production facility. The images confirmed both a weapons programme and chambers for producing lithium-6 (used in thermonuclear devices). The Mossad ran a honey-trap operation using a female agent to lure Vanunu to Rome, where he was drugged, abducted, and smuggled to Israel on a cargo ship.',
+      'Vanunu was convicted of treason in a secret trial and sentenced to 18 years — 11 in solitary confinement. Released in 2004, he was subjected to severe movement restrictions and repeatedly re-arrested for speaking to foreign journalists. Current independent estimates of Israel\'s nuclear stockpile range from 80 to 400 warheads — making it the sixth-largest nuclear arsenal on Earth, entirely outside the NPT framework.'
     ],
     facts: [
-      "Linear channel orientation aligned with flat-plane radial geometry.",
-      "Exodus crossing consistent with wind setdown — a documented hydrological phenomenon.",
-      "Hebrew \"Yam Suph\" — Sea of Reeds, not Red Sea.",
-      "Bordered by Egypt, Sudan, Eritrea, Saudi Arabia, Yemen."
+      'Reactor operational since 1963 — built with French assistance.',
+      'Israel has never signed the Nuclear Non-Proliferation Treaty.',
+      'Nixon–Meir 1969 agreement: US will not press Israel on nuclear opacity.',
+      'Mordechai Vanunu: photographed facility, kidnapped by Mossad, 18 years prison.',
+      'Estimated stockpile: 80–400 nuclear warheads — entirely outside IAEA oversight.'
     ],
-    significance: "The Exodus account is geographically and physically plausible on the flat plane. Standard biblical scholarship has steadily moved toward this interpretation — but rarely connects it to the broader cosmological implications.",
-    related: [12, 13, 29, 31, 41, 47]
+    significance: 'The only nuclear-armed state that officially does not exist as such. The US–Israel nuclear opacity arrangement is the most consequential double standard in the history of non-proliferation — and it was a deliberate presidential decision made without public knowledge.',
+    sources: [
+      'Vanunu, M. — Sunday Times photographs and testimony (1986)',
+      'Cohen, A. — "Israel and the Bomb" (1998)',
+      'NSA FOIA documents — Nixon–Meir nuclear understanding (partially released)',
+      'IAEA — Dimona facility inspection history (access denied on all occasions)'
+    ],
+    related: [13, 33, 94]
   },
   31: {
-    title: "Persian Gulf",
-    zone: "Sea", color: "#38bdf8",
-    position: "Right-centre arc",
-    summary: "The oil-rich shallow sea whose control underpins the entire petrodollar system. Its geographic position on the flat map — between the African, Arabian, and Asian arcs — made it the strategic prize of 20th-century imperial competition.",
+    title: 'USS Liberty — The Deliberate Attack Cover-Up',
+    zone: 'Suppressed', color: '#f87171',
+    position: 'Right-centre arc — Eastern Mediterranean',
+    classification: 'NSA / US Navy — partially declassified',
+    first_recorded: '8 June 1967',
+    summary: 'On 8 June 1967, Israeli air and naval forces attacked the USS Liberty — a US Navy NSA signals intelligence ship — for 75 minutes in international waters. 34 Americans were killed, 171 wounded. NSA intercepts prove Israeli forces identified the ship as American before the attack began. President Johnson ordered a cover-up the same day to protect the US-Israeli alliance.',
     analysis: [
-      "The Persian Gulf is a shallow extension of the Indian Ocean — never deeper than 90 metres, average depth around 50 metres. It contains roughly 60% of the world's proven oil reserves. The geological story is that it was once dry land that subsequently flooded; the flat-earth structural perspective is that it represents a low basin in the disc's outer arc.",
-      "The petrodollar system, established through the 1974 US-Saudi agreement, requires that all OPEC oil sales be conducted in US dollars. This creates global demand for dollars regardless of US economic performance. The system underpins the entire post-Bretton-Woods reserve currency arrangement and is the actual reason for sustained Western military presence in the Gulf since the late 20th century.",
-      "The Strait of Hormuz at the Gulf's outlet is the world's most important oil chokepoint — roughly 20% of global petroleum traffic transits this 33-km-wide channel. Disruption of Hormuz traffic is one of the small number of events that could collapse the global financial system within days."
+      'The USS Liberty (AGTR-5) was a US Navy signals intelligence ship operating in international waters in the eastern Mediterranean during the Six-Day War. On 8 June 1967, it was attacked by Israeli Air Force jets and Israeli Navy torpedo boats for approximately 75 minutes. The sustained assault included cannon fire, rockets, napalm, and five torpedo runs.',
+      'The official US and Israeli position is that the attack was a tragic case of mistaken identity — Israeli forces believed the Liberty was an Egyptian vessel. This position is directly contradicted by the evidence. NSA intercepts of Israeli military communications — recorded before and during the attack — document Israeli reconnaissance aircraft correctly identifying the ship as American. Multiple Israeli pilots have subsequently confirmed this in statements and memoirs.',
+      'The Liberty flew a large American flag throughout the attack, displayed its hull number GTR-5, and was in radio contact with the US Sixth Fleet. Crew survivors described Israeli torpedo boats machine-gunning life rafts after the attack — an act with no explanation under the mistaken-identity theory.',
+      'President Johnson ordered the recall of rescue aircraft that had already been scrambled from the USS Saratoga. The stated reason: "not wanting to embarrass an ally." A US Navy court of inquiry was convened and completed in just 10 days — the fastest-ever investigation of a wartime ship attack. Its classified findings contradicted the official position. Every subsequent congressional attempt to revisit the incident was blocked. The cover-up has held for over 55 years.'
     ],
     facts: [
-      "60% of world's proven oil reserves under or adjacent to the Gulf.",
-      "Petrodollar system (1974) requires all OPEC oil sales in USD.",
-      "Strait of Hormuz: 20% of global oil traffic, 33km wide chokepoint.",
-      "Sustained Western military presence since 1980s."
+      '34 killed, 171 wounded — 70% of the 293-man crew were casualties.',
+      'NSA intercepts: Israeli forces identified the ship as American before attacking.',
+      'Life rafts machine-gunned by Israeli torpedo boats after the main attack.',
+      'Johnson ordered rescue aircraft recalled before they could reach the ship.',
+      'Court of inquiry completed in 10 days; findings contradicting official account remain classified.'
     ],
-    significance: "The strategic anchor of the modern dollar reserve system. Cabal interest in this region is not mysterious — it is the geographic foundation of the post-1971 monetary architecture.",
-    related: [13, 27]
+    significance: 'A documented case in which a US president ordered the cover-up of a deliberate allied attack on American personnel to protect a geopolitical relationship. The sacrifice of American lives for political alliance is confirmed by NSA intercepts — not theory.',
+    sources: [
+      'NSA — declassified intercepts of Israeli military communications (partial release)',
+      'USS Liberty Veterans Association — survivor testimony collection',
+      'Ennes, J. — "Assault on the Liberty" (1979)',
+      'NSA Inspector General report on Liberty attack (declassified 2003)'
+    ],
+    related: [11, 30, 66, 94]
   },
   32: {
-    title: "Caspian Sea",
-    zone: "Sea", color: "#38bdf8",
-    position: "Right-upper arc — Central Asia",
-    summary: "The world's largest enclosed body of water — entirely landlocked, no tidal influence, no oceanic connection. Its flat, level surface confirms flat-plane hydrology. The globe model offers no explanation for why the world's largest lake has no connection to any ocean.",
+    title: 'Kapustin Yar — The Soviet Roswell',
+    zone: 'Suppressed', color: '#f87171',
+    position: 'Right-upper arc — Astrakhan Oblast, Russia',
+    classification: 'Russian Ministry of Defence — largely classified',
+    first_recorded: 'Missile test site operational 1946; UAP incidents from 1948',
+    summary: 'Russia\'s most secretive military installation — where the Soviets tested their first ballistic missiles using captured German V-2 technology. In June 1948, military observers reported a disc-shaped craft being tracked and shot down near the facility. Wreckage and bodies were allegedly recovered. More documented UAP incidents have occurred at Kapustin Yar than at Roswell — but Western researchers are denied all access.',
     analysis: [
-      "The Caspian Sea is the largest enclosed body of water on Earth — 371,000 square kilometres of saline water with no connection to any ocean. Its surface is approximately 28 metres below sea level. The water is mildly salty (about one-third the salinity of seawater).",
-      "Its perfectly flat surface across hundreds of kilometres provides one of the world's clearest visible examples of large-scale water-finds-its-level. There is no observable curvature across its expanse — a flat-plane hydrology prediction.",
-      "The Caspian sits between Russia, Kazakhstan, Turkmenistan, Iran, and Azerbaijan. Its hydrocarbon resources are vast (roughly 50 billion barrels of oil reserves) and its strategic value as a Central Asian energy basin makes it the centre of ongoing 21st-century resource competition."
+      'Kapustin Yar is a Russian military rocket launch and test site in Astrakhan Oblast. Established in 1946 to test captured German V-2 ballistic missiles under the oversight of engineer Helmut Gröttrup (who chose Soviet employment over US recruitment under Operation Paperclip), the facility became the proving ground for the entire Soviet ballistic missile programme.',
+      'In June 1948, according to Russian military files partially released in the 1990s and accounts from former Soviet military personnel, radar operators at Kapustin Yar tracked an unknown disc-shaped aerial object. Soviet interceptors were scrambled, the object was engaged, and it reportedly crashed in the vicinity of the facility. Witnesses described the recovery of wreckage and bodies of non-human occupants, transferred inside the secure perimeter.',
+      'KGB documentation of Soviet-era UAP incidents runs to thousands of pages. The most active geographic hotspot in this file was consistently Kapustin Yar. The pattern continued through the post-Soviet period into the 21st century. The Soviet and Russian UAP record exceeds the Western record in documented incident volume by a significant margin — and is far less studied, because access is denied.',
+      'Unlike Area 51, which was officially acknowledged in 2013 via CIA FOIA release, Kapustin Yar\'s classified operations remain almost entirely undisclosed. What the Soviet and Russian military recovered, studied, or reverse-engineered at this facility between 1948 and the present has not entered any public record.'
     ],
     facts: [
-      "Largest enclosed body of water on Earth — 371,000 km².",
-      "Water surface is 28m below sea level.",
-      "No oceanic connection — completely landlocked.",
-      "50 billion barrels estimated oil reserves."
+      'Established 1946 — Soviet ballistic missile proving ground using captured V-2 technology.',
+      'June 1948: disc-shaped craft tracked, engaged, and reportedly recovered.',
+      'KGB UAP file: thousands of pages, Kapustin Yar the most active hotspot.',
+      'Zero public access since 1946 — operations remain classified.',
+      'More documented UAP incidents than Roswell by Russian source count.'
     ],
-    significance: "Direct visible evidence of flat-plane hydrology. The Caspian's surface does not curve; this is observable from any of its coasts.",
-    related: [33, 50]
+    significance: 'The Soviet counterpart to Area 51 — with a longer UAP incident history and a more complete information blackout. The parallel pattern of crash recovery, reverse engineering claims, and total official denial across both superpowers\' classified programmes is either coincidence or policy.',
+    sources: [
+      'KGB UAP file — portions released to Russian press 1991–1993',
+      'Zhitkov, N. — former KGB analyst, UAP file summary (1991)',
+      'Good, T. — "Above Top Secret" (1987), Soviet UAP chapter'
+    ],
+    related: [14, 64, 83]
   },
   33: {
-    title: "Dead Sea",
-    zone: "Sea", color: "#38bdf8",
-    position: "Right-centre arc — Israel/Jordan",
-    summary: "The lowest point on the flat plane's surface — 430m below the surrounding plain. Water flows down to it from the Jordan River and evaporates. No outlet. Its perfectly flat surface is the lowest confirmed level reference point on the known world.",
+    title: 'The Vela Incident — The Unattributed Nuclear Test',
+    zone: 'Suppressed', color: '#f87171',
+    position: 'Right-centre arc — South Atlantic / Indian Ocean boundary',
+    classification: 'CIA / US Intelligence — partially declassified',
+    first_recorded: '22 September 1979',
+    summary: 'On 22 September 1979, a US Vela nuclear-detection satellite detected the unmistakable double-flash signature of a nuclear weapons detonation over the South Atlantic near the Prince Edward Islands. Estimated yield: 2–3 kilotons. The Carter administration formed a review panel that controversially denied it was nuclear. Intelligence analysts, independent scientists, and subsequent declassified documents all point to a joint Israeli-South African nuclear test.',
     analysis: [
-      "The Dead Sea sits at 430 metres below sea level — the lowest land-exposed water surface on Earth. The Jordan River flows into it from the north; nothing flows out. Water leaves only by evaporation, leaving behind salts at concentrations roughly ten times those of normal seawater.",
-      "Its surface is perfectly flat — observably so across its entire 50-km length. Ancient and modern observers consistently confirm: no curvature, no slope, no rise toward distant shores. This is the definitive visible reference for the flat-plane hydrology principle: water finds its level.",
-      "The biblical narrative places the destruction of Sodom and Gomorrah in this region. Modern archaeological excavations at Tall el-Hammam in Jordan have documented evidence of a high-temperature destruction event around 1650 BCE consistent with the biblical account — bringing the historical record closer to the textual record."
+      'The Vela satellites were US nuclear-detonation detection platforms operated 1963–1985. On 22 September 1979, Vela satellite 6911 recorded a double-flash — the unique two-pulse optical signature of a nuclear detonation — over the South Atlantic Ocean near the Prince Edward Islands, south of South Africa.',
+      'The Carter administration immediately classified the incident. A review panel (the Ruina Panel) was assembled and issued a report in July 1980 concluding the signal was "probably not from a nuclear explosion," attributing it to a possible micrometeorite strike causing a sensor malfunction. This conclusion was immediately and persistently contested by Defence Intelligence Agency analysts, hydroacoustic monitoring data from underwater listening stations, and independent physicists — all of whom concluded the evidence supported a genuine nuclear detonation.',
+      'The intelligence community\'s operational consensus held that the event was a joint Israeli-South African nuclear test conducted in a remote location chosen to minimise detection. Both states had active nuclear programmes in 1979 and extensive bilateral military-intelligence cooperation. South Africa has since acknowledged it built six nuclear devices before the apartheid era ended; Israel has never acknowledged its programme at all.',
+      'Declassified CIA and NSA documents from the 1990s and 2000s reveal that intelligence analysts remained convinced throughout the Carter and Reagan administrations that the Vela incident was a nuclear test. The political decision not to attribute it was made at White House level — formal attribution would have simultaneously required confronting Israel\'s undeclared nuclear programme and South Africa\'s apartheid government.'
     ],
     facts: [
-      "Lowest land-exposed water surface on Earth — 430m below sea level.",
-      "Salinity ~10× normal seawater — water leaves only by evaporation.",
-      "Perfectly flat surface across 50km — visible reference for flat hydrology.",
-      "Tall el-Hammam excavation: evidence of biblical Sodom destruction event."
+      '22 September 1979: Vela satellite detected double-flash nuclear signature.',
+      'Estimated yield: 2–3 kilotons.',
+      'Ruina Panel (1980): "probably not nuclear" — immediately contested by intelligence analysts.',
+      'CIA/NSA analysts: sustained consensus that it was a genuine nuclear detonation.',
+      'Suspected perpetrators: joint Israel–South Africa test.'
     ],
-    significance: "The lowest reference point of the inhabited disc. Its flat surface is one of the most visible everyday confirmations of flat-plane hydrology.",
-    related: [13, 30, 47]
+    significance: 'A nuclear weapons test that has never been officially attributed — despite 45 years of evidence accumulation consistently pointing to the same two states. The deliberate non-attribution is itself the conspiracy: a political decision to protect an alliance at the expense of non-proliferation norms.',
+    sources: [
+      'Ruina Panel Report — "The Vela Incident" (July 1980, partially declassified)',
+      'CIA FOIA documents — Vela incident intelligence assessments (released 1990s–2000s)',
+      'Richelson, J. — "Spying on the Bomb" (2006)',
+      'Taylor, T. — independent scientific analysis (1980)'
+    ],
+    related: [12, 30, 64]
   },
   34: {
-    title: "Black Sea",
-    zone: "Sea", color: "#38bdf8",
-    position: "Upper-right arc junction",
-    summary: "Another nearly enclosed basin with minimal tidal activity. Ancient flood legends from every surrounding culture — Sumerian, Greek, Hebrew, and Anatolian — describe a catastrophic filling event consistent with a flat-plane basin breach.",
+    title: 'Ukraine Biolabs — The DTRA Biological Network',
+    zone: 'Suppressed', color: '#f87171',
+    position: 'Upper-right arc — Ukraine',
+    classification: 'US DTRA / DoD — partially acknowledged 2022',
+    first_recorded: 'Programme began early 2000s; Senate acknowledgement March 2022',
+    summary: 'The US Defense Threat Reduction Agency (DTRA) funded and managed a network of at least 46 biological laboratories across Ukraine — confirmed by Undersecretary of State Victoria Nuland in Senate testimony on 8 March 2022. The labs conducted pathogen research including bat coronavirus collection, African Swine Fever, and other high-consequence agents. The existence of the network was publicly denied until the Russian invasion made denial impossible.',
     analysis: [
-      "The Black Sea is bordered by Turkey, Bulgaria, Romania, Ukraine, Russia, and Georgia. It connects to the Mediterranean only through the narrow Bosphorus and Dardanelles straits. Its waters are anoxic below approximately 200 metres — the world's largest body of anoxic water.",
-      "The Ryan-Pitman hypothesis (1996) proposed that the Black Sea was catastrophically flooded around 5600 BCE when rising Mediterranean waters breached a natural dam at the Bosphorus. The event would have been visible and geographically catastrophic for the surrounding human populations. Flood legends from Sumerian, Greek, Hebrew (Noah), and Anatolian sources may all preserve memory of this event.",
-      "The convergence of independent flood traditions from cultures surrounding the Black Sea, all describing a single catastrophic event in roughly the same era, is one of the strongest cases for treating ancient flood narratives as historical record rather than mythology."
+      'The US DTRA Biological Threat Reduction Program has operated a network of laboratories across former Soviet states since the early 2000s, officially to secure Soviet-era biological weapons materials. Ukrainian sources and independent researchers had identified multiple bio-cooperation sites prior to 2022, but official acknowledgement was consistently denied.',
+      'On 8 March 2022, Undersecretary of State Victoria Nuland appeared before the Senate Foreign Relations Committee. When Senator Marco Rubio asked whether Ukraine possessed biological or chemical weapons, Nuland confirmed: "Ukraine has biological research facilities which we are now quite concerned Russian forces may be seeking to gain control of." This was the first official US confirmation of the facilities\' existence and strategic sensitivity — made only after their potential exposure during military operations.',
+      'Russian Ministry of Defence statements from 2022 onward described documents allegedly recovered from these facilities, including: Project UP-4 (bat coronavirus research focused on enhanced pathogen transmission), African Swine Fever pathogen research (a disease that has devastated pig populations across Europe and Asia), and a project reportedly using migratory birds as potential pathogen vectors across national borders.',
+      'The Pentagon has confirmed the existence of the DTRA programme in Ukraine and has described the facilities as purely defensive — securing Soviet-era biological materials and monitoring endemic disease outbreaks. The discrepancy between "securing old materials" and active bat coronavirus and cross-border pathogen-vector research has not been publicly resolved.'
     ],
     facts: [
-      "World's largest body of anoxic water (below ~200m depth).",
-      "Connected to Mediterranean only via Bosphorus and Dardanelles.",
-      "Ryan-Pitman flood hypothesis: catastrophic filling ~5600 BCE.",
-      "Convergence of independent flood legends from surrounding cultures."
+      'At least 46 DTRA-funded biological laboratories across Ukraine.',
+      'Confirmed by Victoria Nuland in Senate testimony, 8 March 2022.',
+      'Projects included bat coronavirus research and potential pathogen-vector sampling via migratory birds.',
+      'Network existence publicly denied until the Russian invasion made denial untenable.',
+      'Pentagon confirms funding; describes labs as defensive research only.'
     ],
-    significance: "A documented historical example of catastrophic flat-plane hydrological events. The biblical Flood narrative is consistent with the kind of event that physically occurred at the Black Sea in the Holocene.",
-    related: [29, 41]
+    significance: 'The rapid shift from denial to confirmation of a 46-facility biological research network — triggered by its imminent military exposure — is the textbook pattern of a suppressed programme revealed under pressure. The gap between "securing old Soviet materials" and active pathogen research remains publicly unresolved.',
+    sources: [
+      'Nuland, V. — Senate Foreign Relations Committee testimony, 8 March 2022',
+      'Pentagon — DTRA Cooperative Biological Engagement Program (Ukraine) documentation',
+      'Russian MoD — briefings on recovered facility documents (2022–24)',
+      'Bulletin of the Atomic Scientists — analysis of DTRA Ukraine programme'
+    ],
+    related: [11, 29, 66]
   },
   35: {
-    title: "South China Sea",
-    zone: "Sea", color: "#38bdf8",
-    position: "Right-lower arc junction",
-    summary: "The disputed zone at the intersection of the Chinese and Pacific arcs on the flat map. China's aggressive territorial expansion here reflects an understanding of its strategic position as the gateway between the Asian arc and the right-side Pacific expanse.",
+    title: 'Yulin Naval Base — China\'s Underground Nuclear Fleet',
+    zone: 'Suppressed', color: '#f87171',
+    position: 'Right-lower arc — Hainan Island, China',
+    classification: 'People\'s Liberation Army Navy — classified',
+    first_recorded: 'Construction confirmed 2002; scale confirmed by satellite imagery 2007',
+    summary: 'Built into the granite cliffs of Hainan Island, the Yulin Naval Base contains a vast network of underwater tunnels opening directly into the South China Sea. The base shelters China\'s nuclear ballistic missile submarines — the Jin-class (Type 094) SSBNs — from satellite observation. Commercial satellite imagery in 2007 first revealed the tunnel entrances to Western analysts.',
     analysis: [
-      "The South China Sea is the most contested maritime zone in the early 21st century. Roughly $5 trillion in shipping passes through it annually. China's constructed island bases in the Spratly and Paracel chains since 2014 have transformed the strategic geography in ways that the rest of the international community has been unable to reverse.",
-      "On the flat azimuthal map, the South China Sea sits at the intersection of the Asian right arc and the Pacific outer arc — a natural gateway between the two largest economic zones of the modern era. Control of this gateway means control over the trade flow between the world's largest manufacturing economy (China) and its largest consumer market (the US-led Pacific Rim).",
-      "The 2016 Permanent Court of Arbitration ruling against China's \"nine-dash line\" claims has been ignored by Beijing. The international institutional system has no mechanism to enforce maritime law against a major power that refuses to accept it."
+      'Yulin Naval Base is a People\'s Liberation Army Navy facility on the southern coast of Hainan Island. Its most strategically significant element is entirely underground: a network of tunnels bored through the island\'s granite base, with openings into the sea large enough to shelter full-size submarines and surface warships — invisible to overhead satellite surveillance.',
+      'When commercial satellite imagery in 2007 revealed the submarine tunnel entrances along the island\'s southern cliffs, with nuclear submarines visible berthed inside, Western analysts described it as one of the most significant strategic revelations of the decade. The tunnels shelter China\'s Jin-class (Type 094) nuclear-powered ballistic missile submarines, each carrying 12 JL-2 missiles with a range of 7,400 km — capable of striking targets across the continental United States from within the South China Sea.',
+      'The strategic logic is straightforward. By basing its nuclear deterrent fleet underground in a peninsula location, China has created an asset extremely difficult to neutralise in a first strike. Submarines can shelter undetected underwater and emerge from multiple exits into the South China Sea for patrol without being tracked from satellite.',
+      'The Hainan Island strategic cluster also includes Sanya air base, multiple over-the-horizon radar installations, and China\'s newest carrier facilities. Together they represent the largest concentration of Chinese power projection in the South China Sea. The underground nuclear fleet at Yulin is the hidden backbone of this complex.'
     ],
     facts: [
-      "$5 trillion annual shipping volume — major chokepoint.",
-      "Chinese island construction in Spratlys/Paracels since 2014.",
-      "2016 PCA ruling against China — ignored.",
-      "Strategic gateway between Asia and Pacific arc."
+      'Underground tunnels cut into Hainan Island granite, opening directly to the sea.',
+      'Houses Jin-class (Type 094) nuclear-powered ballistic missile submarines.',
+      'Each SSBN carries 12 JL-2 missiles with 7,400 km range.',
+      'Satellite imagery (2007) first confirmed the scale to Western analysts.',
+      'Submarines can shelter invisibly underwater and exit undetected.'
     ],
-    significance: "A modern demonstration of how the enforcement of international maritime law depends on great-power consent. The cabal-aligned international institutions are powerless when a major actor refuses to comply.",
+    significance: 'China\'s hidden nuclear second-strike capability. The underground basing eliminates the satellite visibility that made Cold War deterrence transparent. This opaque nuclear force is among the most significant strategic uncertainties of the 21st century.',
+    sources: [
+      'CSIS — Sanya base satellite imagery analysis (2007–present)',
+      'ONI (Office of Naval Intelligence) — China Naval Forces report',
+      'IHS Jane\'s — Yulin Naval Base facility description'
+    ],
     related: [17, 18, 19, 25]
   },
   36: {
-    title: "Gulf of Mexico",
-    zone: "Sea", color: "#38bdf8",
-    position: "Left-centre arc — N. America",
-    summary: "The curved basin in the inner arc of North America. Its near-circular shape is consistent with an impact or structural feature of the flat plane. The 2010 Deepwater Horizon disaster occurred here — the largest accidental marine oil spill in history, in an area that flat earth researchers note for anomalous seabed geology.",
+    title: 'Deepwater Horizon — The Cover-Up',
+    zone: 'Suppressed', color: '#f87171',
+    position: 'Left-centre arc — Gulf of Mexico',
+    classification: 'BP / US DOJ — civil litigation settled; criminal charges dropped',
+    first_recorded: '20 April 2010',
+    summary: 'On 20 April 2010 the BP Deepwater Horizon rig exploded, killing 11 workers and releasing 4.9 million barrels of oil. BP\'s CEO sold £1.4 million of his shares three weeks before the blowout. The chemical dispersant Corexit — used in unprecedented volumes — is more acutely toxic than the crude oil itself. No executives were convicted of manslaughter. BP\'s record fine was effectively halved by US tax deductions.',
     analysis: [
-      "The Gulf of Mexico is a near-circular basin bounded by the southern United States, Mexico, and Cuba. Its almost perfect curvature — unusual for ocean basins, which typically follow continental margins — has been the subject of multiple impact-crater hypotheses. The Chicxulub impact crater on its southern edge is the official explanation for at least the Yucatan portion of this geometry.",
-      "The Deepwater Horizon disaster of 2010 was the largest accidental marine oil spill in history — approximately 4.9 million barrels released over 87 days from the Macondo well. The official explanation centred on rig operator failures. Independent marine geologists noted anomalies in the seabed geology of the spill zone that have never been satisfactorily explained in the public record.",
-      "The Gulf is an oil and natural gas production zone of global significance, hosting hundreds of offshore platforms. It is also a hurricane formation and intensification zone, with the warm shallow water acting as a storm energy reservoir."
+      'The Deepwater Horizon was a semi-submersible drilling rig operating on BP\'s Macondo Prospect in the Gulf of Mexico in 1,500 metres of water. On 20 April 2010, a blowout caused an explosion that killed 11 workers and injured 17. The resulting oil spill — approximately 4.9 million barrels released over 87 days — was the largest accidental marine oil spill in history.',
+      'Three weeks before the blowout, BP CEO Tony Hayward sold approximately £1.4 million of his personal BP shares — reducing his shareholding by roughly one-third. The timing was reported by the Sunday Times and other outlets. No insider trading investigation was publicly completed. Hayward left BP in October 2010 with a pension package worth £10.8 million.',
+      'The US government authorised approximately 1.84 million gallons of Corexit chemical dispersant — the largest single application in history. The EC9527A formulation of Corexit contains 2-butoxyethanol, linked to blood and kidney disorders. Scientific studies published after the spill indicated that Corexit-oil mixtures were significantly more toxic to marine organisms than crude oil alone. By dispersing rather than collecting the oil, Corexit also made the spill\'s true volume harder to measure and its long-term impact harder to attribute.',
+      'BP was charged with 11 counts of felony manslaughter for the workers killed in the explosion. These charges were ultimately resolved via a corporate plea deal — no individual executive was convicted of manslaughter. The $4.5 billion criminal settlement and $8.8 billion civil settlement were structured in a way that allowed BP to claim approximately $10 billion in US tax deductions, making the effective net financial penalty substantially lower than the headline figures.'
     ],
     facts: [
-      "Near-circular basin shape — possibly impact-related.",
-      "Deepwater Horizon (2010): 4.9 million barrels — largest accidental marine spill.",
-      "Chicxulub impact crater on its southern Yucatan edge.",
-      "Major hurricane formation zone."
+      '11 workers killed; 4.9 million barrels released over 87 days.',
+      'CEO Tony Hayward sold £1.4M of personal shares 3 weeks before the blowout.',
+      '1.84 million gallons of Corexit dispersant applied — largest application ever.',
+      'Criminal charges: $4B corporate plea deal, no manslaughter convictions for individuals.',
+      '$4.5B fine partially offset by ~$10B in US tax deductions.'
     ],
-    significance: "A potential structural impact feature of the flat plane. The 2010 disaster's anomalous seabed conditions remain unexplained in publicly available data.",
-    related: [22, 38, 86]
+    significance: 'A case study in managed corporate accountability. The share sale timing, the choice of dispersant over collection, the avoided criminal convictions, and the effective tax-offsetting of the settlement together describe a disaster managed primarily for liability containment rather than environmental remedy.',
+    sources: [
+      'National Commission on the BP Deepwater Horizon Oil Spill — final report (2011)',
+      'US DOJ — BP criminal plea agreement (2012)',
+      'EPA — Corexit toxicology assessment documents',
+      'House Energy and Commerce Committee — Hayward share sale disclosure'
+    ],
+    related: [7, 22, 86]
   },
   37: {
-    title: "Bay of Bengal",
-    zone: "Sea", color: "#38bdf8",
-    position: "Right-centre arc",
-    summary: "The inward-curving bay separating the Indian subcontinent from Southeast Asia. The 2004 Indian Ocean earthquake — the third largest ever recorded — originated beneath it. In flat earth terms, a fracture line in the outer-mid arc of the plane.",
+    title: 'Flight MH370 — The Diego Garcia Connection',
+    zone: 'Suppressed', color: '#f87171',
+    position: 'Right-centre arc — Indian Ocean',
+    classification: 'ATSB / Malaysian Government — officially unsolved',
+    first_recorded: '8 March 2014',
+    summary: 'Malaysia Airlines Flight MH370 vanished on 8 March 2014 with 239 people aboard. The ACARS communication system was manually disabled 12 minutes before the transponder was switched off. Satellite ping analysis shows the aircraft flew south toward the Indian Ocean. The flight path is geometrically consistent with a track toward Diego Garcia — the remote US-British military base at the centre of the Indian Ocean arc — whose radar data from that night has never been independently disclosed.',
     analysis: [
-      "The Bay of Bengal is the world's largest bay by area. It is bounded by India, Bangladesh, Myanmar, Sri Lanka, and the Andaman and Nicobar Islands. Its waters are shallower than open ocean and warm year-round, making it a primary tropical cyclone formation basin.",
-      "The 2004 Boxing Day earthquake (magnitude 9.1-9.3) originated beneath the bay's eastern margin off Sumatra. The resulting tsunami killed approximately 230,000 people across 14 countries, with Bangladesh, India, Sri Lanka, and Indonesia bearing the highest casualties. It is the deadliest natural disaster of the 21st century to date.",
-      "The bay is the receiving basin for the Ganges, Brahmaputra, and Irrawaddy rivers — the major drainage systems of the Indian subcontinent and northern Southeast Asia. The deltaic geography supports some of the densest human populations on Earth, in some of the most flood-vulnerable conditions."
+      'Malaysia Airlines Flight MH370, a Boeing 777-200ER, departed Kuala Lumpur at 00:41 on 8 March 2014. At 01:19 the crew made their last radio contact. At 01:21 the secondary radar transponder was manually switched off. Twelve minutes before this, the ACARS data reporting system had also been manually disabled — the sequence indicating deliberate action from within the aircraft.',
+      'The final primary radar track showed the aircraft making a sharp left turn back across the Malaysian peninsula, then heading northwest across the Strait of Malacca. Military radar from Malaysia and Thailand tracked it on this heading before it left radar coverage. Inmarsat satellite ping analysis then placed the aircraft on a southward arc into the Indian Ocean — consistent with either a route toward the southern search zone southwest of Australia, or a route toward Diego Garcia.',
+      'Diego Garcia is a joint US-British military base at the geographic centre of the Indian Ocean. It has full radar and air traffic control infrastructure capable of detecting all aircraft within hundreds of miles. The US and UK governments declined to release Diego Garcia\'s radar data from the night of 8 March 2014. The island\'s air traffic control records from that period have not been independently disclosed, and the US Navy has neither confirmed nor denied tracking the aircraft.',
+      'Pilot Zaharie Ahmad Shah was investigated by Malaysian intelligence in the days before the flight for his political activities — specifically his public support for opposition leader Anwar Ibrahim, who had been sentenced to five years in prison the day before MH370\'s disappearance. This has been officially dismissed as unrelated, but was never formally excluded as a factor. The aircraft has never been found despite the largest and most expensive maritime search in history.'
     ],
     facts: [
-      "World's largest bay by area.",
-      "2004 tsunami: ~230,000 dead across 14 countries.",
-      "Receives Ganges, Brahmaputra, and Irrawaddy river systems.",
-      "Major tropical cyclone formation basin."
+      '239 aboard; no confirmed wreck found — only scattered surface debris.',
+      'ACARS manually disabled 12 minutes before transponder switch-off.',
+      'Sharp deliberate left turn over Malaysia — inconsistent with technical failure.',
+      'Diego Garcia radar and ATC data from 8 March 2014 not publicly disclosed.',
+      'Pilot investigated by Malaysian intelligence days before the disappearance.'
     ],
-    significance: "A structural fracture zone of the flat plane. The 2004 event demonstrated the catastrophic energy release possible at this stress line.",
-    related: [16, 19, 27, 92]
+    significance: 'The most thoroughly investigated disappearance of a large commercial aircraft in history — officially unsolved after the most expensive search ever conducted. The deliberate system deactivations, the trajectory data consistent with Diego Garcia, and the non-disclosure of the base\'s radar records collectively define an unsolved mystery with a suppressed geographic dimension.',
+    sources: [
+      'ATSB — MH370 safety investigation final report (2017)',
+      'Malaysian ICAO Annex 13 Safety Investigation Team — final report (2018)',
+      'Inmarsat — satellite ping data analysis (released 2014)',
+      'Wise, J. — "The Plane That Wasn\'t There" (independent analysis)'
+    ],
+    related: [16, 19, 27, 65]
   },
   38: {
     title: "Caribbean Sea / Bermuda Triangle",
@@ -836,23 +932,33 @@ window.LOCATION_DATA = {
     related: [23, 36, 86, 87]
   },
   39: {
-    title: "Bering Sea / Strait",
-    zone: "Sea", color: "#38bdf8",
-    position: "Upper arc — Alaska/Russia junction",
-    summary: "On the flat map, Alaska and Russia are neighbours across a narrow strait — not opposite sides of a globe. The Bering Land Bridge migration theory depends on globe geography. On the flat map, Alaska–Russia proximity makes cultural exchange a simple matter of crossing a channel.",
+    title: 'The Soviet Woodpecker — Russia\'s Ionospheric Radar Weapon',
+    zone: 'Suppressed', color: '#f87171',
+    position: 'Upper arc — Russia / Ukraine (Chernobyl & Far East sites)',
+    classification: 'Soviet military — denied until 1991; partially declassified post-collapse',
+    first_recorded: 'Operational July 1976; source confirmed 1991',
+    summary: 'The Duga over-the-horizon radar system — NATO codename Steel Yard, nicknamed the "Russian Woodpecker" — broadcast a repetitive 10-pulse-per-second clicking sound on shortwave frequencies that disrupted radio communications across the entire world from 1976 to 1989. The transmitter near Chernobyl was one of the largest antenna structures ever built. The Soviet Union denied its existence throughout its entire operational life.',
     analysis: [
-      "The Bering Strait is a narrow channel — just 82 km at its narrowest — separating Alaska from Russia. On the flat azimuthal map, Alaska and Russia are upper-arc neighbours; on the globe, they are presented as opposite sides of an immense ocean.",
-      "The Bering Land Bridge theory of human migration to the Americas depends entirely on globe geography. On the flat map, the proximity of Alaska to Siberia makes cultural and population exchange a simple matter of crossing a narrow strait — there is no need for a \"bridge\" because the landmasses were always neighbours.",
-      "During the Cold War, the strait was the most militarised maritime border on Earth. The two superpowers maintained continuous surveillance and air patrol on either side. Today the asymmetric demographics — sparse populations, harsh climate — keep the strait a quiet but strategically critical point."
+      'The Duga (Russian: "Arc") radar system was a Soviet over-the-horizon early warning radar designed to detect US ballistic missile launches at intercontinental range. Unlike conventional line-of-sight radars, OTH systems bounce high-frequency signals off the ionosphere to achieve detection ranges of thousands of kilometres. The Duga transmitted on shortwave frequencies at 10 pulses per second — directly into the bands used by amateur radio, aviation communications, and international emergency services.',
+      'Beginning in July 1976, amateur radio operators and shortwave listeners worldwide began reporting a persistent, rhythmic clicking interference — 10 pulses per second, appearing without warning on multiple shortwave frequencies and sometimes strong enough to block entire bands. The interference disrupted aviation communications and emergency frequencies. Western signals intelligence agencies identified it as a Soviet radar system within years, but could not publicly confirm this without disclosing their own capabilities.',
+      'The primary Duga transmitter was located near Chernobyl, Ukraine — adjacent to the Chernobyl nuclear power plant. The proximity was deliberate: the system\'s enormous power requirements were supplied directly from the reactor complex. The antenna array was 700 metres wide and 150 metres tall — one of the largest man-made structures in the Soviet Union. When the Chernobyl disaster occurred in April 1986, the Duga radar at that site went permanently offline.',
+      'A second Duga site was constructed near Komsomolsk-on-Amur in Russia\'s Far East, operational from 1979. This site remained active after the Chernobyl disaster until the late 1980s. The Soviet Union denied the existence of either system throughout their operational lives. Post-Soviet Ukrainian and Russian military archives confirmed their existence, purpose, and scale. The Chernobyl antenna array is still standing and has become one of the most visited locations in the Chernobyl Exclusion Zone.'
     ],
     facts: [
-      "82 km wide at its narrowest — Alaska and Russia are neighbours.",
-      "Bering Land Bridge theory depends on globe geography.",
-      "Most militarised maritime border during the Cold War.",
-      "Crossable by small boat in calm conditions."
+      'Operational July 1976–1989 (Chernobyl site) — global shortwave radio interference.',
+      'Chernobyl antenna array: 700m wide, 150m tall — powered directly by the nuclear reactor.',
+      'Went permanently offline when the Chernobyl reactor exploded in April 1986.',
+      'NATO codename: Steel Yard. Civilian nickname: Russian Woodpecker.',
+      'Soviet denial held throughout operational life — confirmed only after 1991 collapse.'
     ],
-    significance: "On the flat map, the Alaska-Russia relationship is geographically simple. Globe-based migration theory becomes unnecessary — the populations were always neighbours.",
-    related: [7, 14, 28]
+    significance: 'The Duga demonstrates that a military programme can interfere with global civilian communications for over a decade — disrupting aviation, emergency services, and broadcasting worldwide — without any official acknowledgement or international accountability. The infrastructure of the cover-up matched the infrastructure of the programme itself.',
+    sources: [
+      'Post-Soviet Ukrainian military archives — Duga operational documentation',
+      'ITU (International Telecommunication Union) — interference reports 1976–1989',
+      'Federation of American Scientists — Duga facility satellite and technical analysis',
+      'Chernobyl Exclusion Zone facility documentation and surveys'
+    ],
+    related: [14, 62, 66]
   },
   40: {
     title: "The Bedford Level, England",
