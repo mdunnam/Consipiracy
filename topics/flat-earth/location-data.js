@@ -83,66 +83,71 @@ window.LOCATION_DATA = {
   },
 
   3: {
-    title: 'Tropic of Cancer',
+    title: 'Tropic of Cancer — The Sacred Latitude',
     zone: 'Structural', color: '#c9a227',
-    position: 'Inner-mid ring · ~23°N equivalent',
+    position: 'Inner-mid ring · ~23.5°N',
     region: 'Northern subtropical band',
-    summary: 'The northernmost circle the sun reaches in its annual spiral. The midsummer solstice track. Beyond this ring the days grow shorter as the sun spirals southward and its circuit widens.',
+    summary: 'The Tropic of Cancer latitude band contains the world\'s most precisely engineered ancient monuments — the Great Pyramid (29.97°N), Chichén Itzá (20.7°N), Petra (30.3°N), Varanasi (25°N), and Lhasa (29.7°N) — and also hosts the world\'s most significant Cold War nuclear weapons complexes. The overlap between sacred ancient geography and modern weapons geography is not coincidental.',
     analysis: [
-      'Named for the constellation Cancer, in which the sun was historically located at midsummer, this latitude marks the northernmost point on the surface where the sun appears directly overhead at noon. On a globe this is explained by axial tilt. On the flat plane it is the boundary of the sun\'s northernmost circuit path.',
-      'The geographic placement of the great civilisations is significant. Egypt, the Levant, Mesopotamia, the Indus Valley, the great Chinese dynasties — all developed in or just south of this band. The reason is obvious: these are the latitudes where the local sun spends the most time directly overhead each year, producing the most consistent agricultural cycles.',
-      'The Tropic of Cancer also defines the southern boundary of the temperate zones. Beyond it, seasonal extremes diminish dramatically. This gradient — gentle within the tropics, sharp toward the poles — is exactly what the flat disc model predicts as the sun\'s circuit changes radius and energy distribution across the seasons.'
+      'The Great Pyramid of Giza sits at 29.9792458°N — a number that encodes the speed of light (299,792,458 m/s) to nine significant figures. The precise latitude placement was not accidental. Chichén Itzá (20.7°N), the most precisely astronomically aligned structure in the Americas, sits just south of the Tropic. Petra in Jordan (30.3°N), Varanasi\'s sacred ghats (25.3°N), Lhasa\'s Potala Palace (29.7°N), and Luxor\'s Valley of the Kings (25.7°N) all cluster within a narrow band either side of this latitude. The builders of every major ancient religious complex on Earth placed their most sacred structures along this arc.',
+      'The ancient placement was not coincidence — it was cosmological precision. On the flat earth model, the Tropic of Cancer marks the innermost arc of the sun\'s annual circuit. The point directly below the sun\'s tightest annual path is the zone of maximum solar energy and maximum cosmological significance. Ancient priests understood this and built accordingly.',
+      'Modern weapons programmes settled in the same band. The Nevada Test Site (37°N), White Sands Missile Range (32.4°N), Kirtland Air Force Base (35.0°N), Sandia National Laboratories (35.0°N), and Los Alamos National Laboratory (35.9°N) are all within the same 23–38°N latitude corridor as the ancient sites. Cape Canaveral (28.5°N) — the primary US rocket launch facility — sits almost exactly on the Tropic. This concentration of both ancient and modern high-energy technology in this specific latitude band suggests a common understanding of why this zone is special.'
     ],
     facts: [
-      'Marks the northern limit of the sun\'s direct overhead position.',
-      'Coincides with the geographic location of all major ancient civilisations.',
-      'On the flat plane, defines the inner edge of the sun\'s widest annual circuit.',
-      'Equinoxes occur when the sun crosses the equatorial midpoint between this ring and Capricorn.'
+      'Great Pyramid latitude: 29.9792458°N — matches the speed of light to 9 significant figures.',
+      'Chichén Itzá, Petra, Luxor, Varanasi, and Lhasa all cluster within the 20–32°N band.',
+      'US nuclear complex — Nevada Test Site, White Sands, Los Alamos, Sandia — all within 32–38°N.',
+      'Cape Canaveral launch complex sits at 28.5°N — essentially on the Tropic.',
+      'The latitude produces the lowest fuel cost to reach equatorial orbit from the Northern Hemisphere.'
     ],
-    significance: 'A direct geometric prediction of the sun-on-circuit model. The placement of the world\'s great civilisations along this latitude is not coincidence — it is the band of optimal solar energy on the flat plane.',
-    related: [4, 5, 51, 53]
+    significance: 'Both the ancient sacred builders and the modern weapons programmes chose the same latitude band. The flat earth model explains why: this is the innermost arc of the sun\'s annual circuit — the zone of maximum cosmological energy. Whether the modern military planners knew this consciously or not, the pattern is unmistakable.',
+    related: [4, 5, 51, 53, 93]
   },
 
   4: {
-    title: 'The Equatorial Ring',
+    title: 'The Equatorial Ring — Control of the Launching Latitude',
     zone: 'Structural', color: '#c9a227',
     position: 'Mid-disc ring · True equator',
     region: 'Equatorial midline',
-    summary: 'The midpoint of the flat disc — equidistant between the North Pole centre and the Antarctic Ice Wall outer boundary. At equinox the sun travels this ring, producing equal day and night for all latitudes simultaneously.',
+    summary: 'The equator provides maximum rotational velocity for orbital launches — reducing fuel cost by ~460 m/s versus polar launches. Every major space power has fought to control equatorial territory. The US fought proxy wars across equatorial Africa, Asia, and Central America. France retains French Guiana (5°N) as a sovereign launch asset. The geography of 20th-century Cold War interventionism is substantially the race for equatorial access.',
     analysis: [
-      'The equator is the precise midpoint between the disc\'s centre and its outer boundary. On the azimuthal equidistant projection, it appears as a perfect circle exactly halfway from the North Pole to the ice wall. This is the only projection where the equator\'s relationship to the rest of the geography is geometrically faithful.',
-      'At the spring and autumn equinoxes, the sun travels along this exact circuit. The result — observed and recorded in every culture, every century — is that day and night are equal length for every observer on Earth simultaneously. The flat plane model predicts this exactly. The globe model requires the orbital geometry of a tilted sphere intercepting a parallel light source — a far more elaborate mechanism producing the same observation.',
-      'The placement of major equatorial civilisations — the Mayan and Inca cultures, the Bantu kingdoms, the Indonesian island empires — followed the predictable solar abundance of this midline ring. The equator is also the band where the sun\'s energy is most evenly distributed across the year, with the smallest seasonal variation.'
+      'The equatorial surface rotates at approximately 465 m/s — the fastest point on the Earth\'s surface. Any object launched eastward from the equator receives this velocity as a free bonus toward orbital speed. A launch from Kourou (5°N) requires approximately 10% less fuel than a comparable launch from Cape Canaveral (28.5°N), and roughly 30% less than from Baikonur (46°N). The entire economics of orbital launch are dominated by equatorial access.',
+      'France has maintained the Guiana Space Centre at Kourou, French Guiana (5.2°N) as a sovereign overseas territory specifically to preserve this launch advantage. The European Space Agency depends entirely on this French-controlled equatorial territory for its commercial launch capability. France decolonised the rest of its empire but never relinquished Guiana. The equatorial launch site is too strategically valuable.',
+      'The US Cold War interventionism in equatorial regions — Guatemala (1954 CIA coup), Congo (1960 CIA-backed Lumumba assassination), Indonesia (1965 CIA-backed Suharto coup) — was driven by multiple factors, but control of equatorial territory and military overflight rights was consistently an unstated interest. The Reagan Test Site in the Marshall Islands (9°N) is the US\'s primary intercontinental ballistic missile target range — positioned mid-ocean at equatorial latitude for maximum strategic symmetry.',
+      'The equatorial ionospheric electrojet — a powerful natural electric current flowing in the ionosphere along the geomagnetic equator — can be manipulated by ground-based high-frequency transmitters. Facilities analogous to HAARP have been established at equatorial latitudes: JICAMARCA in Peru (12°S) and ALTAIR in Kwajalein (9°N). In flat earth terms, this ring is where the disc\'s mid-circuit electromagnetic environment is most active and most susceptible to manipulation.'
     ],
     facts: [
-      'Geometric midpoint between the North Pole centre and outer ice ring.',
-      'Sun travels directly overhead at equinox, producing equal day/night globally.',
-      'Equatorial civilisations show the smallest seasonal variation in agricultural cycles.',
-      'The Coriolis effect — used as evidence of Earth rotation — has been shown to be undetectable at the equator in flat earth experiments.'
+      'Equatorial surface velocity: 465 m/s — a free boost toward orbital speed used by all launch providers.',
+      'France retained French Guiana specifically to keep the Kourou launch site at 5°N.',
+      'Reagan Test Site, Marshall Islands (9°N) — US ICBM target range at equatorial Pacific.',
+      'Equatorial electrojet — natural ionospheric current manipulable by HF transmitters.',
+      'US proxy interventions in equatorial states: Guatemala 1954, Congo 1960, Indonesia 1965.'
     ],
-    significance: 'The equator is not the line where a sphere is widest — it is the disc\'s mid-radius where the sun\'s annual circuit crosses twice a year. The geometry is simpler and more predictive on the flat plane.',
-    related: [3, 5, 53]
+    significance: 'The equatorial zone is the most militarily and economically valuable latitude on Earth for the space age. The geography of 20th-century Cold War intervention is substantially driven by the race for equatorial access — a strategic reality obscured by ideological framing of those interventions.',
+    related: [3, 5, 12, 53, 62]
   },
 
   5: {
-    title: 'Tropic of Capricorn',
+    title: 'Tropic of Capricorn — The Mining Corridor',
     zone: 'Structural', color: '#c9a227',
-    position: 'Outer-mid ring · ~23°S equivalent',
+    position: 'Outer-mid ring · ~23.5°S',
     region: 'Southern subtropical band',
-    summary: 'The southernmost circle the sun\'s path reaches. Midwinter for northern lands. The sun\'s circuit is at its widest here — longer days for observers on the outer arc, shorter for those near centre.',
+    summary: 'The Tropic of Capricorn runs through the richest mineral extraction zone on Earth. The Atacama lithium triangle (Bolivia-Chile-Argentina), South African platinum belt, Namibian uranium and diamond fields, Western Australian iron ore, and Brazil\'s iron ore quadrilateral all sit within a narrow band either side of 23.5°S. De Beers, Anglo-American, Rio Tinto, and BHP control assets almost exclusively along this ring — and the history of coups, assassinations, and proxy wars in the southern hemisphere follows the same latitude.',
     analysis: [
-      'The Tropic of Capricorn marks the sun\'s southernmost circuit at midwinter (northern hemisphere). On the flat plane this is the widest annual orbit the sun traces above the disc. Observers in the southern lands experience their summer at this time — the sun is overhead for them, while distant from the northern arc.',
-      'The width of the sun\'s circuit at this point is a key geometric prediction. The southern hemisphere "summer" produces longer apparent daylight at southern latitudes than the northern summer does at equivalent northern latitudes — because the sun\'s circuit at Capricorn is geometrically larger than at Cancer. The asymmetry is a flat-plane prediction. The globe model requires special-pleading to explain it.',
-      'Sydney, Rio de Janeiro, Johannesburg, and the major southern population centres all sit just south of this ring — directly within the band where the sun spends maximum overhead time during their summer months.'
+      'The Tropic of Capricorn passes through the Atacama Desert of northern Chile and Bolivia at almost exactly 23.5°S. The Atacama holds approximately 50–70% of the world\'s known lithium reserves — the element that powers every EV battery and smartphone. The "Lithium Triangle" (Chile, Bolivia, Argentina) is the Saudi Arabia of the electric vehicle age, sitting precisely on this latitude.',
+      'Moving east, the band crosses southern Brazil\'s iron ore quadrilateral (Minas Gerais), then into southern Africa — Namibia (uranium, diamonds), Botswana (diamonds, De Beers\'s primary source), Zimbabwe (lithium, chrome, platinum), and Mozambique. Johannesburg at 26.2°S is the financial capital of this entire southern arc\'s extraction system. De Beers (founded by Cecil Rhodes, 1888) has maintained a near-monopoly on global diamond production from this latitude band for over 130 years, interlocked with the Rothschild banking network and the City of London establishment.',
+      'Bolivia is the most instructive contemporary case. Its lithium reserves are the world\'s largest — but Bolivia under socialist president Evo Morales resisted privatisation. In November 2019, Morales was removed in a military coup. Elon Musk tweeted three days later: "We will coup whoever we want." The tweet was deleted. Tesla had been in lithium supply discussions with Bolivia before the coup. The pattern — resource nationalisation followed by externally backed military coup — repeats across the entire southern arc from Congo to Chile.',
+      'Australia\'s Pilbara region (22–24°S) is the world\'s largest iron ore export province, controlled primarily by Rio Tinto and BHP. Western Australia\'s Olympic Dam (30.4°S) contains the world\'s largest known uranium deposit. The concentration of critical modern industrial inputs along this single latitude band is not geological coincidence — it is the defining resource geography of the 21st-century industrial economy.'
     ],
     facts: [
-      'Sun reaches its widest annual circuit at this latitude.',
-      'Major southern hemisphere cities cluster around this band.',
-      'Daylight lengths at equivalent southern latitudes exceed northern equivalents — a flat-plane prediction.',
-      'The "Capricorn anomaly" in flight times exposes the limits of the globe model.'
+      'Atacama lithium triangle: 50–70% of global lithium reserves at 22–25°S.',
+      'De Beers, Anglo-American, Rio Tinto, BHP — core assets concentrated along 23–32°S.',
+      'Bolivia 2019 coup: Evo Morales removed; Elon Musk publicly acknowledged the US right to intervene.',
+      'Johannesburg (26.2°S) — financial centre of the southern hemisphere extraction empire.',
+      'Olympic Dam, Australia (30.4°S): world\'s largest known uranium deposit.'
     ],
-    significance: 'The widest circuit of the local sun. Its existence and behaviour confirm that the sun is a relatively close, relatively small object travelling above a flat plane — not a distant star illuminating a tilted sphere.',
-    related: [3, 4, 6, 52]
+    significance: 'The Tropic of Capricorn is the latitude of the world\'s most contested mineral wealth. The history of colonialism, proxy wars, and coups in the southern hemisphere is substantially the history of controlling the assets that sit along this ring.',
+    related: [3, 4, 6, 9, 12, 52]
   },
 
   6: {
@@ -201,24 +206,32 @@ window.LOCATION_DATA = {
   },
 
   8: {
-    title: 'Greenland',
+    title: 'Greenland — Project Iceworm',
     zone: 'Landmass', color: '#fbbf24',
     position: 'Upper-left, close to centre',
     region: 'Arctic — North Atlantic',
-    summary: 'On a Mercator globe map, Greenland appears the same size as Africa. On the flat azimuthal map its true proportional size is restored — smaller than South America. The globe projection deliberately distorted northern landmasses.',
+    summary: 'In 1960 the US Army secretly built a fully operational nuclear missile base under the Greenland ice sheet — without telling Denmark, the sovereign nation that owns Greenland. Camp Century housed 200 men and a nuclear reactor, and was the test bed for Project Iceworm: a plan to hide 600 nuclear missiles in 4,000 km of ice tunnels. The base was abandoned in 1967, leaving radioactive waste behind. The ice is now melting and exposing it. In 2019, Trump tried to buy Greenland.',
     analysis: [
-      'Greenland is one of the most visually obvious examples of map projection deception. On the standard Mercator world map taught in every Western school, Greenland appears roughly the size of Africa. The true relationship is: Africa is over 14 times larger. Greenland is approximately the size of Mexico in actual surface area.',
-      'The Mercator projection was specifically designed for ocean navigation in the 16th century, where preserving direction at the cost of distorting area was useful. Its continued use in education, news graphics, and political maps — long after better projections existed — is not an accident. Inflating the visual size of northern landmasses (where the dominant 16th–20th century powers were located) and shrinking equatorial and southern landmasses serves a propaganda function.',
-      'On the azimuthal equidistant projection — the official emblem of the United Nations — Greenland appears at its true relative size, immediately revealing the distortion of conventional maps. The UN logo itself depicts a flat earth azimuthal map. This has never been hidden; it has only been left unexamined.'
+      'Camp Century was constructed in 1959–60 by the US Army Corps of Engineers approximately 240 km from Thule Air Base in northwest Greenland. Built entirely beneath the ice — tunnels up to 10 metres wide housing barracks, a chapel, a cinema, and a PM-2A nuclear reactor — it peaked at around 200 men. Denmark was told it was a scientific research station studying Arctic conditions. The classified purpose was Project Iceworm: a plan to build 4,000 km of tunnels beneath the Greenland ice sheet sheltering up to 600 medium-range ballistic missiles with nuclear warheads pointed at the Soviet Union. The system would have been effectively invisible and invulnerable to any Soviet first strike.',
+      'The ice sheet moves. This was not adequately accounted for in the original engineering. By 1966 the tunnels were distorting, the structural integrity failing, and the reactor was shut down and removed. Camp Century was abandoned in 1967. The US Army left behind approximately 200,000 litres of diesel fuel, 240,000 litres of liquid waste including sewage, and radioactive reactor byproducts — expecting everything to remain permanently sealed under accumulating snowfall. Denmark was never informed of what was left.',
+      'In 2016, a paper published in Geophysical Research Letters (Colgan et al.) concluded that under current warming projections the base and its waste could be exposed by the end of the 21st century. The Danish government formally raised the legal and environmental liability issue with the US — which has not been resolved. In August 2019, Donald Trump publicly offered to purchase Greenland from Denmark. Prime Minister Mette Frederiksen called the offer "absurd." What was not widely discussed: a US acquisition of Greenland would transfer jurisdiction over Camp Century and its buried contamination from Denmark to the United States, ending Danish claims.',
+      'The broader strategic context: Greenland sits at the geographic apex of the flat azimuthal map — closest to the North Pole, positioned at the upper arc between the North American and European landmasses. It dominates the GIUK gap (Greenland-Iceland-UK) — the chokepoint through which Soviet submarines had to pass to reach the Atlantic during the Cold War. US control of Thule Air Base (now Pituffik Space Base) has been maintained continuously since 1951, operating under a bilateral agreement that has been repeatedly renewed without Greenlandic public referendum.'
     ],
     facts: [
-      'Mercator inflates Greenland to ~14× its true relative area vs Africa.',
-      'On azimuthal equidistant maps, true proportions are preserved.',
-      'The UN logo is a flat earth azimuthal map — visible on every UN document.',
-      'Greenland\'s ice sheet has been a major NATO Cold War surveillance asset.'
+      'Camp Century: nuclear reactor under Greenland ice, built 1959–60 without Danish knowledge.',
+      'Project Iceworm: 600 nuclear missiles in 4,000 km of ice tunnels — classified until 1995.',
+      'Abandoned 1967 — 200,000L diesel, 240,000L liquid waste, radioactive byproducts left behind.',
+      '2016 paper: waste could be exposed by end of 21st century as Greenland\'s ice melts.',
+      'Trump\'s 2019 purchase offer: strategic context includes Camp Century liability and GIUK gap control.'
     ],
-    significance: 'Direct evidence that the maps used to teach geography are deliberately distorted. The fact that better projections exist, and that one (azimuthal equidistant) is the official UN emblem, makes the continued use of Mercator in education a matter of policy — not necessity.',
-    related: [7, 10, 22, 27, 39]
+    significance: 'The US secretly built a nuclear missile base on a NATO ally\'s sovereign territory, abandoned it with radioactive waste, and the evidence is now emerging from the melting ice. Project Iceworm demonstrates that the Cold War\'s most sensitive operations were conducted entirely outside the knowledge of the governments hosting them — including those governments\' own citizens.',
+    sources: [
+      'US Army Corps of Engineers — Camp Century construction documents (partially declassified)',
+      'Colgan, W. et al. — "The abandoned ice sheet base at Camp Century, Greenland" — Geophysical Research Letters (2016)',
+      'Danish Institute for International Studies — Danish-American security arrangements (2017)',
+      'Project Iceworm planning documents — declassified 1995 via FOIA'
+    ],
+    related: [7, 10, 22, 28, 67]
   },
 
   9: {
@@ -413,44 +426,60 @@ window.LOCATION_DATA = {
   },
 
   18: {
-    title: 'Japan',
+    title: 'Japan — Fukushima and the Pacific Poisoning',
     zone: 'Landmass', color: '#fbbf24',
     position: 'Far right arc',
     region: 'Japanese archipelago',
-    summary: 'Island chain at the outer rightward arc. The Japanese word for horizon — chihei-sen — means "the line where land and sky meet" — a perspective description, not a curvature reference. Japan\'s ancient cosmology described a disc-world supported by pillars.',
+    summary: 'On 11 March 2011, three reactor meltdowns at Fukushima Daiichi released the largest single release of radioactive water into the Pacific Ocean in history. TEPCO and the Japanese government concealed the true severity for months. In 2023, Japan began deliberately dumping 1.25 million tonnes of tritium-contaminated water into the Pacific — under IAEA approval. China banned Japanese seafood imports. The US government said it was safe. The fishing communities of the Pacific had no vote.',
     analysis: [
-      'Japan\'s archipelago lies along the outer right arc of the flat map. Geographic isolation preserved a distinctive cosmological tradition — the Shintō-Buddhist synthesis describes the world as a disc supported by giant catfish (whose movements cause earthquakes) and enclosed by an ocean ring, with the sun and moon as relatively local objects on cyclical paths.',
-      'The Japanese language preserves cosmological vocabulary that does not encode globe assumptions. Chihei-sen (地平線) — the standard word for "horizon" — translates literally as "the level line of the earth," explicitly describing a perceived flat horizon. Japanese still distinguishes between the apparent flat ground and any abstract notion of a curved earth, in a way that modern English does not.',
-      'The 2011 Fukushima Daiichi nuclear disaster occurred along Japan\'s eastern coast — within the seismic Ring of Fire arc. The official handling of the disaster (continuous discharge of contaminated water into the Pacific, ongoing into the 2020s) is one of the largest deliberate marine pollution events in history, with predictable cabal-aligned silence from international environmental institutions.'
+      'The Fukushima Daiichi nuclear disaster began on 11 March 2011 when a 9.0-magnitude earthquake and subsequent tsunami disabled the cooling systems of three General Electric Mark I boiling water reactors. Units 1, 2, and 3 underwent complete core meltdowns within days. The International Nuclear Event Scale (INES) rating was eventually upgraded to 7 — the maximum — matching Chernobyl. TEPCO (Tokyo Electric Power Company) and the Japanese government delayed public acknowledgment of the severity, releasing contaminated steam without disclosure, and continuing to describe events as "controlled" while the cores were melting.',
+      'The continuous discharge of contaminated groundwater and cooling water into the Pacific Ocean began immediately after the disaster and has continued for over a decade. An underground water barrier was eventually constructed to slow the discharge, but the site produces approximately 100-150 tonnes of contaminated water per day. TEPCO constructed over 1,000 tanks on the site to store the accumulating water. By 2020, these tanks were approaching capacity.',
+      'On 24 August 2023, Japan began the deliberate controlled discharge of approximately 1.25 million tonnes of treated water — filtered through the ALPS system to remove most radioactive isotopes except tritium, which cannot currently be filtered — into the Pacific Ocean. The discharge was approved by the International Atomic Energy Agency (IAEA). Japan paid $1 million to the IAEA for the review process. The IAEA Director General visited Japan as discharge began. China immediately banned all Japanese seafood imports. South Korea, Hong Kong, and several Pacific island nations expressed concern. The US government stated the discharge was safe.',
+      'Japanese cosmological tradition (Shintō-Buddhist synthesis) describes the world as a disc supported by giant catfish (namazu) whose movements cause earthquakes — a seismically accurate metaphor. The word for horizon in Japanese — chihei-sen (地平線) — translates literally as "the level line of the earth," describing a perceived flat horizon, not a curved surface.'
     ],
     facts: [
-      'Shintō cosmology: disc-world supported by pillars, enclosed by ocean.',
-      'Japanese "horizon" (地平線) literally means "level earth line."',
-      'Fukushima Daiichi disaster (2011) — ongoing radioactive water discharge.',
-      'Located on the right-arc Ring of Fire — where the disc shows seismic stress.'
+      'Three core meltdowns March 2011 — INES Level 7 (maximum); concealed for weeks.',
+      '1.25 million tonnes of tritium-contaminated water discharged into Pacific from August 2023.',
+      'IAEA approval process cost $1 million — paid by Japan.',
+      'China banned Japanese seafood imports immediately upon discharge beginning.',
+      'Japanese "horizon" (地平線): literally "level earth line" — flat-plane cosmological vocabulary preserved in daily use.'
     ],
-    significance: 'Japanese language and cosmology preserved flat-earth descriptions in living daily use. The Fukushima case is a contemporary example of cabal-aligned international institutions enabling environmental destruction with no accountability.',
+    significance: 'Fukushima represents the deliberate, government-sanctioned contamination of the world\'s largest ocean over a multi-decade timeframe. The IAEA — the body whose approval was purchased — approved the discharge. The fishing communities of the Pacific had no vote. This is how the control system manages civilisational-scale environmental crimes.',
+    sources: [
+      'TEPCO — Fukushima Daiichi contaminated water management reports',
+      'IAEA — Comprehensive Report on the Safety Review of the ALPS-Treated Water (2023)',
+      'Japanese Ministry of Economy, Trade and Industry — Fukushima site status reports',
+      'Buesseler, K. — "Opening the floodgates at Fukushima" — Science (2021)'
+    ],
     related: [17, 19, 35, 87]
   },
 
   19: {
-    title: 'Southeast Asia / Indonesia',
+    title: 'Southeast Asia — Phoenix Program & the Golden Triangle',
     zone: 'Landmass', color: '#fbbf24',
     position: 'Right-lower arc',
     region: 'Indonesian archipelago & ASEAN',
-    summary: 'The Ring of Fire arc — in flat earth terms, a fracture zone in the plane\'s outer crust near the equatorial ring where volcanic and seismic activity is concentrated. The 2004 Indian Ocean earthquake and tsunami originated here — the largest seismic event in modern recorded history.',
+    summary: 'The CIA\'s Phoenix Program killed 20,000–40,000 Vietnamese civilians through assassination, torture, and imprisonment. Simultaneously, CIA-affiliated Air America aircraft transported heroin from the Golden Triangle across the region. The Golden Triangle supplied the heroin that addicted an estimated 100,000 US soldiers in Vietnam. Programme director William Colby became Director of Central Intelligence in 1973.',
     analysis: [
-      'Indonesia and the surrounding archipelago span the equatorial right arc of the flat map. The region contains over 17,000 islands, the world\'s largest active volcanic system, and the most seismically active zone on the planet. In flat earth terms, this is a fracture zone — a region where the disc shows structural stress along its outer-mid arc.',
-      'The 2004 Boxing Day earthquake (magnitude 9.1-9.3) and the resulting Indian Ocean tsunami killed approximately 230,000 people across 14 nations. It was the third-largest earthquake ever instrumentally recorded. The seismic event originated beneath the Bay of Bengal, approximately 160 km off the western coast of Sumatra.',
-      'Indonesia is also the world\'s largest Muslim-majority nation — placing the population centre of Islam at this point on the flat map\'s right arc, geometrically remote from the religious heartland in the Arabian peninsula. The qibla (prayer direction) from Indonesia toward Mecca traces an arc on the flat map that is geometrically consistent — and that demonstrates the geometric precision required of the flat earth model to satisfy religious prayer-direction requirements.'
+      'Operation Phoenix (1965–1972) was a CIA-managed programme to destroy the Viet Cong political infrastructure in South Vietnam through "neutralisation" — assassination, capture, and defection. Over 20,000 Vietnamese were killed (South Vietnamese government figures) and approximately 17,000–35,000 more were imprisoned. Many were tortured under protocols that later surfaced in US post-9/11 "enhanced interrogation" programmes. The programme was run by CIA officer William Colby, who testified before Congress in 1971 and would become Director of Central Intelligence in 1973.',
+      'Simultaneously, the CIA was deeply involved in the Golden Triangle heroin trade. The Golden Triangle — the mountainous border zone of Laos, Myanmar, and Thailand — was then and remains the world\'s second-largest opium-producing region. CIA-affiliated airlines, most prominently Air America and Continental Air Services, operated throughout Laos in support of the secret war. Multiple investigations, most thoroughly Alfred McCoy\'s 1972 book "The Politics of Heroin in Southeast Asia," documented that these aircraft transported opium and heroin alongside official cargo, and that CIA-affiliated officers provided protection for opium caravans run by client warlords.',
+      'The heroin produced in the Golden Triangle flowed both to the US market and directly to US soldiers in Vietnam. By 1971, US military studies estimated that 10–15% of servicemen in Vietnam were addicted to heroin — approximately 100,000 men. The addiction wave followed them home, contributing to the domestic heroin crisis of the 1970s. The political pressure this created — active-duty and veteran family opposition to the war — was used to justify Nixon\'s 1971 declaration of the War on Drugs, which expanded domestic law enforcement in ways that outlasted the Vietnam era by decades.',
+      'The pattern established in Southeast Asia was exported. The CIA-linked heroin trade in Afghanistan following the 1979 Soviet invasion operated through the same mechanism — proxy forces (mujahideen, later Taliban) providing security for poppy cultivation in exchange for weapons and CIA support. The Golden Triangle operation was not an exception; it was the prototype.'
     ],
     facts: [
-      '17,000+ islands — world\'s largest archipelago.',
-      '2004 tsunami — third-largest earthquake ever recorded.',
-      'World\'s largest Muslim-majority nation.',
-      'Most seismically active region on the planet.'
+      'Phoenix Program: 20,000–40,000 Vietnamese killed; 17,000–35,000 imprisoned without trial.',
+      'Programme director William Colby became Director of Central Intelligence in 1973.',
+      'Air America documented to have transported opium and heroin alongside official cargo.',
+      '10–15% of US soldiers in Vietnam estimated addicted to heroin by 1971.',
+      'McCoy\'s 1972 exposé: publisher pressured not to publish by CIA; published anyway.'
     ],
-    significance: 'A structural stress zone on the flat plane. The 2004 tsunami event demonstrates the catastrophic energy release possible at this fracture line.',
+    significance: 'Southeast Asia is where the CIA\'s combined assassination-programme and narcotics-trafficking model was operationally developed. The combination of proxy war, assassination, and narcotics as a funding mechanism was exported to Central America and Afghanistan. The region is the template, not the exception.',
+    sources: [
+      'McCoy, A. — "The Politics of Heroin in Southeast Asia" (1972)',
+      'Valentine, D. — "The Phoenix Program" (1990)',
+      'Colby, W. — Senate testimony on Phoenix Program (1971)',
+      'US Army — "Drug Abuse: A Guide for the Flight Surgeon" internal study (1971)'
+    ],
     related: [18, 20, 35, 37, 85, 87]
   },
 
@@ -498,23 +527,31 @@ window.LOCATION_DATA = {
   },
 
   22: {
-    title: 'Pacific Islands / Hawaii',
+    title: 'Pacific Islands / Hawaii — PACOM and the Nuclear Test Zone',
     zone: 'Landmass', color: '#fbbf24',
     position: 'Centre-lower, Pacific arc',
     region: 'Hawaiian archipelago & Pacific islands',
-    summary: 'Hawaii sits at the precise midpoint between the North American and Asian arcs on the flat azimuthal map — as expected geometrically. The Pacific Military Command is based here, at the dead centre of the Pacific arc\'s strategic radius.',
+    summary: 'Hawaii sits at the precise midpoint between North American and Asian arcs — geometrically correct on the flat map and home to the US Indo-Pacific Command, the largest unified combatant command on Earth. But the broader Pacific island chain was the test zone for 106 nuclear detonations between 1946-1962 at Bikini and Enewetak atolls — with indigenous populations forcibly relocated and never allowed to return. The Marshall Islands are still contaminated 70 years later.',
     analysis: [
-      'Hawaii\'s location at the geometric midpoint between the North American and Asian arcs of the flat map made it the obvious choice for the headquarters of the US Pacific Command (now Indo-Pacific Command), the largest unified combatant command of the US military. Pearl Harbor on Oahu remains the strategic naval anchor of the entire Pacific theatre.',
-      'The Pearl Harbor attack of 7 December 1941 — the formal entry point of the United States into World War II — has been the subject of decades of historical investigation regarding what was known in advance by the Roosevelt administration. Declassified Navy and intelligence documents indicate that Japanese fleet movements were tracked and that the attack timing was anticipated. The "surprise" framing was politically necessary for war justification.',
-      'Hawaii\'s indigenous Polynesian navigation tradition is one of the most sophisticated pre-modern wayfinding systems ever developed. Polynesian navigators crossed thousands of miles of open ocean using stellar, oceanic, and atmospheric cues. Their methods are flat-plane navigation methods — they did not require globe geometry to work, and indeed make more sense on the flat azimuthal map than on a sphere.'
+      'Hawaii\'s location at the geometric midpoint between the North American and Asian arcs of the flat map made it the obvious choice for the headquarters of the US Indo-Pacific Command — the largest of the six US unified combatant commands, responsible for the area from the US Pacific coast to the western Indian Ocean. Pearl Harbor on Oahu remains the strategic naval anchor of the entire Pacific theatre.',
+      'The Marshall Islands — 2,400 km southeast of Guam in the central Pacific — were used by the United States as the primary nuclear weapons testing zone from 1946 to 1958. Bikini Atoll: 23 nuclear tests. Enewetak Atoll: 43 nuclear tests. The total yield of all tests at these atolls was approximately 210 megatons — 200 times the total yield of all World War II explosions including Hiroshima and Nagasaki. The indigenous Marshallese population of Bikini (167 people) was forcibly relocated to Rongelap Atoll in 1946, told by US officials they were "being used for the benefit of mankind." They have never been allowed to return permanently; Bikini remains too contaminated for habitation.',
+      'The Bravo shot of 1 March 1954 — a 15-megaton thermonuclear device, the largest US nuclear test — was detonated at Bikini when the wind had shifted, showering the inhabited atolls of Rongelap and Utrik with radioactive fallout. The US did not evacuate these islands for 48 hours after the test, despite knowing within hours that they were heavily contaminated. The resulting "fallout study" — documented in the AEC\'s secret Project 4.1 report — was a deliberate human radiation exposure experiment, not an accident response. The affected Marshallese were treated as research subjects.',
+      'Polynesian navigation across the Pacific is one of the most decisive flat-earth navigational exhibits. Polynesian wayfinders crossed thousands of miles of open ocean using stellar mapping (the star compass), wave pattern reading, and atmospheric observation — none of which require globe geometry. Their star compass is an azimuthal system, mapping stars to horizon positions exactly as the flat azimuthal map describes. The navigation worked.'
     ],
     facts: [
-      'Geometric midpoint of the Pacific arc on the flat azimuthal map.',
-      'US Indo-Pacific Command — largest unified combatant command.',
-      'Pearl Harbor attack: anticipated based on declassified intelligence records.',
-      'Polynesian navigation: flat-plane wayfinding, no globe geometry required.'
+      'Hawaii: geometric midpoint of Pacific arc; headquarters of US Indo-Pacific Command.',
+      '106 nuclear tests at Bikini and Enewetak (1946-1962) — 210 megaton total yield.',
+      'Bikini Atoll population forcibly relocated 1946; told they were helping "mankind"; still cannot return.',
+      'Bravo shot (1 March 1954): fallout on inhabited atolls — AEC\'s Project 4.1 was a deliberate human radiation experiment.',
+      'Polynesian star compass: azimuthal navigation system — geometrically consistent with flat disc, not globe.'
     ],
-    significance: 'Demonstrates that pre-modern long-distance navigation worked on flat-plane principles. The geometric centrality of Hawaii on the Pacific arc explains its strategic military importance.',
+    significance: 'The Pacific island chain was sacrificed as a nuclear test zone. Indigenous populations were used as research subjects. The Polynesian navigation systems that successfully crossed this ocean were azimuthal, not spherical. The US military command that controls this ocean is headquartered at its geometric centre on the flat map.',
+    sources: [
+      'AEC — Project 4.1 classified report on Rongelap fallout exposure (declassified 1994)',
+      'Johnson, G. — "Collision Course at Kwajalein" (1984)',
+      'Niedenthal, J. — "For the Good of Mankind: A History of the People of Bikini and Their Islands" (2001)',
+      'Finney, B. — "Voyage of Rediscovery: A Cultural Odyssey Through Polynesia" (1994)'
+    ],
     related: [7, 17, 25, 36]
   },
 
@@ -564,45 +601,61 @@ window.LOCATION_DATA = {
   /* ════════ ZONE 3 — OCEANS & SEAS ════════ */
 
   25: {
-    title: 'Pacific Ocean',
+    title: 'Pacific Ocean — The Nuclear Sacrifice Zone',
     zone: 'Ocean', color: '#38bdf8',
     position: 'Left and right outer arcs',
     region: 'World\'s largest ocean',
-    summary: 'The globe convention of a single unified Pacific is an artefact of Mercator projection. On the flat azimuthal map, the Pacific splits across both the leftmost and rightmost edges — two arcs of the same body. This split is why trans-Pacific flight routes behave unexpectedly.',
+    summary: 'Between 1946 and 1958, the US detonated 67 nuclear weapons over and under the Pacific Ocean. Castle Bravo on 1 March 1954 was 15 megatons — 1,000 times more powerful than Hiroshima — and contaminated 18,000 km². The Bikini Island population was evacuated in 1946 and told they would return. They have never returned. Their island is still radioactive. The Marshall Islanders who received fallout were studied as medical research subjects by Brookhaven National Laboratory.',
     analysis: [
-      'The Pacific Ocean covers approximately one-third of the Earth\'s surface — making it larger than all the continents combined. On the standard Mercator world map it appears as a single unified body in the centre. On the flat azimuthal projection, the same body of water appears split — wrapping around both the left and right outer arcs of the disc.',
-      'This visual splitting is not a distortion of the flat map; it is the accurate representation of how the ocean is actually traversed by ships and aircraft. Trans-Pacific flight times, current patterns, and weather systems all behave consistently with the Pacific being a continuous outer-arc water body — not a unified central basin.',
-      'The trade winds, ocean currents, and pressure systems of the Pacific operate in ways that are perfectly modelled by flat-plane fluid dynamics and largely independent of any globe-rotation Coriolis assumptions. Indeed, several of the most studied "Coriolis effects" in oceanography have been shown to have alternative non-rotational explanations.'
+      'The United States conducted 67 nuclear weapons tests at Bikini Atoll and Enewetak Atoll in the Marshall Islands between 1946 and 1958. The Marshall Islands were administered as a US "Trust Territory of the Pacific Islands" under a UN trusteeship — an arrangement that gave the US administrative authority while nominally protecting indigenous rights, and that was used to provide legal cover for the largest nuclear testing programme conducted near inhabited territory in history.',
+      'Operation Castle, Bravo shot, 1 March 1954: a thermonuclear device at Bikini Atoll yielded 15 megatons — three times the expected yield, due to an underestimated lithium-6 reaction. The fallout cloud spread over approximately 18,000 km² of ocean, reef, and inhabited islands. The crew of the Japanese fishing vessel Lucky Dragon No. 5 were 150 km from ground zero; all 23 crew were severely irradiated; chief radio operator Aikichi Kuboyama died seven months later. The incident caused an international crisis and contributed directly to the 1963 Partial Nuclear Test Ban Treaty.',
+      'The Bikini islanders were evacuated in March 1946 before the first test, told by US officers: "We are asking you to sacrifice your island for the good of mankind and to end all world wars." They have never been permitted to permanently resettle — residual plutonium-239 (half-life 24,100 years) makes the main island uninhabitable. Nuclear compensation claims by Marshall Islanders against the US government remain only partially settled, with the US having capped payments at $150 million — a fraction of the estimated damage.',
+      'Brookhaven National Laboratory conducted a long-term medical study of Marshall Islanders who received Castle Bravo fallout — particularly the Rongelap Atoll population. Documents released via FOIA revealed explicit language describing the exposure as a "unique opportunity" to study radiation effects in living human populations. The islanders were not fully informed of their status as research subjects. Senator Glenn\'s 1993 investigation into US government radiation experiments confirmed that the Marshall Islands study was conducted under the same framework as domestic radiation experiments on unwitting American subjects.'
     ],
     facts: [
-      'Larger than all continents combined.',
-      'Splits across both left and right outer arcs on the flat azimuthal map.',
-      'Trans-Pacific flight times consistent with flat-plane geometry.',
-      'Trade wind patterns explainable without globe rotation.'
+      '67 nuclear weapons detonated in the Pacific 1946–1958.',
+      'Castle Bravo (1 March 1954): 15 megatons — 1,000× Hiroshima; 18,000 km² contaminated.',
+      'Bikini islanders evacuated 1946 — told they could return. Still cannot permanently return.',
+      'Rongelap Atoll fallout victims studied as research subjects by Brookhaven National Laboratory.',
+      'Lucky Dragon No. 5 crew irradiated 150 km from ground zero; one died within 7 months.'
     ],
-    significance: 'The Pacific\'s split appearance on the flat map is not a distortion — it is the accurate representation of how this body of water actually functions for navigation and weather.',
+    significance: 'The Pacific nuclear testing programme is the clearest case of the US using a captive non-white population and remote ocean territory as a nuclear weapons laboratory. The human cost — permanent radioactive contamination, displaced populations, and undisclosed medical experimentation — has never been fully compensated or acknowledged.',
+    sources: [
+      'US AEC — Nuclear Testing at Bikini and Enewetak: official records (partially declassified)',
+      'Brookhaven National Laboratory — Project 4.1 documents (FOIA release)',
+      'Niedenthal, J. — "For the Good of Mankind" (2001)',
+      'Weisgall, J. — "Operation Crossroads: The Atomic Tests at Bikini Atoll" (1994)'
+    ],
     related: [22, 26, 27, 35, 36, 76]
   },
 
   26: {
-    title: 'Atlantic Ocean',
+    title: 'Atlantic Ocean — The Nazi Ratlines',
     zone: 'Ocean', color: '#38bdf8',
     position: 'Central corridor',
     region: 'Atlantic basin',
-    summary: 'The central oceanic corridor on the flat map — the primary navigational highway between the European and American arcs. Its relatively narrow width on the flat map explains why early navigators could cross it in weeks without magnetic compass anomalies.',
+    summary: 'After World War II, thousands of Nazi war criminals crossed the Atlantic to South America via organised ratlines — Vatican-issued identity documents, Red Cross travel papers, and port connections in Genoa and Barcelona. Josef Mengele, Franz Stangl, and hundreds more escaped this way. The US CIC actively protected Klaus Barbie; the US formally apologised to France in 1983. Operation Paperclip ran the inverse route, bringing 1,600 German scientists to the US with falsified records.',
     analysis: [
-      'The Atlantic Ocean appears as a vertical corridor on the flat azimuthal map, running between the European/African upper arc and the American left arc. Its relative narrowness on this projection is one of the reasons trans-Atlantic exploration was possible centuries before reliable transcontinental Pacific navigation.',
-      'The compass behaviour during early Atlantic crossings was a major historical puzzle. The deviations recorded in early ship logs — particularly the Columbus voyages — make sense in a flat earth context as the ship moves through varying magnetic field zones along a flat plane. They are harder to explain on a globe rotating at 1,000 mph at the equator.',
-      'The Mid-Atlantic Ridge — a continuous underwater mountain chain running the length of the Atlantic — has been mapped only in the modern era. Its existence as a geological feature is consistent with the disc structure: a fracture line in the basement plate beneath the ocean.'
+      'The ratlines were escape networks used by Nazi war criminals after 1945 to reach South America, the Middle East, and — under Operation Paperclip — the United States. The Atlantic was the primary crossing, from ports in Genoa, Barcelona, and Hamburg to Buenos Aires, Asunción, and Montevideo. The network operated through multiple layers: false identity documents from SS units; Catholic church support (most notably Bishop Alois Hudal in Rome and the Croatian Ustasha network operating through the Vatican); fraudulently obtained Red Cross travel documents; then Atlantic passage aboard commercial or military vessels.',
+      'Juan Perón\'s Argentina was the primary receiving country. Perón actively welcomed former SS officers, Gestapo members, and fascist collaborators — providing Argentine passports, land grants, and intelligence service positions. Adolf Eichmann lived in Buenos Aires as Ricardo Klement until Mossad agents abducted him in 1960. His trial in Jerusalem in 1961 — where he maintained he was "only following orders" — revealed for the first time to the global public the full bureaucratic architecture of the Holocaust.',
+      'Klaus Barbie — the "Butcher of Lyon," responsible for the torture of French Resistance members and the deportation of Jewish children to Auschwitz — was employed by the US Army Counter Intelligence Corps (CIC) after the war for his knowledge of communist networks. When French authorities pressed for extradition, the CIC organised his escape to Bolivia in 1951, where he lived as Klaus Altmann until exposure in 1971. The US government formally apologised to France in 1983 and published a full report on the CIC\'s role in protecting him.',
+      'Operation Paperclip ran the inverse route. Approximately 1,600 German scientists — Wernher von Braun, Kurt Debus, Walter Dornberger, and others — were brought across the Atlantic under classified US government sponsorship. Their Nazi Party memberships and records of using concentration camp slave labour at Mittelwerk were falsified or suppressed. Von Braun, who used Dora concentration camp prisoners to build V-2 rockets, became NASA\'s Saturn V designer and the celebrated face of the American space programme.'
     ],
     facts: [
-      'Vertical corridor between European and American arcs on flat map.',
-      'Trans-Atlantic crossings achievable with pre-modern navigation.',
-      'Mid-Atlantic Ridge: continuous underwater mountain chain.',
-      'Compass anomalies historical recorded but rarely explained.'
+      'Ratline routes: Genoa/Barcelona → Buenos Aires/Asunción, operated 1945–late 1950s.',
+      'Bishop Alois Hudal (Vatican) issued false identity documents to hundreds of fleeing SS officers.',
+      'Eichmann lived in Buenos Aires as "Ricardo Klement" 1950–1960; abducted by Mossad.',
+      'Klaus Barbie protected by US CIC 1945–51; US formally apologised to France in 1983.',
+      'Operation Paperclip: 1,600 German scientists brought to US; Nazi records systematically falsified.'
     ],
-    significance: 'The primary navigational corridor of the modern era. Its accessibility via pre-modern technology depends on flat-plane navigation — globe assumptions complicate the historical record without explaining it.',
-    related: [25, 27, 36, 38, 39, 40]
+    significance: 'The Atlantic ratlines demonstrate that the post-war world was not a clean break from Nazism. Thousands of war criminals continued their careers — in South America, in the US defence establishment, under Vatican protection — with active institutional support. The war criminal Klaus Barbie was a US government employee.',
+    sources: [
+      'Aarons, M. & Loftus, J. — "Unholy Trinity: The Vatican, The Nazis, and the Swiss Banks" (1991)',
+      'US Department of Justice — Klaus Barbie investigation report (Sher/Ryan, 1983)',
+      'Cesarani, D. — "Eichmann: His Life and Crimes" (2004)',
+      'Hunt, L. — "Secret Agenda: The United States Government, Nazi Scientists, and Project Paperclip" (1991)'
+    ],
+    related: [9, 25, 27, 36, 76]
   },
 
   27: {
@@ -961,398 +1014,556 @@ window.LOCATION_DATA = {
     related: [14, 62, 66]
   },
   40: {
-    title: "The Bedford Level, England",
-    zone: "Evidence", color: "#4ade80",
-    position: "Upper-centre arc · Cambridgeshire, UK",
-    first_recorded: "Rowbotham experiment, 1838",
-    summary: "A 6-mile perfectly straight drainage canal in Cambridgeshire. Rowbotham's 1838 experiment showed a boat remaining fully visible at water level across the full 6 miles — no curvature observable. Reproduced dozens of times. The Royal Geographical Society's attempted debunking inadvertently confirmed the result.",
+    title: 'The Bedford Level — The Bet That Became a Legal War',
+    zone: 'Evidence', color: '#4ade80',
+    position: 'Upper-centre arc · Cambridgeshire, UK',
+    first_recorded: 'Rowbotham experiment, 1838',
+    summary: 'Samuel Rowbotham proved the canal flat in 1838. In 1870, John Hampden bet £500 no one could prove the globe. Alfred Russel Wallace accepted and won the adjudication — then Hampden spent 15 years harassing Wallace with threatening letters and had his wife arrested. Wallace spent more winning the bet in legal costs than he received. The scientific establishment used the courts to destroy the man who embarrassed them.',
     analysis: [
-      "The Bedford Level is a section of the Old Bedford River — a perfectly straight artificial drainage canal in the Cambridgeshire fens, England. Six miles of dead-straight, level water make it the ideal natural laboratory for testing the curvature of the Earth.",
-      "Samuel Rowbotham conducted the original experiment in 1838, observing a boat traversing the full six miles while remaining fully visible at water level through a telescope set just above the water surface. According to globe geometry (8 inches × miles², squared), a six-mile distance should hide approximately 24 feet of the boat's lower portion. Rowbotham observed: it did not.",
-      "The 1870 \"Bedford Level Experiment\" sponsored by John Hampden and adjudicated by Alfred Russel Wallace was officially decided in favour of the globe model, but the methodology — using flag markers and telescopic alignments — has been criticised by both sides. Subsequent independent reproductions throughout the 20th and 21st centuries have consistently confirmed Rowbotham's original observation.",
-      "The Bedford Level remains the standard reference experiment for the curvature debate. Modern reproductions using high-resolution video and laser measurement equipment continue to fail to detect the predicted curvature."
+      'Samuel Rowbotham conducted the original Bedford Level experiment in 1838, observing a boat traversing six miles of dead-straight drainage canal while remaining fully visible at water level. On globe geometry, the opposite end of the canal should be hidden by approximately 24 feet of curvature. It was not. Rowbotham published his findings as "Zetetic Astronomy" (1849) and later as "Earth Not a Globe" (1865), which ran to multiple editions.',
+      'In 1870, John Hampden placed a £500 bet (roughly £60,000 today) in the journal Scientific Opinion: he would pay £500 to anyone who could demonstrate water curvature over several miles. Alfred Russel Wallace — co-discoverer of evolution, Fellow of the Royal Society — accepted. The adjudicated experiment used flag markers at measured heights. The referee declared Wallace the winner. Hampden refused to pay, declared Wallace a fraud, and the harassment began.',
+      'What followed was 15 years of legal warfare. Hampden sent threatening letters to Wallace and his family. He posted public notices calling Wallace a swindler. He was jailed briefly for threatening correspondence, released, and repeated the offence. Wallace pursued multiple civil actions. His total legal costs in pursuing the £500 prize exceeded what he ultimately collected. He later wrote that accepting the bet was the greatest mistake of his professional life.',
+      'The episode was then weaponised by the scientific establishment to discredit flat earth advocates as unhinged obsessives — while the underlying experimental question remained unaddressed. The Bedford Level itself was never officially surveyed by laser in a controlled peer-reviewed study. Modern reproductions using high-resolution video and drone equipment continue to fail to detect the predicted curvature.'
     ],
     facts: [
-      "Six-mile dead-straight canal in the Cambridgeshire fens.",
-      "Boat at water level should be hidden by ~24 feet at 6 miles distance on a globe.",
-      "Rowbotham (1838): boat fully visible across full distance.",
-      "Multiple modern reproductions confirm: no curvature observable."
+      'Rowbotham (1838): boat visible across full 6 miles at water level — no curvature.',
+      'Hampden-Wallace bet (1870): £500 wager; adjudicated for Wallace; Hampden refused to pay.',
+      'Hampden jailed for threatening letters; released; reoffended.',
+      "Wallace's legal costs exceeded the £500 prize; he called it his greatest mistake.",
+      'No peer-reviewed laser survey of the Bedford Level has confirmed globe curvature.'
     ],
-    significance: "The original repeatable curvature experiment. The fact that this experiment can still be performed today, with modern equipment, and continues to confirm the flat result, is among the most direct evidence for the model.",
+    significance: "The Bedford Level bet shows the standard playbook: bury an inconvenient experimental result through social destruction of its proponent, not counter-experiment. Wallace's 15-year ordeal was used to discredit all flat earth research while the original question went unanswered.",
     sources: [
-      "Rowbotham, S. — \"Earth Not a Globe\" (1865)",
-      "Hampden, J. — \"The Bedford Canal Swindle Detected and Exposed\" (1870)",
-      "Eric Dubay — modern reproduction footage and analysis"
+      'Rowbotham, S. — "Earth Not a Globe" (1865)',
+      'Wallace, A.R. — "My Life: A Record of Events and Opinions" (1905)',
+      'Hampden, J. — "The Bedford Canal Swindle Detected and Exposed" (1870)'
     ],
     related: [42, 43, 44, 45, 46]
   },
   41: {
-    title: "The Suez Canal, Egypt",
-    zone: "Evidence", color: "#4ade80",
-    position: "Right-centre arc · Egypt",
-    first_recorded: "Construction completed 1869",
-    summary: "193.3 km long, built completely level with no curvature accommodation. At globe curvature rate (8 inches per mile²), the canal should drop 1,666 feet from end to end. Official British engineering specifications confirm: no curvature adjustment was made. The canal works perfectly at sea level its entire length.",
+    title: 'The Suez Canal — The Crisis That Was Planned in Secret',
+    zone: 'Evidence', color: '#4ade80',
+    position: 'Right-centre arc · Egypt',
+    first_recorded: 'Canal completed 1869; Protocol of Sèvres 24 October 1956',
+    summary: '193.3 km long, built level with no curvature accommodation — it should drop 508 metres on a globe but does not. More consequentially: the 1956 Suez Crisis was preceded by the secret Protocol of Sèvres — a tripartite agreement between Britain, France, and Israel to stage a war. The UK told the US nothing. Eisenhower found out from U-2 reconnaissance photos and threatened to destroy the pound sterling. Britain capitulated within days.',
     analysis: [
-      "The Suez Canal connects the Mediterranean to the Red Sea over a distance of 193.3 km. It was completed in 1869 by a French-led consortium under Ferdinand de Lesseps. The original engineering specifications, preserved in Egyptian and British archives, confirm: it was built completely level, sea level to sea level, with no curvature adjustment.",
-      "On a globe with the standard 8-inches-per-mile-squared curvature rate, a 193 km canal should require a drop of approximately 508 metres (1,666 feet) from end to end to accommodate Earth's curvature. The Suez was not built this way. It is straight, level, and operates at sea level along its entire length.",
-      "Subsequent canal projects worldwide — Panama, Kiel, Corinth — have all been built on the same flat-plane assumption. No canal in history has been engineered with curvature accommodation. The engineering profession's practical methodology contradicts the cosmological model the engineers were taught."
+      'The Suez Canal was built level, sea level to sea level, over 193.3 km with no curvature adjustment. On a globe, it should require approximately 508 metres of drop from end to end. It does not drop. British and Egyptian engineering archives confirm: flat construction throughout.',
+      'On 26 July 1956, Egyptian President Nasser nationalised the Suez Canal Company. British Prime Minister Eden began covert planning to use military force to retake it, but could not do so openly without US support — which Eisenhower would not provide for naked colonial military action in 1956.',
+      'The solution was the Protocol of Sèvres, signed 24 October 1956: a secret agreement between Britain (Eden), France (Mollet and Pineau), and Israel (Ben-Gurion and Dayan). Israel would invade Egypt through Sinai. Britain and France would then issue an ultimatum to both sides to withdraw from the canal zone, knowing Egypt would refuse. Britain and France would then bomb and invade, framed as peacekeeping. The plan worked militarily.',
+      'Eisenhower discovered the conspiracy from US U-2 reconnaissance photographs showing Israeli mobilisation before the attack — eight days before the US presidential election. He threatened to deny the UK emergency IMF currency loans and to flood the market with British government bonds, collapsing the pound. Eden capitulated within days. British troops withdrew. Eden resigned in January 1957. The British government denied the Protocol of Sèvres existed until the documents were declassified from UK National Archives in 1996.'
     ],
     facts: [
-      "193.3 km long — should require 508m drop on a globe.",
-      "Built sea-level to sea-level with no curvature adjustment.",
-      "British and Egyptian engineering archives confirm flat construction.",
-      "No canal in history has been built with curvature accommodation."
+      '193.3 km canal built level — should drop 508m on globe; does not.',
+      'Protocol of Sèvres (24 Oct 1956): secret UK-France-Israel agreement to stage the Suez Crisis.',
+      'Eisenhower not informed; discovered the plot via U-2 reconnaissance photographs.',
+      'UK threatened with IMF loan denial and pound sterling collapse — capitulated within days.',
+      'British government denied the Protocol existed until documents declassified 1996.'
     ],
-    significance: "The engineering reality of major canal construction is direct evidence for the flat plane. The construction methodology contradicts the educational theory.",
-    related: [42, 43, 44, 45]
+    significance: 'Suez Canal is flat-plane engineering evidence and the site of the most consequential political conspiracy of the Cold War\'s first decade. Three NATO allies secretly planned and staged a military crisis — then denied it for 40 years. The cover-up held until declassification, not until anyone came forward.',
+    sources: [
+      'Protocol of Sèvres — original document (declassified UK National Archives, 1996)',
+      'Kyle, K. — "Suez: Britain\'s End of Empire in the Middle East" (1991)',
+      'Dayan, M. — "Story of My Life" (1976)'
+    ],
+    related: [12, 13, 42, 43, 44, 45]
   },
   42: {
-    title: "The Panama Canal",
-    zone: "Evidence", color: "#4ade80",
-    position: "Left-centre arc · Panama",
-    first_recorded: "Canal opened 15 August 1914",
-    summary: "82 km long, built entirely level. Official US Army Corps of Engineers documents confirm no curvature adjustment was required or made. The Gatun Lake section sits at 26m above sea level across its entire flat surface — confirming a level plane, not a curved surface.",
+    title: 'The Panama Canal — CIA Hub & Death Squad Academy',
+    zone: 'Evidence', color: '#4ade80',
+    position: 'Left-centre arc · Panama',
+    first_recorded: 'Canal opened 15 August 1914; School of the Americas established 1946',
+    summary: '82 km long, built level with no curvature compensation. More consequentially: the Canal Zone hosted the School of the Americas, which trained 64,000+ Latin American military officers in assassination, torture, and counterinsurgency — producing the architects of every major Latin American death squad programme. Manuel Noriega was simultaneously a CIA asset and Medellín Cartel facilitator for over a decade before the US invaded to arrest him.',
     analysis: [
-      "The Panama Canal connects the Pacific and Atlantic oceans across the Isthmus of Panama. Construction was begun by the French (1881-1894), restarted by the US under Roosevelt (1904-1914), and the canal opened on 15 August 1914. Total length: 82 km from deep water to deep water.",
-      "The Gatun Lake section — 33 km of the canal — sits at 26 metres above sea level. The lake's surface is perfectly flat across its entire expanse. Ships are raised by the Gatun Locks on the Atlantic side, transit the flat lake, and are lowered by the Pedro Miguel and Miraflores Locks on the Pacific side.",
-      "The US Army Corps of Engineers archives confirm: no curvature accommodation was made in the engineering. The canal is built on flat-plane principles. If the Earth were a globe, the Pacific and Atlantic surfaces at the canal endpoints would not be at the same level — there would be a measurable curvature drop. There is not."
+      'The Panama Canal is 82 km from deep water to deep water, including Gatun Lake at 26 metres elevation — perfectly flat across its entire 33-km section. Built level with no curvature accommodation (US Army Corps of Engineers archives confirm no curvature adjustment was made).',
+      'The Canal Zone housed Fort Gulick and the School of the Americas (SOA) from 1946 until its relocation to Fort Benning, Georgia in 1984. The SOA trained over 64,000 Latin American military and police officers. Its curriculum — declassified in 1996 after a FOIA request by Father Roy Bourgeois — included torture techniques, execution methods, false arrest procedures, and psychological operations. SOA graduates include: General Hugo Banzer (Bolivian dictator), General Leopoldo Galtieri (Argentine junta leader), Roberto D\'Aubuisson (El Salvador death squad founder), Vladimiro Montesinos (Peruvian intelligence chief convicted of drug trafficking), and commanders involved in the El Mozote massacre (800+ civilians, 1981).',
+      'Manuel Noriega was recruited as a CIA informant in the 1960s while at the Peruvian Military Academy. He became Panama\'s de facto leader in 1983. The CIA paid him approximately $100,000 per year throughout the 1970s and 1980s for intelligence services. Simultaneously, he was facilitating the Medellín Cartel\'s cocaine shipments. The DEA documented this. The CIA and NSC continued to work with him regardless.',
+      'When the relationship collapsed in 1987–89, the US invaded Panama in December 1989, killing an estimated 500–3,000 civilians (official figure: 516; independent estimates up to 3,000), and arrested Noriega on drug charges. He was convicted and imprisoned in the US. The canal passed to full Panamanian control on 31 December 1999.'
     ],
     facts: [
-      "82 km from deep water to deep water.",
-      "Gatun Lake section: 33 km of perfectly flat water at 26m elevation.",
-      "US Army Corps of Engineers archives: no curvature adjustment.",
-      "Pacific and Atlantic surfaces at canal endpoints are at the same level."
+      '82 km canal built level with no curvature accommodation.',
+      'School of the Americas: 64,000+ officers trained in torture, assassination, counterinsurgency.',
+      'SOA curriculum declassified 1996 — includes specific torture and execution techniques.',
+      'Noriega: CIA asset and Medellín Cartel facilitator simultaneously; paid $100,000/year by CIA.',
+      'US invasion December 1989: 516 official civilian deaths; independent estimates up to 3,000.'
     ],
-    significance: "A modern engineering project that demonstrates the same flat-plane assumption as Suez. Built within the past century with full documentation, leaves no ambiguity about the methodology.",
-    related: [9, 41, 43]
+    significance: 'The Panama Canal Zone was simultaneously a flat-plane engineering achievement and the operational headquarters of the Latin American death squad training network. The combination of CIA payroll management, drug facilitation, and mass civilian death in a single geographic location makes Panama the clearest Cold War covert operations case study.',
+    sources: [
+      'US Army SOA curriculum documents — declassified 1996 via Bourgeois FOIA',
+      'National Security Archive — Noriega-CIA relationship documents',
+      'Human Rights Watch — Panama civilian casualty assessment (1990)',
+      'Dinges, J. — "Our Man in Panama" (1990)'
+    ],
+    related: [9, 23, 41, 43]
   },
   43: {
-    title: "Lake Pontchartrain Causeway, Louisiana",
-    zone: "Evidence", color: "#4ade80",
-    position: "Left-centre arc · Louisiana, USA",
-    first_recorded: "Construction completed 1956 (north), 1969 (south)",
-    summary: "At 38.6 km, the longest continuous bridge over water in the world. Should show approximately 29m of curvature drop from centre to ends. Engineers confirm: no curvature allowance was made. The bridge is built perfectly level from shore to shore.",
+    title: 'Lake Pontchartrain — The Deliberate Flood',
+    zone: 'Evidence', color: '#4ade80',
+    position: 'Left-centre arc · Louisiana, USA',
+    first_recorded: 'Causeway opened 1956/1969; Hurricane Katrina August 2005',
+    summary: 'The 38.6-km causeway is built level with no curvature compensation — it should show ~29m of drop on a globe. More consequentially: when Hurricane Katrina hit in August 2005, Army Corps engineers had warned for years the levees were inadequate. Budget requests to upgrade them had been cut every year since 2003. An FBI agent testified to Congress about a witnessed explosive levee breach. The post-Katrina land grab in the Ninth Ward displaced 250,000 Black residents who never returned.',
     analysis: [
-      "The Lake Pontchartrain Causeway, opened in 1956 (north-bound) and 1969 (south-bound), is a pair of parallel bridges crossing Lake Pontchartrain in southern Louisiana. Each is approximately 38.6 km long — together they form the world's longest continuous bridge over water.",
-      "On a globe with standard curvature, the bridge should drop approximately 29 metres from its centre point to its ends — the centre of the bridge would be visibly higher than either end. Engineers and contractors involved in the construction have confirmed: no such adjustment was made. The bridge is engineered to be perfectly level from end to end.",
-      "Photographs from the bridge demonstrate the absence of any visible curvature. The opposite shore is visible; the lake surface is flat; the bridge runs straight. These observations are consistent with a flat plane and inconsistent with a globe."
+      'The Lake Pontchartrain Causeway is 38.6 km long, built level with no curvature compensation — the centre should be 29 metres higher than either shore on a globe. It is not. Flat-plane engineering confirmed.',
+      'Hurricane Katrina made landfall on 29 August 2005. The US Army Corps of Engineers levee system protecting New Orleans failed catastrophically, flooding approximately 80% of the city. 1,833 people died. Internal Corps of Engineers documents released via FOIA and published in a 2006 congressional investigation revealed that engineers had warned for years that the levees were inadequate for a Category 3 or higher hurricane. Budget requests to upgrade the system had been cut by the Bush administration every year since 2003.',
+      'FBI agent Kenneth Williams testified before Congress that he had witnessed an explosive charge used to intentionally breach a levee in the Ninth Ward. The testimony was not widely reported. A number of Ninth Ward residents reported hearing an explosion before their neighbourhood flooded. The Ninth Ward was the poorest, predominantly Black neighbourhood in New Orleans.',
+      'The aftermath: approximately 250,000 people were permanently displaced from New Orleans. Property values in the Lower Ninth Ward collapsed. Developers purchased land at fraction-of-market prices in 2006–07. The pre-Katrina Black population of the Lower Ninth Ward has never returned to pre-storm levels. A 2015 Loyola University study documented the displacement and found patterns consistent with deliberate gentrification enabled by the disaster. The city\'s rebuilt population skews wealthier and whiter than before Katrina.'
     ],
     facts: [
-      "38.6 km long — longest continuous bridge over water on Earth.",
-      "Should show ~29m curvature drop on a globe.",
-      "Built level from shore to shore — no curvature compensation.",
-      "Visible flat horizon and opposite shore demonstrate the absence of curvature."
+      '38.6 km causeway built level — should show ~29m curvature on globe; does not.',
+      'Corps of Engineers warned levees were inadequate; upgrade budget cut every year 2003–2005.',
+      'FBI agent Williams testified to Congress about witnessed levee demolition charge.',
+      '1,833 dead; 250,000 permanently displaced; Lower Ninth Ward Black population has not returned.',
+      'Post-Katrina land acquisitions in Ninth Ward at distressed prices; city rebuilt wealthier and whiter.'
     ],
-    significance: "A modern American example demonstrating that major US engineering projects assume a flat plane.",
+    significance: 'Katrina demonstrates the standard disaster capitalism pattern: a preventable catastrophe is allowed to occur, the most vulnerable population absorbs the casualties, and connected interests acquire the real estate. The FBI levee testimony has never been publicly resolved.',
+    sources: [
+      'US House Select Committee — "A Failure of Initiative" Katrina investigation (2006)',
+      'Corps of Engineers FOIA documents — pre-Katrina levee warnings',
+      'Loyola University New Orleans — Ninth Ward displacement report (2015)',
+      'Klein, N. — "The Shock Doctrine" (2007), Katrina chapter'
+    ],
     related: [40, 41, 42, 44]
   },
   44: {
-    title: "Chesapeake Bay Bridge-Tunnel, Virginia",
-    zone: "Evidence", color: "#4ade80",
-    position: "Left-centre arc · Virginia, USA",
-    first_recorded: "Opened 1964",
-    summary: "37 km over open water. Should show ~27m of curvature. Laser measurements and photography confirm the full length is built level. The globe curvature calculation predicts a drop that is simply not there.",
+    title: 'Chesapeake Bay — NSA Fort Meade & the Surveillance Capital',
+    zone: 'Evidence', color: '#4ade80',
+    position: 'Left-centre arc · Virginia / Maryland, USA',
+    first_recorded: 'Bridge-Tunnel opened 1964; NSA Fort Meade established 1957',
+    summary: 'The Chesapeake Bay Bridge-Tunnel is 37 km of flat water built level with no curvature compensation. The Bay\'s western shore hosts NSA Fort Meade — headquarters of the world\'s largest intelligence organisation, which for decades denied it even existed. Edward Snowden\'s 2013 revelations showed PRISM was collecting every American\'s communications without individual warrants. The FISA court reviewing these requests rejected fewer than 0.03% of them.',
     analysis: [
-      "The Chesapeake Bay Bridge-Tunnel is a 37-km fixed crossing of the mouth of the Chesapeake Bay in Virginia, opened in 1964. It is one of only a handful of bridge-tunnel structures in the world.",
-      "The crossing should show approximately 27 metres of curvature drop on a globe. Laser ranging measurements taken from the structure show no such drop. The bridge is engineered level. The water surface is flat.",
-      "Drone footage and high-resolution video from the bridge consistently show a flat horizon, a flat water surface, and the opposite shore visible at the height predicted by flat-plane geometry — not by globe curvature."
+      'The Chesapeake Bay Bridge-Tunnel is a 37-km fixed crossing opened in 1964. On a globe it should show approximately 27 metres of curvature drop. It is built level. No curvature accommodation was made. The water surface is flat.',
+      'The western shore of the Chesapeake Bay, at Fort Meade, Maryland, is home to the National Security Agency — the largest intelligence organisation on Earth. The NSA\'s existence was classified for so long it was nicknamed "No Such Agency." Its Fort Meade campus covers approximately 350 acres, employs an estimated 30,000–40,000 people (the exact figure is classified), and houses the world\'s most powerful non-military computing infrastructure for signals collection and analysis.',
+      'On 5 June 2013, The Guardian published the first story based on documents provided by NSA contractor Edward Snowden. PRISM — a classified programme collecting content of communications from Google, Yahoo, Facebook, Microsoft, Apple, AOL, YouTube, Skype, and others — was confirmed to operate without individual court orders. A separate programme collected metadata on every phone call made in the United States. Both operated under secret FISA court orders.',
+      'XKeyscore — a further Snowden-revealed programme — allowed analysts to search "nearly everything a user does on the internet" including emails, web searches, and browsing history. The FISA court overseeing these programmes has rejected fewer than 0.03% of government surveillance requests in its entire history. Its rulings are themselves classified. Snowden was charged under the Espionage Act and remains in Russia. No NSA official was charged with any crime.'
     ],
     facts: [
-      "37 km open-water crossing.",
-      "Should show ~27m curvature drop on a globe.",
-      "Built level — no curvature compensation.",
-      "Modern laser and drone surveys confirm the flat result."
+      '37-km Bay crossing built level — no curvature compensation; contradicts globe prediction.',
+      'NSA Fort Meade: ~30,000–40,000 employees; exact figure classified.',
+      'PRISM: collected communications from Google, Facebook, Apple et al. without individual warrants.',
+      'XKeyscore: searched "nearly everything a user does on the internet."',
+      'FISA court rejected fewer than 0.03% of surveillance requests in its entire history.'
     ],
-    significance: "Another major US engineering project demonstrating the flat-plane methodology in practice.",
-    related: [40, 41, 42, 43]
+    significance: 'Fort Meade is the operational headquarters of the global surveillance architecture. PRISM demonstrated that mass warrantless surveillance of all Americans — prohibited by the Fourth Amendment — had been running for years under secret court approval. The Chesapeake Bay Bridge, built flat, is the access road to the world\'s largest surveillance complex.',
+    sources: [
+      'Greenwald, G. — "No Place to Hide: Edward Snowden, the NSA, and the US Surveillance State" (2014)',
+      'Snowden, E. — "Permanent Record" (2019)',
+      'FISC — declassified FISA court orders (released 2013–2014)',
+      'NSA — XKeyscore programme documentation (Snowden release, 2013)'
+    ],
+    related: [40, 41, 42, 43, 62, 66]
   },
   45: {
-    title: "Trans-Siberian Railway",
-    zone: "Evidence", color: "#4ade80",
-    position: "Upper-right arc · Russia",
-    first_recorded: "Construction began 1891; main line opened 1916",
-    summary: "9,289 km across Russia — the world's longest railway, built essentially level through the vast Siberian plain. At globe curvature, the track should drop thousands of metres from end to end. It does not. The engineering was performed on a flat surface.",
+    title: 'Trans-Siberian Railway — Built on Gulag Bones',
+    zone: 'Evidence', color: '#4ade80',
+    position: 'Upper-right arc · Russia',
+    first_recorded: 'Construction began 1891; BAM railway built by Gulag labour 1930s–50s',
+    summary: '9,289 km across Russia — built essentially level with no curvature accommodation. More consequentially: the Baikal-Amur Mainline extension was built almost entirely by Soviet Gulag prisoners, hundreds of thousands of whom died in the construction. 18 million people passed through the Gulag system 1918–1956. The camps were positioned along the railway lines deliberately so prisoners could be transported directly to the worksite.',
     analysis: [
-      "The Trans-Siberian Railway runs 9,289 km from Moscow to Vladivostok — the longest continuous railway on Earth. Construction began in 1891 and the main line opened in 1916. The route crosses vast level plains in the Siberian interior with minimal elevation change over thousands of kilometres.",
-      "On a globe, a 9,289-km level railway should drop tens of thousands of metres from end to end — the curvature accumulates. The Trans-Siberian was not engineered this way. It runs essentially level across the Siberian plain with adjustments only for actual terrain (hills and valleys).",
-      "The railway's construction predates radio, GPS, and satellite surveying. It was built using classical surveying instruments, on flat-plane assumptions, and it works. This is the largest single piece of engineering evidence from the pre-modern era for flat-plane geometry."
+      'The Trans-Siberian Railway runs 9,289 km from Moscow to Vladivostok — the longest continuous railway on Earth. Built using classical surveying on flat-plane assumptions, it runs essentially level across the Siberian plain with adjustments only for actual terrain. On a globe, the track should drop tens of thousands of metres across its length. It does not.',
+      'The Gulag — Glavnoye upravleniye lagerey, the Main Camp Administration — was established in 1918 and operated until 1956. At its peak approximately 1.5–1.8 million prisoners were held at any given moment. An estimated 18 million people passed through the system across its existence; scholarly estimates of deaths range from 1.5 to 1.8 million, with some estimates running higher. Aleksandr Solzhenitsyn\'s "The Gulag Archipelago" (1973) compiled from survivor testimonies described the system in detail the Soviet state denied until 1990.',
+      'The Baikal-Amur Mainline (BAM) — a parallel railway running north of the Trans-Siberian across the most remote areas of Siberia — was built almost entirely by Gulag prisoners from the late 1930s through the early 1950s. The camps were positioned specifically along the construction route so prisoner labour could be deployed directly to the trackbed. Conditions were catastrophic: inadequate food and clothing for Siberian winters, no medical care, deliberately punishing work quotas. Death rates in BAM construction camps during the worst years (1937–38 and 1942–43) reached extraordinary levels.',
+      'The Gulag geography was not random. Camps concentrated in resource-rich areas — Kolyma (gold), Vorkuta (coal), the Urals (metals), and the BAM corridor (strategic infrastructure). The prisoner population was the extractive workforce of Soviet industrial expansion. The railway that opened Siberia was literally built on the deaths of political prisoners, intellectuals, ethnic minorities, and anyone the Soviet state found inconvenient.'
     ],
     facts: [
-      "9,289 km — longest continuous railway on Earth.",
-      "Crosses vast level Siberian plain with minimal elevation change.",
-      "Built using pre-modern surveying instruments on flat-plane principles.",
-      "Should accumulate tens of thousands of metres of curvature drop on a globe."
+      '9,289 km railway built level with no curvature accommodation.',
+      'Gulag system: ~18 million prisoners 1918–1956; 1.5–1.8 million estimated deaths.',
+      'BAM railway built almost entirely by Gulag prisoners in lethal Siberian conditions.',
+      'Camp geography followed resource extraction zones and strategic infrastructure routes.',
+      'Solzhenitsyn\'s "The Gulag Archipelago" (1973) documented it; Soviet state denied until 1990.'
     ],
-    significance: "A continental-scale engineering project that confirms flat-plane methodology. The largest such piece of evidence from the pre-electronic surveying era.",
-    related: [14, 41, 42]
+    significance: 'The Trans-Siberian and BAM railways are simultaneously flat-plane engineering evidence and the physical infrastructure of the largest slave labour system of the 20th century. The railway that opened Siberia was built on the deaths of millions — a fact suppressed in the USSR for decades and still underemphasised in Western accounts of the Cold War.',
+    sources: [
+      'Solzhenitsyn, A. — "The Gulag Archipelago" (1973–75)',
+      'Applebaum, A. — "Gulag: A History" (2003)',
+      'Memorial Society — Gulag database and camp maps (organisation dissolved by Russian government 2021)'
+    ],
+    related: [14, 40, 41, 42, 43, 44]
   },
   46: {
-    title: "Chicago Skyline from Lake Michigan",
-    zone: "Evidence", color: "#4ade80",
-    position: "Left-centre arc · Lake Michigan, USA",
-    summary: "The Chicago skyline is regularly photographed from 60+ miles across Lake Michigan, showing the full base of skyscrapers at water level — buildings that should be 610m below the horizon on a globe. Multiple independent photographs from different observers, different conditions. Never explained by globe defenders.",
+    title: 'Chicago Skyline — The Refraction Lie That Never Ends',
+    zone: 'Evidence', color: '#4ade80',
+    position: 'Left-centre arc · Lake Michigan, USA',
+    summary: 'The Chicago skyline is regularly photographed from 60+ miles across Lake Michigan showing the full base of skyscrapers at water level — buildings that should be 610m below the horizon on a globe. The official "atmospheric refraction" explanation requires refraction effects orders of magnitude beyond what standard atmospheric physics actually predicts. Independent photographers document the same result under cold, stable, low-refraction conditions. It\'s never explained — only repeated.',
     analysis: [
-      "The Chicago skyline is regularly photographed from across Lake Michigan, particularly from the eastern shore at distances of 60-90 miles. At 60 miles, the lower 610 metres of the city should be hidden by the curvature of a globe. The actual photographs consistently show the full base of the skyscrapers visible at water level.",
-      "The official \"explanation\" relies on atmospheric refraction — light bending around curvature. But the magnitude of refraction required to make the observation consistent with a globe is far in excess of what optical physics actually predicts under standard atmospheric conditions. Many of the best-documented photographs were taken under cool, stable conditions where refraction would be minimal.",
-      "Joshua Nowicki and other independent photographers have documented the Chicago skyline from across Lake Michigan over many years and conditions. The full skyscraper bases are consistently visible. No ad hoc atmospheric explanation has succeeded in fully accounting for the observations."
+      'At 60 miles (96 km) across Lake Michigan, globe geometry predicts the lower 610 metres of the Chicago skyline should be hidden below the curvature horizon. The tallest building in Chicago (Willis Tower) is 442 metres tall. Globe defenders would predict that even the top of Willis Tower should be near the horizon limit at 60 miles — and that at 90 miles, no building at all should be visible.',
+      'Reality: the Chicago skyline has been photographed at distances up to 90+ miles with the full building bases visible at water level. Photographer Joshua Nowicki has documented this extensively across multiple years and conditions. The photographs are not disputed — their existence is acknowledged by globe defenders. The sole offered explanation is "superior refraction" or "Fata Morgana" mirage effects.',
+      'The refraction explanation is physically inadequate. Standard atmospheric refraction — well-studied since the 18th century — bends light approximately 7% of the theoretical curvature value under standard conditions. To explain the Chicago observations on a globe, refraction would need to exceed standard values by a factor of 10-15. The atmospheric conditions required for refraction of this magnitude are very specific (strong thermal inversion layers). Nowicki and others have documented the Chicago observations under conditions (cold water, stable atmosphere, overcast sky) where thermal inversions and Fata Morgana effects are explicitly minimal.',
+      'The standard retort is that these photographs are "rare anomalous conditions." They are not. The Chicago skyline is visible at extended distances regularly throughout the year. Multiple independent photographers from different shore positions document it under different conditions. On a flat plane, this is the expected observation at any time under any conditions — and that is what is actually observed.'
     ],
     facts: [
-      "Skyline photographed from 60+ miles across Lake Michigan.",
-      "At 60 miles, lower 610m should be hidden by curvature.",
-      "Full base of skyscrapers consistently visible at water level.",
-      "Refraction \"explanation\" requires unphysical magnitudes."
+      'At 60 miles on a globe: lower 610m of Chicago should be hidden; it is not.',
+      'Photographed at 60-90+ miles with full building bases visible at water level.',
+      'Standard refraction: ~7% of curvature value — nowhere near sufficient to explain the gap.',
+      'Documented under cold, stable, low-refraction conditions — ruling out Fata Morgana.',
+      'Multiple independent photographers from different shore positions confirm the same result.'
     ],
-    significance: "One of the most photographically documented curvature anomalies. The official explanation (refraction) requires effects far beyond standard atmospheric optics.",
-    related: [40, 49]
+    significance: 'The Chicago skyline observations are among the most thoroughly documented curvature anomalies. The refraction excuse has been tested against the conditions of the observations and fails. The flat plane prediction matches reality; the globe prediction requires unphysical atmospheric effects.',
+    sources: [
+      'Nowicki, J. — documented long-distance Lake Michigan photography archive',
+      'Walton, B. — "Globe Earth Deception" optical analysis',
+      'Minnaert, M. — "The Nature of Light and Colour in the Open Air" (1954) — standard refraction values'
+    ],
+    related: [40, 41, 49]
   },
   47: {
-    title: "The Nile River, Egypt",
-    zone: "Evidence", color: "#4ade80",
-    position: "Right-centre arc · Egypt/Sudan/Ethiopia",
-    summary: "Flows northward for 6,650 km from its highland source in the East African Rift to the Mediterranean. On the globe model this means flowing \"uphill\" relative to Earth's alleged spherical geometry. On the flat plane it flows naturally downhill from an elevated inland source toward the sea.",
+    title: 'The Nile — The Grand Renaissance Dam Water War',
+    zone: 'Evidence', color: '#4ade80',
+    position: 'Right-centre arc · Ethiopia/Sudan/Egypt',
+    first_recorded: 'GERD construction began 2011; filling began 2020',
+    summary: 'The Nile flows northward 6,650 km and is anomalous on a globe. More critically: Ethiopia began filling the Grand Ethiopian Renaissance Dam (GERD) in 2020 — the world\'s 10th-largest dam, built with Chinese financing. Egypt, which depends on the Nile for 97% of its freshwater, has threatened military strikes. Sudan sits between them with its own interests. China is using the dam as strategic infrastructure leverage across the entire Nile Basin.',
     analysis: [
-      "The Nile flows for 6,650 km from sources in the East African highlands (Ethiopia and the Burundi-Rwanda region) to the Mediterranean delta in Egypt. Its course is almost due north for the entire length.",
-      "On a sphere, \"north\" near the equator means moving toward the spherical pole, away from the equatorial bulge. The Nile would therefore be flowing from a lower gravitational potential (equatorial bulge) to a higher one (toward the pole). The standard explanation is that \"downhill\" follows local elevation, not absolute altitude on the sphere — but this elides the actual question.",
-      "On the flat plane, the Nile simply flows downhill from its elevated highland sources to sea level at the delta. There is no paradox. The northward direction of flow on the flat azimuthal map is straightforwardly consistent with the actual elevation drop."
+      'The Nile flows northward for 6,650 km from highland sources in Ethiopia and East Africa to the Mediterranean delta in Egypt — anomalous on a globe (flows "uphill" relative to the equatorial bulge) but simply downhill on the flat plane.',
+      'The Grand Ethiopian Renaissance Dam (GERD), under construction since 2011 and beginning reservoir filling in 2020, is the world\'s 10th-largest dam by capacity. Located on the Blue Nile — which provides approximately 86% of the Nile\'s flow — it was financed primarily through Chinese bank loans and built by Chinese contractors. Ethiopia has refused to sign any binding agreement governing how quickly the reservoir will be filled or how much water downstream nations will receive.',
+      'Egypt depends on the Nile for approximately 97% of its freshwater. Any significant reduction in flow threatens Egyptian agriculture, drinking water, and economic stability. Egyptian officials from President Sisi downward have explicitly threatened military action if Ethiopia fills the dam too quickly. In 2020, Egyptian and Sudanese military conducted joint exercises along the Nile corridor. In 2021, Ethiopian Prime Minister Abiy Ahmed stated that "no force" could stop the dam.',
+      'The GERD is not simply a bilateral dispute. China\'s financing of the dam is part of the Belt and Road Initiative\'s infrastructure expansion across East Africa. China gains strategic leverage over both Ethiopia (a key Belt and Road partner) and Egypt (historically aligned with the US and a major arms purchaser) by controlling the terms of Nile water access. The dam transforms China into an indirect arbiter of North African water security — without firing a shot.'
     ],
     facts: [
-      "6,650 km of northward flow.",
-      "Sources in the highlands of Ethiopia and central Africa.",
-      "On a globe: flows from equatorial bulge \"uphill\" toward the pole.",
-      "On the flat plane: flows simply downhill from elevated source to sea."
+      'GERD: world\'s 10th-largest dam by capacity; built with Chinese financing on the Blue Nile.',
+      'Egypt: 97% of freshwater depends on the Nile; military strikes explicitly threatened.',
+      'Ethiopia refuses binding agreement on fill rate or downstream water guarantees.',
+      'China gains strategic leverage over Egypt-Ethiopia water dispute via Belt and Road financing.',
+      'Sudan sits between both nations with independent interests in Nile flow volume.'
     ],
-    significance: "A 6,650-km piece of physical evidence visible from any globe map. The Nile's direction and behaviour are simpler on the flat model.",
+    significance: 'The Nile water dispute is the clearest contemporary example of water as a weapon of geopolitical leverage. China\'s Belt and Road infrastructure financing is transforming it into a strategic asset in the Africa-Middle East-Asia competition.',
+    sources: [
+      'International Crisis Group — "The Dam That Could Drown Ethiopia-Egypt Ties" (2020)',
+      'Cascão, A. — Nile Basin Initiative research, water politics documentation',
+      'Ethiopian Grand Renaissance Dam Project — technical specifications',
+      'US State Department — Nile Basin mediation records (2019–2021)'
+    ],
     related: [12, 13, 30, 33, 48, 88]
   },
   48: {
-    title: "The Amazon River, South America",
-    zone: "Evidence", color: "#4ade80",
-    position: "Lower-left arc · Brazil",
-    summary: "Drains a continent in a radial pattern perfectly consistent with flat-plane drainage toward a lower perimeter. The Amazon basin's near-perfect flatness — less than 100m total elevation change across 3,000 km — is a defining exhibit for flat-surface hydrology.",
+    title: 'The Amazon — Deforestation as Policy and the Silencing of Witnesses',
+    zone: 'Evidence', color: '#4ade80',
+    position: 'Lower-left arc · Brazil',
+    first_recorded: 'Dorothy Stang murdered 2005; Bruno Pereira & Dom Phillips murdered 2022',
+    summary: 'The Amazon basin drains radially outward in a pattern consistent with flat-plane hydrology. More consequentially: the Amazon\'s deforestation is not a policy failure — it is policy. Investigators who documented it have been murdered. US missionary Dorothy Stang was shot in 2005. British journalist Dom Phillips and Brazilian indigenous specialist Bruno Pereira were murdered in 2022. Under Bolsonaro (a WEF Young Global Leader), deforestation accelerated 22% in a single year.',
     analysis: [
-      "The Amazon basin covers approximately 7 million square kilometres — the largest river drainage basin in the world. Its terrain is exceptionally flat: the elevation drop from the Andean foothills to the Atlantic delta is less than 100 metres over more than 3,000 km of distance.",
-      "The basin's drainage pattern is radial — water flows outward from the central highlands in a fan that matches the flat-plane prediction of centrifugal hydrology. On a globe, the basin's flatness over such a vast distance is anomalous; on the flat plane, it is the expected result of slow surface drainage on a near-level surface.",
-      "The Amazon River discharges approximately one-fifth of all freshwater that enters the world's oceans. Its flow is so massive that the salinity of the Atlantic is measurably reduced for hundreds of kilometres offshore from its delta."
+      'The Amazon basin covers approximately 7 million km² — the largest river drainage basin on Earth. Its drainage pattern is radial, water flowing outward from the Andean foothills to the Atlantic in a fan consistent with flat-plane centrifugal hydrology. The basin\'s near-perfect flatness — less than 100 metres elevation change across 3,000 km — is anomalous on a globe and expected on a flat plane.',
+      'Dorothy Stang, a 73-year-old US missionary and environmental defender, was shot six times at point-blank range in Anapu, Pará state, Brazil on 12 February 2005. She had spent decades documenting illegal land clearance by ranching interests in the Amazon frontier. Her murder was ordered by local landowners and carried out by hired gunmen. The Brazilian government\'s response was inadequate; the land conflicts she documented continued.',
+      'British journalist Dom Phillips and Brazilian indigenous specialist Bruno Pereira were murdered in the Javari Valley, Amazonas, Brazil on 5 June 2022. Pereira was the head of FUNAI\'s (Brazil\'s indigenous affairs agency) isolated tribes unit and had made enemies among illegal fishing and mining operations in the Javari Valley. Phillips was researching a book on conservation and indigenous rights. Both bodies were found dismembered. The Brazilian government, under Bolsonaro, had systematically defunded FUNAI and gutted environmental enforcement agencies.',
+      'Under President Jair Bolsonaro (2019–2022), Brazilian Amazon deforestation accelerated by 22% in 2019 alone — the highest rate since 2008. Bolsonaro explicitly promoted agricultural and mining expansion into protected territory, fired environmental agency leaders who reported violations, and publicly dismissed deforestation statistics. The Bolsonaro government cut the environmental enforcement agency (IBAMA) budget by 24% and fired frontline inspectors. Bolsonaro was a graduate of the WEF Young Global Leaders programme — the same leadership cohort that includes key architects of the Great Reset agenda.'
     ],
     facts: [
-      "Largest river drainage basin in the world (~7 million km²).",
-      "Less than 100m total elevation change over 3,000+ km.",
-      "Discharges ~20% of all freshwater entering the world's oceans.",
-      "Drainage pattern matches flat-plane radial hydrology."
+      'Amazon basin: 7 million km², radial drainage pattern consistent with flat-plane hydrology.',
+      'Dorothy Stang: 73-year-old US missionary murdered 2005 for documenting illegal land clearance.',
+      'Dom Phillips & Bruno Pereira: murdered 2022; bodies found dismembered in Javari Valley.',
+      'Bolsonaro: deforestation +22% in 2019; IBAMA budget cut 24%; enforcement defunded.',
+      'Bolsonaro: WEF Young Global Leaders programme graduate.'
     ],
-    significance: "The flatness of the Amazon basin over continental distances is a direct visible argument for the flat plane model. Globe geometry would require either tectonic explanations or curvature adjustments not present in the actual basin.",
+    significance: 'The Amazon\'s deforestation is corporate land seizure at continental scale, enforced by killing witnesses and defunding enforcement. The murders of Stang, Phillips, and Pereira are not isolated incidents — they are the predictable result of a deliberate policy of impunity.',
+    sources: [
+      'Human Rights Watch — Amazon land defenders report (2019)',
+      'Phillips, D. & Pereira, B. — correspondence and reporting pre-disappearance',
+      'INPE (National Institute for Space Research) — annual Amazon deforestation data',
+      'Branford, S. & Borges, T. — "The Amazon: What Everyone Needs to Know" (2019)'
+    ],
     related: [9, 47]
   },
   49: {
-    title: "The Maldives",
-    zone: "Evidence", color: "#4ade80",
-    position: "Right arc · Indian Ocean",
-    summary: "A nation of islands averaging 1.2m above sea level with a perfectly flat ocean surface visible in all directions. The claim that the Maldives are \"sinking\" due to climate change is contradicted by tide gauge records showing no net sea level rise relative to the islands over the measurement period.",
+    title: 'The Maldives — The Sinking Nation That Isn\'t Sinking',
+    zone: 'Evidence', color: '#4ade80',
+    position: 'Right arc · Indian Ocean',
+    summary: 'A nation of 1,200 islands averaging 1.2m above sea level, used since the 1990s as the canonical "victim nation" of climate change sea level rise. INQUA (International Union for Quaternary Research) tide gauge studies documented no net sea level rise relative to the islands. The President of the Maldives held an underwater cabinet meeting in 2009 to publicise the sinking claim. The same government was simultaneously approving luxury resort construction requiring multi-decade investment horizons.',
     analysis: [
-      "The Maldives is an archipelago of approximately 1,200 small islands averaging just 1.2 metres above sea level. From any beach in the country, the ocean horizon extends in all directions as a perfectly flat line — one of the clearest visible references for the flat-plane water surface.",
-      "The \"sinking Maldives\" climate narrative — pushed since the early 1990s and used to justify various international policy initiatives — is contradicted by the actual tide gauge records from the islands. Researchers from the International Union for Quaternary Research (INQUA) have published data showing no net sea level rise relative to the Maldivian coastline over the multi-decade measurement record.",
-      "The Maldives nonetheless continues to feature in international climate policy discussions as the canonical \"sinking nation.\" This is an example of how observational evidence can be politically marginalised when it contradicts the desired narrative."
+      'The Maldives is an archipelago of approximately 1,200 small islands across 26 atolls in the Indian Ocean, averaging just 1.2 metres above sea level. From any beach, the ocean extends in all directions as a perfectly flat line — one of the clearest visible references for the flat-plane water surface available from a civilian population centre.',
+      'The "sinking Maldives" narrative was established in international media in the late 1980s and early 1990s through the work of Maldivian President Maumoon Abdul Gayoom, who brought the country\'s claimed climate vulnerability to international attention. It was amplified in 2009 when President Mohamed Nasheed held an underwater cabinet meeting — ministers in scuba gear signing papers on the seafloor — that became one of the most widely reproduced images of climate change vulnerability. International news organisations distributed it worldwide.',
+      'The same Nasheed government was simultaneously approving plans for a new island airport (Velana International Airport expansion), new resort developments across multiple atolls, and land reclamation projects — multi-decade infrastructure investments incompatible with a genuine belief that the islands would be underwater within decades. The government\'s investment behaviour contradicted its public climate rhetoric.',
+      'The scientific contradiction: researchers from INQUA — the International Union for Quaternary Research, the primary academic body for sea level and coastal change science — published studies showing no net sea level rise relative to Maldivian coastlines across the measurement record. Nils-Axel Mörner, a leading Swedish sea level specialist, led multiple field visits and documented that tide gauge records, coral microatoll growth rings, and sediment cores all showed stability or slight sea level fall relative to the islands. His findings were excluded from IPCC reports and his subsequent research was discredited through institutional pressure rather than scientific rebuttal.'
     ],
     facts: [
-      "Average elevation 1.2m above sea level.",
-      "Ocean horizon visible flat in all directions.",
-      "INQUA tide gauge records: no net sea level rise.",
-      "Continues to be cited as a \"sinking nation\" despite contradictory data."
+      'Average elevation: 1.2m above sea level; ocean horizon flat in all directions.',
+      'INQUA studies: no net sea level rise relative to the Maldivian coastline.',
+      'Nasheed government: held underwater cabinet meeting for media; simultaneously approved multi-decade resort development.',
+      'Mörner findings excluded from IPCC reports — institutional rather than scientific suppression.',
+      'Flat plane: ocean horizon from Maldives matches predicted flat water surface geometry.'
     ],
-    significance: "Visible flat horizon evidence from a major civilian population centre. Also a case study in how observational data can be politically suppressed.",
+    significance: 'The Maldives is the canonical climate-politics manipulation: a flat-water observation site whose actual tide gauge data contradicts the narrative, with a government whose investment behaviour demonstrates they do not believe their own public claims.',
+    sources: [
+      'Mörner, N-A. et al. — "New perspectives for the future of the Maldives" — Global and Planetary Change (2004)',
+      'INQUA Commission on Sea Level Changes and Coastal Evolution — field study records',
+      'Maldives government — Velana International Airport expansion plans (2009–2014)',
+      'IPCC AR4 WG2 Chapter 16 — Small Islands — sea level assessment'
+    ],
     related: [27, 46]
   },
   50: {
-    title: "Lake Titicaca, Peru / Bolivia",
-    zone: "Evidence", color: "#4ade80",
-    position: "Lower-left arc · Peru/Bolivia",
-    summary: "3,800m above sea level — the world's highest navigable body of water. Its surface is perfectly flat across its entire 8,372 km² expanse. An enormous flat water surface at altitude, confirming that flat-plane hydrology applies even to elevated bodies of water far from sea level.",
+    title: 'Lake Titicaca — Tiwanaku and the Pre-Flood Civilisation',
+    zone: 'Evidence', color: '#4ade80',
+    position: 'Lower-left arc · Peru/Bolivia',
+    summary: '3,812m above sea level — the world\'s highest navigable lake. Its surface is perfectly flat across 8,372 km². The Tiwanaku megalithic complex on its southern shore predates the Inca by at least 1,000 years and includes 100-tonne stone blocks moved from quarries miles away using methods not explained by official archaeology. Ancient harbour structures at Tiwanaku are now 20km from the lake — either the lake shrank, or the land rose. Arthur Posnansky calculated Tiwanaku\'s astronomical orientation dates it to 15,000 BC.',
     analysis: [
-      "Lake Titicaca sits at 3,812 metres above sea level — the world's highest commercially navigable lake. Its surface area is 8,372 km², making it large enough that the opposite shore is below the horizon at standard observation heights — except that, in practice, the opposite shore is consistently visible.",
-      "The surface of the lake is perfectly flat across its entire extent. From any vantage point on the shore, the water extends as a level plane. The standard globe-curvature calculation would predict significant horizon drop; the actual observation does not show it.",
-      "The lake is the geographic centre of a complex of pre-Inca civilisations whose origins are not fully understood. Tiwanaku, on the southern Bolivian shore, includes megalithic stonework whose construction methodology is not satisfactorily explained by official archaeology."
+      'Lake Titicaca sits at 3,812 metres above sea level — the world\'s highest commercially navigable lake. Its surface area is 8,372 km², making it one of the largest and most visible flat water surfaces at altitude anywhere on Earth. From any vantage point on the shore, the water extends as a level plane. The globe-curvature prediction would require the far shore to be significantly below the horizon at this distance; it is consistently visible.',
+      'The Tiwanaku civilisation occupied the southern shore of Lake Titicaca, in modern Bolivia, from approximately 400-1000 CE in the mainstream chronology — though the city itself was built on structures whose construction significantly predates this period. Tiwanaku is distinguished by its monolithic architecture: single stones weighing 100-150 tonnes, transported from quarries 15-90 km away across the Andes, cut with geometric precision achievable (in modern practice) only with diamond-tipped cutting tools. The Puma Punku H-blocks show machine-cut straight lines and circular drill holes inconsistent with any known Bronze Age or pre-Columbian tool set.',
+      'The Kalasasaya temple at Tiwanaku contains astronomical alignments. Bolivian archaeologist Arthur Posnansky, working in the early 20th century, measured the astronomical orientations and calculated — using the known rate of change of Earth\'s axial obliquity — that the alignments corresponded to a date of approximately 15,000 BC (17,000 BP). His calculation was reviewed by a commission of German astronomers in 1930 who confirmed the methodological accuracy while disputing the cultural implications. This date places Tiwanaku\'s original construction in the period immediately following the end of the Last Glacial Maximum.',
+      'The most anomalous evidence: ancient harbour and pier structures at Tiwanaku are located approximately 20 km from the current shore of Lake Titicaca, at an elevation 15 metres higher than the current lake surface. This is not contested. The official explanation: the lake was once larger. The alternative explanation: a catastrophic geologic event raised the entire Altiplano and relocated the shoreline. Posnansky documented extensive marine fossils (including ocean fish and fossilised sea horses) in the sediment layers around Tiwanaku — indicating that the entire plateau was once near sea level, and was rapidly elevated.'
     ],
     facts: [
-      "Surface elevation: 3,812m above sea level.",
-      "Surface area: 8,372 km².",
-      "Perfectly flat surface visible across entire extent.",
-      "Tiwanaku megalithic site on southern shore — unexplained construction methods."
+      'Surface area 8,372 km² at 3,812m — perfectly flat surface confirms flat-plane hydrology at altitude.',
+      'Tiwanaku: 100-150 tonne stones; Puma Punku H-blocks with machine-cut precision.',
+      'Posnansky\'s astronomical dating: ~15,000 BC; reviewed and methodologically confirmed by German astronomers (1930).',
+      'Ancient harbours located 20 km from current lake shore at 15m higher elevation — shoreline displacement unexplained.',
+      'Marine fossils including sea horses in Altiplano sediment — plateau was once near sea level.'
     ],
-    significance: "Demonstrates that flat-plane hydrology applies at altitude — water finds its level regardless of the elevation reference. The Tiwanaku megaliths add a suppressed-history dimension.",
+    significance: 'Lake Titicaca is flat-plane hydrology at altitude confirmed visually. Tiwanaku is the most anomalous pre-modern megalithic complex in the Americas — constructed using methods unknown to official archaeology, at a date that mainstream chronology cannot accommodate, with harbour structures demonstrating a catastrophic geological event that raised the entire plateau.',
+    sources: [
+      'Posnansky, A. — "Tiahuanacu: The Cradle of American Man" Vol I-IV (1945)',
+      'German Astronomical Commission — review of Posnansky calculations (1930)',
+      'Kolata, A. — "Valley of the Spirits: A Journey into the Lost Realm of the Aymara" (1996)',
+      'Hancock, G. — "Fingerprints of the Gods" — Tiwanaku analysis (1995)'
+    ],
     related: [9, 32, 103]
   },
   51: {
-    title: "The Sun's Northern Circuit Path",
-    zone: "Celestial", color: "#818cf8",
-    position: "Inner-mid ring circuit",
-    summary: "The circle traced by the sun 3,000 miles above the flat plane at midsummer — near the Tropic of Cancer ring. The sun spirals outward from here as summer ends, explaining the shortening days without requiring axial tilt or orbital ellipses.",
+    title: 'Project STARGATE — The CIA\'s Remote Viewing Programme',
+    zone: 'Celestial', color: '#818cf8',
+    position: 'Inner-mid ring circuit',
+    first_recorded: 'Programme began 1972 at SRI International; declassified 1995',
+    summary: 'Project STARGATE was a classified CIA and DIA programme running 1972–1995 at Stanford Research Institute that trained and deployed psychic "remote viewers" to gather intelligence on Soviet facilities, underground bases, and classified targets — including the sun and deep space. Over $20 million was spent. The programme was declassified in 1995. Remote viewers reported anomalous structures on Mars, inside the moon, and beyond the sun\'s corona. These reports remain classified.',
     analysis: [
-      "In the flat earth model, the sun is a relatively local luminary — approximately 3,000-4,000 miles above the plane — moving in a circular path that changes radius throughout the year. At midsummer, the circuit is at its tightest and most northerly, passing directly above the Tropic of Cancer ring.",
-      "The sun's apparent size on the horizon, the angle of sunset and sunrise, the length of daylight, and the seasonal temperature variations all match the predictions of a small local sun on a circular path far better than they match a distant star illuminating a tilted spinning sphere. The flat model has fewer free parameters and produces simpler predictions.",
-      "The phenomenon of \"perspective convergence\" — where the sun appears to set on the horizon despite never actually descending below the plane — explains why we see a sunset without requiring the Earth to rotate away from a stationary sun."
+      'Project STARGATE began in 1972 as a joint CIA-DIA research programme at Stanford Research Institute (SRI) International in Menlo Park, California. Physicists Russell Targ and Hal Puthoff led the research. The programme trained military and intelligence personnel to use "remote viewing" — a form of trained extrasensory perception — to observe distant targets without physical presence.',
+      'Confirmed operational uses included: gathering intelligence on Soviet submarine bases, locating a downed Soviet bomber in Africa (successfully), identifying the location of a secret Soviet research facility in Siberia, and monitoring Chinese nuclear test preparations. The programme\'s existence was confirmed by CIA Director Stansfield Turner in a 1977 press briefing. Over $20 million in documented funding was spent across its 23-year lifespan. The programme was terminated in 1995 and immediately declassified — raising the question of whether it actually terminated or whether the classified version continues under a different name.',
+      'Remote viewer Ingo Swann conducted sessions targeting astronomical objects including the sun, Jupiter, Saturn, and Mars. His Jupiter session — conducted before the Voyager 1 flyby — reportedly described details of Jupiter\'s rings and atmospheric structures subsequently confirmed by the mission. His Mars sessions described an ancient artificial structure. These session reports have been partially released; the astronomical sessions remain among the most heavily redacted.',
+      'The programme\'s significance for flat earth research: if consciousness can interact with distant objects via non-physical means, then consciousness itself operates outside the physical constraints of the globe cosmology. The firmament model — where all of reality is enclosed within a bounded structure — provides a more coherent framework for why remote viewing might work than does the heliocentric model of infinite space.'
     ],
     facts: [
-      "Sun height: ~3,000-4,000 miles above the plane.",
-      "Sun diameter: ~32 miles in flat earth measurements.",
-      "Northernmost circuit at midsummer (Tropic of Cancer).",
-      "Sunset is perspective convergence, not Earth rotation."
+      'STARGATE: CIA-DIA programme 1972–1995, $20M+ spent, based at SRI International.',
+      'Successfully located downed Soviet bomber in Africa; identified Soviet facilities.',
+      'Declassified 1995 immediately after termination — suggesting the classified version continues.',
+      'Ingo Swann\'s pre-Voyager Jupiter session described confirmed features not yet discovered.',
+      'Astronomical target session reports remain among the most heavily redacted.'
     ],
-    significance: "The local sun model is the cosmological foundation of the flat earth picture. Its predictions match observation more simply than the heliocentric model.",
+    significance: 'Project STARGATE proves the US government spent $20 million over 23 years validating psychic intelligence gathering — and then immediately declassified it upon "termination." The astronomical session reports that remain classified are the most interesting. What did they see?',
+    sources: [
+      'CIA — Project STARGATE declassified files (available at CIA.gov reading room)',
+      'Targ, R. — "The Reality of ESP: A Physicist\'s Proof of Psychic Abilities" (2012)',
+      'Swann, I. — "Penetration: The Question of Extraterrestrial and Human Telepathy" (1998)',
+      'Puthoff, H. — SRI remote viewing programme research papers (1974–1995)'
+    ],
     related: [3, 52, 53, 56, 57]
   },
   52: {
-    title: "The Sun's Southern Circuit Path",
-    zone: "Celestial", color: "#818cf8",
-    position: "Outer-mid ring circuit",
-    summary: "The circle traced at midwinter — near the Tropic of Capricorn ring. The sun's circuit is at its widest here, meaning sunrise and sunset happen at wider azimuth angles. This explains winter's shorter days for northern observers: the sun is circling further away.",
+    title: 'Operation Fishbowl — Nuking the Firmament',
+    zone: 'Celestial', color: '#818cf8',
+    position: 'Outer-mid ring circuit',
+    first_recorded: 'Operation Dominic/Fishbowl series: May–November 1962',
+    summary: 'In 1962, the US conducted 9 nuclear detonations at extreme altitude — up to 400 km — under Operation Fishbowl (part of Operation Dominic). The official justification was testing missile warheads and studying the Van Allen belts. In flat earth terms, the detonations were probing and attempting to penetrate the firmament dome. Starfish Prime, the largest (1.4 megatons at 400 km), created an artificial aurora visible from Honolulu and disabled 7 satellites.',
     analysis: [
-      "At midwinter (in the northern hemisphere), the sun's circuit is at its widest — passing above the Tropic of Capricorn ring. For northern observers, the sun is geometrically far away, never rising high in the sky and never staying above the horizon for long. The result: short winter days.",
-      "For southern observers, the same circuit is overhead — producing summer in the southern hemisphere when the north is in winter. The seasonal anti-correlation between hemispheres is a flat-plane geometric prediction, not a globe-rotation phenomenon.",
-      "The Tropic of Capricorn marks the southern limit of the sun's annual circuit. Beyond it, in the southern arc proper, the sun never reaches overhead — but the longer circuit means long summer days for southern populations even at high latitudes."
+      'Operation Fishbowl was a series of 9 high-altitude nuclear tests conducted by the US from Johnston Atoll in the central Pacific between April and November 1962. Part of the larger Operation Dominic test series, Fishbowl tests were conducted at altitudes ranging from 147 km (Bluegill) to 400 km (Starfish Prime). These altitudes are above the Kármán line — the conventional boundary of "space" — making Fishbowl the only known series of nuclear detonations in near-space.',
+      'Starfish Prime, detonated on 9 July 1962 at 400 km altitude with a 1.4-megaton warhead, was the largest. The electromagnetic pulse disabled or damaged 7 satellites — approximately one-third of all satellites then in orbit. It created an artificial radiation belt in the Van Allen zone that persisted for months. The detonation created an artificial aurora visible from Honolulu, 1,445 km from the burst point, lasting several minutes. The Department of Defense classified much of the Starfish Prime data at the time.',
+      'The official justification was studying warhead behaviour at altitude and the effects of nuclear detonations on the Van Allen radiation belts. A secondary classified purpose involved testing whether a nuclear burst could disrupt enemy missile guidance systems — a concept called "blackout" interference. But the specific choice of altitudes — right at and above the conventional "edge of space" boundary — has attracted different interpretation from flat earth researchers: the tests were probing the physical boundary of the dome.',
+      'The Van Allen belts themselves are relevant. Discovered in 1958 by Explorer 1, the Van Allen belts are zones of intense radiation surrounding Earth at altitudes of 1,000–6,000 km (inner belt) and 13,000–60,000 km (outer belt). In flat earth terms, these are not planetary radiation bands but are the electromagnetic properties of the firmament dome itself. The Fishbowl tests, which disrupted and modified these belts, were physical interventions in the dome structure.'
     ],
     facts: [
-      "Sun's widest annual circuit at midwinter (Capricorn).",
-      "Northern hemisphere winter / southern hemisphere summer occur simultaneously.",
-      "Sun never reaches directly overhead south of Capricorn.",
-      "Long southern summer days — geometrically required by the wider circuit."
+      '9 nuclear detonations at altitude 147–400 km, May–November 1962.',
+      'Starfish Prime (9 July 1962): 1.4 megatons at 400 km — largest nuclear detonation in near-space.',
+      'Disabled or damaged 7 satellites — ~⅓ of all then in orbit.',
+      'Artificial aurora visible from Honolulu, 1,445 km away.',
+      'Created persistent artificial radiation belt in the Van Allen zone lasting months.'
     ],
-    significance: "Confirms the local sun model. The Capricorn circuit's wider geometry explains the southern hemisphere's longer summer days more simply than globe orbital mechanics.",
-    related: [5, 51, 53]
+    significance: 'Nine nuclear detonations at the edge of space. The scale of the programme, the classification of results, and the specific altitude range chosen — right at the conventional space boundary — are consistent with an attempt to probe and breach a physical boundary. What were they actually testing?',
+    sources: [
+      'US Defense Nuclear Agency — Operation Dominic / Fishbowl technical reports (partially declassified)',
+      'Hess, W. — "The Radiation Belt and Magnetosphere" (1968)',
+      'Dyal, P. — Johnston Island Fishbowl measurements (DASA report)',
+      'Stokes, G. — "High Altitude Electromagnetic Pulse" research (1980s)'
+    ],
+    related: [5, 51, 53, 57, 58]
   },
   53: {
-    title: "The Equatorial Sun Path",
-    zone: "Celestial", color: "#818cf8",
-    position: "Mid-disc circuit",
-    summary: "The intermediate solar circuit at the spring and autumn equinoxes — directly over the equatorial ring. Produces equal day and night for all observers simultaneously, which is geometrically consistent with the flat azimuthal model but presents calculation difficulties on the globe model.",
+    title: 'The Equatorial Ring — Ionospheric Heaters & Project Argus',
+    zone: 'Celestial', color: '#818cf8',
+    position: 'Mid-disc circuit',
+    first_recorded: 'Project Argus: August–September 1958; JICAMARCA established 1961',
+    summary: 'In 1958, the US secretly detonated 3 nuclear bombs at altitude over the South Atlantic — Project Argus — creating artificial radiation belts to study whether they could disable Soviet ICBMs. The programme was classified until 1959. The equatorial ionospheric electrojet — a powerful natural current in the ionosphere along the geomagnetic equator — has been the target of modification experiments using ground-based heaters at equatorial latitudes (JICAMARCA, Peru; Kwajalein, Marshall Islands) since the 1960s.',
     analysis: [
-      "At the spring and autumn equinoxes, the sun's circular path lies directly above the equatorial ring of the flat disc. The result — observed and recorded since antiquity — is that day and night are exactly equal length for every observer on Earth, simultaneously.",
-      "On the flat plane, this equality is the direct geometric consequence of the sun's circuit passing through the disc's mid-radius. Every observer is the same proportional distance from the sun's circuit. The day-night ratio is 1:1 for all.",
-      "The globe model produces the same observation through more complex orbital geometry — a spinning, tilted sphere intercepting parallel light rays from a distant star. The result is the same; the explanation is more elaborate. Occam's razor favours the simpler model."
+      'Project Argus (August–September 1958) was a top-secret US Navy programme that detonated three small nuclear warheads at altitudes of 161–750 km over the South Atlantic Ocean. The project\'s goal was to create artificial radiation belts — electron shells — in the inner magnetosphere that would disable or degrade Soviet ICBM guidance systems and damage Soviet satellites. Three detonations (Argus I, II, III) created measurable artificial radiation bands that were detected by US and Soviet instrumentation. The programme was classified until March 1959, when it was publicly disclosed after a partial leak. The full technical results remained classified for decades.',
+      'The equatorial ionospheric electrojet is a concentrated electrical current flowing in the ionosphere at approximately 100 km altitude along the magnetic equator. It is one of the most powerful naturally occurring electrical currents on Earth, with a total current on the order of 100,000 amperes. The electrojet is significantly stronger in the equatorial region than the polar auroral electrojets — and, unlike the polar jets, can be studied and potentially manipulated from ground-based transmitters at equatorial latitudes.',
+      'JICAMARCA Radio Observatory, established 1961 near Lima, Peru (12°S, essentially on the magnetic equator), is the world\'s most powerful ionospheric radar facility — 6 MW of transmitted power over a 22,000 m² phased array. Its stated purpose is ionospheric research. Its actual operational history includes classified Department of Defense projects involving modification of the electrojet and creation of artificial ionospheric layers. The Arecibo facility in Puerto Rico (18°N, near-equatorial) served similar dual scientific-military functions until its collapse in 2020.',
+      'In flat earth terms, the equatorial ring marks the mid-radius of the disc — the point where the disc\'s electromagnetic properties are most symmetrically concentrated. Modification of the electrojet at this latitude would affect the entire disc\'s electromagnetic environment. The concentration of ionospheric research facilities along this specific latitude band is not coincidence.'
     ],
     facts: [
-      "Sun overhead at the equator at the equinoxes.",
-      "Day and night exactly equal everywhere simultaneously.",
-      "Direct geometric consequence on the flat plane.",
-      "Requires elaborate orbital geometry on a globe."
+      'Project Argus (1958): 3 secret nuclear detonations at altitude over South Atlantic; created artificial radiation belts.',
+      'Argus goal: disable Soviet ICBM guidance with artificial electron shells.',
+      'JICAMARCA, Peru (12°S): 6 MW ionospheric radar on the magnetic equator; classified DoD history.',
+      'Equatorial electrojet: ~100,000 amperes flowing in the ionosphere along the magnetic equator.',
+      'Arecibo (18°N) and JICAMARCA both served dual scientific-military ionospheric modification functions.'
     ],
-    significance: "A foundational geometric prediction. The equinox observation is the same on either model; the flat plane produces it more simply.",
-    related: [4, 51, 52]
+    significance: 'The equatorial ring has been the target of classified ionospheric modification operations since the 1950s. The concentration of research facilities at this specific latitude, combined with Project Argus\'s secret artificial radiation belt programme, suggests systematic military interest in controlling the electromagnetic properties of the equatorial ring.',
+    sources: [
+      'Christofilos, N. — Project Argus original proposal (declassified 1982)',
+      'Van Allen, J. et al. — "Satellite Observations of Electrons Artificially Injected into the Geomagnetic Field" (1959)',
+      'JICAMARCA Radio Observatory — operational history and DoD contract records',
+      'Hess, W. — "The Artificial Radiation Belt" chapter in "The Radiation Belt and Magnetosphere" (1968)'
+    ],
+    related: [4, 51, 52, 56, 62]
   },
   54: {
-    title: "Polaris — The Fixed North Star",
-    zone: "Celestial", color: "#818cf8",
-    position: "Directly above map centre — all times",
-    summary: "Positioned directly above the North Pole at all times from all northern latitudes. Every star in the sky rotates around Polaris in perfect concentric circles. The angular elevation of Polaris above the horizon equals your latitude precisely — confirming the geometry of a flat disc with a centre-point above.",
+    title: 'Polaris & the Parallax Problem — NASA\'s Moving Star',
+    zone: 'Celestial', color: '#818cf8',
+    position: 'Directly above map centre — all times',
+    summary: 'Polaris sits fixed above the North Pole for every northern observer at every moment — the exact behaviour predicted by a flat disc with a central axis point, and geometrically incompatible with a spinning, orbiting sphere. Additionally: Polaris\'s official distance has been revised three times (100 ly, 820 ly, 434 ly) by space agencies. The Hubble measurement contradicted the Hipparcos satellite measurement by 10%. For the star that defines our coordinate system, this inconsistency has never been explained.',
     analysis: [
-      "Polaris is the bright star situated within one degree of the celestial north pole. From every northern latitude, throughout every recorded century, Polaris has appeared in the same fixed position relative to the celestial sphere — directly above the geographic North Pole, with all other stars rotating around it in perfect concentric circles.",
-      "On a spinning, orbiting, wobbling sphere, this fixity is geometrically impossible. The Earth allegedly moves at 67,000 mph in its orbit, with the entire solar system moving through the galaxy at hundreds of thousands of mph. Yet Polaris is fixed. The \"explanation\" — that it is so far away that parallax is negligible — has been challenged by parallax measurements made over the long-baseline period of Earth's alleged orbital motion.",
-      "On the flat plane with a fixed centre point, Polaris's fixity is the predicted observation. The angular elevation of Polaris above the horizon equals the observer's latitude precisely — an exact mathematical relationship that holds across the northern hemisphere and that breaks down geometrically at the equator and beyond.",
-      "In the southern hemisphere, no equivalent \"south pole star\" exists. There is no fixed star at the celestial south pole. On a globe, this asymmetry has no clean explanation; on a flat plane with a single central pole, it is exactly what is predicted."
+      'Polaris is the bright star within one degree of the celestial north pole. From every northern latitude, throughout all of recorded history, Polaris has appeared in the same fixed position — directly above the geographic North Pole, with all other stars rotating around it in perfect concentric circles visible in long-exposure photography. The angular elevation of Polaris above the horizon equals the observer\'s latitude precisely: at 45°N it is 45° above the horizon; at 60°N it is 60° above. This exact mathematical relationship holds across the entire northern hemisphere.',
+      'On a flat disc with a central axis, this behaviour is the direct and only prediction: a fixed light directly above the centre, with angular elevation directly proportional to the observer\'s distance from centre. On a spinning, orbiting, wobbling sphere moving at 67,000 mph around the sun (which itself moves at 483,000 mph around the galaxy), Polaris\'s apparent fixity for all observers requires that the star be so far away that all parallax and proper motion is undetectable over human timescales — a convenient solution that requires extraordinary assumed distances.',
+      'The distance to Polaris has been officially revised three times. Early estimates placed it at approximately 100 light-years. The Hipparcos satellite (1989–1993) measured it at 434 light-years using stellar parallax (baseline: Earth\'s 300-million-km orbital diameter). The Hubble Space Telescope subsequently measured it at 325 light-years — a 25% discrepancy with Hipparcos. Later reanalysis restored the estimate to approximately 430 light-years, with acknowledged uncertainty. For a star whose fixed position defines the entire celestial coordinate system used by every navigation system on Earth, a 25% measurement disagreement between the two most advanced space telescopes is a significant unresolved anomaly.',
+      'In the southern hemisphere, no equivalent "south pole star" exists. There is no fixed star at the celestial south pole. On a globe with the Earth\'s axis pointing at Polaris in the north and the equivalent point in the south, there should be a comparable south pole star — there is simply not a bright star at that position. On a flat disc with a single central axis, the absence of a south pole star is exactly predicted: the centre is the north pole; the south is the outer boundary, not a point.'
     ],
     facts: [
-      "Polaris within 1° of the celestial north pole.",
-      "Fixed for all northern observers throughout recorded history.",
-      "Angular height = observer's latitude (exact mathematical relationship).",
-      "No equivalent \"south pole star\" exists."
+      'Polaris: fixed above the North Pole for all northern observers throughout recorded history.',
+      'Elevation above horizon = latitude: exact mathematical relationship across entire northern hemisphere.',
+      'Distance estimates: 100 ly (early), 434 ly (Hipparcos), 325 ly (Hubble), ~430 ly (reanalysis) — 25% discrepancy.',
+      'No equivalent south pole star exists — exactly predicted by flat disc, problematic for globe.',
+      'All other stars trace perfect concentric circles around Polaris in long-exposure photography.'
     ],
-    significance: "The single most direct stellar evidence for the flat earth model. Polaris's fixity and the latitude-elevation rule are unambiguous.",
+    significance: "Polaris's fixity is the single clearest stellar prediction of the flat disc model. The distance measurement controversy — a 25% disagreement between the two most advanced space telescopes for the most-used star in human navigation history — has received remarkably little public attention.",
+    sources: [
+      'ESA — Hipparcos mission data release (1997)',
+      'Turner, N. et al. — Hubble Space Telescope Polaris distance measurement (2012)',
+      'van Leeuwen, F. — Hipparcos parallax reanalysis (2007)',
+      'US Naval Observatory — Polaris navigation and celestial mechanics documentation'
+    ],
     related: [1, 2, 55]
   },
   55: {
-    title: "The Southern Cross Constellation Zone",
-    zone: "Celestial", color: "#818cf8",
-    position: "Visible from outer southern arc",
-    summary: "Visible simultaneously from the entire southern arc of the flat disc. On a globe, observers in widely separated southern locations should have their view blocked by curvature. The simultaneous visibility of the Southern Cross across all southern longitudes is consistent with stars affixed to the interior of the firmament dome.",
+    title: 'Operation Deep Freeze — Antarctica\'s Military Science Cover',
+    zone: 'Celestial', color: '#818cf8',
+    position: 'Visible from outer southern arc',
+    first_recorded: 'Operation Deep Freeze established 1955; continuous since',
+    summary: 'Operation Deep Freeze is the US military\'s continuous logistical support operation for US Antarctic research stations — running since 1955 under the Commander, Naval Support Force Antarctica. It is classified as a military operation. The US Air Force, Navy, and Army all maintain active components. "Scientific research" is the publicly stated purpose. The Southern Cross constellation zone is the celestial reference point for navigation in this restricted military zone.',
     analysis: [
-      "The Southern Cross (Crux) is the principal navigational constellation of the southern hemisphere, used by Polynesian, Australian Aboriginal, and European mariners for centuries. Its visibility from across the entire southern arc — Argentina, South Africa, Australia, New Zealand — is simultaneous and continuous.",
-      "On a globe, observers separated by half the planet's circumference (e.g. Buenos Aires and Sydney) should not be able to see the same stars at the same time, because the globe's curvature would block the line of sight to the celestial pole region. The simultaneous visibility is anomalous.",
-      "On the flat plane with a domed firmament, all southern arc observers are looking up at the same celestial sphere from positions on the same disc. The simultaneous visibility of southern stars is the predicted observation."
+      'Operation Deep Freeze was established in 1955 as the US military logistical operation to support the upcoming International Geophysical Year (IGY) 1957-58 — the scientific framework under which 12 nations established Antarctic presence before signing the Antarctic Treaty in 1959. It has operated continuously since, under successive naval task forces now coordinated by the Joint Task Force Support Forces Antarctica (JTF-SFA).',
+      'The operation is classified as a US military operation, not a civilian scientific programme. The US Air Force operates airlift missions between Christchurch, New Zealand and McMurdo Station (Operation Deep Freeze\'s primary staging point). The US Navy historically operated icebreakers under Deep Freeze designation. The US Army provides engineering and support personnel. The complete budget — military and civilian combined — has never been publicly disclosed.',
+      'The Southern Cross (Crux) is the principal navigational reference in the southern sky — used by every Australian, South American, and Antarctic navigator. The constellation is visible simultaneously from the entire southern arc: Argentina, South Africa, Australia, New Zealand, and — crucially — from Antarctic research stations. Long-exposure photography of southern skies shows all stars rotating around the celestial south pole in perfect concentric arcs. In flat earth terms, all southern arc observers are looking up at the same firmament from the same disc — their simultaneous sight of the Southern Cross is exactly predicted.',
+      'The IGY 1957-58 was the operational genesis of the entire Antarctic Treaty system. Twelve nations participated: Argentina, Australia, Belgium, Chile, France, Japan, New Zealand, Norway, South Africa, Soviet Union, United Kingdom, and the United States. All 12 became original Antarctic Treaty signatories in 1959. The smooth transition from "international scientific cooperation" to "international treaty regime restricting independent access" occurred in just two years — suggesting the treaty framework had been pre-planned alongside the IGY itself.'
     ],
     facts: [
-      "Visible from across entire southern arc simultaneously.",
-      "Used for navigation by Polynesians, Aborigines, and European mariners.",
-      "On a globe, observers in widely separated southern locations should not see the same stars.",
-      "On the flat plane with firmament dome, simultaneous visibility is predicted."
+      'Operation Deep Freeze: continuous US military operation since 1955 — Air Force, Navy, Army all participating.',
+      'Classification: military operation, not civilian scientific programme.',
+      'Southern Cross: simultaneous visibility from entire southern arc predicted by flat disc model.',
+      'IGY 1957-58: 12 nations → all 12 became Antarctic Treaty signatories in 1959.',
+      'Complete Deep Freeze budget (military + civilian) has never been publicly disclosed.'
     ],
-    significance: "The simultaneous visibility of southern stars across the southern arc is geometrically problematic for a globe and trivially explained on the flat plane.",
+    significance: 'The US military has maintained continuous operations in Antarctica since 1955 under "scientific" cover. The Southern Cross constellation zone, used for navigation by every participant, is the celestial reference for the most militarised science programme in history.',
+    sources: [
+      'US Navy — Operation Deep Freeze historical records (partial declassification)',
+      'NSF — United States Antarctic Program annual reports',
+      'Antarctic Treaty Secretariat — original 12 signatories documentation',
+      'IGY — International Geophysical Year scientific programme records (1957–58)'
+    ],
     related: [54, 56, 57]
   },
   56: {
-    title: "Aurora Borealis Zone",
-    zone: "Celestial", color: "#818cf8",
-    position: "Inner arctic zone — circular band",
-    summary: "The northern lights occur near the inner Arctic Circle arc — electrical discharges at the inner edge of the firmament dome where it meets the plane. Ancient Norse, Sámi, and Indigenous Alaskan traditions consistently described the aurora as a boundary phenomenon, not a random atmospheric event.",
+    title: 'HAARP Alaska — Ionospheric Heater or Weapon?',
+    zone: 'Celestial', color: '#818cf8',
+    position: 'Inner arctic zone — circular band',
+    first_recorded: 'HAARP construction began 1993; fully operational 2007',
+    summary: 'The High-frequency Active Auroral Research Program in Gakona, Alaska is the world\'s most powerful ionospheric heater — 3.6 MW of radio frequency power directed into the ionosphere. Officially: scientific research. The patent held by ARCO Power Technologies (later acquired by BAE Systems) explicitly describes weather modification, earth-penetrating tomography, and missile defence applications. Congress questioned the programme repeatedly; its classified annexes were never released.',
     analysis: [
-      "The aurora borealis appears as luminous curtains, arcs, and rays of light in the sky at high northern latitudes. The official explanation invokes solar wind particles striking atmospheric gases. The phenomenon's consistent occurrence in a circular band — the auroral oval — centred on the magnetic north pole is a structural fact that the official explanation does not fully account for.",
-      "On the flat plane with a domed firmament, the auroral oval is the predicted location for electrical discharge phenomena: the inner perimeter where the dome meets the disc surface. The luminous patterns are interpreted as direct visual evidence of the firmament boundary itself.",
-      "Indigenous Arctic traditions universally describe the aurora as a meaningful boundary phenomenon — Norse mythology associates it with the bridge to Asgard, Sámi tradition treats it as the visible spirit world, Inuit and Yupik traditions see it as the souls of the dead. The cross-cultural consistency is striking."
+      'HAARP — the High-frequency Active Auroral Research Program — is located at Gakona, Alaska (62°N), in the inner Arctic arc of the flat disc. It consists of an Ionospheric Research Instrument (IRI): 180 antenna elements arranged in a phased array, capable of transmitting up to 3.6 MW of radio frequency energy directed into specific regions of the ionosphere. The facility was built by Advanced Power Technologies Inc (APTI), a subsidiary of ARCO, under US Air Force and Navy contracts, with construction beginning in 1993.',
+      'The foundational HAARP patent — US Patent 4,686,605, held by Bernard Eastlund of APTI — explicitly describes a wide range of applications beyond basic ionospheric research: weather modification (by disrupting jet streams), earth-penetrating tomography (for detecting underground installations, including submarines under the ocean floor), and disruption of communications across wide geographic areas. The patent was classified for a period before public release. When HAARP\'s existence became publicly known, these patent applications were presented as theoretical — not as operational objectives.',
+      'HAARP was transferred from military to University of Alaska Fairbanks civilian management in 2015. The transfer was presented as evidence of the programme\'s benign nature. However, the transfer was to a public university operating under Department of Defense research contracts — and the facility continues to conduct classified "campaign" experiments that are not publicly disclosed in advance. The schedule of experiments, the targeting parameters, and the classified results are not subject to FOIA requests when conducted under DoD classification.',
+      'In the flat earth firmament model, HAARP\'s function is more significant than in the globe model. The ionosphere in the flat earth model is the lower surface of the firmament dome — the active electromagnetic boundary between the disc and the waters above. HAARP-class facilities are not merely "studying" this layer — they are modifying it. The Aurora Borealis natural electromagnetic phenomenon occurs in the same inner Arctic zone as HAARP\'s beam targeting area — the inner perimeter of the firmament dome.'
     ],
     facts: [
-      "Forms a consistent circular band — the auroral oval.",
-      "Predicted location of dome-disc boundary on flat earth model.",
-      "Cross-cultural indigenous traditions describe it as a boundary phenomenon.",
-      "Official explanation does not account for the consistent oval geometry."
+      'HAARP: 180-element phased array, 3.6 MW — world\'s most powerful ionospheric heater.',
+      'Eastlund Patent 4,686,605: explicitly describes weather modification, earth-penetrating tomography, communications disruption.',
+      'Transferred to University of Alaska 2015 — continues DoD classified experiment campaigns.',
+      'Located at 62°N, inner Arctic arc — same zone as the auroral oval.',
+      'Classified experiment schedules and results not subject to FOIA under DoD designation.'
     ],
-    significance: "Direct visual evidence of the firmament boundary on the flat earth model. The circular oval pattern is geometrically predicted by the dome structure.",
+    significance: 'HAARP is the most powerful publicly known ionospheric modification facility on Earth, its foundational patent describes weather and communications weapons, and its classified research programme has never been disclosed. In flat earth terms it is targeting the lower surface of the firmament dome — the most consequential electromagnetic boundary in the cosmological model.',
+    sources: [
+      'Eastlund, B. — US Patent 4,686,605 (filed 1985, granted 1987)',
+      'US Air Force / US Navy — HAARP construction and programme records (partial)',
+      'GAO — "High-frequency Active Auroral Research Program" review (2009)',
+      'Manning, J. & Begich, N. — "Angels Don\'t Play This HAARP" (1995)'
+    ],
     related: [2, 28, 57, 58]
   },
   57: {
-    title: "Aurora Australis Zone",
-    zone: "Celestial", color: "#818cf8",
-    position: "Outer ice ring zone — circular band",
-    summary: "Southern lights occur near the outer Antarctic arc — electrical discharges at the outer dome edge. Both auroras follow circular paths perfectly consistent with a dome structure. The globe model cannot explain why auroras form in consistent circular bands — the flat firmament dome model predicts exactly this pattern.",
+    title: 'The Nazi Antarctic Expedition — Operation Schwabenland',
+    zone: 'Celestial', color: '#818cf8',
+    position: 'Outer ice ring zone — circular band',
+    first_recorded: 'Schwabenland expedition: December 1938 – April 1939',
+    summary: 'In December 1938, the German Reich dispatched the research vessel Schwabenland to Antarctica, mapping approximately 600,000 km² of the continent and claiming it as Neuschwabenland (New Swabia). The Luftwaffe conducted 15 photographic reconnaissance flights covering the interior. The expedition\'s classified findings were never publicly released. Operation Highjump (1947) is widely interpreted as the US military response to whatever the Germans found — or built — there.',
     analysis: [
-      "The aurora australis is the southern hemisphere counterpart to the aurora borealis. It forms a circular oval centred on the magnetic south pole. Like its northern counterpart, it appears as luminous curtains and arcs of light.",
-      "On the flat plane model with the southern arc forming the outer perimeter of the disc, the auroral oval here corresponds to the outer dome boundary — the rim where the firmament meets the plane at its outer edge. The pairing of aurora borealis and aurora australis is therefore not the symmetry of two opposing globe poles, but the inner and outer perimeters of a single dome over a single disc.",
-      "The circular oval pattern of both auroras is one of the strongest visual confirmations of the dome model. No globe-based explanation predicts oval geometry; the dome model requires it."
+      'The German Antarctic Expedition of 1938–39, conducted by the Schwabenland under the command of Captain Alfred Ritscher, was the first systematic aerial survey of the Antarctic interior. The Luftwaffe deployed Dornier seaplanes from the ship\'s catapult to conduct 15 reconnaissance flights over the interior, photographing approximately 600,000 km² and dropping hundreds of metal swastika markers to claim the territory for Germany as Neuschwabenland (New Swabia). This is documented. The expedition\'s full findings were classified by the Reich.',
+      'What is not documented — but has been extensively researched — is whether a permanent German base was subsequently established in Antarctica during World War II. The claim, referred to as "Base 211" in post-war German documents and witness testimony, holds that a submarine-supplied base was built in the ice caverns of Neuschwabenland from 1941-44, using the submarine fleet\'s capacity to reach the Antarctic without Allied detection. Rudolf Hess\'s 1941 flight to Scotland — officially attributed to a solo peace mission — has been linked by researchers to negotiations for safe passage for a future Antarctic operation.',
+      'Operation Highjump (1946-47), the largest military Antarctic expedition in history (4,700 personnel, 33 aircraft, 13 ships), is widely interpreted by flat earth and alternative history researchers as a military operation against whatever the Germans left in Antarctica. The expedition returned after 8 weeks of a planned 6-8 month schedule. Three aircraft were destroyed under unexplained circumstances. Admiral Byrd\'s subsequent references to "a strategically important land beyond the pole" and his 1954 statement that US security was threatened by objects capable of flying "from pole to pole at incredible speeds" have never been satisfactorily explained.',
+      'The Aurora Australis — the southern auroral oval centred on the magnetic south pole — rings the outer ice boundary of the flat disc. If German expeditions and subsequently US-Soviet operations were conducted in the most southern latitudes, the Aurora Australis would have been their constant celestial reference. The southern auroral oval\'s circular geometry, perfectly predicted by the flat disc model\'s dome structure, forms the luminous ceiling of this contested southern zone.'
     ],
     facts: [
-      "Counterpart to aurora borealis — circular oval at southern magnetic pole.",
-      "On flat plane, corresponds to outer dome perimeter at the ice ring.",
-      "Same luminous patterns as northern lights.",
-      "Circular geometry directly predicted by dome model."
+      'Schwabenland (1938-39): 600,000 km² mapped; territory claimed as Neuschwabenland.',
+      '15 Luftwaffe photographic reconnaissance flights over Antarctic interior.',
+      'Expedition classified findings never publicly released.',
+      'Operation Highjump (1947): returned after 8 weeks of planned 6-8 months; 3 aircraft destroyed.',
+      'Byrd (1954): "objects flying pole to pole at incredible speeds" threatening US security.'
     ],
-    significance: "The southern auroral oval is the outer boundary visualisation. Together with the northern oval, the two auroras form the inner and outer perimeters of the firmament dome.",
-    related: [6, 24, 56, 58]
+    significance: 'The Nazi Antarctic expedition and Operation Highjump\'s mysterious truncation frame the southern zone as a contested military zone, not a scientific preserve. Whatever the Germans found — or established — in 1938-39 prompted the largest military Antarctic expedition in history four years later.',
+    sources: [
+      'Ritscher, A. — Schwabenland expedition official report (1939)',
+      'US Navy — Operation Highjump records (declassified portions)',
+      'Byrd, R. — El Mercurio interview (1954)',
+      'Slavin, P. — Soviet research on German Antarctic operations'
+    ],
+    related: [6, 24, 56, 58, 71]
   },
   58: {
-    title: "The Firmament Dome",
-    zone: "Celestial", color: "#818cf8",
-    position: "Above entire map — all locations",
-    summary: "The solid crystalline vault above the flat plane — not visible on the surface map but implied by the behaviour of all celestial objects. The Hebrew raqia, Greek stereoma, Sumerian heaven-vault, and Egyptian nut all describe the same structure. Stars, sun, and moon all move within it. Nothing passes through it.",
+    title: 'Operation Fishbowl — Nuclear Weapons Aimed at the Sky',
+    zone: 'Celestial', color: '#818cf8',
+    position: 'Above entire map — all locations',
+    first_recorded: 'Operation Fishbowl: April–November 1962; part of Operation Dominic',
+    summary: 'In 1962, the United States detonated five nuclear warheads at altitudes between 95 km and 400 km above the Pacific Ocean. The programme was called Operation Fishbowl. One detonation — Starfish Prime (1.4 megatons, 400 km altitude) — created an artificial radiation belt that persisted for years and destroyed six satellites. Flat earth researchers note: the programme is called Fishbowl. Nuclear weapons aimed at the upper sky boundary. Six satellites destroyed in one test. The full classified results were never released.',
     analysis: [
-      "The firmament — Hebrew raqia (רקיע), Greek stereoma (στερέωμα), Latin firmamentum — is the central structural element of the flat earth cosmological model. It is the solid crystalline dome enclosing the disc, within which the sun, moon, and stars move on their respective paths.",
-      "The Genesis 1:6-8 account describes the firmament as separating the \"waters above\" from the \"waters below\" — a structural divider in the cosmos. The Hebrew word raqia derives from the verb raqa meaning \"to beat out\" or \"to spread thin\" — describing a hammered or beaten-thin metallic surface, not an empty void.",
-      "Every ancient cosmological tradition independently describes the same structure: Sumerian (the heaven-vault held up by mountains), Egyptian (Nut, the sky goddess arched as a dome), Greek (the stereoma supporting the celestial spheres), Norse (the skull of Ymir forming the sky), Vedic (the multiple celestial domes of the Lokas). The cross-cultural consistency is the strongest argument for treating the firmament as preserved historical knowledge, not as primitive mythology.",
-      "Modern attempts to penetrate the firmament have been documented. Operation Fishbowl (1962) involved the detonation of nuclear weapons at high altitude — a programme that flat earth researchers interpret as attempts to break through or test the firmament boundary."
+      'Operation Fishbowl was a series of high-altitude nuclear weapons tests conducted in 1962 as part of the broader Operation Dominic nuclear testing programme. The tests were conducted over Johnston Atoll in the Pacific Ocean. Five tests were successfully detonated: Starfish Prime (1.4 Mt, 400 km altitude, 9 July 1962), Checkmate (7 July), Bluegill Triple Prime (25 October), Kingfish (1 November), and Tightrope (4 November).',
+      'Starfish Prime was the largest test and produced the most anomalous results. Detonated at 400 km above the Pacific, it created a geomagnetically trapped radiation belt — the "Starfish Belt" — that persisted in the Van Allen Belt region for years after the test. Within a month, six satellites (including Telstar 1, the first commercial communications satellite, launched just days before the test) were damaged or destroyed by the radiation. The EMP (electromagnetic pulse) from Starfish Prime shut down electrical systems in Honolulu, 1,400 km away.',
+      'The programme name "Fishbowl" is not explained in any declassified document. A "fishbowl" is a transparent sphere — the enclosed world seen from inside. Flat earth researchers note the name as a possible acknowledgment of the test\'s actual purpose: probing the upper boundary of the enclosed disc. The series of tests across five detonation heights (95 km to 400 km) is consistent with a systematic mapping programme of the upper atmospheric/firmament boundary at different altitudes.',
+      'Operation Dominic\'s full results — including all Fishbowl classified data — remain partially classified. The effects of high-altitude detonations on the ionosphere and what are now called the Van Allen Belts were studied extensively. The Van Allen Belts themselves were only discovered in 1958 by Explorer 1. The subsequent revelation that the Belts would constitute a lethal radiation hazard for spacecraft traveling through them has been the basis for flat earth arguments that the Apollo missions could not have safely traversed them.'
     ],
     facts: [
-      "Hebrew raqia — \"beaten-out\" or \"hammered-thin\" surface.",
-      "Cross-cultural: Sumerian, Egyptian, Greek, Norse, Vedic all describe the same structure.",
-      "Operation Fishbowl (1962) — high-altitude nuclear tests.",
-      "Stars, sun, and moon all move within it — nothing passes through."
+      'Operation Fishbowl: 5 nuclear detonations at 95–400 km altitude over Johnston Atoll, 1962.',
+      'Starfish Prime (1.4 Mt, 400 km): destroyed 6 satellites; radiation belt persisted years.',
+      'EMP from Starfish Prime disrupted electrical systems in Honolulu, 1,400 km away.',
+      'Programme name "Fishbowl" is unexplained in any declassified document.',
+      'Full classified results of Dominic/Fishbowl never released; Van Allen Belt data partially classified.'
     ],
-    significance: "The structural enclosure of the cosmos. Without the firmament, the flat earth model loses its physical containment. The cross-cultural consistency of the description argues for its historical reality.",
+    significance: 'The United States detonated nuclear weapons at the upper atmospheric boundary six months before the first manned orbital mission and destroyed the first commercial communications satellite in the process. The programme is named Fishbowl. The full results of what happened to the upper sky boundary when nuclear weapons were detonated in it have never been released.',
+    sources: [
+      'US Defense Nuclear Agency — "Operation Dominic I: 1962" report (partially declassified)',
+      'Tesche, F.M. — "EMP, Lightning, and Power Systems" — Starfish Prime EMP analysis',
+      'Christofilos, N. — Van Allen Belt radiation proposals preceding Fishbowl',
+      'DARPA — early satellite damage assessments (partial FOIA release)'
+    ],
     related: [54, 55, 56, 57, 59]
   },
   59: {
-    title: "The Waters Above the Firmament",
-    zone: "Celestial", color: "#818cf8",
-    position: "Beyond firmament — above all",
-    summary: "The reservoir of water above the dome — described in Genesis 1:6-7, in Vedic cosmology, and in the traditions of over 200 indigenous cultures worldwide. Responsible for the sky's distinctive blue and the source of the biblical Flood. The Schumann resonance — the electromagnetic resonance of the space between Earth and firmament — was predicted by Tesla and detected by Schumann in 1952.",
+    title: 'Nikola Tesla & the Suppressed Atmospheric Energy System',
+    zone: 'Celestial', color: '#818cf8',
+    position: 'Beyond firmament — above all',
+    first_recorded: 'Wardenclyffe Tower: 1901–1905; Tesla files seized: January 1943',
+    summary: 'Nikola Tesla claimed the upper atmosphere was an inexhaustible reservoir of electrical energy that could be transmitted wirelessly to the entire surface of the Earth — for free. JP Morgan withdrew funding when he realised there was no way to meter it. Tesla\'s Wardenclyffe Tower was demolished in 1917. On Tesla\'s death in January 1943, the FBI immediately seized all his papers and equipment. The Office of Alien Property classified them. Many remain classified or "missing."',
     analysis: [
-      "Genesis 1:6-7 describes the firmament as separating the \"waters which were under the firmament\" from the \"waters which were above the firmament.\" This is not poetry; it is a structural description of the cosmos.",
-      "The waters above explain several otherwise mysterious phenomena. The blue colour of the sky is consistent with looking up through the lower atmospheric layers toward an upper water reservoir. The biblical Flood — the breaking of the \"fountains of the deep\" and the \"windows of heaven\" — describes a catastrophic release of water from both above and below the disc.",
-      "The Schumann resonance — the electromagnetic standing wave at approximately 7.83 Hz that exists in the space between the Earth's surface and the ionosphere — was predicted by Nikola Tesla and instrumentally confirmed by Winfried Schumann in 1952. In flat earth interpretation, this is the resonance of the cavity between the disc and the underside of the firmament."
+      'Nikola Tesla\'s most ambitious project was the Wardenclyffe Tower (Shoreham, New York, 1901–1905) — a 57-metre wooden tower topped with a 55-tonne copper sphere, connected by a 36-metre shaft to underground tunnels and resonating chambers. Tesla\'s design called for it to be one of a global network of such towers that would transmit electrical power wirelessly to every point on Earth, drawing energy from the ionosphere. JP Morgan had funded the initial construction believing it was a wireless telegraphy station; when Tesla explained the true purpose, Morgan withdrew all funding. Without a metering system, there was no way to charge for the transmitted electricity.',
+      'Wardenclyffe was never completed. Tesla ran out of money. The tower was sold for debt and demolished in 1917 for scrap metal — partly at the instigation of government concerns that it could be used as a signalling beacon by German submarines. Tesla spent his remaining 26 years in relative poverty, with his funding requests for atmospheric energy research consistently denied.',
+      'On 7 January 1943, Tesla died alone in Room 3327 of the New Yorker Hotel. The FBI arrived before the body was moved. All of Tesla\'s papers, notebooks, equipment, and personal effects were seized by the Office of Alien Property — despite Tesla having been a US citizen for over 50 years. The collection was taken to MIT for review. The full inventory was classified. Some papers were returned to Tesla\'s nephew in 1952; many were not. A subset remain classified to this day under designations that have never been publicly explained.',
+      'Tesla\'s atmospheric energy theory is directly relevant to the flat earth firmament model. He described the ionosphere as an "electrified fluid" that could be set into resonance. In flat earth terms, this is the charged inner surface of the firmament dome — the boundary between the inhabited disc and the waters above. Tesla\'s work suggests that the firmament is not merely a physical boundary but an active electromagnetic system that could be tapped as an energy source. The Schumann resonance — confirmed in 1952, exactly as Tesla predicted — is the electromagnetic signature of this system.'
     ],
     facts: [
-      "Genesis 1:6-7 explicitly describes water above the firmament.",
-      "Cross-cultural: described in over 200 indigenous traditions.",
-      "Schumann resonance (7.83 Hz) — electromagnetic resonance of the disc-dome cavity.",
-      "Source of the biblical Flood — \"windows of heaven\" opened."
+      'Wardenclyffe Tower: built 1901-05; JP Morgan withdrew funding when he realised energy could not be metered.',
+      'Tower demolished 1917 for scrap; Tesla left impoverished.',
+      'Tesla died 7 January 1943; FBI seized all papers and equipment before body was removed.',
+      'Office of Alien Property classified the collection; subset remains classified.',
+      'Schumann resonance (7.83 Hz) confirmed 1952 — exactly as Tesla predicted.'
     ],
-    significance: "The cosmological reservoir above the dome. Its existence explains the blue sky, the Flood, and the Schumann resonance.",
-    related: [58]
+    significance: 'Tesla\'s suppressed atmospheric energy system was not merely an engineering project — it was proof of concept that the upper atmosphere (the firmament boundary) is an active electrical system. The seizure and classification of his files on the day of his death ensures we may never know the full extent of what he discovered.',
+    sources: [
+      'Tesla, N. — "The Problem of Increasing Human Energy" (1900) — Century Magazine',
+      'FBI Records — Tesla file (partially released via FOIA; portions still classified)',
+      'Cheney, M. — "Tesla: Man Out of Time" (1981)',
+      'Schumann, W. — "Über die strahlungslosen Eigenschwingungen einer leitenden Kugel" (1952)'
+    ],
+    related: [58, 62]
   },
   60: {
     title: "McMurdo Station, Antarctica",
@@ -1531,23 +1742,31 @@ window.LOCATION_DATA = {
     related: [2, 28]
   },
   68: {
-    title: "The Strait of Gibraltar",
-    zone: "Suppressed", color: "#f87171",
-    position: "Centre arc · Europe/Africa junction",
-    classification: "British Overseas Territory; military strategic asset",
-    summary: "The narrow gateway between the Atlantic and the Mediterranean — the choke point of the ancient world's trade and the western entrance to what the Romans called Mare Nostrum (Our Sea). The Rock of Gibraltar is one of the two mythological Pillars of Hercules — the boundary markers of the known ancient world.",
+    title: 'The Strait of Gibraltar — Where the Ancient World Ended',
+    zone: 'Suppressed', color: '#f87171',
+    position: 'Centre arc · Europe/Africa junction',
+    classification: 'British Overseas Territory; military strategic asset',
+    summary: 'The 14-km gateway between the Atlantic and Mediterranean — where the Pillars of Hercules stood, marked "Non Plus Ultra" (nothing further beyond). The Rock of Gibraltar has been British territory since 1713 despite Spanish claims. Annually, over 100,000 commercial vessels transit the strait. Britain controls the choke point between two oceans and the ancient mythological boundary of the world. The name Gibraltar comes from the Arabic Jebel Tariq — the mountain of Tariq ibn Ziyad, the Umayyad general who crossed here in 711 AD to conquer Visigothic Iberia.',
     analysis: [
-      "The Strait of Gibraltar is the 14-km-wide channel separating the Iberian Peninsula from North Africa, connecting the Mediterranean to the Atlantic. It has been the most strategically contested maritime chokepoint in Western history — controlled by Phoenicians, Romans, Vandals, Moors, Spanish, and (since 1713) British.",
-      "In ancient mythology, the strait was the location of the Pillars of Hercules — the two mountains that marked the western boundary of the inhabited world. The motto \"Non Plus Ultra\" (\"nothing further beyond\") was inscribed at the boundary, warning sailors not to venture past. Charles V of Spain later reversed this to \"Plus Ultra\" — the motto still on the Spanish coat of arms.",
-      "Gibraltar remains a British Overseas Territory despite Spanish territorial claims. The military value of the rock — overlooking the strait from above — has kept it under continuous British military control since 1713. It is one of the most heavily militarised small territories on Earth."
+      'The Strait of Gibraltar is the 14-km-wide channel separating the Iberian Peninsula from North Africa, connecting the Mediterranean to the Atlantic. It has been the most strategically contested maritime chokepoint in Western history — controlled by Phoenicians, Romans, Vandals, Moors, Spanish, and (since 1713) British. The Treaty of Utrecht (1713) transferred sovereignty to Britain; Spain has claimed it as Spanish territory ever since. Britain has refused every negotiation.',
+      'In ancient mythology, the strait was the location of the Pillars of Hercules — Mons Calpe (the Rock of Gibraltar) and Mons Abyla (Jebel Musa, on the African side) — the two mountains that marked the western boundary of the inhabited world. The motto "Non Plus Ultra" (nothing further beyond) warned sailors not to venture past. Charles V of Spain reversed this to "Plus Ultra" (further beyond) when the Spanish Empire expanded to the Americas — the motto is still on the Spanish coat of arms today.',
+      'The flat earth significance: the mythological boundary of the ancient world was a geographic chokepoint. In the flat earth model, the inhabited world has boundaries — and the ancient warning at Gibraltar was not symbolic but literal: do not venture past this boundary into unknown waters. The "Pillars of Hercules" may have marked the western limit of the ancient cartographic knowledge zone rather than merely a shipping hazard.',
+      'Modern strategic significance: approximately 100,000 commercial vessels transit the strait annually. All Mediterranean trade — including energy supplies to Europe from the Middle East — passes through this 14-km channel. Britain\'s military installations on Gibraltar include naval facilities, airspace control, and electronic intelligence. The British maintain sovereignty over this chokepoint as the direct institutional continuation of the maritime dominance that built the British Empire. The European Union does not control it. Spain does not control it. NATO does not control it. Britain does.'
     ],
     facts: [
-      "14 km wide — the only natural connection between Mediterranean and Atlantic.",
-      "British-controlled since 1713.",
-      "Pillars of Hercules — ancient boundary marker of the inhabited world.",
-      "Motto changed from \"Non Plus Ultra\" to \"Plus Ultra\" by Charles V."
+      '14 km wide — the only natural connection between Mediterranean and Atlantic; 100,000+ vessels per year.',
+      'British-controlled since 1713 — Spain has never accepted the Treaty of Utrecht\'s cession.',
+      'Pillars of Hercules: "Non Plus Ultra" — ancient boundary of the inhabited world.',
+      'Gibraltar = Jebel Tariq: named for the Umayyad general who crossed in 711 AD to conquer Iberia.',
+      'British intelligence, naval, and airspace control infrastructure maintained continuously since 1713.'
     ],
-    significance: "The mythological boundary of the ancient inhabited world remains a British military choke point in the modern era. The geographical reality has not changed; the political control has.",
+    significance: 'The mythological western boundary of the ancient world has been under continuous British military control since 1713. The warning inscribed at the Pillars — "nothing further beyond" — may have been geographic knowledge, not mythology. Britain\'s refusal to negotiate Gibraltar\'s status in 300 years reflects the choke point\'s continued strategic value beyond what is publicly acknowledged.',
+    sources: [
+      'Treaty of Utrecht (1713) — Gibraltar sovereignty clause',
+      'Strabo — "Geographica" Book III — Pillars of Hercules',
+      'Casson, L. — "The Ancient Mariners" (1959) — Phoenician Strait navigation',
+      'UK Ministry of Defence — Gibraltar garrison operational records'
+    ],
     related: [29, 10, 12]
   },
   69: {
@@ -1651,42 +1870,59 @@ window.LOCATION_DATA = {
     related: [6, 70, 73, 75]
   },
   73: {
-    title: "Speculation — Second Ring of Continents",
-    zone: "Outer", color: "#94a3b8",
-    position: "Beyond outer boundary — unknown",
-    summary: "Researchers studying the azimuthal projection at extended scales note that the known continental pattern could theoretically repeat — a second ring of landmasses further out, separated by a second body of water and a second ice ring. No confirmed evidence exists, but the possibility is consistent with the cosmological model.",
+    title: 'Classified Antarctic Imagery — What Satellites Are Ordered Not to Show',
+    zone: 'Outer', color: '#94a3b8',
+    position: 'Beyond outer boundary — satellite imaging gap',
+    summary: 'Commercial satellite operators have documented receiving government instructions to pixelate, exclude, or withhold imagery of specific Antarctic zones. Google Earth\'s coverage of Antarctica is demonstrably lower resolution than comparable Arctic zones. The "South Pole" on Google Maps is a single coordinate point with a generic ice image — not live or high-resolution satellite imagery. Several Antarctic grid coordinates produce black or blurred tiles. What is being hidden, and by whom?',
     analysis: [
-      "Some flat earth researchers have proposed that the disc may extend significantly beyond the known Ice Wall — and that what we consider the \"outer boundary\" is in fact only the boundary of the inhabited zone. Beyond the Ice Wall, on this view, there may be additional rings of land separated by additional rings of water and ice.",
-      "This proposal is speculative — no confirmed evidence exists for any landmass beyond the Ice Wall. However, the proposal is consistent with several ancient cosmological traditions: the Vedic system of seven concentric ring continents, the Buddhist Mount Meru cosmology with its surrounding ring continents, and certain interpretations of biblical geography.",
-      "The plausibility of this proposal is reinforced by the structural prohibition on independent verification beyond the Ice Wall. If the disc ended at the Ice Wall, there would be no obvious reason to prevent civilians from confirming this through independent expeditions. The continued treaty restriction strongly implies that there is something beyond the Ice Wall that the treaty signatories do not want independently verified."
+      'Google Earth offers high-resolution imagery of the North Pole region, the Arctic Ocean, and Greenland — areas of comparable remoteness to Antarctica. The Antarctic coverage is demonstrably lower resolution in the interior regions and inconsistently stitched from images taken at different times and under different conditions. The "South Pole" on Google Maps is marked with a pin on a low-resolution composite — not a live or independently verifiable high-resolution image.',
+      'Multiple researchers have documented anomalous tiles in Antarctic satellite imagery — grid squares showing pure black (null data), heavily blurred regions, or imagery that appears to have been composited from mismatched sources. The most discussed is a region near the Ross Ice Shelf and the Norwegian Queen Maud Land sector (Neuschwabenland) that displays inconsistently with surrounding tiles at the same resolution setting.',
+      'Commercial satellite operators — including DigitalGlobe (now Maxar Technologies), the primary provider of high-resolution imagery for Google Earth — operate under agreements with the US government that include provisions for imagery withholding or pixelation at government request. This is acknowledged in Maxar\'s published terms and has been used to pixelate military facilities in the US, UK, Israel, and elsewhere. The same mechanism applies to Antarctic imagery.',
+      'The flat earth significance: if the area beyond the Ice Wall were empty ice, there would be nothing to hide. The classified satellite coverage and the documented pixelation of specific Antarctic zones suggests that there is geographic content in the southern outer zone that the treaty powers are not prepared to disclose. The argument from concealment: you only hide what exists.'
     ],
     facts: [
-      "Vedic cosmology: seven concentric ring continents.",
-      "Buddhist Mount Meru: ring continents surrounding the central axis.",
-      "Treaty restrictions prevent independent verification of what lies beyond.",
-      "No direct evidence — speculative interpretation only."
+      'Google Earth Antarctic coverage: demonstrably lower resolution than comparable Arctic zones.',
+      'Multiple documented null/black tiles and blurred regions in Antarctic satellite imagery.',
+      'Maxar Technologies (Google Earth provider) acknowledges imagery withholding at government request.',
+      'The "South Pole" Google Maps marker is a low-resolution composite, not live high-resolution imagery.',
+      'Specific regions of Neuschwabenland (Queen Maud Land) show anomalous tile stitching.'
     ],
-    significance: "The structural prohibition on independent verification is the strongest indirect argument that something exists beyond the Ice Wall worth concealing.",
+    significance: 'Satellite imagery classification is the modern mechanism for enforcing the same access restriction as the Antarctic Treaty on the ground. The specific zones being pixelated or excluded from high-resolution release are the most important intelligence about what lies beyond the outer boundary.',
+    sources: [
+      'Maxar Technologies — content licensing and imagery withholding terms (public documentation)',
+      'Google Earth — comparative resolution analysis: Antarctic vs Arctic coverage',
+      'NOAA — US Antarctic Program satellite data use policies',
+      'Multiple independent researchers — documented Antarctic tile anomalies (YouTube, flat earth forums)'
+    ],
     related: [6, 70, 71, 72, 74, 75]
   },
   74: {
-    title: "The Outer Waters",
-    zone: "Outer", color: "#94a3b8",
-    position: "Beyond outer boundary",
-    summary: "If the flat plane extends beyond the ice wall, a second expanse of ocean would lie beyond the boundary — consistent with the biblical description of waters surrounding and enclosing the known world. Scriptural references to the \"sea of glass\" and the \"ocean that encircles all\" point to this structure.",
+    title: 'Operation Highjump — The Mission That Was Cut Short',
+    zone: 'Outer', color: '#94a3b8',
+    position: 'Beyond outer boundary — southern ocean',
+    first_recorded: 'Operation Highjump: December 1946 – February 1947',
+    summary: 'The US Navy\'s Operation Highjump was the largest Antarctic expedition in history — 4,700 personnel, 33 aircraft, 13 ships including a submarine and aircraft carrier, planned for 6-8 months. It returned in 8 weeks. Three aircraft were destroyed under unexplained circumstances. Classified reports were filed. Admiral Byrd\'s subsequent interviews referred to "a land beyond the pole" and objects capable of flying "pole to pole at incredible speeds." No official explanation has ever accounted for the expedition\'s abrupt termination.',
     analysis: [
-      "Several ancient cosmological traditions describe a great \"outer ocean\" surrounding the inhabited world. The Greek Okeanos was the world-encircling river or ocean at the boundary of the known earth. The Hebrew tehom is the deep waters surrounding and underlying creation. Revelation 4:6 describes a \"sea of glass like crystal\" before the divine throne.",
-      "On the flat earth model with a possible second ring of continents (location 73), the outer waters would be the body of water separating the inhabited disc from any further landmasses. Their existence is implied by the cosmological structure but not directly verified.",
-      "The \"sea of glass\" metaphor is particularly suggestive: a still, perfectly level water surface. This is the appearance of a flat sea from above, consistent with the flat-plane hydrology principle that water finds its level."
+      'Operation Highjump was authorised by Secretary of the Navy James Forrestal and commanded by Rear Admiral Richard E. Byrd. Launched from Norfolk, Virginia in December 1946, it was the largest single Antarctic expedition ever assembled. The fleet included: USS Philippine Sea (aircraft carrier), USS Burton Island and USS Northwind (icebreakers), USS Sennet (submarine), USS Canisteo (oiler), USS Yancey and USS Merrick (cargo ships), and various smaller vessels. The 33 aircraft included large multi-engine Douglas R4D transport aircraft. The stated mission was systematic mapping of the Antarctic coastline.',
+      'The expedition was scheduled to last 6-8 months across the austral summer of 1946-47. It returned to the United States after approximately 8 weeks, in late February 1947. No official explanation for the early return satisfied independent researchers. Officially: "weather conditions." Three aircraft were lost during the expedition: George 1 (a PBM Mariner seaplane) disappeared with its 3-man crew in the interior; two other aircraft were damaged beyond repair on the ice. The circumstances of the George 1 disappearance — with 3 crew and no distress signal from a well-equipped military aircraft — remain unexplained.',
+      'Admiral Byrd filed multiple classified reports after Highjump. His public statements, however, were remarkable. In August 1947, he told a Chilean newspaper that the US must be prepared to defend against an attack by "enemy aircraft" that could fly from the Antarctic to the United States "with incredible speed." In his 1954 El Mercurio interview, he referenced "that enchanted continent in the sky, that land of everlasting mystery" — adding that "the most important discovery of the century" awaited in the polar regions. These statements were never officially endorsed or denied by the US government.',
+      'The flat earth interpretation holds that Highjump was dispatched to investigate or destroy whatever the German Schwabenland expedition had established in Antarctica in 1938-39 (see ID 57). The mission\'s abrupt termination, combined with Byrd\'s cryptic public statements, suggests the operation encountered something it was not prepared for. The classified portion of the after-action report has never been released.'
     ],
     facts: [
-      "Greek Okeanos — world-encircling outer ocean.",
-      "Hebrew tehom — deep waters surrounding creation.",
-      "Revelation 4:6: \"sea of glass like crystal.\"",
-      "Implied by cosmological structure; not directly verified."
+      'Highjump: 4,700 personnel, 33 aircraft, 13 ships; planned 6-8 months; returned in 8 weeks.',
+      'Three aircraft lost: George 1 (3 crew disappeared, no distress signal); 2 others destroyed.',
+      'Byrd (1947): warned US must prepare against aircraft "flying from pole to pole at incredible speed."',
+      'Byrd (1954): referenced "enchanted continent in the sky" and "most important discovery of the century."',
+      'Classified Highjump after-action report has never been released.'
     ],
-    significance: "Cross-cultural ancient cosmology consistently describes outer waters surrounding the inhabited world. The flat earth model accommodates this structure naturally.",
-    related: [6, 70, 73, 75]
+    significance: 'Highjump is the single most important undisclosed military operation in the context of the flat earth model. What did 4,700 men, a carrier, and a submarine find in Antarctica that brought the entire expedition back in 8 weeks with cryptic statements from its commander and three destroyed aircraft? The classified record has never answered this.',
+    sources: [
+      'US Navy — Operation Highjump official records (partially declassified)',
+      'Byrd, R. — El Mercurio interview (1954)',
+      'Byrd, R. — 1947 press statements on polar defence',
+      'Rawlins, D. — "Byrd\'s Heroic Era" research on Highjump timeline'
+    ],
+    related: [6, 70, 71, 73, 75]
   },
   75: {
     title: "Terra Australis Incognita",
@@ -1708,213 +1944,279 @@ window.LOCATION_DATA = {
     related: [6, 70, 71, 72, 73, 74]
   },
   76: {
-    title: "Sydney → Santiago (Chile)",
-    zone: "Flight Path", color: "#60a5fa",
-    position: "Right arc → Left arc · Trans-Pacific",
-    summary: "On a globe the shortest great circle route crosses directly over Antarctica. No airline flies this route. All Sydney–Santiago flights detour via Los Angeles — adding 6+ hours. On the flat azimuthal map, the Los Angeles arc IS the geometrically shortest path between Australia (right arc) and South America (left arc). The detour makes no sense on a globe. It is mandatory on the flat map.",
+    title: 'Sydney → Santiago — The Route That Should Exist But Doesn\'t',
+    zone: 'Flight Path', color: '#60a5fa',
+    position: 'Right arc → Left arc · Trans-Pacific',
+    summary: 'On a globe, the shortest Sydney-Santiago path crosses directly over Antarctica (~13 hours). No airline has ever operated this route. All actual flights detour 6+ hours via Los Angeles. On the flat map, the LA routing IS the geometrically shortest path. More: in 2019, Qantas launched Project Sunrise — testing ultra-long-haul nonstops to London and New York. They never tested Sydney-Santiago direct. A route that should be 13 hours on a globe simply does not exist, and no airline has ever publicly explained why.',
     analysis: [
-      "The Sydney to Santiago route is the most decisive single piece of operational aviation evidence for the flat earth model. On a globe, the shortest great circle path between these two cities crosses directly over Antarctica, with a flight time of approximately 13 hours. No commercial airline operates this route.",
-      "All actual Sydney-Santiago flights are routed via Auckland and Tahiti, or via Los Angeles, or both. The total flight time is typically 18-24 hours. The detour adds thousands of miles and many hours of fuel cost. No airline would do this if a direct great circle route were operationally viable.",
-      "On the flat azimuthal map, the geometrically correct path from Australia (right arc) to South America (left arc) is via the upper northern arcs — exactly via Los Angeles or via the Pacific island chain. The detour is not a detour on the flat map; it IS the shortest path. The aviation industry operates on the flat map's geometry."
+      'The Sydney to Santiago great circle on a globe crosses directly over the southern ocean and Antarctica, with a predicted flight time of approximately 13 hours. No commercial airline has ever operated this route. All Sydney-Santiago flights are routed via Auckland and Tahiti, or via Los Angeles, or both — adding 6 to 11 hours and significant fuel cost. The route\'s non-existence has been maintained continuously since commercial aviation began.',
+      'In 2019, Qantas launched Project Sunrise — a public programme testing the operational viability of ultra-long-haul nonstop flights from Sydney. Three "proof of concept" flights were conducted: Sydney to London (19 hours 19 minutes), Sydney to New York (19 hours 16 minutes), and Sydney to London again via a different routing. All three demonstrated that 19-hour nonstop flights were operationally viable with modified Boeing 787-9 aircraft. Qantas announced it would launch commercial nonstops to London and New York from 2025.',
+      'Qantas did not test Sydney to Santiago — a route predicted to be only 13 hours on a globe. A shorter route than Sydney-London, using the same aircraft, over a proven oceanic corridor, with a major commercial market (Brazil and Chile are Australia\'s largest South American trading partners). The Project Sunrise route selection is inexplicable on the globe model. On the flat map, Sydney-Santiago via Antarctica is simply not a viable route because Antarctica-adjacent southern ocean airspace is not navigable. The LA routing IS the actual shortest path.',
+      'The operational aviation industry has maintained the Sydney-Santiago routing pattern consistently for over 70 years. No airline — Australian, Chilean, or otherwise — has ever publicly explained why the globe\'s shortest route is commercially impractical. The absence of explanation is as significant as the absence of the route.'
     ],
     facts: [
-      "Globe great circle: direct over Antarctica, ~13 hours.",
-      "Actual route: via Auckland-Tahiti or Los Angeles, 18-24 hours.",
-      "No commercial airline operates the globe-shortest route.",
-      "Flat map: the actual route IS the geometrically shortest path."
+      'Globe prediction: Sydney-Santiago direct over Antarctica, ~13 hours.',
+      'Actual route: via Auckland-Tahiti-LA or LA, 18-24 hours; exists since commercial aviation began.',
+      'Project Sunrise (2019): Qantas tested 19-hour nonstops to London and New York; never tested 13-hour Sydney-Santiago.',
+      'No commercial airline has ever operated or publicly announced a direct southern ocean crossing.',
+      'Flat map: the LA routing IS the geometrically correct shortest path.'
     ],
-    significance: "The single most decisive practical evidence for the flat earth model in modern aviation. The aviation industry would not waste fuel on globe-impossible routes if the globe model were operationally accurate.",
+    significance: 'The Sydney-Santiago route is the single most decisive operational anomaly in commercial aviation. A 13-hour globe route that has never been flown in 70 years of commercial aviation, while 19-hour routes are being launched commercially, has never been publicly explained by any airline or regulatory body.',
     related: [9, 20, 22, 77, 78, 79]
   },
   77: {
-    title: "Cape Town → Sydney",
-    zone: "Flight Path", color: "#60a5fa",
-    position: "Right-centre → Right arc",
-    summary: "Globe shortest route: directly east across the southern ocean (16 hours). Actual flights: via Dubai, Singapore, or Perth — heading northeast first and adding hours. On the flat map, South Africa (right-centre) to Australia (far right) requires travelling outward along the right arc — which is exactly northeast on the flat map. The globe route simply does not exist in practice.",
+    title: 'Cape Town → Sydney — The Southern Ocean Surveillance Gap',
+    zone: 'Flight Path', color: '#60a5fa',
+    position: 'Right-centre → Right arc',
+    summary: 'Globe shortest route: directly east across the southern Indian Ocean (~16 hours). Actual flights: northeast via Dubai, Singapore, or Perth — adding hours. The southern ocean route doesn\'t exist operationally. More critically: the Southern Ocean between Africa and Australia is the world\'s largest SOSUS (submarine surveillance) gap. No equivalent of the US SOSUS network exists in the southern hemisphere. Why?',
     analysis: [
-      "The Cape Town to Sydney route on a globe should follow a southern great circle — directly east across the southern Indian Ocean — taking approximately 16 hours. No airline operates this direct route. All flights detour via Dubai, Doha, Singapore, or Perth.",
-      "The detour adds 3-7 hours to the journey and routes the flight far north of the globe-predicted great circle path. On the flat azimuthal map, this northeastern detour is exactly the geometrically correct path along the disc's right arc. The \"detour\" is not a detour at all — it is the actual shortest path.",
-      "This pattern is consistent across all major southern hemisphere intercontinental routes. The systematic absence of direct southern hemisphere flights — despite the existence of high-volume traffic between southern hemisphere city pairs — is among the strongest practical indicators of the flat earth geometry."
+      'The Cape Town to Sydney route on a globe follows a great circle directly east across the southern Indian Ocean at approximately 40°S — the "Roaring Forties" — for a predicted flight time of approximately 16 hours. No airline operates this route. All flights connect via Dubai, Doha, Singapore, or Perth, routing far north of the globe-predicted shortest path.',
+      'On the flat azimuthal map, Cape Town sits on the right arc and Sydney on the far right arc. The geometrically shortest path between them goes northeast, inward along the disc, and then back out to the right lower arc — exactly matching the Dubai/Singapore routing actually used. The "detour" is the flat map shortest path.',
+      'The Southern Ocean between Africa and Australia is the world\'s largest ocean surveillance gap. The US SOSUS (Sound Surveillance System) — the Cold War hydrophone network for detecting Soviet submarines — covered the North Atlantic, the Norwegian Sea, the GIUK Gap, and portions of the Pacific. It has no southern hemisphere equivalent. There are no SOSUS installations along the Southern Ocean corridor between South Africa and Australia.',
+      'The reasons officially given for this gap include remoteness and low strategic priority during the Cold War. The flat earth interpretation is more direct: there is no strategic need for surveillance infrastructure in a zone that aircraft and ships do not actually traverse because the flat-map geometry makes it operationally irrelevant. The "Southern Ocean gap" is not a strategic failure — it is a structural consequence of the flat plane\'s actual geography.'
     ],
     facts: [
-      "Globe shortest route: ~16 hours direct east.",
-      "Actual routes: via Dubai/Doha/Singapore/Perth, 19-23 hours.",
-      "No direct flight exists.",
-      "Detour matches flat-plane geometric shortest path."
+      'Globe predicted route: ~16 hours direct east over southern Indian Ocean.',
+      'Actual routes: northeast via Dubai/Singapore/Perth, 19-23 hours.',
+      'No direct flight exists or has ever been operated commercially.',
+      'Southern Ocean: the world\'s largest SOSUS surveillance gap — no hydrophone network.',
+      'Flat map: northeastern routing IS the geometrically correct shortest path.'
     ],
-    significance: "Confirms the systematic absence of direct trans-southern flights that the globe model predicts should be optimal.",
+    significance: 'The Cape Town-Sydney route anomaly is compounded by the surveillance infrastructure gap in the southern ocean. In a world where the globe model was operational reality, the southern ocean would be heavily monitored and directly flown. In the flat earth model, it is operationally irrelevant — and the absence of infrastructure confirms this.',
     related: [76, 78, 79]
   },
   78: {
-    title: "Johannesburg → Santiago",
-    zone: "Flight Path", color: "#60a5fa",
-    position: "Right arc → Left arc · Via centre",
-    summary: "Should be a direct southern hemisphere route (8–9 hours) on a globe. No direct flight exists. All routes go via São Paulo, Atlanta, or London — adding 6–10 hours. On the flat map, Joburg (right arc) to Santiago (left arc) requires travelling inward toward the North Pole centre then outward to the left arc — consistent with the São Paulo routing.",
+    title: 'Johannesburg → Santiago — The Operation Condor Corridor',
+    zone: 'Flight Path', color: '#60a5fa',
+    position: 'Right arc → Left arc · Via centre',
+    summary: 'Should be a direct southern hemisphere route (8-9 hours) on a globe. No direct flight exists. All routes go via São Paulo, Atlanta, or London — adding 6-10 hours. On the flat map, Joburg to Santiago requires travelling inward then outward — matching exactly. More: the same cities served by this notional route (Buenos Aires, Santiago, Montevideo) were the operational centres of Operation Condor — the CIA-backed cross-border assassination network of the 1970s-80s. Apartheid South Africa collaborated with Condor states.',
     analysis: [
-      "Johannesburg to Santiago on a globe should be a direct southern hemisphere flight of approximately 8-9 hours. No such direct flight exists. All routes connect via São Paulo, Atlanta, London, or Madrid — adding 6-10 hours and significant operational cost.",
-      "On the flat azimuthal map, Johannesburg sits on the right arc and Santiago on the left arc. The geometrically shortest path between these two points goes inward toward the centre of the disc and then outward — exactly the routing that operational flights follow via the South American or northern hub airports.",
-      "The decades-long absence of any direct Joburg-Santiago commercial route is one of the most consistent and decisive aviation anomalies. Multiple airlines have studied the route; none have launched it. The geometric reality (on the flat map) makes the route economically impossible."
+      'Johannesburg to Santiago on a globe is a direct southern hemisphere route of approximately 8-9 hours. No such direct flight has ever been commercially operated. All routes connect via São Paulo, Atlanta, London, or Madrid — adding 6-10 hours. On the flat azimuthal map, Johannesburg on the right arc and Santiago on the left arc are separated by the full width of the disc — the geometrically shortest path routes inward toward the northern centre and back out. The São Paulo routing exactly matches this flat-map geometry.',
+      'Operation Condor was a CIA-coordinated campaign of political repression operated by six South American military dictatorships: Argentina, Chile, Bolivia, Brazil, Paraguay, and Uruguay. Active from approximately 1975 to 1983, Condor organised cross-border assassination, abduction, and disappearance of political opponents — allowing one country\'s secret police to operate in another\'s territory with full governmental cooperation. An estimated 60,000 people were killed and 400,000 imprisoned across the six participating states.',
+      'Apartheid South Africa was an informal collaborator with the Condor network. South African intelligence (BOSS and later DONS/NIS) maintained active liaison relationships with Chilean DINA (under Manuel Contreras), Argentine SIDE, and Brazilian SNI throughout the 1970s. The shared ideological commitment to anti-communism and the mutual intelligence interest in monitoring ANC members who had taken refuge in Latin America created a natural collaboration axis.',
+      'The flight route anomaly and the political history converge: the capitals connected by the notional Joburg-Santiago direct route (Johannesburg, Buenos Aires, Santiago, Montevideo) were the operational centres of an intelligence collaboration that included extra-judicial killing, prisoner exchange, and joint surveillance. The route that would have made civilian travel between these capitals convenient and fast has never existed. The geography of difficult travel between these cities during the Condor era was strategically convenient.'
     ],
     facts: [
-      "Globe shortest route: 8-9 hours direct.",
-      "Actual routes: via São Paulo/Atlanta/London/Madrid, 14-19 hours.",
-      "No direct flight has ever been launched.",
-      "Routing follows flat-plane geometry via the disc centre."
+      'Globe predicted route: 8-9 hours direct; no direct flight has ever been operated.',
+      'Actual routes: via São Paulo/Atlanta/London, 14-19 hours.',
+      'Operation Condor (1975-83): CIA-backed; ~60,000 killed, 400,000 imprisoned across 6 states.',
+      'Apartheid South Africa: active DINA/SIDE intelligence liaison; monitored ANC members in South America.',
+      'Flat map: São Paulo routing is the geometrically correct shortest path.'
     ],
-    significance: "The systematic non-existence of direct Joburg-Santiago flights is a decades-long industry consistent admission that the flat-plane geometry, not the globe, governs operational aviation.",
+    significance: 'The Joburg-Santiago route that doesn\'t exist connects the capitals of one of the most murderous Cold War intelligence collaborations. The flat-map geometry explains the route\'s non-existence operationally; Operation Condor explains why no one in power was inconvenienced by its absence.',
+    sources: [
+      'McSherry, J. — "Predatory States: Operation Condor and Covert War in Latin America" (2005)',
+      'NSA — Operation Condor declassified cables (National Security Archive release)',
+      'Dinges, J. — "The Condor Years" (2004)',
+      'Politzer, P. — South African-Chilean intelligence collaboration research'
+    ],
     related: [9, 12, 76, 77]
   },
   79: {
-    title: "Auckland → Buenos Aires",
-    zone: "Flight Path", color: "#60a5fa",
-    position: "Far right → Lower left arc",
-    summary: "One of the rare trans-southern routes that does exist. Should take approximately 10–11 hours on a globe. Takes 10–12 hours in practice. This is one of the few routes where globe and flat map arc predictions agree closely — providing a calibration point. The route exists; it is not the trans-southern anomaly routes that expose the lie.",
+    title: 'Auckland → Buenos Aires — The LATAM Dirty War Route',
+    zone: 'Flight Path', color: '#60a5fa',
+    position: 'Far right → Lower left arc',
+    summary: 'One of the few direct trans-southern hemisphere flights — ~12 hours. Both globe and flat-map predictions agree for this specific route. But the cities it connects — New Zealand and Argentina — were both implicated in the post-WWII Nazi ratline network. Argentina received the largest concentration of fleeing SS officers in the world. New Zealand intelligence operated under British Crown oversight throughout the ratline era. The route\'s existence is less interesting than what it connected.',
     analysis: [
-      "The Auckland to Buenos Aires route, operated by Air New Zealand and LATAM, is one of the few direct trans-southern hemisphere flights in operation. It takes approximately 12 hours one way. Both the globe model and the flat azimuthal map predict similar flight times for this specific route — making it a calibration point rather than an anomaly.",
-      "The reason is geometric. Auckland and Buenos Aires are positioned on the flat map such that the great-circle shortest path on a globe and the arc-shortest path on the flat plane happen to be roughly equivalent in length and direction. This coincidence does not vindicate the globe — it simply means this particular route happens not to expose the difference.",
-      "The decisive routes are those where the two models predict different paths and different flight times. The Sydney-Santiago, Cape Town-Sydney, and Joburg-Santiago routes are decisive because they show globe-impossible operational reality. Auckland-Buenos Aires is non-decisive — and that is why it is sometimes cited as \"evidence for the globe\" by people who do not understand the asymmetry."
+      'The Auckland to Buenos Aires route, operated by Air New Zealand and LATAM, is approximately 12 hours. Both the globe model and the flat azimuthal map predict similar flight times for this specific city pair — making it a geometric calibration point rather than a flat-earth anomaly route. The route exists; it does not expose globe-flat discrepancy because the two models agree here.',
+      'Buenos Aires is the most consequential city in the Nazi ratline geography. Under President Juan Perón, Argentina admitted more former Nazi officers, SS members, and fascist collaborators than any other country. Adolf Eichmann, Josef Mengele, Franz Stangl, Erich Priebke, Walter Rauff, Gerhard Bohne, and hundreds of others settled in Argentina after 1945. The Argentine government provided official identity documents, land grants, and in many cases intelligence service employment.',
+      'The Argentine military dictatorship of 1976-1983 — the junta that conducted the "Dirty War" in which 30,000 people were disappeared — had direct institutional continuity from the post-war fascist networks. The methods used by the Argentine SIDE and Army Intelligence during the Dirty War — particularly the ESMA detention centre in Buenos Aires, which used torture protocols matching those documented in SS training manuals — reflect the influence of the imported personnel.',
+      'New Zealand\'s intelligence relationship was with the British GCHQ/SIS apparatus throughout this period. New Zealand joined the Five Eyes arrangement, giving GCHQ access to New Zealand\'s signals intercept position in the South Pacific. The Auckland-Buenos Aires route, when it was eventually opened commercially, connected two cities at the ends of the ratline network — one that had received the fleeing war criminals, and one that was part of the intelligence apparatus that had enabled them to flee.'
     ],
     facts: [
-      "One of the few direct trans-southern flights in operation.",
-      "~12 hours flight time — matches both globe and flat-map predictions.",
-      "A calibration point, not an anomaly.",
-      "Geometric coincidence between globe great-circle and flat-arc paths."
+      '~12 hours flight time — globe and flat-map predictions agree; not an anomaly route.',
+      'Buenos Aires: largest single Nazi/SS resettlement concentration after 1945.',
+      'Eichmann, Mengele, Stangl and hundreds of others settled in Argentina under Perón.',
+      'Argentine Dirty War (1976-83): 30,000 disappeared; ESMA torture protocols match SS methods.',
+      'New Zealand: Five Eyes member; GCHQ-linked signals intercept position in South Pacific.'
     ],
-    significance: "Demonstrates that not all flat earth flight evidence is decisive. The argument depends on routes where the two models predict different operational realities — and those are the Sydney-Santiago class of routes.",
-    related: [9, 21, 76]
+    significance: 'Auckland-Buenos Aires is a calibration route, not an anomaly route — the models agree here. Its historical significance lies in the political geography it connects: the Nazi ratline destination and the Five Eyes intelligence satellite state.',
+    sources: [
+      'Cesarani, D. — "Eichmann: His Life and Crimes" (2004)',
+      'CONADEP — "Nunca Más" (1984) — Argentine truth commission report on the Dirty War',
+      'Aarons, M. & Loftus, J. — "Unholy Trinity" (1991)',
+      'Richelson, J. — "The Five Eyes Intelligence Community" research'
+    ],
+    related: [9, 21, 26, 76]
   },
   80: {
-    title: "Tokyo → London (Polar Route)",
-    zone: "Flight Path", color: "#60a5fa",
-    position: "Right arc → Upper-centre · Via Russia",
-    summary: "Takes approximately 12 hours flying northwest over Russia and Siberia. On the globe this requires flying over the top of the Earth. On the flat azimuthal map, Tokyo (right arc) to London (upper-centre) via the Russian upper arc is simply the shortest straight arc path — requiring no \"over the top of a globe\" explanation.",
+    title: 'Tokyo → London — The Siberian Overflight Deal',
+    zone: 'Flight Path', color: '#60a5fa',
+    position: 'Right arc → Upper-centre · Via Russia',
+    summary: 'Polar routes via Siberia became standard after Soviet airspace opened to commercial transit in 1991. Tokyo to London takes ~12 hours heading northwest — matching the flat-map upper arc geometry exactly. More: Soviet overflight rights were denied to Western carriers from the 1950s to 1991, forcing Pacific routes. The refusal was not political inconvenience — Soviet airspace denial was a deliberate chokepoint on global aviation that shaped airline economics for 40 years.',
     analysis: [
-      "Polar routes — flights that pass over or near the North Pole — became standard in the late 20th century after Russian airspace opened to commercial transit. Tokyo to London takes approximately 12 hours via the polar route, flying northwest over Siberia and Scandinavia.",
-      "On the globe model, this route is described as flying \"over the top\" of a sphere — the great circle path passing near the geographic north pole. On the flat azimuthal map, the same physical route is simply a straight arc across the upper portion of the disc — Tokyo on the right arc, London at the upper-centre, with the path crossing the Russian upper arc in between.",
-      "The flat earth interpretation does not contradict the existence of polar routes — it explains them more simply. There is no \"over the top\" geometry on a flat plane; there is only direct arc travel across the upper portion of the disc."
+      'Tokyo to London via the polar route takes approximately 11-12 hours, flying northwest from Japan over Siberia and Scandinavia. On the flat azimuthal map, this is the geometrically direct path: Tokyo sits on the right arc, London at the upper-centre, and the flight traces a straight arc across the upper disc via the Russian landmass. On the globe model this is described as flying "over the top of the Earth" — the North Pole great circle path. The flat map requires no special explanation: it is simply the upper arc route.',
+      'Soviet airspace was closed to Western commercial carriers from the onset of the Cold War. All Japan-Europe flights were forced to route via Anchorage and the North Pacific — adding hours and fuel cost. The Anchorage route created a significant hub at Anchorage International Airport, which during the Cold War was a major transit point for nearly all trans-Pacific commercial flights. When Soviet airspace opened in 1991, Anchorage lost its hub function almost overnight. The airport\'s commercial traffic declined dramatically within two years.',
+      'The Soviet overflight denial had a structural economic effect: it forced the entire Pacific-to-Europe commercial aviation market into fuel-inefficient routings for 40 years. The beneficiaries were Anchorage (as a fuelling hub) and American carriers (who could operate via US territory). The Soviet denial was not merely a political gesture — it was a significant lever on global commercial aviation economics that generated dependence on US airspace.',
+      'When Russian airspace was fully opened to commercial overflight after 1991, and the Siberian overfly surcharge was negotiated as a revenue stream for Aeroflot, the entire Pacific-Europe commercial market reoriented within a few years. The flat-map upper-arc route became the operational default. The political geography of Soviet airspace closure shaped global aviation economics more than any single technical factor of the jet age.'
     ],
     facts: [
-      "Tokyo-London polar route: ~12 hours via Siberia and Scandinavia.",
-      "Operates under Russian airspace overflight rights since 1991.",
-      "Flat map: straight arc across upper disc — no \"over the top\" needed.",
-      "Globe explanation: great circle near the geographic north pole."
+      'Tokyo-London polar route: ~11-12 hours via Siberia — northwest upper-arc path on flat map.',
+      'Soviet airspace: closed to Western carriers 1950s–1991; forced Pacific-via-Anchorage routing for 40 years.',
+      'Anchorage International: major Cold War hub lost function within 2 years of Soviet opening.',
+      'Aeroflot Siberian overflight surcharge: revenue stream negotiated as condition of opening.',
+      'Flat map: Tokyo-London path is a straight upper-arc crossing; no "over the top" explanation needed.'
     ],
-    significance: "Polar routes are not evidence against the flat earth model — they are simpler on the flat map than on the globe.",
+    significance: 'The polar routes that now seem obvious were denied for 40 years as a Cold War economic and political chokepoint. The flat-map geometry makes them geometrically trivial. Soviet airspace denial was the single largest artificial distortion of global aviation geography in the jet age.',
     related: [11, 14, 17, 18, 81]
   },
   81: {
-    title: "Los Angeles → Dubai",
-    zone: "Flight Path", color: "#60a5fa",
-    position: "Left arc → Upper arc → Right arc",
-    summary: "On a globe the shortest western route crosses the Atlantic and Europe. Actual flights head northeast over Alaska and Russia — the \"wrong\" direction on a globe. On the flat map, going upper-left (Alaska) then across the Russian upper arc to Dubai (right-centre arc) is the correct and shortest path. Every polar route confirms the flat map geometry.",
+    title: 'Los Angeles → Dubai — Emirates & the Aviation Arms Race',
+    zone: 'Flight Path', color: '#60a5fa',
+    position: 'Left arc → Upper arc → Right arc',
+    summary: 'LA-Dubai flights head northeast over Alaska and Russia — the "wrong" direction on a globe. On the flat map this is the correct upper-arc path. Emirates (Dubai) became the world\'s largest long-haul airline by exploiting the hub geography of the flat-map upper arc. The US airline industry lobbied Congress to restrict Emirates access, claiming "unfair subsidies." What they actually feared: Emirates had correctly read the flat-map hub geometry that US carriers had structured their entire network around.',
     analysis: [
-      "Los Angeles to Dubai is a 16-hour Emirates and United route. The actual flight path heads northeast from LA over Alaska, across the Russian upper arc, and down across Iran and the Persian Gulf to Dubai. This is the \"wrong\" direction on a globe — the great circle should head east over the Atlantic and Europe.",
-      "On the flat azimuthal map, the route is geometrically obvious. Los Angeles is on the left arc; Dubai is on the right-centre arc. The shortest path between them is via the upper arc — crossing through the Alaska-Russia neighbourhood and down into the Middle East. This is exactly what Emirates and United fly.",
-      "The pattern is consistent across all Pacific-to-Middle East and Pacific-to-South Asia routes. The \"polar\" or \"near-polar\" routing is the practical operational reality, and it matches the flat azimuthal map's geometry, not the globe's."
+      'Los Angeles to Dubai is a 16-hour Emirates and United route. The actual flight path goes northeast from LA over Alaska, across the Russian upper arc, down across Iran and the Persian Gulf to Dubai. On the globe, the great circle should head east over the Atlantic and Europe. The actual NE routing is the flat-map upper-arc path — Los Angeles on the left arc, Dubai on the right-centre arc, with the shortest path crossing through the Alaska-Russia upper arc.',
+      'Emirates Airlines was founded in 1985 with two aircraft and $10 million in start-up capital from the Dubai government. By 2016, it was the world\'s largest international airline by passenger numbers, operating 258 aircraft to 155 destinations. Its hub at Dubai International Airport (DXB) became the world\'s busiest international airport. The key to this growth: Dubai\'s geographic position on the flat azimuthal map is almost exactly at the intersection of the European-Asian right arc and the upper arc — the optimal hub position for connecting Europe, Asia, Africa, and Oceania.',
+      'In 2015, the three major US carriers — American, Delta, and United — filed a 55-page complaint to the US Department of Transportation arguing that Emirates, Etihad, and Qatar Airways had received $42 billion in government subsidies and should be denied access to US airports. The complaint was partly successful: it triggered bilateral negotiations and some access restrictions. The real dynamic: US carriers had structured their hub networks around JFK, ORD, LAX, and ATL — all of which are suboptimal positions on the flat-map arc geometry compared to Dubai, Doha, and Abu Dhabi.',
+      'The Gulf carriers\' rise is a flat-map geographic inevitability: their hub cities are at the geometric intersection of the most travelled arcs on the disc. The US carriers\' lobbying is the economic response of airlines that built their networks on globe-model geography being outcompeted by airlines that — knowingly or not — built theirs on the flat-map geometry.'
     ],
     facts: [
-      "LA-Dubai actual route: NE over Alaska and Russia, ~16 hours.",
-      "Globe great-circle would be eastward over Atlantic and Europe.",
-      "Operates as a polar/near-polar route.",
-      "Matches flat-plane upper-arc geometry."
+      'LA-Dubai actual route: northeast over Alaska and Russia — flat-map upper-arc path.',
+      'Emirates: 2 aircraft (1985) → world\'s largest international carrier (2016) — via Dubai\'s flat-map hub geometry.',
+      'Dubai International Airport: world\'s busiest international airport by 2014.',
+      'US carriers complaint (2015): $42B in alleged Gulf carrier subsidies; partial access restrictions.',
+      'Gulf hub cities (Dubai, Doha, Abu Dhabi) sit at the geometric intersection of the most-travelled flat-map arcs.'
     ],
-    significance: "Polar route operations are systematic and consistent. They are the practical operational reality of intercontinental aviation, and they match the flat earth geometry.",
+    significance: 'The rise of Gulf carriers is the flat-map hub geometry playing out in commercial aviation economics. Airlines that positioned hubs at the flat-map arc intersections outcompeted those built on globe-model hub geography. The US industry\'s response was lobbying, not route restructuring — because restructuring would require acknowledging the geometry.',
     related: [7, 14, 31, 80]
   },
   82: {
-    title: "The Sahara Desert",
-    zone: "Anomalous", color: "#fb923c",
-    position: "Right-centre arc · North Africa",
-    summary: "The world's largest hot desert sits at the zone where the sun's local circuit passes directly overhead for the longest duration each year. Maximum solar energy at minimum atmospheric angle = maximum surface heating = desertification. No globe model orbital mechanics are required to explain the Sahara's position — only the flat earth sun circuit does so cleanly.",
+    title: 'The Sahara — The Great Green Sahara Suppression',
+    zone: 'Anomalous', color: '#fb923c',
+    position: 'Right-centre arc · North Africa',
+    summary: 'The Sahara was a fertile grassland with rivers, lakes, and large human populations from ~11,000 to ~5,000 years ago — the African Humid Period. This is not disputed in academic literature. What is not discussed: the civilisations that occupied the Green Sahara left thousands of rock art sites, megalithic monuments, and organised settlements. The abrupt desertification ~5,000 years ago coincides with the post-flood timeline of every ancient cosmology. The relationship between the Saharan collapse and the rise of Egypt has never been satisfactorily explained.',
     analysis: [
-      "The Sahara is the largest hot desert on Earth — approximately 9.2 million square kilometres, comparable in area to the United States or China. Its position straddles the Tropic of Cancer across North Africa. On the flat earth model, this is the zone where the sun's local circuit passes most directly overhead for the longest duration each year.",
-      "The simple physics: maximum overhead solar exposure produces maximum surface heating, which produces maximum evaporation, which produces desertification when combined with limited inland precipitation. The Sahara's position is the natural geographic consequence of the local sun's circuit geometry on the flat plane.",
-      "The Sahara was not always desert. Multiple paleoclimatological studies confirm the \"Green Sahara\" period (approximately 11,000-5,000 years ago) when the region supported lakes, grasslands, and substantial human and animal populations. The desertification roughly coincides with the catastrophic events recorded in flood-era cosmologies — suggesting a possible structural shift in the sun's circuit or in the disc's overall climate."
+      'The African Humid Period (AHP), approximately 14,500–5,500 years ago (with peak greenness 11,000–5,000 BP), is well-documented in the paleoclimatological record. Pollen studies, lake sediment cores, and fossil river channels (paleochannels) in what is now the hyper-arid Sahara demonstrate that the region supported savanna grasslands, permanent lakes, and perennial rivers. Hippos lived in the Fezzan; crocodiles inhabited proto-Nile river systems deep in what is now Libya. The human population was substantial.',
+      'The rock art record of the Green Sahara is extraordinary. The Tassili n\'Ajjer plateau in Algeria, the Acacus Mountains in Libya, and the Jebel Uweinat region at the Egypt-Sudan-Libya border contain tens of thousands of rock engravings and paintings depicting cattle herds, swimming humans, hippos, crocodiles, and organised social life. The Tassili site alone has been called the "world\'s largest open-air museum." Academic treatment of these sites emphasises their artistic interest without adequately addressing what happened to the populations who made them.',
+      'The desertification was rapid. Research published in Nature (2009) suggests the shift from grassland to desert could have occurred within decades rather than centuries at the regional level — driven by a nonlinear feedback between vegetation and rainfall. Where the displaced Saharan population went has been proposed as a driver of the sudden demographic and cultural expansion of Nile Valley civilisation at the same period (~5,500–4,500 BP). The abrupt appearance of Egyptian civilisation at full complexity — writing, monumental architecture, state organisation — without a visible developmental sequence is an anomaly consistently noted by Egyptologists and consistently not resolved.',
+      'In flat earth terms: the sun\'s local circuit passes most directly overhead across the Sahara zone for the longest duration each summer. A structural shift in that circuit — or in the disc\'s broader climate system — would produce exactly the pattern observed: rapid desertification of the zone closest to the circuit\'s peak overhead position.'
     ],
     facts: [
-      "Largest hot desert on Earth — 9.2 million km².",
-      "Straddles the Tropic of Cancer across North Africa.",
-      "Was a Green Sahara from ~11,000 to ~5,000 years ago.",
-      "Desertification correlates with end-of-Atlantis-era flood cosmologies."
+      'African Humid Period: Sahara was grassland with lakes and rivers 11,000–5,000 BP.',
+      'Tens of thousands of rock art sites across Algeria, Libya, and Egypt — depicting cattle herds, hippos, swimming humans.',
+      'Desertification occurred within decades to centuries — paleoclimate record confirms rapid shift.',
+      'Displaced Saharan population proposed as driver of sudden Egyptian civilisation emergence.',
+      'Egyptian civilisation appears at full complexity ~5,000 BP with no visible developmental sequence.'
     ],
-    significance: "The Sahara's geographic placement is a direct geometric prediction of the local-sun model. The Green-to-Desert transition may record a major historical shift in the disc's climate.",
+    significance: 'The Green Sahara\'s abrupt collapse drove population movements that shaped all subsequent North African and Middle Eastern civilisation. The causal mechanism — a rapid climate shift — and its relationship to flood-era cosmological timelines has never been formally addressed in academic Egyptology.',
+    sources: [
+      'deMenocal, P. et al. — "Abrupt onset and termination of the African Humid Period" Nature (2000)',
+      'Drake, N. et al. — "Ancient watercourses and biogeography of the Sahara" PNAS (2011)',
+      'Hassan, F. — "Holocene lakes and prehistoric settlements of the Western Fayum, Egypt" (1986)',
+      'Lhote, H. — "The Search for the Tassili Frescoes" (1959)'
+    ],
     related: [3, 12, 51, 88]
   },
   83: {
-    title: "The Himalayas / Tibetan Plateau",
-    zone: "Anomalous", color: "#fb923c",
-    position: "Right-upper arc · Central Asia",
-    summary: "The highest surface feature on the flat plane. In flat earth terms, this represents the maximum upwelling of the plane itself — closest any land gets to the firmament above. The Tibetan plateau sits at an average of 4,500m elevation. Buddhist and Hindu cosmological traditions from this region describe the most accurate pre-suppression models of the enclosed universe.",
+    title: 'The Himalayas — China\'s Annexation and the Destruction of Tibetan Cosmology',
+    zone: 'Anomalous', color: '#fb923c',
+    position: 'Right-upper arc · Central Asia',
+    summary: 'The highest surface feature on the flat plane — the region closest to the firmament above. In October 1950, China invaded Tibet, ending the only remaining traditional governance system in the world that treated cosmological knowledge (the Kalachakra Tantra) as state policy. The Cultural Revolution (1966-1976) destroyed approximately 6,000 monasteries and their libraries. The systematic elimination of Tibetan cosmological knowledge is the most recent and most deliberate destruction of flat-earth-consistent knowledge in history.',
     analysis: [
-      "The Himalayan-Tibetan mountain complex is the largest and highest surface feature on Earth. The Tibetan Plateau averages 4,500 metres in elevation across an area roughly the size of Western Europe. The Himalayas themselves contain all 14 of the world's 8,000-metre peaks, including Mount Everest at 8,848 metres.",
-      "On the flat earth model, this is the maximum upwelling of the disc itself — the closest any large area of land approaches the underside of the firmament. The geographic concentration of preserved cosmological traditions describing the firmament structure (Tibetan Buddhism, Vedic Hinduism, Bon, Jain) in precisely this region is consistent with the proximity giving rise to particularly clear ancient observation of the dome boundary.",
-      "The geographic isolation of Tibet, in particular, preserved cosmological traditions until the 1950 Chinese annexation. The subsequent destruction of monastic libraries during the Cultural Revolution (1966-1976) eliminated approximately 6,000 monasteries. The deliberate cultural genocide of one of the most accurate pre-suppression cosmological traditions on Earth is itself diagnostic."
+      'The Himalayan-Tibetan mountain complex is the highest and largest elevated surface on Earth. The Tibetan Plateau averages 4,500 metres in elevation across an area roughly the size of Western Europe. On the flat earth model, this represents the maximum upwelling of the disc — the closest any large land area approaches the underside of the firmament dome. The geographic concentration of cosmological traditions that describe the firmament (Tibetan Buddhism, Vedic Hinduism, Bon, Jain) in precisely this region is not coincidental.',
+      'Tibetan cosmology, particularly the Kalachakra Tantra tradition, describes a detailed model of the cosmos: a central sacred mountain (Mount Meru/Sumeru) around which the sun and moon orbit at different levels; an enclosed universe with multiple dome layers; and a world disc surrounded by an outer ocean ring. The structural similarity to the flat earth model is direct. The Tibetan monastic system preserved and studied these descriptions as live cosmological knowledge, not as mythology.',
+      'On 7 October 1950, the People\'s Liberation Army invaded Tibet. 40,000 Chinese troops crossed into Tibetan territory. The Tibetan army of approximately 10,000 men was rapidly defeated. The Dalai Lama\'s government was forced to sign the 17-Point Agreement in 1951, confirming Chinese sovereignty. The Dalai Lama fled to India in 1959 following the failed Tibetan Uprising, in which approximately 87,000 Tibetans were killed in the initial repression.',
+      'The Cultural Revolution (1966-1976) systematically destroyed approximately 6,000 Tibetan monasteries — virtually the entire existing monastic infrastructure. Their libraries, containing cosmological, astronomical, and geographical manuscripts accumulated over centuries, were destroyed. The destruction was not incidental to the Cultural Revolution\'s ideology; it was a specific target. Red Guard brigades were dispatched to dismantle monasteries stone by stone. The Jokhang Temple in Lhasa — Tibet\'s most sacred site — was used as a pigsty for several years during this period.'
     ],
     facts: [
-      "Tibetan Plateau averages 4,500m — largest high-altitude region on Earth.",
-      "Contains all 14 of the world's 8,000m peaks.",
-      "Himalayas, Vedic, Bon, Jain cosmologies all from this region.",
-      "Cultural Revolution destroyed ~6,000 monasteries and their libraries."
+      'Tibetan Plateau: 4,500m average — closest inhabited land to the firmament dome.',
+      'Kalachakra Tantra: describes flat-disc cosmos with central mountain, orbital sun/moon, enclosed dome.',
+      'PLA invasion of Tibet: 7 October 1950; 87,000 Tibetans killed in 1959 uprising repression.',
+      'Cultural Revolution: ~6,000 monasteries destroyed; libraries eliminated.',
+      'Jokhang Temple — Tibet\'s holiest site — used as a pigsty during Cultural Revolution.'
     ],
-    significance: "The closest land to the firmament. The cosmological traditions that emerged from this region preserve the most detailed surviving descriptions of the dome structure.",
+    significance: 'The destruction of Tibetan cosmological libraries is the most deliberate and systematic elimination of flat-earth-consistent knowledge in the modern era. The Chinese Communist Party invaded, occupied, and culturally erased the civilisation that preserved the most detailed surviving cosmological model of the enclosed universe.',
+    sources: [
+      'Smith, W. — "Tibetan Nation: A History of Tibetan Nationalism and Sino-Tibetan Relations" (1996)',
+      'Goldstein, M. — "A History of Modern Tibet" (1989)',
+      'International Commission of Jurists — "Tibet and the People\'s Republic of China" (1960)',
+      'Powers, J. — "Introduction to Tibetan Buddhism" (2007) — Kalachakra cosmology'
+    ],
     related: [15, 16, 90]
   },
   84: {
-    title: "The Mariana Trench",
-    zone: "Anomalous", color: "#fb923c",
-    position: "Right arc · Western Pacific",
-    summary: "The deepest known point in the ocean — up to 11km below the surface in the Challenger Deep. On the flat plane this represents the deepest penetration into the \"waters below\" the disc — the primordial deep described in Genesis as the tehom. The trench's existence is consistent with a flat disc of significant thickness overlying a deeper oceanic basement.",
+    title: 'The Mariana Trench — James Cameron\'s Classified Discovery',
+    zone: 'Anomalous', color: '#fb923c',
+    position: 'Right arc · Western Pacific',
+    summary: 'Deepest known point on Earth — 10,935m in the Challenger Deep. Visited by manned submersible only 3 times: Trieste (1960), Deepsea Challenger (2012), Limiting Factor (2019). Director James Cameron conducted the 2012 dive and emerged saying he had found no life. Navy records from the 1960 Trieste dive were immediately classified. The Trieste\'s crew reported hearing an explosion during the dive. What exactly is down there remains unverified by any independent observation.',
     analysis: [
-      "The Mariana Trench is the deepest point in the world's oceans. Its deepest section, the Challenger Deep, reaches approximately 10,935 metres below sea level. The trench is located in the western Pacific east of the Mariana Islands.",
-      "On the globe model, the trench is explained as a subduction zone where the Pacific Plate is being forced beneath the Mariana Plate. On the flat earth model, the trench represents the deepest known penetration into the \"waters below\" — the primordial deep underlying the disc, described in Genesis 1:2 as the tehom over which the spirit of God moved.",
-      "The trench has been visited by manned submersibles only a handful of times — the Trieste in 1960, the Deepsea Challenger in 2012, and a few subsequent expeditions. Most of the trench remains unexplored. What lies in the unexplored portions of the deepest ocean is among the least-known geographies on Earth."
+      'The Mariana Trench lies east of the Mariana Islands in the western Pacific at maximum depths of approximately 10,935 metres in the Challenger Deep. The only three manned descents to the deepest point are: Don Walsh and Jacques Piccard in the US Navy bathyscaphe Trieste on 23 January 1960; James Cameron in the Deepsea Challenger on 26 March 2012; and Victor Vescovo in the DSV Limiting Factor on 28 April 2019.',
+      'The 1960 Trieste dive is the most important and the least documented publicly. Walsh and Piccard descended to approximately 10,916 metres. During the descent, the crew heard a loud cracking sound — attributed officially to a Plexiglas window cracking (non-catastrophically). The full scientific data from the 1960 dive was classified by the US Navy. The Trieste was a military vessel and the dive was a classified military operation. Walsh, a Navy officer, was under classification obligations for the full data set.',
+      'James Cameron\'s 2012 descent in his privately-built Deepsea Challenger was announced as a scientific expedition and live-streamed in partnership with National Geographic. Cameron emerged and stated that the Challenger Deep was "almost featureless" and he had seen very little life. He subsequently donated the submersible to Woods Hole Oceanographic Institution. The full scientific data from the dive has been published in academic papers — but the raw video footage beyond what National Geographic broadcast has not been fully released.',
+      'Victor Vescovo\'s 2019 dive using DSV Limiting Factor reportedly identified a plastic bag and candy wrappers on the trench floor — a detail that received extensive media coverage. The dive also reportedly detected new species of amphipod crustaceans and identified a potential new deepest point slightly exceeding the Challenger Deep measurement. Vescovo sold the submersible to Inkfish in 2021. In flat earth terms, the trench represents the deepest penetration into the "waters below" — the primordial deep described in Genesis 1:2 as the tehom underlying the disc.'
     ],
     facts: [
-      "Deepest point: Challenger Deep, ~10,935m below sea level.",
-      "Manned descents: Trieste (1960), Deepsea Challenger (2012), Limiting Factor (2019).",
-      "Most of the trench remains unexplored.",
-      "On the flat plane: deepest penetration into the \"waters below.\""
+      'Deepest point: Challenger Deep, ~10,935m below sea level.',
+      'Three manned descents: Trieste (1960, classified); Deepsea Challenger (2012); Limiting Factor (2019).',
+      '1960 Trieste dive: full scientific data classified by US Navy.',
+      'Cameron (2012): described bottom as "almost featureless" — full raw footage not publicly released.',
+      'Most of the trench floor remains unexplored by any instrument.'
     ],
-    significance: "Among the least-explored geographies on Earth. The \"waters below\" of biblical cosmology have a direct geophysical interpretation here.",
+    significance: 'The deepest point on Earth has been visited by human beings only three times, with the most important visit classified. The floor of the world\'s deepest trench is less explored than the surface of Mars — and the 1960 Navy classification ensures we do not know what the first visitors actually found.',
+    sources: [
+      'Walsh, D. — Trieste dive reports (partially declassified)',
+      'Cameron, J. et al. — "Deepsea Challenge 3D" and associated National Geographic documentation (2012)',
+      'Vescovo, V. — Five Deeps Expedition — Challenger Deep dive documentation (2019)',
+      'MBARI — Mariana Trench survey research'
+    ],
     related: [25, 36]
   },
   85: {
-    title: "The Great Barrier Reef",
-    zone: "Anomalous", color: "#fb923c",
-    position: "Right arc · Queensland, Australia",
-    summary: "The world's largest living structure — 2,300 km long — parallels the Australian coastline along the flat map's outer right arc. Its formation pattern and orientation are consistent with the radial geography of the flat azimuthal map. The reef has been dying at the arc where the sun's local circuit passes closest to the Australian coastline in summer.",
+    title: 'The Great Barrier Reef — The Bleaching That Became a Policy Tool',
+    zone: 'Anomalous', color: '#fb923c',
+    position: 'Right arc · Queensland, Australia',
+    summary: 'The world\'s largest living structure — 2,300 km along the flat map\'s outer right arc. Coral bleaching events since the 1990s have been used as the canonical image of climate change. The same government that cited reef bleaching to push climate policy approved the Carmichael Coal Mine — the largest coal mine in Australian history — in 2019, 700 km from the reef. Queensland coal now ships through ports that service reef-adjacent shipping lanes.',
     analysis: [
-      "The Great Barrier Reef is the largest single biological structure on Earth, composed of approximately 2,900 individual reefs and 900 islands stretching 2,300 km along the northeast coast of Australia. It is visible from space as the largest single feature of life on the planet's surface.",
-      "The reef's orientation parallels the Australian coastline along the flat azimuthal map's outer right arc. This linear distribution along a radial direction is consistent with the reef having formed along a structural feature of the flat plane — a coastal shelf running outward toward the disc's perimeter.",
-      "The reef has experienced significant coral bleaching events since the 1990s. The official explanation centres on global warming. The flat earth model offers an alternative interpretation: the sun's local circuit during the southern hemisphere summer passes most closely over the Australian coastline at the Great Barrier Reef's latitude, producing intense heating that increases bleaching events without requiring an \"Earth-warming\" globally applicable explanation."
+      'The Great Barrier Reef is the largest single biological structure on Earth, composed of approximately 2,900 individual reefs and 900 islands stretching 2,300 km along the northeast coast of Australia. Its orientation along the flat map\'s outer right arc is structurally consistent with the disc geometry — a linear shelf running parallel to the outer boundary.',
+      'Coral bleaching events — caused when coral expels its symbiotic algae in response to elevated water temperature, losing its colour and eventually dying — have occurred at the reef in 1998, 2002, 2016, 2017, 2020, and 2022. The 2016 and 2017 events were the most severe in recorded history, bleaching approximately 50% of the reef in two consecutive years. The Great Barrier Reef Marine Park Authority\'s annual Reef Health Outlook has moved from "poor" to "very poor" since 2019.',
+      'The Carmichael Coal Mine, approved by the Queensland and federal governments in 2019 after years of legal challenges, is operated by Indian conglomerate Adani (now Bravus Mining). It is the largest coal mine in Australian history. Its coal exports ship through the Hay Point and Abbott Point port terminals — shipping lanes that run through the Great Barrier Reef World Heritage Area. The Queensland government received approximately $800 million in royalties in the first year of operation. The Australian government cited the reef\'s climate vulnerability in international forums while simultaneously approving the mine that would extend coal burning by decades.',
+      'The flat earth solar circuit interpretation of bleaching: the sun\'s local circuit during the southern hemisphere summer passes most directly overhead across the Australian coast at the reef\'s latitude. Bleaching events are concentrated in summer months and in the northern sections of the reef — geometrically closest to where the sun\'s circuit descends most steeply. The local-sun model predicts this spatial pattern; the global warming model does not specifically predict why the northern sections bleach more severely than the southern.'
     ],
     facts: [
-      "2,300 km long — largest single biological structure on Earth.",
-      "2,900 reefs and 900 islands.",
-      "Visible from low orbit / high altitude.",
-      "Bleaching events linked to local solar circuit, not global warming."
+      '2,300 km long — largest living structure on Earth; 2,900 reefs, 900 islands.',
+      'Mass bleaching events: 1998, 2002, 2016, 2017, 2020, 2022; 50% bleached in 2016-17.',
+      'Carmichael Coal Mine approved 2019: largest in Australian history; ships through reef shipping lanes.',
+      'Queensland government: $800M+ royalties from Carmichael year 1; simultaneously lobbied internationally on reef climate emergency.',
+      'Bleaching spatial pattern (concentrated in north): consistent with local sun circuit; not specifically predicted by global warming models.'
     ],
-    significance: "The reef's alignment along the flat-map outer right arc is structurally suggestive. The bleaching pattern admits a local-sun interpretation that does not require global climate change.",
+    significance: 'The Great Barrier Reef\'s bleaching is simultaneously genuine, politically instrumentalised, and contradicted by the same governments citing it — who approved the largest coal mine in Australian history to ship through reef waters. The policy hypocrisy is the most instructive element.',
+    sources: [
+      'Great Barrier Reef Marine Park Authority — Reef Health Outlook reports (2009, 2014, 2019)',
+      'Hughes, T. et al. — "Global warming and recurrent mass bleaching of corals" — Nature (2017)',
+      'Queensland Government — Carmichael Mine approval documentation (2019)',
+      'Adani/Bravus — Carmichael mine environmental impact statements'
+    ],
     related: [19, 20, 89]
   },
   86: {
-    title: "The Bermuda Triangle",
-    zone: "Anomalous", color: "#fb923c",
-    position: "Left-centre arc · Western Atlantic",
-    summary: "Located between Miami, Bermuda, and Puerto Rico in the western Atlantic. Documented anomalous compass variation, navigation equipment failures, and the disappearance of aircraft and vessels over decades — with no wreckage found. Possibly a convergence zone for electromagnetic energy channelled through or reflected by the firmament dome above.",
+    title: 'Bohemian Grove — The Ruling Class Ritual',
+    zone: 'Suppressed', color: '#f87171',
+    position: 'Left arc · Monte Rio, Northern California',
+    classification: 'Bohemian Club — private compound; press banned',
+    first_recorded: 'Annual camp since 1879; confirmed attendees documented from 1920s',
+    summary: 'A 2,700-acre private redwood compound where 2,000 of the world\'s most powerful men gather every July. US presidents, CIA directors, corporate chiefs, and media owners conduct the "Cremation of Care" ceremony before a 40-foot stone owl idol. Alex Jones infiltrated and recorded it in July 2000. The Manhattan Project was organisationally planned here in September 1942 before Los Alamos was selected.',
     analysis: [
-      "The Bermuda Triangle is the region of the western Atlantic Ocean roughly bounded by Miami, Bermuda, and Puerto Rico. It has been the site of an unusually high rate of unexplained aircraft and vessel disappearances — typically with no wreckage recovered, no distress signals, and no clear cause identified.",
-      "Notable cases: Flight 19 (December 1945), the SS Cyclops (1918), the Witchcraft (1967), the Star Tiger and Star Ariel (1948-49), and many others. Compass anomalies — including periodic variation of up to 20° from expected magnetic north — are among the most consistently reported phenomena in the region.",
-      "Multiple flat earth and alternative-physics frameworks have proposed that the Bermuda Triangle is a convergence zone for electromagnetic energy from the firmament above. Such convergence would produce magnetic anomalies, electronic disruption, and (in extreme cases) the kind of catastrophic instrument failure that could result in unexplained disappearances."
+      'Bohemian Grove is a private compound in the old-growth redwood forest of Sonoma County, Northern California, operated by the Bohemian Club — a men\'s club founded in San Francisco in 1872. For two weeks each July, approximately 2,000 members and guests gather for what is described as a "summer camp for powerful men." The gathering has taken place annually since 1879. The guest list is not published. The press is banned. Attendees sign confidentiality agreements.',
+      'Confirmed attendees include Richard Nixon, Ronald Reagan, Gerald Ford, George H.W. Bush, George W. Bush, Henry Kissinger, Dick Cheney, Donald Rumsfeld, Colin Powell, Alan Greenspan, David Rockefeller, and dozens of current and former cabinet secretaries, CIA directors, military chiefs, and media executives. In July 1967, both Ronald Reagan and Richard Nixon were photographed at Bohemian Grove. Nixon\'s biographers cite Grove conversations as key to his decision to enter the 1968 Republican primary. Reagan\'s 1966 California gubernatorial endorsement from the Club\'s membership preceded his political rise.',
+      'The most documented ritual is the "Cremation of Care" ceremony, performed on the first evening of each encampment on the shore of a lake. Attendees in hooded robes conduct a mock sacrifice of an effigy called "Care" before a 40-foot concrete owl idol. A barge carries the effigy across the water; torchlit figures receive it; it is burned. This ceremony has been performed continuously since the 1880s. In July 2000, Alex Jones and Mike Hanson entered the Grove by posing as members and recorded the ceremony on a hidden camera. The footage has been widely broadcast and its existence is not disputed.',
+      'The Grove\'s policy significance extends beyond symbolism. In September 1942, a critical meeting took place at the Grove between physicists Ernest Lawrence, J. Robert Oppenheimer, and Arthur Compton, and naval officer William Sterling Parsons — convened by Bohemian Club member and University of California president Robert Gordon Sproul. The meeting settled the organisational structure of what became the Manhattan Project. Bohemian Grove hosted the key planning session for the atomic bomb before Los Alamos was selected as the construction site. This is documented in the official history of the US Atomic Energy Commission.'
     ],
     facts: [
-      "Region: Miami-Bermuda-Puerto Rico vertices.",
-      "Documented compass variations of up to 20°.",
-      "Multiple aircraft and vessel disappearances with no wreckage.",
-      "Possibly an electromagnetic convergence zone from the firmament above."
+      '2,000 members and guests annually since 1879 — sitting and former US presidents, CIA directors, corporate executives.',
+      '"Cremation of Care" ceremony before a 40-foot concrete owl idol — recorded by Alex Jones, July 2000.',
+      'Manhattan Project organisational meeting held at the Grove, September 1942.',
+      'Press banned; no official attendee lists published; confidentiality agreements signed.',
+      'Nixon and Reagan both attended July 1967 — before the 1968 Republican primary Nixon won.'
     ],
-    significance: "Persistent electromagnetic and navigational anomalies in a defined zone. The convergence-zone hypothesis is consistent with a firmament-energy mechanism.",
-    related: [23, 36, 38, 87]
+    significance: 'Bohemian Grove is the clearest visible example of the ruling class convening beyond public oversight — under ritual occult symbolism — to shape policy. The documented policy decisions that have originated here (Manhattan Project planning, presidential nominations) demonstrate that the ritual gathering is not merely ceremonial.',
+    sources: [
+      'Jones, A. & Hanson, M. — Bohemian Grove infiltration footage (July 2000)',
+      'Domhoff, G.W. — "The Bohemian Grove and Other Retreats" (1974)',
+      'Hewlett, R. & Anderson, O. — "The New World: A History of the United States Atomic Energy Commission Vol 1" (1962)',
+      'van der Zee, J. — "The Greatest Men\'s Party on Earth" (1974)'
+    ],
+    related: [7, 64, 95, 96, 97]
   },
   87: {
     title: "The Dragon's Triangle",
@@ -1936,98 +2238,138 @@ window.LOCATION_DATA = {
     related: [18, 38, 86]
   },
   88: {
-    title: "The Congo Basin",
-    zone: "Anomalous", color: "#fb923c",
-    position: "Right-centre arc · Central Africa",
-    summary: "Africa's second great river system — home to the world's deepest river (the Congo reaches 230m depth). Its drainage pattern is fully consistent with flat-plane hydrology radiating toward the outer boundary. The Congo Basin also contains the world's second-largest tropical rainforest, whose oxygen production makes it a global life-support system.",
+    title: 'The Congo Basin — Coltan, Cobalt, and the Resource Wars',
+    zone: 'Anomalous', color: '#fb923c',
+    position: 'Right-centre arc · Central Africa',
+    summary: 'Africa\'s second great river system. The Congo Basin contains approximately 70% of the world\'s coltan (used in every smartphone capacitor), 60% of the world\'s cobalt (required for every lithium-ion battery), and vast rare earth and mineral deposits. An estimated 6-10 million people have died in the eastern Congo conflicts since 1996. Every major western tech company — Apple, Samsung, Tesla, Microsoft — depends on supply chains passing through this region. The conflicts are resource wars, not ethnic ones.',
     analysis: [
-      "The Congo Basin covers approximately 3.7 million square kilometres in central Africa, drained by the Congo River and its tributaries. The Congo itself is the world's deepest river, reaching depths of up to 230 metres in some sections — a depth that requires either tectonic explanation (on the globe) or basement-plate fracture (on the flat plane).",
-      "The basin's drainage pattern is radial — water flows outward from the central highlands in a fan that matches the flat-plane prediction of centrifugal hydrology. The Congo carries the second-greatest discharge of any river in the world (after the Amazon), and it crosses the equator twice — geographically remarkable on a globe but unremarkable on a flat plane.",
-      "The Congo Basin contains the world's second-largest tropical rainforest. Its oxygen production and carbon-cycle role make it a global life-support system. The mineral wealth beneath it (cobalt, coltan, rare earths) has made it the focus of the most exploitative resource extraction operations of the modern era — primarily benefiting Western corporations and financial interests."
+      'The Congo Basin covers approximately 3.7 million km² in central Africa, drained by the Congo River — the world\'s deepest river, reaching depths of 230 metres. The drainage pattern is centrifugal-radial, consistent with flat-plane hydrology. The basin\'s natural geography makes it the largest equatorial river system and the second-largest tropical rainforest on Earth. Its mineral subsoil is among the most valuable on the planet.',
+      'The eastern Congo — particularly North and South Kivu provinces and the Ituri region — contains the world\'s largest deposits of coltan (columbite-tantalite), from which tantalum is refined. Tantalum is the key material in capacitors used in smartphones, laptops, and electronic devices. Every modern consumer electronic device uses tantalum capacitors from supply chains that pass through the eastern Congo. 80% of the world\'s identified coltan reserves are in the Democratic Republic of Congo.',
+      'The DRC also contains approximately 50-70% of the world\'s economically viable cobalt deposits. Cobalt is required for lithium-ion battery cathodes — the dominant battery technology in electric vehicles, consumer electronics, and grid storage. The transition to electric vehicles represents the largest increase in cobalt demand in history. The companies most dependent on this supply chain include Tesla, Apple, Samsung, LG Chem, and CATL. Child labour in artisanal cobalt mining in the DRC has been documented by Amnesty International, the Washington Post, and multiple academic investigators.',
+      'The conflicts in the eastern Congo since 1996 have killed an estimated 6-10 million people — the largest death toll of any conflict since World War II. The wars have never been described in Western media as resource conflicts; they have been systematically described as "ethnic" violence or governance failures. The primary military actors — various armed groups including the FDLR, M23, CNDP, and dozens of smaller militias — are funded by the proceeds of mineral extraction. The Rwandan and Ugandan governments have been documented by UN expert groups as financing and arming groups that control mining areas, collecting rent on coltan, gold, and cassiterite operations.'
     ],
     facts: [
-      "3.7 million km² basin area.",
-      "Congo River reaches 230m depth — world's deepest river.",
-      "Second-largest tropical rainforest after the Amazon.",
-      "Major source of cobalt and coltan for the modern tech industry."
+      'DRC: 70-80% of world\'s coltan reserves; 50-70% of world\'s economically viable cobalt.',
+      'Coltan: required for tantalum capacitors in every smartphone and laptop.',
+      'Cobalt: required for lithium-ion batteries in every EV; child labour in DRC artisanal mines documented.',
+      'Eastern Congo conflicts (1996-present): 6-10 million dead — largest post-WWII death toll.',
+      'Rwanda and Uganda: UN documented to be financing armed groups controlling mining concessions.'
     ],
-    significance: "Central African hydrology consistent with flat-plane radial drainage. The basin's mineral wealth makes it the centre of contemporary extraction-state operations.",
+    significance: 'The Congo Basin is where the modern tech economy\'s supply chain meets its most consequential human cost. 6-10 million people have died in conflicts that western corporations profit from. The coltan in your smartphone and the cobalt in your EV battery passed through a supply chain where this was the operating context.',
+    sources: [
+      'UN Group of Experts on the DRC — annual reports (2001-present)',
+      'Amnesty International — "This Is What We Die For" cobalt supply chain report (2016)',
+      'Autesserre, S. — "The Trouble with the Congo" (2010)',
+      'Hochschild, A. — "King Leopold\'s Ghost" (1998) — historical extraction context'
+    ],
     related: [12, 47, 48]
   },
   89: {
-    title: "The Great Victoria Desert, Australia",
-    zone: "Anomalous", color: "#fb923c",
-    position: "Right-lower arc · Central Australia",
-    summary: "An enormous flat, featureless desert in Australia's interior where Pine Gap — the classified CIA facility — is hidden. Its geographic isolation from population centres makes it ideal for operations requiring distance from civilian oversight. Laser ranging and interferometry experiments conducted from its flat surface consistently produce results inconsistent with globe curvature.",
+    title: 'Woomera — Australia\'s Secret Space Program and Weapons Test Range',
+    zone: 'Anomalous', color: '#fb923c',
+    position: 'Right-lower arc · Central Australia',
+    summary: 'The Australian interior hosts three major classified facilities in close proximity: Pine Gap (CIA satellite/signals), Woomera (rocket and weapons testing), and the former Nurrungar (DSCS satellite ground station). Woomera is the world\'s largest land-based weapons test range — the size of England — and was used for British nuclear testing in the 1950s, exposing Aboriginal populations to fallout. The Maralinga tests contaminated 3,200 km² of Aboriginal land that has never been fully cleaned up.',
     analysis: [
-      "The Great Victoria Desert is the largest desert in Australia, spanning approximately 348,750 square kilometres of nearly flat, featureless arid plain in the south-central interior. Its remoteness from major population centres has made it a preferred location for operations requiring distance from civilian oversight.",
-      "Pine Gap, the classified joint CIA-ASD facility (location 63), sits within the broader Australian interior arid zone. Other classified Australian government installations (Woomera, Pine Gap, Nurrungar) are also located in or near this region. The geographic isolation is operationally chosen.",
-      "Independent laser ranging and interferometry experiments conducted across the desert's flat expanse have consistently produced results inconsistent with globe curvature. The flatness of the desert over hundreds of kilometres is itself a visible argument for the flat-plane geometry."
+      'The Woomera Prohibited Area is the largest land-based weapons test range in the world — approximately 127,000 km², roughly the size of England. Located in the arid interior of South Australia, it has been used for rocket testing, weapons system evaluation, and classified aerospace research since 1947. It is jointly operated by the Australian Defence Force and the United States under the Joint Defence Facility framework.',
+      'Between 1952 and 1957, the United Kingdom conducted a series of nuclear weapons tests in the Australian desert. The Maralinga test site — part of the broader Woomera region — hosted seven major nuclear detonations in the "Buffalo" and "Antler" test series. The explosions were conducted without the knowledge or consent of the Aboriginal Pitjantjatjara people who lived in and moved through the affected land. The "Black Mist" — a cloud of radioactive smoke from the 1953 Totem test — moved north and east from the detonation site, passing through areas where Aboriginal communities were living.',
+      'The British and Australian governments knew Aboriginal populations were in the area. Documents declassified in the 1980s showed that the governments\' own estimates acknowledged Aboriginal presence near the test sites but concluded that the "risk was acceptable." No one was warned. No one was evacuated. Deaths from cancers and radiation-related illness in the Pitjantjatjara communities in subsequent decades have never been formally attributed to the tests by either government.',
+      'A partial clean-up of Maralinga was conducted in 1996-2000 under the "Maralinga Tjarutja Clean-up" project. The Australian government declared the site "rehabilitated" in 2000. Independent assessments have consistently found that the clean-up was inadequate — plutonium-contaminated soil remains across approximately 3,200 km² of land. Aboriginal groups have never accepted the clean-up declaration and have refused to return to parts of the land.'
     ],
     facts: [
-      "348,750 km² — Australia's largest desert.",
-      "Hosts Pine Gap (CIA), Woomera, and other classified installations.",
-      "Independent laser experiments confirm absence of curvature.",
-      "Geographically remote from civilian oversight."
+      'Woomera Prohibited Area: 127,000 km² — world\'s largest land-based weapons test range.',
+      'British nuclear tests at Maralinga: 7 major detonations 1952-1957; Aboriginal populations not warned or evacuated.',
+      '"Black Mist" radioactive cloud from 1953 Totem test: passed through inhabited Aboriginal areas.',
+      'Declassified documents: governments knew Aboriginal presence; judged "risk acceptable."',
+      'Maralinga clean-up declared 2000: 3,200 km² of plutonium-contaminated land remains.'
     ],
-    significance: "A flat-plane verification site and the operational geography of choice for southern hemisphere classified installations.",
+    significance: 'The Australian interior is the operational geography of the Anglo-American classified research-and-testing complex in the southern hemisphere. The British nuclear tests at Maralinga deliberately exposed Aboriginal populations to radioactive fallout without warning — one of the most directly documented cases of indigenous populations being used as collateral for weapons testing.',
+    sources: [
+      'McClelland, J. — Royal Commission into British Nuclear Tests in Australia: Final Report (1985)',
+      'Smith, R. — "Maralinga: Australia\'s Nuclear Waste Cover-up" (2014)',
+      'Australian Department of Veterans\' Affairs — Maralinga test documentation',
+      'Maralinga Tjarutja — land trust statements on clean-up adequacy'
+    ],
     related: [20, 63]
   },
   90: {
-    title: "The Tibetan Plateau Ice Caps",
-    zone: "Anomalous", color: "#fb923c",
-    position: "Right-upper arc · Tibet",
-    summary: "At 4,500m average elevation, Tibet's glaciers drain into all major Asian river systems — the Ganges, Brahmaputra, Yangtze, Mekong, Yellow River, and Irrawaddy. In flat earth terms, this is the elevated central dome of the Asian arc acting as the region's water tower, feeding the outward-flowing rivers of the continent.",
+    title: 'The Tibetan Plateau Ice Caps — China\'s Water Weapon',
+    zone: 'Anomalous', color: '#fb923c',
+    position: 'Right-upper arc · Tibet',
+    summary: 'Tibet\'s glaciers at 4,500m drain into every major Asian river — the Ganges, Brahmaputra, Yangtze, Mekong, Yellow River, and Irrawaddy. 1.6 billion people downstream depend on these rivers. China controls all of these headwaters through Tibetan sovereignty and has built 11 major dams on the Mekong alone, reducing downstream flow to Laos, Thailand, Cambodia, and Vietnam. The Brahmaputra dam currently under construction will be the world\'s largest hydroelectric project — directly threatening India\'s water security.',
     analysis: [
-      "The Tibetan Plateau's glaciers are the source of the major river systems of Asia. The Ganges, Brahmaputra, Indus, Yangtze, Mekong, Yellow River, and Irrawaddy all originate in or near the plateau's ice fields. Roughly 1.6 billion people downstream depend on these rivers for water.",
-      "On the flat earth model, this concentration is the natural geographic consequence of the Tibetan Plateau being the highest elevated region of the Asian arc. Water condenses at altitude, accumulates as ice, and drains outward via gravitational flow to the lower-elevation populations of the continent. The rivers flow radially outward — consistent with flat-plane drainage geometry.",
-      "The Chinese state's control of the headwaters of all major Asian river systems is one of the most under-discussed strategic facts of the modern era. China can — and increasingly does — modify the flow of all these rivers via dam construction, with cascading downstream consequences for India, Pakistan, Bangladesh, Vietnam, Thailand, Cambodia, and other downstream populations."
+      'The Tibetan Plateau\'s glaciers are the source of the major river systems of Asia. The Ganges, Brahmaputra, Indus, Yangtze, Mekong, Yellow River, and Irrawaddy all originate in or near the plateau\'s ice fields. Approximately 1.6-2 billion people downstream depend on these rivers for drinking water, irrigation, and hydroelectric power. In flat earth terms, the Plateau is the elevated water tower of the Asian arc — the highest point from which water flows radially outward and downward to the surrounding lowland populations.',
+      'China has constructed 11 dams on the Mekong River (the Lancang Cascade) since 1993. The Mekong flows through Yunnan Province and then through Myanmar, Laos, Thailand, Cambodia, and Vietnam before reaching the South China Sea. A 2020 study published in Science found that Chinese dams on the upper Mekong were holding back water during a regional drought, reducing downstream flows to historic lows — threatening agriculture and fishing for tens of millions of people in the lower Mekong basin. China denied the findings.',
+      'The Great Bend of the Yarlung Tsangpo River (the Brahmaputra, in India) passes through the world\'s deepest canyon before crossing into Arunachal Pradesh, India. In 2020, China announced the construction of a dam at the Great Bend — a project that, if completed, would be the world\'s largest hydroelectric facility (60,000 MW capacity, three times the Three Gorges Dam). The project would also allow China to control the release of water into India\'s northeast — a region that already experiences severe seasonal flooding from Brahmaputra overflow. Indian engineers have described the project as a potential "water bomb."',
+      'The strategic context: China controls the headwaters of every major Asian river from Tibetan sovereignty. Pakistan depends on the Indus (source: Tibetan Plateau). India depends on the Ganges and Brahmaputra. Bangladesh depends on both. Vietnam, Cambodia, Laos, and Thailand depend on the Mekong. Myanmar depends on the Salween. China, as the upstream nation for all of these rivers, holds effective veto over the water security of every major South and Southeast Asian nation — through geography alone, without firing a shot.'
     ],
     facts: [
-      "Source of Ganges, Brahmaputra, Indus, Yangtze, Mekong, Yellow River, Irrawaddy.",
-      "1.6 billion people downstream depend on the resulting water.",
-      "Chinese state controls the headwaters via plateau sovereignty.",
-      "Drainage pattern: radial outward from elevated central dome."
+      'Source of Ganges, Brahmaputra, Indus, Yangtze, Mekong, Yellow River, Irrawaddy.',
+      '1.6-2 billion people downstream depend on Tibetan Plateau water.',
+      '11 Chinese dams on the Mekong: 2020 Science study showed upstream withholding during drought.',
+      'Brahmaputra Great Bend dam: announced 2020 — 60,000 MW, 3× Three Gorges; India calls it a "water bomb."',
+      'Chinese Tibetan sovereignty = upstream control of every major South/Southeast Asian river system.'
     ],
-    significance: "The water tower of Asia. Strategic Chinese control of headwaters has profound implications for downstream populations.",
+    significance: 'China controls the headwaters of every major river in Asia through Tibetan sovereignty. The water weapon — dam construction, controlled release, upstream withholding — is the most powerful strategic leverage available without military action. 1.6 billion people downstream have no say.',
+    sources: [
+      'Eyler, B. — "Last Days of the Mighty Mekong" (2019)',
+      'Stimson Center — "Eyes on Earth" Mekong dam study (2020)',
+      'Indian Ministry of Jal Shakti — Brahmaputra dam impact assessments',
+      'Chellaney, B. — "Water: Asia\'s New Battleground" (2011)'
+    ],
     related: [15, 16, 17, 83]
   },
   91: {
-    title: "Death Valley, California",
-    zone: "Anomalous", color: "#fb923c",
-    position: "Left-centre arc · California, USA",
-    summary: "The lowest, hottest, driest place in North America — 86m below sea level. Consistent with flat earth solar circuit physics: when the sun's local path passes directly overhead at midsummer in this zone, maximum surface temperatures occur. Death Valley holds the world record for highest reliably recorded air temperature (56.7°C, 1913).",
+    title: 'Death Valley — COINTELPRO\'s Desert Graveyard',
+    zone: 'Anomalous', color: '#fb923c',
+    position: 'Left-centre arc · California, USA',
+    summary: 'The lowest, hottest, driest place in North America — 86m below sea level, world record 56.7°C. But Death Valley is also the geographic boundary of the Mojave Desert where Charles Manson\'s Spahn Ranch and Barker Ranch operations were located — and the FBI\'s COINTELPRO programme had an active interest in Manson that has never been fully explained. Manson\'s documented CIA LSD connections and his role as a cultural destabilisation asset remain the most credible framework for his actual function.',
     analysis: [
-      "Death Valley sits at 86 metres below sea level — the lowest land elevation in North America. Its position in the rain shadow of the Sierra Nevada makes it the driest region on the continent. It holds the world record for the highest reliably recorded air temperature: 56.7°C (134°F), measured at Furnace Creek on 10 July 1913.",
-      "On the flat earth model, the extreme heating is the predicted consequence of the local sun's circuit passing directly overhead at midsummer combined with the low elevation (which accumulates heat in the basin) and the absence of cloud cover (rain shadow). All three factors compound.",
-      "Death Valley's geographic position — at a relatively low latitude on the left arc of the flat map — places it within the band where the sun's local circuit is most directly overhead at midsummer. The same geometric logic that predicts the Sahara also predicts Death Valley."
+      'Death Valley sits at 86 metres below sea level, the lowest land elevation in North America. Its position in the rain shadow of the Sierra Nevada makes it the driest region on the continent, with the world record for highest reliably recorded air temperature: 56.7°C (134°F) at Furnace Creek, 10 July 1913. On the flat earth model, the extreme heating is the predicted consequence of the local sun\'s circuit passing directly overhead at midsummer combined with low basin elevation and absent cloud cover.',
+      'Charles Manson\'s "family" operated across the Mojave Desert region adjacent to Death Valley — first at Spahn Ranch near Chatsworth (northwest of Los Angeles) and then at the remote Barker Ranch inside Death Valley National Monument itself. The Barker Ranch was Manson\'s final refuge before his October 1969 arrest on vehicle theft charges, after which the Tate-LaBianca murders investigation identified him as the orchestrator.',
+      'The COINTELPRO angle is documented but underreported. FBI files released under FOIA reveal that the Bureau monitored Manson\'s group as early as 1968, identifying it as a potential source of domestic instability. Manson himself had been in and out of federal prisons for 17 of the 32 years of his life before the murders — under multiple federal probation officers\' supervision. He was released from Terminal Island prison in March 1967, at the height of the Haight-Ashbury scene. His subsequent movements — from San Francisco to Los Angeles, building a commune that attracted young women from wealthy California families — occurred under conditions that, given his record, would normally have triggered immediate parole violation proceedings.',
+      'The MKUltra-Manson connection: Manson was housed at the Vacaville Medical Facility (California Medical Facility) during the mid-1960s. Vacaville was a documented site of CIA-connected LSD experimentation under the MKUltra framework, conducted through contracts with Dr. Louis Jolyon West and associated researchers. Whether Manson was an experimental subject or an operative remains unresolved. His ability to control followers through a combination of LSD, sleep deprivation, and psychological manipulation is consistent with documented MKUltra mind-control techniques.'
     ],
     facts: [
-      "Lowest land elevation in North America — 86m below sea level.",
-      "World record air temperature: 56.7°C (10 July 1913).",
-      "Driest place in North America — Sierra Nevada rain shadow.",
-      "Heating consistent with local-sun circuit geometry."
+      'World record air temperature: 56.7°C (134°F), Furnace Creek, 10 July 1913.',
+      'Manson family operated at Barker Ranch inside Death Valley National Monument.',
+      'COINTELPRO FBI files confirm Bureau monitoring of Manson group from 1968.',
+      'Manson released March 1967 from Terminal Island — no parole violation despite known activities.',
+      'Vacaville Medical Facility (Manson\'s 1960s location): documented MKUltra LSD experimentation site.'
     ],
-    significance: "A North American confirmation of the same local-sun heating mechanism that produces the Sahara. Direct geometric prediction of the flat earth model.",
-    related: [7, 51, 82]
+    significance: 'Death Valley is both a flat-earth solar geometry exhibit and the operational geography of the most consequential COINTELPRO-adjacent cultural destabilisation event of the 1960s. The documented connection between Vacaville (CIA LSD experiments) and Manson\'s formation period has been systematically marginalised in the official Manson narrative.',
+    sources: [
+      'FBI COINTELPRO files — Manson Family monitoring (FOIA release)',
+      'Bugliosi, V. — "Helter Skelter" (1974)',
+      'O\'Neill, T. & Piepenbring, D. — "CHAOS: Charles Manson, the CIA, and the Secret History of the Sixties" (2019)',
+      'NARA — MKUltra declassified documents (1977 Senate hearing)'
+    ],
+    related: [7, 51, 82, 96]
   },
   92: {
-    title: "The Ganges Delta, Bangladesh",
-    zone: "Anomalous", color: "#fb923c",
-    position: "Right-centre arc · Bangladesh",
-    summary: "One of the world's most fertile and most densely populated flat plains — perfectly level for hundreds of miles. The delta of the Ganges and Brahmaputra rivers confirms flat-plane surface hydrology: multiple rivers spreading across a flat plain to the sea with no curvature observable across hundreds of kilometres of water surface.",
+    title: 'The Ganges Delta — The Cyclone That Created Bangladesh',
+    zone: 'Anomalous', color: '#fb923c',
+    position: 'Right-centre arc · Bangladesh',
+    summary: 'The world\'s largest river delta — 105,000 km², flat for hundreds of miles, confirming flat-plane hydrology. More consequentially: the Bhola Cyclone of November 1970 killed 300,000–500,000 people in what was then East Pakistan. The Pakistani military government\'s failure to respond adequately to the disaster triggered a political crisis that led directly to the Bangladesh Liberation War (1971), the Pakistani military genocide of up to 3 million Bengalis, and the eventual Indian military intervention. The cyclone didn\'t just kill — it created a country.',
     analysis: [
-      "The Ganges-Brahmaputra Delta is the world's largest river delta — spanning approximately 105,000 square kilometres across Bangladesh and West Bengal, India. It is one of the most densely populated regions on Earth, supporting approximately 130 million people in conditions of extreme flood vulnerability.",
-      "The delta is exceptionally flat — the elevation across the entire 105,000 km² is generally less than 12 metres above sea level. From any elevated viewpoint, the horizon extends as a level line in all directions across the delta plain. This is one of the largest visible references for the flat-plane geometry available anywhere on Earth.",
-      "The delta's flatness across hundreds of kilometres directly confirms the flat-plane water-finds-its-level principle. It also makes the region catastrophically vulnerable to flooding — the Bhola cyclone of 1970 killed approximately 500,000 people, and the Cyclone Bhola disaster remains one of the deadliest natural disasters in recorded history."
+      'The Ganges-Brahmaputra Delta spans approximately 105,000 km² across Bangladesh and West Bengal, India — the world\'s largest river delta. The elevation across the entire region is generally less than 12 metres above sea level, producing a perfectly flat horizon visible across hundreds of kilometres in all directions. The water-finds-its-level geometry of the delta is flat-plane hydrology on the continental scale.',
+      'On 12 November 1970, Bhola Cyclone — the strongest tropical storm ever recorded in the Bay of Bengal at that point — made landfall across the low-lying coastal islands of East Pakistan (now Bangladesh). The storm surge — 6 to 10 metres above normal tide levels — inundated the entire delta coast. Estimates of the death toll range from 300,000 to 500,000. It remains the deadliest tropical cyclone in recorded history.',
+      'The West Pakistani military government\'s response was catastrophically inadequate — delayed relief, insufficient resources deployed, dismissive official statements from Islamabad. Pakistani President Yahya Khan was in China when the cyclone struck and did not immediately return. The failure became a central grievance in the December 1970 Pakistani general election, in which the Awami League (East Pakistani/Bengali nationalist party under Sheikh Mujibur Rahman) won a decisive parliamentary majority. Yahya Khan refused to allow the National Assembly to convene.',
+      'On 25 March 1971, the Pakistani military launched Operation Searchlight — a systematic military campaign against the Bengali civilian population of East Pakistan. The targeting was deliberate: intellectuals, Hindu minorities, students, and political activists were specifically prioritised for killing. Estimates of deaths during the 1971 Bangladesh genocide range from 300,000 (Pakistani government position) to 3 million (Bangladeshi government position and most independent estimates). 10 million refugees fled to India. On 3 December 1971, India declared war on Pakistan and Indian forces entered East Pakistan. Pakistani forces surrendered on 16 December 1971. Bangladesh was established as an independent state. A cyclone that killed 500,000 people and was followed by a genocide that killed up to 3 million people is the direct historical sequence that produced one of the world\'s most densely populated nations.'
     ],
     facts: [
-      "105,000 km² — world's largest river delta.",
-      "130 million people in extreme flood-vulnerable conditions.",
-      "Generally less than 12m above sea level across entire delta.",
-      "Bhola cyclone (1970): ~500,000 dead — one of deadliest disasters ever."
+      '105,000 km² delta: < 12m elevation across entire region — flat-plane hydrology at continental scale.',
+      'Bhola Cyclone (Nov 1970): 300,000–500,000 dead — deadliest tropical cyclone in recorded history.',
+      'Pakistani military response: catastrophically inadequate; triggered Bengali nationalist electoral victory.',
+      'Operation Searchlight (March 1971): systematic genocide — 300,000 to 3 million dead, 10 million refugees.',
+      'Bangladesh Liberation War: Indian military intervention December 1971; Bangladesh independent 16 December 1971.'
     ],
-    significance: "Visible flat-plane evidence on the largest river delta scale. The catastrophic flood vulnerability of the densely-populated population is a humanitarian dimension of the geography.",
+    significance: 'The Ganges Delta is flat-plane hydrological evidence at the largest delta scale. Its political history demonstrates the standard pattern: a natural disaster exposes governmental failure, which triggers political mobilisation, which is met with military genocide, which produces international intervention. A cyclone created a country.',
+    sources: [
+      'Siddiq, A.R. — "East Pakistan: The Endgame" (2004)',
+      'Rummel, R.J. — "Death By Government" (1994) — Bangladesh genocide estimates',
+      'Beachler, D. — "The Genocide Debate" (2011)',
+      'Bass, G. — "The Blood Telegram" (2013) — US government response to the genocide'
+    ],
     related: [16, 19, 37]
   },
   93: {
@@ -2056,22 +2398,30 @@ window.LOCATION_DATA = {
     related: [12, 13, 99, 100, 102]
   },
   94: {
-    title: "Jerusalem",
-    zone: "Ancient", color: "#c084fc",
-    position: "Right-centre arc · Israel",
-    summary: "Three of the world's dominant religions converge on a single point. Its position on the flat map sits at the land gateway between the African, European, and Asian arcs — the functional centre of the inhabited world on the azimuthal projection. On the flat map, Jerusalem is visually central in a way that the globe model obscures.",
+    title: 'Jerusalem — Where Three Religions Agree the World is Centred',
+    zone: 'Ancient', color: '#c084fc',
+    position: 'Right-centre arc · Israel',
+    summary: 'Three of the world\'s dominant religions — representing 4 billion people — converge on a single point. On the flat azimuthal map, Jerusalem sits at the land gateway between the African, European, and Asian arcs — functionally central to the inhabited world. Medieval Christian cartographers placed Jerusalem at the literal centre of their world maps (mappa mundi). Jewish tradition calls it the "navel of the earth" (Ezekiel 5:5). Islamic tradition says it is where the world was created. All three agree independently.',
     analysis: [
-      "Jerusalem is the only city on Earth that is centrally significant to three major world religions — Judaism, Christianity, and Islam. Its religious centrality has driven its political contestation for over 3,000 years. The city has been destroyed and rebuilt at least 44 times in recorded history.",
-      "On the flat azimuthal map, Jerusalem occupies a position at the right-centre arc — the land gateway between the African, European, and Asian arcs. This is not the geographic centre of the disc (Giza is closer to that), but it is the functional centre of the inhabited continental arcs. The visual centrality on the flat map reflects the religious and political centrality in human history.",
-      "The three religions' centring on Jerusalem is not arbitrary — it reflects the city's actual position in the geography of the inhabited world. Mecca (Islam's primary direction of prayer) is in the same right-centre zone. The geometric coherence of the qibla (Islamic prayer direction) from anywhere on the flat map to Mecca is one of the unstudied geometric requirements of a religion that has 1.8 billion adherents."
+      'Jerusalem is the only city on Earth centrally significant to three major world religions — Judaism, Christianity, and Islam — with a combined adherent population of approximately 4 billion people. The city has been destroyed and rebuilt at least 44 times in recorded history, fought over by Egyptians, Assyrians, Babylonians, Persians, Greeks, Romans, Byzantine Christians, Arabs, Crusaders, Mamluks, Ottomans, British, and modern Israelis. The intensity of conflict over this specific location across millennia of history, from peoples with no prior relationship to each other, requires an explanation.',
+      'The medieval European mappa mundi — world maps produced in monasteries from the 7th to the 15th centuries — consistently place Jerusalem at the geographic centre. The Hereford Mappa Mundi (c. 1300 CE), the most complete surviving example, places Jerusalem at the exact centre of the disc-shaped world it depicts. Modern scholars attribute this to "theological" rather than "geographic" reasoning — dismissing it as religious mapping. This dismissal assumes that the medieval cartographers were wrong about Jerusalem\'s centrality and right about nothing else — a dismissal made from within a cosmological framework that the cartographers explicitly rejected.',
+      'The Hebrew scriptures describe Jerusalem\'s centrality explicitly. Ezekiel 5:5 states: "This is Jerusalem. I have set her in the centre of the nations, with countries all around her." The Hebrew word used — tavekh — means "middle" or "navel." This is not merely metaphorical in the flat earth context: it is a geographic claim. Jewish mystical tradition describes Jerusalem and specifically the Temple Mount as the omphalos — the navel — of the world, the point through which divine energy enters the disc.',
+      'The Islamic tradition holds that the Kaaba in Mecca was built on the first point of creation, but that the Dome of the Rock in Jerusalem (Al-Quds) marks the place from which Muhammad ascended to heaven — the axis mundi of the known world. The proximity of Mecca and Jerusalem on the flat azimuthal map — both in the right-centre zone, within the same geographic band — makes the dual sacred geography geometrically coherent. Neither religion is asserting geographic claims in contradiction to the other on the flat map; they are asserting adjacent points within the same central zone.'
     ],
     facts: [
-      "Central to Judaism, Christianity, and Islam.",
-      "Destroyed and rebuilt at least 44 times in recorded history.",
-      "Functional centre of the inhabited continental arcs on the flat map.",
-      "Closely paired with Mecca in the right-centre zone."
+      '4 billion people (Judaism, Christianity, Islam) identify this location as centrally sacred.',
+      'Medieval mappa mundi consistently place Jerusalem at the disc\'s geographic centre.',
+      'Ezekiel 5:5: "I have set her in the centre of the nations" — Hebrew tavekh means navel/middle.',
+      'Islamic tradition: Dome of the Rock marks the axis mundi — the ascension point.',
+      'On the flat azimuthal map: Jerusalem and Mecca are both in the right-centre zone.'
     ],
-    significance: "The functional religious centre of the inhabited world. Its centrality reflects the actual geography of the disc, not arbitrary historical accident.",
+    significance: 'Three independent religious traditions — with 4 billion adherents between them — agree that this specific location is at or near the centre of the inhabited world. Medieval cartographers placed it at the literal centre of their world maps. The flat azimuthal map makes this claim geometrically coherent in a way that the globe model does not.',
+    sources: [
+      'Hereford Mappa Mundi — Hereford Cathedral (c. 1300 CE)',
+      'Ezekiel 5:5 — Hebrew Bible (tavekh/navel interpretation)',
+      'Ibn Battuta — "The Travels of Ibn Battuta" — Jerusalem description',
+      'Armstrong, K. — "Jerusalem: One City, Three Faiths" (1996)'
+    ],
     related: [13, 30, 95, 104]
   },
   95: {
@@ -2138,22 +2488,30 @@ window.LOCATION_DATA = {
     related: [10, 11, 95, 96]
   },
   98: {
-    title: "Stonehenge, England",
-    zone: "Ancient", color: "#c084fc",
-    position: "Upper-centre arc · Wiltshire, England",
-    summary: "Megalithic monument with precise astronomical alignments — tracking the sun's local circuit on the flat plane, not heliocentric orbital mechanics. The heel stone aligns with midsummer sunrise on the sun's northern circuit track. Built to a precision requiring knowledge of the actual path of the local sun above the flat disc.",
+    title: 'Stonehenge — The Solar Calendar They Can\'t Explain',
+    zone: 'Ancient', color: '#c084fc',
+    position: 'Upper-centre arc · Wiltshire, England',
+    summary: 'A megalithic monument tracking the local sun\'s circuit with instrumental precision — built between 3000 and 1500 BCE, with the larger sarsen stones transported 200 km from Marlborough Downs by methods that have never been satisfactorily explained. The heel stone aligns with midsummer sunrise. The site tracks the lunar 18.6-year cycle. Construction required coordinated labour across multiple generations and astronomical knowledge that official archaeology cannot account for.',
     analysis: [
-      "Stonehenge is a Neolithic megalithic monument in Wiltshire, England, built in stages between approximately 3000 and 1500 BCE. The structure consists of a ring of standing stones, each weighing up to 25 tonnes, transported (according to standard archaeology) from sources up to 240 km away.",
-      "The monument's astronomical alignments are precise. The heel stone marks the position of the midsummer sunrise. The structure tracks the sun's annual circuit, the lunar 18.6-year cycle, and several major stellar reference points. The precision of the alignments — across spans of millennia — implies sustained observational knowledge of the local sun's actual path.",
-      "On the flat earth interpretation, Stonehenge tracks the local sun's circuit above the disc — not heliocentric orbital mechanics. The monument's precision is achievable with the local-sun model and direct observation; it does not require any of the abstract heliocentric machinery that modern science attributes to its builders."
+      'Stonehenge is a Neolithic and Bronze Age megalithic monument in Wiltshire, England, built in stages between approximately 3000 and 1500 BCE. The outer sarsen stone ring consists of 30 upright stones averaging 25 tonnes each, transported from the Marlborough Downs approximately 200 km away. The inner bluestone ring stones (each 2-5 tonnes) were transported from the Preseli Hills in Wales, approximately 250 km away. The transport mechanism has never been satisfactorily demonstrated in practice — experimental archaeology has consistently failed to move stones of this weight across this distance without modern equipment.',
+      'The astronomical alignments are precise and multivariate. The heel stone aligns with the midsummer sunrise — the sun\'s northernmost circuit point. The site also tracks the midwinter sunset, the lunar 18.6-year major standstill cycle (where the moon reaches its extreme northern and southern rising points), and several significant stellar reference points. These alignments require sustained observational knowledge of the actual paths of the local sun and moon across the sky — not abstract mathematical models.',
+      'On the flat earth interpretation, Stonehenge is a precision instrument for tracking the local sun\'s circuit above the disc. The sun moves in a spiralling circuit above the flat plane; its northernmost point (the midsummer sunrise alignment at Stonehenge) and southernmost point (the midwinter alignment) mark the outer limits of the circuit as observed from the upper arc. The monument encodes this circuit in stone across a structure that has survived 4,000-5,000 years.',
+      'The prehistoric transport problem remains one of archaeology\'s most significant unsolved questions. Experimental teams using period-appropriate methods — logs, ropes, sledges — have never successfully moved stones of the required weight across the required distances. The official explanation (primitive technology applied over very long periods) is not supported by experimental results. Alternative explanations — including acoustic levitation, electromagnetic stone-moving techniques, or pre-modern technology that has not survived — remain excluded from academic discourse by methodological convention rather than experimental disconfirmation.'
     ],
     facts: [
-      "Built in stages 3000-1500 BCE.",
-      "Stones up to 25 tonnes transported from up to 240 km away.",
-      "Heel stone aligns with midsummer sunrise.",
-      "Tracks lunar 18.6-year cycle and multiple stellar references."
+      'Built 3000-1500 BCE — sarsen stones 25 tonnes each, transported 200 km.',
+      'Bluestone ring: transported from Preseli Hills, Wales, ~250 km; transport method unconfirmed by experiment.',
+      'Heel stone: midsummer sunrise alignment — sun\'s northernmost circuit point.',
+      'Tracks lunar 18.6-year major standstill cycle.',
+      'Experimental archaeology has not successfully demonstrated stone transport using period methods.'
     ],
-    significance: "A pre-modern observatory tracking the local sun's actual circuit. Its precision is consistent with the flat earth model's simpler observational requirements.",
+    significance: 'Stonehenge is a 5,000-year-old precision astronomical instrument whose construction method remains unsolved. It tracks the local sun\'s circuit with precision consistent with the flat earth model\'s observational requirements. Its builders had sustained astronomical knowledge across multiple generations that mainstream archaeology cannot account for.',
+    sources: [
+      'Atkinson, R. — "Stonehenge" (1956)',
+      'Hawkins, G. — "Stonehenge Decoded" (1965)',
+      'Darvill, T. — "Stonehenge: The Biography of a Landscape" (2006)',
+      'Parker Pearson, M. — "Stonehenge: Exploring the Greatest Stone Age Mystery" (2012)'
+    ],
     related: [10, 11, 51]
   },
   99: {
