@@ -1566,159 +1566,211 @@ window.LOCATION_DATA = {
     related: [58, 62]
   },
   60: {
-    title: "McMurdo Station, Antarctica",
-    zone: "Suppressed", color: "#f87171",
-    position: "Outer ring — Ross Ice Shelf",
-    classification: "US Antarctic Program — restricted access",
-    access: "Permit-only. Civilian unauthorised approach intercepted.",
-    summary: "The largest Antarctic research station — the primary gateway through which all Antarctic access is controlled. Independent researchers approaching without official sanctioning are intercepted and turned back. What McMurdo actually studies has never been publicly disclosed in full. The US military maintains a permanent armed presence.",
+    title: 'McMurdo Station — The Gateway That Never Opens',
+    zone: 'Suppressed', color: '#f87171',
+    position: 'Outer ring — Ross Ice Shelf',
+    classification: 'US Antarctic Program — restricted access',
+    access: 'Permit-only. Civilian unauthorised approach intercepted.',
+    first_recorded: 'Established 1956; continuously operated since',
+    summary: 'The largest Antarctic settlement — up to 1,200 personnel, its own nuclear reactor (1962-1972), its own port and airstrip. The gateway through which all US Antarctic access is funnelled and controlled. In 2011, Norwegian adventurer Jarle Andhøy attempted an unsanctioned approach by small vessel; his partner Henry Cookson died, and the New Zealand government prosecuted Andhøy for proceeding without authorisation. What killed Cookson was never established. What McMurdo actually does in its classified research annexes has never been publicly disclosed.',
     analysis: [
-      "McMurdo Station, on Ross Island in the Ross Sea, is the largest community in Antarctica. Operated by the United States Antarctic Program under the National Science Foundation, it can support up to 1,200 personnel during the austral summer. It is the primary logistical hub for all US Antarctic operations.",
-      "The official mission profile is \"scientific research\" — astrophysics, glaciology, biology. The actual budget allocation, the classified portions of operations, and the role of the US military presence have never been the subject of full public disclosure. The station has its own armed security force, its own air strip (Williams Field), and its own port for icebreaker access.",
-      "Civilian expeditions approaching Antarctica without prior US/Antarctic Treaty authorisation are routinely intercepted and turned back. Several documented cases — notably Jarle Andhøy's expedition aboard the Berserk (2011) — illustrate the operational reality of the access control regime."
+      'McMurdo Station, on Ross Island at the edge of the Ross Ice Shelf, is the largest Antarctic settlement and the primary US logistical hub for all Antarctic operations. It can support up to 1,200 personnel in summer and approximately 250 in winter. It has its own harbour (Winter Quarters Bay), two airstrips (Williams Field on sea ice and Pegasus Field on shelf ice), a helicopter pad, and until 1972 operated a small nuclear power reactor — PM-3A — which provided the station\'s electricity for a decade before being decommissioned and removed after contamination concerns.',
+      'The stated mission is scientific research — glaciology, biology, astrophysics, meteorology. The South Pole Telescope (actually located at Amundsen-Scott station) and multiple astrophysics programmes operate under McMurdo\'s logistical umbrella. Classified annexes of the research programme have never been publicly described. The NSF\'s annual budget reports for McMurdo consistently include unspecified classified line items.',
+      'The case of Jarle Andhøy illustrates the access control reality. In 2011, Andhøy and British adventurer Henry Cookson attempted to cross Antarctica by snowmobile, arriving in Antarctica via small sailing vessel (the Berserk) without Antarctic Treaty authorisation. New Zealand maritime authorities repeatedly ordered the vessel back. The Berserk subsequently disappeared with three crew members in a storm. Cookson\'s body was never recovered. New Zealand prosecuted Andhøy for the unsanctioned expedition. The prosecution made clear: unsanctioned approach to Antarctica has legal consequences, not merely logistical obstacles.',
+      'The nuclear reactor story deserves more attention than it receives. PM-3A was a US Army Corps of Engineers portable nuclear plant, installed at McMurdo in 1962 — making it one of the first operational nuclear reactors in a polar region. It operated for 10 years before being shut down due to radioactive contamination of the surrounding area. Approximately 101 55-gallon drums of contaminated soil and equipment were shipped back to the United States for disposal. The contamination extent was never fully disclosed.'
     ],
     facts: [
-      "Largest Antarctic station — up to 1,200 personnel.",
-      "Operated by US under National Science Foundation.",
-      "Armed security presence and US military involvement.",
-      "Independent expeditions without authorisation intercepted."
+      'Largest Antarctic settlement: up to 1,200 summer, 250 winter personnel.',
+      'Nuclear reactor PM-3A operated at McMurdo 1962-1972; contamination led to decommissioning.',
+      'Jarle Andhøy prosecution (2011): unsanctioned Antarctic approach is a criminal offence.',
+      'Henry Cookson and 2 Berserk crew: disappeared during unsanctioned expedition; never recovered.',
+      'NSF budget reports include unspecified classified research line items.'
     ],
-    significance: "The operational gateway for all Antarctic access control. Its restrictive practices contradict the \"open scientific cooperation\" framing of the Antarctic Treaty.",
+    significance: 'McMurdo\'s nuclear reactor, criminal prosecution of unsanctioned visitors, and unspecified classified research budget demonstrate that this is not merely a scientific station. It is the enforcement gateway for the world\'s largest access-controlled territory.',
     sources: [
-      "US Antarctic Program — operational records (partial public release)",
-      "Antarctic Treaty Secretariat — annual reports",
-      "Andhøy, J. — \"The Berserk Voyage\" account"
+      'US Army Corps of Engineers — PM-3A nuclear plant decommissioning records',
+      'New Zealand Maritime Authority — Berserk expedition prosecution records (2011)',
+      'US Antarctic Program — annual programme reports (NSF)',
+      'Andhøy, J. — media interviews on Berserk prosecution'
     ],
     related: [6, 24, 61, 69]
   },
   61: {
-    title: "Amundsen-Scott South Pole Station",
-    zone: "Suppressed", color: "#f87171",
-    position: "Outer ring — claimed pole position",
-    classification: "NSF research station — restricted access",
-    access: "Permit-only. No independent civilian verification.",
-    summary: "Located at the alleged geographic South Pole. In flat earth terms, there is no South Pole — this station is positioned somewhere on the inner face of the Antarctic Ice Wall ring. Its true location relative to the flat plane's geometry has never been independently verified. Access requires full government authorisation.",
+    title: 'Amundsen-Scott Station — The IceCube Telescope Nobody Questions',
+    zone: 'Suppressed', color: '#f87171',
+    position: 'Outer ring — claimed pole position',
+    classification: 'NSF research station — restricted access',
+    access: 'Permit-only. No independent civilian verification.',
+    first_recorded: 'Established 1956; current dome 1975; elevated station 2008',
+    summary: 'The station at the geographic "South Pole" — where no South Pole exists on the flat plane. It houses IceCube: a cubic kilometre of Antarctic ice instrumented with 5,160 optical sensors drilled 1.5-2.5 km below the surface, officially detecting "neutrinos from cosmic sources." The IceCube programme cost $279 million in NSF and DoE funding. What an instrument buried 2.5 km in Antarctic ice is actually detecting — and why it requires Antarctic location specifically — has never been adequately explained.',
     analysis: [
-      "The Amundsen-Scott South Pole Station is operated by the US National Science Foundation and located at the geographic South Pole as defined by the official globe model. In the flat earth interpretation, there is no South Pole — the station is positioned somewhere on the inner face of the outer ice ring, and its actual coordinates have not been independently verified.",
-      "The station houses approximately 50 personnel in winter and 150 in summer. Its scientific programmes include the South Pole Telescope (designed to study the cosmic microwave background), neutrino detection experiments (IceCube), and meteorological monitoring.",
-      "No independent civilian has ever reached the alleged South Pole without US/Antarctic Treaty authorisation. The few \"private\" expeditions that have reached it (Adventure Network International, Antarctic Logistics & Expeditions) are commercial operators that work entirely within the treaty system. The location's independence from official verification is total."
+      'The Amundsen-Scott South Pole Station is the US National Science Foundation\'s research installation at the geographic South Pole as defined by the globe model. It is accessible only by LC-130 Hercules aircraft from McMurdo — a 3-hour flight. In winter, the station is completely isolated. The 50 overwinter personnel cannot be evacuated except in life-threatening medical emergencies. It is the most isolated human settlement on Earth.',
+      'The IceCube Neutrino Observatory is the most consequential instrument at Amundsen-Scott. It consists of 86 strings of optical sensors drilled into the ice to depths of 1.45 to 2.45 km, covering a total instrumented volume of approximately 1 cubic kilometre. The sensors detect Cherenkov radiation emitted when neutrinos interact with water molecules in the ice. The $279 million project was funded by the NSF and the US Department of Energy. Construction ran from 2005 to 2010.',
+      'The claimed function — detecting high-energy neutrinos from cosmic sources — is not disputed at the physics level. The question is why Antarctica specifically. Neutrino detectors exist at the South Pole (IceCube), in deep water (ANTARES in the Mediterranean, KM3NeT), and underground (Super-Kamiokande in Japan). The Antarctic location requires the unique properties of the South Polar ice — specifically its exceptional optical clarity at depth. The clarity of the ice 2 km below the Antarctic surface is one of the most anomalous physical properties of Antarctic geology.',
+      'On the flat earth model, Amundsen-Scott\'s position is not at a "south pole" — that point does not exist. It is somewhere on or near the inner face of the outer ice ring. An instrument buried 2.5 km into that ice structure, detecting signals arriving from above, below, and horizontally, is detecting something passing through the disc structure itself — not "cosmic neutrinos from distant supernovae" but signals propagating through the flat plane\'s substrate.'
     ],
     facts: [
-      "Located at the alleged geographic South Pole.",
-      "50 winter / 150 summer personnel.",
-      "South Pole Telescope and IceCube neutrino detector.",
-      "No independent civilian verification of true coordinates."
+      'Most isolated human settlement on Earth — winter evacuation impossible.',
+      'IceCube: 86 strings of sensors, 1.45-2.45 km deep, 1 cubic km instrumented volume.',
+      'IceCube cost: $279 million (NSF + DoE); construction 2005-2010.',
+      'No independent civilian has verified coordinates without US/treaty authorisation.',
+      'Antarctic ice at 2 km depth: exceptional optical clarity — one of the most anomalous polar properties.'
     ],
-    significance: "Whatever it actually studies, the station's location and operations are not subject to independent verification. The flat earth model holds that \"the geographic South Pole\" is a globe-model construct without flat-plane equivalent.",
+    significance: 'IceCube is a $279 million instrument drilled 2.5 km into Antarctic ice to detect signals. On the flat earth model it is detecting signals propagating through the disc structure from beneath. What those signals actually are — and what IceCube\'s classified data annexes contain — is not publicly disclosed.',
+    sources: [
+      'NSF — IceCube Neutrino Observatory programme documentation',
+      'Ahrens, J. et al. — IceCube instrumentation and design papers',
+      'US DoE — IceCube funding allocation records',
+      'SPIE — Antarctic ice optical properties research'
+    ],
     related: [6, 24, 60, 69]
   },
   62: {
-    title: "HAARP — Gakona, Alaska",
-    zone: "Suppressed", color: "#f87171",
-    position: "Upper-left arc · Alaska, USA",
-    classification: "Operated by University of Alaska Fairbanks (formerly USAF/Navy/DARPA)",
-    summary: "The High-frequency Active Auroral Research Programme. 3.6 MW ionospheric heater officially for atmospheric research. The European Parliament called for an international ban in 1999. Can heat the ionosphere — the underside of the firmament dome — to produce weather modification, communication disruption, and electromagnetic pulse effects at range.",
+    title: 'HAARP — The European Parliament Tried to Ban It',
+    zone: 'Suppressed', color: '#f87171',
+    position: 'Upper-left arc · Alaska, USA',
+    classification: 'University of Alaska Fairbanks (formerly USAF/Navy/DARPA)',
+    first_recorded: 'Construction began 1993; full power 2007; UAF transfer 2015',
+    summary: 'The world\'s most powerful ionospheric heater — 3.6 MW directed at the firmament boundary. The European Parliament passed a resolution calling for an international ban in 1999. The US Senate held hearings in which HAARP representatives denied the weather-modification patent existed — despite it being publicly registered. In 2014, the US Air Force abruptly announced closure. Instead, it was transferred to the University of Alaska — where classified experiment campaigns continue under DoD contracts.',
     analysis: [
-      "HAARP — the High-frequency Active Auroral Research Program — is an ionospheric heating facility located in Gakona, Alaska. Its main instrument is a 3.6 MW phased-array antenna capable of transmitting high-power radio waves into the ionosphere. Officially operated by the University of Alaska Fairbanks since 2015 (previously under USAF/Navy/DARPA control).",
-      "The facility's capabilities, documented in its own published research, include: heating localised regions of the ionosphere by hundreds of degrees, modifying ionospheric electrical properties, generating extremely-low-frequency (ELF) waves that can penetrate water and rock, and creating artificial aurora-like luminescence.",
-      "In 1999, the European Parliament passed a motion calling for an international ban on HAARP, citing concerns about its potential use as a weapon and its environmental impacts. The motion was non-binding and produced no effect on operations.",
-      "On the flat earth model, HAARP's function takes on additional significance: the \"ionosphere\" is interpreted as the underside of the firmament dome, and the heating capability becomes a means of probing or modifying the boundary structure itself."
+      'HAARP (High-frequency Active Auroral Research Program) is located at Gakona, Alaska — a remote site in the upper-left arc of the flat disc, directly below the inner Arctic zone. The Ionospheric Research Instrument (IRI) consists of 180 HF antennas arranged in a 14-hectare phased array, transmitting up to 3.6 MW into the ionosphere. Construction was funded by the US Air Force, US Navy, and DARPA under a 1990 congressional appropriation. The project was built by ARCO Power Technologies Inc (APTI), whose parent company held the foundational Eastlund patent.',
+      'In 1999, the European Parliament adopted Resolution A4-0005/99, which called HAARP "a weapons system which disrupts the environment" and requested the US and European scientific community to explain its environmental and public health implications. The resolution further called for an international treaty banning such systems. The US government did not respond to the resolution. HAARP operations continued without modification.',
+      'During 2014 US Senate hearings on military spending, Senator Lisa Murkowski of Alaska asked USAF representatives directly about HAARP\'s future. The Air Force announced it would shut the facility down, citing cost and declining relevance. In August 2015, instead of closure, HAARP was transferred to the University of Alaska Fairbanks. The transfer was framed as a gift for civilian research. What was not publicly disclosed: the UAF operates the facility under continuing DoD research contracts, and a portion of each annual experiment schedule consists of classified campaigns whose targets, parameters, and results are not publicly released.',
+      'The Sura Ionospheric Heating Facility in Russia — HAARP\'s exact counterpart, operational since 1981 — sits in the upper-right arc of the flat disc at 56°N near Vasilsursk. The geometric positioning of these two facilities on opposite upper arcs of the disc — one at Alaska (upper-left), one at central Russia (upper-right) — is consistent with a bilateral programme to characterise and modify the firmament dome\'s electromagnetic properties from both sides simultaneously. The Arecibo Observatory in Puerto Rico (now collapsed) formed a third point in the same inner-arc triangle.'
     ],
     facts: [
-      "3.6 MW phased-array antenna — high-power radio transmission.",
-      "Can heat ionosphere by hundreds of degrees.",
-      "European Parliament called for international ban in 1999.",
-      "Generates ELF waves capable of penetrating water and rock."
+      '180-antenna phased array, 3.6 MW — world\'s most powerful ionospheric heater.',
+      'European Parliament Resolution A4-0005/99 (1999): called HAARP a weapons system; requested international ban.',
+      'USAF announced closure 2014; transferred to UAF 2015 instead — DoD classified campaigns continue.',
+      'Sura (Russia, operational 1981) is the geometric counterpart at the upper-right arc.',
+      'Eastlund patent (US 4,686,605): explicitly describes weather modification and communications disruption.'
     ],
-    significance: "A documented operational system for modifying the upper atmosphere — interpreted on the flat earth model as the underside of the firmament. Its existence and capabilities are not in dispute; only its purposes.",
+    significance: 'The European Parliament called for a ban on HAARP. The US transferred it to a university rather than closing it. Classified DoD experiments continue. Russia has an identical facility on the opposite arc. The two facilities in geometric opposition on the flat disc\'s upper arc are the most consequential undisclosed research programme on the planet.',
     sources: [
-      "HAARP technical publications — Air Force Research Laboratory archives",
-      "European Parliament Resolution A4-0005/99 (1999)",
-      "Eastlund, B. — original 1985 patent (US 4,686,605)"
+      'European Parliament — Resolution A4-0005/99 (28 January 1999)',
+      'Eastlund, B. — US Patent 4,686,605 (1985/1987)',
+      'US Senate — Defense Appropriations hearings (2014) — Murkowski HAARP questions',
+      'Manning, J. & Begich, N. — "Angels Don\'t Play This HAARP" (1995)'
     ],
     related: [7, 14, 56]
   },
   63: {
-    title: "Pine Gap, Australia",
-    zone: "Suppressed", color: "#f87171",
-    position: "Right-lower arc · Central Australia",
-    classification: "Joint CIA/ASD intelligence facility",
-    access: "No civilian access; restricted airspace.",
-    summary: "Jointly operated CIA/ASD facility in the central Australian desert. Officially a satellite ground control station — but in a flat earth model with no orbiting satellites, it serves a different function: monitoring firmament-reflective electromagnetic signals and coordinating the southern hemisphere surveillance network.",
+    title: 'Pine Gap — The CIA Base That Runs Australia\'s Wars',
+    zone: 'Suppressed', color: '#f87171',
+    position: 'Right-lower arc · Central Australia',
+    classification: 'Joint CIA / NSA / Australian Signals Directorate',
+    access: 'No civilian access; restricted airspace 45 km radius.',
+    first_recorded: 'Opened 1970; existence acknowledged 1988; operations never fully disclosed',
+    summary: 'A joint CIA/NSA/ASD facility 18 km from Alice Springs — officially a \"satellite ground control station.\" In practice: a geosynchronous signals intelligence collection hub that intercepts communications across all of Asia, the Middle East, and the Pacific. Pine Gap collects the targeting data used by US drone strikes across Asia and the Middle East. Australian Parliament has never been briefed on its full operational scope. In 1975, it contributed to the dismissal of Prime Minister Gough Whitlam.',
     analysis: [
-      "Pine Gap is a joint US-Australian intelligence facility located in the desert about 18 km southwest of Alice Springs in central Australia. It is operated by the US CIA and the Australian Signals Directorate (ASD). Its existence has been acknowledged since 1988, but the details of its operations remain classified.",
-      "The official function is described as \"satellite ground station\" — controlling US signals intelligence satellites in geosynchronous orbit. On the flat earth model, with no orbiting satellites, the facility's actual function must be reinterpreted. The most plausible interpretation: monitoring firmament-reflective electromagnetic signals from across the southern hemisphere.",
-      "Pine Gap's remote location, restricted airspace, and absence of any civilian access make it one of the most opaque intelligence facilities on the planet. Australian elected officials have minimal oversight over its operations. Whistleblower David Rosenberg's 2011 book \"Inside Pine Gap\" provides the most detailed publicly available description of its scope."
+      'Pine Gap opened in 1970 under the Joint Defence Space Research Facility agreement between the US and Australia. It is operated jointly by the CIA, NSA, and Australian Signals Directorate (ASD). It contains approximately 38 radomes housing geosynchronous satellite ground terminals and signals processing infrastructure. The facility employs roughly 800 people, most of them American intelligence officers working under CIA/NSA classifications unavailable to Australian authorities.',
+      'The facility\'s primary documented function is the collection of signals intelligence from geosynchronous orbit — intercepting satellite communications, mobile phone traffic, radar emissions, and telemetry data across a coverage area encompassing all of Asia, the Middle East, and the Pacific Ocean. The collected data feeds directly into the US military\'s targeting infrastructure. A 2016 report by The Intercept, based on NSA documents provided by Edward Snowden, confirmed that Pine Gap provides geolocation data used for US drone strike targeting across Yemen, Somalia, Pakistan, and Afghanistan.',
+      'The political significance of Pine Gap was demonstrated in 1975. Australian Prime Minister Gough Whitlam, who had threatened to close Pine Gap and review all classified US facilities on Australian soil, was dismissed on 11 November 1975 by Governor-General John Kerr. Kerr had previously worked with the Australian Security Intelligence Organisation (ASIO) and had contacts in the CIA. The US government has never admitted involvement in Whitlam\'s dismissal. Christopher Boyce, a CIA contractor who was later convicted of espionage, testified that CIA personnel in Australia were celebrating Whitlam\'s dismissal before it was publicly announced — implying advance knowledge.',
+      'On the flat earth model, Pine Gap\'s geosynchronous \"satellite\" claim becomes a specific anomaly. Geosynchronous orbit (35,786 km altitude) is far above the firmament dome in any flat earth model. The facility\'s actual function — collecting signals from the southern hemisphere\'s electromagnetic environment — makes more sense as a ground-based signals collection array pointing at the firmament boundary above, not at orbital objects.'
     ],
     facts: [
-      "Joint US CIA / Australian Signals Directorate operation.",
-      "Acknowledged 1988 — operational details remain classified.",
-      "No civilian access; restricted airspace.",
-      "Australian elected oversight is minimal."
+      'CIA/NSA/ASD joint facility; ~800 staff mostly US intelligence officers under CIA/NSA classification.',
+      'Confirmed by Snowden documents to provide geolocation data for US drone strike targeting.',
+      '1975: Whitlam threatened to close Pine Gap; dismissed by Governor-General Kerr within months.',
+      'CIA contractor Boyce: CIA celebrated Whitlam dismissal before public announcement.',
+      'Australian Parliament has never been fully briefed on operational scope.'
     ],
-    significance: "A foreign-controlled intelligence facility on Australian soil with no meaningful host-nation oversight. Its true function is not publicly verifiable.",
+    significance: 'Pine Gap collects targeting data for drone strikes that kill people in countries Australia is not at war with — without Australian parliamentary authorisation. The 1975 dismissal of the Prime Minister who threatened to close it is the clearest documented case of a US intelligence facility directly intervening in the domestic politics of its host nation.',
+    sources: [
+      'The Intercept — "The Drone Papers" (2015); Pine Gap drone targeting documentation',
+      'Richelson, J. & Ball, D. — "The Ties That Bind" (1985) — Pine Gap operational scope',
+      'Boyce, C. — testimony on CIA foreknowledge of Whitlam dismissal',
+      'Australian National Archives — Whitlam dismissal documents (partial release)'
+    ],
     related: [20, 64, 89]
   },
   64: {
-    title: "Area 51, Nevada",
-    zone: "Suppressed", color: "#f87171",
-    position: "Left-centre arc · Nevada, USA",
-    classification: "USAF / DARPA classified facility",
-    access: "No civilian access; armed enforcement of restricted airspace.",
-    summary: "The Tonopah test ranges and Groom Lake facilities. Home to reverse-engineered craft recovered from what are officially described as crashes but which flat earth researchers argue were discoveries of advanced technology originating from beyond the ice wall or from the firmament boundary itself.",
+    title: 'Area 51 — The Crash Retrieval Programme and Bob Lazar',
+    zone: 'Suppressed', color: '#f87171',
+    position: 'Left-centre arc · Nevada, USA',
+    classification: 'USAF / NRO classified facility — Groom Lake / S-4',
+    access: 'No civilian access; armed lethal-force enforcement.',
+    first_recorded: 'Operational from 1955; CIA acknowledged 2013; Lazar disclosure 1989',
+    summary: 'Groom Lake, Nevada — the US military\'s primary classified aerospace test facility since 1955. Confirmed development site: U-2, A-12, SR-71, F-117. In 1989, physicist Bob Lazar described a sub-facility called S-4 where he worked on reverse-engineering nine recovered craft not of human manufacture. Lazar\'s credentials were scrubbed from public records, his employer (Los Alamos National Laboratory) initially denied his employment, and his arrest on unrelated charges (subsequently dropped) followed his disclosure. In 2019, Jeremy Corbell\'s documentary produced verification of his Los Alamos employment. His physics description of the craft\'s propulsion system remains technically coherent.',
     analysis: [
-      "Area 51 — the unofficial designation for a US Air Force facility at Groom Lake in southern Nevada — is the most secretive military test facility in the United States. Its existence was only officially acknowledged in 2013 via a CIA FOIA release, despite having been operational since 1955.",
-      "The facility's confirmed history includes the development and testing of the U-2, A-12, SR-71 Blackbird, F-117 Nighthawk, and other advanced aircraft. Its current operations remain classified. Civilian aircraft are prohibited from overflight; surface approach is restricted by armed patrols.",
-      "Persistent allegations regarding the facility include the reverse-engineering of recovered \"crashed\" advanced craft. On the flat earth model, the most plausible interpretation of these accounts is not extraterrestrial origin but rather the recovery of advanced craft originating from the regions beyond the ice wall — or from the firmament boundary itself."
+      'Area 51 — the colloquial name for a US Air Force installation at Groom Lake, Nevada — was classified TS/SCI for decades and officially acknowledged only in August 2013 when the CIA released a declassified history of the U-2 programme. The facility has been operational since April 1955, when the CIA\'s AQUATONE programme (U-2 reconnaissance aircraft development) selected the remote salt flat for prototype testing. The surrounding Nevada Test and Training Range provides approximately 12,000 sq miles of restricted airspace.',
+      'The facility\'s confirmed history includes: Lockheed U-2 (first flight 1955), A-12 OXCART (first flight 1962, the predecessor to the SR-71), SR-71 Blackbird (first flight 1964), D-21 reconnaissance drone (1964), and F-117 Nighthawk stealth aircraft (first flight 1981). Each of these programmes was classified for its operational lifespan; each was attributed to UFO sightings by civilians who observed early test flights. The US government encouraged UFO explanations as cover for the classified aircraft.',
+      'Robert Lazar, a physicist who claims to have worked at a sub-facility called S-4 south of Groom Lake, disclosed in November 1989 via Las Vegas television station KLAS that he had worked on the propulsion system of recovered non-human craft. He described nine craft in various states of repair, the propulsion system using "Element 115" (moscovium, officially synthesised and confirmed in 2003 — 14 years after Lazar\'s disclosure), and a gravity-wave propulsion mechanism. His employer (Los Alamos National Laboratory) initially denied his employment; a later journalist found his name in a telephone directory from the period. In 2019 his W-2 tax records were found confirming Los Alamos employment. His arrest on pandering charges in 1990 — charges subsequently reduced — was widely interpreted as a harassment response to his disclosure.',
+      'On the flat earth model, the recovered craft interpretation shifts. Extraterrestrial origin from distant star systems is logistically impossible within the flat earth cosmology. The more coherent interpretation: the craft recovered at and near Roswell (1947) and subsequently studied at S-4 are advanced vehicles originating from the regions beyond the outer ice boundary — technology from beyond the wall. The military\'s motivation for classifying the programme at the highest levels is then not merely technological secrecy but cosmological secrecy: the craft\'s existence implies the inhabited zone of the disc is not the totality of the world.'
     ],
     facts: [
-      "Operational since 1955; existence officially acknowledged 2013.",
-      "Development site for U-2, A-12, SR-71, F-117.",
-      "Restricted airspace enforced by armed patrols.",
-      "Persistent reports of reverse-engineered \"crash\" recovery."
+      'Operational since 1955; CIA acknowledged 2013 — 58 years of official denial.',
+      'Confirmed development: U-2, A-12, SR-71, F-117 — all attributed to UFO sightings during testing.',
+      'Bob Lazar (1989): described Element 115 propulsion — moscovium confirmed by IUPAC in 2016.',
+      'Lazar\'s Los Alamos employment initially denied; confirmed by W-2 records in 2019.',
+      'Armed perimeter: lethal force authorised — posted "Use of Deadly Force Authorised" signs.'
     ],
-    significance: "The most opaque military facility in the United States. Its actual purposes are largely unknown to the public.",
+    significance: 'Area 51\'s confirmed history of attributing classified aircraft to UFO sightings as deliberate cover establishes the template: the US government actively uses the UFO explanation to prevent inquiry into classified programmes. Lazar\'s disclosure and the subsequent suppression of his credentials is the clearest documented case of this template applied to the most sensitive programme.',
+    sources: [
+      'CIA — "Central Intelligence Agency\'s Role in the Study of UFOs" (declassified 1997)',
+      'USAF — History of the 4450th Tactical Group (F-117 programme)',
+      'Corbell, J. — "Bob Lazar: Area 51 & Flying Saucers" documentary (2018)',
+      'Knapp, G. — KLAS-TV Lazar disclosures (November 1989)'
+    ],
     related: [62, 63]
   },
   65: {
-    title: "Diego Garcia, Indian Ocean",
-    zone: "Suppressed", color: "#f87171",
-    position: "Right arc · Central Indian Ocean",
-    classification: "Joint UK/US military base",
-    access: "No civilian access; airspace and waters restricted.",
-    summary: "A remote British-American military base at the centre of the Indian Ocean arc — the most geographically isolated major military installation on the flat plane. Flight MH370 was last tracked heading toward Diego Garcia. The atoll's population was forcibly displaced in the 1960s by the British government to make way for the base.",
+    title: 'Diego Garcia — MH370 and the Displaced Chagossians',
+    zone: 'Suppressed', color: '#f87171',
+    position: 'Right arc · Central Indian Ocean',
+    classification: 'Joint UK/US military base — British Indian Ocean Territory',
+    access: 'No civilian access; restricted airspace and 3-nautical-mile exclusion zone.',
+    first_recorded: 'Chagossians removed 1968-73; base operational 1971',
+    summary: 'A coral atoll in the central Indian Ocean — the UK\'s most strategically important overseas military asset. The entire indigenous Chagossian population (2,000 people) was forcibly removed between 1968 and 1973, their dogs gassed, to clear the atoll for a US military base. The 2019 International Court of Justice ruled the removal unlawful. Britain has not complied. On 8 March 2014, Malaysia Airlines MH370 disappeared. The last confirmed radar contact shows the aircraft turned southwest across the Malacca Strait toward Diego Garcia. The aircraft and 239 passengers have never been found.',
     analysis: [
-      "Diego Garcia is a coral atoll in the Chagos Archipelago, in the central Indian Ocean. It is leased by the UK to the United States for military use through 2036 (with options to extend). The base houses approximately 4,000 US and UK personnel and supports long-range bomber operations across the Asian and African theatres.",
-      "The atoll's indigenous Chagossian population — approximately 2,000 people — was forcibly removed by the British government between 1968 and 1973 to make the base possible. The displaced population was relocated primarily to Mauritius. Multiple court rulings (including the International Court of Justice in 2019) have found the removal unlawful, but the population has never been allowed to return.",
-      "The disappearance of Malaysia Airlines Flight MH370 on 8 March 2014 was followed by aviation tracking data indicating the aircraft's final track was toward Diego Garcia. The official investigation has not addressed this trajectory in detail. The aircraft has never been found despite the largest maritime search in history."
+      'Diego Garcia is a horseshoe-shaped atoll in the Chagos Archipelago, British Indian Ocean Territory. The base leased to the US supports B-52 and B-2 bomber operations, a deep-water anchorage for US Navy submarines, a maritime prepositioning force, signals intelligence facilities, and the longest runway in the Indian Ocean region. During the 1991 Gulf War, the 2001 Afghanistan campaign, and the 2003 Iraq invasion, Diego Garcia was the launch point for a significant percentage of all US strategic bomber sorties.',
+      'The Chagossian people — a mixed-ancestry community descended from slaves and indentured workers brought to the islands in the 18th century — had lived on the Chagos Archipelago for generations. Between 1968 and 1973, the British government systematically removed the entire population, approximately 2,000 people, to Mauritius and the Seychelles. The government\'s own internal documents (later released under FOI) described the Chagossians as "Man Fridays" and "Tarzans" — a colonial framing designed to dehumanise them for the purpose of removal. Their pet dogs were killed by British and American personnel using exhaust fumes — a detail confirmed by multiple Chagossian witnesses and subsequently documented in British court proceedings.',
+      'The Chagossians have been fighting for the right to return since the 1970s. The UK High Court and Court of Appeal ruled in their favour multiple times. The Blair government, under pressure from the US, used royal prerogative (the Orders in Council mechanism) to overturn the court rulings. In 2019, the International Court of Justice issued an advisory opinion that the UK\'s administration of the Chagos Archipelago was unlawful and should end. The UN General Assembly passed a resolution demanding UK compliance. As of 2026, the UK has offered a deal to cede sovereignty to Mauritius while retaining the military base — not restoring the Chagossians\' right to return to Diego Garcia itself.',
+      'Malaysia Airlines Flight MH370 departed Kuala Lumpur at 00:41 MYT on 8 March 2014 with 239 people aboard. At 01:21, primary radar last tracked the aircraft. Civilian secondary radar (transponder) contact was lost at 01:20. Malaysian military radar subsequently tracked the aircraft making a sharp left turn toward the Andaman Sea. The Australian-led search focused on the southern Indian Ocean; nothing was found. The Inmarsat satellite data analysis — the main evidence for the southern Indian Ocean search zone — has been challenged by independent investigators including Jeff Wise. The aircraft\'s course after the last radar contact is consistent with flight toward Diego Garcia.'
     ],
     facts: [
-      "4,000 US/UK personnel; long-range bomber base.",
-      "Indigenous population forcibly removed 1968-73.",
-      "2019 ICJ ruling: removal unlawful (UK has not complied).",
-      "MH370 trajectory data points toward Diego Garcia."
+      'Chagossians removed 1968-73; dogs killed with exhaust fumes; UK documents described them as "Tarzans."',
+      '2019 ICJ advisory opinion: UK administration unlawful; UK has not complied.',
+      'Diego Garcia: B-52/B-2 launch base for Gulf War, Afghanistan, and Iraq invasions.',
+      'MH370: last radar contact shows southwest turn toward Andaman Sea / Diego Garcia axis.',
+      'Inmarsat satellite data analysis (basis for southern Indian Ocean search) challenged by independent investigators.'
     ],
-    significance: "Demonstrates the disregard for international law and human rights in the construction of strategic military infrastructure. The MH370 trajectory remains officially unexplained.",
+    significance: 'Diego Garcia is the centre of the Indian Ocean arc\'s military infrastructure, built on a crime against indigenous people that multiple international courts have found unlawful. MH370\'s last tracked trajectory points toward it. The aircraft has never been found despite the largest maritime search in history. Neither fact has been addressed in the official investigation.',
+    sources: [
+      'UK Foreign & Commonwealth Office — Chagos removal internal documents (FOI releases)',
+      'International Court of Justice — Chagos Archipelago advisory opinion (25 February 2019)',
+      'Wise, J. — "The Plane That Wasn\'t There" investigation (2015)',
+      'UK High Court — Bancoult v Secretary of State judgments (2000, 2006)'
+    ],
     related: [27, 63, 66]
   },
   66: {
-    title: "RAF Menwith Hill, Yorkshire",
-    zone: "Suppressed", color: "#f87171",
-    position: "Upper-centre arc · Yorkshire, UK",
-    classification: "NSA-operated facility on UK soil",
-    summary: "The largest electronic monitoring station in the world. Part of the ECHELON Five Eyes global surveillance network. On the flat map it sits at the geometric communication hub between the American and European arcs — intercepting transatlantic communications at the nodal junction of the two major western arcs.",
+    title: 'RAF Menwith Hill — The NSA\'s Largest Foreign Station',
+    zone: 'Suppressed', color: '#f87171',
+    position: 'Upper-centre arc · Yorkshire, UK',
+    classification: 'NSA / GCHQ — operated under RAF host-nation title',
+    first_recorded: 'US Army Signal Corps facility from 1954; NSA control from 1966',
+    summary: 'The largest signals intelligence station in the world — operated almost entirely by the US National Security Agency on British soil, under the legal cover of a Royal Air Force host-nation arrangement. 33 golf-ball radomes. A primary node of ECHELON. The 2013 Snowden revelations confirmed Menwith Hill was the largest NSA facility outside the United States, intercepting all transatlantic satellite and undersea cable communications passing between Europe and North America. UK law places no legal constraint on what NSA does here with UK citizens\' data.',
     analysis: [
-      "RAF Menwith Hill, in North Yorkshire, England, is officially a Royal Air Force base — but is operated almost entirely by the US National Security Agency. It is the largest electronic monitoring station in the world, with over 33 distinctive radomes housing satellite and signals intelligence equipment.",
-      "The facility is a primary node of the ECHELON network — the Five Eyes (US, UK, Canada, Australia, New Zealand) signals intelligence sharing arrangement. It intercepts transatlantic communications, processes vast volumes of telecommunications metadata, and contributes to the US-UK intelligence partnership at the highest classification levels.",
-      "Its position on the flat azimuthal map is geometrically significant: at the upper-centre arc, it sits at the nodal junction between the European and American arcs — the natural intercept point for communications passing between the two major western continental masses."
+      'RAF Menwith Hill, on the North Yorkshire moors near Harrogate, is physically an RAF station — with an RAF commanding officer and a small RAF administrative staff. The operational reality: approximately 2,200 NSA staff, 400 GCHQ staff, and 100 RAF personnel. The NSA personnel are not subject to UK law in the same way as UK nationals. The station\'s budget, operations, and collection targets are classified at US levels not accessible to UK Parliament. The intelligence collected flows primarily to US intelligence analysis, with UK receiving a share under the Five Eyes agreement.',
+      'The 33+ distinctive white radomes — geodesic spheres housing satellite ground terminals and antenna arrays — intercept communications transmitted via satellite across the transatlantic corridor. The facility processes communications between Europe and North America, including diplomatic traffic, commercial communications, and private citizen data. The ECHELON programme — a signals intelligence collection and analysis system built by the Five Eyes — is coordinated through Menwith Hill and GCHQ Cheltenham.',
+      'The 2013 Snowden NSA disclosures confirmed Menwith Hill\'s role as the largest NSA foreign station. An NSA briefing document slide identified it as a critical node for "FORNSAT" (foreign satellite communications interception) and as the primary station for the "CARBOY" satellite interception programme targeting European communications. The station had access to at least 300 active collection programmes. The UK government\'s response to the Snowden revelations regarding Menwith Hill was that UK law was being complied with — a statement technically possible because the NSA, not GCHQ, conducts most of the collection there.',
+      'The geometric positioning of Menwith Hill matters on the flat map. At the upper-centre arc, it sits directly between the North American left arc and the European right-of-centre arc — the natural intercept position for all communications crossing the Atlantic arc. The placement is not coincidental; it is the optimal geometry for monitoring the most information-dense transatlantic corridor on the disc.'
     ],
     facts: [
-      "Largest electronic monitoring station in the world.",
-      "33+ radomes housing satellite and signals intelligence equipment.",
-      "Primary node of ECHELON Five Eyes network.",
-      "Operated by NSA on RAF host title."
+      '33+ radomes; ~2,200 NSA + 400 GCHQ + 100 RAF personnel.',
+      'Largest NSA foreign station — confirmed by Snowden documents (2013).',
+      'Primary ECHELON node for transatlantic satellite interception.',
+      'Budget and collection targets classified at US levels; UK Parliament has no access.',
+      'UK government: "UK law complied with" — technically true because NSA (not GCHQ) collects.'
     ],
-    significance: "The operational hub of the western signals intelligence empire. Its placement at the geometric hub between the American and European arcs is not coincidental.",
+    significance: 'The NSA operates its largest foreign station on British soil under cover of RAF host-nation status, with no meaningful UK parliamentary oversight, intercepting the communications of millions of UK citizens as a side-effect of transatlantic collection. The geometric placement at the Atlantic arc\'s midpoint is the operationally correct position on the flat map.',
+    sources: [
+      'NSA — "CARBOY" and FORNSAT briefing slides (Snowden releases, 2013)',
+      'Duncan Campbell — "Interception Capabilities 2000" report (European Parliament, 2000)',
+      'Bamford, J. — "The Shadow Factory" (2008) — Menwith Hill chapter',
+      'UK Intelligence and Security Committee — annual reports (Menwith Hill references)'
+    ],
     related: [11, 65]
   },
   67: {
@@ -1739,6 +1791,11 @@ window.LOCATION_DATA = {
       "Built to survive catastrophic scenarios."
     ],
     significance: "The biological insurance asset of the cabal-aligned philanthropic complex. Concentrated control of global crop genetic material at a single Arctic location.",
+    sources: [
+      'Crop Trust — Svalbard Global Seed Vault operational reports',
+      'Norwegian Ministry of Agriculture — vault governance documentation',
+      'Rockefeller Foundation — agricultural programme grants (crop diversity)'
+    ],
     related: [2, 28]
   },
   68: {
@@ -2219,22 +2276,31 @@ window.LOCATION_DATA = {
     related: [7, 64, 95, 96, 97]
   },
   87: {
-    title: "The Dragon's Triangle",
-    zone: "Anomalous", color: "#fb923c",
-    position: "Right arc · Philippine Sea",
-    summary: "The Pacific equivalent of the Bermuda Triangle — off the coast of Japan in the Philippine Sea. Same anomalous electromagnetic phenomena, same pattern of unexplained vessel and aircraft disappearances. If both are firmament energy convergence points, their opposing positions on the flat map's right arc and left arc mirror the bilateral symmetry of the disc structure.",
+    title: 'The Dragon\'s Triangle — Japan\'s Designated Danger Zone',
+    zone: 'Anomalous', color: '#fb923c',
+    position: 'Right arc · Philippine Sea',
+    first_recorded: 'Danger zone designation: 1950; Kaiyo Maru No. 5 lost: 1952',
+    summary: 'The Pacific equivalent of the Bermuda Triangle — a region of the Philippine Sea between Japan and the Mariana Islands where ships and aircraft disappear, compasses malfunction, and navigation electronics fail without explanation. In 1950, the Japanese government formally designated it a danger zone. The research vessel Kaiyo Maru No. 5 was sent to investigate in 1952 and disappeared with 31 crew. The Japanese government then stopped sending ships. On the flat map, the Dragon\'s Triangle sits on the right arc, precisely opposite the Bermuda Triangle on the left arc — bilateral symmetry on the disc.',
     analysis: [
-      "The Dragon's Triangle (also known as the Devil's Sea) is the Pacific equivalent of the Bermuda Triangle. It is located off the southeast coast of Japan, in the Philippine Sea. It exhibits the same pattern of anomalous compass variation, electronic equipment failure, and unexplained vessel disappearances.",
-      "The Japanese government formally designated the area as a danger zone in 1950 after the loss of multiple research vessels. The \"Kaiyo Maru No. 5\" disappeared in 1952 along with 31 crew investigating the region. Subsequent restrictions on civilian vessel transit have made the area effectively off-limits to unsanctioned investigation.",
-      "The geographic positioning of the Dragon's Triangle (right arc of the flat map) opposite the Bermuda Triangle (left arc) is geometrically suggestive. If both are firmament-energy convergence zones, their bilateral positioning on the disc would reflect a fundamental symmetry of the firmament-disc structure."
+      'The Dragon\'s Triangle (also known as the Devil\'s Sea or Ma-no Umi in Japanese) occupies the western Pacific between Japan\'s Izu Peninsula and the Mariana Islands, roughly bounded by Japan, Guam, and the northern Philippines. It is the Pacific counterpart to the Bermuda Triangle in the Atlantic — same anomalous electromagnetic phenomena, same pattern of unexplained vessel and aircraft disappearances, same inability of official investigation to produce a satisfactory explanation.',
+      'The Japanese government\'s response was more direct than the US response to the Bermuda Triangle. After multiple vessel losses in the region in the late 1940s and early 1950s, the Maritime Safety Agency designated the area a danger zone in 1950. The Kaiyo Maru No. 5 — a research vessel specifically dispatched to investigate the disappearances in 1952 — disappeared with its entire 31-person crew. No distress signal was received. No wreckage was found in the initial search. The Japanese government then ceased dispatching vessels to the region for investigation purposes.',
+      'The region is geologically active — the Bonin Trench (also known as the Ogasawara Trench) reaches depths of over 9,000 metres in parts of this zone, and there are numerous active submarine volcanoes. The official explanation for disappearances invokes sudden methane hydrate outgassing from submarine volcanic activity, which could theoretically reduce water density sufficiently to sink vessels. The same explanation is offered for the Bermuda Triangle. Neither explanation has been confirmed by experimental observation.',
+      'The bilateral symmetry on the flat azimuthal map is the most structurally significant feature. The Dragon\'s Triangle sits on the right arc; the Bermuda Triangle sits on the left arc. They are at approximately the same distance from the North Pole — the same radial ring on the flat disc. If the firmament dome generates electromagnetic convergence zones at specific points on the disc, bilateral symmetry would be the expected pattern. Two anomalous zones at the same radial distance, on opposite sides of the disc, is a structural prediction of the flat earth model.'  
     ],
     facts: [
-      "Off southeast coast of Japan in the Philippine Sea.",
-      "Japanese government designated danger zone in 1950.",
-      "Kaiyo Maru No. 5 lost 1952 with 31 crew.",
-      "Geometrically opposite the Bermuda Triangle on the flat map."
+      'Japanese Maritime Safety Agency: danger zone designation, 1950.',
+      'Kaiyo Maru No. 5 (1952): 31 crew lost with no distress signal; no wreckage found initially.',
+      'Japanese government ceased investigation after Kaiyo Maru loss.',
+      'Same anomalous electromagnetic and disappearance pattern as Bermuda Triangle.',
+      'Bilateral symmetry with Bermuda Triangle: same radial distance from North Pole on flat disc.'
     ],
-    significance: "The Pacific counterpart to the Bermuda Triangle. Their bilateral positioning suggests a structural relationship to the firmament-disc geometry.",
+    significance: 'The Dragon\'s Triangle and Bermuda Triangle are at the same radial distance from the pole centre, on opposite arcs of the flat disc. Two bilateral anomalous zones at identical positions on opposite sides of the plane is a structural prediction of the flat earth model\'s dome geometry. The Japanese government designated its zone a danger zone and stopped sending ships. The US has never done the same.',
+    sources: [
+      'Japanese Maritime Safety Agency — danger zone designation records (1950)',
+      'Berlitz, C. — "The Dragon\'s Triangle" (1989)',
+      'US Naval Oceanographic Office — Philippine Sea anomaly reports',
+      'JAMSTEC — Bonin Trench geological survey data'
+    ],
     related: [18, 38, 86]
   },
   88: {
@@ -2425,66 +2491,87 @@ window.LOCATION_DATA = {
     related: [13, 30, 95, 104]
   },
   95: {
-    title: "Vatican City, Rome",
-    zone: "Ancient", color: "#c084fc",
-    position: "Upper-centre arc · Italy",
-    summary: "The spiritual capital of the institution that suppressed the flat earth model and imposed heliocentrism through the Inquisition. The Vatican's LUCIFER infrared telescope (Vatican Advanced Technology Telescope) is named explicitly. Vatican astronomers have issued statements preparing Catholics for \"extraterrestrial life\" disclosure.",
+    title: 'Vatican City — LUCIFER, the Jesuits, and the Heliocentric Imposition',
+    zone: 'Ancient', color: '#c084fc',
+    position: 'Upper-centre arc · Italy',
+    first_recorded: 'Vatican City sovereign state created 1929; Galileo trial 1633',
+    summary: 'The institutional vehicle through which heliocentrism was first suppressed and then imposed. The Catholic Church condemned Copernicus in 1616 and Galileo in 1633 — then reversed course and championed heliocentrism once its cosmological implications proved useful. The Vatican operates a telescope in Arizona jointly named LUCIFER. Vatican astronomers have publicly briefed Catholics on how to accept extraterrestrial life. In 2014, Pope Francis stated he would baptise aliens. The Vatican\'s cosmological transitions track its political needs, not its evidence.',
     analysis: [
-      "Vatican City is a sovereign micro-state of approximately 109 acres within Rome. Its institutional status as the spiritual headquarters of the Catholic Church gives it influence over approximately 1.3 billion Catholics worldwide. It is one of the three sovereign micro-states (alongside the City of London and Washington D.C.) that constitute the operational triad of the modern western control system.",
-      "The Catholic Church's historical role in suppressing the flat earth model and imposing heliocentrism through the Inquisition (Galileo's 1633 trial being the iconic example) is foundational to the modern cosmological deception. The Church's control over education, scholarship, and authoritative interpretation of cosmology in the medieval and early modern periods made it the institutional vehicle for the heliocentric transition.",
-      "In modern times, the Vatican operates the Vatican Advanced Technology Telescope (VATT) on Mount Graham in Arizona. One of its associated infrared instruments is named LUCIFER (Large Binocular Telescope Near-infrared Utility with Camera and Integral Field Unit for Extragalactic Research). The naming choice has been publicly defended by Vatican officials as referencing the Latin meaning of the word (\"light-bringer\"), but the resonance with the entity's religious significance is unmissable."
+      'Vatican City is a sovereign micro-state of 109 acres within Rome, created by the 1929 Lateran Treaty between the Holy See and Mussolini\'s Italy. It is the spiritual headquarters of the Catholic Church — approximately 1.3 billion Catholics — and one of the three sovereign micro-states (alongside the City of London and Washington D.C.) that constitute the operational triad of the modern western control system. Unlike the other two, the Vatican\'s temporal and spiritual power was historically unified until the Italian unification stripped it of the Papal States in 1870.',
+      'The Catholic Church\'s historical relationship with cosmology is the defining exhibit for the flat earth argument. In 1616, the Congregation of the Index placed Copernicus\' "De Revolutionibus" on the Index Librorum Prohibitorum (banned books). In 1633, Galileo Galilei was tried by the Inquisition for championing heliocentrism, forced to abjure his position, and placed under house arrest. The standard framing — the Church was obscurantist, science won — obscures the reversal: having suppressed Copernicus and Galileo, the Church subsequently became one of the primary institutional promoters of the heliocentric model. The Jesuits, the Church\'s intellectual order, built observatories across Europe and Asia in the 17th-18th centuries. The Church adopted the very cosmology it had previously banned.',
+      'The Vatican Advanced Technology Telescope (VATT) operates on Mount Graham in Arizona in partnership with the University of Arizona. One of the instruments sharing the same binocular telescope structure — the Large Binocular Telescope Infrared Utility with Camera and Integral Field Unit for Extragalactic Research — is named LUCIFER. Vatican officials have publicly defended the name as referencing the Latin "light-bringer." The VATT\'s stated research focus includes near-Earth objects and observations that Vatican astronomers have described as preparatory for understanding "non-terrestrial life."',
+      'In 2008, Vatican astronomer Father Jose Gabriel Funes gave an interview to the Vatican\'s own newspaper L\'Osservatore Romano stating that belief in extraterrestrial life does not contradict Catholic doctrine. In 2014, Pope Francis stated that if a Martian ambassador arrived and asked to be baptised, he would do so. These statements represent a systematic preparation of the Catholic population for a disclosure event. The Vatican\'s advance positioning on alien life acceptance — decades before any official government disclosure — suggests foreknowledge of what is to be disclosed.'
     ],
     facts: [
-      "Sovereign micro-state — 109 acres within Rome.",
-      "Influence over ~1.3 billion Catholics worldwide.",
-      "Historical institutional vehicle for heliocentric transition.",
-      "Operates LUCIFER infrared instrument on Mount Graham, Arizona."
+      'Galileo trial 1633: forced to abjure heliocentrism; Church later championed it.',
+      '1616: Copernicus\' "De Revolutionibus" placed on the Index of Banned Books.',
+      'VATT telescope on Mount Graham: shares structure with instrument named LUCIFER.',
+      'Father Funes (2008): "Believing in aliens does not contradict Catholic doctrine."',
+      'Pope Francis (2014): stated he would baptise alien visitors if asked.'
     ],
-    significance: "The institutional centre of the heliocentric cosmological imposition. Its modern astronomical operations and naming choices remain diagnostic of its priorities.",
+    significance: 'The Church suppressed heliocentrism, then adopted it, then built a telescope named LUCIFER, then began preparing its 1.3 billion members to accept extraterrestrial life disclosure. Each cosmological transition served a political purpose. The transition from flat earth suppression to heliocentric promotion is the first and most consequential of these.',
+    sources: [
+      'Vatican Congregation of the Index — 1616 decree against Copernicus',
+      'Galileo — Inquisition trial records (1633)',
+      'Funes, J.G. — L\'Osservatore Romano interview (2008)',
+      'VATT / Large Binocular Telescope Collaboration — instrument documentation'
+    ],
     related: [10, 11, 96]
   },
   96: {
-    title: "Washington D.C.",
-    zone: "Ancient", color: "#c084fc",
-    position: "Left-centre arc · USA",
-    summary: "The political capital of the control system. Its street layout — designed by Freemason Pierre Charles L'Enfant — forms an inverted pentagram pointing north toward the White House when viewed from above. The Washington Monument obelisk marks the centre. The Capitol building sits on Jenkins Hill, formerly called Rome — named by its developer.",
+    title: 'Washington D.C. — A City Designed in Masonic Geometry',
+    zone: 'Ancient', color: '#c084fc',
+    position: 'Left-centre arc · USA',
+    first_recorded: 'Designed 1791 by Pierre Charles L\'Enfant; cornerstone laid 18 September 1793',
+    summary: 'The political capital of the western control system. Its street layout was designed by Pierre Charles L\'Enfant, a French Freemason. The original 1791 plan encodes Masonic sacred geometry: an inverted pentagram pointing north toward the White House (whose cornerstone was laid by a Masonic lodge), a Freemasonic compass-and-square pattern in the Capitol district street grid, and the Washington Monument obelisk at the centre. The Capitol building sits on a hill that its developer called Rome. The city is a sovereign jurisdiction outside any US state\'s authority.',
     analysis: [
-      "Washington D.C. was designed by Pierre Charles L'Enfant (a French Freemason) in 1791 as the political capital of the United States. The street layout — superimposed over the city plan when viewed from above — encodes Masonic and occult symbolism that has been documented by multiple architectural historians (David Ovason, Robert Hieronimus, others).",
-      "The Washington Monument obelisk (555.5 feet tall — the height encoded in feet, inches, and metres encodes 5-5-5 patterns) marks the geographic and symbolic centre of the city. The street pattern north of the Mall forms an inverted pentagram pointing toward the White House. The Capitol sits on Jenkins Hill, which the developer Daniel Carroll renamed \"Rome\" before the city was built.",
-      "D.C. is one of the three sovereign jurisdictions of the western control system (alongside the City of London and Vatican City). Its territorial status — a federal district outside the jurisdiction of any state — was structurally designed to keep its operations beyond the reach of state-level oversight."
+      'Washington D.C. was designed in 1791 by Major Pierre Charles L\'Enfant, a French engineer and Freemason who had served with George Washington during the Revolution. The street plan superimposed diagonal avenues over a grid, creating triangular intersections and geometric patterns visible from above. Multiple architectural historians (David Ovason, Robert Hieronimus, James Curl) have documented the Masonic geometric encoding in the street plan.',
+      'The most discussed geometric feature is the inverted pentagram in the street layout north of the Mall. The points of the inverted pentagram align with Massachusetts Avenue NW, Connecticut Avenue NW, Vermont Avenue NW, and a partial section of Pennsylvania Avenue NW. The downward-pointing apex is at the White House grounds. The shape is not disputed — it is visible on any map of the street grid. Its significance is disputed: Masonic scholars and architectural historians disagree on whether it was intentional, while Masonic documents from the period confirm that the street plan was reviewed and endorsed by multiple Masonic lodges.',
+      'The cornerstone of the Capitol building was laid on 18 September 1793 in a full Masonic ceremony conducted by the Alexandria Volunteer Fire Company\'s Masonic lodge, with George Washington presiding in his Masonic regalia (still preserved). The building sits on Jenkins\' Hill, renamed \"Rome\" by landowner Daniel Carroll, whose family developed the area. Carroll\'s brother John Carroll was the first Catholic bishop in the United States. The connection between Masonic Founders and the early Catholic Church hierarchy in America at the city\'s founding is the closest intersection of the two most institutionally powerful religious and fraternal orders of the period.',
+      'Washington D.C. is a federal district created by the Constitution specifically outside the jurisdiction of any US state. Its residents had no voting representation in Congress until the 23rd Amendment (1961). Its status as a sovereign political entity outside the normal federal-state structure means that operations conducted within it — and specifically within the government agencies headquartered there — are outside the jurisdiction of any state law or state law enforcement. This structural exceptionalism was not an accident.'
     ],
     facts: [
-      "Designed by Freemason Pierre Charles L'Enfant in 1791.",
-      "Washington Monument: 555.5 feet — encodes 5-5-5 patterns.",
-      "Inverted pentagram in street layout north of the Mall.",
-      "Sovereign federal district outside state jurisdiction.",
-      "Capitol Hill originally renamed \"Rome\" before construction."
+      'Designed 1791 by Pierre Charles L\'Enfant — French Freemason, Washington\'s wartime aide.',
+      'Capitol cornerstone: Masonic ceremony 18 September 1793; Washington in full Masonic regalia.',
+      'Jenkins\' Hill (Capitol site) renamed \"Rome\" by developer Daniel Carroll before construction.',
+      'Inverted pentagram in street grid north of the Mall: visible on any map, disputed in intent.',
+      'Federal district: outside state jurisdiction; no voting representation until 1961.'
     ],
-    significance: "The political capital of the western control system. Its architectural and territorial design reflects the priorities of its founders.",
+    significance: 'The political capital of the United States was designed by a Freemason, its cornerstone laid in a Masonic ceremony, its central landmark (the Capitol) built on a hill deliberately renamed Rome, and its sovereign status places it outside normal state oversight. The Masonic geometry encoded in the streets is visible on any map. The significance is not in the geometry itself but in who was empowered to design it that way.',
     sources: [
-      "Ovason, D. — \"The Secret Architecture of Our Nation's Capital\" (1999)",
-      "Hieronimus, R. — \"Founding Fathers, Secret Societies\" (2006)"
+      'Ovason, D. — "The Secret Architecture of Our Nation\'s Capital" (1999)',
+      'Hieronimus, R. — "Founding Fathers, Secret Societies" (2006)',
+      'Alexandria Masonic Lodge — Capitol cornerstone ceremony records (1793)',
+      'Curl, J.S. — "The Art and Architecture of Freemasonry" (1991)'
     ],
     related: [7, 11, 95]
   },
   97: {
-    title: "London — The City of London",
-    zone: "Ancient", color: "#c084fc",
-    position: "Upper-centre arc · England",
-    summary: "The financial capital — a one-square-mile independent state within Greater London, not subject to UK law, with its own police force and its own Lord Mayor. Home of the Bank of England, the Temple Bar (Templar gateway), and the financial mechanisms of the central banking cabal. The three City obelisks mark its territory.",
+    title: 'The City of London — The Square Mile That Governs Itself',
+    zone: 'Ancient', color: '#c084fc',
+    position: 'Upper-centre arc · England',
+    first_recorded: 'Roman Londinium (43 CE); Bank of England chartered 1694; City Corporation status continuously maintained',
+    summary: 'A one-square-mile sovereign entity within Greater London with its own laws, its own police force, its own Lord Mayor, and its own parliamentary representation arrangements that predate democracy. The Bank of England, Lloyd\'s of London, and the major UK merchant banks are headquartered here. The City Corporation — its governing body — allows non-resident businesses to vote in its elections, giving the financial institutions that operate here more electoral power than the people who live here. No other equivalent arrangement exists in any democracy.',
     analysis: [
-      "The City of London is a one-square-mile financial district within Greater London with sovereign jurisdiction distinct from the rest of the UK. It has its own laws, its own police force (the City of London Police, distinct from the Metropolitan Police), its own Lord Mayor (distinct from the Mayor of London), and its own representation arrangements that predate parliamentary democracy.",
-      "The City contains the Bank of England (model for the Federal Reserve and most modern central banks), Lloyd's of London (the world's primary specialty insurance market), the London Stock Exchange, and the headquarters of the major British merchant banks. Its territorial boundary is marked by dragon statues and historical monuments including the Temple Bar — the Templar gateway between the City and the rest of London.",
-      "Three obelisks (Cleopatra's Needle on the Embankment, the Monument to the Great Fire, and the obelisk in Hyde Park) form the symbolic perimeter markers. The continuous historical relationship between the Templars (whose Temple Church is in the City), the early English banking dynasties, and the modern cabal-aligned financial institutions makes the City the most institutionally continuous power centre in the western world."
+      'The City of London Corporation is the governing body of the one-square-mile financial district. It predates parliamentary democracy, the British constitution, and the Magna Carta in its current institutional form. The Corporation\'s powers derive from a series of Royal Charters beginning in 1067 under William the Conqueror, who confirmed the rights of the City\'s burgesses. These charters have been continuously maintained through every change of government — including the Commonwealth period, the Glorious Revolution, and the democratic reforms of the 19th and 20th centuries — without fundamental change to the Corporation\'s autonomy.',
+      'The most structurally anomalous feature of the City\'s governance is its voting system. The City of London ward elections — which elect the Court of Common Council, the City\'s primary legislative body — allow business entities (corporations) registered or operating in the City to vote. Approximately 23,000 residents vote. Approximately 32,000 business nominee votes are cast by the corporations and partnerships headquartered in the City, in proportion to their number of employees. This means the financial institutions that operate in the City control the majority of votes in the elections that govern it. No equivalent arrangement exists anywhere else in the UK or any Western democracy.',
+      'The City\'s own police force — the City of London Police — is distinct from the Metropolitan Police, which covers the rest of London. The Lord Mayor of London — distinct from the Mayor of London — represents the City in formal state occasions and conducts diplomatic functions separate from the UK government. When the monarch enters the City, they are met at Temple Bar (the Templar boundary) by the Lord Mayor and must request permission to enter — a ceremony still maintained today.',
+      'The Bank of England was chartered in 1694 to lend money to the English government at interest — a model that subsequently spread to every major nation-state and became the template for the Federal Reserve (1913), the European Central Bank, and every modern central bank. The City\'s financial institutions effectively determine the credit conditions under which all Western governments operate. The City\'s sovereign status means this function is exercised by an entity that is formally within the UK but practically outside its democratic accountability structures.'
     ],
     facts: [
-      "One-square-mile sovereign financial district within Greater London.",
-      "Own laws, own police, own Lord Mayor.",
-      "Bank of England — model for the Federal Reserve.",
-      "Templar Temple Church — continuous institutional history.",
-      "Three obelisks mark the symbolic perimeter."
+      'City Corporation governance: business entities cast more votes than residents (32,000 business nominees vs 23,000 residents).',
+      'Lord Mayor distinct from Mayor of London; monarch requests permission to enter City at Temple Bar.',
+      'City of London Police: separate force from Metropolitan Police.',
+      'Bank of England (1694): template for the Federal Reserve and every modern central bank.',
+      'Royal Charters continuously maintained since 1067 — survived every change of UK government.'
     ],
-    significance: "The financial-institutional centre of the western system. Its sovereign status is deliberately obscured in popular discourse precisely because its existence reveals how the modern world is actually governed.",
+    significance: 'The City of London is the only jurisdiction in any Western democracy where corporations hold more voting power than residents. It is the institutional template for the modern central banking system. The ceremony requiring the monarch to request entry at the Templar boundary acknowledges a sovereignty arrangement that predates the British state itself.',
+    sources: [
+      'City of London Corporation — electoral arrangements documentation',
+      'Shaxson, N. — "Treasure Islands" (2011) — City of London financial analysis',
+      'Palan, R. et al. — "Tax Havens: How Globalization Really Works" (2010)',
+      'Morgan, E.V. & Thomas, W.A. — "The Stock Exchange: Its History and Functions" (1962)'
+    ],
     related: [10, 11, 95, 96]
   },
   98: {
@@ -2532,6 +2619,12 @@ window.LOCATION_DATA = {
       "Encodes mathematical constants matching the Great Pyramid."
     ],
     significance: "A New World confirmation that the same astronomical-architectural tradition existed across the disc. The cross-continental consistency implies a single suppressed source tradition.",
+    sources: [
+      'Sugiyama, S. — "Human Sacrifice, Militarism, and Rulership: Materialization of State Ideology at the Feathered Serpent Pyramid" (2005)',
+      'Harleston, H. — measurements of Teotihuacán mathematical constants',
+      'Schele, L. & Freidel, D. — "A Forest of Kings" (1990)',
+      'Peden, J.R. — astronomical alignment analysis, Teotihuacán (1977)'
+    ],
     related: [9, 93, 100, 101, 103]
   },
   100: {
@@ -2552,6 +2645,11 @@ window.LOCATION_DATA = {
       "Mathematical proportions match Giza and Teotihuacán."
     ],
     significance: "A southeast Asian confirmation of the same suppressed astronomical-architectural tradition. The eastward orientation directly tracks the local sun's observed circuit.",
+    sources: [
+      'Stencel, R. et al. — "Astronomy and Cosmology at Angkor Wat" — Science (1976)',
+      'Mannikka, E. — "Angkor Wat: Time, Space, and Kingship" (1996)',
+      'Nafilyan, G. — Angkor Wat proportional analysis (1969)'
+    ],
     related: [16, 17, 19, 93, 99]
   },
   101: {
@@ -2572,6 +2670,11 @@ window.LOCATION_DATA = {
       "Astronomical alignments consistent with local-sun observation."
     ],
     significance: "A remote outpost of the same astronomical tradition. The challenge to the \"ecological collapse\" narrative parallels the broader challenge to academic suppression of pre-modern knowledge.",
+    sources: [
+      'Hunt, T. & Lipo, C. — "The Statues That Walked" (2011)',
+      'Routledge, K. — "The Mystery of Easter Island" (1919)',
+      'EISP — Easter Island Statue Project survey documentation'
+    ],
     related: [22, 99, 103]
   },
   102: {
