@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<!-- Those who read the code see more than those who only read the page. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conspiracy Tier List — Truth Archive</title>
+  <meta name="description" content="Drag and drop 60+ conspiracies into your personal tier ranking — from CONFIRMED to PSYOP. Share the result. How awake are you?" />
+  <meta property="og:title" content="Conspiracy Tier List — Truth Archive" />
+  <meta property="og:description" content="Rate 60 conspiracies. Save your tier list. Share it. Are you an S-tier truther or still in denial?" />
+  <meta property="og:image" content="https://thetrutharchive.org/images/og-preview.jpg" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .fade-in { opacity:0; transform:translateY(20px); transition:opacity .35s ease, transform .35s ease; }
+    .fade-in.visible { opacity:1; transform:none; }
+
+    /* ── Hero ─────────────────────────────────────────────────────── */
+    .tl-hero {
+      padding: 6rem 1.5rem 3.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(201,162,39,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 60%, rgba(139,20,20,0.08) 0%, transparent 40%),
+        var(--bg-primary);
+    }
+    .tl-hero::before {
+      content:'';
+      position:absolute; inset:0;
+      background:
+        linear-gradient(90deg, rgba(201,162,39,0.04) 1px, transparent 1px),
+        linear-gradient(rgba(201,162,39,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.5) 40%, transparent 78%);
+      pointer-events:none;
+    }
+    .tl-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.63rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .tl-hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+    .tl-hero p {
+      color: var(--text-secondary);
+      max-width: 52ch;
+      margin: 0 auto 1.5rem;
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+    .tl-instructions {
+      display: inline-flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      margin-bottom: 0;
+    }
+    .tl-instructions span {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .tl-instructions span strong { color: var(--gold); }
+
+    /* ── Main layout ───────────────────────────────────────────────── */
+    .tl-main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* ── Tier rows ─────────────────────────────────────────────────── */
+    .tier-board {
+      display: grid;
+      gap: 4px;
+      margin-bottom: 2rem;
+    }
+    .tier-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      min-height: 72px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .tier-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-shadow: var(--glow-text-gold);
+      line-height: 1;
+      gap: 0.25rem;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .tier-label .tier-name {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      font-weight: 400;
+      text-shadow: none;
+    }
+    .tier-drop {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      padding: 6px;
+      min-height: 72px;
+      align-content: flex-start;
+      transition: background 0.2s;
+    }
+    .tier-drop.drag-over {
+      background: rgba(201,162,39,0.08);
+      outline: 1px dashed var(--border-gold);
+      outline-offset: -2px;
+    }
+
+    /* Tier colours */
+    .tier-s  .tier-label { background: #ff7675; color: #000; }
+    .tier-a  .tier-label { background: #fdcb6e; color: #000; }
+    .tier-b  .tier-label { background: #55efc4; color: #000; }
+    .tier-c  .tier-label { background: #74b9ff; color: #000; }
+    .tier-d  .tier-label { background: #a29bfe; color: #000; }
+    .tier-f  .tier-label { background: #636e72; color: #fff; }
+    .tier-psyop .tier-label { background: var(--red-bright); color: #fff; }
+    .tier-s  .tier-drop { background: rgba(255,118,117,0.06); }
+    .tier-a  .tier-drop { background: rgba(253,203,110,0.06); }
+    .tier-b  .tier-drop { background: rgba(85,239,196,0.06); }
+    .tier-c  .tier-drop { background: rgba(116,185,255,0.06); }
+    .tier-d  .tier-drop { background: rgba(162,155,254,0.06); }
+    .tier-f  .tier-drop { background: rgba(99,110,114,0.06); }
+    .tier-psyop .tier-drop { background: rgba(204,34,34,0.06); }
+
+    /* ── Item cards ────────────────────────────────────────────────── */
+    .tl-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 88px;
+      height: 60px;
+      padding: 4px 6px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      border-radius: 3px;
+      cursor: grab;
+      user-select: none;
+      transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+      text-align: center;
+      gap: 3px;
+      position: relative;
+    }
+    .tl-item:hover {
+      border-color: var(--border-gold);
+      box-shadow: var(--glow-gold);
+      z-index: 1;
+      transform: translateY(-1px) scale(1.03);
+    }
+    .tl-item.dragging {
+      opacity: 0.35;
+      cursor: grabbing;
+    }
+    .tl-item .item-icon { font-size: 1.2rem; line-height: 1; }
+    .tl-item .item-label {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      line-height: 1.25;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    /* ── Unranked pool ─────────────────────────────────────────────── */
+    .pool-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .pool-header-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .pool-count {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--gold);
+    }
+    .unranked-pool {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      min-height: 80px;
+      border-radius: var(--radius);
+    }
+    .unranked-pool.drag-over {
+      background: rgba(201,162,39,0.05);
+      border-color: var(--border-gold);
+    }
+
+    /* ── Action bar ────────────────────────────────────────────────── */
+    .action-bar {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1.75rem;
+    }
+    .action-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.5rem;
+      font-family: var(--font-label);
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .action-btn.primary {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      color: #000;
+      border: none;
+      font-weight: 700;
+    }
+    .action-btn.primary:hover { filter: brightness(1.1); box-shadow: 0 4px 20px rgba(201,162,39,0.4); }
+    .action-btn.secondary {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+    .action-btn.secondary:hover { border-color: var(--gold); color: var(--gold); }
+    .action-btn.danger {
+      background: transparent;
+      color: var(--red-bright);
+      border: 1px solid rgba(204,34,34,0.3);
+    }
+    .action-btn.danger:hover { background: rgba(204,34,34,0.1); }
+
+    /* ── Result card ───────────────────────────────────────────────── */
+    #result-section { display: none; margin-top: 2rem; }
+    #result-section.visible { display: block; }
+    .result-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-gold);
+      flex-wrap: wrap;
+    }
+    .result-header h2 { font-size: 1.4rem; margin: 0; }
+    .result-score {
+      margin-left: auto;
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      color: var(--gold);
+      text-shadow: var(--glow-text-gold);
+      line-height: 1;
+    }
+    .result-score small {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-shadow: none;
+      font-size: 0.65rem;
+    }
+    .result-verdict {
+      padding: 1.25rem;
+      border: 1px solid var(--border-gold);
+      background: rgba(201,162,39,0.06);
+      border-radius: var(--radius);
+      margin-bottom: 1.5rem;
+    }
+    .result-verdict .verdict-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .result-verdict .verdict-title {
+      font-family: var(--font-label);
+      font-size: 1.1rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 0.5rem;
+    }
+    .result-verdict p {
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+      max-width: 100%;
+      margin: 0;
+    }
+    .result-share {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .share-btn {
+      padding: 0.5rem 1.1rem;
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid var(--border-gold);
+      background: transparent;
+      color: var(--gold);
+    }
+    .share-btn:hover { background: rgba(201,162,39,0.1); }
+    .share-btn.copied { color: #2ecc71; border-color: #2ecc71; }
+
+    /* ── Tooltip ───────────────────────────────────────────────────── */
+    .tl-item[title]:hover::after {
+      content: attr(title);
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      white-space: nowrap;
+      padding: 0.3rem 0.6rem;
+      pointer-events: none;
+      z-index: 10;
+      max-width: 200px;
+      white-space: normal;
+      line-height: 1.4;
+    }
+
+    /* ── Mobile touch hint ─────────────────────────────────────────── */
+    .touch-hint {
+      display: none;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    @media (pointer: coarse) { .touch-hint { display: block; } }
+
+    @media (max-width: 600px) {
+      .tier-row { grid-template-columns: 70px 1fr; }
+      .tier-label { font-size: 1.2rem; padding: 0.35rem; }
+      .tl-item { width: 74px; height: 54px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-logo">
+      <span class="eye-symbol">👁</span>
+      Truth Archive
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-label="Toggle menu">☰</button>
+        <ul class="nav-links">
+      <li class="nav-group">
+        <button class="nav-group-toggle" aria-expanded="false" aria-label="Browse all chapters">
+          <span class="nav-rail-icon" aria-hidden="true">&#x25A6;</span><span class="nav-rail-label">Chapters &#x25BE;</span>
+        </button>
+        <ul class="nav-sub">
+          <li><a href="flat-earth.html">Ch 01 &middot; Flat Earth</a></li>
+          <li><a href="great-awakening.html">Ch 02 &middot; Great Awakening</a></li>
+          <li><a href="deep-state.html">Ch 03 &middot; Deep State</a></li>
+          <li><a href="secret-societies.html">Ch 04 &middot; Secret Societies</a></li>
+          <li><a href="banking-control.html">Ch 05 &middot; Banking Control</a></li>
+          <li><a href="media-control.html">Ch 06 &middot; Media Control</a></li>
+          <li><a href="space-deception.html">Ch 07 &middot; Space Deception</a></li>
+          <li><a href="big-pharma.html">Ch 08 &middot; Big Pharma</a></li>
+          <li><a href="tech-control.html">Ch 09 &middot; Tech &amp; Control</a></li>
+          <li><a href="false-flags.html">Ch 10 &middot; False Flags</a></li>
+          <li><a href="suppressed-history.html">Ch 11 &middot; Suppressed History</a></li>
+          <li><a href="metaphysical.html">Ch 12 &middot; Metaphysical</a></li>
+          <li><a href="ufo-disclosure.html">Ch 13 &middot; UFO Disclosure</a></li>
+          <li><a href="ancient-civilisations.html">Ch 14 &middot; Ancient Civilisations</a></li>
+          <li><a href="anomalous-zones.html">Ch 15 &middot; Anomalous Zones</a></li>
+          <li><a href="elite-networks.html">Ch 16 &middot; Elite Networks</a></li>
+          <li><a href="internet-control.html">Ch 17 &middot; Internet Control</a></li>
+          <li><a href="mandela-effect.html">Ch 18 &middot; Mandela Effect</a></li>
+          <li><a href="forensic-mysteries.html">Ch 19 &middot; Forensic Mysteries</a></li>
+          <li><a href="secret-science.html">Ch 20 &middot; Secret Science</a></li>
+        </ul>
+      </li>
+      <li><a href="rabbit-hole.html">Rabbit Hole</a></li>
+      <li><a href="tier-list.html">Tier List</a></li>
+      <li><a href="map.html">Connection Map</a></li>
+      <li><a href="ebook.html" class="ebook-link">eBook</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header class="tl-hero fade-in">
+    <span class="tl-eyebrow">// interactive ranking tool</span>
+    <h1 class="glitch" data-text="Conspiracy Tier List">Conspiracy Tier List</h1>
+    <p>Drag each conspiracy into the tier you believe it deserves. Share your ranking. Compare your awakening level to others.</p>
+    <div class="tl-instructions">
+      <span>⬆ <strong>Drag</strong> items into tiers</span>
+      <span>↕ <strong>Reorder</strong> within tiers</span>
+      <span>↙ <strong>Drop back</strong> to unranked</span>
+      <span>📋 <strong>Export</strong> your tier list</span>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="tl-main">
+
+    <p class="touch-hint">Tap and hold an item, then drag to a tier</p>
+
+    <!-- TIER BOARD -->
+    <div class="tier-board" id="tier-board">
+      <!-- populated by JS -->
+    </div>
+
+    <!-- UNRANKED POOL -->
+    <div class="pool-header">
+      <span class="pool-header-label">
+        Unranked — Drag items into tiers above
+        <span class="pool-count" id="pool-count">0 remaining</span>
+      </span>
+    </div>
+    <div class="unranked-pool" id="unranked-pool">
+      <!-- populated by JS -->
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="action-bar">
+      <button class="action-btn primary" id="generate-result-btn">↯ Generate My Result</button>
+      <button class="action-btn secondary" id="shuffle-btn">⇄ Shuffle Pool</button>
+      <button class="action-btn danger" id="reset-btn">↺ Reset All</button>
+    </div>
+
+    <!-- RESULT -->
+    <section id="result-section">
+      <div class="result-header">
+        <h2 id="result-heading">Your Tier List Result</h2>
+        <div class="result-score">
+          <span id="result-score-number">0</span>
+          <small>Awakening Score</small>
+        </div>
+      </div>
+      <div class="result-verdict" id="result-verdict">
+        <span class="verdict-label">// assessment</span>
+        <div class="verdict-title" id="verdict-title">—</div>
+        <p id="verdict-body">—</p>
+      </div>
+      <div id="result-breakdown" style="display:grid; gap:0.4rem; margin-bottom:1rem;"></div>
+      <div class="result-share">
+        <button class="share-btn" id="copy-share-btn">📋 Copy Share Link</button>
+        <button class="share-btn" id="copy-text-btn">📝 Copy Tier Text</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>The Truth Archive</h3>
+        <p>An independent research network dedicated to exposing the hidden architecture of power.</p>
+        <p style="margin-top:1rem; font-family:var(--font-mono); font-size:0.68rem; color:var(--text-muted); letter-spacing:0.1em;">
+          &ldquo;Once you see it, you cannot unsee it.&rdquo;
+        </p>
+      </div>
+      <div class="footer-links">
+        <h5>Interactive</h5>
+        <ul>
+          <li><a href="rabbit-hole.html">Rabbit Hole</a></li>
+          <li><a href="tier-list.html">Tier List</a></li>
+          <li><a href="flat-earth-map.html">Flat Earth Map</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>Core Routes</h5>
+        <ul>
+          <li><a href="deep-state.html">Deep State</a></li>
+          <li><a href="flat-earth.html">Flat Earth</a></li>
+          <li><a href="secret-societies.html">Secret Societies</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>More Chapters</h5>
+        <ul>
+          <li><a href="banking-control.html">Banking Control</a></li>
+          <li><a href="media-control.html">Media Control</a></li>
+          <li><a href="ebook.html">eBook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&#9670; &nbsp; THE TRUTH ARCHIVE &nbsp; &#9670; &nbsp; RESEARCH &amp; EDUCATION &nbsp; &#9670; &nbsp; QUESTION EVERYTHING &nbsp; &#9670;</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+
+  <script>
+  // ══════════════════════════════════════════════════════════════════════════
+  //  CONSPIRACY TIER LIST — Data & Engine
+  // ══════════════════════════════════════════════════════════════════════════
+
+  const TIERS = [
+    { id: 's',     label: 'S',      name: 'CONFIRMED',    desc: 'Documented fact. Government admitted it, court-proven, or primary-source verified.' },
+    { id: 'a',     label: 'A',      name: 'HIGHLY LIKELY', desc: 'Strong evidence. Whistleblowers, FOIA documents, or scientific studies back it up.' },
+    { id: 'b',     label: 'B',      name: 'PLAUSIBLE',    desc: 'Credible circumstantial evidence and consistent testimony. Warrants serious investigation.' },
+    { id: 'c',     label: 'C',      name: 'POSSIBLE',     desc: 'Some evidence but not conclusive. Pattern-matching without a smoking gun.' },
+    { id: 'd',     label: 'D',      name: 'UNCERTAIN',    desc: 'Interesting theory but weak evidence. Could go either way.' },
+    { id: 'f',     label: 'F',      name: 'UNLIKELY',     desc: 'Extraordinary claims, insufficient evidence, or logical inconsistencies.' },
+    { id: 'psyop', label: '🚩',     name: 'PSYOP',        desc: 'Deliberate distraction, honeypot, or disinformation planted by bad actors.' },
+  ];
+
+  const ITEMS = [
+    // Confirmed — these should score highest
+    { id: 'mk-ultra',      icon: '🧠', label: 'MKUltra',          hint: 'CIA admitted this under oath in 1977. Senate confirmed it.' },
+    { id: 'paperclip',     icon: '🚀', label: 'Operation Paperclip', hint: '1,600 Nazi scientists imported. Declassified 1990s.' },
+    { id: 'mockingbird',   icon: '📺', label: 'Op. Mockingbird',   hint: 'Church Committee confirmed CIA media infiltration, 1975.' },
+    { id: 'northwoods',    icon: '📋', label: 'Op. Northwoods',    hint: 'Declassified 1997. Joint Chiefs planned false flags on US soil.' },
+    { id: 'cointelpro',    icon: '🕵️', label: 'COINTELPRO',        hint: 'FBI confirmed. MLK, Black Panthers, AIM targeted 1956–1971.' },
+    { id: 'gulf-tonkin',   icon: '⚓', label: 'Gulf of Tonkin',    hint: 'Robert McNamara admitted fabrication. Declassified 2005.' },
+    { id: 'echelon',       icon: '📡', label: 'ECHELON',           hint: 'EU Parliament confirmed in 2001 report.' },
+    { id: 'prism',         icon: '💻', label: 'PRISM / NSA',       hint: 'Snowden documents confirmed. Tech companies verified.' },
+    { id: 'uss-liberty',   icon: '🚢', label: 'USS Liberty',       hint: 'NSA declassified 2014. Israel attacked US ship, 34 killed.' },
+    { id: 'tuskegee',      icon: '💉', label: 'Tuskegee Syphilis', hint: 'US gov admitted 1997. 40 years of deliberate non-treatment.' },
+    { id: 'lsd-cia',       icon: '🍄', label: 'CIA LSD Testing',   hint: 'Confirmed by 1977 Senate. Frank Olson thrown from window.' },
+    { id: 'iran-contra',   icon: '🔫', label: 'Iran-Contra',       hint: 'Reagan admin confirmed. CIA drug trafficking admitted.' },
+    { id: 'msm-6-corps',   icon: '📰', label: 'Media 6 Corporations', hint: '6 corps own 90%+ of US media. This is public information.' },
+    { id: 'fed-private',   icon: '🏦', label: 'Federal Reserve',   hint: 'It is a private corporation. This is in the Federal Reserve Act.' },
+    // Deep State
+    { id: 'shadow-gov',    icon: '🏛', label: 'Shadow Government', hint: 'Senator Daniel Inouye confirmed it at Iran-Contra hearings.' },
+    { id: 'jfk',           icon: '🔫', label: 'JFK — Multiple Shooters', hint: 'HSCA 1979 concluded "probable conspiracy." Still classified 2026.' },
+    { id: '9-11-anomalies',icon: '🏢', label: '9/11 Anomalies',    hint: 'WTC7 free fall. Nanothermite in dust. NIST simulation fails.' },
+    { id: 'chemtrails',    icon: '✈️', label: 'Geoengineering',    hint: 'Harvard SCoPEx funded. Patents exist. UN discussing it.' },
+    { id: 'bilderberg',    icon: '🤝', label: 'Bilderberg',         hint: 'Meetings are real. They officially deny deciding policy.' },
+    { id: 'five-eyes',     icon: '👁', label: 'Five Eyes',          hint: 'Confirmed by Snowden. Legally circumvents domestic surveillance.' },
+    { id: 'big-pharma-sup',icon: '💊', label: 'Big Pharma Suppression', hint: 'Rife, Burzynski, and others suppressed. Patents vs cures model.' },
+    { id: 'fluoride-iq',   icon: '🚰', label: 'Fluoride Neurotoxin', hint: 'Lancet 2014 listed it. Harvard meta-analysis confirmed IQ reduction.' },
+    { id: 'kissinger-food',icon: '🌾', label: 'Kissinger Food Weapon', hint: 'NSSM 200 (1974): food as geopolitical tool. Declassified 1989.' },
+    { id: 'cia-coups',     icon: '🗳', label: 'CIA Coups',          hint: '72 documented coups. Chile 1973. Iran 1953. Guatemala 1954.' },
+    // Pharma / Health
+    { id: 'covid-lab',     icon: '🦠', label: 'COVID Lab Origin',  hint: 'Fauci-Wuhan emails confirmed. FBI/DoE assessed lab origin.' },
+    { id: 'mrna-concerns', icon: '🧬', label: 'mRNA Safety Concerns', hint: 'IgG4 class switch published in peer review. VAERS data.' },
+    { id: 'event-201',     icon: '📅', label: 'Event 201',         hint: 'October 2019. Gates/WEF/Johns Hopkins. 6 weeks before COVID.' },
+    { id: 'opioid-pharma', icon: '💊', label: 'Opioid Crisis — Sacklers', hint: 'Purdue Pharma pled guilty 2020. Sacklers paid $6 billion.' },
+    { id: 'who-gates',     icon: '🏥', label: 'Gates WHO Influence', hint: 'Gates is #2 donor to WHO. This is public on WHO website.' },
+    // Tech / Surveillance
+    { id: 'clearview',     icon: '📷', label: 'Clearview AI',       hint: '30 billion scraped faces. Used by 3,100 law enforcement agencies.' },
+    { id: 'pegasus',       icon: '📱', label: 'Pegasus Spyware',    hint: 'NSO Group confirmed. 50,000 phones including world leaders.' },
+    { id: 'palantir',      icon: '🔍', label: 'Palantir / Police AI', hint: '2,000+ US law enforcement clients. Peter Thiel/CIA funded.' },
+    { id: 'in-q-tel-fb',   icon: '📘', label: 'Facebook / LifeLog', hint: 'DARPA LifeLog cancelled same day Facebook launched (Feb 2004).' },
+    { id: 'google-cia',    icon: '🔎', label: 'Google / In-Q-Tel',  hint: 'In-Q-Tel (CIA VC arm) invested in Google in early years.' },
+    { id: '5g-roll',       icon: '📶', label: '5G Rollout Speed',   hint: 'No pre-market health studies mandated. Telecom act blocked them.' },
+    // Secret Societies / Occult
+    { id: 'freemasonry-levels', icon: '🔺', label: 'Freemasonry 33°', hint: 'Albert Pike\'s writings confirm what 33rd degree serves.' },
+    { id: 'skull-bones',   icon: '💀', label: 'Skull & Bones',      hint: 'Confirmed membership: 2 presidents, multiple CIA directors.' },
+    { id: 'bohemian-grove',icon: '🦉', label: 'Bohemian Grove',     hint: 'Alex Jones footage confirmed. Nixon tapes mention it.' },
+    { id: 'epstein-net',   icon: '🏝', label: 'Epstein Network',    hint: 'Flight logs confirmed. Maxwell convicted. Client list still sealed.' },
+    { id: 'pizzagate-pattern', icon: '🍕', label: 'Trafficking Patterns', hint: 'FBI confirmed coded language. Pattern not fully investigated.' },
+    // Space / Cosmic
+    { id: 'ufo-congressional', icon: '🛸', label: 'UAP Congressional Testimony', hint: 'Grusch 2023 under oath: non-human intelligence. Congressional record.' },
+    { id: 'moon-land-anomalies', icon: '🌙', label: 'Moon Landing Anomalies', hint: 'Telemetry erased. Van Allen dose calculations contested.' },
+    { id: 'nasa-cgi',      icon: '🚀', label: 'NASA Composite Images', hint: 'NASA admits all "whole Earth" photos are composites. They said this.' },
+    { id: 'eisenhower-1954', icon: '👽', label: 'Eisenhower ET Meeting', hint: 'State Dept official on record. Holloman AFB. February 1954.' },
+    { id: 'tic-tac-uap',   icon: '💿', label: 'Tic Tac UAP',        hint: 'Officially released by Pentagon 2017. Fravor testimony confirmed.' },
+    // Ancient / History
+    { id: 'smithsonian-giants', icon: '🏛', label: 'Smithsonian Giants Cover-up', hint: '2014 FOIA confirmed destruction of specimens.' },
+    { id: 'gobekli-burial', icon: '🪨', label: 'Göbekli Tepe Burial', hint: 'Deliberately buried 10,000 BCE. By whom, and why, unknown.' },
+    { id: 'piri-reis',     icon: '🗺', label: 'Piri Reis Map',      hint: 'Depicts Antarctica ice-free. Map pre-dates European Antarctic exploration.' },
+    { id: 'tartaria-maps', icon: '📜', label: 'Tartaria on Maps',   hint: 'Appears on major atlases 1500–1800. Then disappears without explanation.' },
+    { id: 'younger-dryas', icon: '☄️', label: 'Younger Dryas Impact', hint: 'Published in Nature 2018. Cosmic impact 12,900 years ago confirmed.' },
+    // Flat Earth / Extreme
+    { id: 'flat-earth',    icon: '🗺', label: 'Flat Earth',         hint: 'The foundational cosmological claim. Horizon, water level, firmament.' },
+    { id: 'moon-hollow',   icon: '🌑', label: 'Hollow Moon',        hint: 'Apollo seismic data showed moon "rang like a bell." Unexplained.' },
+    { id: 'firmament-dome', icon: '🔵', label: 'Firmament Dome',    hint: 'Operation Fishbowl: 8 of 9 missiles "failed" going straight up.' },
+    { id: 'water-curve',   icon: '💧', label: 'No Water Curvature', hint: 'Bedford Level 1838. Canal 6 miles, no observable drop.' },
+    // Spiritual / ET
+    { id: 'draco-ruling',  icon: '🦎', label: 'Reptilian Control',  hint: 'David Icke\'s claim. No primary-source evidence. Possibly symbolic.' },
+    { id: 'adrenochrome-elite', icon: '🩸', label: 'Elite Adrenochrome', hint: 'Compound is real. Mass harvesting claim lacks direct evidence.' },
+    { id: 'simulation',    icon: '💻', label: 'Simulation Theory',  hint: 'Nick Bostrom\'s argument. Elon Musk endorses it. Philosophical, not conspiratorial.' },
+    { id: 'blue-avians',   icon: '🦅', label: 'Blue Avians',        hint: 'Corey Goode testimony. No physical evidence. Spiritual framework.' },
+    { id: 'law-of-one-real', icon: '☯️', label: 'Law of One',       hint: 'Channelled 1981. Corroborated by SSP whistleblowers. Unfalsifiable.' },
+    { id: 'great-flash',   icon: '☀️', label: 'Great Solar Flash',  hint: 'Prophesied across world religions. No physical evidence of timing.' },
+    { id: 'annunaki-real', icon: '👾', label: 'Annunaki — Literal', hint: 'Sumerian tablets are real. Sitchin\'s interpretation is disputed.' },
+  ];
+
+  // ── State ─────────────────────────────────────────────────────────────────
+  const state = {};
+  TIERS.forEach(t => state[t.id] = []);
+  state.unranked = [...ITEMS.map(i => i.id)];
+
+  // ── Scoring weights ────────────────────────────────────────────────────────
+  const TIER_SCORES = { s: 10, a: 8, b: 6, c: 4, d: 2, f: 1, psyop: -2, unranked: 0 };
+
+  // ── Verdicts by score ──────────────────────────────────────────────────────
+  function getVerdict(score, ranked) {
+    const maxPossible = ranked * 10;
+    const pct = maxPossible > 0 ? score / maxPossible : 0;
+    if (ranked < 10) return { title: 'Still Loading', body: 'You haven\'t ranked enough to assess yet. Keep going — the picture only makes sense when you see the whole board.' };
+    if (pct >= 0.82) return { title: 'FULLY AWAKE', body: 'You\'ve followed the evidence wherever it leads, regardless of how uncomfortable the conclusion. The matrix has no more mirrors for you.' };
+    if (pct >= 0.65) return { title: 'DEEP INSIDE THE HOLE', body: 'You\'re well past the surface. You see the patterns. You question the institutions. The last few layers are waiting.' };
+    if (pct >= 0.50) return { title: 'SERIOUSLY CURIOUS', body: 'You accept what\'s been proven but draw lines at the unprovable. That\'s rational. The question is whether the patterns you can see are enough.' };
+    if (pct >= 0.35) return { title: 'CAUTIOUSLY QUESTIONING', body: 'You\'re looking at this honestly, but you\'re still anchored to what\'s officially sanctioned. The anchor is the mechanism of control.' };
+    return { title: 'STILL ASLEEP', body: 'The normalcy bias is strong. The most important conspiracies here have been proven in courts of law. Start with MKUltra.' };
+  }
+
+  // ── Drag state ─────────────────────────────────────────────────────────────
+  let dragItemId = null;
+  let dragSourceTier = null;
+
+  // ── Render ─────────────────────────────────────────────────────────────────
+  function itemById(id) { return ITEMS.find(i => i.id === id); }
+
+  function createItemEl(id) {
+    const item = itemById(id);
+    if (!item) return null;
+    const el = document.createElement('div');
+    el.className = 'tl-item';
+    el.draggable = true;
+    el.dataset.id = id;
+    el.setAttribute('title', item.hint || '');
+    el.innerHTML = `<span class="item-icon">${item.icon}</span><span class="item-label">${item.label}</span>`;
+
+    // Desktop drag
+    el.addEventListener('dragstart', e => {
+      dragItemId = id;
+      dragSourceTier = el.parentElement.dataset.tier;
+      el.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    el.addEventListener('dragend', () => {
+      el.classList.remove('dragging');
+    });
+
+    // Touch drag (mobile)
+    let touchClone = null;
+    let touchOffX = 0, touchOffY = 0;
+
+    el.addEventListener('touchstart', e => {
+      dragItemId = id;
+      dragSourceTier = el.parentElement.dataset.tier;
+      const t = e.touches[0];
+      const rect = el.getBoundingClientRect();
+      touchOffX = t.clientX - rect.left;
+      touchOffY = t.clientY - rect.top;
+
+      touchClone = el.cloneNode(true);
+      touchClone.style.cssText = `position:fixed;pointer-events:none;opacity:0.8;z-index:9999;width:${rect.width}px;height:${rect.height}px;left:${rect.left}px;top:${rect.top}px;`;
+      document.body.appendChild(touchClone);
+    }, { passive: true });
+
+    el.addEventListener('touchmove', e => {
+      e.preventDefault();
+      const t = e.touches[0];
+      if (touchClone) {
+        touchClone.style.left = (t.clientX - touchOffX) + 'px';
+        touchClone.style.top = (t.clientY - touchOffY) + 'px';
+      }
+      // Highlight drop target
+      document.querySelectorAll('.tier-drop, .unranked-pool').forEach(z => z.classList.remove('drag-over'));
+      const el2 = document.elementFromPoint(t.clientX, t.clientY);
+      const zone = el2 && (el2.closest('.tier-drop') || el2.closest('.unranked-pool'));
+      if (zone) zone.classList.add('drag-over');
+    }, { passive: false });
+
+    el.addEventListener('touchend', e => {
+      if (touchClone) { touchClone.remove(); touchClone = null; }
+      document.querySelectorAll('.tier-drop, .unranked-pool').forEach(z => z.classList.remove('drag-over'));
+      const t = e.changedTouches[0];
+      const el2 = document.elementFromPoint(t.clientX, t.clientY);
+      const zone = el2 && (el2.closest('.tier-drop') || el2.closest('.unranked-pool'));
+      if (zone) {
+        const destTier = zone.dataset.tier;
+        moveItem(dragItemId, dragSourceTier, destTier);
+        render();
+      }
+      dragItemId = null; dragSourceTier = null;
+    });
+
+    return el;
+  }
+
+  function moveItem(id, fromTier, toTier) {
+    if (!fromTier || !toTier || fromTier === toTier) return;
+    const fromArr = state[fromTier];
+    const idx = fromArr.indexOf(id);
+    if (idx === -1) return;
+    fromArr.splice(idx, 1);
+    state[toTier].push(id);
+  }
+
+  function render() {
+    // Tiers
+    TIERS.forEach(tier => {
+      const drop = document.querySelector(`.tier-drop[data-tier="${tier.id}"]`);
+      if (!drop) return;
+      drop.innerHTML = '';
+      state[tier.id].forEach(id => {
+        const el = createItemEl(id);
+        if (el) drop.appendChild(el);
+      });
+    });
+    // Unranked
+    const pool = document.getElementById('unranked-pool');
+    pool.innerHTML = '';
+    state.unranked.forEach(id => {
+      const el = createItemEl(id);
+      if (el) pool.appendChild(el);
+    });
+    // Count
+    document.getElementById('pool-count').textContent = state.unranked.length + ' remaining';
+    updateLocalStorage();
+  }
+
+  // ── Build board ────────────────────────────────────────────────────────────
+  function buildBoard() {
+    const board = document.getElementById('tier-board');
+    board.innerHTML = '';
+    TIERS.forEach(tier => {
+      const row = document.createElement('div');
+      row.className = `tier-row tier-${tier.id}`;
+      row.innerHTML = `
+        <div class="tier-label">
+          <span>${tier.label}</span>
+          <span class="tier-name">${tier.name}</span>
+        </div>
+        <div class="tier-drop" data-tier="${tier.id}"></div>
+      `;
+      // Drop zone events
+      const drop = row.querySelector('.tier-drop');
+      drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('drag-over'); });
+      drop.addEventListener('dragleave', () => drop.classList.remove('drag-over'));
+      drop.addEventListener('drop', e => {
+        e.preventDefault();
+        drop.classList.remove('drag-over');
+        const destTier = drop.dataset.tier;
+        moveItem(dragItemId, dragSourceTier, destTier);
+        render();
+      });
+      board.appendChild(row);
+    });
+
+    // Unranked pool drop events
+    const pool = document.getElementById('unranked-pool');
+    pool.dataset.tier = 'unranked';
+    pool.addEventListener('dragover', e => { e.preventDefault(); pool.classList.add('drag-over'); });
+    pool.addEventListener('dragleave', () => pool.classList.remove('drag-over'));
+    pool.addEventListener('drop', e => {
+      e.preventDefault();
+      pool.classList.remove('drag-over');
+      moveItem(dragItemId, dragSourceTier, 'unranked');
+      render();
+    });
+  }
+
+  // ── LocalStorage persistence ───────────────────────────────────────────────
+  const LS_KEY = 'ta_tierlist_v1';
+  function updateLocalStorage() {
+    try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch(e) {}
+  }
+  function loadFromLocalStorage() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(LS_KEY));
+      if (!saved) return false;
+      // Validate: all item IDs must be accounted for
+      const allIds = new Set(ITEMS.map(i => i.id));
+      const savedIds = new Set([...Object.values(saved).flat()]);
+      if (![...allIds].every(id => savedIds.has(id))) return false; // mismatch → ignore
+      Object.assign(state, saved);
+      return true;
+    } catch(e) { return false; }
+  }
+
+  // ── Score calculation ──────────────────────────────────────────────────────
+  function calcScore() {
+    let score = 0;
+    let ranked = 0;
+    TIERS.forEach(t => {
+      const s = TIER_SCORES[t.id] || 0;
+      state[t.id].forEach(() => { score += s; ranked++; });
+    });
+    return { score, ranked };
+  }
+
+  // ── Generate result ────────────────────────────────────────────────────────
+  document.getElementById('generate-result-btn').addEventListener('click', () => {
+    const { score, ranked } = calcScore();
+    const verdict = getVerdict(score, ranked);
+    document.getElementById('result-score-number').textContent = score;
+    document.getElementById('verdict-title').textContent = verdict.title;
+    document.getElementById('verdict-body').textContent = verdict.body;
+
+    // Breakdown
+    const breakdown = document.getElementById('result-breakdown');
+    breakdown.innerHTML = TIERS.map(t => {
+      const count = state[t.id].length;
+      if (count === 0) return '';
+      return `<div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);display:flex;gap:0.5rem;align-items:center;">
+        <strong style="color:var(--gold);min-width:36px">${t.label}</strong>
+        <span style="color:var(--text-secondary)">${state[t.id].map(id => itemById(id)?.label || id).join(', ')}</span>
+      </div>`;
+    }).join('');
+
+    const resultSection = document.getElementById('result-section');
+    resultSection.classList.add('visible');
+    resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // ── Share ─────────────────────────────────────────────────────────────────
+  function buildShareText() {
+    return TIERS.map(t => {
+      const items = state[t.id];
+      if (items.length === 0) return null;
+      return `[${t.label} — ${t.name}]\n${items.map(id => itemById(id)?.label || id).join(', ')}`;
+    }).filter(Boolean).join('\n\n') + '\n\nMy Conspiracy Tier List — thetrutharchive.org/tier-list.html';
+  }
+
+  document.getElementById('copy-share-btn').addEventListener('click', function() {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).catch(() => {});
+    this.textContent = 'Copied ✓';
+    this.classList.add('copied');
+    setTimeout(() => { this.textContent = '📋 Copy Share Link'; this.classList.remove('copied'); }, 2000);
+  });
+  document.getElementById('copy-text-btn').addEventListener('click', function() {
+    const text = buildShareText();
+    navigator.clipboard.writeText(text).catch(() => { /* fallback omitted for brevity */ });
+    this.textContent = 'Copied ✓';
+    this.classList.add('copied');
+    setTimeout(() => { this.textContent = '📝 Copy Tier Text'; this.classList.remove('copied'); }, 2000);
+  });
+
+  // ── Shuffle ────────────────────────────────────────────────────────────────
+  document.getElementById('shuffle-btn').addEventListener('click', () => {
+    for (let i = state.unranked.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [state.unranked[i], state.unranked[j]] = [state.unranked[j], state.unranked[i]];
+    }
+    render();
+  });
+
+  // ── Reset ─────────────────────────────────────────────────────────────────
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    TIERS.forEach(t => state[t.id] = []);
+    state.unranked = [...ITEMS.map(i => i.id)];
+    document.getElementById('result-section').classList.remove('visible');
+    render();
+    try { localStorage.removeItem(LS_KEY); } catch(e) {}
+  });
+
+  // ── Init ──────────────────────────────────────────────────────────────────
+  buildBoard();
+  const restored = loadFromLocalStorage();
+  if (!restored) {
+    // Shuffle on first load for variety
+    for (let i = state.unranked.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [state.unranked[i], state.unranked[j]] = [state.unranked[j], state.unranked[i]];
+    }
+  }
+  render();
+
+  // ── Fade-in observer ─────────────────────────────────────────────────────
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

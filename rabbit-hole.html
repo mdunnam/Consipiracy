@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<!-- Those who read the code see more than those who only read the page. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rabbit Hole Generator — Truth Archive</title>
+  <meta name="description" content="Select a starting topic and descend into a personalised sequence of connected rabbit holes. How deep are you willing to go?" />
+  <meta property="og:title" content="Rabbit Hole Generator — Truth Archive" />
+  <meta property="og:description" content="One starting point. Seven layers deep. How far will you go?" />
+  <meta property="og:image" content="https://thetrutharchive.org/images/og-preview.jpg" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .fade-in { opacity:0; transform:translateY(20px); transition:opacity .35s ease, transform .35s ease; }
+    .fade-in.visible { opacity:1; transform:none; }
+
+    /* ── Hero ─────────────────────────────────────────────────────── */
+    .rh-hero {
+      padding: 6rem 1.5rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(139,20,20,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 20% 60%, rgba(201,162,39,0.07) 0%, transparent 40%),
+        var(--bg-primary);
+    }
+    .rh-hero::before {
+      content:'';
+      position:absolute; inset:0;
+      background:
+        linear-gradient(90deg, rgba(201,162,39,0.04) 1px, transparent 1px),
+        linear-gradient(rgba(201,162,39,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.6) 40%, transparent 80%);
+      pointer-events:none;
+    }
+    .rh-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.63rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--red-bright);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .rh-hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
+      line-height: 1.05;
+      margin-bottom: 1.2rem;
+    }
+    .rh-hero p {
+      color: var(--text-secondary);
+      max-width: 52ch;
+      margin: 0 auto 2.5rem;
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+    .rh-hero .depth-warning {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 1.1rem;
+      border: 1px solid var(--border-red);
+      background: rgba(139,20,20,0.12);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--red-bright);
+      margin-bottom: 2.5rem;
+    }
+    .rh-hero .depth-warning::before { content:'⚠'; font-size:0.9rem; }
+
+    /* ── Category selector ─────────────────────────────────────── */
+    .rh-main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 1.5rem 5rem;
+    }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-label::after {
+      content:'';
+      flex:1;
+      height:1px;
+      background: var(--border);
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.6rem;
+      margin-bottom: 2.5rem;
+    }
+    .cat-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      font-family: var(--font-label);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--transition);
+      border-radius: var(--radius);
+      text-align: left;
+    }
+    .cat-btn .cat-icon { font-size: 1.05rem; flex-shrink:0; }
+    .cat-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+      background: rgba(201,162,39,0.07);
+    }
+    .cat-btn.selected {
+      border-color: var(--gold);
+      background: rgba(201,162,39,0.12);
+      color: var(--gold-light);
+      box-shadow: var(--glow-gold);
+    }
+
+    /* ── Starting topic ────────────────────────────────────────── */
+    .topic-picker-wrap {
+      margin-bottom: 2rem;
+    }
+    .topic-search-row {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .topic-search {
+      flex:1;
+      padding: 0.7rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      border-radius: var(--radius);
+      outline: none;
+      transition: var(--transition);
+    }
+    .topic-search:focus { border-color: var(--gold); box-shadow: var(--glow-gold); }
+    .topic-search::placeholder { color: var(--text-muted); }
+
+    .topic-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      max-height: 160px;
+      overflow-y: auto;
+      padding: 0.25rem 0;
+    }
+    .topic-chip {
+      padding: 0.32rem 0.75rem;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .topic-chip:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+    .topic-chip.selected {
+      border-color: var(--red-bright);
+      background: rgba(204,34,34,0.14);
+      color: var(--red-bright);
+      box-shadow: var(--glow-red);
+    }
+
+    /* ── Depth selector ────────────────────────────────────────── */
+    .depth-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .depth-row label {
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+    .depth-pills {
+      display: flex;
+      gap: 0.4rem;
+    }
+    .depth-pill {
+      padding: 0.35rem 0.85rem;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+    .depth-pill:hover { border-color: var(--gold); color: var(--gold); }
+    .depth-pill.active {
+      border-color: var(--gold);
+      background: rgba(201,162,39,0.12);
+      color: var(--gold-light);
+    }
+    .depth-pill[data-depth="10"] { border-color: var(--border-red); color: var(--red-bright); }
+    .depth-pill[data-depth="10"].active {
+      background: rgba(139,20,20,0.2);
+      color: var(--red-bright);
+      box-shadow: var(--glow-red);
+    }
+
+    /* ── Generate button ───────────────────────────────────────── */
+    .generate-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      width: 100%;
+      padding: 1.05rem 2rem;
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #000;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      border: none;
+      cursor: pointer;
+      border-radius: var(--radius);
+      transition: var(--transition);
+      box-shadow: 0 4px 24px rgba(201,162,39,0.3);
+      margin-bottom: 3rem;
+    }
+    .generate-btn:hover {
+      background: linear-gradient(135deg, #f0d460, var(--gold-light));
+      box-shadow: 0 6px 32px rgba(201,162,39,0.5);
+      transform: translateY(-1px);
+    }
+    .generate-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .generate-btn .btn-arrow { font-size: 1.2rem; }
+
+    /* ── Results: the hole ─────────────────────────────────────── */
+    #hole-output { display: none; }
+    #hole-output.visible { display: block; }
+
+    .hole-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-gold);
+    }
+    .hole-title-block .hole-label {
+      font-family: var(--font-mono);
+      font-size: 0.63rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--red-bright);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .hole-title-block h2 {
+      font-size: 1.6rem;
+      margin: 0;
+    }
+    .hole-stats {
+      display: flex;
+      gap: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+    .hole-stats span strong { color: var(--gold); }
+
+    /* ── Progress bar ──────────────────────────────────────────── */
+    .progress-wrap {
+      margin-bottom: 2.5rem;
+    }
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+    .progress-meta .depth-pct { color: var(--gold-light); font-size: 0.78rem; }
+    .progress-track {
+      height: 4px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--red-bright), var(--gold));
+      border-radius: 2px;
+      transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
+      width: 0%;
+    }
+
+    /* ── Topic cards ───────────────────────────────────────────── */
+    .hole-cards {
+      display: grid;
+      gap: 0;
+    }
+    .hole-card {
+      display: grid;
+      grid-template-columns: 60px 1fr auto;
+      align-items: start;
+      gap: 0;
+      padding: 0;
+      border: 1px solid var(--border);
+      border-bottom: none;
+      background: var(--bg-card);
+      position: relative;
+      transition: var(--transition);
+      opacity: 0;
+      transform: translateX(-12px);
+    }
+    .hole-card:last-child { border-bottom: 1px solid var(--border); }
+    .hole-card.revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .hole-card:hover {
+      border-color: var(--border-gold);
+      background: var(--bg-card-hover);
+      z-index: 1;
+    }
+    .hole-card:first-child {
+      border-color: var(--border-red);
+      background: linear-gradient(135deg, rgba(139,20,20,0.1), var(--bg-card));
+    }
+    .hole-card:first-child .card-number { color: var(--red-bright); }
+    .hole-card:first-child .card-depth-tag { background: rgba(204,34,34,0.2); color: var(--red-bright); border-color: var(--border-red); }
+
+    .card-number {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 1.4rem 0 1.4rem;
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      color: var(--gold);
+      opacity: 0.6;
+      border-right: 1px solid var(--border);
+      line-height: 1;
+    }
+    .card-body {
+      padding: 1.25rem 1.2rem;
+    }
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 0.55rem;
+      flex-wrap: wrap;
+    }
+    .card-category {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: 2px;
+    }
+    .card-depth-tag {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      padding: 0.18rem 0.5rem;
+      border: 1px solid var(--border-gold);
+      background: rgba(201,162,39,0.08);
+      color: var(--gold);
+      border-radius: 2px;
+    }
+    .card-title {
+      font-family: var(--font-label);
+      font-size: 0.98rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 0.45rem;
+      line-height: 1.35;
+    }
+    .card-hook {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      line-height: 1.7;
+      max-width: 64ch;
+    }
+    .card-hook strong { color: var(--text-primary); }
+    .card-connection {
+      margin-top: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .card-connection::before { content:'↗'; color: var(--red-bright); }
+    .card-action {
+      padding: 1.25rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-start;
+      gap: 0.5rem;
+      min-width: 110px;
+    }
+    .read-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.85rem;
+      font-family: var(--font-label);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--border-gold);
+      background: transparent;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .read-btn:hover {
+      background: rgba(201,162,39,0.14);
+      box-shadow: var(--glow-gold);
+    }
+    .card-marker {
+      display: none;
+    }
+
+    /* ── Connection thread ─────────────────────────────────────── */
+    .thread-line {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 0 0.5rem 1.5rem;
+      border-left: 2px solid var(--border);
+      margin: 0 0 0 29px;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+    }
+    .thread-arrow { color: var(--gold); font-size: 0.9rem; }
+
+    /* ── Depth meter (sidebar pill when at bottom) ─────────────── */
+    .depth-reached {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      border: 1px solid var(--border-red);
+      background: rgba(139,20,20,0.12);
+      border-radius: var(--radius);
+      text-align: center;
+    }
+    .depth-reached .dr-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red-bright);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .depth-reached .dr-number {
+      font-family: var(--font-heading);
+      font-size: 3rem;
+      color: var(--gold);
+      text-shadow: var(--glow-text-gold);
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .depth-reached p {
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+      max-width: 44ch;
+      margin: 0 auto 1.25rem;
+    }
+
+    .regen-row {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .regen-btn {
+      padding: 0.6rem 1.4rem;
+      font-family: var(--font-label);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .regen-btn.primary {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      color: #000;
+      border: none;
+    }
+    .regen-btn.primary:hover { filter: brightness(1.1); }
+    .regen-btn.secondary {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+    .regen-btn.secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── Share strip ───────────────────────────────────────────── */
+    .share-strip {
+      margin-top: 1.5rem;
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      border-radius: var(--radius);
+    }
+    .share-strip p {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      max-width: 100%;
+      margin: 0;
+    }
+    .share-strip #share-text {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.4rem 0.75rem;
+      border-radius: 2px;
+      flex: 1;
+      min-width: 0;
+      cursor: text;
+    }
+    .copy-btn {
+      padding: 0.4rem 1rem;
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: transparent;
+      border: 1px solid var(--border-gold);
+      color: var(--gold);
+      cursor: pointer;
+      border-radius: 2px;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .copy-btn:hover { background: rgba(201,162,39,0.1); }
+    .copy-btn.copied { color: #2ecc71; border-color: #2ecc71; }
+
+    /* ── Responsive ────────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .hole-card { grid-template-columns: 44px 1fr; }
+      .card-action { display: none; }
+      .depth-row { gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-logo">
+      <span class="eye-symbol">👁</span>
+      Truth Archive
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-label="Toggle menu">☰</button>
+        <ul class="nav-links">
+      <li class="nav-group">
+        <button class="nav-group-toggle" aria-expanded="false" aria-label="Browse all chapters">
+          <span class="nav-rail-icon" aria-hidden="true">&#x25A6;</span><span class="nav-rail-label">Chapters &#x25BE;</span>
+        </button>
+        <ul class="nav-sub">
+          <li><a href="flat-earth.html">Ch 01 &middot; Flat Earth</a></li>
+          <li><a href="great-awakening.html">Ch 02 &middot; Great Awakening</a></li>
+          <li><a href="deep-state.html">Ch 03 &middot; Deep State</a></li>
+          <li><a href="secret-societies.html">Ch 04 &middot; Secret Societies</a></li>
+          <li><a href="banking-control.html">Ch 05 &middot; Banking Control</a></li>
+          <li><a href="media-control.html">Ch 06 &middot; Media Control</a></li>
+          <li><a href="space-deception.html">Ch 07 &middot; Space Deception</a></li>
+          <li><a href="big-pharma.html">Ch 08 &middot; Big Pharma</a></li>
+          <li><a href="tech-control.html">Ch 09 &middot; Tech &amp; Control</a></li>
+          <li><a href="false-flags.html">Ch 10 &middot; False Flags</a></li>
+          <li><a href="suppressed-history.html">Ch 11 &middot; Suppressed History</a></li>
+          <li><a href="metaphysical.html">Ch 12 &middot; Metaphysical</a></li>
+          <li><a href="ufo-disclosure.html">Ch 13 &middot; UFO Disclosure</a></li>
+          <li><a href="ancient-civilisations.html">Ch 14 &middot; Ancient Civilisations</a></li>
+          <li><a href="anomalous-zones.html">Ch 15 &middot; Anomalous Zones</a></li>
+          <li><a href="elite-networks.html">Ch 16 &middot; Elite Networks</a></li>
+          <li><a href="internet-control.html">Ch 17 &middot; Internet Control</a></li>
+          <li><a href="mandela-effect.html">Ch 18 &middot; Mandela Effect</a></li>
+          <li><a href="forensic-mysteries.html">Ch 19 &middot; Forensic Mysteries</a></li>
+          <li><a href="secret-science.html">Ch 20 &middot; Secret Science</a></li>
+        </ul>
+      </li>
+      <li><a href="rabbit-hole.html">Rabbit Hole</a></li>
+      <li><a href="tier-list.html">Tier List</a></li>
+      <li><a href="map.html">Connection Map</a></li>
+      <li><a href="ebook.html" class="ebook-link">eBook</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header class="rh-hero fade-in">
+    <span class="rh-eyebrow">// interactive research tool</span>
+    <h1 class="glitch" data-text="Rabbit Hole Generator">Rabbit Hole Generator</h1>
+    <p>Select a starting topic. The generator builds a personalised chain of connected research — each step pulling you deeper into the hidden structure of reality.</p>
+    <span class="depth-warning">Warning: Some sequences lead to conclusions you cannot unlearn</span>
+  </header>
+
+  <!-- MAIN -->
+  <main class="rh-main">
+
+    <!-- STEP 1: Category -->
+    <div class="fade-in" id="step-category">
+      <p class="section-label">Step 1 — Choose a Domain</p>
+      <div class="category-grid" id="cat-grid">
+        <!-- populated by JS -->
+      </div>
+    </div>
+
+    <!-- STEP 2: Starting topic -->
+    <div class="fade-in" id="step-topic">
+      <p class="section-label">Step 2 — Pick Your Entry Point</p>
+      <div class="topic-picker-wrap">
+        <div class="topic-search-row">
+          <input type="text" class="topic-search" id="topic-search" placeholder="Filter topics…" autocomplete="off" />
+        </div>
+        <div class="topic-chips" id="topic-chips">
+          <!-- populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3: Depth -->
+    <div class="fade-in" id="step-depth">
+      <p class="section-label">Step 3 — Set Depth</p>
+      <div class="depth-row">
+        <label>Levels deep:</label>
+        <div class="depth-pills" id="depth-pills">
+          <button class="depth-pill" data-depth="3">3</button>
+          <button class="depth-pill active" data-depth="5">5</button>
+          <button class="depth-pill" data-depth="7">7</button>
+          <button class="depth-pill" data-depth="10">10 ☠</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="generate-btn" id="generate-btn" disabled>
+      <span class="btn-arrow">↯</span>
+      Generate Rabbit Hole
+      <span class="btn-arrow">↯</span>
+    </button>
+
+    <!-- OUTPUT -->
+    <div id="hole-output">
+      <div class="hole-header">
+        <div class="hole-title-block">
+          <span class="hole-label">// active rabbit hole</span>
+          <h2 id="hole-title">—</h2>
+        </div>
+        <div class="hole-stats">
+          <span>Depth: <strong id="stat-depth">—</strong></span>
+          <span>Connections: <strong id="stat-conn">—</strong></span>
+          <span>Est. read: <strong id="stat-time">—</strong></span>
+        </div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <span id="progress-label">Start — <span id="current-topic-name">—</span></span>
+          <span class="depth-pct" id="depth-pct">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="hole-cards" id="hole-cards"></div>
+
+      <div class="depth-reached" id="depth-reached" style="display:none">
+        <span class="dr-label">// depth reached</span>
+        <span class="dr-number" id="dr-number">0</span>
+        <p id="dr-message">You've reached the bottom of this rabbit hole. Most people stop at level 3.</p>
+        <div class="regen-row">
+          <button class="regen-btn primary" id="regen-same-btn">↺ New Path, Same Entry</button>
+          <button class="regen-btn secondary" id="regen-new-btn">↯ Start Over</button>
+        </div>
+      </div>
+
+      <div class="share-strip" id="share-strip" style="display:none">
+        <p>Share this rabbit hole:</p>
+        <input type="text" id="share-text" readonly />
+        <button class="copy-btn" id="copy-btn">Copy Link</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>The Truth Archive</h3>
+        <p>An independent research network dedicated to exposing the hidden architecture of power.</p>
+        <p style="margin-top:1rem; font-family:var(--font-mono); font-size:0.68rem; color:var(--text-muted); letter-spacing:0.1em;">
+          &ldquo;Once you see it, you cannot unsee it.&rdquo;
+        </p>
+      </div>
+      <div class="footer-links">
+        <h5>Interactive</h5>
+        <ul>
+          <li><a href="rabbit-hole.html">Rabbit Hole</a></li>
+          <li><a href="tier-list.html">Tier List</a></li>
+          <li><a href="flat-earth-map.html">Flat Earth Map</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>Core Routes</h5>
+        <ul>
+          <li><a href="deep-state.html">Deep State</a></li>
+          <li><a href="flat-earth.html">Flat Earth</a></li>
+          <li><a href="secret-societies.html">Secret Societies</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>More Chapters</h5>
+        <ul>
+          <li><a href="banking-control.html">Banking Control</a></li>
+          <li><a href="media-control.html">Media Control</a></li>
+          <li><a href="ebook.html">eBook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&#9670; &nbsp; THE TRUTH ARCHIVE &nbsp; &#9670; &nbsp; RESEARCH &amp; EDUCATION &nbsp; &#9670; &nbsp; QUESTION EVERYTHING &nbsp; &#9670;</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+
+  <script>
+  // ══════════════════════════════════════════════════════════════════════════
+  //  RABBIT HOLE — DATA & ENGINE
+  // ══════════════════════════════════════════════════════════════════════════
+
+  const CATEGORIES = [
+    { id: 'banking',     label: 'Banking & Finance',       icon: '🏦', color: '#c9a227' },
+    { id: 'deepstate',   label: 'Deep State',               icon: '🕵️', color: '#cc2222' },
+    { id: 'societies',   label: 'Secret Societies',         icon: '🔺', color: '#9b59b6' },
+    { id: 'health',      label: 'Health & Pharma',          icon: '💊', color: '#2ecc71' },
+    { id: 'tech',        label: 'Technology & Control',     icon: '📡', color: '#3498db' },
+    { id: 'media',       label: 'Media & Crime Networks',   icon: '📺', color: '#e67e22' },
+    { id: 'falseflags',  label: 'False Flags & Events',     icon: '🚩', color: '#e74c3c' },
+    { id: 'ssp',         label: 'Secret Space Program',     icon: '🛸', color: '#1abc9c' },
+    { id: 'et',          label: 'Extraterrestrial',         icon: '👁', color: '#8e44ad' },
+    { id: 'innerearth',  label: 'Inner Earth',              icon: '🌍', color: '#27ae60' },
+    { id: 'ancient',     label: 'Ancient History',          icon: '🏛', color: '#f39c12' },
+    { id: 'flatearth',   label: 'Flat Earth',               icon: '🗺', color: '#16a085' },
+    { id: 'spiritual',   label: 'Spiritual & Metaphysical', icon: '☯️', color: '#8e44ad' },
+    { id: 'nazi',        label: 'Nazi / Breakaway',         icon: '⚡', color: '#7f8c8d' },
+  ];
+
+  // Topic graph: each topic has a slug, title, category, hook text, and connections array
+  // Connections are slugs that get followed as the next step
+  const TOPICS = [
+    // ── BANKING ──────────────────────────────────────────────────────────────
+    { id: 'federal-reserve',       cat: 'banking',    title: 'The Federal Reserve',        hook: 'A private corporation — not a government body — issues the world\'s reserve currency. Created in 1913 on Jekyll Island, Georgia, in a secret meeting of the Morgans, Rockefellers, and Warburgs.', connects: ['rothschilds','bis','petrodollar','babylonian-money-magic','blackrock-vanguard'] },
+    { id: 'rothschilds',           cat: 'banking',    title: 'The Rothschild Dynasty',     hook: '250 years of funding both sides of every European war. Nathan Rothschild\'s London bond markets. The "Give me control of a nation\'s money supply" doctrine. Five sons, five central banks, one family.', connects: ['federal-reserve','bis','khazarian-mafia','illuminati','all-money-leads-rome'] },
+    { id: 'rockefellers',          cat: 'banking',    title: 'The Rockefeller Network',    hook: 'Standard Oil dismantled in 1911 — but the Rockefeller empire pivoted into medicine, education, and global governance. The CFR, the WHO framework, and modern university curricula all bear their fingerprints.', connects: ['big-pharma','council-foreign-relations','who-control','bill-gates','tavistock-institute'] },
+    { id: 'bis',                   cat: 'banking',    title: 'Bank for International Settlements', hook: 'The central bank of central banks, headquartered in Basel, Switzerland. Founded in 1930. Immune from all national law. Its meetings are closed to the public. All major monetary decisions flow through it.', connects: ['federal-reserve','imf-world-bank','great-reset','cbdc','world-gold-heist'] },
+    { id: 'cbdc',                  cat: 'banking',    title: 'CBDCs — Programmable Money', hook: 'Money that expires. Money that cannot be spent on unapproved items. Money linked to a social credit score. Central bank digital currencies are the final layer of the financial control system.', connects: ['great-reset','smart-cities','transhumanism','wef-schwab','nesara-gesara'] },
+    { id: 'blackrock-vanguard',    cat: 'banking',    title: 'BlackRock, Vanguard & State Street', hook: 'The Big Three own controlling stakes in every major bank, media company, pharma giant, and defence contractor simultaneously. They are the institutional layer through which the cabal controls the corporate world.', connects: ['federal-reserve','corporate-state-capture','great-reset','wef-schwab','petrodollar'] },
+    { id: 'great-reset',           cat: 'banking',    title: 'The Great Reset',            hook: '"You will own nothing and you will be happy." Klaus Schwab\'s 2020 WEF agenda. The COVID pandemic was the trigger. CBDCs, smart cities, and 15-minute zones are the architecture.', connects: ['wef-schwab','cbdc','smart-cities','agenda-2030','bill-gates'] },
+    { id: 'babylonian-money-magic',cat: 'banking',    title: 'Babylonian Money Magic',     hook: 'The occult origins of fiat debt money. The creation of money from nothing — lending non-existent currency at interest — is a form of ritual sorcery encoded in maritime admiralty law.', connects: ['all-money-leads-rome','illuminati','federal-reserve','khazarian-mafia','kabbalah-tree-of-life'] },
+    { id: 'petrodollar',           cat: 'banking',    title: 'The Petrodollar System',     hook: 'In 1973, Kissinger negotiated with Saudi Arabia: all oil globally would be priced in US dollars. Every nation that needs oil must first acquire dollars. The dollar\'s reserve status is enforced by military force, not economic merit.', connects: ['federal-reserve','jfk-assassination','cia-operations','false-flags','blackrock-vanguard'] },
+    { id: 'khazarian-mafia',       cat: 'banking',    title: 'The Khazarian Mafia',        hook: 'The historical roots of the global banking crime syndicate trace to the Khazarian Empire (650–850 CE), which converted to Judaism en masse as a political act. Their descendants infiltrated European banking dynasties.', connects: ['rothschilds','babylonian-money-magic','illuminati','skull-bones','all-money-leads-rome'] },
+
+    // ── DEEP STATE ─────────────────────────────────────────────────────────
+    { id: 'cia-operations',        cat: 'deepstate',  title: 'CIA Operations',             hook: 'The CIA has conducted 72 documented coups, assassinations, and regime changes since 1947. Its black budget is funded through drug trafficking (Iran-Contra, Afghan opium). No congressional oversight has ever been sustained.', connects: ['mkultra','operation-paperclip','operation-mockingbird','cia-drug-trafficking','jfk-assassination'] },
+    { id: 'mkultra',               cat: 'deepstate',  title: 'MKUltra',                    hook: 'The CIA\'s non-consensual human mind-control programme. 150+ sub-projects. LSD, electroshock, sleep deprivation, child subjects. Confirmed by a 1977 Senate hearing. The Church Committee found the programme was never fully terminated.', connects: ['cia-operations','tavistock-institute','super-soldiers','monarch','hollywood-satanism'] },
+    { id: 'operation-paperclip',   cat: 'deepstate',  title: 'Operation Paperclip',        hook: '1,600 Nazi scientists secretly imported to the United States after WW2. Werner von Braun — former SS officer who used slave labour — became the director of NASA. The deep state was built with Nazi architecture.', connects: ['nasa-deceptions','nazi-breakaway-group','cia-operations','mkultra','dark-fleet'] },
+    { id: 'shadow-government',     cat: 'deepstate',  title: 'The Shadow Government',      hook: 'The permanent unelected administrative state — 34 levels above the President\'s security clearance. POTUS is read into programmes selectively. The real decisions are made by people who never face an election.', connects: ['ses-senior-executive','sealed-indictments','cia-operations','five-eyes','cabal-hierarchy'] },
+    { id: 'five-eyes',             cat: 'deepstate',  title: 'Five Eyes',                  hook: 'US, UK, Canada, Australia, New Zealand — a signals intelligence alliance that circumvents each nation\'s domestic surveillance laws by having allies spy on their own citizens\' data and share it.', connects: ['nsa-surveillance','operation-mockingbird','pine-gap','raf-menwith-hill','shadow-government'] },
+    { id: 'nsa-surveillance',      cat: 'deepstate',  title: 'NSA Mass Surveillance',      hook: 'PRISM, XKeyscore, MUSCULAR. Snowden\'s 2013 revelations confirmed total collection of all digital communications. Room 641A in AT&T\'s San Francisco office is a literal NSA splitter cabinet on the backbone of the internet.', connects: ['five-eyes','snowden-assange','global-surveillance-grid','smart-cities','rfid-surveillance'] },
+    { id: 'cointelpro',            cat: 'deepstate',  title: 'COINTELPRO',                 hook: 'FBI\'s 15-year programme (1956–1971) to infiltrate, discredit, and destroy American political movements — from the Civil Rights movement to the Black Panthers to the American Indian Movement. Tactics: forged documents, informants, assassinations.', connects: ['cia-operations','jfk-assassination','false-flags','shadow-government','operation-mockingbird'] },
+    { id: 'jfk-assassination',     cat: 'deepstate',  title: 'JFK Assassination',          hook: 'The single-bullet theory requires a bullet to make 7 wounds, change direction twice, and emerge pristine. 59 witnesses heard shots from the grassy knoll. 1,100 documents remain classified in 2026. Kennedy was killed 10 days after signing Executive Order 11110.', connects: ['cia-operations','federal-reserve','operation-northwoods','shadow-government','9-11-inside-job'] },
+    { id: 'snowden-assange',       cat: 'deepstate',  title: 'Snowden & Assange',          hook: 'Two men who proved what was called conspiracy theory. Snowden confirmed total surveillance. Assange published 10 million classified documents proving war crimes. Both are in exile or prison. The documents are accurate. The men are vilified.', connects: ['nsa-surveillance','five-eyes','operation-mockingbird','cia-operations','wikileaks'] },
+    { id: 'operation-mockingbird', cat: 'deepstate',  title: 'Operation Mockingbird',      hook: '400 journalists on CIA payroll. 25 major news organisations penetrated. The Church Committee confirmed it in 1975 and ordered it stopped. The programme was never stopped — it was restructured. The media you trust was built as a propaganda tool.', connects: ['cia-operations','corporate-media-control','tavistock-institute','predictive-programming','social-media-control'] },
+
+    // ── SECRET SOCIETIES ───────────────────────────────────────────────────
+    { id: 'illuminati',            cat: 'societies',  title: 'The Illuminati',             hook: 'Founded 1 May 1776 by Adam Weishaupt. Infiltrated Freemasonry. Suppressed by Bavarian authorities 1785. Their papers were seized and published — revealing plans for a single world government and abolition of private property. The date 1776 appears on the US dollar pyramid.', connects: ['freemasonry','skull-bones','rothschilds','new-world-order','kabbalah-tree-of-life'] },
+    { id: 'freemasonry',           cat: 'societies',  title: 'Freemasonry',                hook: 'Lower-degree Masons are misled about what the upper degrees serve. 33rd degree Albert Pike wrote that Lucifer is the god of Freemasonry. Supreme Court justices, presidents, and military leaders have been 33rd-degree Masons throughout American history.', connects: ['illuminati','skull-bones','bohemian-grove','washington-dc','albert-pike'] },
+    { id: 'skull-bones',           cat: 'societies',  title: 'Skull & Bones',              hook: 'Yale\'s most secretive order — 800 total members in 170 years. Multiple CIA directors, both Bushes, John Kerry, and countless senior intelligence officials. All "Bonesmen." Membership requires submitting complete sexual history in ritual detail.', connects: ['freemasonry','cia-operations','illuminati','bohemian-grove','cabal-hierarchy'] },
+    { id: 'bohemian-grove',        cat: 'societies',  title: 'Bohemian Grove',             hook: 'Every July, 2,000 of the world\'s most powerful men gather at a 2,700-acre redwood compound. They conduct the "Cremation of Care" ritual before a 40-foot stone owl. Alex Jones filmed it in 2000. The Manhattan Project was planned here in 1942.', connects: ['freemasonry','skull-bones','cia-operations','washington-dc','cabal-hierarchy'] },
+    { id: 'bilderberg',            cat: 'societies',  title: 'Bilderberg Group',           hook: '150 world leaders meeting annually since 1954. No press. No minutes published. No elected oversight. Former attendees have described the meeting as where policy is set, not discussed. What\'s decided at Bilderberg becomes government policy within 12 months.', connects: ['council-foreign-relations','trilateral-commission','wef-schwab','committee-300','cabal-hierarchy'] },
+    { id: 'council-foreign-relations', cat: 'societies', title: 'Council on Foreign Relations', hook: 'The US foreign policy establishment\'s real decision-making body. Founded 1921. Every Secretary of State, most CIA directors, most defence secretaries since WW2 have been CFR members. The CFR publishes its agenda openly because no one is watching.', connects: ['rockefellers','bilderberg','trilateral-commission','operation-mockingbird','shadow-government'] },
+    { id: 'tavistock-institute',   cat: 'societies',  title: 'Tavistock Institute',        hook: 'The UK\'s premier psychological operations think-tank, founded 1947. Tavistock developed the techniques for mass psychological manipulation that underpin modern advertising, political messaging, and social engineering. Kurt Lewin, Sigmund Freud\'s student, was its founding architect.', connects: ['mkultra','operation-mockingbird','educational-indoctrination','social-media-control','kill-your-tv'] },
+    { id: 'vatican-jesuits',       cat: 'societies',  title: 'Vatican & Jesuits',          hook: 'The Society of Jesus — founded 1540 as a counter-reformation military intelligence order. Jesuit-trained leaders include Castro, Clinton, and numerous heads of state. The Jesuits were expelled from 83 countries between 1500 and 1900 before being readmitted.', connects: ['all-money-leads-rome','illuminati','knights-templar','black-nobility','committee-300'] },
+    { id: 'knights-templar',       cat: 'societies',  title: 'Knights Templar',            hook: 'The original banking cartel, 1119–1312 CE. Invented the letter of credit. Accumulated wealth and territory across Europe. Suppressed by Philip IV of France on Friday 13 October 1307. Their banking operations continued through the Hospitallers and later the City of London.', connects: ['freemasonry','vatican-jesuits','rothschilds','city-of-london','babylonian-money-magic'] },
+
+    // ── HEALTH ─────────────────────────────────────────────────────────────
+    { id: 'big-pharma',            cat: 'health',     title: 'Big Pharma Cartel',          hook: 'John D. Rockefeller paid $100 million to reform American medical schools in 1910 to teach only drug-based medicine. Homeopathy, herbalism, and nutritional medicine were systematically eliminated. The patent drug model requires permanent illness, not cures.', connects: ['rockefellers','cancer-cure-suppressed','who-control','covid-plandemic','fluoride-poison'] },
+    { id: 'covid-plandemic',       cat: 'health',     title: 'COVID-19 Plandemic',         hook: 'Event 201 — a pandemic exercise simulating a novel coronavirus — was held in October 2019, 6 weeks before COVID\'s first case. Gain-of-function research at the Wuhan Institute of Virology was funded by EcoHealth Alliance with NIH money signed off by Fauci.', connects: ['bill-gates','who-control','mrna-vaccines','great-reset','false-flags'] },
+    { id: 'mrna-vaccines',         cat: 'health',     title: 'mRNA Vaccines',              hook: 'The first-ever mass deployment of mRNA technology. No long-term safety data existed. IgG4 class switching — documented in peer-reviewed literature — may indicate immune tolerance to spike protein, not immunity. The VAERS database records more adverse events than all previous vaccines combined.', connects: ['covid-plandemic','bill-gates','transhumanism','who-control','depopulation-agenda'] },
+    { id: 'fluoride-poison',       cat: 'health',     title: 'Fluoride as Neurotoxin',     hook: 'Classified as a neurotoxin in the Lancet Neurology journal 2014. The Harvard meta-analysis found reduced IQ in children exposed to fluoride. The substance added to water is industrial waste from aluminium and phosphate manufacturing, not pharmaceutical grade.', connects: ['big-pharma','pineal-gland','educational-indoctrination','rockefellers','cancer-cure-suppressed'] },
+    { id: 'adrenochrome',          cat: 'health',     title: 'Adrenochrome',               hook: 'Oxidised adrenaline. Documented psychoactive effects. Referenced in "Fear and Loathing in Las Vegas" as a black-market substance. The elite trafficking network is alleged to involve harvesting adrenal glands from terrified children. The compound is real. Its trafficking is the claim.', connects: ['epstein-network','pizzagate','underground-trafficking','save-the-children','nxivm'] },
+    { id: 'cancer-cure-suppressed',cat: 'health',     title: 'Suppressed Cancer Cures',    hook: 'Royal Raymond Rife\'s frequency machine cured 16 terminal cancer patients in 1934 under AMA supervision. His lab was raided, his equipment destroyed, and his research colleague Morris Fishbein of the AMA drove him into poverty. The cure was suppressed within 2 years of its confirmation.', connects: ['rife-machine','big-pharma','rockefellers','holistic-healing','med-beds'] },
+    { id: 'bill-gates',            cat: 'health',     title: 'Bill Gates',                 hook: 'Microsoft monopoly conviction (2000) → global vaccine czar (2010). Gates Foundation is the second-largest donor to the WHO after the US government. His 2010 TED talk stated that vaccines are a tool for reducing population growth. His words, on camera, unedited.', connects: ['who-control','mrna-vaccines','covid-plandemic','rockefellers','depopulation-agenda'] },
+
+    // ── TECHNOLOGY ─────────────────────────────────────────────────────────
+    { id: 'chemtrails',            cat: 'tech',       title: 'Chemtrails / Geoengineering',hook: 'Harvard\'s SCoPEx programme officially proposes stratospheric aerosol injection. The patents exist. The US government\'s own weather modification bill (WEATHER Act) was reintroduced in 2021. The debate has shifted from "does it happen" to "should we regulate it."', connects: ['haarp','5g-surveillance','bill-gates','dew-weapons','scalar-weapons'] },
+    { id: 'haarp',                 cat: 'tech',       title: 'HAARP Weather Control',      hook: '3.6 MW ionospheric heater. The European Parliament called for an international ban in 1999. "Transferred" to University of Alaska in 2015 with continuing DoD classified experiments. Russia\'s identical Sura facility sits at the geometrically opposite point.', connects: ['chemtrails','scalar-weapons','dew-weapons','5g-surveillance','firmament'] },
+    { id: '5g-surveillance',       cat: 'tech',       title: '5G & EMF Surveillance',      hook: 'Millimetre-wave frequencies at 60GHz interfere with oxygen molecule absorption. The rollout proceeded without mandatory health studies. Wuhan was one of the first 5G cities in China. The infrastructure doubles as a complete surveillance mesh — every device, every location, all the time.', connects: ['smart-cities','transhumanism','ai-surveillance','rfid-surveillance','nsa-surveillance'] },
+    { id: 'transhumanism',         cat: 'tech',       title: 'Transhumanism & Neurotech',  hook: 'Elon Musk\'s Neuralink. DARPA\'s hydrogel injectable sensor. Klaus Schwab\'s prediction that within a decade humans will have chips implanted "under their skin." The merger of biological and digital systems is not a future speculation — it\'s the stated agenda.', connects: ['cbdc','smart-cities','mrna-vaccines','wef-schwab','ancient-ai'] },
+    { id: 'dew-weapons',           cat: 'tech',       title: 'Directed Energy Weapons',    hook: 'The 2018 Paradise, CA fire burned houses from the inside while trees remained standing. The 2023 Maui fire left blue objects untouched while burning everything else. Aluminium melted on cars while plastic remained intact. Standard wildfire physics cannot explain these patterns.', connects: ['haarp','scalar-weapons','9-11-inside-job','maui-fire','shadow-government'] },
+    { id: 'ai-surveillance',       cat: 'tech',       title: 'AI Surveillance State',      hook: 'Palantir Gotham is deployed by 2,000+ US law enforcement agencies. Clearview AI scraped 30 billion faces without consent. China\'s Social Credit system is already operational. The western version is being built in phases under the framing of "public safety."', connects: ['5g-surveillance','smart-cities','nsa-surveillance','rfid-surveillance','global-surveillance-grid'] },
+
+    // ── MEDIA & CRIME ──────────────────────────────────────────────────────
+    { id: 'epstein-network',       cat: 'media',      title: 'Epstein Network',            hook: 'Jeffrey Epstein — registered sex offender, billionaire with no clear source of wealth, friend of Presidents and Princes. Little Saint James island. The client list exists. None have been charged. Epstein "died" in a federal maximum security prison with cameras off and guards asleep.', connects: ['adrenochrome','pizzagate','blackmail-control','cia-operations','nxivm'] },
+    { id: 'pizzagate',             cat: 'media',      title: 'Pizzagate',                  hook: 'The Podesta email investigation. Coded language that FBI documents confirm is used by trafficking networks. The building had a basement that didn\'t exist. The investigation was shut down before completion. The pattern has never been resolved — only labelled a conspiracy theory.', connects: ['epstein-network','underground-trafficking','adrenochrome','save-the-children','cia-operations'] },
+    { id: 'hollywood-satanism',    cat: 'media',      title: 'Hollywood & Ritual Abuse',   hook: 'The CIA\'s Hollywood liaison office is in every major studio. Monarch programming produces the trauma-dissociated performers the industry requires. Every major awards ceremony encodes ritual symbolism. The industry built the culture you absorbed from childhood.', connects: ['mkultra','disney-programming','predictive-programming','tavistock-institute','adrenochrome'] },
+    { id: 'corporate-media-control',cat:'media',      title: 'Corporate Media Control',    hook: 'In 1983, 50 companies controlled 90% of US media. Today, 6 do. The same 6 corporations are 40% owned by BlackRock and Vanguard. Their editorial boards share members with the CFR. Operation Mockingbird was the seed. This is the harvest.', connects: ['operation-mockingbird','blackrock-vanguard','council-foreign-relations','social-media-control','tavistock-institute'] },
+    { id: 'predictive-programming',cat:'media',       title: 'Predictive Programming',     hook: 'The Simpsons predicted 9/11, the Trump presidency, and the COVID pandemic — all by name, years in advance. Predictive programming is the occult practice of pre-announcing events to manifest them and to obtain ritual consent from an unsuspecting public.', connects: ['hollywood-satanism','9-11-inside-job','covid-plandemic','operation-mockingbird','stanley-kubrick'] },
+    { id: 'stanley-kubrick',       cat: 'media',      title: 'Stanley Kubrick',            hook: '2001: A Space Odyssey as soft disclosure. The Shining as coded confession about filming the Apollo 11 footage. Eyes Wide Shut about elite ritual sex clubs — released 4 days after Kubrick died, heavily edited. He left enough in each film to be found by those looking.', connects: ['moon-landing','hollywood-satanism','predictive-programming','bohemian-grove','nasa-deceptions'] },
+
+    // ── FALSE FLAGS ────────────────────────────────────────────────────────
+    { id: '9-11-inside-job',       cat: 'falseflags', title: '9/11 Inside Job',            hook: 'WTC7 fell at free-fall speed into its own footprint without being struck by a plane. NIST\'s model cannot reproduce this result. 2,977 deaths. The PNAC document from 2000 called for "a new Pearl Harbor" to justify military expansion. It arrived one year later.', connects: ['jfk-assassination','operation-northwoods','false-flags','dew-weapons','shadow-government'] },
+    { id: 'false-flags',           cat: 'falseflags', title: 'False Flag Operations',      hook: 'Gulf of Tonkin: admitted fabrication that started the Vietnam War. USS Liberty: Israel attacked a US Navy ship in 1967, killing 34 American sailors. Operation Gladio: NATO stay-behind networks conducted terrorist attacks across Europe, blamed on the left.', connects: ['9-11-inside-job','operation-northwoods','jfk-assassination','cia-operations','covid-as-false-flag'] },
+    { id: 'operation-northwoods',  cat: 'falseflags', title: 'Operation Northwoods',       hook: 'In 1962, the Joint Chiefs of Staff presented President Kennedy with a plan to conduct false-flag terrorist attacks on American soil — including shooting down an American airliner — and blame Cuba, to justify invasion. Kennedy refused to sign it. He was dead 13 months later.', connects: ['jfk-assassination','9-11-inside-job','false-flags','cia-operations','shadow-government'] },
+    { id: 'covid-as-false-flag',   cat: 'falseflags', title: 'COVID as False Flag',        hook: 'Event 201 (Johns Hopkins / WEF / Gates Foundation, Oct 2019) simulated a novel coronavirus pandemic and recommended suppressing "misinformation." Six weeks later, COVID appeared. The response was the agenda: lockdowns, vaccine mandates, digital ID infrastructure, CBDC rollout.', connects: ['covid-plandemic','bill-gates','great-reset','false-flags','cbdc'] },
+    { id: 'fukushima',             cat: 'falseflags', title: 'Fukushima',                  hook: 'The Fukushima Daiichi plant ran Siemens control systems. Stuxnet — the US/Israeli cyberweapon that destroyed Iranian centrifuges — also targeted Siemens systems. The 2011 Tōhoku earthquake epicentre was 70 km offshore. HAARP ionospheric heating can induce seismic activity.', connects: ['haarp','dew-weapons','false-flags','9-11-inside-job','chemtrails'] },
+    { id: 'pearl-harbor-foreknowledge', cat: 'falseflags', title: 'Pearl Harbor Foreknowledge', hook: 'US Navy cryptographers had broken Japanese naval codes by November 1941. Multiple warnings were sent to Hawaii and ignored. FDR had moved the Pacific Fleet\'s aircraft carriers out of Pearl Harbor three days before the attack. The "surprise" was engineered.', connects: ['false-flags','operation-northwoods','jfk-assassination','shadow-government','cia-operations'] },
+
+    // ── SSP ────────────────────────────────────────────────────────────────
+    { id: 'secret-space-program',  cat: 'ssp',        title: 'Secret Space Programme',     hook: 'The unacknowledged $21 trillion in undocumented Pentagon spending (Catherine Austin Fitts) funded a parallel space infrastructure invisible to the public. The X-37B robotic space plane has been on 700+ day orbital missions. What it\'s doing has never been disclosed.', connects: ['majestic-mj12','dark-fleet','solar-warden','tr3b-arvs','operation-paperclip'] },
+    { id: 'dark-fleet',            cat: 'ssp',        title: 'Dark Fleet',                 hook: 'An offensive space fleet operating beyond our solar system, built on a Nazi command structure inherited from Operation Paperclip. Multiple SSP whistleblowers describe the Dark Fleet as the most secretive and ruthless faction — operating beyond human oversight entirely.', connects: ['secret-space-program','nazi-breakaway-group','operation-paperclip','solar-warden','ceres'] },
+    { id: 'solar-warden',          cat: 'ssp',        title: 'Solar Warden',               hook: 'Gary McKinnon hacked NASA and DoD computers in 2001–2002 and found a spreadsheet listing "non-terrestrial officers" and ship-to-ship transfers. The names of the ships did not match any known Navy vessel. The US government demanded his extradition. He was never tried.', connects: ['secret-space-program','dark-fleet','majestic-mj12','nasa-deceptions','space-force'] },
+    { id: 'majestic-mj12',         cat: 'ssp',        title: 'Majestic MJ-12',             hook: 'The 12-person classified group managing ET contact since the Roswell retrieval in 1947. Operates 34 levels above the President\'s security clearance. The Eisenhower briefing document — naming all 12 members — was authenticated by three independent document examiners.', connects: ['eisenhower-et-meeting','secret-space-program','area-51','ufo-disclosure','solar-warden'] },
+    { id: '20-and-back',           cat: 'ssp',        title: '20 & Back Program',          hook: 'SSP conscripts serve a 20-year tour, are age-reversed using exotic technology, memory-wiped, and returned to their point of departure. 5% of subjects retain memories through the blank-slating. Those subjects are the whistleblowers.', connects: ['secret-space-program','super-soldiers','mkultra','time-travel','ssp-whistleblowers'] },
+
+    // ── EXTRATERRESTRIAL ───────────────────────────────────────────────────
+    { id: 'annunaki',              cat: 'et',         title: 'The Annunaki',               hook: '"Those who from heaven to earth came." Sumerian cuneiform tablets, 4,500 years old, describe in detail the Annunaki as ET genetic engineers who created Homo sapiens as a slave race to mine gold. Zecharia Sitchin spent 30 years translating these tablets.', connects: ['draco-reptilians','ancient-builder-race','gobekli-tepe','book-of-enoch','pre-adamites'] },
+    { id: 'draco-reptilians',      cat: 'et',         title: 'Draco & Reptilian Alliance', hook: 'Service-to-self negative beings who operate through hierarchy, fear, and control. They feed on loosh — human fear and suffering. The Cabal hierarchy is described by multiple SSP witnesses as operating under Draco guidance. Their physical existence is disputed; their functional role in the control system is documented by proxy.', connects: ['annunaki','ancient-ai','loosh','cabal-hierarchy','illuminati'] },
+    { id: 'blue-avians',           cat: 'et',         title: 'Blue Avians',                hook: 'Sixth-density beings who made contact with Corey Goode in 2012, identifying themselves as the RA entity from the Law of One material. They represent the Sphere Being Alliance, which placed protective barrier spheres throughout the solar system to buffer the incoming solar flash energies.', connects: ['sphere-being-alliance','law-of-one','great-solar-flash','ssp-alliance','ancient-builder-race'] },
+    { id: 'greys-nordics',         cat: 'et',         title: 'Greys, Nordics & EBEs',      hook: 'The Greys (Zeta Reticulans) are the most commonly reported ET race in abduction testimony. They are described as biological robots operated by taller Greys, who serve the Draco. The Nordics are benevolent humanoids from the Pleiades who are in conflict with the Draco control system.', connects: ['draco-reptilians','eisenhower-et-meeting','majestic-mj12','annunaki','blue-avians'] },
+    { id: 'eisenhower-et-meeting', cat: 'et',         title: 'Eisenhower 1954 ET Meeting', hook: 'In February 1954, President Eisenhower disappeared for a night from his Palm Springs vacation. The official explanation: emergency dental surgery. Multiple witnesses, including a State Department protocol officer, describe a meeting at Holloman AFB with two ET races — one of which offered technology in exchange for access to human subjects.', connects: ['majestic-mj12','greys-nordics','area-51','secret-space-program','mkultra'] },
+    { id: 'ufo-disclosure',        cat: 'et',         title: 'UAP Disclosure',             hook: 'David Grusch\'s 2023 Congressional testimony: the US government possesses "non-human intelligence" and "non-human biologics." He is a credentialed intelligence officer. The House Intelligence Committee\'s response was classified. This is not a theory — it is a congressional record.', connects: ['majestic-mj12','secret-space-program','eisenhower-et-meeting','area-51','project-blue-beam'] },
+
+    // ── INNER EARTH ────────────────────────────────────────────────────────
+    { id: 'dumbs',                 cat: 'innerearth', title: 'DUMBs',                      hook: 'Deep Underground Military Bases. The US government has acknowledged 100+ classified underground facilities. The 2011 Virginia earthquake was later attributed by military analysts to the destruction of a DUMB. The tunnelling machines exist, are in operation, and their products are never shown to the public.', connects: ['underground-trafficking','inner-earth-civilizations','sandia-dulce','area-51','jump-gate-mars'] },
+    { id: 'inner-earth-civilizations', cat: 'innerearth', title: 'Inner Earth Civilisations', hook: 'Corey Goode\'s documented briefings describe meeting representatives of six Inner Earth civilisations at a council convened by the Sphere Being Alliance. The oldest civilisation (the "Anshar") has existed underground for 18 million years and claims to be humanity\'s future selves.', connects: ['anshar-ka-aree','honeycomb-earth','dumbs','blue-avians','sasquatch-giants'] },
+    { id: 'sandia-dulce',          cat: 'innerearth', title: 'Dulce Base',                 hook: 'The alleged joint human-ET underground facility at Archuleta Mesa, New Mexico. Phil Schneider — a former government geologist who claimed to have worked there — described a firefight with Grey aliens in 1979. He was found strangled in his apartment in 1996. 11 of his colleagues died within months of his lectures.', connects: ['dumbs','area-51','greys-nordics','cia-operations','underground-trafficking'] },
+    { id: 'honeycomb-earth',       cat: 'innerearth', title: 'Honeycomb Earth',            hook: 'The geological evidence for large cavern systems beneath every continent is not disputed. The question is scale. Symmes Holes at the poles (now the "Polar Opening" theory) was taken seriously by US Navy Admiral Byrd, whose 1947 Operation Highjump encountered something that drove the fleet back in disarray.', connects: ['operation-highjump','inner-earth-civilizations','dumbs','anshar-ka-aree','portals-stargates'] },
+
+    // ── ANCIENT HISTORY ────────────────────────────────────────────────────
+    { id: 'tartaria',              cat: 'ancient',    title: 'Tartaria & Suppressed History', hook: 'The Tartarian Empire appears on every major world atlas from 1500–1800 and then simply vanishes from the historical record. The "mud flood" theory proposes a global reset event in the 18th–19th century that buried an advanced previous civilisation whose buildings we now use as our "oldest" structures.', connects: ['mud-flood','atlantis-lemuria','stolen-history','great-solar-flash','pre-adamites'] },
+    { id: 'atlantis-lemuria',      cat: 'ancient',    title: 'Atlantis, Lemuria & Mu',     hook: 'Plato described Atlantis with specific geographic coordinates (beyond the Pillars of Hercules, in the Atlantic) and a specific date (9,600 BCE — precisely the Younger Dryas impact event). The Richat Structure in Mauritania matches Plato\'s dimensions to within 5%.', connects: ['younger-dryas-impact','gobekli-tepe','pre-adamites','piri-reis-map','operation-highjump'] },
+    { id: 'gobekli-tepe',          cat: 'ancient',    title: 'Göbekli Tepe',               hook: '12,000-year-old megalithic complex — 6,000 years older than any previously known civilisation. Deliberately buried by its own builders. Only 5% excavated. The Vulture Stone encodes an astronomical date matching the Younger Dryas comet impact of ~10,950 BCE. Someone with advanced knowledge built this and then hid it.', connects: ['younger-dryas-impact','atlantis-lemuria','annunaki','ancient-builder-race','vimanas'] },
+    { id: 'giants-suppressed',     cat: 'ancient',    title: 'Suppressed Giant Archaeology', hook: 'Over 1,000 19th-century newspaper accounts describe the discovery of giant humanoid skeletons across North America — many between 7 and 12 feet tall, with double rows of teeth. The Smithsonian Institution systematically collected and destroyed these specimens. A 2014 FOIA request confirmed the destruction.', connects: ['pre-adamites','smithsonian-cover-up','annunaki','book-of-enoch','tartaria'] },
+    { id: 'giza-complex',          cat: 'ancient',    title: 'Giza Ascension Machine',     hook: 'The Great Pyramid sits within 1/60th of a degree of the geographic centre of all land mass on Earth. Its latitude in decimal degrees (29.9792458°N) matches the speed of light (299,792,458 m/s) to 9 significant figures. This is not a coincidence — it is a signature.', connects: ['ancient-builder-race','gobekli-tepe','sacred-geometry','law-of-one','tartaria'] },
+    { id: 'operation-highjump',    cat: 'ancient',    title: 'Operation Highjump 1947',    hook: 'The largest US naval operation ever assembled — 4,700 men, 13 ships, 33 aircraft — sent to Antarctica by Admiral Byrd in 1947. The mission was planned for 8 months. It was aborted after 8 weeks. Byrd reported encountering "aircraft that could fly from pole to pole at incredible speed." The mission\'s full records are still classified.', connects: ['antarctica-hidden','neuschwabenland','nazi-breakaway-group','honeycomb-earth','dark-fleet'] },
+
+    // ── FLAT EARTH ─────────────────────────────────────────────────────────
+    { id: 'flat-earth-overview',   cat: 'flatearth',  title: 'Flat Earth — The Core Case', hook: 'The horizon rises to eye level at any altitude. Water finds its level globally. The Bedford Level Experiment (1838) confirmed no curvature over 6 miles of still canal. The azimuthal equidistant map — used by the United Nations as its official logo — places the North Pole at the centre of all continents, exactly as flat earth predicts.', connects: ['firmament','antarctic-treaty','southern-flight-paths','globe-psyop','moon-landing'] },
+    { id: 'firmament',             cat: 'flatearth',  title: 'The Firmament',              hook: 'Operation Fishbowl (1962): the US military fired nuclear missiles straight up. 8 of 9 attempts failed — with official explanations that defy credibility. The Starfish Prime detonation at 400km altitude produced effects consistent with striking a physical boundary. The Bible describes a solid dome over the earth in 17 separate verses.', connects: ['flat-earth-overview','haarp','antarctic-treaty','waters-above','nasa-deceptions'] },
+    { id: 'antarctic-treaty',      cat: 'flatearth',  title: 'The Antarctic Treaty',       hook: '56 nations jointly signed a treaty in 1959 prohibiting civilian access to Antarctica. No public vote. No expiry date. Every attempted unsanctioned approach is intercepted. The treaty was signed before any significant Antarctic exploration was complete. What needed protecting before anyone had even been there?', connects: ['flat-earth-overview','firmament','operation-highjump','mcmurdo-station','neuschwabenland'] },
+    { id: 'moon-landing',          cat: 'flatearth',  title: 'Moon Landing Hoax',          hook: 'The Van Allen radiation belts: NASA\'s own data shows that passage through them for the required 30+ hours would have delivered fatal doses. The telemetry data for the lunar missions was "accidentally" erased. Stanley Kubrick admitted to friends he filmed the footage. All original footage: destroyed.', connects: ['nasa-deceptions','stanley-kubrick','firmament','moon-truth','secret-space-program'] },
+    { id: 'globe-psyop',           cat: 'flatearth',  title: 'The Globe Psyop',            hook: 'Copernicus published heliocentrism in 1543 — funded by the same papal establishment that would later "persecute" Galileo. The Jesuits built observatories across Europe and Asia to propagate the new model. Removing humanity from the centre of creation was the first step in reducing human significance to cosmic accident.', connects: ['flat-earth-overview','vatican-jesuits','illuminati','nasa-deceptions','educational-indoctrination'] },
+    { id: 'southern-flight-paths', cat: 'flatearth',  title: 'Southern Hemisphere Flights', hook: 'Every direct flight between southern hemisphere cities transits through a northern hemisphere hub — or routes that are impossible on a globe but geometrically direct on the azimuthal flat earth map. Johannesburg to Buenos Aires: the real route goes via London or Dallas on a globe, but is a straight southern arc on the flat map.', connects: ['flat-earth-overview','antarctic-treaty','firmament','globe-psyop','nasa-deceptions'] },
+
+    // ── SPIRITUAL ──────────────────────────────────────────────────────────
+    { id: 'law-of-one',            cat: 'spiritual',  title: 'Law of One (Ra Material)',   hook: '106 sessions of channelled dialogue (1981–84) with a 6th-density entity identifying itself as RA — the same RA referenced in Egyptian cosmology. The material describes the history of Earth\'s ET involvement, the structure of consciousness across densities, and the mechanics of the harvest. Corroborated by Corey Goode\'s briefings.', connects: ['blue-avians','great-solar-flash','annunaki','ancient-builder-race','pineal-gland'] },
+    { id: 'pineal-gland',          cat: 'spiritual',  title: 'Pineal Gland / Third Eye',   hook: 'The only unpaired structure in the brain. Contains photoreceptor cells identical to those in the eye. Produces DMT at birth, death, and in deep meditation. Calcified by fluoride. The pine cone symbol — representing the pineal — appears at the Vatican, on the papal staff, and outside CERN. Why are they obsessed with suppressing your inner vision?', connects: ['fluoride-poison','dmt','sacred-geometry','freemasonry','vatican-jesuits'] },
+    { id: 'great-solar-flash',     cat: 'spiritual',  title: 'Great Solar Flash',          hook: 'A cyclical solar event occurring every 25,900 years (the precession cycle) that produces a burst of energy activating the human light body. Described in Hindu texts as the Samvartaka Fire, in Zoroastrian scripture as Frashokereti, in Greek cosmology as Ekpyrosis. The Sphere Being Alliance\'s protective spheres are buffering the incoming energies.', connects: ['sphere-being-alliance','law-of-one','5d-ascension','precession-equinox','tartaria'] },
+    { id: 'dmt',                   cat: 'spiritual',  title: 'DMT',                        hook: 'Endogenous in every mammalian brain. Produced in the pineal gland. The active compound in ayahuasca. Every near-death experience shares structural features with a DMT experience. Rick Strassman\'s clinical trials at the University of New Mexico (the only legitimate DMT human trials) showed subjects consistently reported contact with independent intelligences.', connects: ['pineal-gland','ayahuasca','law-of-one','bardo','mkultra'] },
+    { id: 'sacred-geometry',       cat: 'spiritual',  title: 'Sacred Geometry',            hook: 'The Flower of Life, encoded in stone at the Temple of Osiris in Abydos, predates the temple it\'s carved in. The phi ratio (1.618) appears in the proportions of every megalithic structure from Giza to Angkor Wat. The 64-Tetrahedron Vector Equilibrium is the geometrical shape of the vacuum — the structure of space itself.', connects: ['giza-complex','law-of-one','pineal-gland','planetary-grid','ancient-builder-race'] },
+    { id: '5d-ascension',          cat: 'spiritual',  title: '5D Ascension',               hook: 'The transition from 3rd-density (physical, veil-of-forgetting) to 4th/5th-density (higher consciousness, no veil). Described consistently across Tibetan Buddhism, the Law of One, Pleiadian channelling, and indigenous prophecy traditions. The solar flash triggers the transition. Not everyone ascends in the same harvest cycle.', connects: ['great-solar-flash','law-of-one','pineal-gland','lightworkers-starseeds','sphere-being-alliance'] },
+
+    // ── NAZI / BREAKAWAY ──────────────────────────────────────────────────
+    { id: 'nazi-breakaway-group',  cat: 'nazi',       title: 'Nazi Breakaway Civilisation', hook: 'The most senior Nazi scientists and SS officers were extracted from Germany before the war ended. 1,600 went to America (Operation Paperclip). Others went to Argentina. A third group went to Antarctica — Neuschwabenland — and continued their advanced technology R&D beyond Allied reach, forming the foundation of the Dark Fleet.', connects: ['operation-paperclip','neuschwabenland','dark-fleet','vril-society','nazi-bell'] },
+    { id: 'neuschwabenland',       cat: 'nazi',       title: 'Neuschwabenland',             hook: 'Germany explored and claimed a section of Antarctica in 1938–39, naming it Neuschwabenland. The Nazis\' 1938 Schwabenland expedition mapped a geothermal region with exposed rock and liquid water — perfect for base construction. Operation Highjump\'s abrupt failure in 1947 is the strongest evidence that something was already there.', connects: ['nazi-breakaway-group','operation-highjump','dark-fleet','antarctica-hidden','vril-society'] },
+    { id: 'vril-society',          cat: 'nazi',       title: 'Vril Society',                hook: 'The pre-WW2 occult society around Maria Orsic, a medium who claimed to receive technical schematics from an ET civilisation in the Aldebaran system via automatic writing. The Vril saucer prototypes were allegedly successfully tested before WW2. The technology was then handed to the SS.', connects: ['nazi-breakaway-group','nazi-bell','dark-fleet','annunaki','operation-paperclip'] },
+    { id: 'nazi-bell',             cat: 'nazi',       title: 'Nazi Bell / Die Glocke',      hook: 'The Nazi Bell — a bell-shaped device using counter-rotating mercury-compound plasma — generated effects described as "anti-gravity and time-distortion." All personnel who worked on it suffered rapid aging, crystallisation of blood cells, and death. The Bell was the last device evacuated from Germany in April 1945.', connects: ['vril-society','nazi-breakaway-group','antigravity','time-travel','dark-fleet'] },
+  ];
+
+  // Build lookup maps
+  const topicMap = {};
+  TOPICS.forEach(t => { topicMap[t.id] = t; });
+
+  // ── State ─────────────────────────────────────────────────────────────────
+  let selectedCat = null;
+  let selectedTopic = null;
+  let selectedDepth = 5;
+  let generatedHole = [];
+
+  // ── DOM refs ──────────────────────────────────────────────────────────────
+  const catGrid      = document.getElementById('cat-grid');
+  const topicChips   = document.getElementById('topic-chips');
+  const topicSearch  = document.getElementById('topic-search');
+  const generateBtn  = document.getElementById('generate-btn');
+  const holeOutput   = document.getElementById('hole-output');
+  const holeCards    = document.getElementById('hole-cards');
+  const holeTitle    = document.getElementById('hole-title');
+  const statDepth    = document.getElementById('stat-depth');
+  const statConn     = document.getElementById('stat-conn');
+  const statTime     = document.getElementById('stat-time');
+  const progressFill = document.getElementById('progress-fill');
+  const depthPct     = document.getElementById('depth-pct');
+  const currentTopic = document.getElementById('current-topic-name');
+  const drNumber     = document.getElementById('dr-number');
+  const drMessage    = document.getElementById('dr-message');
+  const depthReached = document.getElementById('depth-reached');
+  const shareStrip   = document.getElementById('share-strip');
+  const shareText    = document.getElementById('share-text');
+
+  // ── Render categories ──────────────────────────────────────────────────────
+  function renderCategories() {
+    catGrid.innerHTML = CATEGORIES.map(c => `
+      <button class="cat-btn${selectedCat === c.id ? ' selected' : ''}" data-cat="${c.id}">
+        <span class="cat-icon">${c.icon}</span>
+        <span>${c.label}</span>
+      </button>
+    `).join('');
+    catGrid.querySelectorAll('.cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectedCat = btn.dataset.cat;
+        selectedTopic = null;
+        renderCategories();
+        renderTopics('');
+        topicSearch.value = '';
+      });
+    });
+  }
+
+  // ── Render topic chips ─────────────────────────────────────────────────────
+  function renderTopics(filter) {
+    const pool = selectedCat
+      ? TOPICS.filter(t => t.cat === selectedCat)
+      : TOPICS;
+    const f = filter.toLowerCase().trim();
+    const filtered = f ? pool.filter(t => t.title.toLowerCase().includes(f) || t.id.includes(f)) : pool;
+
+    topicChips.innerHTML = filtered.slice(0, 60).map(t => `
+      <button class="topic-chip${selectedTopic === t.id ? ' selected' : ''}" data-id="${t.id}">${t.title}</button>
+    `).join('');
+    topicChips.querySelectorAll('.topic-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        selectedTopic = chip.dataset.id;
+        renderTopics(topicSearch.value);
+        updateGenerateBtn();
+      });
+    });
+  }
+
+  // ── Depth pills ────────────────────────────────────────────────────────────
+  document.getElementById('depth-pills').querySelectorAll('.depth-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.depth-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      selectedDepth = parseInt(pill.dataset.depth);
+    });
+  });
+
+  // ── Search ─────────────────────────────────────────────────────────────────
+  topicSearch.addEventListener('input', () => {
+    renderTopics(topicSearch.value);
+  });
+
+  // ── Generate button state ──────────────────────────────────────────────────
+  function updateGenerateBtn() {
+    generateBtn.disabled = !selectedTopic;
+  }
+
+  // ── Build the rabbit hole chain ────────────────────────────────────────────
+  function buildHole(startId, depth) {
+    const chain = [];
+    const visited = new Set();
+    let currentId = startId;
+
+    for (let i = 0; i < depth; i++) {
+      const topic = topicMap[currentId];
+      if (!topic || visited.has(currentId)) break;
+      visited.add(currentId);
+
+      // Determine connection reason (what links this to the previous)
+      const prev = chain[chain.length - 1];
+      let connectionReason = null;
+      if (prev) {
+        const prevTopic = topicMap[prev.id];
+        connectionReason = `Connected via: ${prevTopic.title}`;
+      }
+
+      chain.push({ ...topic, connectionReason, depth: i + 1 });
+
+      // Pick next: prefer connected topics not yet visited, shuffle for variety
+      const candidates = (topic.connects || []).filter(id => !visited.has(id) && topicMap[id]);
+      if (candidates.length === 0) {
+        // Fall through to random topic in same category
+        const catTopics = TOPICS.filter(t => t.cat === topic.cat && !visited.has(t.id));
+        if (catTopics.length > 0) {
+          currentId = catTopics[Math.floor(Math.random() * catTopics.length)].id;
+        } else break;
+      } else {
+        // Weighted: prefer first 2 connections (strongest links), but randomise
+        const weighted = candidates.slice(0, 3);
+        currentId = weighted[Math.floor(Math.random() * weighted.length)];
+      }
+    }
+    return chain;
+  }
+
+  // ── Depth messaging ────────────────────────────────────────────────────────
+  const DEPTH_MESSAGES = {
+    3: 'You went 3 levels deep. Most people stop here — the official narrative still feels intact.',
+    5: 'Five levels in. You\'ve seen enough connections to know this isn\'t random. The question is whether you\'ll keep pulling.',
+    7: 'Seven layers. You can no longer describe what you\'ve found using the vocabulary you started with.',
+    10: 'Ten levels deep. Welcome to the view from the bottom. It looks different from here.'
+  };
+
+  // ── URL for sharing ────────────────────────────────────────────────────────
+  function buildShareURL(startId, depth) {
+    const url = new URL(window.location.href);
+    url.searchParams.set('start', startId);
+    url.searchParams.set('depth', depth);
+    return url.toString();
+  }
+
+  // ── Animate cards in sequence ──────────────────────────────────────────────
+  function animateCards(cards) {
+    cards.forEach((card, i) => {
+      setTimeout(() => {
+        card.classList.add('revealed');
+        // Update progress
+        const pct = Math.round(((i + 1) / cards.length) * 100);
+        progressFill.style.width = pct + '%';
+        depthPct.textContent = pct + '%';
+        const name = card.querySelector('.card-title')?.textContent || '';
+        currentTopic.textContent = name;
+      }, i * 180);
+    });
+    // Show bottom elements after all cards
+    const totalDelay = cards.length * 180 + 400;
+    setTimeout(() => {
+      depthReached.style.display = 'block';
+      shareStrip.style.display = 'flex';
+    }, totalDelay);
+  }
+
+  // ── Topic URL mapping ──────────────────────────────────────────────────────
+  function getTopicURL(id) {
+    // Map topic IDs to actual site pages
+    const urlMap = {
+      'federal-reserve': '/topics/great-awakening/federal-reserve.html',
+      'rothschilds': '/topics/great-awakening/rothschilds.html',
+      'rockefellers': '/topics/great-awakening/rockefellers.html',
+      'bis': '/topics/great-awakening/bis.html',
+      'cbdc': '/topics/great-awakening/cbdc.html',
+      'blackrock-vanguard': '/topics/great-awakening/blackrock-vanguard.html',
+      'great-reset': '/topics/great-awakening/great-reset.html',
+      'babylonian-money-magic': '/topics/great-awakening/babylonian-money-magic.html',
+      'petrodollar': '/topics/great-awakening/petrodollar.html',
+      'khazarian-mafia': '/topics/great-awakening/khazarian-mafia.html',
+      'cia-operations': '/topics/great-awakening/cia-operations.html',
+      'mkultra': '/topics/great-awakening/mkultra.html',
+      'operation-paperclip': '/topics/great-awakening/operation-paperclip.html',
+      'shadow-government': '/topics/great-awakening/shadow-government.html',
+      'five-eyes': '/topics/great-awakening/five-eyes.html',
+      'nsa-surveillance': '/topics/great-awakening/nsa-surveillance.html',
+      'cointelpro': '/topics/great-awakening/cointelpro.html',
+      'jfk-assassination': '/topics/great-awakening/jfk-assassination.html',
+      'snowden-assange': '/topics/great-awakening/snowden-assange.html',
+      'operation-mockingbird': '/topics/great-awakening/operation-mockingbird.html',
+      'illuminati': '/topics/great-awakening/illuminati.html',
+      'freemasonry': '/topics/great-awakening/freemasonry.html',
+      'skull-bones': '/topics/great-awakening/skull-bones.html',
+      'bohemian-grove': '/topics/great-awakening/bohemian-grove.html',
+      'bilderberg': '/topics/great-awakening/bilderberg.html',
+      'council-foreign-relations': '/topics/great-awakening/council-foreign-relations.html',
+      'tavistock-institute': '/topics/great-awakening/tavistock-institute.html',
+      'vatican-jesuits': '/topics/great-awakening/vatican-jesuits.html',
+      'knights-templar': '/topics/great-awakening/knights-templar.html',
+      'big-pharma': '/topics/great-awakening/big-pharma.html',
+      'covid-plandemic': '/topics/great-awakening/covid-plandemic.html',
+      'mrna-vaccines': '/topics/great-awakening/mrna-vaccines.html',
+      'fluoride-poison': '/topics/great-awakening/fluoride-poison.html',
+      'adrenochrome': '/topics/great-awakening/adrenochrome.html',
+      'cancer-cure-suppressed': '/topics/great-awakening/cancer-cure-suppressed.html',
+      'bill-gates': '/topics/great-awakening/bill-gates.html',
+      'chemtrails': '/topics/great-awakening/chemtrails.html',
+      'haarp': '/topics/great-awakening/haarp.html',
+      '5g-surveillance': '/topics/great-awakening/5g-surveillance.html',
+      'transhumanism': '/topics/great-awakening/transhumanism.html',
+      'dew-weapons': '/topics/great-awakening/dew-weapons.html',
+      'ai-surveillance': '/topics/great-awakening/ai-surveillance.html',
+      'epstein-network': '/topics/great-awakening/epstein-network.html',
+      'pizzagate': '/topics/great-awakening/pizzagate.html',
+      'hollywood-satanism': '/topics/great-awakening/hollywood-satanism.html',
+      'corporate-media-control': '/topics/great-awakening/corporate-media-control.html',
+      'predictive-programming': '/topics/great-awakening/predictive-programming.html',
+      'stanley-kubrick': '/topics/great-awakening/stanley-kubrick.html',
+      '9-11-inside-job': '/topics/great-awakening/9-11-inside-job.html',
+      'false-flags': '/topics/great-awakening/false-flags.html',
+      'operation-northwoods': '/topics/great-awakening/operation-northwoods.html',
+      'covid-as-false-flag': '/topics/great-awakening/covid-as-false-flag.html',
+      'fukushima': '/topics/great-awakening/fukushima.html',
+      'pearl-harbor-foreknowledge': '/topics/great-awakening/pearl-harbor-foreknowledge.html',
+      'secret-space-program': '/topics/great-awakening/secret-space-program.html',
+      'dark-fleet': '/topics/great-awakening/dark-fleet.html',
+      'solar-warden': '/topics/great-awakening/solar-warden.html',
+      'majestic-mj12': '/topics/great-awakening/majestic-mj12.html',
+      '20-and-back': '/topics/great-awakening/20-and-back.html',
+      'annunaki': '/topics/great-awakening/annunaki.html',
+      'draco-reptilians': '/topics/great-awakening/draco-reptilians.html',
+      'blue-avians': '/topics/great-awakening/blue-avians.html',
+      'greys-nordics': '/topics/great-awakening/greys-nordics-ebes.html',
+      'eisenhower-et-meeting': '/topics/great-awakening/eisenhower-et-meeting.html',
+      'ufo-disclosure': '/topics/great-awakening/ufo-disclosure.html',
+      'dumbs': '/topics/great-awakening/dumbs.html',
+      'inner-earth-civilizations': '/topics/great-awakening/inner-earth-civilizations.html',
+      'sandia-dulce': '/topics/great-awakening/sandia-dulce-base.html',
+      'honeycomb-earth': '/topics/great-awakening/honeycomb-earth.html',
+      'tartaria': '/topics/great-awakening/tartaria.html',
+      'atlantis-lemuria': '/topics/great-awakening/atlantis-lemuria-mu.html',
+      'gobekli-tepe': '/topics/great-awakening/ancient-alien-ruins.html',
+      'giants-suppressed': '/topics/great-awakening/giants-suppressed.html',
+      'giza-complex': '/topics/great-awakening/giza-complex.html',
+      'operation-highjump': '/topics/great-awakening/operation-highjump.html',
+      'flat-earth-overview': '/flat-earth.html',
+      'firmament': '/topics/flat-earth/firmament.html',
+      'antarctic-treaty': '/topics/flat-earth/antarctic-treaty.html',
+      'moon-landing': '/topics/flat-earth/moonlanding-hoax.html',
+      'globe-psyop': '/topics/flat-earth/globe-psyop.html',
+      'southern-flight-paths': '/topics/flat-earth/southern-flight-paths.html',
+      'law-of-one': '/topics/great-awakening/law-of-one.html',
+      'pineal-gland': '/topics/great-awakening/pineal-gland.html',
+      'great-solar-flash': '/topics/great-awakening/great-solar-flash.html',
+      'dmt': '/topics/great-awakening/dmt.html',
+      'sacred-geometry': '/topics/great-awakening/sacred-geometry.html',
+      '5d-ascension': '/topics/great-awakening/5d-ascension.html',
+      'nazi-breakaway-group': '/topics/great-awakening/nazi-breakaway-group.html',
+      'neuschwabenland': '/topics/great-awakening/neuschwabenland.html',
+      'vril-society': '/topics/great-awakening/vril-society.html',
+      'nazi-bell': '/topics/great-awakening/nazi-bell-haunebu.html',
+    };
+    return urlMap[id] || '/topics/index.html';
+  }
+
+  // ── Cat color ──────────────────────────────────────────────────────────────
+  function getCatColor(catId) {
+    const c = CATEGORIES.find(c => c.id === catId);
+    return c ? c.color : '#c9a227';
+  }
+  function getCatLabel(catId) {
+    const c = CATEGORIES.find(c => c.id === catId);
+    return c ? c.label : catId;
+  }
+
+  // ── Render hole ────────────────────────────────────────────────────────────
+  function renderHole(chain) {
+    holeTitle.textContent = chain[0]?.title || '—';
+    statDepth.textContent = chain.length;
+    statConn.textContent = chain.reduce((a, t) => a + (t.connects?.length || 0), 0);
+    statTime.textContent = Math.round(chain.length * 8) + ' min';
+    drNumber.textContent = chain.length;
+    drMessage.textContent = DEPTH_MESSAGES[selectedDepth] || DEPTH_MESSAGES[5];
+    progressFill.style.width = '0%';
+    depthPct.textContent = '0%';
+    currentTopic.textContent = chain[0]?.title || '—';
+
+    holeCards.innerHTML = chain.map((t, i) => {
+      const isEntry = i === 0;
+      const url = getTopicURL(t.id);
+      const catColor = getCatColor(t.cat);
+      const catLabel = getCatLabel(t.cat);
+
+      return `
+        <div class="hole-card" style="${isEntry ? `border-color: rgba(204,34,34,0.6)` : ''}">
+          <div class="card-number" style="color: ${isEntry ? '#cc2222' : catColor}; opacity: ${isEntry ? 1 : 0.55};">${i + 1}</div>
+          <div class="card-body">
+            <div class="card-top">
+              <span class="card-category" style="border-color: ${catColor}33; color: ${catColor}99;">${catLabel}</span>
+              <span class="card-depth-tag" style="border-color: ${catColor}66; background: ${catColor}11; color: ${catColor};">${isEntry ? '⬤ Entry point' : `Layer ${i + 1}`}</span>
+            </div>
+            <div class="card-title">${t.title}</div>
+            <div class="card-hook">${t.hook}</div>
+            ${t.connectionReason ? `<div class="card-connection">${t.connectionReason}</div>` : ''}
+          </div>
+          <div class="card-action">
+            <a href="${url}" class="read-btn" style="border-color: ${catColor}66; color: ${catColor};">
+              Read More →
+            </a>
+          </div>
+        </div>
+        ${i < chain.length - 1 ? `
+        <div class="thread-line">
+          <span class="thread-arrow">↓</span>
+          <span>leads to</span>
+        </div>` : ''}
+      `;
+    }).join('');
+
+    holeOutput.classList.add('visible');
+    depthReached.style.display = 'none';
+    shareStrip.style.display = 'none';
+
+    // Animate cards
+    const cardEls = holeCards.querySelectorAll('.hole-card');
+    setTimeout(() => animateCards([...cardEls]), 100);
+
+    // Share URL
+    shareText.value = buildShareURL(chain[0].id, selectedDepth);
+
+    // Scroll to output
+    holeOutput.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // ── Generate ───────────────────────────────────────────────────────────────
+  generateBtn.addEventListener('click', () => {
+    if (!selectedTopic) return;
+    generatedHole = buildHole(selectedTopic, selectedDepth);
+    renderHole(generatedHole);
+  });
+
+  // ── Regen buttons ──────────────────────────────────────────────────────────
+  document.getElementById('regen-same-btn').addEventListener('click', () => {
+    if (!selectedTopic) return;
+    generatedHole = buildHole(selectedTopic, selectedDepth);
+    holeOutput.classList.remove('visible');
+    setTimeout(() => renderHole(generatedHole), 50);
+  });
+  document.getElementById('regen-new-btn').addEventListener('click', () => {
+    holeOutput.classList.remove('visible');
+    selectedTopic = null;
+    selectedCat = null;
+    renderCategories();
+    renderTopics('');
+    topicSearch.value = '';
+    updateGenerateBtn();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ── Copy button ────────────────────────────────────────────────────────────
+  document.getElementById('copy-btn').addEventListener('click', function() {
+    navigator.clipboard.writeText(shareText.value).catch(() => {
+      shareText.select();
+      document.execCommand('copy');
+    });
+    this.textContent = 'Copied ✓';
+    this.classList.add('copied');
+    setTimeout(() => { this.textContent = 'Copy Link'; this.classList.remove('copied'); }, 2000);
+  });
+
+  // ── URL params (shareable links) ───────────────────────────────────────────
+  function checkURLParams() {
+    const params = new URLSearchParams(window.location.search);
+    const startId = params.get('start');
+    const depth = parseInt(params.get('depth')) || 5;
+    if (startId && topicMap[startId]) {
+      selectedTopic = startId;
+      selectedDepth = depth;
+      const topic = topicMap[startId];
+      selectedCat = topic.cat;
+      // Set depth pill
+      document.querySelectorAll('.depth-pill').forEach(p => {
+        p.classList.toggle('active', parseInt(p.dataset.depth) === depth);
+      });
+      renderCategories();
+      renderTopics('');
+      updateGenerateBtn();
+      generatedHole = buildHole(startId, depth);
+      renderHole(generatedHole);
+    }
+  }
+
+  // ── Init ───────────────────────────────────────────────────────────────────
+  renderCategories();
+  renderTopics('');
+  updateGenerateBtn();
+  checkURLParams();
+
+  // ── Fade-in observer ───────────────────────────────────────────────────────
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

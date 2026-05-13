@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "puppeteer": "^24.41.0",
-    "puppeteer-core": "^24.41.0"
+    "puppeteer-core": "^24.41.0",
+    "ssh2": "^1.17.0"
   }
 }

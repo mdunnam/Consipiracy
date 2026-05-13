@@ -1392,3 +1392,102 @@ kbd {
 @media (max-width:600px) {
   .quiz-opts { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   NAV ACCORDION — Chapters group
+   ============================================================ */
+
+.nav-group {
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.nav-group-toggle {
+  display: flex;
+  align-items: center;
+  width: 220px;
+  padding: 0.65rem 0;
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  border: none;
+  border-left: 2px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.nav-group-toggle:hover,
+.nav-group.open .nav-group-toggle {
+  color: var(--gold);
+  background: rgba(201,162,39,0.05);
+  text-shadow: var(--glow-text-gold);
+  border-left-color: var(--border-gold);
+}
+
+/* Chevron rotation on open */
+.nav-group.open .nav-group-toggle .nav-rail-label::after {
+  content: ' ▴';
+}
+.nav-group-toggle .nav-rail-label::after {
+  content: ' ▾';
+}
+
+.nav-sub {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+  background: rgba(0,0,0,0.25);
+}
+.nav-group.open .nav-sub {
+  max-height: 900px;
+}
+
+.nav-sub li {
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.nav-sub a {
+  display: flex;
+  align-items: center;
+  padding: 0.4rem 0.75rem 0.4rem 52px;
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-left: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  width: 220px;
+}
+.nav-sub a:hover,
+.nav-sub a.active {
+  color: var(--gold);
+  border-left-color: var(--border-gold);
+  background: rgba(201,162,39,0.04);
+}
+.nav-sub a.active {
+  border-left-color: var(--red-bright);
+  color: var(--gold);
+}
+
+@media (max-width: 900px) {
+  .nav-group,
+  .nav-group-toggle,
+  .nav-sub li,
+  .nav-sub a { width: 270px; }
+  .nav-sub a  { padding-left: 52px; }
+}

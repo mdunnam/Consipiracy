@@ -11,7 +11,7 @@ import { S3Client, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3
 import { SSMClient, GetParameterCommand } from '@aws-sdk/client-ssm';
 import { generateContent } from './ai.mjs';
 import { renderHTML } from './template.mjs';
-import { deployFile, updateSectionIndex, writeLatestTopic } from './ssh-deploy.mjs';
+import { deployFile, updateSectionIndex, writeLatestTopic, writeRecentTopics } from './ssh-deploy.mjs';
 
 const REGION      = process.env.AWS_REGION   || 'us-east-1';
 const QUEUE_BUCKET = process.env.QUEUE_BUCKET || 'ta-autopilot';
@@ -87,6 +87,7 @@ export const handler = async () => {
   await deployFile(sshConfig, webRoot, topic, html);
   await updateSectionIndex(sshConfig, webRoot, topic, content);
   await writeLatestTopic(sshConfig, webRoot, topic, content);
+  await writeRecentTopics(sshConfig, webRoot, topic, content);
 
   // 6. Mark topic as published and persist queue
   const entry = queue.find(t => t.id === topic.id);

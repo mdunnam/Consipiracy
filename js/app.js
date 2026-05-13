@@ -36,8 +36,19 @@ function initNavToggle() {
     'tech-control':      '⊞',
     'false-flags':       '⚑',
     'suppressed-history':'≡',
-    'metaphysical':      '※',
-    'ebook':             '▶',
+    'metaphysical':         '※',
+    'ufo-disclosure':        '◯',
+    'ancient-civilisations': '◎',
+    'anomalous-zones':       '⦻',
+    'elite-networks':        '◊',
+    'internet-control':      '⬡',
+    'mandela-effect':        '⧸',
+    'forensic-mysteries':    '⌖',
+    'secret-science':        '⚗',
+    'rabbit-hole':           '↯',
+    'tier-list':             '≡',
+    'map':                   '⊛',
+    'ebook':                 '▶',
   };
 
   // Inject icon + label spans (idempotent)
@@ -488,9 +499,40 @@ function trackPageVisit() {
   }
 }
 
+/**
+ * Handles the Chapters accordion toggle in the left rail nav.
+ * Auto-opens if the current page is one of the chapter sub-links.
+ */
+function initNavAccordion() {
+  document.querySelectorAll('.nav-group-toggle').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const group = btn.closest('.nav-group');
+      const isOpen = group.classList.contains('open');
+      group.classList.toggle('open', !isOpen);
+      btn.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+
+  // Auto-open if the current page is a chapter sub-link
+  const current = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-sub a').forEach(a => {
+    const href = a.getAttribute('href') || '';
+    if (href === current || href.endsWith(current)) {
+      const group = a.closest('.nav-group');
+      if (group) {
+        group.classList.add('open');
+        const toggle = group.querySelector('.nav-group-toggle');
+        if (toggle) toggle.setAttribute('aria-expanded', 'true');
+      }
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   trackPageVisit();
   initNavToggle();
+  initNavAccordion();
   highlightActiveNavLink();
   initReadingProgress();
   initGlitchText();

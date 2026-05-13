@@ -189,3 +189,44 @@ export async function writeLatestTopic(cfg, webRoot, topic, content) {
   await sftpWrite(cfg, `${webRoot}/data/latest-topic.json`, payload);
   console.log('latest-topic.json written');
 }
+
+/**
+ * Prepends the newly published topic to /data/recent-topics.json,
+ * keeping the last 20 entries. Consumed by the homepage
+ * "Recently Declassified" scroll strip.
+ *
+ * @param {Object} cfg
+ * @param {string} webRoot
+ * @param {Object} topic
+ * @param {Object} content
+ */
+export async function writeRecentTopics(cfg, webRoot, topic, content) {
+  assertSafeSlug(topic.category, 'category');
+  assertSafeSlug(topic.slug, 'slug');
+  await sshExec(cfg, `mkdir -p ${shellQuote(`${webRoot}/data`)}`);
+
+  const remotePath = `${webRoot}/data/recent-topics.json`;
+  let existing = [];
+  try {
+    const raw = await sftpRead(cfg, remotePath);
+    existing = JSON.parse(raw);
+    if (!Array.isArray(existing)) existing = [];
+  } catch (_) {
+    existing = [];
+  }
+
+  const newEntry = {
+    title:  topic.title,
+    slug:   topic.slug,
+    cat:    topic.section || topic.mapBadge || 'Archive',
+    color:  '#c9a227',
+    url:    `/topics/${topic.category}/${topic.slug}.html`,
+    hook:   (content.subtitle || content.intro || '').substring(0, 120),
+    date:   new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }),
+  };
+
+  // Prepend and cap at 20
+  const updated = [newEntry, ...existing.filter(e => e.slug !== topic.slug)].slice(0, 20);
+  await sftpWrite(cfg, remotePath, JSON.stringify(updated, null, 2));
+  console.log('recent-topics.json updated (' + updated.length + ' entries)');
+}

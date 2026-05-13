@@ -6,8 +6,20 @@
     "category": "great-awakening",
     "section": "Intelligence Operations",
     "mapBadge": "Intelligence",
-    "keywords": ["CIA", "MKULTRA", "trauma-based mind control", "Monarch", "Candy Jones", "Cathy O'Brien"],
-    "relatedSlugs": ["mkultra", "cia-operations", "hollywood-satanism", "tavistock-institute"],
+    "keywords": [
+      "CIA",
+      "MKULTRA",
+      "trauma-based mind control",
+      "Monarch",
+      "Candy Jones",
+      "Cathy O'Brien"
+    ],
+    "relatedSlugs": [
+      "mkultra",
+      "cia-operations",
+      "hollywood-satanism",
+      "tavistock-institute"
+    ],
     "published": false
   },
   {
@@ -17,8 +29,21 @@
     "category": "great-awakening",
     "section": "Population Control",
     "mapBadge": "Health",
-    "keywords": ["Georgia Guidestones", "Bill Gates", "WHO", "fertility reduction", "sterilisation", "UN agenda"],
-    "relatedSlugs": ["georgia-guidestones", "bill-gates", "who-control", "mrna-vaccines", "agenda-2030"],
+    "keywords": [
+      "Georgia Guidestones",
+      "Bill Gates",
+      "WHO",
+      "fertility reduction",
+      "sterilisation",
+      "UN agenda"
+    ],
+    "relatedSlugs": [
+      "georgia-guidestones",
+      "bill-gates",
+      "who-control",
+      "mrna-vaccines",
+      "agenda-2030"
+    ],
     "published": false
   },
   {
@@ -28,8 +53,20 @@
     "category": "great-awakening",
     "section": "Suppressed Technology",
     "mapBadge": "Technology",
-    "keywords": ["Tesla", "teleforce", "death ray", "JPMorgan", "stolen patents", "Wardenclyffe"],
-    "relatedSlugs": ["nikola-tesla", "suppressed-technologies", "haarp", "scalar-weapons"],
+    "keywords": [
+      "Tesla",
+      "teleforce",
+      "death ray",
+      "JPMorgan",
+      "stolen patents",
+      "Wardenclyffe"
+    ],
+    "relatedSlugs": [
+      "nikola-tesla",
+      "suppressed-technologies",
+      "haarp",
+      "scalar-weapons"
+    ],
     "published": false
   },
   {
@@ -39,8 +76,19 @@
     "category": "great-awakening",
     "section": "Power Structures",
     "mapBadge": "Hierarchy",
-    "keywords": ["bloodlines", "13 families", "Rothschild", "black nobility", "satanic council"],
-    "relatedSlugs": ["cabal-hierarchy", "rothschilds", "black-nobility", "luciferian-doctrine"],
+    "keywords": [
+      "bloodlines",
+      "13 families",
+      "Rothschild",
+      "black nobility",
+      "satanic council"
+    ],
+    "relatedSlugs": [
+      "cabal-hierarchy",
+      "rothschilds",
+      "black-nobility",
+      "luciferian-doctrine"
+    ],
     "published": false
   },
   {
@@ -50,8 +98,19 @@
     "category": "great-awakening",
     "section": "Geoengineering",
     "mapBadge": "Technology",
-    "keywords": ["weather modification", "HAARP", "cloud seeding", "ionospheric heaters", "patent 4686605"],
-    "relatedSlugs": ["haarp", "chemtrails", "dew-weapons", "scalar-weapons"],
+    "keywords": [
+      "weather modification",
+      "HAARP",
+      "cloud seeding",
+      "ionospheric heaters",
+      "patent 4686605"
+    ],
+    "relatedSlugs": [
+      "haarp",
+      "chemtrails",
+      "dew-weapons",
+      "scalar-weapons"
+    ],
     "published": false
   },
   {
@@ -61,8 +120,20 @@
     "category": "great-awakening",
     "section": "Election Control",
     "mapBadge": "Politics",
-    "keywords": ["Dominion", "ES&S", "Smartmatic", "vote flipping", "2020 election", "Halderman report"],
-    "relatedSlugs": ["shadow-government", "cia-operations", "corporate-state-capture", "the-storm"],
+    "keywords": [
+      "Dominion",
+      "ES&S",
+      "Smartmatic",
+      "vote flipping",
+      "2020 election",
+      "Halderman report"
+    ],
+    "relatedSlugs": [
+      "shadow-government",
+      "cia-operations",
+      "corporate-state-capture",
+      "the-storm"
+    ],
     "published": false
   },
   {
@@ -72,8 +143,20 @@
     "category": "great-awakening",
     "section": "False Flags",
     "mapBadge": "Intelligence",
-    "keywords": ["NATO", "stay-behind networks", "false flag terrorism", "Bologna bombing", "Red Brigades", "CIA"],
-    "relatedSlugs": ["false-flags", "cia-operations", "cointelpro", "operation-northwoods"],
+    "keywords": [
+      "NATO",
+      "stay-behind networks",
+      "false flag terrorism",
+      "Bologna bombing",
+      "Red Brigades",
+      "CIA"
+    ],
+    "relatedSlugs": [
+      "false-flags",
+      "cia-operations",
+      "cointelpro",
+      "operation-northwoods"
+    ],
     "published": false
   },
   {
@@ -83,8 +166,20 @@
     "category": "great-awakening",
     "section": "Finance",
     "mapBadge": "Finance",
-    "keywords": ["DOD black budget", "Mark Skidmore", "21 trillion", "HUD", "Pentagon audit", "Catherine Austin Fitts"],
-    "relatedSlugs": ["federal-reserve", "usap", "secret-space-program", "shadow-government"],
+    "keywords": [
+      "DOD black budget",
+      "Mark Skidmore",
+      "21 trillion",
+      "HUD",
+      "Pentagon audit",
+      "Catherine Austin Fitts"
+    ],
+    "relatedSlugs": [
+      "federal-reserve",
+      "usap",
+      "secret-space-program",
+      "shadow-government"
+    ],
     "published": false
   },
   {
@@ -94,8 +189,20 @@
     "category": "great-awakening",
     "section": "Health",
     "mapBadge": "Health",
-    "keywords": ["GMO", "glyphosate", "seed patents", "Monsanto", "Codex Alimentarius", "food additives"],
-    "relatedSlugs": ["weaponized-food", "big-pharma", "bill-gates", "organic-food-nongmo"],
+    "keywords": [
+      "GMO",
+      "glyphosate",
+      "seed patents",
+      "Monsanto",
+      "Codex Alimentarius",
+      "food additives"
+    ],
+    "relatedSlugs": [
+      "weaponized-food",
+      "big-pharma",
+      "bill-gates",
+      "organic-food-nongmo"
+    ],
     "published": false
   },
   {
@@ -105,8 +212,20 @@
     "category": "great-awakening",
     "section": "Surveillance",
     "mapBadge": "Technology",
-    "keywords": ["smart meters", "AMI meters", "5G", "IoT surveillance", "energy monitoring", "DEW"],
-    "relatedSlugs": ["smart-cities", "rfid-surveillance", "5g-surveillance", "global-surveillance-grid"],
+    "keywords": [
+      "smart meters",
+      "AMI meters",
+      "5G",
+      "IoT surveillance",
+      "energy monitoring",
+      "DEW"
+    ],
+    "relatedSlugs": [
+      "smart-cities",
+      "rfid-surveillance",
+      "5g-surveillance",
+      "global-surveillance-grid"
+    ],
     "published": false
   },
   {
@@ -116,8 +235,19 @@
     "category": "great-awakening",
     "section": "Digital Control",
     "mapBadge": "Technology",
-    "keywords": ["facial recognition", "iris scanning", "digital ID", "WEF ID2020", "CBDCs"],
-    "relatedSlugs": ["cbdc", "smart-cities", "transhumanism", "rfid-surveillance"],
+    "keywords": [
+      "facial recognition",
+      "iris scanning",
+      "digital ID",
+      "WEF ID2020",
+      "CBDCs"
+    ],
+    "relatedSlugs": [
+      "cbdc",
+      "smart-cities",
+      "transhumanism",
+      "rfid-surveillance"
+    ],
     "published": false
   },
   {
@@ -127,8 +257,20 @@
     "category": "great-awakening",
     "section": "Banking",
     "mapBadge": "Finance",
-    "keywords": ["Rothschild", "BIS", "central banks", "fiat currency", "fractional reserve", "debt slavery"],
-    "relatedSlugs": ["rothschilds", "federal-reserve", "bis", "babylonian-money-magic"],
+    "keywords": [
+      "Rothschild",
+      "BIS",
+      "central banks",
+      "fiat currency",
+      "fractional reserve",
+      "debt slavery"
+    ],
+    "relatedSlugs": [
+      "rothschilds",
+      "federal-reserve",
+      "bis",
+      "babylonian-money-magic"
+    ],
     "published": false
   },
   {
@@ -138,8 +280,19 @@
     "category": "great-awakening",
     "section": "Ancient History",
     "mapBadge": "History",
-    "keywords": ["Dendera reliefs", "Baghdad battery", "Giza power plant", "Christopher Dunn", "acoustic levitation"],
-    "relatedSlugs": ["giza-complex", "ancient-builder-race", "sound-levitation", "oopart"],
+    "keywords": [
+      "Dendera reliefs",
+      "Baghdad battery",
+      "Giza power plant",
+      "Christopher Dunn",
+      "acoustic levitation"
+    ],
+    "relatedSlugs": [
+      "giza-complex",
+      "ancient-builder-race",
+      "sound-levitation",
+      "oopart"
+    ],
     "published": false
   },
   {
@@ -149,8 +302,20 @@
     "category": "great-awakening",
     "section": "Surveillance",
     "mapBadge": "Intelligence",
-    "keywords": ["Five Eyes", "UKUSA agreement", "PRISM", "XKeyscore", "Tempora", "GCHQ"],
-    "relatedSlugs": ["five-eyes", "nsa-surveillance", "snowden-assange", "global-surveillance-grid"],
+    "keywords": [
+      "Five Eyes",
+      "UKUSA agreement",
+      "PRISM",
+      "XKeyscore",
+      "Tempora",
+      "GCHQ"
+    ],
+    "relatedSlugs": [
+      "five-eyes",
+      "nsa-surveillance",
+      "snowden-assange",
+      "global-surveillance-grid"
+    ],
     "published": false
   },
   {
@@ -160,8 +325,20 @@
     "category": "great-awakening",
     "section": "Geoengineering",
     "mapBadge": "Health",
-    "keywords": ["barium", "aluminium oxide", "strontium", "coal fly ash", "Marvin Herndon", "SCoPEx"],
-    "relatedSlugs": ["chemtrails", "haarp", "bill-gates", "fluoride-poison"],
+    "keywords": [
+      "barium",
+      "aluminium oxide",
+      "strontium",
+      "coal fly ash",
+      "Marvin Herndon",
+      "SCoPEx"
+    ],
+    "relatedSlugs": [
+      "chemtrails",
+      "haarp",
+      "bill-gates",
+      "fluoride-poison"
+    ],
     "published": false
   },
   {
@@ -171,8 +348,19 @@
     "category": "great-awakening",
     "section": "Elite Crime",
     "mapBadge": "Crime",
-    "keywords": ["adrenochrome", "adrenaline oxidation", "child trafficking", "Hollywood", "Hunter Biden"],
-    "relatedSlugs": ["adrenochrome", "epstein-network", "global-child-trafficking", "hollywood-satanism"],
+    "keywords": [
+      "adrenochrome",
+      "adrenaline oxidation",
+      "child trafficking",
+      "Hollywood",
+      "Hunter Biden"
+    ],
+    "relatedSlugs": [
+      "adrenochrome",
+      "epstein-network",
+      "global-child-trafficking",
+      "hollywood-satanism"
+    ],
     "published": false
   },
   {
@@ -182,8 +370,19 @@
     "category": "great-awakening",
     "section": "Biowarfare",
     "mapBadge": "Health",
-    "keywords": ["Fort Detrick", "USAMRIID", "anthrax letters", "gain-of-function", "COVID-19 origins"],
-    "relatedSlugs": ["engineered-diseases", "covid-plandemic", "cia-operations", "operation-paperclip"],
+    "keywords": [
+      "Fort Detrick",
+      "USAMRIID",
+      "anthrax letters",
+      "gain-of-function",
+      "COVID-19 origins"
+    ],
+    "relatedSlugs": [
+      "engineered-diseases",
+      "covid-plandemic",
+      "cia-operations",
+      "operation-paperclip"
+    ],
     "published": false
   },
   {
@@ -193,8 +392,21 @@
     "category": "great-awakening",
     "section": "Occult",
     "mapBadge": "Occult",
-    "keywords": ["Saturn", "black cube", "Kaaba", "tefillin", "hexagon", "Kronos", "occult symbolism"],
-    "relatedSlugs": ["saturn-rings", "cern-occult", "luciferian-doctrine", "dagon-mitre-hats"],
+    "keywords": [
+      "Saturn",
+      "black cube",
+      "Kaaba",
+      "tefillin",
+      "hexagon",
+      "Kronos",
+      "occult symbolism"
+    ],
+    "relatedSlugs": [
+      "saturn-rings",
+      "cern-occult",
+      "luciferian-doctrine",
+      "dagon-mitre-hats"
+    ],
     "published": false
   },
   {
@@ -204,8 +416,19 @@
     "category": "great-awakening",
     "section": "Media Control",
     "mapBadge": "Media",
-    "keywords": ["Noam Chomsky", "propaganda model", "Operation Mockingbird", "narrative management", "Overton window"],
-    "relatedSlugs": ["operation-mockingbird", "corporate-media-control", "kill-your-tv", "tavistock-institute"],
+    "keywords": [
+      "Noam Chomsky",
+      "propaganda model",
+      "Operation Mockingbird",
+      "narrative management",
+      "Overton window"
+    ],
+    "relatedSlugs": [
+      "operation-mockingbird",
+      "corporate-media-control",
+      "kill-your-tv",
+      "tavistock-institute"
+    ],
     "published": false
   },
   {
@@ -215,8 +438,2791 @@
     "category": "great-awakening",
     "section": "Biotech Control",
     "mapBadge": "Technology",
-    "keywords": ["Myriad Genetics", "BRCA1 patent", "mRNA patents", "Moderna NIH", "DNA as property"],
-    "relatedSlugs": ["mrna-vaccines", "transhumanism", "big-pharma", "dna-upgrade"],
+    "keywords": [
+      "Myriad Genetics",
+      "BRCA1 patent",
+      "mRNA patents",
+      "Moderna NIH",
+      "DNA as property"
+    ],
+    "relatedSlugs": [
+      "mrna-vaccines",
+      "transhumanism",
+      "big-pharma",
+      "dna-upgrade"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-021",
+    "slug": "raven-rock",
+    "title": "Raven Rock Mountain Complex (Site R)",
+    "category": "great-awakening",
+    "section": "Hidden Government",
+    "mapBadge": "Deep State",
+    "keywords": [
+      "COG",
+      "continuity of government",
+      "nuclear bunker",
+      "Site R",
+      "Raven Rock"
+    ],
+    "relatedSlugs": [
+      "mount-weather",
+      "cheyenne-mountain",
+      "shadow-government",
+      "fema"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-022",
+    "slug": "mount-weather",
+    "title": "Mount Weather Emergency Operations Center",
+    "category": "great-awakening",
+    "section": "Hidden Government",
+    "mapBadge": "Deep State",
+    "keywords": [
+      "COG",
+      "continuity of government",
+      "FEMA",
+      "shadow government",
+      "nuclear bunker"
+    ],
+    "relatedSlugs": [
+      "raven-rock",
+      "cheyenne-mountain",
+      "fema",
+      "shadow-government"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-023",
+    "slug": "cheyenne-mountain",
+    "title": "Cheyenne Mountain — NORAD Underground Fortress",
+    "category": "great-awakening",
+    "section": "Hidden Government",
+    "mapBadge": "Deep State",
+    "keywords": [
+      "NORAD",
+      "nuclear bunker",
+      "deep state",
+      "underground base",
+      "DUMB"
+    ],
+    "relatedSlugs": [
+      "raven-rock",
+      "mount-weather",
+      "dumbs",
+      "shadow-government"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-024",
+    "slug": "greenbrier-bunker",
+    "title": "Greenbrier Congressional Bunker",
+    "category": "great-awakening",
+    "section": "Hidden Government",
+    "mapBadge": "Deep State",
+    "keywords": [
+      "COG",
+      "congress",
+      "bunker",
+      "continuity of government",
+      "cold war"
+    ],
+    "relatedSlugs": [
+      "raven-rock",
+      "mount-weather",
+      "shadow-government"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-025",
+    "slug": "continuity-of-government",
+    "title": "Continuity of Government (COG) Programs",
+    "category": "great-awakening",
+    "section": "Hidden Government",
+    "mapBadge": "Deep State",
+    "keywords": [
+      "COG",
+      "shadow government",
+      "FEMA",
+      "executive orders",
+      "martial law"
+    ],
+    "relatedSlugs": [
+      "fema",
+      "raven-rock",
+      "mount-weather",
+      "shadow-government",
+      "sealed-indictments"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-026",
+    "slug": "project-stargate",
+    "title": "Project Stargate — CIA Remote Viewing Program",
+    "category": "great-awakening",
+    "section": "Hidden Government",
+    "mapBadge": "Intelligence",
+    "keywords": [
+      "remote viewing",
+      "CIA",
+      "psychic spy",
+      "SRI",
+      "Ingo Swann"
+    ],
+    "relatedSlugs": [
+      "remote-viewing",
+      "cia-operations",
+      "mkultra",
+      "five-eyes"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-027",
+    "slug": "project-bluebird",
+    "title": "Project Bluebird — CIA Behavior Modification",
+    "category": "great-awakening",
+    "section": "Hidden Government",
+    "mapBadge": "Intelligence",
+    "keywords": [
+      "CIA",
+      "mind control",
+      "behavior modification",
+      "ARTICHOKE",
+      "MKUltra precursor"
+    ],
+    "relatedSlugs": [
+      "mkultra",
+      "cia-operations",
+      "super-soldiers",
+      "monarch"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-028",
+    "slug": "operation-chaos",
+    "title": "Operation CHAOS — CIA Domestic Surveillance 1967–74",
+    "category": "great-awakening",
+    "section": "Hidden Government",
+    "mapBadge": "Intelligence",
+    "keywords": [
+      "CIA",
+      "domestic surveillance",
+      "antiwar movement",
+      "COINTELPRO",
+      "Operation CHAOS"
+    ],
+    "relatedSlugs": [
+      "cointelpro",
+      "cia-operations",
+      "operation-mockingbird",
+      "nsa-surveillance"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-029",
+    "slug": "echelon",
+    "title": "ECHELON — Five Eyes Mass Interception Network",
+    "category": "great-awakening",
+    "section": "Hidden Government",
+    "mapBadge": "Surveillance",
+    "keywords": [
+      "ECHELON",
+      "Five Eyes",
+      "mass surveillance",
+      "signals intelligence",
+      "NSA"
+    ],
+    "relatedSlugs": [
+      "five-eyes",
+      "nsa-surveillance",
+      "global-surveillance-grid",
+      "raf-menwith-hill"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-030",
+    "slug": "total-information-awareness",
+    "title": "Total Information Awareness — DARPA Surveillance Blueprint",
+    "category": "great-awakening",
+    "section": "Hidden Government",
+    "mapBadge": "Surveillance",
+    "keywords": [
+      "DARPA",
+      "TIA",
+      "mass surveillance",
+      "John Poindexter",
+      "pre-crime"
+    ],
+    "relatedSlugs": [
+      "nsa-surveillance",
+      "ai-surveillance",
+      "five-eyes",
+      "prism-expansion"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-031",
+    "slug": "main-core-database",
+    "title": "Main Core — The List of Americans to Detain",
+    "category": "great-awakening",
+    "section": "Hidden Government",
+    "mapBadge": "Surveillance",
+    "keywords": [
+      "Main Core",
+      "detention list",
+      "COG",
+      "martial law",
+      "shadow government"
+    ],
+    "relatedSlugs": [
+      "fema",
+      "shadow-government",
+      "continuity-of-government",
+      "nsa-surveillance"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-032",
+    "slug": "darpa-social-mapping",
+    "title": "DARPA Social Network Mapping Programs",
+    "category": "great-awakening",
+    "section": "Hidden Government",
+    "mapBadge": "Surveillance",
+    "keywords": [
+      "DARPA",
+      "social network analysis",
+      "mass surveillance",
+      "LifeLog",
+      "Facebook"
+    ],
+    "relatedSlugs": [
+      "facebook-google-surveillance",
+      "ai-surveillance",
+      "nsa-surveillance",
+      "transhumanism"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-033",
+    "slug": "in-q-tel",
+    "title": "In-Q-Tel — CIA's Venture Capital Arm",
+    "category": "great-awakening",
+    "section": "Hidden Government",
+    "mapBadge": "Intelligence",
+    "keywords": [
+      "In-Q-Tel",
+      "CIA",
+      "Silicon Valley",
+      "venture capital",
+      "surveillance capitalism"
+    ],
+    "relatedSlugs": [
+      "cia-operations",
+      "facebook-google-surveillance",
+      "ai-surveillance",
+      "nsa-surveillance"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-034",
+    "slug": "room-641a",
+    "title": "Room 641A — AT&T NSA Splitter Cabinet",
+    "category": "great-awakening",
+    "section": "Hidden Government",
+    "mapBadge": "Surveillance",
+    "keywords": [
+      "Room 641A",
+      "NSA",
+      "AT&T",
+      "internet surveillance",
+      "Mark Klein"
+    ],
+    "relatedSlugs": [
+      "nsa-surveillance",
+      "five-eyes",
+      "echelon",
+      "prism-expansion"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-035",
+    "slug": "carnivore-surveillance",
+    "title": "Carnivore — FBI Packet-Sniffing Program",
+    "category": "great-awakening",
+    "section": "Hidden Government",
+    "mapBadge": "Surveillance",
+    "keywords": [
+      "Carnivore",
+      "FBI",
+      "packet sniffing",
+      "internet surveillance",
+      "DCS1000"
+    ],
+    "relatedSlugs": [
+      "nsa-surveillance",
+      "prism-expansion",
+      "five-eyes",
+      "snowden-assange"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-036",
+    "slug": "prism-expansion",
+    "title": "PRISM Expansion — Beyond Snowden Documents",
+    "category": "great-awakening",
+    "section": "Hidden Government",
+    "mapBadge": "Surveillance",
+    "keywords": [
+      "PRISM",
+      "NSA",
+      "Snowden",
+      "mass surveillance",
+      "tech companies"
+    ],
+    "relatedSlugs": [
+      "nsa-surveillance",
+      "snowden-assange",
+      "five-eyes",
+      "facebook-google-surveillance"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-037",
+    "slug": "fusion-centers",
+    "title": "Fusion Centers — DHS Intelligence Fusion",
+    "category": "great-awakening",
+    "section": "Hidden Government",
+    "mapBadge": "Surveillance",
+    "keywords": [
+      "fusion centers",
+      "DHS",
+      "local police",
+      "surveillance",
+      "counter-terrorism"
+    ],
+    "relatedSlugs": [
+      "nsa-surveillance",
+      "predictive-policing",
+      "ai-surveillance",
+      "shadow-government"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-038",
+    "slug": "stingray-devices",
+    "title": "Stingray / IMSI Catchers — Mass Cell Tracking",
+    "category": "great-awakening",
+    "section": "Hidden Government",
+    "mapBadge": "Surveillance",
+    "keywords": [
+      "Stingray",
+      "IMSI catcher",
+      "cell phone tracking",
+      "law enforcement",
+      "Harris Corporation"
+    ],
+    "relatedSlugs": [
+      "nsa-surveillance",
+      "5g-surveillance",
+      "rfid-surveillance",
+      "ai-surveillance"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-039",
+    "slug": "predictive-policing",
+    "title": "Predictive Policing — Pre-Crime Algorithms",
+    "category": "great-awakening",
+    "section": "Hidden Government",
+    "mapBadge": "Surveillance",
+    "keywords": [
+      "predictive policing",
+      "pre-crime",
+      "PredPol",
+      "algorithmic bias",
+      "surveillance"
+    ],
+    "relatedSlugs": [
+      "ai-surveillance",
+      "palantir-gotham",
+      "stingray-devices",
+      "social-media-control"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-040",
+    "slug": "doggerland",
+    "title": "Doggerland — The Flooded North Sea Civilisation",
+    "category": "great-awakening",
+    "section": "Ancient History",
+    "mapBadge": "Ancient",
+    "keywords": [
+      "Doggerland",
+      "North Sea",
+      "flooded civilisation",
+      "Mesolithic",
+      "Younger Dryas"
+    ],
+    "relatedSlugs": [
+      "younger-dryas-impact",
+      "atlantis-lemuria-mu",
+      "sundaland",
+      "mud-flood"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-041",
+    "slug": "sundaland",
+    "title": "Sundaland — The Submerged Southeast Asian Continent",
+    "category": "great-awakening",
+    "section": "Ancient History",
+    "mapBadge": "Ancient",
+    "keywords": [
+      "Sundaland",
+      "Sunda shelf",
+      "submerged continent",
+      "Lemuria",
+      "ancient civilisation"
+    ],
+    "relatedSlugs": [
+      "doggerland",
+      "atlantis-lemuria-mu",
+      "younger-dryas-impact",
+      "gunung-padang"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-042",
+    "slug": "richat-atlantis",
+    "title": "Richat Structure — Atlantis in Mauritania",
+    "category": "great-awakening",
+    "section": "Ancient History",
+    "mapBadge": "Ancient",
+    "keywords": [
+      "Richat Structure",
+      "Eye of Africa",
+      "Atlantis",
+      "Mauritania",
+      "Plato"
+    ],
+    "relatedSlugs": [
+      "atlantis-lemuria-mu",
+      "younger-dryas-impact",
+      "piri-reis-map",
+      "giza-complex"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-043",
+    "slug": "yonaguni-monument",
+    "title": "Yonaguni Monument — Japan's Underwater Pyramid",
+    "category": "great-awakening",
+    "section": "Ancient History",
+    "mapBadge": "Ancient",
+    "keywords": [
+      "Yonaguni",
+      "underwater pyramid",
+      "Japan",
+      "ancient ruins",
+      "Masaaki Kimura"
+    ],
+    "relatedSlugs": [
+      "atlantis-lemuria-mu",
+      "bimini-road",
+      "ancient-alien-ruins",
+      "sundaland"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-044",
+    "slug": "bimini-road",
+    "title": "Bimini Road — Bahamas Underwater Stone Formation",
+    "category": "great-awakening",
+    "section": "Ancient History",
+    "mapBadge": "Ancient",
+    "keywords": [
+      "Bimini Road",
+      "Bahamas",
+      "underwater ruins",
+      "Edgar Cayce",
+      "Atlantis"
+    ],
+    "relatedSlugs": [
+      "atlantis-lemuria-mu",
+      "yonaguni-monument",
+      "richat-atlantis",
+      "younger-dryas-impact"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-045",
+    "slug": "dwarka-submerged",
+    "title": "Dwarka — Submerged Ancient City off India",
+    "category": "great-awakening",
+    "section": "Ancient History",
+    "mapBadge": "Ancient",
+    "keywords": [
+      "Dwarka",
+      "submerged city",
+      "India",
+      "Krishna",
+      "ancient archaeology"
+    ],
+    "relatedSlugs": [
+      "atlantis-lemuria-mu",
+      "yonaguni-monument",
+      "vimanas",
+      "the-vedas"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-046",
+    "slug": "baalbek-megaliths",
+    "title": "Baalbek — 1,500-Ton Stones No Modern Crane Can Lift",
+    "category": "great-awakening",
+    "section": "Ancient History",
+    "mapBadge": "Ancient",
+    "keywords": [
+      "Baalbek",
+      "megaliths",
+      "Lebanon",
+      "ancient construction",
+      "impossible engineering"
+    ],
+    "relatedSlugs": [
+      "sacsayhuaman",
+      "ancient-alien-ruins",
+      "annunaki",
+      "gobekli-tepe-burial",
+      "vimanas"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-047",
+    "slug": "sacsayhuaman",
+    "title": "Sacsayhuamán — Precision-Cut Masonry Impossible by Hand",
+    "category": "great-awakening",
+    "section": "Ancient History",
+    "mapBadge": "Ancient",
+    "keywords": [
+      "Sacsayhuaman",
+      "Inca",
+      "precision masonry",
+      "ancient technology",
+      "Peru"
+    ],
+    "relatedSlugs": [
+      "baalbek-megaliths",
+      "ancient-alien-ruins",
+      "annunaki",
+      "nazca-lines",
+      "puma-punku"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-048",
+    "slug": "nan-madol",
+    "title": "Nan Madol — Island City Built on Coral",
+    "category": "great-awakening",
+    "section": "Ancient History",
+    "mapBadge": "Ancient",
+    "keywords": [
+      "Nan Madol",
+      "Micronesia",
+      "ancient city",
+      "coral",
+      "impossible engineering"
+    ],
+    "relatedSlugs": [
+      "baalbek-megaliths",
+      "ancient-alien-ruins",
+      "yonaguni-monument",
+      "sacsayhuaman"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-049",
+    "slug": "derinkuyu",
+    "title": "Derinkuyu Underground City — 18 Levels, 20,000 People",
+    "category": "great-awakening",
+    "section": "Ancient History",
+    "mapBadge": "Ancient",
+    "keywords": [
+      "Derinkuyu",
+      "underground city",
+      "Turkey",
+      "Cappadocia",
+      "ancient shelter"
+    ],
+    "relatedSlugs": [
+      "dumbs",
+      "honeycomb-earth",
+      "ancient-alien-ruins",
+      "baalbek-megaliths",
+      "gobekli-tepe-burial"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-050",
+    "slug": "gobekli-tepe-burial",
+    "title": "Göbekli Tepe Burial Mystery — Why Was It Buried?",
+    "category": "great-awakening",
+    "section": "Ancient History",
+    "mapBadge": "Ancient",
+    "keywords": [
+      "Gobekli Tepe",
+      "deliberately buried",
+      "ancient mystery",
+      "Klaus Schmidt",
+      "pre-flood"
+    ],
+    "relatedSlugs": [
+      "ancient-alien-ruins",
+      "younger-dryas-impact",
+      "atlantis-lemuria-mu",
+      "annunaki"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-051",
+    "slug": "younger-dryas-impact",
+    "title": "Younger Dryas Impact — The Comet That Reset Civilisation",
+    "category": "great-awakening",
+    "section": "Ancient History",
+    "mapBadge": "Ancient",
+    "keywords": [
+      "Younger Dryas",
+      "comet impact",
+      "civilisation reset",
+      "Randall Carlson",
+      "Graham Hancock"
+    ],
+    "relatedSlugs": [
+      "atlantis-lemuria-mu",
+      "gobekli-tepe-burial",
+      "mud-flood",
+      "tartaria",
+      "great-solar-flash"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-052",
+    "slug": "library-of-alexandria",
+    "title": "Lost Library of Alexandria — What Was Actually Destroyed",
+    "category": "great-awakening",
+    "section": "Ancient History",
+    "mapBadge": "Ancient",
+    "keywords": [
+      "Library of Alexandria",
+      "ancient knowledge",
+      "destruction",
+      "Julius Caesar",
+      "Hypatia"
+    ],
+    "relatedSlugs": [
+      "stolen-history",
+      "tartaria",
+      "ancient-alien-ruins",
+      "the-vedas",
+      "oopart"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-053",
+    "slug": "osireion-abydos",
+    "title": "Osireion at Abydos — Pre-Dynastic Temple in Groundwater",
+    "category": "great-awakening",
+    "section": "Ancient History",
+    "mapBadge": "Ancient",
+    "keywords": [
+      "Osireion",
+      "Abydos",
+      "Egypt",
+      "pre-dynastic",
+      "submerged temple"
+    ],
+    "relatedSlugs": [
+      "giza-complex",
+      "ancient-alien-ruins",
+      "atlantis-lemuria-mu",
+      "annunaki"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-054",
+    "slug": "gunung-padang",
+    "title": "Gunung Padang — 25,000-Year-Old Pyramid in Indonesia",
+    "category": "great-awakening",
+    "section": "Ancient History",
+    "mapBadge": "Ancient",
+    "keywords": [
+      "Gunung Padang",
+      "Indonesia",
+      "ancient pyramid",
+      "25000 years",
+      "Danny Natawidjaja"
+    ],
+    "relatedSlugs": [
+      "younger-dryas-impact",
+      "sundaland",
+      "ancient-alien-ruins",
+      "gobekli-tepe-burial"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-055",
+    "slug": "vitrified-forts",
+    "title": "Vitrified Forts — Scottish Hillforts Melted by Unknown Heat",
+    "category": "great-awakening",
+    "section": "Ancient History",
+    "mapBadge": "Ancient",
+    "keywords": [
+      "vitrified forts",
+      "Scotland",
+      "ancient fire",
+      "impossible heat",
+      "megalithic"
+    ],
+    "relatedSlugs": [
+      "mahabharata-nuclear-war",
+      "vimanas",
+      "younger-dryas-impact",
+      "ancient-alien-ruins"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-056",
+    "slug": "klerksdorp-spheres",
+    "title": "Klerksdorp Spheres — 3-Billion-Year-Old Machined Metal Objects",
+    "category": "great-awakening",
+    "section": "Ancient History",
+    "mapBadge": "Ancient",
+    "keywords": [
+      "Klerksdorp spheres",
+      "South Africa",
+      "OOPArts",
+      "out of place artifacts",
+      "ancient technology"
+    ],
+    "relatedSlugs": [
+      "oopart",
+      "ancient-alien-ruins",
+      "annunaki",
+      "ancient-builder-race"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-057",
+    "slug": "paracas-skulls",
+    "title": "Paracas Skull DNA — Non-Human Mitochondrial Results",
+    "category": "great-awakening",
+    "section": "Ancient History",
+    "mapBadge": "Ancient",
+    "keywords": [
+      "Paracas skulls",
+      "elongated skulls",
+      "DNA",
+      "non-human",
+      "Peru",
+      "Brien Foerster"
+    ],
+    "relatedSlugs": [
+      "pre-adamites",
+      "homocapensis",
+      "giants-suppressed",
+      "annunaki",
+      "atacama-humanoid"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-058",
+    "slug": "bosnian-pyramids",
+    "title": "Bosnian Pyramid Controversy — Semir Osmanagic Excavations",
+    "category": "great-awakening",
+    "section": "Ancient History",
+    "mapBadge": "Ancient",
+    "keywords": [
+      "Bosnian pyramids",
+      "Semir Osmanagic",
+      "Visoko",
+      "ancient structures",
+      "covered pyramids"
+    ],
+    "relatedSlugs": [
+      "ancient-alien-ruins",
+      "giza-complex",
+      "gunung-padang",
+      "younger-dryas-impact"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-059",
+    "slug": "sanxingdui",
+    "title": "Sanxingdui Bronzes — Bronze Age China with No Known Origin",
+    "category": "great-awakening",
+    "section": "Ancient History",
+    "mapBadge": "Ancient",
+    "keywords": [
+      "Sanxingdui",
+      "Bronze Age China",
+      "unknown civilisation",
+      "alien artefacts",
+      "Sichuan"
+    ],
+    "relatedSlugs": [
+      "ancient-alien-ruins",
+      "chinese-pyramids",
+      "annunaki",
+      "oopart"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-060",
+    "slug": "phoenix-lights",
+    "title": "Phoenix Lights 1997 — Mile-Wide Craft, 10,000 Witnesses",
+    "category": "great-awakening",
+    "section": "UFO Incidents",
+    "mapBadge": "UFO",
+    "keywords": [
+      "Phoenix Lights",
+      "1997",
+      "Arizona",
+      "UFO sighting",
+      "Fife Symington"
+    ],
+    "relatedSlugs": [
+      "ufo-disclosure",
+      "tr3b-arvs",
+      "majestic-mj12",
+      "battle-of-la-1942"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-061",
+    "slug": "rendlesham-forest",
+    "title": "Rendlesham Forest 1980 — UK's Roswell, Binary Code Download",
+    "category": "great-awakening",
+    "section": "UFO Incidents",
+    "mapBadge": "UFO",
+    "keywords": [
+      "Rendlesham Forest",
+      "1980",
+      "UK",
+      "UFO landing",
+      "Jim Penniston",
+      "binary code"
+    ],
+    "relatedSlugs": [
+      "ufo-disclosure",
+      "majestic-mj12",
+      "area-51",
+      "five-eyes"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-062",
+    "slug": "varginha-brazil",
+    "title": "Varginha Brazil 1996 — ET Captured by Military",
+    "category": "great-awakening",
+    "section": "UFO Incidents",
+    "mapBadge": "UFO",
+    "keywords": [
+      "Varginha",
+      "Brazil",
+      "1996",
+      "ET captured",
+      "military",
+      "UFO crash"
+    ],
+    "relatedSlugs": [
+      "ufo-disclosure",
+      "greys-nordics-ebes",
+      "majestic-mj12",
+      "battle-of-la-1942"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-063",
+    "slug": "ariel-school",
+    "title": "Ariel School Zimbabwe 1994 — 62 Children, Same ET Description",
+    "category": "great-awakening",
+    "section": "UFO Incidents",
+    "mapBadge": "UFO",
+    "keywords": [
+      "Ariel School",
+      "Zimbabwe",
+      "1994",
+      "children",
+      "ET contact",
+      "John Mack"
+    ],
+    "relatedSlugs": [
+      "ufo-disclosure",
+      "greys-nordics-ebes",
+      "blue-avians",
+      "pleiadian-guidance"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-064",
+    "slug": "roswell-witnesses",
+    "title": "Roswell Witnesses — 600+ Affidavits Never Covered Together",
+    "category": "great-awakening",
+    "section": "UFO Incidents",
+    "mapBadge": "UFO",
+    "keywords": [
+      "Roswell",
+      "1947",
+      "witness affidavits",
+      "UFO crash",
+      "Jesse Marcel"
+    ],
+    "relatedSlugs": [
+      "majestic-mj12",
+      "area-51",
+      "ufo-disclosure",
+      "battle-of-la-1942"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-065",
+    "slug": "foo-fighters-wwii",
+    "title": "Foo Fighters WWII — Allied and Axis Pilots, Same Craft",
+    "category": "great-awakening",
+    "section": "UFO Incidents",
+    "mapBadge": "UFO",
+    "keywords": [
+      "foo fighters",
+      "WWII",
+      "UFO",
+      "Allied pilots",
+      "Axis pilots"
+    ],
+    "relatedSlugs": [
+      "battle-of-la-1942",
+      "ufo-disclosure",
+      "tr3b-arvs",
+      "nazi-breakaway-group"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-066",
+    "slug": "kecksburg",
+    "title": "Kecksburg Incident 1965 — Acorn-Shaped Craft, Soviet/NASA Link",
+    "category": "great-awakening",
+    "section": "UFO Incidents",
+    "mapBadge": "UFO",
+    "keywords": [
+      "Kecksburg",
+      "1965",
+      "UFO crash",
+      "Pennsylvania",
+      "acorn-shaped craft"
+    ],
+    "relatedSlugs": [
+      "roswell-witnesses",
+      "ufo-disclosure",
+      "operation-paperclip",
+      "nasa-deceptions"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-067",
+    "slug": "hessdalen-lights",
+    "title": "Hessdalen Lights — 40-Year Anomaly in Norway",
+    "category": "great-awakening",
+    "section": "UFO Incidents",
+    "mapBadge": "UFO",
+    "keywords": [
+      "Hessdalen lights",
+      "Norway",
+      "anomalous lights",
+      "scientific study",
+      "plasma"
+    ],
+    "relatedSlugs": [
+      "ufo-disclosure",
+      "haarp",
+      "firmament",
+      "bermuda-triangle"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-068",
+    "slug": "westall-1966",
+    "title": "Westall 1966 — 200 Australian Schoolchildren, Mass Sighting",
+    "category": "great-awakening",
+    "section": "UFO Incidents",
+    "mapBadge": "UFO",
+    "keywords": [
+      "Westall 1966",
+      "Australia",
+      "schoolchildren",
+      "UFO mass sighting",
+      "Melbourne"
+    ],
+    "relatedSlugs": [
+      "ufo-disclosure",
+      "ariel-school",
+      "pine-gap",
+      "five-eyes"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-069",
+    "slug": "malmstrom-missiles",
+    "title": "Malmstrom Missile Shutdown — ICBMs Disabled by UFO",
+    "category": "great-awakening",
+    "section": "UFO Incidents",
+    "mapBadge": "UFO",
+    "keywords": [
+      "Malmstrom",
+      "ICBM",
+      "UFO",
+      "nuclear missiles disabled",
+      "1967",
+      "Robert Salas"
+    ],
+    "relatedSlugs": [
+      "ufo-disclosure",
+      "majestic-mj12",
+      "solar-warden",
+      "scalar-weapons"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-070",
+    "slug": "tunguska-exotic",
+    "title": "Tunguska Exotic Hypotheses — Tesla Weapon or ET Craft?",
+    "category": "great-awakening",
+    "section": "UFO Incidents",
+    "mapBadge": "UFO",
+    "keywords": [
+      "Tunguska",
+      "1908",
+      "Tesla weapon",
+      "ET craft",
+      "explosion",
+      "Siberia"
+    ],
+    "relatedSlugs": [
+      "scalar-weapons",
+      "haarp",
+      "ufo-disclosure",
+      "antigravity"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-071",
+    "slug": "nuremberg-1561",
+    "title": "Nuremberg 1561 Sky Battle — Woodcut Broadsheet UFO Battle",
+    "category": "great-awakening",
+    "section": "UFO Incidents",
+    "mapBadge": "UFO",
+    "keywords": [
+      "Nuremberg 1561",
+      "sky battle",
+      "UFO history",
+      "woodcut",
+      "ancient UFO"
+    ],
+    "relatedSlugs": [
+      "foo-fighters-wwii",
+      "ufo-disclosure",
+      "ancient-alien-ruins",
+      "vimanas"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-072",
+    "slug": "project-blue-book",
+    "title": "Project Blue Book — 12,618 Cases, 701 Unexplained",
+    "category": "great-awakening",
+    "section": "UFO Incidents",
+    "mapBadge": "UFO",
+    "keywords": [
+      "Project Blue Book",
+      "USAF",
+      "UFO investigation",
+      "J. Allen Hynek",
+      "unexplained cases"
+    ],
+    "relatedSlugs": [
+      "ufo-disclosure",
+      "majestic-mj12",
+      "roswell-witnesses",
+      "tic-tac-origins"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-073",
+    "slug": "tic-tac-origins",
+    "title": "Tic Tac Craft Origins — USS Nimitz 2004",
+    "category": "great-awakening",
+    "section": "UFO Incidents",
+    "mapBadge": "UFO",
+    "keywords": [
+      "Tic Tac UFO",
+      "USS Nimitz",
+      "2004",
+      "David Fravor",
+      "UAP"
+    ],
+    "relatedSlugs": [
+      "ufo-disclosure",
+      "tr3b-arvs",
+      "solar-warden",
+      "majestic-mj12"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-074",
+    "slug": "hollow-moon",
+    "title": "Hollow Moon Theory — Seismological Evidence from Apollo",
+    "category": "great-awakening",
+    "section": "UFO Incidents",
+    "mapBadge": "Space",
+    "keywords": [
+      "hollow moon",
+      "Apollo seismology",
+      "moon bell",
+      "artificial satellite",
+      "lunar anomalies"
+    ],
+    "relatedSlugs": [
+      "moon-truth",
+      "moon-structures",
+      "moonlanding-hoax",
+      "nasa-deceptions"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-075",
+    "slug": "davos-meetings",
+    "title": "Davos / WEF Annual Meetings — What Is Actually Decided",
+    "category": "great-awakening",
+    "section": "Elite Networks",
+    "mapBadge": "Power",
+    "keywords": [
+      "Davos",
+      "WEF",
+      "World Economic Forum",
+      "Klaus Schwab",
+      "global governance"
+    ],
+    "relatedSlugs": [
+      "wef-schwab",
+      "great-reset",
+      "bilderberg",
+      "council-foreign-relations"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-076",
+    "slug": "bohemian-grove-guests",
+    "title": "Bohemian Grove Guest Lists — Who Was Photographed There",
+    "category": "great-awakening",
+    "section": "Elite Networks",
+    "mapBadge": "Power",
+    "keywords": [
+      "Bohemian Grove",
+      "guest list",
+      "Nixon",
+      "Reagan",
+      "Skull and Bones"
+    ],
+    "relatedSlugs": [
+      "bohemian-grove",
+      "skull-bones",
+      "bilderberg",
+      "cia-operations"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-077",
+    "slug": "bilderberg-leaks",
+    "title": "Bilderberg Leaks — Agendas and Attendees Over 70 Years",
+    "category": "great-awakening",
+    "section": "Elite Networks",
+    "mapBadge": "Power",
+    "keywords": [
+      "Bilderberg",
+      "leaked agenda",
+      "attendees",
+      "Tony Blair",
+      "Henry Kissinger"
+    ],
+    "relatedSlugs": [
+      "bilderberg",
+      "council-foreign-relations",
+      "trilateral-commission",
+      "committee-300"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-078",
+    "slug": "rhodes-scholars",
+    "title": "Rhodes Scholars — The Network Placing Globalists in Government",
+    "category": "great-awakening",
+    "section": "Elite Networks",
+    "mapBadge": "Power",
+    "keywords": [
+      "Rhodes Scholars",
+      "Cecil Rhodes",
+      "globalism",
+      "Rhodes Trust",
+      "Clinton"
+    ],
+    "relatedSlugs": [
+      "council-foreign-relations",
+      "trilateral-commission",
+      "new-world-order",
+      "skull-bones"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-079",
+    "slug": "think-tank-capture",
+    "title": "Think Tank Capture — How Policy Is Laundered Through Academia",
+    "category": "great-awakening",
+    "section": "Elite Networks",
+    "mapBadge": "Power",
+    "keywords": [
+      "think tanks",
+      "policy laundering",
+      "CFR",
+      "Brookings",
+      "RAND Corporation"
+    ],
+    "relatedSlugs": [
+      "council-foreign-relations",
+      "corporate-state-capture",
+      "operation-mockingbird",
+      "educational-indoctrination"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-080",
+    "slug": "ngo-soft-power",
+    "title": "NGO Soft Power — Regime Change via Civil Society",
+    "category": "great-awakening",
+    "section": "Elite Networks",
+    "mapBadge": "Power",
+    "keywords": [
+      "NGO",
+      "NED",
+      "USAID",
+      "regime change",
+      "Open Society",
+      "George Soros"
+    ],
+    "relatedSlugs": [
+      "george-soros",
+      "cia-operations",
+      "hegelian-dialectic",
+      "corporate-state-capture"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-081",
+    "slug": "offshore-trust-havens",
+    "title": "Offshore Trust Havens — Legal Structures Hiding Trillions",
+    "category": "great-awakening",
+    "section": "Elite Networks",
+    "mapBadge": "Finance",
+    "keywords": [
+      "offshore trusts",
+      "tax havens",
+      "wealth hiding",
+      "Cayman Islands",
+      "Panama"
+    ],
+    "relatedSlugs": [
+      "panama-papers",
+      "rothschilds",
+      "blackrock-vanguard",
+      "world-gold-heist",
+      "city-of-london"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-082",
+    "slug": "panama-papers",
+    "title": "Panama Papers Networks — Who Was In Them and Why It Was Buried",
+    "category": "great-awakening",
+    "section": "Elite Networks",
+    "mapBadge": "Finance",
+    "keywords": [
+      "Panama Papers",
+      "Mossack Fonseca",
+      "offshore tax evasion",
+      "elite wealth",
+      "ICIJ"
+    ],
+    "relatedSlugs": [
+      "offshore-trust-havens",
+      "rothschilds",
+      "george-soros",
+      "world-gold-heist"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-083",
+    "slug": "private-island-meetings",
+    "title": "Private Island Meetings — The Unrecorded Gatherings",
+    "category": "great-awakening",
+    "section": "Elite Networks",
+    "mapBadge": "Power",
+    "keywords": [
+      "private islands",
+      "elite meetings",
+      "Epstein island",
+      "unrecorded summits"
+    ],
+    "relatedSlugs": [
+      "epstein-network",
+      "bohemian-grove",
+      "bilderberg",
+      "skull-bones"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-084",
+    "slug": "ai-narrative-manipulation",
+    "title": "AI Narrative Manipulation — LLMs Trained to Steer Opinion",
+    "category": "great-awakening",
+    "section": "Technology Control",
+    "mapBadge": "Technology",
+    "keywords": [
+      "AI",
+      "LLM",
+      "narrative control",
+      "opinion steering",
+      "ChatGPT",
+      "censorship"
+    ],
+    "relatedSlugs": [
+      "social-media-control",
+      "operation-mockingbird",
+      "dead-internet-theory",
+      "deepfake-politics"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-085",
+    "slug": "synthetic-influencers",
+    "title": "Synthetic Influencers — AI-Generated Social Media Personalities",
+    "category": "great-awakening",
+    "section": "Technology Control",
+    "mapBadge": "Technology",
+    "keywords": [
+      "synthetic influencers",
+      "AI",
+      "virtual influencers",
+      "fake personas",
+      "astroturfing"
+    ],
+    "relatedSlugs": [
+      "social-media-control",
+      "dead-internet-theory",
+      "ai-narrative-manipulation",
+      "deepfake-politics"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-086",
+    "slug": "deepfake-politics",
+    "title": "Deepfake Politics — Political Deepfakes Already Deployed",
+    "category": "great-awakening",
+    "section": "Technology Control",
+    "mapBadge": "Technology",
+    "keywords": [
+      "deepfakes",
+      "political manipulation",
+      "video forgery",
+      "AI video",
+      "disinformation"
+    ],
+    "relatedSlugs": [
+      "ai-narrative-manipulation",
+      "social-media-control",
+      "predictive-programming",
+      "false-flags"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-087",
+    "slug": "vehicle-kill-switches",
+    "title": "Vehicle Kill Switches — 2026 Federal Mandate, All New Cars",
+    "category": "great-awakening",
+    "section": "Technology Control",
+    "mapBadge": "Technology",
+    "keywords": [
+      "vehicle kill switch",
+      "remote shutdown",
+      "NHTSA",
+      "Infrastructure Act",
+      "control"
+    ],
+    "relatedSlugs": [
+      "smart-cities",
+      "cbdc",
+      "rfid-surveillance",
+      "5g-surveillance"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-088",
+    "slug": "emotion-recognition",
+    "title": "Emotion Recognition Cameras — Airport and Retail Deployments",
+    "category": "great-awakening",
+    "section": "Technology Control",
+    "mapBadge": "Technology",
+    "keywords": [
+      "emotion recognition",
+      "facial AI",
+      "airport surveillance",
+      "retail tracking",
+      "biometrics"
+    ],
+    "relatedSlugs": [
+      "ai-surveillance",
+      "smart-cities",
+      "global-surveillance-grid",
+      "rfid-surveillance"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-089",
+    "slug": "neuromarketing",
+    "title": "Neuromarketing — fMRI and EEG Used to Bypass Conscious Choice",
+    "category": "great-awakening",
+    "section": "Technology Control",
+    "mapBadge": "Technology",
+    "keywords": [
+      "neuromarketing",
+      "fMRI",
+      "EEG",
+      "consumer manipulation",
+      "subconscious advertising"
+    ],
+    "relatedSlugs": [
+      "tavistock-institute",
+      "kill-your-tv",
+      "social-media-control",
+      "mkultra"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-090",
+    "slug": "dream-data-mining",
+    "title": "Dream Data Mining — Dormio Device, DARPA Sleep Research",
+    "category": "great-awakening",
+    "section": "Technology Control",
+    "mapBadge": "Technology",
+    "keywords": [
+      "Dormio",
+      "dream hacking",
+      "DARPA",
+      "sleep research",
+      "hypnagogia",
+      "MIT"
+    ],
+    "relatedSlugs": [
+      "mkultra",
+      "transhumanism",
+      "super-soldiers",
+      "voice-of-god-tech"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-091",
+    "slug": "digital-twin-humans",
+    "title": "Digital Twin Humans — Full Behavioral Simulation per Citizen",
+    "category": "great-awakening",
+    "section": "Technology Control",
+    "mapBadge": "Technology",
+    "keywords": [
+      "digital twin",
+      "behavioural simulation",
+      "smart city",
+      "AI surveillance",
+      "control grid"
+    ],
+    "relatedSlugs": [
+      "smart-cities",
+      "ai-surveillance",
+      "cbdc",
+      "global-surveillance-grid"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-092",
+    "slug": "machine-prophets",
+    "title": "Machine Prophets — AI Systems Given Predictive Authority",
+    "category": "great-awakening",
+    "section": "Technology Control",
+    "mapBadge": "Technology",
+    "keywords": [
+      "AI prediction",
+      "algorithmic authority",
+      "machine learning governance",
+      "pre-crime"
+    ],
+    "relatedSlugs": [
+      "predictive-policing",
+      "ai-surveillance",
+      "hegelian-dialectic",
+      "transhumanism"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-093",
+    "slug": "pegasus-spyware",
+    "title": "Pegasus Spyware — NSO Group, 50,000 Phones, Journalists and Leaders",
+    "category": "great-awakening",
+    "section": "Technology Control",
+    "mapBadge": "Surveillance",
+    "keywords": [
+      "Pegasus",
+      "NSO Group",
+      "spyware",
+      "journalists",
+      "world leaders",
+      "zero-click"
+    ],
+    "relatedSlugs": [
+      "nsa-surveillance",
+      "five-eyes",
+      "global-surveillance-grid",
+      "snowden-assange"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-094",
+    "slug": "clearview-ai",
+    "title": "Clearview AI — 30 Billion Scraped Faces, No Consent",
+    "category": "great-awakening",
+    "section": "Technology Control",
+    "mapBadge": "Surveillance",
+    "keywords": [
+      "Clearview AI",
+      "facial recognition",
+      "scraping",
+      "biometrics",
+      "police"
+    ],
+    "relatedSlugs": [
+      "ai-surveillance",
+      "global-surveillance-grid",
+      "emotion-recognition",
+      "nsa-surveillance"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-095",
+    "slug": "palantir-gotham",
+    "title": "Palantir Gotham — The Surveillance Ontology Behind Police AI",
+    "category": "great-awakening",
+    "section": "Technology Control",
+    "mapBadge": "Surveillance",
+    "keywords": [
+      "Palantir",
+      "Gotham",
+      "police AI",
+      "Peter Thiel",
+      "surveillance capitalism"
+    ],
+    "relatedSlugs": [
+      "ai-surveillance",
+      "predictive-policing",
+      "in-q-tel",
+      "global-surveillance-grid"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-096",
+    "slug": "brain-computer-patents",
+    "title": "Brain-Computer Telemetry Patents — Neuralink and Classified Variants",
+    "category": "great-awakening",
+    "section": "Technology Control",
+    "mapBadge": "Technology",
+    "keywords": [
+      "Neuralink",
+      "BCI",
+      "brain-computer interface",
+      "DARPA",
+      "classified patents"
+    ],
+    "relatedSlugs": [
+      "transhumanism",
+      "super-soldiers",
+      "voice-of-god-tech",
+      "dream-data-mining"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-097",
+    "slug": "geofencing-warrants",
+    "title": "Geofencing Warrants — Google Giving Police Everyone Near a Crime",
+    "category": "great-awakening",
+    "section": "Technology Control",
+    "mapBadge": "Surveillance",
+    "keywords": [
+      "geofencing warrants",
+      "Google",
+      "police",
+      "location data",
+      "privacy"
+    ],
+    "relatedSlugs": [
+      "nsa-surveillance",
+      "rfid-surveillance",
+      "ai-surveillance",
+      "stingray-devices"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-098",
+    "slug": "dead-internet-theory",
+    "title": "Dead Internet Theory — Most Content Is Bots, Human Web Is Dead",
+    "category": "great-awakening",
+    "section": "Technology Control",
+    "mapBadge": "Technology",
+    "keywords": [
+      "dead internet theory",
+      "bots",
+      "AI content",
+      "fake web",
+      "astroturfing"
+    ],
+    "relatedSlugs": [
+      "social-media-control",
+      "ai-narrative-manipulation",
+      "synthetic-influencers",
+      "operation-mockingbird"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-099",
+    "slug": "cicada-3301",
+    "title": "Cicada 3301 — The Impossible Puzzle, Who Ran It",
+    "category": "great-awakening",
+    "section": "Internet Mysteries",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "Cicada 3301",
+      "internet puzzle",
+      "cryptography",
+      "anonymous",
+      "dark web"
+    ],
+    "relatedSlugs": [
+      "anonymous-meme-wars",
+      "dark-web",
+      "cia-operations",
+      "cryptography"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-100",
+    "slug": "lake-city-quiet-pills",
+    "title": "Lake City Quiet Pills — Reddit's Accidental Hitman Forum",
+    "category": "great-awakening",
+    "section": "Internet Mysteries",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "Lake City Quiet Pills",
+      "Reddit",
+      "hitman",
+      "mercenary",
+      "dark web"
+    ],
+    "relatedSlugs": [
+      "dark-web",
+      "cia-operations",
+      "cia-drug-trafficking",
+      "anonymous-meme-wars"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-101",
+    "slug": "elsagate",
+    "title": "Elsagate — Algorithmically Generated Child Trauma Content",
+    "category": "great-awakening",
+    "section": "Internet Mysteries",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "Elsagate",
+      "YouTube Kids",
+      "child trauma content",
+      "algorithm",
+      "MKUltra"
+    ],
+    "relatedSlugs": [
+      "disney-programming",
+      "mkultra",
+      "hollywood-satanism",
+      "adrenochrome"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-102",
+    "slug": "hidden-wikipedia-wars",
+    "title": "Hidden Wikipedia Wars — The Edit Battles That Reveal Control",
+    "category": "great-awakening",
+    "section": "Internet Mysteries",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "Wikipedia",
+      "edit wars",
+      "editorial control",
+      "agenda",
+      "information suppression"
+    ],
+    "relatedSlugs": [
+      "operation-mockingbird",
+      "social-media-control",
+      "ai-narrative-manipulation",
+      "memory-holing"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-103",
+    "slug": "search-suppression",
+    "title": "Search Engine Suppression — What Google Buries and Why",
+    "category": "great-awakening",
+    "section": "Internet Mysteries",
+    "mapBadge": "Surveillance",
+    "keywords": [
+      "Google suppression",
+      "search censorship",
+      "SEO manipulation",
+      "information control"
+    ],
+    "relatedSlugs": [
+      "facebook-google-surveillance",
+      "operation-mockingbird",
+      "social-media-control",
+      "in-q-tel"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-104",
+    "slug": "memory-holing",
+    "title": "Memory-Holing Pages — Systematic Deletion of Inconvenient Facts",
+    "category": "great-awakening",
+    "section": "Internet Mysteries",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "memory hole",
+      "Wayback Machine",
+      "deleted pages",
+      "internet censorship",
+      "Orwell"
+    ],
+    "relatedSlugs": [
+      "search-suppression",
+      "operation-mockingbird",
+      "social-media-control",
+      "stolen-history"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-105",
+    "slug": "markovian-parallax",
+    "title": "Markovian Parallax Denigrate — Usenet's Most Mysterious Post",
+    "category": "great-awakening",
+    "section": "Internet Mysteries",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "Markovian Parallax Denigrate",
+      "Usenet",
+      "mystery",
+      "1996",
+      "NSA",
+      "cipher"
+    ],
+    "relatedSlugs": [
+      "cicada-3301",
+      "nsa-surveillance",
+      "dark-web",
+      "echelon"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-106",
+    "slug": "max-headroom-intrusion",
+    "title": "Max Headroom Signal Intrusion 1987 — Still Unsolved",
+    "category": "great-awakening",
+    "section": "Internet Mysteries",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "Max Headroom",
+      "signal intrusion",
+      "1987",
+      "Chicago",
+      "TV piracy",
+      "unsolved"
+    ],
+    "relatedSlugs": [
+      "media-control",
+      "horror-signal",
+      "false-flags",
+      "anonymous-meme-wars"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-107",
+    "slug": "dyatlov-pass",
+    "title": "Dyatlov Pass Incident — 9 Dead, Soviet Secret, 2021 Classified Docs",
+    "category": "great-awakening",
+    "section": "Internet Mysteries",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "Dyatlov Pass",
+      "1959",
+      "Soviet",
+      "mysterious deaths",
+      "classified documents",
+      "Russia"
+    ],
+    "relatedSlugs": [
+      "missing-411",
+      "alaska-triangle",
+      "skinwalker-ranch",
+      "haarp"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-108",
+    "slug": "denver-airport-murals",
+    "title": "Denver Airport Murals — The Apocalyptic Artwork Explained",
+    "category": "great-awakening",
+    "section": "Symbolism",
+    "mapBadge": "Symbols",
+    "keywords": [
+      "Denver Airport",
+      "murals",
+      "apocalyptic art",
+      "new world order",
+      "gargoyle"
+    ],
+    "relatedSlugs": [
+      "obelisks-pine-cones",
+      "washington-dc",
+      "olympic-ceremonies",
+      "predictive-programming"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-109",
+    "slug": "masonic-street-grids",
+    "title": "Masonic Street Grids — DC, Paris, London Pentagram Layouts",
+    "category": "great-awakening",
+    "section": "Symbolism",
+    "mapBadge": "Symbols",
+    "keywords": [
+      "Masonic street grid",
+      "pentagram",
+      "Washington DC",
+      "Paris",
+      "London",
+      "Freemasonry"
+    ],
+    "relatedSlugs": [
+      "freemasonry",
+      "washington-dc",
+      "city-of-london",
+      "obelisks-pine-cones"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-110",
+    "slug": "capitol-dome-symbolism",
+    "title": "Capitol Dome Symbolism — The Apotheosis of Washington Decoded",
+    "category": "great-awakening",
+    "section": "Symbolism",
+    "mapBadge": "Symbols",
+    "keywords": [
+      "Capitol dome",
+      "Apotheosis of Washington",
+      "occult symbolism",
+      "Constantino Brumidi",
+      "Freemasonry"
+    ],
+    "relatedSlugs": [
+      "freemasonry",
+      "washington-dc",
+      "masonic-street-grids",
+      "luciferian-doctrine"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-111",
+    "slug": "olympic-ceremonies",
+    "title": "Olympic Ceremony Symbolism — London 2012, Paris 2024 Decoded",
+    "category": "great-awakening",
+    "section": "Symbolism",
+    "mapBadge": "Symbols",
+    "keywords": [
+      "Olympic ceremonies",
+      "Illuminati symbolism",
+      "London 2012",
+      "Paris 2024",
+      "occult ritual"
+    ],
+    "relatedSlugs": [
+      "predictive-programming",
+      "cern-occult",
+      "obelisks-pine-cones",
+      "bohemian-grove"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-112",
+    "slug": "currency-hidden-symbols",
+    "title": "Currency Hidden Symbols — Dollar Bill, Euro, Pound Decoded",
+    "category": "great-awakening",
+    "section": "Symbolism",
+    "mapBadge": "Symbols",
+    "keywords": [
+      "dollar bill",
+      "eye of providence",
+      "pyramid",
+      "currency symbolism",
+      "Illuminati"
+    ],
+    "relatedSlugs": [
+      "freemasonry",
+      "illuminati",
+      "federal-reserve",
+      "babylonian-money-magic"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-113",
+    "slug": "missing-411",
+    "title": "Missing 411 — David Paulides NPS Clustering Data",
+    "category": "great-awakening",
+    "section": "Anomalous Zones",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "Missing 411",
+      "David Paulides",
+      "National Parks",
+      "disappearances",
+      "clusters"
+    ],
+    "relatedSlugs": [
+      "alaska-triangle",
+      "skinwalker-ranch",
+      "bennington-triangle",
+      "dumbs"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-114",
+    "slug": "alaska-triangle",
+    "title": "Alaska Triangle — More Disappearances per Capita Than Anywhere",
+    "category": "great-awakening",
+    "section": "Anomalous Zones",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "Alaska Triangle",
+      "disappearances",
+      "Nick Begich",
+      "UFOs",
+      "anomalous zone"
+    ],
+    "relatedSlugs": [
+      "missing-411",
+      "bermuda-triangle",
+      "haarp",
+      "dyatlov-pass"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-115",
+    "slug": "bridgewater-triangle",
+    "title": "Bridgewater Triangle — Massachusetts Paranormal Hot-Zone",
+    "category": "great-awakening",
+    "section": "Anomalous Zones",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "Bridgewater Triangle",
+      "Massachusetts",
+      "paranormal",
+      "UFOs",
+      "cryptids"
+    ],
+    "relatedSlugs": [
+      "skinwalker-ranch",
+      "missing-411",
+      "bermuda-triangle",
+      "bennington-triangle"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-116",
+    "slug": "skinwalker-ranch",
+    "title": "Skinwalker Ranch — DIA NIDS Study, Classified Findings",
+    "category": "great-awakening",
+    "section": "Anomalous Zones",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "Skinwalker Ranch",
+      "Utah",
+      "DIA",
+      "NIDS",
+      "Robert Bigelow",
+      "paranormal"
+    ],
+    "relatedSlugs": [
+      "missing-411",
+      "alaska-triangle",
+      "haarp",
+      "portals-stargates"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-117",
+    "slug": "hoia-baciu",
+    "title": "Hoia Baciu Forest — Romania's Bermuda Triangle",
+    "category": "great-awakening",
+    "section": "Anomalous Zones",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "Hoia Baciu",
+      "Romania",
+      "Bermuda Triangle",
+      "paranormal",
+      "UFOs"
+    ],
+    "relatedSlugs": [
+      "bermuda-triangle",
+      "skinwalker-ranch",
+      "missing-411",
+      "hessdalen-lights"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-118",
+    "slug": "bermuda-triangle",
+    "title": "Bermuda Triangle Case Clusters — The Real Documented Cases",
+    "category": "great-awakening",
+    "section": "Anomalous Zones",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "Bermuda Triangle",
+      "disappearances",
+      "Flight 19",
+      "USS Cyclops",
+      "methane hydrates"
+    ],
+    "relatedSlugs": [
+      "alaska-triangle",
+      "hoia-baciu",
+      "dragons-triangle",
+      "missing-411"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-119",
+    "slug": "bennington-triangle",
+    "title": "Bennington Triangle — 5 Disappearances, 1945–50, Vermont",
+    "category": "great-awakening",
+    "section": "Anomalous Zones",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "Bennington Triangle",
+      "Vermont",
+      "1945",
+      "disappearances",
+      "Paula Welden"
+    ],
+    "relatedSlugs": [
+      "missing-411",
+      "bridgewater-triangle",
+      "alaska-triangle",
+      "skinwalker-ranch"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-120",
+    "slug": "zone-of-silence",
+    "title": "Zone of Silence Mexico — Radio Blackout, Meteorite Cluster",
+    "category": "great-awakening",
+    "section": "Anomalous Zones",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "Zone of Silence",
+      "Mexico",
+      "radio blackout",
+      "meteorites",
+      "Zona del Silencio"
+    ],
+    "relatedSlugs": [
+      "bermuda-triangle",
+      "haarp",
+      "skinwalker-ranch",
+      "firmament"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-121",
+    "slug": "nahanni-valley",
+    "title": "Nahanni Valley — The 'Headless Valley' Disappearances",
+    "category": "great-awakening",
+    "section": "Anomalous Zones",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "Nahanni Valley",
+      "Canada",
+      "headless bodies",
+      "disappearances",
+      "anomalous zone"
+    ],
+    "relatedSlugs": [
+      "missing-411",
+      "alaska-triangle",
+      "bennington-triangle",
+      "bermuda-triangle"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-122",
+    "slug": "oak-island",
+    "title": "Oak Island Deaths and Curse — The $10M Money Pit",
+    "category": "great-awakening",
+    "section": "Anomalous Zones",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "Oak Island",
+      "money pit",
+      "Templar treasure",
+      "Nova Scotia",
+      "curse"
+    ],
+    "relatedSlugs": [
+      "knights-templar",
+      "bohemian-grove",
+      "missing-411",
+      "priory-of-sion"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-123",
+    "slug": "isdal-woman",
+    "title": "Isdal Woman 1970 — Europe's Most Mysterious Death",
+    "category": "great-awakening",
+    "section": "Forensic Mysteries",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "Isdal Woman",
+      "Norway",
+      "1970",
+      "unidentified",
+      "spy",
+      "cold case"
+    ],
+    "relatedSlugs": [
+      "somerton-man",
+      "jennifer-fairgate",
+      "lead-masks-case",
+      "dyatlov-pass"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-124",
+    "slug": "somerton-man",
+    "title": "Somerton Man — The Tamam Shud Cipher, Still Unsolved",
+    "category": "great-awakening",
+    "section": "Forensic Mysteries",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "Somerton Man",
+      "Tamam Shud",
+      "cipher",
+      "Australia",
+      "1948",
+      "unidentified"
+    ],
+    "relatedSlugs": [
+      "isdal-woman",
+      "jennifer-fairgate",
+      "cicada-3301",
+      "dyatlov-pass"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-125",
+    "slug": "jennifer-fairgate",
+    "title": "Jennifer Fairgate — Oslo Hotel, No Identity, Disputed Ruling",
+    "category": "great-awakening",
+    "section": "Forensic Mysteries",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "Jennifer Fairgate",
+      "Oslo",
+      "unidentified",
+      "spy",
+      "hotel death"
+    ],
+    "relatedSlugs": [
+      "isdal-woman",
+      "somerton-man",
+      "lead-masks-case",
+      "dyatlov-pass"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-126",
+    "slug": "lead-masks-case",
+    "title": "Lead Masks Case — Two Dead Brazilians in Radiation Suits",
+    "category": "great-awakening",
+    "section": "Forensic Mysteries",
+    "mapBadge": "Mystery",
+    "keywords": [
+      "lead masks",
+      "Brazil",
+      "1966",
+      "radiation suits",
+      "unexplained death",
+      "UFO"
+    ],
+    "relatedSlugs": [
+      "isdal-woman",
+      "varginha-brazil",
+      "dyatlov-pass",
+      "somerton-man"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-127",
+    "slug": "berenstain-bears",
+    "title": "Berenstain Bears — The Most Documented Mass False Memory",
+    "category": "great-awakening",
+    "section": "Mandela Effect",
+    "mapBadge": "Paranormal",
+    "keywords": [
+      "Berenstain Bears",
+      "Mandela Effect",
+      "false memory",
+      "Berenstein",
+      "timeline shift"
+    ],
+    "relatedSlugs": [
+      "mandela-effect",
+      "simulation-theory",
+      "time-travel-temporal",
+      "montauk-project"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-128",
+    "slug": "fruit-of-the-loom",
+    "title": "Fruit of the Loom Cornucopia — The Logo That Never Was",
+    "category": "great-awakening",
+    "section": "Mandela Effect",
+    "mapBadge": "Paranormal",
+    "keywords": [
+      "Fruit of the Loom",
+      "cornucopia",
+      "Mandela Effect",
+      "false memory",
+      "logo"
+    ],
+    "relatedSlugs": [
+      "mandela-effect",
+      "berenstain-bears",
+      "simulation-theory",
+      "monopoly-monocle"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-129",
+    "slug": "monopoly-monocle",
+    "title": "Monopoly Man Monocle — Rich Uncle Pennybags Never Had One",
+    "category": "great-awakening",
+    "section": "Mandela Effect",
+    "mapBadge": "Paranormal",
+    "keywords": [
+      "Monopoly Man",
+      "monocle",
+      "Rich Uncle Pennybags",
+      "Mandela Effect",
+      "false memory"
+    ],
+    "relatedSlugs": [
+      "mandela-effect",
+      "berenstain-bears",
+      "fruit-of-the-loom",
+      "simulation-theory"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-130",
+    "slug": "curious-george-tail",
+    "title": "Curious George Tail — No Tail in Any Original Illustration",
+    "category": "great-awakening",
+    "section": "Mandela Effect",
+    "mapBadge": "Paranormal",
+    "keywords": [
+      "Curious George",
+      "tail",
+      "Mandela Effect",
+      "false memory",
+      "H.A. Rey"
+    ],
+    "relatedSlugs": [
+      "mandela-effect",
+      "berenstain-bears",
+      "simulation-theory",
+      "monopoly-monocle"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-131",
+    "slug": "new-zealand-position",
+    "title": "New Zealand Map Position — Northeast vs Southeast of Australia",
+    "category": "great-awakening",
+    "section": "Mandela Effect",
+    "mapBadge": "Paranormal",
+    "keywords": [
+      "New Zealand",
+      "Mandela Effect",
+      "map position",
+      "Australia",
+      "false memory"
+    ],
+    "relatedSlugs": [
+      "mandela-effect",
+      "flat-earth-overview",
+      "simulation-theory",
+      "berenstain-bears"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-132",
+    "slug": "we-are-the-champions",
+    "title": "We Are the Champions Ending — Freddie Mercury's Missing Final Line",
+    "category": "great-awakening",
+    "section": "Mandela Effect",
+    "mapBadge": "Paranormal",
+    "keywords": [
+      "Queen",
+      "We Are the Champions",
+      "Mandela Effect",
+      "Freddie Mercury",
+      "missing lyric"
+    ],
+    "relatedSlugs": [
+      "mandela-effect",
+      "music-industry-control",
+      "simulation-theory",
+      "berenstain-bears"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-133",
+    "slug": "mirror-mirror",
+    "title": "Mirror Mirror Line — \"Magic Mirror\" vs \"Mirror Mirror\"",
+    "category": "great-awakening",
+    "section": "Mandela Effect",
+    "mapBadge": "Paranormal",
+    "keywords": [
+      "Snow White",
+      "mirror mirror",
+      "Magic Mirror",
+      "Mandela Effect",
+      "false memory"
+    ],
+    "relatedSlugs": [
+      "mandela-effect",
+      "disney-programming",
+      "simulation-theory",
+      "berenstain-bears"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-134",
+    "slug": "apollo-13-quote",
+    "title": "Apollo 13 Quote — \"Problem\" vs \"Had a Problem\"",
+    "category": "great-awakening",
+    "section": "Mandela Effect",
+    "mapBadge": "Paranormal",
+    "keywords": [
+      "Apollo 13",
+      "Houston we have a problem",
+      "Mandela Effect",
+      "false memory",
+      "NASA"
+    ],
+    "relatedSlugs": [
+      "mandela-effect",
+      "moon-landing",
+      "nasa-deceptions",
+      "simulation-theory"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-135",
+    "slug": "c3po-silver-leg",
+    "title": "C-3PO Silver Leg — Gold All Over vs One Silver Shin",
+    "category": "great-awakening",
+    "section": "Mandela Effect",
+    "mapBadge": "Paranormal",
+    "keywords": [
+      "C-3PO",
+      "silver leg",
+      "Star Wars",
+      "Mandela Effect",
+      "false memory"
+    ],
+    "relatedSlugs": [
+      "mandela-effect",
+      "simulation-theory",
+      "predictive-programming",
+      "berenstain-bears"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-136",
+    "slug": "hutchison-effect",
+    "title": "Hutchison Effect — Metal Levitation and Melting via EM Fields",
+    "category": "great-awakening",
+    "section": "Secret Science",
+    "mapBadge": "Technology",
+    "keywords": [
+      "Hutchison Effect",
+      "John Hutchison",
+      "levitation",
+      "EM fields",
+      "free energy"
+    ],
+    "relatedSlugs": [
+      "antigravity",
+      "scalar-weapons",
+      "tesla-suppressed",
+      "biefeld-brown"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-137",
+    "slug": "meyer-water-fuel",
+    "title": "Stanley Meyer Water Fuel Cell — Patent, Demo, Mysterious Death",
+    "category": "great-awakening",
+    "section": "Secret Science",
+    "mapBadge": "Technology",
+    "keywords": [
+      "Stanley Meyer",
+      "water fuel cell",
+      "free energy",
+      "hydrogen",
+      "mysterious death"
+    ],
+    "relatedSlugs": [
+      "cancer-cure-suppressed",
+      "antigravity",
+      "tesla-suppressed",
+      "cold-fusion-wars"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-138",
+    "slug": "biefeld-brown",
+    "title": "Biefeld-Brown Effect — Electrogravitic Lift, Documented in Patents",
+    "category": "great-awakening",
+    "section": "Secret Science",
+    "mapBadge": "Technology",
+    "keywords": [
+      "Biefeld-Brown",
+      "electrogravitics",
+      "T.T. Brown",
+      "antigravity",
+      "USAF patents"
+    ],
+    "relatedSlugs": [
+      "antigravity",
+      "hutchison-effect",
+      "electrogravitics",
+      "tr3b-arvs"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-139",
+    "slug": "cold-fusion-wars",
+    "title": "Cold Fusion Replication Wars — Pons/Fleischmann, LENR Today",
+    "category": "great-awakening",
+    "section": "Secret Science",
+    "mapBadge": "Technology",
+    "keywords": [
+      "cold fusion",
+      "LENR",
+      "Pons Fleischmann",
+      "free energy",
+      "suppressed science"
+    ],
+    "relatedSlugs": [
+      "meyer-water-fuel",
+      "cancer-cure-suppressed",
+      "rife-machine",
+      "tesla-suppressed"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-140",
+    "slug": "salvatore-pais-patents",
+    "title": "Salvatore Pais Patent Cluster — US Navy Filed These, They Are Real",
+    "category": "great-awakening",
+    "section": "Secret Science",
+    "mapBadge": "Technology",
+    "keywords": [
+      "Salvatore Pais",
+      "US Navy patents",
+      "UFO technology",
+      "high energy electromagnetic field",
+      "hybrid aerospace vehicle"
+    ],
+    "relatedSlugs": [
+      "tr3b-arvs",
+      "antigravity",
+      "ufo-disclosure",
+      "biefeld-brown"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-141",
+    "slug": "kozyrev-mirrors",
+    "title": "Kozyrev Mirrors — Russian Consciousness-Focusing Experiments",
+    "category": "great-awakening",
+    "section": "Secret Science",
+    "mapBadge": "Technology",
+    "keywords": [
+      "Kozyrev mirrors",
+      "Russian experiments",
+      "consciousness",
+      "torsion fields",
+      "Nikolai Kozyrev"
+    ],
+    "relatedSlugs": [
+      "scalar-weapons",
+      "global-consciousness",
+      "morphic-resonance",
+      "remote-viewing"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-142",
+    "slug": "vortex-mathematics",
+    "title": "Vortex Mathematics — Marko Rodin's Base-9 Torus Pattern",
+    "category": "great-awakening",
+    "section": "Secret Science",
+    "mapBadge": "Technology",
+    "keywords": [
+      "Vortex mathematics",
+      "Marko Rodin",
+      "torus",
+      "base-9",
+      "free energy"
+    ],
+    "relatedSlugs": [
+      "sacred-geometry",
+      "tesla-suppressed",
+      "schumann-resonance",
+      "scalar-weapons"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-143",
+    "slug": "morphic-resonance",
+    "title": "Morphic Resonance — Rupert Sheldrake, Peer-Reviewed and Banned",
+    "category": "great-awakening",
+    "section": "Secret Science",
+    "mapBadge": "Technology",
+    "keywords": [
+      "morphic resonance",
+      "Rupert Sheldrake",
+      "banned science",
+      "morphogenetic fields",
+      "consciousness"
+    ],
+    "relatedSlugs": [
+      "global-consciousness",
+      "kozyrev-mirrors",
+      "law-of-one",
+      "schumann-resonance"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-144",
+    "slug": "global-consciousness",
+    "title": "Global Consciousness Project — RNG Anomalies on 9/11 and COVID",
+    "category": "great-awakening",
+    "section": "Secret Science",
+    "mapBadge": "Technology",
+    "keywords": [
+      "Global Consciousness Project",
+      "RNG",
+      "random number generators",
+      "9/11 anomaly",
+      "Princeton"
+    ],
+    "relatedSlugs": [
+      "morphic-resonance",
+      "schumann-resonance",
+      "maharishi-effect",
+      "9-11-inside-job"
+    ],
+    "published": false
+  },
+  {
+    "id": "auto-145",
+    "slug": "electrogravitics",
+    "title": "Electrogravitics — T.T. Brown's Classified Programme",
+    "category": "great-awakening",
+    "section": "Secret Science",
+    "mapBadge": "Technology",
+    "keywords": [
+      "electrogravitics",
+      "T.T. Brown",
+      "antigravity",
+      "classified",
+      "1956 Jane report"
+    ],
+    "relatedSlugs": [
+      "biefeld-brown",
+      "antigravity",
+      "salvatore-pais-patents",
+      "hutchison-effect"
+    ],
     "published": false
   }
 ]
